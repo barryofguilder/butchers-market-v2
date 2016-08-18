@@ -1,0 +1,80 @@
+// Main Navigation
+//
+
+.navbar-brand {
+  height: $navbar-height + 1px;
+}
+
+.main-nav {
+  padding: 0;
+  background-color: #fff;
+
+  @include media-breakpoint-down(md) {
+    text-align: center;
+  }
+
+  .navbar-collapse {
+    &.collapsing {
+      width: 100%;
+    }
+  }
+
+  .navbar-toggler {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+  }
+
+  .navbar-nav {
+    @include media-breakpoint-down(md) {
+      width: 100%;
+      margin-top: 30px;
+    }
+  }
+
+  .nav-item {
+    font-size: .9rem;
+
+    &.dropdown.open {
+      .nav-link {
+        background: $bm-gray-lighter;
+      }
+    }
+  }
+
+  .nav-link {
+    color: $gray-dark;
+    padding: 26px 30px;
+
+    &:hover {
+      color: $brand-primary;
+    }
+
+    @include media-breakpoint-down(md) {
+      padding: 15px 0;
+    }
+  }
+
+  .dropdown-menu {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background-color: $bm-gray-lightest;
+    border-radius: 0;
+
+    @include media-breakpoint-down(md) {
+      position: static;
+      float: none;
+      text-align: center;
+    }
+
+    .dropdown-item {
+      padding: $height-xxs 30px;
+
+      &:hover {
+        background-color: $bm-gray-lightest;
+        color: $brand-primary;
+      }
+    }
+  }
+}
