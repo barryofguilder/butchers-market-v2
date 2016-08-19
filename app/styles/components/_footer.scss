@@ -1,0 +1,45 @@
+// Footer
+//
+
+.main-footer {
+  background-color: $bm-gray-lightest;
+  margin-top: $height-lg;
+
+  .copyright {
+    padding-top: $height-xxs;
+    padding-bottom: $height-xxs;
+  }
+
+  @include media-breakpoint-down(sm) {
+    text-align: center;
+  }
+}
+
+.social-media-icons {
+  margin-top: 9px;
+  float: right;
+
+  @include media-breakpoint-down(sm) {
+    text-align: center;
+    float: none;
+    margin-bottom: 10px;
+  }
+}
+
+.social-media-icon {
+  display: inline-block;
+  color: $body-color;
+  font-size: 18px;
+  text-align: center;
+  padding-top: 1px;
+  margin: 0 5px;
+  border: solid 1px $body-color;
+  border-radius: 6px;
+  width: 30px;
+  height: 30px;
+
+  &:hover {
+    background: $body-color;
+    color: #fff;
+  }
+}
