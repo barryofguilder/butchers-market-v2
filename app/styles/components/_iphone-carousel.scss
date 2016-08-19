@@ -1,0 +1,23 @@
+// iPhone Carousel
+//
+
+.iphone-carousel {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.iphone-gallery-wrapper {
+  position: absolute;
+  left: 49.8%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: 332px;
+  top: 138px;
+}
+
+.iphone {
+  width: 450px;
+  margin: $height-sm auto 0;
+}

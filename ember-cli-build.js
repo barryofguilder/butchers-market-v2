@@ -38,5 +38,15 @@ module.exports = function(defaults) {
   //app.import('bower_components/bootstrap/js/dist/tooltip.js');
   //app.import('bower_components/bootstrap/js/dist/popover.js');
 
+  // Fotorama, for carousel
+  app.import('bower_components/fotorama/fotorama.js');
+  app.import('bower_components/fotorama/fotorama.css');
+  app.import('bower_components/fotorama/fotorama.png', {
+    destDir: 'assets'
+  });
+
+  // jQuery Stellar, for parallax
+  app.import('bower_components/jquery.stellar/jquery.stellar.js');
+
   return app.toTree();
 };

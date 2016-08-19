@@ -1,0 +1,65 @@
+// Promo
+//
+
+.butcher-promo {
+  margin-top: $navbar-height;
+  margin-bottom: $height-lg;
+  background: #000 url("#{$images}/promo.jpg") 50% 0 no-repeat;
+  height: 730px;
+
+  @include media-breakpoint-down(md) {
+    height: 715px;
+  }
+
+  .promo-title {
+    padding-top: $height-lg;
+
+    @include media-breakpoint-down(md) {
+      padding-top: $height-md;
+    }
+  }
+
+  .promo-title,
+  .lead {
+    color: #fff;
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.75);
+  }
+
+  .lead {
+    margin-top: $height-xs;
+  }
+
+  .store-hours {
+    color: #fff;
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+
+  .store-hours-title {
+    margin-bottom: 5px;
+  }
+
+  .store-hours-line {
+    margin-bottom: 5px;
+  }
+
+  .btn {
+    @include media-breakpoint-down(xs) {
+      width: 100%;
+      padding-left: 10px;
+      padding: 6px 10px;;
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    text-align: center;
+  }
+}
+
+.mobile-app-downloads {
+  margin: 10px auto 0;
+
+  li {
+    margin-bottom: 10px;
+  }
+}
