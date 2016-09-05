@@ -1,0 +1,37 @@
+// Newsletter
+//
+
+.newsletter {
+  background: url("#{$images}/promo.jpg") 50% 0;
+  padding-top: $height-sm/2;
+  padding-bottom: $height-sm/2;
+  color: #fff;
+
+  h2 {
+    line-height: 42px;
+  }
+
+  .form-inline {
+    .btn {
+      margin-left: 15px;
+    }
+  }
+}
+
+.newsletter-form {
+  input {
+    min-width: 250px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    margin-top: $height-xs;
+  }
+
+  @include media-breakpoint-down(xs) {
+    margin-top: $height-xs;
+
+    .btn {
+      margin-top: $height-xxs;
+    }
+  }
+}
