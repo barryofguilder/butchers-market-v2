@@ -6,6 +6,9 @@ module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
     'ember-font-awesome': {
       useScss: true
+    },
+    fingerprint: {
+      exclude: ['apple-touch-icon.png', 'images/*.*']
     }
   });
 
