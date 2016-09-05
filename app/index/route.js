@@ -2,7 +2,7 @@ import Ember from 'ember';
 import RSVP from 'rsvp';
 
 const featured = [{
-  title: '20lb Meat Pack',
+  title: '25lb Meat Pack',
   price: '$68',
   items: [
     '5lb. Beef Ground Chuck',
@@ -39,10 +39,41 @@ const featured = [{
   description: 'We have a meat or grocery packages for every need and budget!'
 }];
 
+const products = [{
+  title: 'Natural Pork',
+  isTop: false,
+  items: [
+    'No added hormones',
+    'No antibiotics',
+    'Source of key nutrients',
+    'Heart healthy'
+  ]
+}, {
+  title: 'Natural Beef',
+  isTop: true,
+  items: [
+    'Our beef quality is even more selective than USDA prime, choice, & select!*',
+    'No added hormones',
+    'No antibiotics',
+    'Source of key nutrients',
+    'Heart healthy'
+  ]
+}, {
+  title: 'Natural Poultry',
+  isTop: false,
+  items: [
+    'No added hormones',
+    'No antibiotics',
+    'Source of key nutrients',
+    'Heart healthy'
+  ]
+}];
+
 export default Ember.Route.extend({
   model() {
     return RSVP.hash({
-      featured
+      featured,
+      products
     });
   }
 });

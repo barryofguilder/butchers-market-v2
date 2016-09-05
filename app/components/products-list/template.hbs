@@ -1,0 +1,12 @@
+<div class="container">
+  {{header-title title=title}}
+  <div class="row">
+    <div class="col-md-10 offset-md-1 col-sm-12">
+      <div class="row">
+        {{#each products as |product|}}
+          {{products-list-item product=product}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,9 +4,7 @@
 
 <section>
   <div class="container">
-    <header>
-      <h2 class="stripe"><span>Who We Are</span></h2>
-    </header>
+    {{header-title title="Who We Are"}}
     <div class="row">
       <div class="col-md-5">
         <img src="images/group.jpg" alt="Butcher's Market people" class="img-fluid">
@@ -24,3 +22,5 @@
     </div>
   </div>
 </section>
+
+{{products-list title="Natural Products" products=model.products}}

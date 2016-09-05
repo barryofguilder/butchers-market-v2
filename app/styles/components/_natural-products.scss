@@ -1,0 +1,55 @@
+// Natural Products
+//
+
+.natural-products {
+  border: 1px solid $bm-gray-lighter;
+  margin: $height-sm 0px;
+  text-align: center;
+
+  .natural-products-header {
+    background-color: $bm-gray-lighter;
+    padding: $height-xxs 0;
+  }
+
+  .natural-products-items {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    li {
+      font-size: $font-size-sm;
+      padding: $height-xxs;
+      border-top: 1px solid $bm-gray-lightest;
+      margin: 0;
+
+      &:first-child {
+        border-top: none;
+      }
+    }
+  }
+
+  .natural-products-button {
+    background-color: $bm-gray-lighter;
+    padding: $height-xxs 0;
+
+    .btn {
+      padding: $height-xxs/2 $height-sm/2;
+    }
+  }
+
+  &.natural-products-top {
+    margin-top: 0;
+
+    .natural-products-header {
+      background: url("#{$images}/promo.jpg") 50% 0;
+      color: #fff;
+      padding: $height-xs 0;
+    }
+
+    .natural-products-items {
+      li {
+        font-size: $font-size-base;
+      }
+    }
+  }
+}
