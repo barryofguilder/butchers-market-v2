@@ -2,6 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   tagName: 'section',
+  attributeBindings: ['id'],
+  id: 'contact',
 
   ajax: Ember.inject.service(),
 
