@@ -4,7 +4,6 @@
 .butcher-promo {
   margin-top: $navbar-height;
   margin-bottom: $height-lg;
-  background: #000 url("#{$images}/promo.jpg") 50% 0 no-repeat;
   height: 730px;
 
   @include media-breakpoint-down(md) {
@@ -29,18 +28,8 @@
     margin-top: $height-xs;
   }
 
-  .store-hours {
-    color: #fff;
-    padding-top: 25px;
-    padding-bottom: 25px;
-  }
-
-  .store-hours-title {
-    margin-bottom: 5px;
-  }
-
-  .store-hours-line {
-    margin-bottom: 5px;
+  @include media-breakpoint-down(md) {
+    text-align: center;
   }
 
   .btn {
@@ -49,17 +38,5 @@
       padding-left: 10px;
       padding: 6px 10px;;
     }
-  }
-
-  @include media-breakpoint-down(md) {
-    text-align: center;
-  }
-}
-
-.mobile-app-downloads {
-  margin: 10px auto 0;
-
-  li {
-    margin-bottom: 10px;
   }
 }
