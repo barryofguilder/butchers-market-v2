@@ -4,7 +4,7 @@ export default Ember.Component.extend({
   classNames: ['col-md-4'],
 
   product: null,
-  topPrice: Ember.computed('product.isTop', function() {
-    return this.get('product.isTop') ? 'natural-products-top' : null;
+  topPrice: Ember.computed('product.featured', function() {
+    return this.get('product.featured') ? 'natural-products-top' : null;
   })
 });

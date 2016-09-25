@@ -1,0 +1,34 @@
+{
+  "meatProducts": [{
+    "id": 1,
+    "title": "Natural Pork",
+    "featured": false,
+    "items": [
+      "No added hormones",
+      "No antibiotics",
+      "Source of key nutrients",
+      "Heart healthy"
+    ]
+  }, {
+    "id": 2,
+    "title": "Natural Beef",
+    "featured": true,
+    "items": [
+      "Our beef quality is even more selective than USDA prime, choice, & select!*",
+      "No added hormones",
+      "No antibiotics",
+      "Source of key nutrients",
+      "Heart healthy"
+    ]
+  }, {
+    "id": 3,
+    "title": "Natural Poultry",
+    "featured": false,
+    "items": [
+      "No added hormones",
+      "No antibiotics",
+      "Source of key nutrients",
+      "Heart healthy"
+    ]
+  }]
+}
