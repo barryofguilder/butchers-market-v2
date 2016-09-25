@@ -4,7 +4,7 @@
     "ember": "~2.7.0",
     "ember-cli-shims": "0.1.1",
     "ember-qunit-notifications": "0.1.0",
-    "bootstrap": "4.0.0-alpha.3",
+    "bootstrap": "4.0.0-alpha.4",
     "font-awesome": "~4.5.0",
     "fotorama": "^4.6.4",
     "jquery.stellar": "^0.6.2"

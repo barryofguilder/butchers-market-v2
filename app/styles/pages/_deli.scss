@@ -1,0 +1,18 @@
+// Deli
+//
+
+.butcher-promo-deli {
+  background: #000 url("#{$images}/promo-deli.jpg") 0 0 no-repeat;
+}
+
+.deli-item {
+  border: none;
+
+  .card-block {
+    padding: 1rem 0 2rem 0;
+  }
+
+  .card-title {
+    text-align: center;
+  }
+}

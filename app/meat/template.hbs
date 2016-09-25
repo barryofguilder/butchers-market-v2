@@ -7,17 +7,17 @@
   <div class="container">
     {{header-title title="Bundle Packs"}}
 
-    <div class="row">
-      {{#each model.bundles as |bundle|}}
+    {{#each (grouped-each bundleColumns model.bundles) as |row|}}
+      <div class="row">
+        {{#each row as |bundle|}}
         <div class="col-sm-6 col-md-4 feature-item">
           {{bundle-list-item product=bundle}}
         </div>
-      {{/each}}
-    </div>
+        {{/each}}
+      </div>
+    {{/each}}
 
-    <div class="row">
-      <h3 class="promo-title">More Bundle Packs</h3>
-      <a href="docs/bmpackages.pdf" class="btn btn-secondary">View Printable Flyer</a>
-    </div>
+    {{header-title title="More"}}
+    <a href="docs/bmpackages.pdf" class="btn btn-secondary">View Printable Flyer</a>
   </div>
 </section>

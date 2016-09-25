@@ -1,0 +1,25 @@
+{{#promo-section class="butcher-promo-deli"}}
+  <h1 class="promo-title">Fresh Made Everything!</h1>
+  <p class="lead large">Everything in our deli is made in-house from scratch to achieve a quality and freshness like no other store can provide. Below are some of the items you will commonly find &amp; enjoy!</p>
+{{/promo-section}}
+
+<section>
+  <div class="container">
+    {{header-title title="Items"}}
+
+    {{#each (grouped-each 4 model.items) as |row|}}
+      <div class="row">
+        {{#each row as |item|}}
+          <div class="col-md-3">
+            <div class="card deli-item">
+              <img class="card-img-top" src="images/{{item.image}}" style="width: 100%" alt="Image of {{item.title}}">
+              <div class="card-block">
+                <h4 class="card-title">{{item.title}}</h4>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    {{/each}}
+  </div>
+</section>
