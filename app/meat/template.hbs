@@ -6,5 +6,18 @@
 <section>
   <div class="container">
     {{header-title title="Bundle Packs"}}
+
+    <div class="row">
+      {{#each model.bundles as |bundle|}}
+        <div class="col-sm-6 col-md-4 feature-item">
+          {{bundle-list-item product=bundle}}
+        </div>
+      {{/each}}
+    </div>
+
+    <div class="row">
+      <h3 class="promo-title">More Bundle Packs</h3>
+      <a href="docs/bmpackages.pdf" class="btn btn-secondary">View Printable Flyer</a>
+    </div>
   </div>
 </section>

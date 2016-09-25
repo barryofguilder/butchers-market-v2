@@ -37,7 +37,20 @@
   </div>
 {{/promo-section}}
 
-{{featured-list title="Featured Specials" featured=featuredBundles}}
+<div class="container">
+  {{header-title title="Featured Specials"}}
+  <div class="row">
+    {{#each featuredBundles as |bundle|}}
+      <div class="col-sm-6 col-md-3 feature-item">
+        {{bundle-list-item product=bundle}}
+      </div>
+    {{/each}}
+    <div class="col-sm-6 col-md-3 feature-item">
+      <h5 class="feature-title">View All Packages</h5>
+      <p class="feature-item-description">We have a meat or grocery packages for every need and budget!</p>
+    </div>
+  </div>
+</div>
 
 <section>
   <div class="container">
