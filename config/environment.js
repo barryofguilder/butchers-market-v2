@@ -20,7 +20,9 @@ module.exports = function(environment) {
 
     gReCaptcha: {
       siteKey: '6LcrHAITAAAAACvTiT4qS4dvbwL7wgGRXhJtsKim'
-    }
+    },
+
+    api: ''
   };
 
   if (environment === 'development') {
@@ -44,6 +46,7 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     ENV.rootURL = '/new_butch_2/';
+    ENV.api = 'http://thebutchersmarket.com/new_butch_2';
   }
 
   return ENV;
