@@ -7,11 +7,11 @@
   <div class="container">
     {{header-title title="Items"}}
 
-    {{#each (grouped-each 4 model.items) as |row|}}
+    {{#each (grouped-each cardColumns model.items) as |row|}}
       <div class="row">
         {{#each row as |item|}}
-          <div class="col-md-3">
-            <div class="card deli-item">
+          <div class="col-sm-6 col-md-3">
+            <div class="card card-plain">
               <img class="card-img-top" src="images/{{item.image}}" style="width: 100%" alt="Image of {{item.title}}">
               <div class="card-block">
                 <h4 class="card-title">{{item.title}}</h4>

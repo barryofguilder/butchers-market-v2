@@ -9,6 +9,7 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('meat');
   this.route('deli');
+  this.route('beverage');
 });
 
 export default Router;

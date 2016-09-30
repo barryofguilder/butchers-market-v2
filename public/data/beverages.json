@@ -1,0 +1,123 @@
+{
+  "beverages": [{
+    "id": 1,
+    "title": "New Belgium \"Fat Tire\"",
+    "image": "fattire.jpg",
+    "url": "http://www.newbelgium.com/beer",
+    "category": 1
+  }, {
+    "id": 2,
+    "title": "Spencer Trappist Ale",
+    "image": "spencer.jpg",
+    "url": "http://spencerbrewery.com",
+    "category": 1
+  }, {
+    "id": 3,
+    "title": "Red Hare Brewery \"Long Day Lager\"",
+    "image": "redharelongday.jpg",
+    "url": "http://www.redharebrewing.com/beers/long-day-lager",
+    "category": 1
+  }, {
+    "id": 4,
+    "title": "Jail House Brewing \"Mugshot IPA\"",
+    "image": "mugshot.jpg",
+    "url": "http://jailhousebrewing.com",
+    "category": 1
+  }, {
+    "id": 5,
+    "title": "Jekyll Brewing \"Merican\"",
+    "image": "merican.jpg",
+    "url": "http://jekyllbrewing.com/beers",
+    "category": 1
+  }, {
+    "id": 6,
+    "title": "Mckenzies Hard Cider \"Seasonal Reserve\"",
+    "image": "seasonalreserve.jpg",
+    "url": "http://www.mckenziesbeverages.com/varieties",
+    "category": 1
+  }, {
+    "id": 7,
+    "title": "Eagle Creek Brewery \"Spot Tail Blonde Ale\"",
+    "image": "eaglecreek.jpg",
+    "url": "http://www.eaglecreekbrewingco.com/our-brew",
+    "category": 1
+  }, {
+    "id": 8,
+    "title": "Fannin County Brewing Company \"Moonlight Harvest Porter\"",
+    "image": "fannincounty.jpg",
+    "url": "http://www.fanninbrewingcompany.com/beers",
+    "category": 1
+  }, {
+    "id": 9,
+    "title": "2011 adaj cabernet sauvignon",
+    "image": "adaj.jpg",
+    "url": "http://adajwines.com/wine1",
+    "category": 2
+  }, {
+    "id": 10,
+    "title": "Carnivore Cabernet Sauvignon",
+    "image": "carnivore.jpg",
+    "url": "http://www.carnivorcabernet.com",
+    "category": 2
+  }, {
+    "id": 11,
+    "title": "Muscadry Georgia Muscadine",
+    "image": "muscadry.jpg",
+    "url": "http://www.chateauelan.com/menu-winery/menu-wine-list.html",
+    "category": 2
+  }, {
+    "id": 12,
+    "title": "Georgia Winery \"Bulldog Red\"",
+    "image": "bulldog.jpg",
+    "url": "http://www.georgiawines.com/Bulldog-Red",
+    "category": 2
+  }, {
+    "id": 13,
+    "title": "Liberty Creek Pink Moscato",
+    "image": "libertypink.jpg",
+    "url": "http://www.libertycreekwine.com/Our-Wines",
+    "category": 2
+  }, {
+    "id": 14,
+    "title": "Francis Coppola \"Diamond Red Blend\"",
+    "image": "coppolared.jpg",
+    "url": "https://www.francisfordcoppolawinery.com/wine/diamond/red-blend",
+    "category": 2
+  }, {
+    "id": 15,
+    "title": "Red Hare Brewing Sugar Cane Rootbeer (on tap)",
+    "image": "redhare.jpg",
+    "url": "http://www.redharebrewing.com/beers/root-beer",
+    "category": 3
+  }, {
+    "id": 16,
+    "title": "Boylan's Bottling Root Beer",
+    "image": "boylansrootbeer.jpg",
+    "url": "https://www.boylanbottling.com",
+    "category": 3
+  }, {
+    "id": 16,
+    "title": "Boylan's Bottling Orange Cream Soda",
+    "image": "boylansorangecream.jpg",
+    "url": "https://www.boylanbottling.com",
+    "category": 3
+  }, {
+    "id": 17,
+    "title": "Boylan's Bottling Shirley Temple",
+    "image": "boylansshirley.jpg",
+    "url": "https://www.boylanbottling.com",
+    "category": 3
+  }, {
+    "id": 18,
+    "title": "Boylan's Bottling Cream Soda",
+    "image": "boylanscreme.jpg",
+    "url": "https://www.boylanbottling.com",
+    "category": 3
+  }, {
+    "id": 19,
+    "title": "Boylan's Bottling Cane Cola",
+    "image": "boylanscane.jpg",
+    "url": "https://www.boylanbottling.com",
+    "category": 3
+  }]
+}

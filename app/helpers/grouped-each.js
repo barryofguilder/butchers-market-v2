@@ -4,12 +4,6 @@ export function groupedEach(params) {
   let every = params[0];
   let models = params[1];
   let modelLength = models.get('length');
-
-  if (modelLength < every) {
-    return models;
-  }
-
-  let rows = Math.ceil(modelLength / every);
   let newModels = Ember.A();
   let rowModels = Ember.A();
 
