@@ -51,5 +51,8 @@ module.exports = function(defaults) {
   // jQuery Stellar, for parallax
   app.import('bower_components/jquery.stellar/jquery.stellar.js');
 
+  // Order online script
+  app.import('vendor/order-online.js');
+
   return app.toTree();
 };

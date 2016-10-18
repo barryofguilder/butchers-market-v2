@@ -1,10 +1,14 @@
-<div class="container">
-  {{header-title title="Feedback"}}
+<div class="container contact-page">
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-md-6">
+      <h3 class="color-primary">Contact Us</h3>
+      <p>We welcome any feedback or questions you may have big or small!</p>
+      <p><b>Note:</b> This form is not intended for placing orders or for inquiries needing immediate response. Your information is not shared with any third party and will only be used for our communications with you. If you need immediate assistance, call us at (706) 279-9277.</p>
+    </div>
+    <div class="col-md-6">
       {{#if feedbackSent}}
         <div class="alert alert-success">
-          Thank you for your feedback!
+          Thank you for contacting us! If you require immediate assistance, please call us at (706) 279-9277.
         </div>
       {{/if}}
       {{#if showServerError}}
@@ -40,11 +44,6 @@
           </div>
         </form>
       {{/unless}}
-    </div>
-    <div class="col-sm-6">
-      <h3 class="color-primary">Contact Us</h3>
-      <p>We welcome any feedback or questions you may have big or small!</p>
-      <p>Note: This form is not intended for placing orders or for inquiries needing immediate response. Your information is not shared with any third party and will only be used for our communications with you. If you need immediate assistance, call us at (706) 279-9277.</p>
     </div>
   </div>
 </div>

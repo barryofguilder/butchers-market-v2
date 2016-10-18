@@ -41,12 +41,16 @@
   {{header-title title="Featured Specials"}}
   <div class="row">
     {{#each featuredBundles as |bundle|}}
-      <div class="col-sm-6 col-md-3 feature-item">
+      <div class="col-sm-6 col-lg-3 feature-item">
         {{bundle-list-item product=bundle}}
       </div>
     {{/each}}
-    <div class="col-sm-6 col-md-3 feature-item">
-      <h5 class="feature-title">View All Packages</h5>
+    <div class="col-sm-6 col-lg-3 feature-item">
+      <h5 class="feature-title">
+        {{#link-to "meat" class="btn btn-secondary"}}
+          View All Packages
+        {{/link-to}}
+      </h5>
       <p class="feature-item-description">We have a meat or grocery packages for every need and budget!</p>
     </div>
   </div>
@@ -56,10 +60,7 @@
   <div class="container">
     {{header-title title="Who We Are"}}
     <div class="row">
-      <div class="col-md-5">
-        <img src="images/group.jpg" alt="Butcher's Market people" class="img-fluid">
-      </div>
-      <div class="col-md-6 offset-md-1">
+      <div class="col-md-8 offset-md-2">
         <h3 class="color-primary">Each interaction is unique.</h3>
         <p class="lead">Every customer is an individual and deserves service catered to their exact needs.</p>
         <p>We come to work everyday to supply that type of service &amp; and to be a part of our customer's lives for years to come!</p>
@@ -73,7 +74,7 @@
   </div>
 </section>
 
-{{products-list title="Natural Products" products=model.products}}
+{{products-list title="Our Meat Products" products=model.products}}
 
 {{reviews-list title="Customer Reviews" reviews=model.reviews}}
 

@@ -72,7 +72,7 @@
     "image": "ribs.jpg"
   }, {
     "id": 17,
-    "title": "Smoked Whole Chicken",
+    "title": "Smoked Chicken Halves",
     "image": "chicken.jpg"
   }, {
     "id": 18,
@@ -98,10 +98,5 @@
     "title": "Chipotle Twice Baked Potato",
     "image": "chipotle-potato.jpg",
     "ingredients": "chipotle pepper, milk, butter, sour cream, cheddar cheese, chives"
-  }, {
-    "id": 23,
-    "title": "Twice Baked Sweet Potato",
-    "image": "sweet-potato.jpg",
-    "ingredients": "butter, vanilla, cinnamon"
   }]
 }

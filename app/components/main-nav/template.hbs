@@ -6,7 +6,7 @@
     <img src="images/butchers-market-logo.png" alt="The Butcher's Market logo">
   {{/link-to}}
   {{#link-to 'application' class="navbar-brand"}}
-    <img src="images/blues-street-logo.png" alt="Blues Street Cafe logo">
+    <img src="images/blues-street-logo.png" width="100px" height="100px" alt="Blues Street Cafe logo">
   {{/link-to}}
   <div class="collapse navbar-toggleable-md navbar-collapse" id="main-navigation-items">
     <ul class="nav navbar-nav pull-xs-right">
@@ -25,8 +25,8 @@
           Dining
         </a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="docs/bmmenu.pdf">View Printable Menu</a>
-          <a class="dropdown-item" id="order-online" href="#">Order Online</a>
+          <a class="dropdown-item" href="docs/bmmenu.pdf">View Menu</a>
+          <span class="dropdown-item order-online-btn" id="order-online-btn">Order Online</span>
           <a class="dropdown-item" href="cafe.html">Blues Street Cafe</a>
         </div>
       </li>
@@ -36,7 +36,11 @@
         {{/link-to}}
       </li>
       <li class="nav-item"><a class="nav-link" href="#">Events</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+      <li class="nav-item">
+        {{#link-to "contact" class="nav-link"}}
+          Contact
+        {{/link-to}}
+      </li>
     </ul>
   </div>
 </div>

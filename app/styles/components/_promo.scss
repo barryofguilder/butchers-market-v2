@@ -6,10 +6,6 @@
   margin-bottom: $height-lg;
   height: 730px;
 
-  @include media-breakpoint-down(md) {
-    height: 715px;
-  }
-
   .promo-title {
     padding-top: $height-lg;
 
