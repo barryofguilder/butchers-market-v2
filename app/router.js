@@ -11,6 +11,7 @@ Router.map(function() {
   this.route('deli');
   this.route('beverage');
   this.route('contact');
+  this.route('events');
 });
 
 export default Router;

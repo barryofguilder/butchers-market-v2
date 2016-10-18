@@ -1,0 +1,35 @@
+// Events
+//
+
+.butcher-promo-cafe {
+  background: #000 url("#{$images}/promo-cafe.jpg") 50% 0 no-repeat;
+}
+
+.event-month-title {
+  margin-bottom: $height-xs;
+  //text-align: center;
+  color: $brand-primary;
+}
+
+.event-item {
+  //padding-bottom: 60px;
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.event-title {
+  color: $brand-primary;
+}
+
+.event-date {
+  margin-bottom: 10px;
+}
+
+.event-title {
+  font-size: $font-size-base;
+  font-weight: bold;
+  text-decoration: underline;
+}

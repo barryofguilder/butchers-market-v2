@@ -1,0 +1,18 @@
+{
+  "events": [{
+    "id": 1,
+    "title": "Acoustic Blues & Soul with Luke Simmons & Kolby Towe",
+    "startTime": "11/5/2016 12:00PM",
+    "endTime": "11/5/2016 4:00PM"
+  }, {
+    "id": 2,
+    "title": "Backwoods Funk & Blues with Remembering January",
+    "startTime": "11/12/2016 12:00PM",
+    "endTime": "11/12/2016 4:00PM"
+  }, {
+    "id": 3,
+    "title": "Acoustic Country with Josh Driver",
+    "startTime": "12/3/2016 12:00PM",
+    "endTime": "12/3/2016 4:00PM"
+  }]
+}
