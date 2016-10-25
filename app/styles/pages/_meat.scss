@@ -3,5 +3,66 @@
 
 .butcher-promo-meat {
   background: #000 url("#{$images}/promo-meat.jpg") 50% 0 no-repeat;
-  height: 400px;
+  height: inherit;
+}
+
+.natural-products {
+  border: none;
+  background: transparent;
+  color: #fff;
+  margin: $height-sm 0px;
+  margin-top: $height-sm + 70px;
+  margin-bottom: 90px;
+  text-align: center;
+
+  .natural-products-header {
+    background: #000;
+    color: #a16a3c;
+    padding: $height-xxs 0;
+  }
+
+  .natural-products-items {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    li {
+      font-size: $font-size-sm;
+      padding: $height-xxs;
+      background: rgba(255, 255, 255, .3);
+      border-top: none;
+      margin: 0;
+      margin-bottom: 4px;
+
+      &:first-child {
+        border-top: none;
+      }
+    }
+  }
+
+  .natural-products-button {
+    background-color: $bm-gray-lighter;
+    padding: $height-xxs 0;
+
+    .btn {
+      padding: $height-xxs/2 $height-sm/2;
+    }
+  }
+
+  &.natural-products-top {
+    margin-top: 70px;
+    margin-bottom: 90px;
+
+    .natural-products-header {
+      background: #000;
+      color: #a16a3c;
+      padding: $height-xs 0;
+    }
+
+    .natural-products-items {
+      li {
+        font-size: $font-size-base;
+      }
+    }
+  }
 }

@@ -1,13 +1,9 @@
 {{#promo-section class="butcher-promo-meat"}}
   <h1 class="promo-title">Fresh Cut Everything!</h1>
-  <p class="lead large">To offer a higher quality and more constistent product we hand cut all of our meats in-house and stock only Certified Angus Beef Brand!</p>
-{{/promo-section}}
+  <p class="lead large">We hand cut all of our meats in-house and stock only products that satisfy our strict quality standards.</p>
 
-<section>
-  <div class="container">
-    {{products-list title="Our Meat Products" products=model.products}}
-  </div>
-</section>
+  {{products-list products=model.products tagName="div"}}
+{{/promo-section}}
 
 
 {{#scroll-to-section shouldScroll=packages selector="#bundles"}}

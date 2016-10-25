@@ -17,29 +17,6 @@ h3 {
   margin-bottom: $height-xs;
 }
 
-// H2 + hr centered section header
-h2.stripe {
-  position: relative;
-  overflow: hidden;
-  text-align: center;
-  margin: 24px -15px 72px -15px;
-
-  span {
-    display: inline-block;
-    margin: 0 .4em;
-
-    &:before, &:after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      border-top: 3px solid $brand-primary;
-      margin-top: .5em;
-    }
-    &:before { margin-left: -103%; }
-    &:after { margin-left: 3%; }
-  }
-}
-
 header p.lead {
   text-align: center;
   margin-top: -$height-xs;
