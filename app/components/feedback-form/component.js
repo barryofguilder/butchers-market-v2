@@ -1,8 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  tagName: 'section',
-
   ajax: Ember.inject.service(),
 
   name: null,

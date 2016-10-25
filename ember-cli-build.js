@@ -9,6 +9,11 @@ module.exports = function(defaults) {
     },
     fingerprint: {
       exclude: ['apple-touch-icon.png', 'images/*.*']
+    },
+    nodeAssets: {
+      'fitvids': {
+        import: ['dist/fitvids.js']
+      }
     }
   });
 
@@ -53,6 +58,8 @@ module.exports = function(defaults) {
 
   // Order online script
   app.import('vendor/order-online.js');
+
+  app.import('bower_components/fitvids/jquery.fitvids.js');
 
   return app.toTree();
 };

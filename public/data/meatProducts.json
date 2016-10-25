@@ -4,31 +4,33 @@
     "title": "Natural Pork",
     "featured": false,
     "items": [
-      "No added hormones",
-      "No antibiotics",
-      "Source of key nutrients",
-      "Heart healthy"
+      "Natural",
+      "Antibiotic-free",
+      "No hormones used",
+      "Product of the USA"
     ]
   }, {
     "id": 2,
     "title": "Natural Beef",
     "featured": true,
     "items": [
-      "Our beef quality is even more selective than USDA prime, choice, & select!*",
-      "No added hormones",
-      "No antibiotics",
-      "Source of key nutrients",
-      "Heart healthy"
+      "Only 8% of all beef meets our standards",
+      "Natural",
+      "Antibiotic-free",
+      "30 day average aging",
+      "Quality is more selective than USDA grading",
+      "Product of the USA"
     ]
   }, {
     "id": 3,
-    "title": "Natural Poultry",
+    "title": "Natural Chicken",
     "featured": false,
     "items": [
-      "No added hormones",
-      "No antibiotics",
-      "Source of key nutrients",
-      "Heart healthy"
+      "Natural",
+      "Antibiotic-free",
+      "No hormones used",
+      "Only young/small tender birds",
+      "Product of the USA"
     ]
   }]
 }

@@ -1,49 +1,38 @@
-<div class="container contact-page">
-  <div class="row">
-    <div class="col-md-6">
-      <h3 class="color-primary">Contact Us</h3>
-      <p>We welcome any feedback or questions you may have big or small!</p>
-      <p><b>Note:</b> This form is not intended for placing orders or for inquiries needing immediate response. Your information is not shared with any third party and will only be used for our communications with you. If you need immediate assistance, call us at (706) 279-9277.</p>
-    </div>
-    <div class="col-md-6">
-      {{#if feedbackSent}}
-        <div class="alert alert-success">
-          Thank you for contacting us! If you require immediate assistance, please call us at (706) 279-9277.
-        </div>
-      {{/if}}
-      {{#if showServerError}}
-        <div class="alert alert-danger">
-          Oops, something went wrong. Please try again.
-        </div>
-      {{/if}}
-      {{#if showInvalidFormError}}
-        <div class="alert alert-danger">
-          {{#if recaptchaInvalid}}
-            Invalid reCaptcha response, please try again
-          {{else}}
-            Please fill out the form and try sending again.
-          {{/if}}
-        </div>
-      {{/if}}
-      {{#unless feedbackSent}}
-        <form class="form-horizontal feedback-form" {{action "sendFeedback" on="submit"}}>
-          <div class="form-group {{if nameInvalid 'has-danger'}}">
-            {{input class="form-control" placeholder="Your Name" value=name}}
-          </div>
-          <div class="form-group {{if emailInvalid 'has-danger'}}">
-            {{input type="email" class="form-control" placeholder="Your E-mail" value=email}}
-          </div>
-          <div class="form-group {{if messageInvalid 'has-danger'}}">
-            {{textarea class="form-control" placeholder="Your Message" cols="30" rows="7" value=message}}
-          </div>
-          <div class="form-group">
-            {{g-recaptcha onSuccess=(action "onCaptchaResolved")}}
-          </div>
-          <div class="form-group">
-            <button type="submit" class="btn btn-secondary">Send</button>
-          </div>
-        </form>
-      {{/unless}}
-    </div>
+{{#if feedbackSent}}
+  <div class="alert alert-success">
+    Thank you for contacting us! If you require immediate assistance, please call us at (706) 279-9277.
   </div>
-</div>
+{{/if}}
+{{#if showServerError}}
+  <div class="alert alert-danger">
+    Oops, something went wrong. Please try again.
+  </div>
+{{/if}}
+{{#if showInvalidFormError}}
+  <div class="alert alert-danger">
+    {{#if recaptchaInvalid}}
+      Invalid reCaptcha response, please try again
+    {{else}}
+      Please fill out the form and try sending again.
+    {{/if}}
+  </div>
+{{/if}}
+{{#unless feedbackSent}}
+  <form class="form-horizontal feedback-form" {{action "sendFeedback" on="submit"}}>
+    <div class="form-group {{if nameInvalid 'has-danger'}}">
+      {{input class="form-control" placeholder="Your Name" value=name}}
+    </div>
+    <div class="form-group {{if emailInvalid 'has-danger'}}">
+      {{input type="email" class="form-control" placeholder="Your E-mail" value=email}}
+    </div>
+    <div class="form-group {{if messageInvalid 'has-danger'}}">
+      {{textarea class="form-control" placeholder="Your Message" cols="30" rows="7" value=message}}
+    </div>
+    <div class="form-group">
+      {{g-recaptcha onSuccess=(action "onCaptchaResolved")}}
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-secondary">Send</button>
+    </div>
+  </form>
+{{/unless}}

@@ -3,144 +3,151 @@
   <p class="lead large">To offer a higher quality and more constistent product we hand cut all of our meats in-house and stock only Certified Angus Beef Brand!</p>
 {{/promo-section}}
 
-<section id="bundles">
+<section>
   <div class="container">
     {{products-list title="Our Meat Products" products=model.products}}
-    
-    {{header-title title="Bundle Packs"}}
+  </div>
+</section>
 
-    {{#each (grouped-each cardColumns model.bundles) as |row|}}
-      <div class="row">
-        {{#each row as |bundle|}}
-        <div class="col-sm-6 col-md-4 feature-item">
-          {{bundle-list-item product=bundle}}
+
+{{#scroll-to-section shouldScroll=packages selector="#bundles"}}
+  <div id="bundles">
+    <div class="container">
+      {{header-title title="Bundle Packs"}}
+
+      {{#each (grouped-each cardColumns model.bundles) as |row|}}
+        <div class="row">
+          {{#each row as |bundle|}}
+          <div class="col-sm-6 col-md-4 feature-item">
+            {{bundle-list-item product=bundle}}
+          </div>
+          {{/each}}
         </div>
-        {{/each}}
-      </div>
-    {{/each}}
+      {{/each}}
 
-    {{header-title title="Mix N' Match"}}
-    <div class="row">
-      <div class="col-md-4">
-        <ul class="list-unstyled">
-          <li class="h4">Pick 5 for $53</li>
-          <li class="h4">Pick 10 for $99</li>
-          <li class="h4">Pick 20 for $195</li>
-        </ul>
+      {{header-title title="Mix N' Match"}}
+      <div class="row">
+        <div class="col-md-4">
+          <ul class="list-unstyled">
+            <li class="h4">Pick 5 for $53</li>
+            <li class="h4">Pick 10 for $99</li>
+            <li class="h4">Pick 20 for $195</li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <ul>
+            <li>2 (7 oz.) Beef Ribeye Steaks</li>
+            <li>2 (7 oz.) Beef N.Y. Strip Steaks</li>
+            <li>2 lbs. Beef Chuck Roast</li>
+            <li>2 lbs. Beef Sirloin Tip Roast</li>
+            <li>2 lbs. Beef Cube Steaks</li>
+            <li>2 lbs. Beef Stew</li>
+            <li>2 ¼ lbs. Beef Ground Chuck</li>
+            <li>2 lbs. Beef Ground Round</li>
+            <li>2 ½ lbs. Boneless Pork Chops</li>
+            <li>5 lbs. Boston Butt Pork Roast</li>
+            <li>4 lbs. Country Style Pork Ribs</li>
+            <li>2 ½ lbs. Baby Back Pork Ribs</li>
+            <li>3 lbs. Fresh Made Pork Sausage</li>
+            <li>3 lbs. Bratwurst or Italian Sausages</li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <ul>
+            <li>3 lbs. Smoked Pork Sausage</li>
+            <li>2 ½ lbs. Sliced Slab Bacon</li>
+            <li>2 ½ lbs. Boneless Chicken Breast</li>
+            <li>2 ½ lbs. Boneless Chicken Tenders</li>
+            <li>4 ½ lbs. Split Chicken Breast</li>
+            <li>10 lbs. Chicken Leg Quarters</li>
+            <li>5 lbs. Chicken Wings</li>
+            <li>2 ½ lbs. Breaded Chicken Hot Wings</li>
+            <li>3 lbs. Breaded Chicken Strips</li>
+            <li>2 Cornish Game Hens</li>
+            <li>4 lbs. Tilapia or Swai Fish Fillets</li>
+            <li>2 lbs. Peeled Cooked or Raw Shrimp</li>
+            <li>5 lbs. Cooked Whole Crawfish</li>
+            <li>2 lbs. Frog Legs</li>
+          </ul>
+        </div>
       </div>
-      <div class="col-md-4">
-        <ul>
-          <li>2 (7 oz.) Beef Ribeye Steaks</li>
-          <li>2 (7 oz.) Beef N.Y. Strip Steaks</li>
-          <li>2 lbs. Beef Chuck Roast</li>
-          <li>2 lbs. Beef Sirloin Tip Roast</li>
-          <li>2 lbs. Beef Cube Steaks</li>
-          <li>2 lbs. Beef Stew</li>
-          <li>2 ¼ lbs. Beef Ground Chuck</li>
-          <li>2 lbs. Beef Ground Round</li>
-          <li>2 ½ lbs. Boneless Pork Chops</li>
-          <li>5 lbs. Boston Butt Pork Roast</li>
-          <li>4 lbs. Country Style Pork Ribs</li>
-          <li>2 ½ lbs. Baby Back Pork Ribs</li>
-          <li>3 lbs. Fresh Made Pork Sausage</li>
-          <li>3 lbs. Bratwurst or Italian Sausages</li>
-        </ul>
-      </div>
-      <div class="col-md-4">
-        <ul>
-          <li>3 lbs. Smoked Pork Sausage</li>
-          <li>2 ½ lbs. Sliced Slab Bacon</li>
-          <li>2 ½ lbs. Boneless Chicken Breast</li>
-          <li>2 ½ lbs. Boneless Chicken Tenders</li>
-          <li>4 ½ lbs. Split Chicken Breast</li>
-          <li>10 lbs. Chicken Leg Quarters</li>
-          <li>5 lbs. Chicken Wings</li>
-          <li>2 ½ lbs. Breaded Chicken Hot Wings</li>
-          <li>3 lbs. Breaded Chicken Strips</li>
-          <li>2 Cornish Game Hens</li>
-          <li>4 lbs. Tilapia or Swai Fish Fillets</li>
-          <li>2 lbs. Peeled Cooked or Raw Shrimp</li>
-          <li>5 lbs. Cooked Whole Crawfish</li>
-          <li>2 lbs. Frog Legs</li>
-        </ul>
-      </div>
-    </div>
 
-    {{header-title title="Ice Box Mix N' Match"}}
-    <div class="row">
-      <div class="col-md-3">
-        <ul class="list-unstyled">
-          <li class="h4">Pick 5 for $19.99</li>
-          <li class="h4">Pick 10 for $37.99</li>
-          <li class="h4">Pick 20 for $75.99</li>
-        </ul>
-      </div>
-      <div class="col-md-3">
-        <ul>
-          <li>Breaded Chicken Tenders</li>
-          <li>Spicy Chicken Tenders</li>
-          <li>Popcorn Chicken</li>
-          <li>Breaded Chicken Wings</li>
-          <li>Boneless Buffalo Wings</li>
-          <li>Pork Chop Fritter</li>
-          <li>Meatballs</li>
-          <li>Corndogs</li>
-          <li>Mini Corndogs</li>
-          <li>Sausage Biscuits</li>
-          <li>Sausage, Egg, &amp;Cheese Biscuits</li>
-          <li>Canadian Bacon, Egg, &amp;Cheese Muffins</li>
-          <li>Chicken Biscuits</li>
-          <li>Cheeseburger Sliders</li>
-          <li>Chicken Sliders</li>
-          <li>Chicken Tamales</li>
-          <li>Shrimp Poppers</li>
-          <li>Breaded Fish Sticks</li>
-          <li>Pepperoni Pizzas</li>
-          <li>Sausage Patties</li>
-          <li>Pepperoni Pizzas</li>
-        </ul>
-      </div>
-      <div class="col-md-3">
-        <ul>
-          <li>Supreme Pizzas</li>
-          <li>Pizza Sticks</li>
-          <li>Shoestring Fries</li>
-          <li>Steak Cut Fries</li>
-          <li>Straight Cut Fries</li>
-          <li>Seasoned Fries</li>
-          <li>Crinkle Cut Fries</li>
-          <li>Waffle Cut Fries</li>
-          <li>Tater Tots</li>
-          <li>Seasoned Potato Wedges</li>
-          <li>Sweet Potato Fries</li>
-          <li>Mixed Vegetables</li>
-          <li>California Blend Mix Vegetables</li>
-          <li>Cut Green Beans</li>
-          <li>Breaded Okra</li>
-          <li>Sliced Yellow Squash</li>
-          <li>Corn on the Cob</li>
-          <li>Shoepeg Corn</li>
-        </ul>
-      </div>
-      <div class="col-md-3">
-        <ul>
-          <li>Onion Rings</li>
-          <li>Hush Puppies</li>
-          <li>Crab Cakes</li>
-          <li>Yeast Rolls</li>
-          <li>Garlic Cheese Breadstick</li>
-          <li>Southern Style Biscuits</li>
-          <li>Southern Cheese Biscuits</li>
-          <li>Belgian Waffles</li>
-          <li>Cinnamon Rolls</li>
-          <li>Hashbrown Patties</li>
-          <li>Sausage &amp; Cheese Pockets</li>
-          <li>Cooked Sausage Patties</li>
-          <li>Cheeseburger Pockets</li>
-          <li>Chicken Melt Pockets</li>
-          <li>Egg &amp; Cheese Pockets</li>
-        </ul>
+      {{header-title title="Ice Box Mix N' Match"}}
+      <div class="row">
+        <div class="col-md-3">
+          <ul class="list-unstyled">
+            <li class="h4">Pick 5 for $19.99</li>
+            <li class="h4">Pick 10 for $37.99</li>
+            <li class="h4">Pick 20 for $75.99</li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <ul>
+            <li>Breaded Chicken Tenders</li>
+            <li>Spicy Chicken Tenders</li>
+            <li>Popcorn Chicken</li>
+            <li>Breaded Chicken Wings</li>
+            <li>Boneless Buffalo Wings</li>
+            <li>Pork Chop Fritter</li>
+            <li>Meatballs</li>
+            <li>Corndogs</li>
+            <li>Mini Corndogs</li>
+            <li>Sausage Biscuits</li>
+            <li>Sausage, Egg, &amp;Cheese Biscuits</li>
+            <li>Canadian Bacon, Egg, &amp;Cheese Muffins</li>
+            <li>Chicken Biscuits</li>
+            <li>Cheeseburger Sliders</li>
+            <li>Chicken Sliders</li>
+            <li>Chicken Tamales</li>
+            <li>Shrimp Poppers</li>
+            <li>Breaded Fish Sticks</li>
+            <li>Pepperoni Pizzas</li>
+            <li>Sausage Patties</li>
+            <li>Pepperoni Pizzas</li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <ul>
+            <li>Supreme Pizzas</li>
+            <li>Pizza Sticks</li>
+            <li>Shoestring Fries</li>
+            <li>Steak Cut Fries</li>
+            <li>Straight Cut Fries</li>
+            <li>Seasoned Fries</li>
+            <li>Crinkle Cut Fries</li>
+            <li>Waffle Cut Fries</li>
+            <li>Tater Tots</li>
+            <li>Seasoned Potato Wedges</li>
+            <li>Sweet Potato Fries</li>
+            <li>Mixed Vegetables</li>
+            <li>California Blend Mix Vegetables</li>
+            <li>Cut Green Beans</li>
+            <li>Breaded Okra</li>
+            <li>Sliced Yellow Squash</li>
+            <li>Corn on the Cob</li>
+            <li>Shoepeg Corn</li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <ul>
+            <li>Onion Rings</li>
+            <li>Hush Puppies</li>
+            <li>Crab Cakes</li>
+            <li>Yeast Rolls</li>
+            <li>Garlic Cheese Breadstick</li>
+            <li>Southern Style Biscuits</li>
+            <li>Southern Cheese Biscuits</li>
+            <li>Belgian Waffles</li>
+            <li>Cinnamon Rolls</li>
+            <li>Hashbrown Patties</li>
+            <li>Sausage &amp; Cheese Pockets</li>
+            <li>Cooked Sausage Patties</li>
+            <li>Cheeseburger Pockets</li>
+            <li>Chicken Melt Pockets</li>
+            <li>Egg &amp; Cheese Pockets</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
-</section>
+{{/scroll-to-section}}

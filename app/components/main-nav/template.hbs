@@ -33,12 +33,7 @@
         </div>
       </li>
       <li class="nav-item">
-        {{#link-to "beverage" class="nav-link"}}
-          Beverage
-        {{/link-to}}
-      </li>
-      <li class="nav-item">
-        {{#link-to "events" class="nav-link"}}
+        {{#link-to "events" (query-params events=true) class="nav-link"}}
           Events
         {{/link-to}}
       </li>

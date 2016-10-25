@@ -2,6 +2,7 @@
 //
 
 .butcher-promo {
+  text-shadow: 1px 1px 1px #000;
   margin-top: $navbar-height;
   margin-bottom: $height-lg;
   height: 730px;
@@ -35,4 +36,35 @@
       padding: 6px 10px;;
     }
   }
+}
+
+.promo-dark {
+  background: rgba(0, 0, 0, .3);
+  height: 100%;
+}
+
+.store-hours {
+  color: #fff;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.store-hours-title {
+  margin-bottom: 5px;
+}
+
+.store-hours-line {
+  margin-bottom: 5px;
+}
+
+.location {
+  color: #fff;
+
+  @include media-breakpoint-down(md) {
+    padding-bottom: 25px;
+  }
+}
+
+.location-item {
+  margin-bottom: 5px;
 }

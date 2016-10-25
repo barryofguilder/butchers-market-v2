@@ -55,7 +55,7 @@
     {{/each}}
     <div class="col-sm-6 col-lg-3 feature-item">
       <h5 class="feature-title">
-        {{#link-to "meat" class="btn btn-secondary"}}
+        {{#link-to "meat" (query-params packages=true) class="btn btn-secondary"}}
           View All Packages
         {{/link-to}}
       </h5>
@@ -88,4 +88,4 @@
 
 {{newsletter-form}}
 
-{{feedback-form}}
+{{contact-section}}
