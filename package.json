@@ -33,7 +33,6 @@
     "ember-cli-node-assets": "0.1.4",
     "ember-cli-qunit": "^2.0.0",
     "ember-cli-release": "^0.2.9",
-    "ember-cli-reset-scroll": "0.0.1",
     "ember-cli-sass": "5.5.1",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-test-loader": "^1.1.0",

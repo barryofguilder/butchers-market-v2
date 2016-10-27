@@ -1,18 +1,82 @@
 {
   "events": [{
     "id": 1,
-    "title": "Acoustic Blues & Soul with Luke Simmons & Kolby Towe",
-    "startTime": "11/5/2016 12:00 PM",
-    "endTime": "11/5/2016 4:00PM"
+    "title": "Game Day! UGA vs. UF",
+    "startTime": "10/29/2016 12:00 PM",
+    "endTime": "10/29/2016 6:00 PM"
   }, {
     "id": 2,
-    "title": "Backwoods Funk & Blues with Remembering January",
-    "startTime": "11/12/2016 12:00 PM",
-    "endTime": "11/12/2016 4:00PM"
+    "title": "Luke Simmons & Kolby Towe",
+    "leadIn": "Acoustic Blues & Soul with",
+    "startTime": "11/5/2016 12:00 PM",
+    "endTime": "11/5/2016 4:00 PM",
+    "link": "https://www.youtube.com/watch?v=8ODVyWKIZMw"
   }, {
     "id": 3,
-    "title": "Acoustic Country with Josh Driver",
+    "title": "Remembering January",
+    "leadIn": "Backwoods Funk & Blues with",
+    "startTime": "11/12/2016 12:00 PM",
+    "endTime": "11/12/2016 4:00 PM",
+    "link": "https://www.youtube.com/watch?v=FQ41HML4NA4"
+  }, {
+    "id": 4,
+    "title": "Maison Mcgill",
+    "leadIn": "Acoustic Afternoon with",
+    "startTime": "11/19/2016 12:00 PM",
+    "endTime": "11/19/2016 4:00 PM"
+  }, {
+    "id": 5,
+    "title": "Game Day! UGA vs. GA Tech",
+    "startTime": "11/26/2016 12:00 PM",
+    "endTime": "11/26/2016 6:00 PM"
+  }, {
+    "id": 6,
+    "title": "Josh Driver",
+    "leadIn": "Acoustic Country with",
     "startTime": "12/3/2016 12:00 PM",
-    "endTime": "12/3/2016 4:00PM"
+    "endTime": "12/3/2016 4:00 PM"
+  }, {
+    "id": 7,
+    "title": "Mike Oden",
+    "leadIn": "Acoustic Afternoon with",
+    "startTime": "12/10/2016 12:00 PM",
+    "endTime": "12/10/2016 4:00 PM"
+  }, {
+    "id": 8,
+    "title": "Luke Simmons & Kolby Towe",
+    "leadIn": "Acoustic Blues & Soul with",
+    "startTime": "12/17/2016 12:00 PM",
+    "endTime": "12/17/2016 4:00 PM",
+    "link": "https://www.youtube.com/watch?v=8ODVyWKIZMw"
+  }, {
+    "id": 9,
+    "title": "Luke Simmons & Kolby Towe",
+    "leadIn": "Acoustic Blues & Soul with",
+    "startTime": "01/07/2017 12:00 PM",
+    "endTime": "01/07/2017 4:00 PM",
+    "link": "https://www.youtube.com/watch?v=8ODVyWKIZMw"
+  }, {
+    "id": 10,
+    "title": "Jeremy Wells",
+    "startTime": "01/14/2017 12:00 PM",
+    "endTime": "01/14/2017 4:00 PM"
+  }, {
+    "id": 11,
+    "title": "Rosedale Remedy",
+    "startTime": "01/21/2017 12:00 PM",
+    "endTime": "01/21/2017 4:00 PM"
+  }, {
+    "id": 12,
+    "title": "Mike Oden",
+    "leadIn": "Acoustic Afternoon with",
+    "startTime": "01/21/2017 12:00 PM",
+    "endTime": "01/21/2017 4:00 PM"
+  }, {
+    "id": 13,
+    "title": "Luke Simmons & Kolby Towe",
+    "leadIn": "Acoustic Blues & Soul with",
+    "startTime": "02/04/2017 12:00 PM",
+    "endTime": "02/04/2017 4:00 PM",
+    "link": "https://www.youtube.com/watch?v=8ODVyWKIZMw"
   }]
 }

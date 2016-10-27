@@ -1,0 +1,30 @@
+<div class="natural-products">
+  <div class="natural-products-header">
+    <h4>{{monthDisplay}}</h4>
+  </div>
+  <ul class="natural-products-items">
+    {{#each sortedEvents as |event|}}
+      <li>
+        <div class="event-item">
+          <h6 class="event-date">
+            {{moment-format event.momentStartTime "MMMM Do"}}
+          </h6>
+          {{#if event.leadIn}}
+            <p>{{event.leadIn}}:</p>
+          {{/if}}
+          <p class="event-title">
+            {{#if event.link}}
+              <a href=event.link target="_blank">{{event.title}}</a>
+            {{else}}
+              {{event.title}}
+            {{/if}}
+          </p>
+          <p class="event-time">
+            {{moment-format event.momentStartTime "h:mm a"}} -
+            {{moment-format event.momentEndTime "h:mm a"}}
+          </p>
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+</div>

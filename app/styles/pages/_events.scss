@@ -19,14 +19,14 @@
 
 .event-title {
   color: $brand-primary;
+  font-size: $font-size-base;
+  font-weight: bold;
+
+  a {
+    text-decoration: underline;
+  }
 }
 
 .event-date {
   margin-bottom: 10px;
-}
-
-.event-title {
-  font-size: $font-size-base;
-  font-weight: bold;
-  text-decoration: underline;
 }
