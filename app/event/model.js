@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import Ember from 'ember';
 import moment from 'moment';
 
 const DATE_FORMAT = 'MM/DD/YYYY hh:mm A';
