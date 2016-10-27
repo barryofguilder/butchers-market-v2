@@ -52,6 +52,9 @@ module.exports = function(defaults) {
   app.import('bower_components/fotorama/fotorama.png', {
     destDir: 'assets'
   });
+  app.import('bower_components/fotorama/fotorama@2x.png', {
+    destDir: 'assets'
+  });
 
   // jQuery Stellar, for parallax
   app.import('bower_components/jquery.stellar/jquery.stellar.js');

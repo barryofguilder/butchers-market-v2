@@ -11,6 +11,11 @@
     margin-top: $height-sm + 70px;
     margin-bottom: 90px;
 
+    @include media-breakpoint-down(md) {
+      margin-top: $height-sm;
+      margin-bottom: $height-sm;
+    }
+
     .natural-products-header {
       background: #000;
       color: #a16a3c;
