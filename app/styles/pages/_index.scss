@@ -3,6 +3,12 @@
 
 .butcher-promo-index {
   background: #000 url("#{$images}/promo-index.jpg") 50% 0 no-repeat;
+  margin-bottom: 135px;
+
+  @include media-breakpoint-down(md) {
+    height: 430px;
+    margin-bottom: $height-md;
+  }
 }
 
 .mobile-app-downloads {
