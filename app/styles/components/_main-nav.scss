@@ -36,6 +36,7 @@
     &.dropdown.open {
       .nav-link {
         background: $bm-gray-lighter;
+        color: $body-color;
       }
     }
   }
@@ -46,6 +47,10 @@
 
     &:hover {
       color: $brand-primary;
+    }
+
+    &.active {
+      color: $body-color;
     }
 
     @include media-breakpoint-down(md) {
@@ -72,6 +77,11 @@
       &:hover {
         background-color: $bm-gray-lightest;
         color: $brand-primary;
+      }
+
+      &.active {
+        background-color: $bm-gray-lightest;
+        color: $body-color;
       }
     }
   }

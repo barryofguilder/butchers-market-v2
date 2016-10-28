@@ -5,7 +5,7 @@
   background: #000 url("#{$images}/promo-cafe.jpg") 50% 0 no-repeat;
 
   @include media-breakpoint-down(md) {
-    height: 525px;
+    height: 585px;
     margin-bottom: $height-md;
   }
 }

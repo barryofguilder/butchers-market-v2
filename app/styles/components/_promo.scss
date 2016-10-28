@@ -8,7 +8,7 @@
   height: 730px;
 
   .promo-title {
-    padding-top: $height-lg;
+    padding-top: $height-md;
 
     @include media-breakpoint-down(md) {
       padding-top: $height-md;
@@ -46,10 +46,11 @@
 .store-hours {
   color: #fff;
   padding-top: 25px;
-  padding-bottom: 25px;
 
-  @include media-breakpoint-down(md) {
-    padding-top: 50px;
+  &:first-child {
+    @include media-breakpoint-down(md) {
+      padding-top: 50px;
+    }
   }
 }
 
@@ -62,6 +63,7 @@
 }
 
 .location {
+  padding-top: 25px;
   color: #fff;
 
   @include media-breakpoint-down(md) {

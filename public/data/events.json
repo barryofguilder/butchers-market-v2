@@ -52,31 +52,37 @@
     "id": 9,
     "title": "Luke Simmons & Kolby Towe",
     "leadIn": "Acoustic Blues & Soul with",
-    "startTime": "01/07/2017 12:00 PM",
-    "endTime": "01/07/2017 4:00 PM",
+    "startTime": "01/07/2017 7:00 PM",
+    "endTime": "01/07/2017 10:00 PM",
     "link": "https://www.youtube.com/watch?v=8ODVyWKIZMw"
   }, {
     "id": 10,
     "title": "Jeremy Wells",
-    "startTime": "01/14/2017 12:00 PM",
-    "endTime": "01/14/2017 4:00 PM"
+    "startTime": "01/14/2017 7:00 PM",
+    "endTime": "01/14/2017 10:00 PM"
   }, {
     "id": 11,
     "title": "Rosedale Remedy",
-    "startTime": "01/21/2017 12:00 PM",
-    "endTime": "01/21/2017 4:00 PM"
+    "startTime": "01/21/2017 7:00 PM",
+    "endTime": "01/21/2017 10:00 PM"
   }, {
     "id": 12,
     "title": "Mike Oden",
     "leadIn": "Acoustic Afternoon with",
-    "startTime": "01/21/2017 12:00 PM",
-    "endTime": "01/21/2017 4:00 PM"
+    "startTime": "01/21/2017 7:00 PM",
+    "endTime": "01/21/2017 10:00 PM"
   }, {
     "id": 13,
     "title": "Luke Simmons & Kolby Towe",
     "leadIn": "Acoustic Blues & Soul with",
-    "startTime": "02/04/2017 12:00 PM",
-    "endTime": "02/04/2017 4:00 PM",
+    "startTime": "02/04/2017 7:00 PM",
+    "endTime": "02/04/2017 10:00 PM",
+    "link": "https://www.youtube.com/watch?v=8ODVyWKIZMw"
+  }, {
+    "id": 14,
+    "title": "The Outsiders",
+    "startTime": "02/11/2017 7:00 PM",
+    "endTime": "02/11/2017 10:00 PM",
     "link": "https://www.youtube.com/watch?v=8ODVyWKIZMw"
   }]
 }

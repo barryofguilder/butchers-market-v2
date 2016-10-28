@@ -6,7 +6,7 @@
   margin-bottom: 135px;
 
   @include media-breakpoint-down(md) {
-    height: 525px;
+    height: 585px;
     margin-bottom: $height-md;
   }
 }

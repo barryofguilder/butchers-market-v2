@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   didInsertElement() {
     this._super(...arguments);
 
-    this.$('.nav-item, .navbar-brand').click(() => {
+    this.$('.nav-item:not(.dropdown), .navbar-brand, .dropdown-item').click(() => {
       let toggler = this.$('.navbar-toggler');
 
       if (!toggler.hasClass('collapsed')) {
