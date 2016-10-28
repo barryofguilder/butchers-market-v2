@@ -11,6 +11,14 @@ export default Ember.Component.extend({
   didInsertElement() {
     this._super(...arguments);
 
+    this._scrollToSection();
+  },
+
+  didUpdateAttrs() {
+    this._scrollToSection();
+  },
+
+  _scrollToSection() {
     if (this.get('shouldScroll')) {
       // Offset is to make up for the fixed position of the navbar
       this.get('scroller').scrollVertical(this.get('selector'), {

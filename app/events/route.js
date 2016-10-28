@@ -3,6 +3,12 @@ import RSVP from 'rsvp';
 import ResetScrollMixin from '../mixins/reset-scroll-mixin';
 
 export default Ember.Route.extend(ResetScrollMixin, {
+  queryParams: {
+    events: {
+      refreshModel: true
+    }
+  },
+
   model() {
     return RSVP.hash({
       events: this.store.findAll('event'),
