@@ -25,6 +25,18 @@ module.exports = function(environment) {
     api: ''
   };
 
+  ENV.contentSecurityPolicy = {
+    'default-src': "'none'",
+    'script-src': ["'self'", "localhost:*", "https://www.google.com/recaptcha/", "https://www.gstatic.com/recaptcha/", "https://www.foodbooking.com"],
+    'font-src': ["'self'", "localhost:*", "http://fonts.googleapis.com", "http://fonts.gstatic.com"],
+    'connect-src': ["'self'", "localhost:*", "*.thebutchersmarket.com", "https://www.foodbooking.com/api/"],
+    'img-src': ["'self'", "localhost:*"],
+    'style-src': ["'self'", "'unsafe-inline'", "localhost:*", "http://fonts.googleapis.com", "https://www.foodbooking.com"],
+    'frame-src': ["'self'", "https://www.google.com/recaptcha/", "https://www.foodbooking.com/", "https://www.youtube.com/embed/"],
+    'object-src': ["'self'", "localhost:*"],
+    'media-src': null
+  }
+
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
