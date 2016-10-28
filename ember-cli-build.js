@@ -56,13 +56,8 @@ module.exports = function(defaults) {
     destDir: 'assets'
   });
 
-  // jQuery Stellar, for parallax
-  app.import('bower_components/jquery.stellar/jquery.stellar.js');
-
   // Order online script
   app.import('vendor/order-online.js');
-
-  app.import('bower_components/fitvids/jquery.fitvids.js');
 
   return app.toTree();
 };

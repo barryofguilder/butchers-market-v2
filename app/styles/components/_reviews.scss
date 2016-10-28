@@ -4,6 +4,9 @@
 .butcher-reviews {
   background: url("#{$images}/bg-light-gray.jpg") 50% -100px $bm-gray-lightest;
   padding-top: $height-sm/2;
+
+  @include parallax();
+  background-size: cover;
 }
 
 .review-item {

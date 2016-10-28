@@ -2,6 +2,6 @@
 //
 
 .butcher-promo-beverage {
-  background: #000 url("#{$images}/promo-beverage.jpg") 0 0 no-repeat;
+  background-image: url("#{$images}/promo-beverage.jpg");
   height: 400px;
 }

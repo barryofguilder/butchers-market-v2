@@ -1,13 +1,7 @@
 <div class="natural-products {{topPrice}}">
-  {{#if product.featured}}
-    <div data-stellar-background-ratio="0.5" data-stellar-vertical-offset="-76" class="natural-products-header">
-      <h4>{{product.title}}</h4>
-    </div>
-  {{else}}
-    <div class="natural-products-header">
-      <h4>{{product.title}}</h4>
-    </div>
-  {{/if}}
+  <div class="natural-products-header">
+    <h4>{{product.title}}</h4>
+  </div>
   <ul class="natural-products-items">
     {{#each product.items as |item|}}
       <li>{{item}}</li>

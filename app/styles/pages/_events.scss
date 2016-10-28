@@ -2,7 +2,8 @@
 //
 
 .butcher-promo-cafe {
-  background: #000 url("#{$images}/promo-cafe.jpg") 50% 0 no-repeat;
+  background-image: url("#{$images}/promo-cafe.jpg");
+  margin-bottom: 125px;
 
   @include media-breakpoint-down(md) {
     height: 585px;

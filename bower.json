@@ -6,8 +6,6 @@
     "ember-qunit-notifications": "0.1.0",
     "bootstrap": "4.0.0-alpha.4",
     "font-awesome": "~4.5.0",
-    "fotorama": "^4.6.4",
-    "jquery.stellar": "^0.6.2",
-    "fitvids": "FitVids#^1.2.0"
+    "fotorama": "^4.6.4"
   }
 }

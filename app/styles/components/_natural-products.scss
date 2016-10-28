@@ -34,7 +34,10 @@
     .natural-products-header {
       background: url("#{$images}/promo-index.jpg") 50% 0;
       color: #fff;
+      text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.75);
       padding: $height-xs 0;
+
+      @include parallax();
     }
 
     .natural-products-items {

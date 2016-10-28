@@ -2,7 +2,7 @@
 //
 
 .butcher-promo-deli {
-  background: #000 url("#{$images}/promo-deli.png") 0 0 no-repeat;
+  background-image: url("#{$images}/promo-deli.png");
   height: 575px;
 
   @include media-breakpoint-down(sm) {

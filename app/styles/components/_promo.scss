@@ -5,7 +5,11 @@
   text-shadow: 1px 1px 1px #000;
   margin-top: $navbar-height;
   margin-bottom: $height-lg;
+  background-color: #000;
   height: 730px;
+
+  @include parallax();
+  background-size: cover;
 
   .promo-title {
     padding-top: $height-md;
