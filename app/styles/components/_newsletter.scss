@@ -18,6 +18,14 @@
       margin-left: 15px;
     }
   }
+
+  &.index {
+    background-image: url("#{$images}/promo-index.jpg");
+  }
+
+  &.cafe {
+    background-image: url("#{$images}/promo-cafe.jpg");
+  }
 }
 
 .newsletter-form {

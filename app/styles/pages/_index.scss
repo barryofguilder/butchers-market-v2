@@ -12,6 +12,10 @@
   @include media-breakpoint-down(xs) {
     margin-bottom: $height-md;
   }
+
+  .newsletter {
+    background: url("#{$images}/promo-index.jpg") 50% 0;
+  }
 }
 
 .deli-platters-col {
