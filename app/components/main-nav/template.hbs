@@ -38,8 +38,8 @@
         {{/link-to}}
       </li>
       <li class="nav-item">
-        {{#link-to "contact" class="nav-link"}}
-          Contact
+        {{#link-to "contact" (query-params events=isEventsPage) class="nav-link"}}
+          {{contactText}}
         {{/link-to}}
       </li>
     </ul>

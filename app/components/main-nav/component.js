@@ -4,6 +4,23 @@ export default Ember.Component.extend({
   tagName: 'nav',
   classNames: ['navbar', 'navbar-default', 'navbar-fixed-top', 'main-nav'],
 
+  currentRouteName: Ember.computed('applicationRoute.controller.currentRouteName', function() {
+    let currentRouteName = this.get('applicationRoute.controller.currentRouteName');
+    return currentRouteName || '';
+  }),
+
+  isEventsPage: Ember.computed('currentRouteName', function() {
+    let currentRouteName = this.get('currentRouteName');
+
+    return currentRouteName === 'events';
+  }),
+
+  contactText: Ember.computed('isEventsPage', function() {
+    let isEventsPage = this.get('isEventsPage');
+
+    return isEventsPage ? 'Contact & Booking' : 'Contact';
+  }),
+
   didInsertElement() {
     this._super(...arguments);
 
