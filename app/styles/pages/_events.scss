@@ -6,7 +6,10 @@
   margin-bottom: 125px;
 
   @include media-breakpoint-down(md) {
-    height: 585px;
+    margin-bottom: 100px;
+  }
+
+  @include media-breakpoint-down(xs) {
     margin-bottom: $height-md;
   }
 }

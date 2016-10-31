@@ -6,19 +6,20 @@
   margin-bottom: 135px;
 
   @include media-breakpoint-down(md) {
-    height: 585px;
-    margin-bottom: $height-md;
+    margin-bottom: 100px;
   }
-}
 
-.mobile-app-downloads {
-  margin: 10px auto 0;
-
-  li {
-    margin-bottom: 10px;
+  @include media-breakpoint-down(xs) {
+    margin-bottom: $height-md;
   }
 }
 
 .deli-platters-col {
   text-align: center;
+}
+
+.iphone-app {
+  float: right;
+  width: 100%;
+  max-width: 175px;
 }
