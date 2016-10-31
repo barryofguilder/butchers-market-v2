@@ -45,7 +45,6 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.rootURL = '/new_butch_2/';
     ENV.api = '/';
   }
 
