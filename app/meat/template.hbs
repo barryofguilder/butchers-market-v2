@@ -9,7 +9,12 @@
 {{#scroll-to-section shouldScroll=packages selector="#bundles"}}
   <div id="bundles">
     <div class="container">
-      {{header-title title="Bundle Packs"}}
+      {{header-title title="Bundle Packs" class="meat-header"}}
+      <div class="meat-print">
+        <a href="docs/bundles-mixnmatch.pdf" class="btn btn-secondary">
+          Print Flyer
+        </a>
+      </div>
 
       {{#each (grouped-each cardColumns model.bundles) as |row|}}
         <div class="row">
@@ -21,7 +26,12 @@
         </div>
       {{/each}}
 
-      {{header-title title="Mix N' Match"}}
+      {{header-title title="Mix N' Match" class="meat-header"}}
+      <div class="meat-print">
+        <a href="docs/bundles-mixnmatch.pdf" class="btn btn-secondary">
+          Print Flyer
+        </a>
+      </div>
       <div class="row">
         <div class="col-md-4">
           <ul class="list-unstyled">
@@ -57,18 +67,20 @@
             <li>4 ½ lbs. Split Chicken Breast</li>
             <li>10 lbs. Chicken Leg Quarters</li>
             <li>5 lbs. Chicken Wings</li>
-            <li>2 ½ lbs. Breaded Chicken Hot Wings</li>
-            <li>3 lbs. Breaded Chicken Strips</li>
             <li>2 Cornish Game Hens</li>
             <li>4 lbs. Tilapia or Swai Fish Fillets</li>
             <li>2 lbs. Peeled Cooked or Raw Shrimp</li>
-            <li>5 lbs. Cooked Whole Crawfish</li>
             <li>2 lbs. Frog Legs</li>
           </ul>
         </div>
       </div>
 
-      {{header-title title="Ice Box Mix N' Match"}}
+      {{header-title title="Ice Box Mix N' Match" class="meat-header"}}
+      <div class="meat-print">
+        <a href="docs/iceboxflyer.pdf" class="btn btn-secondary">
+          Print Flyer
+        </a>
+      </div>
       <div class="row">
         <div class="col-md-3">
           <ul class="list-unstyled">
