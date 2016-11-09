@@ -11,7 +11,7 @@ export default Ember.Component.extend({
 
     let upcomingEvents = events.filter(event => {
       let date = event.get('momentStartTime');
-      return date.isAfter(now, 'day');
+      return date.isSameOrAfter(now, 'day');
     });
 
     let eventsLength = upcomingEvents.get('length');
