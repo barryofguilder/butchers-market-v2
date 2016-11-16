@@ -46,6 +46,10 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     ENV.api = '/';
+
+    ENV['ember-google-analytics'] = {
+      trackingId: 'UA-59988645-1'
+    }
   }
 
   return ENV;
