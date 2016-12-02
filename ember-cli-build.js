@@ -9,11 +9,6 @@ module.exports = function(defaults) {
     },
     fingerprint: {
       exclude: ['apple-touch-icon.png', 'images/*.*']
-    },
-    nodeAssets: {
-      'fitvids': {
-        import: ['dist/fitvids.js']
-      }
     }
   });
 
