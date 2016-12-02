@@ -7,6 +7,8 @@ export default DS.RESTAdapter.extend({
 
   urlForFindAll(/* modelName */) {
     let url = this._super(...arguments);
-    return url += '.json';
+    let timestamp = new Date().getTime();
+
+    return `${url}.json?t=${timestamp}`;
   }
 });
