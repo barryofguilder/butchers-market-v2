@@ -1,6 +1,8 @@
+import moment from 'moment';
+
 export default function(a, b) {
-  let timeA = a.get('momentStartTime');
-  let timeB = b.get('momentStartTime');
+  let timeA = moment(a.get('startTime'));
+  let timeB = moment(b.get('startTime'));
 
   if (timeA.isAfter(timeB)) {
     return 1;

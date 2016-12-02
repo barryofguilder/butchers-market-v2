@@ -7,7 +7,7 @@
       <li>
         <div class="event-item">
           <h6 class="event-date">
-            {{moment-format event.momentStartTime "MMMM Do"}}
+            {{moment-format event.startTime "MMMM Do"}}
           </h6>
           {{#if event.leadIn}}
             <p>{{event.leadIn}}:</p>
@@ -20,8 +20,8 @@
             {{/if}}
           </p>
           <p class="event-time">
-            {{moment-format event.momentStartTime "h:mm a"}} -
-            {{moment-format event.momentEndTime "h:mm a"}}
+            {{moment-format event.startTime "h:mma"}} -
+            {{moment-format event.endTime "h:mma"}}
           </p>
         </div>
       </li>

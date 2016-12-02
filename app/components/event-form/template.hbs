@@ -1,0 +1,81 @@
+{{#modal-dialog as |modal|}}
+  {{#modal.header close="close"}}
+    {{dialogTitle}}
+  {{/modal.header}}
+  <form {{action "save" on="submit"}}>
+    {{#modal.body}}
+      {{#if errorMessage}}
+        <div class="alert alert-danger">
+          {{errorMessage}}
+        </div>
+      {{/if}}
+      <p class="form-info">
+        <strong>Note:</strong> Required fields are marked with an <span class="required">{{fa-icon "asterisk"}}</span>
+      </p>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="event-title">
+          Title:
+          <span class="required">{{fa-icon "asterisk"}}</span>
+        </label>
+        <div class="col-sm-9">
+          {{input class="form-control" id="event-title" value=title}}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="event-lead-in">Lead In:</label>
+        <div class="col-sm-9">
+          {{input class="form-control" id="event-lead-in" value=leadIn}}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">
+          Date:
+          <span class="required">{{fa-icon "asterisk"}}</span>
+        </label>
+        <div class="col-sm-9">
+          {{pick-a-date
+            date=(readonly startTime)
+            on-selected=(action (mut startTime))
+            class="form-control"
+          }}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">
+          Start Time:
+          <span class="required">{{fa-icon "asterisk"}}</span>
+        </label>
+        <div class="col-sm-9">
+          {{pick-a-time
+            date=(readonly startTime)
+            on-selected=(action (mut startTime))
+            class="form-control"
+          }}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">
+          End Time:
+          <span class="required">{{fa-icon "asterisk"}}</span>
+        </label>
+        <div class="col-sm-9">
+          {{pick-a-time
+            date=(readonly endTime)
+            on-selected=(action (mut endTime))
+            class="form-control"
+          }}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="event-link">Link:</label>
+        <div class="col-sm-9">
+          {{input class="form-control" id="event-link" value=link}}
+        </div>
+      </div>
+    {{/modal.body}}
+    {{#modal.footer}}
+      <button type="button" class="btn btn-secondary" {{action "close"}}>Cancel</button>
+      <button type="submit" class="btn btn-primary">Save</button>
+    {{/modal.footer}}
+  </form>
+{{/modal-dialog}}

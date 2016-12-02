@@ -1,0 +1,102 @@
+{{admin-title title="Events"}}
+
+<div class="admin-page-actions">
+  {{#link-to "admin.events.new" class="btn btn-secondary"}}
+    {{fa-icon "plus"}}
+    New
+  {{/link-to}}
+</div>
+
+<div class="natural-products admin-item-list">
+  <ul class="natural-products-items">
+    {{#each sortedEvents as |event|}}
+      <li>
+        <div class="event-item">
+          <h6 class="event-date">
+            {{moment-format event.startTime "MMMM Do"}}
+          </h6>
+          {{#if event.leadIn}}
+            <p>{{event.leadIn}}:</p>
+          {{/if}}
+          <p class="event-title">
+            {{event.title}}
+          </p>
+          <p class="event-time">
+            {{moment-format event.startTime "h:mma"}} -
+            {{moment-format event.endTime "h:mma"}}
+          </p>
+          <div class="admin-item-options">
+            {{#link-to 'admin.events.edit' event.id class="btn btn-secondary"}}
+              {{fa-icon "pencil"}}
+              Edit
+            {{/link-to}}
+            <a class="btn btn-secondary" href="#" {{action "delete" event}}>
+              {{fa-icon "trash"}}
+              Delete
+            </a>
+          </div>
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+</div>
+
+{{#if showDeleteModal}}
+  {{#modal-dialog as |modal|}}
+    {{modal.header title="Delete Event?" close="cancelDelete"}}
+    <form {{action "deleteEvent" on="submit"}}>
+      {{#modal.body}}
+        {{#if errorMessage}}
+          <div class="alert alert-danger">
+            {{errorMessage}}
+          </div>
+        {{/if}}
+        <p class="form-info">
+          <strong>Do you really want to delete this event?</strong>
+        </p>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Title:</label>
+          <div class="col-sm-9">
+            <p class="form-control-static">{{eventToDelete.title}}</p>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Lead In:</label>
+          <div class="col-sm-9">
+            <p class="form-control-static">{{eventToDelete.leadIn}}</p>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Date:</label>
+          <div class="col-sm-9">
+            <p class="form-control-static">{{moment-format eventToDelete.startTime "MMMM Do YYYY"}}</p>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Start Time:</label>
+          <div class="col-sm-9">
+            <p class="form-control-static">{{moment-format eventToDelete.startTime "h:mma"}}</p>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">End Time:</label>
+          <div class="col-sm-9">
+            <p class="form-control-static">{{moment-format eventToDelete.endTime "h:mma"}}</p>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Link:</label>
+          <div class="col-sm-9">
+            <p class="form-control-static">{{eventToDelete.link}}</p>
+          </div>
+        </div>
+      {{/modal.body}}
+      {{#modal.footer}}
+        <button type="button" class="btn btn-secondary" {{action "cancelDelete"}}>No</button>
+        <button type="submit" class="btn btn-primary">Yes</button>
+      {{/modal.footer}}
+    </form>
+  {{/modal-dialog}}
+{{/if}}
+
+{{outlet}}

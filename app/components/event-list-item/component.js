@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import moment from 'moment';
 import momentSort from '../../utils/moment-sort';
 
 export default Ember.Component.extend({
@@ -6,9 +7,9 @@ export default Ember.Component.extend({
 
   events: null,
   sortedEvents: Ember.computed.sort('events', momentSort),
-  monthDisplay: Ember.computed('events.@each.momentStartTime', function() {
-    let events = this.get('events');
+  monthDisplay: Ember.computed('events.@each.startTime', function() {
+    let firstEvent = this.get('events.firstObject');
 
-    return events[0].get('momentStartTime').format('MMMM YYYY');
+    return moment(firstEvent.get('startTime')).format('MMMM YYYY');
   })
 });

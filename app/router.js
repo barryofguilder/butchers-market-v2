@@ -12,6 +12,13 @@ Router.map(function() {
   this.route('beverage');
   this.route('contact');
   this.route('events');
+
+  this.route('admin', function() {
+    this.route('events', function() {
+      this.route('new');
+      this.route('edit', { path: ':eventId' });
+    });
+  });
 });
 
 export default Router;

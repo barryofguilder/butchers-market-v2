@@ -10,7 +10,7 @@ export default Ember.Component.extend({
     let now = moment();
 
     let upcomingEvents = events.filter(event => {
-      let date = event.get('momentStartTime');
+      let date = moment(event.get('startTime'));
       return date.isSameOrAfter(now, 'day');
     });
 
@@ -19,11 +19,11 @@ export default Ember.Component.extend({
     let monthEvents = Ember.A();
 
     for (let i = 0; i < eventsLength; i++) {
-      let date = upcomingEvents[i].get('momentStartTime');
+      let date = moment(upcomingEvents[i].get('startTime'));
       let month = date.month();
 
       if (monthEvents.get('length')) {
-        let recentDate = monthEvents[0].get('momentStartTime');
+        let recentDate = moment(monthEvents[0].get('startTime'));
 
         if (month !== recentDate.month()) {
           eventsByMonth.pushObject(monthEvents);
