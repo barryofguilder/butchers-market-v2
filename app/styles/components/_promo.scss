@@ -8,6 +8,10 @@
   background-color: #000;
   height: 750px;
 
+  &.special-hours {
+    height: 810px;
+  }
+
   @include parallax();
   background-size: cover;
 
@@ -64,6 +68,11 @@
 
 .store-hours-line {
   margin-bottom: 5px;
+
+  &.store-hours-special {
+    color: $brand-danger;
+    font-weight: bold;
+  }
 }
 
 .location {
