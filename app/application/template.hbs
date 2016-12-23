@@ -1,28 +1,32 @@
-{{main-nav}}
+{{#unless isMobileApp}}
+  {{main-nav}}
+{{/unless}}
 
 {{outlet}}
 
-<footer class="main-footer">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="copyright">
-          Copyright © 2016 The Butcher's Market
+{{#unless isMobileApp}}
+  <footer class="main-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="copyright">
+            Copyright © 2016 The Butcher's Market
+          </div>
         </div>
-      </div>
-      <div class="col-md-6">
-        <div class="social-media-icons">
-          <a href="https://www.facebook.com/thebutchersmarket" class="social-media-icon">
-            <i class="fa fa-facebook"></i>
-          </a>
-          <a href="https://www.instagram.com/thebutchersmarket" class="social-media-icon">
-            <i class="fa fa-instagram"></i>
-          </a>
-          <a href="https://twitter.com/thebutchersmkt" class="social-media-icon">
-            <i class="fa fa-twitter"></i>
-          </a>
+        <div class="col-md-6">
+          <div class="social-media-icons">
+            <a href="https://www.facebook.com/thebutchersmarket" class="social-media-icon">
+              <i class="fa fa-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/thebutchersmarket" class="social-media-icon">
+              <i class="fa fa-instagram"></i>
+            </a>
+            <a href="https://twitter.com/thebutchersmkt" class="social-media-icon">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>
+{{/unless}}

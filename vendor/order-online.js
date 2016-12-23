@@ -12,7 +12,10 @@ $(function() {
 
     var js,fjs=d.getElementsByTagName(s)[0], l=function(){
       glfWidget(h,[bid],cuid);
-      d.getElementById(bid).removeAttribute('id');
+      var element = d.getElementById(bid);
+      if (element) {
+        element.removeAttribute('id');
+      }
     }, b=function(s){
       s.addEventListener?s.addEventListener('load',l,false):s.attachEvent("onload", l);
     };

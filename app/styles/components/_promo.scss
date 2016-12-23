@@ -12,6 +12,10 @@
     height: 810px;
   }
 
+  .mobile-app & {
+    margin-top: 0;
+  }
+
   @include parallax();
   background-size: cover;
 
