@@ -18,7 +18,7 @@ export default Ember.Component.extend({
   contactText: Ember.computed('isEventsPage', function() {
     let isEventsPage = this.get('isEventsPage');
 
-    return isEventsPage ? 'Contact & Booking' : 'Contact';
+    return isEventsPage ? 'Contact, Booking, & Private Parties' : 'Contact';
   }),
 
   didInsertElement() {
