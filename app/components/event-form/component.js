@@ -28,10 +28,22 @@ export default Ember.Component.extend({
     this.setProperties({
       title: event.get('title'),
       leadIn: event.get('leadIn'),
-      startTime: event.get('startTime'),
-      endTime: event.get('endTime'),
       link: event.get('link')
     });
+
+    if (event.get('isNew')) {
+      let now = new Date();
+
+      this.setProperties({
+        startTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 19),
+        endTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 22)
+      });
+    } else {
+      this.setProperties({
+        startTime: event.get('startTime'),
+        endTime: event.get('endTime')
+      });
+    }
   },
 
   actions: {
@@ -40,7 +52,6 @@ export default Ember.Component.extend({
         this.set('errorMessage', null);
 
         let event = this.get('event');
-
         event.setProperties({
           title: this.get('title'),
           leadIn: this.get('leadIn'),
