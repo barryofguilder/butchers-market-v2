@@ -51,8 +51,5 @@ module.exports = function(defaults) {
     destDir: 'assets'
   });
 
-  // Order online script
-  app.import('vendor/order-online.js');
-
   return app.toTree();
 };
