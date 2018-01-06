@@ -1,14 +1,16 @@
-import Ember from 'ember';
+import { bool } from '@ember/object/computed';
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: 'section',
 
-  scroller: Ember.inject.service(),
-  mobileApp: Ember.inject.service('mobile-app'),
+  scroller: service(),
+  mobileApp: service('mobile-app'),
 
   shouldScroll: false,
   selector: null,
-  isMobileApp: Ember.computed.bool('mobileApp.isMobileApp'),
+  isMobileApp: bool('mobileApp.isMobileApp'),
 
   didInsertElement() {
     this._super(...arguments);

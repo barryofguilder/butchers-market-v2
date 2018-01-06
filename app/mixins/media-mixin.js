@@ -1,6 +1,7 @@
-import Ember from 'ember';
+import { bool, not } from '@ember/object/computed';
+import Mixin from '@ember/object/mixin';
 
-export default Ember.Mixin.create({
-  isDesktop: Ember.computed.bool('media.isDesktop'),
-  notDesktop: Ember.computed.not('media.isDesktop')
+export default Mixin.create({
+  isDesktop: bool('media.isDesktop'),
+  notDesktop: not('media.isDesktop')
 });

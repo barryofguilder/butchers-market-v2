@@ -1,11 +1,14 @@
-import Ember from 'ember';
+import { A } from '@ember/array';
+import { computed } from '@ember/object';
+import { sort } from '@ember/object/computed';
+import Component from '@ember/component';
 import moment from 'moment';
 import momentSort from '../../utils/moment-sort';
 
-export default Ember.Component.extend({
+export default Component.extend({
   events: null,
-  sortedEvents: Ember.computed.sort('events', momentSort),
-  eventsByMonth: Ember.computed('sortedEvents.@each', function() {
+  sortedEvents: sort('events', momentSort),
+  eventsByMonth: computed('sortedEvents.@each', function() {
     let events = this.get('sortedEvents');
     let now = moment();
 
@@ -15,8 +18,8 @@ export default Ember.Component.extend({
     });
 
     let eventsLength = upcomingEvents.get('length');
-    let eventsByMonth = Ember.A();
-    let monthEvents = Ember.A();
+    let eventsByMonth = A();
+    let monthEvents = A();
 
     for (let i = 0; i < eventsLength; i++) {
       let date = moment(upcomingEvents[i].get('startTime'));
@@ -27,7 +30,7 @@ export default Ember.Component.extend({
 
         if (month !== recentDate.month()) {
           eventsByMonth.pushObject(monthEvents);
-          monthEvents = Ember.A();
+          monthEvents = A();
         }
       }
 
@@ -40,7 +43,7 @@ export default Ember.Component.extend({
 
     return eventsByMonth;
   }),
-  eventColumns: Ember.computed('media.isMobile', function() {
+  eventColumns: computed('media.isMobile', function() {
     return this.get('media.isMobile') ? 2 : 3;
   })
 });

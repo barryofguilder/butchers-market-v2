@@ -1,8 +1,10 @@
-import Ember from 'ember';
+import { bool } from '@ember/object/computed';
+import { inject as service } from '@ember/service';
+import Mixin from '@ember/object/mixin';
 
-export default Ember.Mixin.create({
-  mobileApp: Ember.inject.service('mobile-app'),
-  isMobileApp: Ember.computed.bool('mobileApp.isMobileApp'),
+export default Mixin.create({
+  mobileApp: service('mobile-app'),
+  isMobileApp: bool('mobileApp.isMobileApp'),
 
   beforeModel(params){
     let isMobileApp = params.queryParams.mobile ? true : false;

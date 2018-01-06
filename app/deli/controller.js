@@ -1,7 +1,8 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
-  cardColumns: Ember.computed('media.isMobile', function() {
+export default Controller.extend({
+  cardColumns: computed('media.isMobile', function() {
     return this.get('media.isMobile') ? 2 : 4;
   })
 });

@@ -1,11 +1,12 @@
-import Ember from 'ember';
+import { filterBy, sort, notEmpty } from '@ember/object/computed';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   eventSort: ['startTime:asc'],
-  filteredEvents: Ember.computed.filterBy('model', 'isNew', false),
-  sortedEvents: Ember.computed.sort('filteredEvents', 'eventSort'),
+  filteredEvents: filterBy('model', 'isNew', false),
+  sortedEvents: sort('filteredEvents', 'eventSort'),
   eventToDelete: null,
-  showDeleteModal: Ember.computed.notEmpty('eventToDelete'),
+  showDeleteModal: notEmpty('eventToDelete'),
   errorMessage: null,
 
   actions: {

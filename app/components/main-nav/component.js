@@ -1,21 +1,22 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: 'nav',
   classNames: ['navbar', 'navbar-default', 'navbar-fixed-top', 'main-nav'],
 
-  currentRouteName: Ember.computed('applicationRoute.controller.currentRouteName', function() {
+  currentRouteName: computed('applicationRoute.controller.currentRouteName', function() {
     let currentRouteName = this.get('applicationRoute.controller.currentRouteName');
     return currentRouteName || '';
   }),
 
-  isEventsPage: Ember.computed('currentRouteName', function() {
+  isEventsPage: computed('currentRouteName', function() {
     let currentRouteName = this.get('currentRouteName');
 
     return currentRouteName === 'events';
   }),
 
-  contactText: Ember.computed('isEventsPage', function() {
+  contactText: computed('isEventsPage', function() {
     let isEventsPage = this.get('isEventsPage');
 
     return isEventsPage ? 'Contact, Booking, & Private Parties' : 'Contact';

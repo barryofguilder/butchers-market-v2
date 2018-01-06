@@ -1,6 +1,8 @@
-import Ember from 'ember';
+import { bool } from '@ember/object/computed';
+import { inject as service } from '@ember/service';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
-  mobileApp: Ember.inject.service('mobile-app'),
-  isMobileApp: Ember.computed.bool('mobileApp.isMobileApp')
+export default Controller.extend({
+  mobileApp: service('mobile-app'),
+  isMobileApp: bool('mobileApp.isMobileApp')
 });

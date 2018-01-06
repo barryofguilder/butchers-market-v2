@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
 import ResetScrollMixin from '../mixins/reset-scroll-mixin';
 
-export default Ember.Route.extend(ResetScrollMixin, {
+export default Route.extend(ResetScrollMixin, {
   queryParams: {
     events: {
       refreshModel: true

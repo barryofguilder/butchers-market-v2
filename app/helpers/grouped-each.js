@@ -1,16 +1,17 @@
-import Ember from 'ember';
+import { helper } from '@ember/component/helper';
+import { A } from '@ember/array';
 
 export function groupedEach(params) {
   let every = params[0];
   let models = params[1];
   let modelLength = models.get('length');
-  let newModels = Ember.A();
-  let rowModels = Ember.A();
+  let newModels = A();
+  let rowModels = A();
 
   for (let i = 0; i < modelLength; i++) {
     if (rowModels.get('length') === every) {
       newModels.pushObject(rowModels);
-      rowModels = Ember.A();
+      rowModels = A();
     }
 
     rowModels.pushObject(models.objectAt(i));
@@ -23,4 +24,4 @@ export function groupedEach(params) {
   return newModels;
 }
 
-export default Ember.Helper.helper(groupedEach);
+export default helper(groupedEach);

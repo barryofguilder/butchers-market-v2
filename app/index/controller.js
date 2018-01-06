@@ -1,6 +1,7 @@
-import Ember from 'ember';
+import { filterBy } from '@ember/object/computed';
+import Controller from '@ember/controller';
 import MediaMixin from '../mixins/media-mixin';
 
-export default Ember.Controller.extend(MediaMixin, {
-  featuredBundles: Ember.computed.filterBy('model.bundles', 'featured', true)
+export default Controller.extend(MediaMixin, {
+  featuredBundles: filterBy('model.bundles', 'featured', true)
 });

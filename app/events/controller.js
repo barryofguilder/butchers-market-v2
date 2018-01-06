@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
 import MediaMixin from '../mixins/media-mixin';
 
-export default Ember.Controller.extend(MediaMixin, {
+export default Controller.extend(MediaMixin, {
   queryParams: ['events'],
   events: false
 });

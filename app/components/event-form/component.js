@@ -1,6 +1,8 @@
-import Ember from 'ember';
+import { isPresent } from '@ember/utils';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   event: null,
   title: null,
   leadIn: null,
@@ -8,16 +10,16 @@ export default Ember.Component.extend({
   endTime: null,
   link: null,
   errorMessage: null,
-  dialogTitle: Ember.computed('event.isNew', function() {
+  dialogTitle: computed('event.isNew', function() {
     let isNew = this.get('event.isNew');
 
     return isNew ? 'New Event' : 'Edit Event';
   }),
 
-  isValid: Ember.computed('title', 'startTime', 'endTime', function() {
-    return Ember.isPresent(this.get('title')) &&
-           Ember.isPresent(this.get('startTime')) &&
-           Ember.isPresent(this.get('endTime'));
+  isValid: computed('title', 'startTime', 'endTime', function() {
+    return isPresent(this.get('title')) &&
+           isPresent(this.get('startTime')) &&
+           isPresent(this.get('endTime'));
   }),
 
   init() {

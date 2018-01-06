@@ -1,8 +1,8 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
 import RSVP from 'rsvp';
 import ResetScrollMixin from '../mixins/reset-scroll-mixin';
 
-export default Ember.Route.extend(ResetScrollMixin, {
+export default Route.extend(ResetScrollMixin, {
   model() {
     return RSVP.hash({
       bundles: this.store.findAll('meat-bundle'),

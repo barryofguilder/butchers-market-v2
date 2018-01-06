@@ -1,10 +1,11 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   queryParams: ['packages'],
   packages: false,
 
-  cardColumns: Ember.computed('media.isMobile', function() {
+  cardColumns: computed('media.isMobile', function() {
     return this.get('media.isMobile') ? 2 : 3;
   })
 });

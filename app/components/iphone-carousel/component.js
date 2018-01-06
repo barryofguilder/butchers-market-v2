@@ -1,9 +1,10 @@
-import Ember from 'ember';
+import $ from 'jquery';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ['iphone-carousel'],
   
   didInsertElement() {
-    Ember.$('.fotorama').fotorama();
+    $('.fotorama').fotorama();
   }
 });

@@ -1,7 +1,9 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
-  ajax: Ember.inject.service(),
+export default Component.extend({
+  ajax: service(),
 
   name: null,
   email: null,
@@ -13,7 +15,7 @@ export default Ember.Component.extend({
   messageInvalid: false,
   recaptchaInvalid: false,
   showServerError: false,
-  showInvalidFormError: Ember.computed('nameInvalid', 'emailInvalid', 'messageInvalid', 'recaptchaInvalid', function() {
+  showInvalidFormError: computed('nameInvalid', 'emailInvalid', 'messageInvalid', 'recaptchaInvalid', function() {
     return this.get('nameInvalid') ||
            this.get('emailInvalid') ||
            this.get('messageInvalid') ||

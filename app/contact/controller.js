@@ -1,8 +1,9 @@
-import Ember from 'ember';
+import { bool } from '@ember/object/computed';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   queryParams: ['events'],
   events: false,
 
-  isEventsPage: Ember.computed.bool('events')
+  isEventsPage: bool('events')
 });

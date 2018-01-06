@@ -1,10 +1,11 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ['col-md-4'],
 
   product: null,
-  topPrice: Ember.computed('product.featured', function() {
+  topPrice: computed('product.featured', function() {
     return this.get('product.featured') ? 'natural-products-top' : null;
   })
 });
