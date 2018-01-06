@@ -25,21 +25,21 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
-  // Bootstrap dependency for popovers and tooltips
-  //app.import('bower_components/tether/dist/js/tether.js');
+  // Bootstrap dependency for dropdowns
+  app.import('node_modules/popper.js/dist/umd/popper.js');
 
   // Bootstrap
-  app.import('bower_components/bootstrap/js/dist/util.js');
+  app.import('node_modules/bootstrap/js/dist/util.js');
   //app.import('bower_components/bootstrap/js/dist/alert.js');
-  app.import('bower_components/bootstrap/js/dist/button.js');
-  //app.import('bower_components/bootstrap/js/dist/carousel.js');
-  app.import('bower_components/bootstrap/js/dist/collapse.js');
-  app.import('bower_components/bootstrap/js/dist/dropdown.js');
-  //app.import('bower_components/bootstrap/js/dist/modal.js');
-  //app.import('bower_components/bootstrap/js/dist/scrollspy.js');
-  //app.import('bower_components/bootstrap/js/dist/tab.js');
-  //app.import('bower_components/bootstrap/js/dist/tooltip.js');
-  //app.import('bower_components/bootstrap/js/dist/popover.js');
+  app.import('node_modules/bootstrap/js/dist/button.js');
+  //app.import('node_modules/bootstrap/js/dist/carousel.js');
+  app.import('node_modules/bootstrap/js/dist/collapse.js');
+  app.import('node_modules/bootstrap/js/dist/dropdown.js');
+  //app.import('node_modules/bootstrap/js/dist/modal.js');
+  //app.import('node_modules/bootstrap/js/dist/tooltip.js');
+  //app.import('node_modules/bootstrap/js/dist/popover.js');
+  //app.import('node_modules/bootstrap/js/dist/scrollspy.js');
+  //app.import('node_modules/bootstrap/js/dist/tab.js');
 
   // Fotorama, for carousel
   app.import('bower_components/fotorama/fotorama.js');

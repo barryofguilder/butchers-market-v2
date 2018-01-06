@@ -1,7 +1,6 @@
 {
   "name": "butchers-market",
   "dependencies": {
-    "bootstrap": "4.0.0-alpha.4",
     "font-awesome": "~4.5.0",
     "fotorama": "4.6.3",
     "pickadate": "^3.5.6"
