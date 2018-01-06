@@ -1,9 +1,8 @@
 <?php
 
 $method = $_SERVER['REQUEST_METHOD'];
-$request = explode('/', trim($_SERVER['PATH_INFO'],'/'));
 $body = json_decode(file_get_contents('php://input'));
-$key = array_shift($request)+0;
+$key = (int)$_GET['id'];
 
 $events = getEventsFromFile();
 

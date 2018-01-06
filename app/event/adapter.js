@@ -2,7 +2,7 @@ import ApplicationAdapter from '../application/adapter';
 
 export default ApplicationAdapter.extend({
   urlForFindRecord(id/*, modelName, snapshot */) {
-    return `server/events.php/${id}`;
+    return `server/events.php?id=${id}`;
   },
 
   urlForCreateRecord(/*modelName, snapshot*/) {
@@ -10,10 +10,10 @@ export default ApplicationAdapter.extend({
   },
 
   urlForUpdateRecord(id/*, modelName, snapshot*/) {
-    return `server/events.php/${id}`;
+    return `server/events.php?id=${id}`;
   },
 
   urlForDeleteRecord(id/*, modelName, snapshot*/) {
-    return `server/events.php/${id}`;
+    return `server/events.php?id=${id}`;
   }
 });
