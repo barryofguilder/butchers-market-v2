@@ -1,7 +1,7 @@
 {{admin-title title="Events"}}
 
 <div class="admin-page-actions">
-  {{#link-to "admin.events.new" class="btn btn-secondary"}}
+  {{#link-to "admin.events.new" class="btn btn-secondary btn-sm"}}
     {{fa-icon "plus"}}
     New
   {{/link-to}}
@@ -26,11 +26,11 @@
             {{moment-format event.endTime "h:mma"}}
           </p>
           <div class="admin-item-options">
-            {{#link-to 'admin.events.edit' event.id class="btn btn-secondary"}}
+            {{#link-to 'admin.events.edit' event.id class="btn btn-secondary btn-sm"}}
               {{fa-icon "pencil"}}
               Edit
             {{/link-to}}
-            <a class="btn btn-secondary" href="#" {{action "delete" event}}>
+            <a class="btn btn-secondary btn-sm" href="#" {{action "delete" event}}>
               {{fa-icon "trash"}}
               Delete
             </a>

@@ -3,14 +3,6 @@
 
 .admin-pages {
   padding-top: $navbar-height + $height-lg;
-
-  .btn {
-    padding: 2px 6px;
-    text-transform: none;
-    border: solid 1px #ccc;
-    font-size: 1rem;
-    @include button-variant($gray-dark, #fff, #ccc);
-  }
 }
 
 .admin-page-title {
