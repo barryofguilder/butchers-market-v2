@@ -2,12 +2,18 @@ import { filterBy, sort, notEmpty } from '@ember/object/computed';
 import Controller from '@ember/controller';
 
 export default Controller.extend({
-  eventSort: ['startTime:asc'],
+  eventSort: null,
   filteredEvents: filterBy('model', 'isNew', false),
   sortedEvents: sort('filteredEvents', 'eventSort'),
   eventToDelete: null,
   showDeleteModal: notEmpty('eventToDelete'),
   errorMessage: null,
+
+  init() {
+    this._super(...arguments);
+
+    this.set('eventSort', ['startTime:asc']);
+  },
 
   actions: {
     delete(event) {

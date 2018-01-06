@@ -1,5 +1,5 @@
 {{#ember-wormhole to=destinationElementId}}
-  <div class="{{wrapperClassNamesString}} {{wrapperClass}}">
+  <div class="{{wrapperClassNamesString}} {{wrapperClass}} {{componentCssClassName}}">
     <div class={{overlayClassNamesString}} onclick={{action (ignore-children onClickOverlay)}} tabindex="-1" data-emd-overlay>
       {{#ember-modal-dialog-positioned-container
           class=containerClassNamesString
