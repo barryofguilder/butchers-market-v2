@@ -4,6 +4,9 @@ import Component from '@ember/component';
 
 export default Component.extend({
   event: null,
+  saved: null,
+  cancelled: null,
+
   title: null,
   leadIn: null,
   startTime: null,
@@ -63,7 +66,7 @@ export default Component.extend({
         });
 
         event.save().then(() => {
-          this.sendAction('saved');
+          this.get('saved')();
         }).catch((reason) => {
           this.set('errorMessage', reason);
         });
@@ -73,7 +76,7 @@ export default Component.extend({
     },
 
     close() {
-      this.sendAction('cancelled');
+      this.get('cancelled')();
     }
   }
 });

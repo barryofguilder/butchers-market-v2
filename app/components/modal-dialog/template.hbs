@@ -1,27 +1,19 @@
-{{!
-    NOTE: This template is mostly copied from the ember-modal-dialog
-          component with the exception of the Bootstrap specific
-          markup. When you upgrade ember-modal-dialog, be sure to
-          update this template as needed
-}}
-{{#ember-wormhole to=destinationElementId renderInPlace=renderInPlace}}
-  {{#modal-dialog-overlay
-      classNameBindings='overlayClassNamesString translucentOverlay:translucent overlay-class'
-      action='close'
-  }}
-    <div class="modal" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        {{#ember-modal-dialog-positioned-container classNameBindings="containerClassNamesString targetAttachmentClass container-class"
-            targetAttachment=targetAttachment
-            target=target
-        }}
+{{#ember-wormhole to=destinationElementId}}
+  <div class="{{wrapperClassNamesString}} {{wrapperClass}}">
+    <div class={{overlayClassNamesString}} onclick={{action (ignore-children onClickOverlay)}} tabindex="-1" data-emd-overlay>
+      {{#ember-modal-dialog-positioned-container
+          class=containerClassNamesString
+          targetAttachment=targetAttachment
+          target=legacyTarget
+      }}
+        <div class="modal-content">
           {{yield (hash
-            header=(component 'modal-dialog-header')
-            body=(component 'modal-dialog-body')
-            footer=(component 'modal-dialog-footer')
+            header=(component "modal-dialog-header")
+            body=(component "modal-dialog-body")
+            footer=(component "modal-dialog-footer")
           )}}
-        {{/ember-modal-dialog-positioned-container}}
-      </div>
+        </div>
+      {{/ember-modal-dialog-positioned-container}}
     </div>
-  {{/modal-dialog-overlay}}
+  </div>
 {{/ember-wormhole}}

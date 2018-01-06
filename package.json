@@ -41,7 +41,7 @@
     "ember-g-recaptcha": "0.4.0",
     "ember-google-analytics": "0.1.1",
     "ember-load-initializers": "^1.0.0",
-    "ember-modal-dialog": "0.9.0",
+    "ember-modal-dialog": "^2.3.0",
     "ember-moment": "6.1.0",
     "ember-resolver": "^4.0.0",
     "ember-responsive": "1.2.7",

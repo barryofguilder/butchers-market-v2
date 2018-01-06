@@ -1,5 +1,5 @@
 {{#modal-dialog as |modal|}}
-  {{#modal.header close="close"}}
+  {{#modal.header close=(action "close")}}
     {{dialogTitle}}
   {{/modal.header}}
   <form {{action "save" on="submit"}}>

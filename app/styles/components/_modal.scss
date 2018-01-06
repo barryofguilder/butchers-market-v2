@@ -12,9 +12,7 @@
 // Since the ember-modal-dialog overlay surrounds the modal, we
 // can't set the opacity. Instead, lighten the background color.
 .modal-backdrop {
-  &.translucent {
-    background-color: rgba(#333, .75);
-  }
+  background-color: rgba(#333, .75);
 }
 
 .modal-content {

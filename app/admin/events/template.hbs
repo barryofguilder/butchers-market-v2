@@ -43,7 +43,9 @@
 
 {{#if showDeleteModal}}
   {{#modal-dialog as |modal|}}
-    {{modal.header title="Delete Event?" close="cancelDelete"}}
+    {{#modal.header close=(action "cancelDelete")}}
+      Delete Event?
+    {{/modal.header}}
     <form {{action "deleteEvent" on="submit"}}>
       {{#modal.body}}
         {{#if errorMessage}}

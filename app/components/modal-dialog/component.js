@@ -5,5 +5,5 @@ export default ModalDialog.extend({
   targetAttachment: 'none',
 
   overlayClassNamesString: 'modal-backdrop',
-  containerClassNamesString: 'modal-content'
+  containerClassNamesString: 'modal-dialog'
 });
