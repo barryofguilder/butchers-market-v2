@@ -26,7 +26,8 @@ module.exports = function(environment) {
       siteKey: '6LcrHAITAAAAACvTiT4qS4dvbwL7wgGRXhJtsKim'
     },
 
-    api: ''
+    api: '',
+    showReCaptcha: true
   };
 
   ENV['ember-body-class'] = {
@@ -39,6 +40,8 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+
+    ENV.showReCaptcha = false;
   }
 
   if (environment === 'test') {

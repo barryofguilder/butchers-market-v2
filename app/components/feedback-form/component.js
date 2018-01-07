@@ -1,10 +1,12 @@
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
+import config from 'butchers-market/config/environment';
 
 export default Component.extend({
   ajax: service(),
 
+  showReCaptcha: config.showReCaptcha,
   name: null,
   email: null,
   message: null,
