@@ -1,13 +1,14 @@
 import { A } from '@ember/array';
 import { computed } from '@ember/object';
-import { sort } from '@ember/object/computed';
+import { filterBy, sort } from '@ember/object/computed';
 import Component from '@ember/component';
 import moment from 'moment';
 import momentSort from '../../utils/moment-sort';
 
 export default Component.extend({
   events: null,
-  sortedEvents: sort('events', momentSort),
+  filteredEvents: filterBy('events', 'isNew', false),
+  sortedEvents: sort('filteredEvents', momentSort),
   eventsByMonth: computed('sortedEvents.@each', function() {
     let events = this.get('sortedEvents');
     let now = moment();

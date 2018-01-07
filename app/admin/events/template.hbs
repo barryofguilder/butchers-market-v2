@@ -1,21 +1,27 @@
-{{admin-title title="Events"}}
+{{admin-title title="Events" class="mb-5"}}
 
-<div class="admin-page-actions">
-  {{#link-to "admin.events.new" class="btn btn-secondary btn-sm"}}
+<div class="mb-3">
+  {{#link-to "admin.events.new" class="btn btn-secondary"}}
     {{fa-icon "plus"}}
     New
   {{/link-to}}
+
+  <div class="btn-group float-right" role="group" aria-label="Event filters">
+    <button type="button" class="btn btn-light {{pastClass}}" {{action "filterEvents" "past"}}>Past</button>
+    <button type="button" class="btn btn-light {{upcomingClass}}" {{action "filterEvents" "upcoming"}}>Upcoming</button>
+    <button type="button" class="btn btn-light {{allClass}}" {{action "filterEvents"}}>All</button>
+  </div>
 </div>
 
 <table class="table table-hover table-sm">
   <thead>
-    <tr>
-      <th scope="col">Date</th>
-      <th scope="col">Time</th>
-      <th scope="col">Title</th>
-      <th scope="col">Lead In</th>
-      <th scope="col"></th>
-    </tr>
+    {{#grid-header currentSort=currentSort onColumnClicked=(action "sortEvents") as |h|}}
+      {{#h.column name="startTime"}}Date{{/h.column}}
+      {{#h.column}}Time{{/h.column}}
+      {{#h.column name="title"}}Title{{/h.column}}
+      {{#h.column name="leadIn"}}Lead In{{/h.column}}
+      {{#h.column}}{{/h.column}}
+    {{/grid-header}}
   </thead>
   <tbody>
     {{#each sortedEvents as |event index|}}
