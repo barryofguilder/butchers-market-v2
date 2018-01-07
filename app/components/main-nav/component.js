@@ -3,7 +3,7 @@ import Component from '@ember/component';
 
 export default Component.extend({
   tagName: 'nav',
-  classNames: ['navbar', 'navbar-default', 'navbar-fixed-top', 'main-nav'],
+  classNames: ['navbar', 'navbar-light', 'fixed-top', 'navbar-expand-lg'],
 
   currentRouteName: computed('applicationRoute.controller.currentRouteName', function() {
     let currentRouteName = this.get('applicationRoute.controller.currentRouteName');

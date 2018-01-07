@@ -1,10 +1,10 @@
-<button type="button" class="close" aria-label="Close" {{action "close"}}>
-  <span aria-hidden="true">&times;</span>
-</button>
-<h4 class="modal-title">
+<h5 class="modal-title">
   {{#if hasBlock}}
     {{yield}}
   {{else}}
     {{title}}
   {{/if}}
-</h4>
+</h5>
+<button type="button" class="close" aria-label="Close" {{action "close"}}>
+  <span aria-hidden="true">&times;</span>
+</button>

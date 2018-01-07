@@ -5,7 +5,7 @@
   height: $navbar-height + 1px;
 }
 
-& {
+&.navbar {
   padding: 0;
   background-color: #fff;
 
@@ -19,12 +19,6 @@
     }
   }
 
-  .navbar-toggler {
-    position: absolute;
-    top: 20px;
-    right: 10px;
-  }
-
   .navbar-nav {
     @include media-breakpoint-down(md) {
       width: 100%;
@@ -33,7 +27,7 @@
   }
 
   .nav-item {
-    &.dropdown.open {
+    &.dropdown.show {
       .nav-link {
         background: $bm-gray-lighter;
         color: $body-color;
@@ -46,7 +40,7 @@
     padding: 26px;
 
     &:hover {
-      color: $brand-primary;
+      color: $primary;
     }
 
     &.active {
@@ -76,7 +70,7 @@
 
       &:hover {
         background-color: $bm-gray-lightest;
-        color: $brand-primary;
+        color: $primary;
       }
 
       &.active {

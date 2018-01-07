@@ -6,12 +6,14 @@
           targetAttachment=targetAttachment
           target=legacyTarget
       }}
-        <div class="modal-content">
-          {{yield (hash
-            header=(component "modal-dialog-header")
-            body=(component "modal-dialog-body")
-            footer=(component "modal-dialog-footer")
-          )}}
+        <div class="modal-dialog">
+          <div class="modal-content">
+            {{yield (hash
+              header=(component "modal-dialog-header")
+              body=(component "modal-dialog-body")
+              footer=(component "modal-dialog-footer")
+            )}}
+          </div>
         </div>
       {{/ember-modal-dialog-positioned-container}}
     </div>
