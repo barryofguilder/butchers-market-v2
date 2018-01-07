@@ -17,7 +17,7 @@
   <thead>
     {{#grid-header currentSort=currentSort onColumnClicked=(action "sortEvents") as |h|}}
       {{#h.column name="startTime"}}Date{{/h.column}}
-      {{#h.column}}Time{{/h.column}}
+      {{#h.column class="col-time"}}Time{{/h.column}}
       {{#h.column name="title"}}Title{{/h.column}}
       {{#h.column name="leadIn"}}Lead In{{/h.column}}
       {{#h.column}}{{/h.column}}
