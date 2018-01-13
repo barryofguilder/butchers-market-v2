@@ -1,18 +1,23 @@
 {
   "performances": [{
     "id":1,
-    "link":"https://www.youtube.com/embed/8ODVyWKIZMw"
+    "title":"Luke Simmons & Kolby Towe - I Don't Need No Doctor",
+    "link":"https://www.youtube.com/watch?v=8ODVyWKIZMw"
   }, {
     "id":2,
-    "link":"https://www.youtube.com/embed/8cfi5r_7qps"
+    "title":"Luke Simmons - Lights",
+    "link":"https://www.youtube.com/watch?v=8cfi5r_7qps"
   }, {
     "id":3,
-    "link":"https://www.youtube.com/embed/El53X1plbSY"
+    "title":"Lon Eldridge - Georgia On My Mind",
+    "link":"https://www.youtube.com/watch?v=El53X1plbSY"
   }, {
     "id":4,
-    "link":"https://www.youtube.com/embed/yDYxlQHpjFE"
+    "title":"Lon Eldridge",
+    "link":"https://www.youtube.com/watch?v=yDYxlQHpjFE"
   }, {
     "id":5,
-    "link":"https://www.youtube.com/embed/r7A_fe4LH-o"
+    "title":"Lon Eldridge - Handy Man",
+    "link":"https://www.youtube.com/watch?v=r7A_fe4LH-o"
   }
 ]}

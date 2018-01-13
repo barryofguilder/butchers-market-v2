@@ -24,7 +24,6 @@ switch ($method) {
     return;
   case 'PUT':
     $rawEvent = $body->event;
-    $existingEvent = searchForId($key, $events['events']);
 
     $event->id = $key;
     $event->title = clean_var($rawEvent->{"title"});

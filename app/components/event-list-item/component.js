@@ -2,7 +2,7 @@ import { computed } from '@ember/object';
 import { sort } from '@ember/object/computed';
 import Component from '@ember/component';
 import moment from 'moment';
-import momentSort from '../../utils/moment-sort';
+import momentSort from 'butchers-market/utils/moment-sort';
 
 export default Component.extend({
   classNames: ['col-sm-6', 'col-md-4'],

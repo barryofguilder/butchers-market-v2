@@ -2,80 +2,86 @@
   {{#modal.header close=(action "close")}}
     {{dialogTitle}}
   {{/modal.header}}
-  <form {{action "save" on="submit"}}>
-    {{#modal.body}}
-      {{#if errorMessage}}
-        <div class="alert alert-danger">
-          {{errorMessage}}
-        </div>
-      {{/if}}
-      <p class="form-info">
-        <strong>Note:</strong> Required fields are marked with an <span class="required">{{fa-icon "asterisk"}}</span>
-      </p>
-      <div class="form-group row">
-        <label class="col-sm-3 col-form-label" for="event-title">
-          Title:
-          <span class="required">{{fa-icon "asterisk"}}</span>
-        </label>
-        <div class="col-sm-9">
-          {{input class="form-control" id="event-title" value=title}}
-        </div>
+  {{#modal.body}}
+    {{#if errorMessage}}
+      <div class="alert alert-danger">
+        {{errorMessage}}
       </div>
-      <div class="form-group row">
-        <label class="col-sm-3 col-form-label" for="event-lead-in">Lead In:</label>
-        <div class="col-sm-9">
-          {{input class="form-control" id="event-lead-in" value=leadIn}}
-        </div>
+    {{/if}}
+    <p class="form-info">
+      <strong>Note:</strong> Required fields are marked with an {{required-field}}
+    </p>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" for="event-title">
+        Title {{required-field}}
+      </label>
+      <div class="col-sm-9">
+        {{#validated-field changeset=changeset propertyName="title" as |isInvalidClass|}}
+          {{input class=(concat "form-control " isInvalidClass) id="event-title" value=changeset.title}}
+        {{/validated-field}}
       </div>
-      <div class="form-group row">
-        <label class="col-sm-3 col-form-label">
-          Date:
-          <span class="required">{{fa-icon "asterisk"}}</span>
-        </label>
-        <div class="col-sm-9">
-          {{pick-a-date
-            date=(readonly startTime)
-            on-selected=(action (mut startTime))
-            class="form-control"
-          }}
-        </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" for="event-lead-in">
+        Lead In
+      </label>
+      <div class="col-sm-9">
+        {{#validated-field changeset=changeset propertyName="leadIn" as |isInvalidClass|}}
+          {{input class=(concat "form-control " isInvalidClass) id="event-lead-in" value=changeset.leadIn}}
+        {{/validated-field}}
       </div>
-      <div class="form-group row">
-        <label class="col-sm-3 col-form-label">
-          Start Time:
-          <span class="required">{{fa-icon "asterisk"}}</span>
-        </label>
-        <div class="col-sm-9">
-          {{pick-a-time
-            date=(readonly startTime)
-            on-selected=(action (mut startTime))
-            class="form-control"
-          }}
-        </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">
+        Date {{required-field}}
+      </label>
+      <div class="col-sm-9">
+        {{pick-a-date
+          date=(readonly changeset.startTime)
+          on-selected=(action (mut changeset.startTime))
+          class="form-control"
+        }}
       </div>
-      <div class="form-group row">
-        <label class="col-sm-3 col-form-label">
-          End Time:
-          <span class="required">{{fa-icon "asterisk"}}</span>
-        </label>
-        <div class="col-sm-9">
-          {{pick-a-time
-            date=(readonly endTime)
-            on-selected=(action (mut endTime))
-            class="form-control"
-          }}
-        </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">
+        Start Time {{required-field}}
+      </label>
+      <div class="col-sm-9">
+        {{pick-a-time
+          date=(readonly changeset.startTime)
+          on-selected=(action (mut changeset.startTime))
+          class="form-control"
+        }}
       </div>
-      <div class="form-group row">
-        <label class="col-sm-3 col-form-label" for="event-link">Link:</label>
-        <div class="col-sm-9">
-          {{input class="form-control" id="event-link" value=link}}
-        </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">
+        End Time {{required-field}}
+      </label>
+      <div class="col-sm-9">
+        {{pick-a-time
+          date=(readonly changeset.endTime)
+          on-selected=(action (mut changeset.endTime))
+          class="form-control"
+        }}
       </div>
-    {{/modal.body}}
-    {{#modal.footer}}
-      <button type="button" class="btn btn-secondary" {{action "close"}}>Cancel</button>
-      <button type="submit" class="btn btn-primary">Save</button>
-    {{/modal.footer}}
-  </form>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" for="event-link">
+        Link
+      </label>
+      <div class="col-sm-9">
+        {{#validated-field changeset=changeset propertyName="link" as |isInvalidClass|}}
+          {{input class=(concat "form-control " isInvalidClass) id="event-link" value=changeset.link}}
+        {{/validated-field}}
+      </div>
+    </div>
+  {{/modal.body}}
+  {{#modal.footer}}
+    <button type="button" class="btn btn-secondary" {{action "close"}}>Cancel</button>
+    {{#task-button class="btn btn-primary" task=saveEvent disabled=saveDisabled}}
+      Save
+    {{/task-button}}
+  {{/modal.footer}}
 {{/modal-dialog}}

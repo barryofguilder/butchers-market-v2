@@ -1,4 +1,4 @@
-import ApplicationAdapter from '../application/adapter';
+import ApplicationAdapter from 'butchers-market/application/adapter';
 
 export default ApplicationAdapter.extend({
   urlForFindRecord(id/*, modelName, snapshot */) {

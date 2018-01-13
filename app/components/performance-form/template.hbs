@@ -1,0 +1,41 @@
+{{#modal-dialog as |modal|}}
+  {{#modal.header close=(action "close")}}
+    {{dialogTitle}}
+  {{/modal.header}}
+  {{#modal.body}}
+    {{#if errorMessage}}
+      <div class="alert alert-danger">
+        {{errorMessage}}
+      </div>
+    {{/if}}
+    <p class="form-info">
+      <strong>Note:</strong> Required fields are marked with an {{required-field}}
+    </p>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" for="performance-title">
+        Title {{required-field}}
+      </label>
+      <div class="col-sm-9">
+        {{#validated-field changeset=changeset propertyName="title" as |isInvalidClass|}}
+          {{input class=(concat "form-control " isInvalidClass) id="performance-title" value=changeset.title}}
+        {{/validated-field}}
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" for="performance-link">
+        Link {{required-field}}
+      </label>
+      <div class="col-sm-9">
+        {{#validated-field changeset=changeset propertyName="link" as |isInvalidClass|}}
+          {{input class=(concat "form-control " isInvalidClass) id="performance-link" value=changeset.link}}
+        {{/validated-field}}
+      </div>
+    </div>
+  {{/modal.body}}
+  {{#modal.footer}}
+    <button type="button" class="btn btn-secondary" {{action "close"}}>Cancel</button>
+    {{#task-button class="btn btn-primary" task=savePerformance disabled=saveDisabled}}
+      Save
+    {{/task-button}}
+  {{/modal.footer}}
+{{/modal-dialog}}

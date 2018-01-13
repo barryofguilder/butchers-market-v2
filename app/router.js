@@ -18,6 +18,10 @@ Router.map(function() {
       this.route('new');
       this.route('edit', { path: ':id' });
     });
+    this.route('performances', function() {
+      this.route('new');
+      this.route('edit', { path: ':id' });
+    });
   });
 });
 
