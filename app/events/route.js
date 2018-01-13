@@ -13,6 +13,7 @@ export default Route.extend(ResetScrollMixin, MobileAppMixin, {
   model() {
     return RSVP.hash({
       events: this.store.findAll('event'),
+      performances: this.store.findAll('performance'),
       reviews: this.store.findAll('review')
     });
   },
