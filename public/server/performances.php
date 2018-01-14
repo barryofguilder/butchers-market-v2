@@ -25,6 +25,7 @@ switch ($method) {
   case 'PUT':
     $rawPerformance = $body->performance;
 
+    $performance = new \stdClass;
     $performance->id = $key;
     $performance->title = clean_var($rawPerformance->{"title"});
     $performance->link = clean_var($rawPerformance->{"link"});
@@ -49,6 +50,7 @@ switch ($method) {
   case 'POST':
     $rawPerformance = $body->performance;
 
+    $performance = new \stdClass;
     $performance->id = generateId($performances['performances']);
     $performance->title = clean_var($rawPerformance->{"title"});
     $performance->link = clean_var($rawPerformance->{"link"});

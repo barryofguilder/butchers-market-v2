@@ -1,0 +1,47 @@
+{{admin-title title="Store Hours" class="mb-5"}}
+
+<table class="table table-hover table-sm">
+  <thead>
+    {{#grid-header as |h|}}
+      {{#h.column}}Type{{/h.column}}
+      {{#h.column}}Label{{/h.column}}
+      {{#h.column}}Active{{/h.column}}
+      {{#h.column}}Lines{{/h.column}}
+      {{#h.column}}{{/h.column}}
+    {{/grid-header}}
+  </thead>
+  <tbody>
+    {{#each sortedHours as |hours index|}}
+      <tr>
+        <td>{{hours.type}}</td>
+        <td>{{hours.label}}</td>
+        <td>
+          {{#if hours.active}}
+            <span class="badge badge-success">Yes</span>
+          {{else}}
+            <span class="badge badge-light">No</span>
+          {{/if}}
+        </td>
+        <td>
+          <ul class="mb-0">
+            <li>{{hours.line1}}</li>
+            {{#if hours.line2}}
+              <li>{{hours.line2}}</li>
+            {{/if}}
+            {{#if hours.line3}}
+              <li>{{hours.line3}}</li>
+            {{/if}}
+          </ul>
+        </td>
+        <td>
+          {{#link-to "admin.hours.edit" hours.id class="btn btn-secondary btn-sm float-right"}}
+            {{fa-icon "pencil"}}
+            Edit
+          {{/link-to}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+{{outlet}}

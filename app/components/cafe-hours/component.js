@@ -7,7 +7,7 @@ export default Component.extend({
   hours: null,
   storeHours: computed('hours.@each.{type,active}', function() {
     let storeHours = this.get('hours').filter((hour) => {
-      if (hour.get('type') === 'cafe' && hour.get('active')) {
+      if (hour.get('type') === 'Cafe' && hour.get('active')) {
         return hour;
       }
     });

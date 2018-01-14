@@ -1,4 +1,8 @@
 <h3 class="store-hours-title">Store Hours</h3>
-{{#each storeHours.lines as |line|}}
-  <p class="store-hours-line">{{line}}</p>
-{{/each}}
+<p class="store-hours-line">{{storeHours.line1}}</p>
+{{#if storeHours.line2}}
+  <p class="store-hours-line">{{storeHours.line2}}</p>
+{{/if}}
+{{#if storeHours.line3}}
+  <p class="store-hours-line">{{storeHours.line3}}</p>
+{{/if}}

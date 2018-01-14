@@ -25,6 +25,7 @@ switch ($method) {
   case 'PUT':
     $rawEvent = $body->event;
 
+    $event = new \stdClass;
     $event->id = $key;
     $event->title = clean_var($rawEvent->{"title"});
     $event->leadIn = clean_var($rawEvent->{"leadIn"});
@@ -52,6 +53,7 @@ switch ($method) {
   case 'POST':
     $rawEvent = $body->event;
 
+    $event = new \stdClass;
     $event->id = generateId($events['events']);
     $event->title = clean_var($rawEvent->{"title"});
     $event->leadIn = clean_var($rawEvent->{"leadIn"});
