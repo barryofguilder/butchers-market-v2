@@ -3,6 +3,10 @@
 
 .navbar-brand {
   height: $navbar-height + 1px;
+
+  a {
+    text-decoration: none;
+  }
 }
 
 &.navbar {
