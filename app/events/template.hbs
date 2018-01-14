@@ -6,14 +6,14 @@
         <p class="lead large">Finger Lickin'. Guitar Pickin'.</p>
       {{/if}}
       {{#if notDesktop}}
-        {{cafe-hours}}
-        {{store-hours}}
+        {{cafe-hours hours=model.hours}}
+        {{store-hours hours=model.hours}}
         {{store-location}}
       {{/if}}
       <a href="https://www.facebook.com/thebutchersmarket" class="btn btn-secondary btn-lg">Like us on Facebook</a>
       {{#if isDesktop}}
-        {{cafe-hours}}
-        {{store-hours}}
+        {{cafe-hours hours=model.hours}}
+        {{store-hours hours=model.hours}}
         {{store-location}}
       {{/if}}
     </div>

@@ -1,0 +1,30 @@
+{
+  "hours": [{
+    "id":1,
+    "type":"store",
+    "active":true,
+    "lines": [
+      "Mon - Sat: 9:00am - 6:00pm",
+      "Sun: Closed"
+    ]
+  }, {
+    "id":2,
+    "type":"cafe",
+    "active":true,
+    "lines": [
+      "Mon - Thurs: 9:00am - 5:30pm",
+      "Fri & Sat: 9:00am - 10:00pm, last call 9:30pm",
+      "Sun: Closed"
+    ]
+  }, {
+    "id":3,
+    "type":"store",
+    "active":false,
+    "lines": []
+  }, {
+    "id":3,
+    "type":"cafe",
+    "active":false,
+    "lines": []
+  }
+]}
