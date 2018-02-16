@@ -1,6 +1,6 @@
 {
   "name": "butchers-market",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "private": true,
   "description": "Small description for butchers-market goes here",
   "license": "MIT",
@@ -44,6 +44,7 @@
     "ember-font-awesome": "^3.1.1",
     "ember-g-recaptcha": "0.4.0",
     "ember-google-analytics": "0.1.1",
+    "ember-lifeline": "^2.0.0",
     "ember-load-initializers": "^1.0.0",
     "ember-modal-dialog": "^2.3.0",
     "ember-moment": "6.1.0",
