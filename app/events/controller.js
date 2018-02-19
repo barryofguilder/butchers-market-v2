@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import MediaMixin from 'butchers-market/mixins/media-mixin';
 import { computed } from '@ember/object';
 
-const PERFORMANCES_TO_SHOW = 5;
+const PERFORMANCES_TO_SHOW = 11;
 
 export default Controller.extend(MediaMixin, {
   queryParams: ['events'],
