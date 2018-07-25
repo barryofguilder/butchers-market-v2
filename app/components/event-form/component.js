@@ -22,7 +22,7 @@ export default Component.extend({
   init() {
     this._super(...arguments);
 
-    let event = this.get('event');
+    const event = this.get('event');
 
     if (event.get('isNew')) {
       let now = new Date();
@@ -56,6 +56,24 @@ export default Component.extend({
   }).drop(),
 
   actions: {
+    dateSelected(date) {
+      const changeset = this.get('changeset');
+      const startTime = changeset.get('startTime');
+      changeset.set('startTime', new Date(date[0].getFullYear(), date[0].getMonth(), date[0].getDate(), startTime.getHours(), startTime.getMinutes()));
+    },
+
+    startTimeSelected(time) {
+      const changeset = this.get('changeset');
+      const startTime = changeset.get('startTime');
+      changeset.set('startTime', new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate(), time[0].getHours(), time[0].getMinutes()));
+    },
+
+    endTimeSelected(time) {
+      const changeset = this.get('changeset');
+      const startTime = changeset.get('startTime');
+      changeset.set('endTime', new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate(), time[0].getHours(), time[0].getMinutes()));
+    },
+
     close() {
       this.get('cancelled')();
     }

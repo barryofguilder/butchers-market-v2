@@ -36,10 +36,14 @@
         Date {{required-field}}
       </label>
       <div class="col-sm-9">
-        {{pick-a-date
-          date=(readonly changeset.startTime)
-          on-selected=(action (mut changeset.startTime))
+        {{ember-flatpickr
           class="form-control"
+          disableMobile=true
+          allowInput=false
+          appendDataInput=true
+          date=(readonly changeset.startTime)
+          dateFormat="m/d/Y"
+          onChange=(action "dateSelected")
         }}
       </div>
     </div>
@@ -48,10 +52,15 @@
         Start Time {{required-field}}
       </label>
       <div class="col-sm-9">
-        {{pick-a-time
-          date=(readonly changeset.startTime)
-          on-selected=(action (mut changeset.startTime))
+        {{ember-flatpickr
           class="form-control"
+          disableMobile=true
+          date=(readonly changeset.startTime)
+          enableTime=true
+          noCalendar=true
+          time_24hr=false
+          dateFormat="h:i K"
+          onChange=(action "startTimeSelected")
         }}
       </div>
     </div>
@@ -60,10 +69,15 @@
         End Time {{required-field}}
       </label>
       <div class="col-sm-9">
-        {{pick-a-time
-          date=(readonly changeset.endTime)
-          on-selected=(action (mut changeset.endTime))
+        {{ember-flatpickr
           class="form-control"
+          disableMobile=true
+          date=(readonly changeset.endTime)
+          enableTime=true
+          noCalendar=true
+          time_24hr=false
+          dateFormat="h:i K"
+          onChange=(action "endTimeSelected")
         }}
       </div>
     </div>

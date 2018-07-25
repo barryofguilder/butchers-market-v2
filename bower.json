@@ -1,6 +1,0 @@
-{
-  "name": "butchers-market",
-  "dependencies": {
-    "pickadate": "^3.5.6"
-  }
-}
