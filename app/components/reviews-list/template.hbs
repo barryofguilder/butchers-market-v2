@@ -1,8 +1,18 @@
 <div class="container">
   {{header-title title="Customer Reviews"}}
-  <div data-width="100%" data-height="350" data-loop="true" data-autoplay="4000" class="fotorama">
-    {{#each reviews as |review|}}
-      {{reviews-list-item review=review}}
-    {{/each}}
+  <div id="review-carousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      {{#each reviews as |review index|}}
+        {{reviews-list-item review=review index=index}}
+      {{/each}}
+    </div>
+    <a class="carousel-control-prev" href="#review-carousel" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#review-carousel" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
   </div>
 </div>

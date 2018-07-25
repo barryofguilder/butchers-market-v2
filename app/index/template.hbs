@@ -45,10 +45,10 @@
     {{else}}
       {{#if isDesktop}}
         <div class="col-md-12 col-lg-6">
-          {{#iphone-carousel}}
-            <img src="images/iPhone-loyalty-club-1.jpg" alt="Loyalty Club punch card">
-            <img src="images/iPhone-loyalty-club-2.jpg" alt="Loyalty Club discount">
-            <img src="images/iPhone-mobile-app.jpg" alt="Butchers Market mobile app">
+          {{#iphone-carousel as |carousel|}}
+            {{carousel.slide src="images/iPhone-loyalty-club-1.jpg" active=true alt="Loyalty Club punch card"}}
+            {{carousel.slide src="images/iPhone-loyalty-club-2.jpg" alt="Loyalty Club discount"}}
+            {{carousel.slide src="images/iPhone-mobile-app.jpg" alt="Butchers Market mobile app"}}
           {{/iphone-carousel}}
         </div>
       {{/if}}

@@ -1,8 +1,10 @@
-import $ from 'jquery';
 import Component from '@ember/component';
+import $ from 'jquery';
 
 export default Component.extend({
   didInsertElement() {
-    $('.fotorama').fotorama();
+    $('.carousel').carousel({
+      interval: 7500
+    });
   }
 });

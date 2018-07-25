@@ -1,6 +1,8 @@
 <div class="iphone-gallery-wrapper">
-  <div data-auto="false" data-loop="true" data-autoplay="4000" data-nav="false" class="fotorama">
-    {{yield}}
+  <div class="carousel slide">
+    <div class="carousel-inner">
+      {{yield (hash slide=(component "iphone-carousel-item"))}}
+    </div>
   </div>
 </div>
 <div class="iphone">

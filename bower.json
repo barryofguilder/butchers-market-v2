@@ -1,7 +1,6 @@
 {
   "name": "butchers-market",
   "dependencies": {
-    "fotorama": "4.6.3",
     "pickadate": "^3.5.6"
   }
 }
