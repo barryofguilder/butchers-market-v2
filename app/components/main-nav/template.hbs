@@ -1,48 +1,71 @@
-<div class="container">
-  <div class="navbar-brand">
-    {{#link-to 'application'}}
+<div>
+  <div class="absolute pt-2 z-50">
+    {{#link-to "application" class="no-underline"}}
       <img src="images/butchers-market-logo.png" alt="The Butcher's Market logo">
     {{/link-to}}
-    {{#link-to 'events' (query-params events=false)}}
+    {{#link-to "events" (query-params events=false) class="no-underline"}}
       <img src="images/blues-street-logo.png" width="100px" height="100px" alt="Blues Street Cafe logo">
     {{/link-to}}
   </div>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navigation-items" aria-controls="main-navigation-items" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="main-navigation-items">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        {{#link-to "meat" class="nav-link"}}
-          Meat
-        {{/link-to}}
-      </li>
-      <li class="nav-item">
-        {{#link-to "deli" class="nav-link"}}
-          Deli
-        {{/link-to}}
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-          Dining
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="docs/bmmenu.pdf">View Menu</a>
-          {{#link-to "events" (query-params events=false) class="dropdown-item"}}
-            Blues Street Cafe
-          {{/link-to}}
-        </div>
-      </li>
-      <li class="nav-item">
-        {{#link-to "events" (query-params events=true) class="nav-link"}}
-          Events
-        {{/link-to}}
-      </li>
-      <li class="nav-item">
-        {{#link-to "contact" (query-params events=isEventsPage) class="nav-link"}}
-          {{contactText}}
-        {{/link-to}}
-      </li>
-    </ul>
-  </div>
 </div>
+
+<button class="text-xl lg:invisible" onclick={{action "toggleNav"}}>
+  {{#if showNav}}
+    {{fa-icon "times"}}
+  {{else}}
+    {{fa-icon "bars"}}
+  {{/if}}
+</button>
+
+<nav class="bg-white {{navClass}} absolute mt-20 pt-8 pin-x lg:block lg:static lg:mt-0 lg:pt-4">
+  <div class="flex flex-col lg:flex-row lg:justify-end">
+    {{#link-to "meat" class="main-nav-link"}}
+      Meat
+    {{/link-to}}
+
+    {{#link-to "deli" class="main-nav-link"}}
+      Deli
+    {{/link-to}}
+
+    <a class="main-nav-link relative" href="#" id="dining-item" {{action "toggleDiningDropdown"}}>
+      Dining {{fa-icon "caret-down" class="pl-1"}}
+
+      {{#if media.isDesktop}}
+        {{#attach-popover
+          hideOn="clickout"
+          isShown=showDiningDropdown
+          onChange=(action "dropdownClosed")
+          showOn="click"
+          placement="bottom"
+          animation="none"
+          hideDuration=0
+          showDuration=0
+        }}
+          <div class="bg-grey-lighter flex flex-col -mt-2">
+            <a class="main-nav-link main-nav-dropdown-link" href="docs/bmmenu.pdf">View Menu</a>
+            {{#link-to "events" (query-params events=false) class="main-nav-link main-nav-dropdown-link"}}
+              Blues Street Cafe
+            {{/link-to}}
+          </div>
+        {{/attach-popover}}
+      {{else}}
+        {{#if showDiningDropdown}}
+          <div class="bg-grey-lighter flex flex-col mt-4">
+            <a class="main-nav-link main-nav-dropdown-link" href="docs/bmmenu.pdf">View Menu</a>
+            {{#link-to "events" (query-params events=false) class="main-nav-link main-nav-dropdown-link"}}
+              Blues Street Cafe
+            {{/link-to}}
+          </div>
+        {{/if}}
+      {{/if}}
+    </a>
+
+    {{#link-to "events" (query-params events=true) class="main-nav-link"}}
+      Events
+    {{/link-to}}
+
+    {{#link-to "contact" (query-params events=isEventsPage) class="main-nav-link"}}
+      Contact
+    {{/link-to}}
+  </div>
+</nav>

@@ -1,0 +1,11 @@
+.main-nav-link {
+  @apply .no-underline .text-black .px-8 .py-4;
+}
+
+.main-nav-link:hover {
+  @apply .text-red-dark;
+}
+
+.main-nav-dropdown-link {
+  @apply .px-4 .py-3
+}
