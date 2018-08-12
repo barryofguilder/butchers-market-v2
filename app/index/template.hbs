@@ -1,4 +1,4 @@
-{{#promo-section class=(concat "butcher-promo-index " tacoSeasonClass) specialHours=false}}
+<PromoSection class={{concat "butcher-promo-index " tacoSeasonClass}} @specialHours=false>
   <div class="row clearfix">
     <div class="col-md-12 col-lg-6">
       {{#if isDesktop}}
@@ -6,15 +6,15 @@
         <p class="lead large">Small town service. Big city selection.</p>
       {{/if}}
       {{#if notDesktop}}
-        {{store-hours hours=model.hours}}
-        {{cafe-hours hours=model.hours}}
-        {{store-location}}
+        <StoreHours @hours={{model.hours}} />
+        <CafeHours @hours={{model.hours}} />
+        <StoreLocation />
       {{/if}}
       <a href="https://www.facebook.com/thebutchersmarket" class="btn btn-secondary btn-lg">Like us on Facebook</a>
       {{#if isDesktop}}
-        {{store-hours hours=model.hours}}
-        {{cafe-hours hours=model.hours}}
-        {{store-location}}
+        <StoreHours @hours={{model.hours}} />
+        <CafeHours @hours={{model.hours}} />
+        <StoreLocation />
       {{/if}}
     </div>
     {{#if showTacoSeason}}
@@ -22,11 +22,11 @@
         <div class="taco-season-countdown">
           <img src="images/taco-season-title.png" class="img-fluid taco-season-title" alt="Taco Season">
           {{#unless tacoSeasonArrived}}
-            {{countdown-ticker
-              date=tacoSeasonDate
-              countdownText="Taco Season"
-              finishedText="Taco Season Has Arrived!"
-            }}
+            <CountdownTicker
+              @date={{tacoSeasonDate}}
+              @countdownText="Taco Season"
+              @finishedText="Taco Season Has Arrived!"
+            />
           {{/unless}}
           <div class="row">
             <div class="col-md-12 offset-lg-1 col-lg-10">
@@ -45,28 +45,28 @@
     {{else}}
       {{#if isDesktop}}
         <div class="col-md-12 col-lg-6">
-          {{#iphone-carousel as |carousel|}}
-            {{carousel.slide src="images/iPhone-loyalty-club-1.jpg" active=true alt="Loyalty Club punch card"}}
-            {{carousel.slide src="images/iPhone-loyalty-club-2.jpg" alt="Loyalty Club discount"}}
-            {{carousel.slide src="images/iPhone-mobile-app.jpg" alt="Butchers Market mobile app"}}
-          {{/iphone-carousel}}
+          <IphoneCarousel as |Slide|>
+            <Slide @src="images/iPhone-loyalty-club-1.jpg" @alt="Loyalty Club punch card" @active={{true}} />
+            <Slide @src="images/iPhone-loyalty-club-2.jpg" @alt="Loyalty Club discount" />
+            <Slide @src="images/iPhone-mobile-app.jpg" @alt="Butchers Market mobile app" />
+          </IphoneCarousel>
         </div>
       {{/if}}
       {{#if notDesktop}}
         <div class="col-md-12 col-lg-6">
-          {{mobile-app}}
+          <MobileApp />
         </div>
       {{/if}}
     {{/if}}
   </div>
-{{/promo-section}}
+</PromoSection>
 
 <div class="container">
-  {{header-title title="Featured Specials"}}
+  <HeaderTitle @title="Featured Specials" />
   <div class="row">
     {{#each featuredBundles as |bundle|}}
       <div class="col-sm-6 col-lg-3 feature-item">
-        {{bundle-list-item product=bundle}}
+        <BundleListItem @product={{bundle}} />
       </div>
     {{/each}}
     <div class="col-sm-6 col-lg-3 feature-item">
@@ -82,7 +82,7 @@
 
 <section>
   <div class="container">
-    {{header-title title="Who We Are"}}
+    <HeaderTitle @title="Who We Are" />
     <div class="row">
       <div class="col-md-8 offset-md-2">
         <h3 class="color-primary">Each interaction is unique.</h3>
@@ -98,10 +98,10 @@
   </div>
 </section>
 
-{{products-list title="Our Meat Products" products=model.products}}
+<ProductsList @title="Our Meat Products" @products={{model.products}} />
 
-{{reviews-list title="Customer Reviews" reviews=model.reviews}}
+<ReviewsList @title="Customer Reviews" @reviews={{model.reviews}} />
 
-{{newsletter-form page="index"}}
+<NewsletterForm @page="index" />
 
-{{contact-section}}
+<ContactSection />

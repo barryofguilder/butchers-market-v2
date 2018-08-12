@@ -27,7 +27,6 @@ const Router = EmberRouter.extend({
 Router.map(function() {
   this.route('meat');
   this.route('deli');
-  this.route('beverage');
   this.route('contact');
   this.route('events');
 
