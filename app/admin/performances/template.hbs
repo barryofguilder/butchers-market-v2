@@ -1,4 +1,4 @@
-{{admin-title title="Past Performances" class="mb-5"}}
+<AdminTitle @title="Past Performances" class="mb-5" />
 
 <div class="mb-3">
   {{#link-to "admin.performances.new" class="btn btn-secondary"}}
@@ -9,11 +9,11 @@
 
 <table class="table table-hover table-sm">
   <thead>
-    {{#grid-header currentSort=currentSort onColumnClicked=(action "sortPerformances") as |h|}}
-      {{#h.column name="title"}}Title{{/h.column}}
-      {{#h.column name="link"}}Link{{/h.column}}
-      {{#h.column}}{{/h.column}}
-    {{/grid-header}}
+    <GridHeader @currentSort={{currentSort}} @onColumnClicked={{action "sortPerformances"}} as |Column|>
+      <Column @name="title">Title</Column>
+      <Column @name="link">Link</Column>
+      <Column></Column>
+    </GridHeader>
   </thead>
   <tbody>
     {{#each sortedPerformances as |performance index|}}
@@ -45,11 +45,11 @@
 </table>
 
 {{#if showDeleteModal}}
-  {{#modal-dialog as |modal|}}
-    {{#modal.header close=(action "cancelDelete")}}
+  <ModalDialog as |Modal|>
+    <Modal.header @close={{action "cancelDelete"}}>
       Delete Performance?
-    {{/modal.header}}
-    {{#modal.body}}
+    </Modal.header>
+    <Modal.body>
       {{#if errorMessage}}
         <div class="alert alert-danger">{{errorMessage}}</div>
       {{/if}}
@@ -68,14 +68,14 @@
           <p class="form-control-static">{{performanceToDelete.link}}</p>
         </div>
       </div>
-    {{/modal.body}}
-    {{#modal.footer}}
+    </Modal.body>
+    <Modal.footer>
       <button type="button" class="btn btn-secondary" {{action "cancelDelete"}}>No</button>
-      {{#task-button class="btn btn-primary" task=deletePerformance disabled=deleteDisabled}}
+      <TaskButton class="btn btn-primary" @task={{deletePerformance}} @disabled={{deleteDisabled}}>
         Yes
-      {{/task-button}}
-    {{/modal.footer}}
-  {{/modal-dialog}}
+      </TaskButton>
+    </Modal.footer>
+  </ModalDialog>
 {{/if}}
 
 {{outlet}}

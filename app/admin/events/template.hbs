@@ -1,4 +1,4 @@
-{{admin-title title="Events" class="mb-5"}}
+<AdminTitle @title="Events" class="mb-5" />
 
 <div class="mb-3">
   {{#link-to "admin.events.new" class="btn btn-secondary"}}
@@ -15,13 +15,13 @@
 
 <table class="table table-hover table-sm">
   <thead>
-    {{#grid-header currentSort=currentSort onColumnClicked=(action "sortEvents") as |h|}}
-      {{#h.column name="startTime"}}Date{{/h.column}}
-      {{#h.column class="col-time"}}Time{{/h.column}}
-      {{#h.column name="title"}}Title{{/h.column}}
-      {{#h.column name="leadIn"}}Lead In{{/h.column}}
-      {{#h.column}}{{/h.column}}
-    {{/grid-header}}
+    <GridHeader @currentSort={{currentSort}} @onColumnClicked={{action "sortEvents"}} as |Column|>
+      <Column name="startTime">Date</Column>
+      <Column class="col-time">Time</Column>
+      <Column name="title">Title</Column>
+      <Column name="leadIn">Lead In</Column>
+      <Column></Column>
+    </GridHeader>
   </thead>
   <tbody>
     {{#each sortedEvents as |event index|}}
@@ -63,12 +63,12 @@
 </table>
 
 {{#if showDeleteModal}}
-  {{#modal-dialog as |modal|}}
-    {{#modal.header close=(action "cancelDelete")}}
+  <ModalDialog as |Modal|>
+    <Modal.header close={{action "cancelDelete"}}>
       Delete Event?
-    {{/modal.header}}
+    </Modal.header>
     <form {{action "deleteEvent" on="submit"}}>
-      {{#modal.body}}
+      <Modal.body>
         {{#if errorMessage}}
           <div class="alert alert-danger">
             {{errorMessage}}
@@ -113,13 +113,13 @@
             <p class="form-control-static">{{eventToDelete.link}}</p>
           </div>
         </div>
-      {{/modal.body}}
-      {{#modal.footer}}
+      </Modal.body>
+      <Modal.footer>
         <button type="button" class="btn btn-secondary" {{action "cancelDelete"}}>No</button>
         <button type="submit" class="btn btn-primary">Yes</button>
-      {{/modal.footer}}
+      </Modal.footer>
     </form>
-  {{/modal-dialog}}
+  </ModalDialog>
 {{/if}}
 
 {{outlet}}

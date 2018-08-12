@@ -1,5 +1,5 @@
-{{event-form
-  event=model
-  saved=(action "eventSaved")
-  cancelled=(action "eventCancelled")
-}}
+<EventForm
+  @event={{model}}
+  @saved={{action "eventSaved"}}
+  @cancelled={{action "eventCancelled"}}
+/>

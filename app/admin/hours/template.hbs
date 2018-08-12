@@ -1,14 +1,14 @@
-{{admin-title title="Store Hours" class="mb-5"}}
+<AdminTitle @title="Store Hours" class="mb-5" />
 
 <table class="table table-hover table-sm">
   <thead>
-    {{#grid-header as |h|}}
-      {{#h.column}}Type{{/h.column}}
-      {{#h.column}}Label{{/h.column}}
-      {{#h.column}}Active{{/h.column}}
-      {{#h.column}}Lines{{/h.column}}
-      {{#h.column}}{{/h.column}}
-    {{/grid-header}}
+    <GridHeader as |Column|>
+      <Column>Type</Column>
+      <Column>Label</Column>
+      <Column>Active</Column>
+      <Column>Lines</Column>
+      <Column></Column>
+    </GridHeader>
   </thead>
   <tbody>
     {{#each sortedHours as |hours index|}}
