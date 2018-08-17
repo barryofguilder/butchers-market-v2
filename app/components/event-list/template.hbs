@@ -1,7 +1,7 @@
 {{#each (grouped-each eventColumns eventsByMonth) as |row|}}
   <div class="row">
     {{#each row as |month|}}
-      {{event-list-item events=month}}
+      <EventListItem @events={{month}} />
     {{/each}}
   </div>
 {{/each}}

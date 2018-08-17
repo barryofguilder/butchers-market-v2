@@ -1,11 +1,11 @@
-{{#ember-wormhole to=destinationElementId}}
+<EmberWormhole @to={{destinationElementId}}>
   <div class="{{wrapperClassNamesString}} {{wrapperClass}} {{componentCssClassName}}">
     <div class={{overlayClassNamesString}} onclick={{action (ignore-children onClickOverlay)}} tabindex="-1" data-emd-overlay>
-      {{#ember-modal-dialog-positioned-container
-          class=containerClassNamesString
-          targetAttachment=targetAttachment
-          target=legacyTarget
-      }}
+      <EmberModalDialogPositionedContainer
+        class={{containerClassNamesString}}
+        @targetAttachment={{targetAttachment}}
+        @target={{legacyTarget}}
+      >
         <div class="modal-dialog">
           <div class="modal-content">
             {{yield (hash
@@ -15,7 +15,7 @@
             )}}
           </div>
         </div>
-      {{/ember-modal-dialog-positioned-container}}
+      </EmberModalDialogPositionedContainer>
     </div>
   </div>
-{{/ember-wormhole}}
+</EmberWormhole>
