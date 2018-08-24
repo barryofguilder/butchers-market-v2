@@ -1,6 +1,6 @@
-<h5 class="feature-title">{{product.title}} {{product.price}}</h5>
+<h5 class="feature-title">{{@product.title}} {{@product.price}}</h5>
 <ul class="feature-item-list">
-  {{#each product.items as |item|}}
+  {{#each @product.items as |item|}}
     <li>{{item}}</li>
   {{/each}}
 </ul>

@@ -1,9 +1,9 @@
 <div class="natural-products {{topPrice}}">
   <div class="natural-products-header">
-    <h4>{{product.title}}</h4>
+    <h4>{{@product.title}}</h4>
   </div>
   <ul class="natural-products-items">
-    {{#each product.items as |item|}}
+    {{#each @product.items as |item|}}
       <li>{{item}}</li>
     {{/each}}
   </ul>

@@ -16,10 +16,10 @@
 <table class="table table-hover table-sm">
   <thead>
     <GridHeader @currentSort={{currentSort}} @onColumnClicked={{action "sortEvents"}} as |Column|>
-      <Column name="startTime">Date</Column>
+      <Column @name="startTime">Date</Column>
       <Column class="col-time">Time</Column>
-      <Column name="title">Title</Column>
-      <Column name="leadIn">Lead In</Column>
+      <Column @name="title">Title</Column>
+      <Column @name="leadIn">Lead In</Column>
       <Column></Column>
     </GridHeader>
   </thead>

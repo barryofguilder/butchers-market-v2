@@ -1,8 +1,8 @@
 <div class="container">
-  <HeaderTitle @title="Customer Reviews" />
+  <HeaderTitle @title={{@title}} />
   <div id="review-carousel" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
-      {{#each reviews as |review index|}}
+      {{#each @reviews as |review index|}}
         <ReviewsListItem @review={{review}} @index={{index}} />
       {{/each}}
     </div>
