@@ -1,9 +1,9 @@
 <div class="container">
-  {{header-title title="Customer Reviews"}}
+  <HeaderTitle @title="Customer Reviews" />
   <div id="review-carousel" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
       {{#each reviews as |review index|}}
-        {{reviews-list-item review=review index=index}}
+        <ReviewsListItem @review={{review}} @index={{index}} />
       {{/each}}
     </div>
     <a class="carousel-control-prev" href="#review-carousel" role="button" data-slide="prev">

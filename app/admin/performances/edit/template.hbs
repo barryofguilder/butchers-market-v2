@@ -1,5 +1,5 @@
-{{performance-form
-  performance=model
-  saved=(action "performanceSaved")
-  cancelled=(action "performanceCancelled")
-}}
+<PerformanceForm
+  @performance={{model}}
+  @saved={{action "performanceSaved"}}
+  @cancelled={{action "performanceCancelled"}}
+/>

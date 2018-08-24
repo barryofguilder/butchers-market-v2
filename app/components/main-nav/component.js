@@ -1,9 +1,11 @@
 import { computed } from '@ember/object';
 import Component from '@ember/component';
+import $ from 'jquery';
 
 export default Component.extend({
   tagName: 'nav',
   classNames: ['navbar', 'navbar-light', 'fixed-top', 'navbar-expand-lg'],
+  navbarClickHandler: '.nav-item:not(.dropdown), .navbar-brand, .dropdown-item',
 
   currentRouteName: computed('applicationRoute.controller.currentRouteName', function() {
     let currentRouteName = this.get('applicationRoute.controller.currentRouteName');
@@ -25,12 +27,21 @@ export default Component.extend({
   didInsertElement() {
     this._super(...arguments);
 
-    this.$('.nav-item:not(.dropdown), .navbar-brand, .dropdown-item').click(() => {
-      let toggler = this.$('.navbar-toggler');
+    this.$().on('click', this.navbarClickHandler, this.collapseNavbar);
+  },
 
-      if (!toggler.hasClass('collapsed')) {
-        toggler.click();
-      }
-    });
+  willDestroyElement() {
+    this._super(...arguments);
+
+    this.$().off('click', this.navbarClickHandler, this.collapseNavbar);
+  },
+
+  collapseNavbar() {
+    const toggler = $('.navbar-toggler');
+    const navbarCollapse = $('.navbar-collapse');
+
+    if (navbarCollapse.hasClass('show')) {
+      toggler.click();
+    }
   }
 });

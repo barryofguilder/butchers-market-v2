@@ -1,8 +1,8 @@
-{{#modal-dialog as |modal|}}
-  {{#modal.header close=(action "close")}}
+<ModalDialog as |Modal|>
+  <Modal.header @close={{action "close"}}>
     Edit Hours
-  {{/modal.header}}
-  {{#modal.body}}
+  </Modal.header>
+  <Modal.body>
     {{#if errorMessage}}
       <div class="alert alert-danger">
         {{errorMessage}}
@@ -24,9 +24,9 @@
         Label {{required-field}}
       </label>
       <div class="col-sm-9">
-        {{#validated-field changeset=changeset propertyName="label" as |isInvalidClass|}}
+        <ValidatedField @changeset={{changeset}} @propertyName="label" as |isInvalidClass|>
           {{input class=(concat "form-control " isInvalidClass) id="hours-label" value=changeset.label}}
-        {{/validated-field}}
+        </ValidatedField>
       </div>
     </div>
     <div class="form-group row">
@@ -44,9 +44,9 @@
         Line 1 {{required-field}}
       </label>
       <div class="col-sm-9">
-        {{#validated-field changeset=changeset propertyName="line1" as |isInvalidClass|}}
+        <ValidatedField @changeset={{changeset}} @propertyName="line1" as |isInvalidClass|>
           {{input class=(concat "form-control " isInvalidClass) id="hours-line1" value=changeset.line1 maxlength="50"}}
-        {{/validated-field}}
+        </ValidatedField>
       </div>
     </div>
     <div class="form-group row">
@@ -54,9 +54,9 @@
         Line 2
       </label>
       <div class="col-sm-9">
-        {{#validated-field changeset=changeset propertyName="line2" as |isInvalidClass|}}
+        <ValidatedField @changeset={{changeset}} @propertyName="line2" as |isInvalidClass|>
           {{input class=(concat "form-control " isInvalidClass) id="hours-line2" value=changeset.line2 maxlength="50"}}
-        {{/validated-field}}
+        </ValidatedField>
       </div>
     </div>
     <div class="form-group row">
@@ -64,16 +64,16 @@
         Line 3
       </label>
       <div class="col-sm-9">
-        {{#validated-field changeset=changeset propertyName="line3" as |isInvalidClass|}}
+        <ValidatedField @changeset={{changeset}} @propertyName="line3" as |isInvalidClass|>
           {{input class=(concat "form-control " isInvalidClass) id="hours-line3" value=changeset.line3 maxlength="50"}}
-        {{/validated-field}}
+        </ValidatedField>
       </div>
     </div>
-  {{/modal.body}}
-  {{#modal.footer}}
+  </Modal.body>
+  <Modal.footer>
     <button type="button" class="btn btn-secondary" {{action "close"}}>Cancel</button>
-    {{#task-button class="btn btn-primary" task=saveHours disabled=saveDisabled}}
+    <TaskButton class="btn btn-primary" @task={{saveHours}} @disabled={{saveDisabled}}>
       Save
-    {{/task-button}}
-  {{/modal.footer}}
-{{/modal-dialog}}
+    </TaskButton>
+  </Modal.footer>
+</ModalDialog>

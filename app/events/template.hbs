@@ -1,4 +1,4 @@
-{{#promo-section class="butcher-promo-cafe" specialHours=false}}
+<PromoSection class="butcher-promo-cafe" @specialHours={{false}}>
   <div class="row clearfix">
     <div class="col-md-12 col-lg-6">
       {{#if isDesktop}}
@@ -6,51 +6,51 @@
         <p class="lead large">Finger Lickin'. Guitar Pickin'.</p>
       {{/if}}
       {{#if notDesktop}}
-        {{cafe-hours hours=model.hours}}
-        {{store-hours hours=model.hours}}
-        {{store-location}}
+        <CafeHours @hours={{model.hours}} />
+        <StoreHours @hours={{model.hours}} />
+        <StoreLocation />
       {{/if}}
       <a href="https://www.facebook.com/thebutchersmarket" class="btn btn-secondary btn-lg">Like us on Facebook</a>
       {{#if isDesktop}}
-        {{cafe-hours hours=model.hours}}
-        {{store-hours hours=model.hours}}
-        {{store-location}}
+        <CafeHours @hours={{model.hours}} />
+        <StoreHours @hours={{model.hours}} />
+        <StoreLocation />
       {{/if}}
     </div>
     {{#if isDesktop}}
       <div class="col-md-12 col-lg-6">
-        {{#iphone-carousel as |carousel|}}
-          {{carousel.slide src="images/iPhone-loyalty-club-3.jpg" active=true alt="Loyalty Club punch card"}}
-          {{carousel.slide src="images/iPhone-loyalty-club-2.jpg" alt="Loyalty Club discount"}}
-          {{carousel.slide src="images/iPhone-mobile-app.jpg" alt="Butchers Market mobile app"}}
-        {{/iphone-carousel}}
+        <IphoneCarousel as |Slide|>
+          <Slide @src="images/iPhone-loyalty-club-3.jpg" @alt="Loyalty Club punch card" @active={{true}} />
+          <Slide @src="images/iPhone-loyalty-club-2.jpg" @alt="Loyalty Club discount" />
+          <Slide @src="images/iPhone-mobile-app.jpg" @alt="Butchers Market mobile app" />
+        </IphoneCarousel>
       </div>
     {{/if}}
     {{#if notDesktop}}
       <div class="col-md-12 col-lg-6">
-        {{mobile-app}}
+        <MobileApp />
       </div>
     {{/if}}
   </div>
-{{/promo-section}}
+</PromoSection>
 
-{{#scroll-to-section shouldScroll=events selector="#events"}}
+<ScrollToSection @shouldScroll={{events}} @selector="#events">
   <div id="events" class="events">
     <div class="container">
-      {{header-title title="Events"}}
+      <HeaderTitle @title="Events" />
 
-      {{event-list events=model.events}}
+      <EventList @events={{model.events}} />
     </div>
   </div>
-{{/scroll-to-section}}
+</ScrollToSection>
 
 <section>
   <div class="container">
-    {{header-title title="Past Performances"}}
+    <HeaderTitle @title="Past Performances" />
     <div class="row">
       {{#each filteredPerformances as |performance|}}
         <div class="col-sm-6 col-md-4">
-          {{responsive-video url=performance.embedLink}}
+          <ResponsiveVideo @url={{performance.embedLink}} />
         </div>
       {{/each}}
       <div class="col-sm-6 col-md-4">
@@ -62,8 +62,8 @@
   </div>
 </section>
 
-{{reviews-list title="Customer Reviews" reviews=model.reviews}}
+<ReviewsList @title="Customer Reviews" @reviews={{model.reviews}} />
 
-{{newsletter-form page="cafe"}}
+<NewsletterForm @page="cafe" />
 
-{{booking-section}}
+<BookingSection />

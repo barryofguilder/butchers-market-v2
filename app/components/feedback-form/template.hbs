@@ -30,7 +30,7 @@
     </div>
     {{#if showReCaptcha}}
       <div class="form-group">
-        {{g-recaptcha onSuccess=(action "onCaptchaResolved")}}
+        <GRecaptcha @onSuccess={{action "onCaptchaResolved"}} />
       </div>
     {{/if}}
     <div class="form-group">

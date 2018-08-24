@@ -1,4 +1,4 @@
-{{#promo-section class="butcher-promo-deli" darken=true}}
+<PromoSection class="butcher-promo-deli" @darken=true>
   <h1 class="promo-title">Fresh Made Everything!</h1>
   <p class="lead large">Everything in our deli is made in-house from scratch to achieve a quality and freshness like no other store can provide.</p>
 
@@ -8,11 +8,11 @@
       <div class="boars-head-meat"></div>
     {{/unless}}
   </div>
-{{/promo-section}}
+</PromoSection>
 
 <section>
   <div class="container">
-    {{header-title title="Everyday Deli Items"}}
+    <HeaderTitle @title="Everyday Deli Items" />
 
     {{#each (grouped-each cardColumns model.items) as |row|}}
       <div class="row">
@@ -29,7 +29,7 @@
       </div>
     {{/each}}
 
-    {{header-title title="Party Platters"}}
+    <HeaderTitle @title="Party Platters" />
     <div class="row">
       <div class="col-sm-6 col-md-3">
         <div class="card card-plain">

@@ -1,15 +1,14 @@
-{{#promo-section class="butcher-promo-meat"}}
+<PromoSection class="butcher-promo-meat">
   <h1 class="promo-title">Fresh Cut Everything!</h1>
   <p class="lead large">We hand cut all of our meats in-house and stock only products that satisfy our strict quality standards.</p>
 
-  {{products-list products=model.products tagName="div"}}
-{{/promo-section}}
+  <ProductsList @products={{model.products}} @tagName="div" />
+</PromoSection>
 
-
-{{#scroll-to-section shouldScroll=packages selector="#bundles"}}
+<ScrollToSection @shouldScroll={{packages}} @selector="#bundles">
   <div id="bundles">
     <div class="container">
-      {{header-title title="Bundle Packs" class="meat-header"}}
+      <HeaderTitle @title="Bundle Packs" class="meat-header" />
       <div class="meat-print">
         <a href="docs/bundles-mixnmatch.pdf" class="btn btn-secondary btn-lg">
           Print Flyer
@@ -20,13 +19,13 @@
         <div class="row">
           {{#each row as |bundle|}}
           <div class="col-sm-6 col-md-4 feature-item">
-            {{bundle-list-item product=bundle}}
+            <BundleListItem @product={{bundle}} />
           </div>
           {{/each}}
         </div>
       {{/each}}
 
-      {{header-title title="Mix N' Match" class="meat-header"}}
+      <HeaderTitle @title="Mix N' Match" class="meat-header" />
       <div class="meat-print">
         <a href="docs/bundles-mixnmatch.pdf" class="btn btn-secondary btn-lg">
           Print Flyer
@@ -75,7 +74,7 @@
         </div>
       </div>
 
-      {{header-title title="Ice Box Mix N' Match" class="meat-header"}}
+      <HeaderTitle @title="Ice Box Mix N' Match" class="meat-header" />
       <div class="meat-print">
         <a href="docs/iceboxflyer.pdf" class="btn btn-secondary btn-lg">
           Print Flyer
@@ -145,4 +144,4 @@
       </div>
     </div>
   </div>
-{{/scroll-to-section}}
+</ScrollToSection>
