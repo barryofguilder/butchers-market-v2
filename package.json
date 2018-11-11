@@ -57,7 +57,7 @@
     "ember-moment": "7.0.1",
     "ember-qunit": "^3.4.1",
     "ember-resolver": "^5.0.1",
-    "ember-responsive": "1.2.7",
+    "ember-responsive": "2.0.8",
     "ember-scroll-to": "0.6.4",
     "ember-source": "~3.5.0",
     "ember-windoc": "0.1.7",
