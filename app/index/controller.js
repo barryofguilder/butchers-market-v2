@@ -2,25 +2,22 @@ import { filterBy } from '@ember/object/computed';
 import Controller from '@ember/controller';
 import MediaMixin from 'butchers-market/mixins/media-mixin';
 import { computed } from '@ember/object';
-import moment from 'moment';
+import { isAfter, isBefore, addDays } from 'date-fns';
 
 export default Controller.extend(MediaMixin, {
   featuredBundles: filterBy('model.bundles', 'featured', true),
 
   tacoSeasonDate: null,
   showTacoSeason: computed('tacoSeasonDate', function() {
-    let takedownDate = moment(this.get('tacoSeasonDate')).add(7, 'days');
-    let now = moment();
+    let takedownDate = addDays(this.tacoSeasonDate, 7);
 
-    return now.isBefore(takedownDate);
+    return isBefore(new Date(), takedownDate);
   }),
   tacoSeasonArrived: computed('tacoSeasonDate', function() {
-    let now = moment();
-
-    return now.isAfter(this.get('tacoSeasonDate'), 'second');
+    return isAfter(new Date(), this.tacoSeasonDate);
   }),
   tacoSeasonClass: computed('showTacoSeason', function() {
-    return this.get('showTacoSeason') ? 'taco-season' : null;
+    return this.showTacoSeason ? 'taco-season' : null;
   }),
 
   init() {

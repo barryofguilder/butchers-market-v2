@@ -2,12 +2,12 @@ import { sort, notEmpty } from '@ember/object/computed';
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 import { isBlank } from '@ember/utils';
-import moment from 'moment';
+import { isAfter, isBefore, isSameDay } from 'date-fns';
 
 export default Controller.extend({
   filteredEvents: computed('model.[]', 'filter', function() {
     let filter = this.get('filter');
-    let now = moment(new Date());
+    let now = new Date();
 
     return this.get('model').filter((item) => {
       if (item.get('isNew')) {
@@ -18,11 +18,11 @@ export default Controller.extend({
         return true;
       }
 
-      let startTime = moment(item.get('startTime'));
+      let startTime = item.get('startTime');
 
       return filter === 'upcoming'
-        ? startTime.isSameOrAfter(now, 'day')
-        : startTime.isBefore(now, 'day');
+        ? (isSameDay(startTime, now) || isAfter(startTime, now))
+        : isBefore(startTime, now);
     });
   }),
   currentSort: null,

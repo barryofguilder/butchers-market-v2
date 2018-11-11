@@ -27,10 +27,10 @@
     {{#each sortedEvents as |event index|}}
       <tr>
         <td>
-          {{moment-format event.startTime "MM/DD/YYYY"}}
+          {{date-format event.startTime "MM/dd/yyyy"}}
         </td>
         <td>
-          {{moment-format event.startTime "h:mma"}} - {{moment-format event.endTime "h:mma"}}
+          {{date-format event.startTime "h:mma"}} - {{date-format event.endTime "h:mma"}}
         </td>
         <td>
           {{#if event.link}}
@@ -92,19 +92,19 @@
         <div class="form-group row">
           <label class="col-sm-3 col-form-label">Date:</label>
           <div class="col-sm-9">
-            <p class="form-control-static">{{moment-format eventToDelete.startTime "MMMM Do YYYY"}}</p>
+            <p class="form-control-static">{{date-format eventToDelete.startTime "EEEE do yyyy"}}</p>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-3 col-form-label">Start Time:</label>
           <div class="col-sm-9">
-            <p class="form-control-static">{{moment-format eventToDelete.startTime "h:mma"}}</p>
+            <p class="form-control-static">{{date-format eventToDelete.startTime "h:mma"}}</p>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-3 col-form-label">End Time:</label>
           <div class="col-sm-9">
-            <p class="form-control-static">{{moment-format eventToDelete.endTime "h:mma"}}</p>
+            <p class="form-control-static">{{date-format eventToDelete.endTime "h:mma"}}</p>
           </div>
         </div>
         <div class="form-group row">

@@ -1,17 +1,17 @@
 import { computed } from '@ember/object';
 import { sort } from '@ember/object/computed';
 import Component from '@ember/component';
-import moment from 'moment';
-import momentSort from 'butchers-market/utils/moment-sort';
+import dateSort from 'butchers-market/utils/date-sort';
+import { format } from 'date-fns';
 
 export default Component.extend({
   classNames: ['col-sm-6', 'col-md-4'],
 
   events: null,
-  sortedEvents: sort('events', momentSort),
+  sortedEvents: sort('events', dateSort),
   monthDisplay: computed('events.@each.startTime', function() {
     let firstEvent = this.get('events.firstObject');
 
-    return moment(firstEvent.get('startTime')).format('MMMM YYYY');
+    return format(firstEvent.get('startTime'), 'MMMM yyyy');
   })
 });
