@@ -18,7 +18,6 @@
     "test": "ember test"
   },
   "devDependencies": {
-    "@ember-decorators/babel-transforms": "^2.0.2",
     "@ember/jquery": "^0.5.2",
     "@ember/optional-features": "^0.6.3",
     "babel-eslint": "^8.2.6",
@@ -45,7 +44,6 @@
     "ember-component-css": "0.6.0",
     "ember-concurrency": "^0.8.12",
     "ember-data": "~3.5.0",
-    "ember-decorators": "^2.3.1",
     "ember-export-application-global": "^2.0.0",
     "ember-flatpickr": "2.5.0",
     "ember-font-awesome": "4.0.0-rc.3",
