@@ -16,7 +16,7 @@
         Type
       </label>
       <div class="col-sm-9">
-        <input type="text" readonly class="form-control-plaintext" id="hours-type" value={{changeset.type}}>
+        <input type="text" readonly class="form-control-plaintext" id="hours-type" value={{this.changeset.type}}>
       </div>
     </div>
     <div class="form-group row">
@@ -24,15 +24,15 @@
         Label {{required-field}}
       </label>
       <div class="col-sm-9">
-        <ValidatedField @changeset={{changeset}} @propertyName="label" as |isInvalidClass|>
-          {{input class=(concat "form-control " isInvalidClass) id="hours-label" value=changeset.label}}
+        <ValidatedField @changeset={{this.changeset}} @propertyName="label" as |isInvalidClass|>
+          {{input class=(concat "form-control " isInvalidClass) id="hours-label" value=this.changeset.label}}
         </ValidatedField>
       </div>
     </div>
     <div class="form-group row">
       <div class="offset-sm-3 col-sm-9">
         <div class="form-check">
-          {{input type="checkbox" class="form-check-input" id="hours-active" checked=changeset.active}}
+          {{input type="checkbox" class="form-check-input" id="hours-active" checked=this.changeset.active}}
           <label class="form-check-label" for="hours-active">
             Active
           </label>
@@ -44,8 +44,8 @@
         Line 1 {{required-field}}
       </label>
       <div class="col-sm-9">
-        <ValidatedField @changeset={{changeset}} @propertyName="line1" as |isInvalidClass|>
-          {{input class=(concat "form-control " isInvalidClass) id="hours-line1" value=changeset.line1 maxlength="50"}}
+        <ValidatedField @changeset={{this.changeset}} @propertyName="line1" as |isInvalidClass|>
+          {{input class=(concat "form-control " isInvalidClass) id="hours-line1" value=this.changeset.line1 maxlength="50"}}
         </ValidatedField>
       </div>
     </div>
@@ -54,8 +54,8 @@
         Line 2
       </label>
       <div class="col-sm-9">
-        <ValidatedField @changeset={{changeset}} @propertyName="line2" as |isInvalidClass|>
-          {{input class=(concat "form-control " isInvalidClass) id="hours-line2" value=changeset.line2 maxlength="50"}}
+        <ValidatedField @changeset={{this.changeset}} @propertyName="line2" as |isInvalidClass|>
+          {{input class=(concat "form-control " isInvalidClass) id="hours-line2" value=this.changeset.line2 maxlength="50"}}
         </ValidatedField>
       </div>
     </div>
@@ -64,8 +64,8 @@
         Line 3
       </label>
       <div class="col-sm-9">
-        <ValidatedField @changeset={{changeset}} @propertyName="line3" as |isInvalidClass|>
-          {{input class=(concat "form-control " isInvalidClass) id="hours-line3" value=changeset.line3 maxlength="50"}}
+        <ValidatedField @changeset={{this.changeset}} @propertyName="line3" as |isInvalidClass|>
+          {{input class=(concat "form-control " isInvalidClass) id="hours-line3" value=this.changeset.line3 maxlength="50"}}
         </ValidatedField>
       </div>
     </div>

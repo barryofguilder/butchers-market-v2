@@ -22,60 +22,50 @@ export default Component.extend({
   init() {
     this._super(...arguments);
 
-    const event = this.get('event');
+    let changeset = new Changeset(this.event, lookupValidator(EventValidations), EventValidations);
 
-    if (event.get('isNew')) {
+    if (changeset.get('isNew')) {
       let now = new Date();
 
-      event.setProperties({
+      changeset.setProperties({
         startTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 19),
         endTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 22)
       });
     }
 
-    let changeset = new Changeset(event, lookupValidator(EventValidations), EventValidations);
     this.set('changeset', changeset);
   },
 
   saveEvent: task(function * () {
-    let changeset = this.get('changeset');
+    yield this.changeset.validate();
 
-    yield changeset.validate();
-
-    if (!changeset.get('isValid')) {
+    if (!this.changeset.get('isValid')) {
       return;
     }
 
     try {
-      yield changeset.save();
-      this.get('saved')();
+      yield this.changeset.save();
+      this.saved();
     } catch (reason) {
-      this.get('event').rollbackAttributes();
+      this.event.rollbackAttributes();
       this.set('errorMessage', reason);
     }
   }).drop(),
 
   actions: {
     dateSelected(date) {
-      const changeset = this.get('changeset');
-      const startTime = changeset.get('startTime');
-      changeset.set('startTime', new Date(date[0].getFullYear(), date[0].getMonth(), date[0].getDate(), startTime.getHours(), startTime.getMinutes()));
+      const startTime = this.changeset.get('startTime');
+      this.changeset.set('startTime', new Date(date[0].getFullYear(), date[0].getMonth(), date[0].getDate(), startTime.getHours(), startTime.getMinutes()));
     },
 
     startTimeSelected(time) {
-      const changeset = this.get('changeset');
-      const startTime = changeset.get('startTime');
-      changeset.set('startTime', new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate(), time[0].getHours(), time[0].getMinutes()));
+      const startTime = this.changeset.get('startTime');
+      this.changeset.set('startTime', new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate(), time[0].getHours(), time[0].getMinutes()));
     },
 
     endTimeSelected(time) {
-      const changeset = this.get('changeset');
-      const startTime = changeset.get('startTime');
-      changeset.set('endTime', new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate(), time[0].getHours(), time[0].getMinutes()));
-    },
-
-    close() {
-      this.get('cancelled')();
+      const startTime = this.changeset.get('startTime');
+      this.changeset.set('endTime', new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate(), time[0].getHours(), time[0].getMinutes()));
     }
   }
 });

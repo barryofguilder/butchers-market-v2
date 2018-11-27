@@ -10,5 +10,5 @@ export default DS.RESTAdapter.extend({
     let timestamp = new Date().getTime();
 
     return `${url}.json?t=${timestamp}`;
-  }
+  },
 });

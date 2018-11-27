@@ -5,6 +5,11 @@ import { isBlank } from '@ember/utils';
 import { task } from 'ember-concurrency';
 
 export default Controller.extend({
+  // Using `model.@each.id` instead of `model.[]` because this wasn't getting refreshed after
+  // adding a new record.
+  filteredPerformances: computed('model.@each.id', function() {
+    return this.model.filter(item => !item.get('isNew'));
+  }),
   currentSort: null,
   performancesSort: computed('currentSort.{sortColumn,sortDirection}', function() {
     let sortColumn = this.get('currentSort.sortColumn');
@@ -16,7 +21,7 @@ export default Controller.extend({
 
     return [`${sortColumn}:${sortDirection}`];
   }),
-  sortedPerformances: sort('model', 'performancesSort'),
+  sortedPerformances: sort('filteredPerformances', 'performancesSort'),
 
   performanceToDelete: null,
   showDeleteModal: notEmpty('performanceToDelete'),
