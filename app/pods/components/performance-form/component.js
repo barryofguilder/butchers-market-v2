@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import { computed } from '@ember/object';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
-import PerformanceValidations from 'butchers-market/performance/validations';
+import PerformanceValidations from 'butchers-market/validations/performance';
 import { task } from 'ember-concurrency';
 
 export default Component.extend({
