@@ -2,20 +2,20 @@ import { A } from '@ember/array';
 import { computed } from '@ember/object';
 import { filterBy, sort } from '@ember/object/computed';
 import Component from '@ember/component';
-import moment from 'moment';
-import momentSort from 'butchers-market/utils/moment-sort';
+import dateSort from 'butchers-market/utils/date-sort';
+import { isAfter, isSameDay, getMonth } from 'date-fns';
 
 export default Component.extend({
   events: null,
   filteredEvents: filterBy('events', 'isNew', false),
-  sortedEvents: sort('filteredEvents', momentSort),
+  sortedEvents: sort('filteredEvents', dateSort),
   eventsByMonth: computed('sortedEvents.@each', function() {
     let events = this.get('sortedEvents');
-    let now = moment();
+    let now = new Date();
 
     let upcomingEvents = events.filter(event => {
-      let date = moment(event.get('startTime'));
-      return date.isSameOrAfter(now, 'day');
+      let date = event.get('startTime');
+      return isSameDay(date, now) || isAfter(date, now);
     });
 
     let eventsLength = upcomingEvents.get('length');
@@ -23,13 +23,13 @@ export default Component.extend({
     let monthEvents = A();
 
     for (let i = 0; i < eventsLength; i++) {
-      let date = moment(upcomingEvents[i].get('startTime'));
-      let month = date.month();
+      let date = upcomingEvents[i].get('startTime');
+      let month = getMonth(date);
 
       if (monthEvents.get('length')) {
-        let recentDate = moment(monthEvents[0].get('startTime'));
+        let recentDate = monthEvents[0].get('startTime');
 
-        if (month !== recentDate.month()) {
+        if (month !== getMonth(recentDate)) {
           eventsByMonth.pushObject(monthEvents);
           monthEvents = A();
         }

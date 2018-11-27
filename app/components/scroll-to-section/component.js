@@ -5,7 +5,7 @@ import Component from '@ember/component';
 export default Component.extend({
   tagName: 'section',
 
-  scroller: service(),
+  scroll: service(),
   mobileApp: service('mobile-app'),
 
   shouldScroll: false,
@@ -23,16 +23,16 @@ export default Component.extend({
   },
 
   _scrollToSection() {
-    if (this.get('shouldScroll')) {
+    if (this.shouldScroll) {
       let offset = -125;
 
-      if (this.get('isMobileApp')) {
+      if (this.isMobileApp) {
         offset = 0;
       }
 
       // Offset is to make up for the fixed position of the navbar
-      this.get('scroller').scrollVertical(this.get('selector'), {
-        offset: offset
+      this.scroll.scrollVertical(this.get('selector'), {
+        offset
       });
     }
   }
