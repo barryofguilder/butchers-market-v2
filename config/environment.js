@@ -3,6 +3,7 @@
 module.exports = function(environment) {
   let ENV = {
     modulePrefix: 'butchers-market',
+    podModulePrefix: 'butchers-market/pods',
     environment,
     rootURL: '/',
     locationType: 'hash',
