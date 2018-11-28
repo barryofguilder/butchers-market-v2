@@ -29,13 +29,13 @@ switch ($method) {
     $hour = new \stdClass;
     $hour->id = $key;
     $hour->type = $oldHour["type"];
+    $hour->default = $oldHour["default"];
     $hour->label = clean_var($rawHour->{"label"});
-    $hour->active = $rawHour->{"active"};
+    $hour->activeStartDate = clean_var($rawHour->{"activeStartDate"});
+    $hour->activeEndDate = clean_var($rawHour->{"activeEndDate"});
     $hour->line1 = clean_var($rawHour->{"line1"});
     $hour->line2 = clean_var($rawHour->{"line2"});
     $hour->line3 = clean_var($rawHour->{"line3"});
-
-    $hours = updateActive($hour, $hours);
 
     $hourIndex = getIndexForId($key, $hours['hours']);
 
@@ -52,6 +52,50 @@ switch ($method) {
     }
 
     echo '{"hour": ' . json_encode($hour) . '}';
+    return;
+  case 'POST':
+    $rawHour = $body->hour;
+
+    $hour = new \stdClass;
+    $hour->id = generateId($hours['hours']);
+    $hour->type = clean_var($rawHour->{"type"});
+    $hour->default = false;
+    $hour->label = clean_var($rawHour->{"label"});
+    $hour->activeStartDate = clean_var($rawHour->{"activeStartDate"});
+    $hour->activeEndDate = clean_var($rawHour->{"activeEndDate"});
+    $hour->line1 = clean_var($rawHour->{"line1"});
+    $hour->line2 = clean_var($rawHour->{"line2"});
+    $hour->line3 = clean_var($rawHour->{"line3"});
+
+    array_push($hours['hours'], $hour);
+
+    $hoursJson = json_encode($hours);
+
+    if (!file_put_contents("../data/hours.json", $hoursJson)) {
+      header('HTTP/1.1 400 Bad Request', true, 400);
+      echo json_encode('Could not save the hours');
+
+      return;
+    }
+
+    echo '{"hour": ' . json_encode($hour) . '}';
+    return;
+
+  case 'DELETE':
+    $hourIndex = getIndexForId($key, $hours['hours']);
+
+    array_splice($hours['hours'], $hourIndex, 1);
+
+    $hoursJson = json_encode($hours);
+
+    if (!file_put_contents("../data/hours.json", $hoursJson)) {
+      header('HTTP/1.1 400 Bad Request', true, 400);
+      echo json_encode('Could not delete the hours');
+
+      return;
+    }
+
+    header('HTTP/1.1 204 No Content', true, 204);
     return;
 }
 
@@ -100,26 +144,18 @@ function getIndexForId($id, $hours) {
   return null;
 }
 
-function updateActive($editHour, $hours) {
-  $editHourId = $editHour->{"id"};
-  $editHourType = $editHour->{"type"};
-  $index = 0;
+function generateId($hours) {
+  $highestId = 0;
 
-  foreach ($hours['hours'] as $hour) {
+  foreach ($hours as $hour) {
     $hourId = $hour['id'];
-    $hourType = $hour['type'];
 
-    if ($hourType === $editHourType && $hourId !== $editHourId) {
-      $hour['active'] = !$editHour->{"active"};
-
-      array_splice($hours['hours'], $index, 1);
-      array_push($hours['hours'], $hour);
+    if ($hourId > $highestId) {
+      $highestId = $hourId;
     }
-
-    $index++;
   }
 
-  return $hours;
+  return $highestId + 1;
 }
 
 ?>

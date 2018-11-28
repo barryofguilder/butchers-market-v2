@@ -14,6 +14,7 @@ export default Component.extend({
 
     let propertyName = this.get('propertyName');
 
+
     defineProperty(this, 'isInvalid', computed(`changeset.error.${propertyName}.validation`, function() {
       return isPresent(this.get(`changeset.error.${propertyName}.validation`));
     }));

@@ -1,5 +1,5 @@
 <ModalDialog as |Modal|>
-  <Modal.header @close={{action "close"}}>
+  <Modal.header @close={{action cancelled}}>
     {{dialogTitle}}
   </Modal.header>
   <Modal.body>
@@ -16,8 +16,8 @@
         Title <RequiredField />
       </label>
       <div class="col-sm-9">
-        <ValidatedField @changeset={{changeset}} @propertyName="title" as |isInvalidClass|>
-          {{input class=(concat "form-control " isInvalidClass) id="event-title" value=changeset.title}}
+        <ValidatedField @changeset={{this.changeset}} @propertyName="title" as |isInvalidClass|>
+          {{input class=(concat "form-control " isInvalidClass) id="event-title" value=this.changeset.title}}
         </ValidatedField>
       </div>
     </div>
@@ -26,8 +26,8 @@
         Lead In
       </label>
       <div class="col-sm-9">
-        <ValidatedField @changeset={{changeset}} @propertyName="leadIn" as |isInvalidClass|>
-          {{input class=(concat "form-control " isInvalidClass) id="event-lead-in" value=changeset.leadIn}}
+        <ValidatedField @changeset={{this.changeset}} @propertyName="leadIn" as |isInvalidClass|>
+          {{input class=(concat "form-control " isInvalidClass) id="event-lead-in" value=this.changeset.leadIn}}
         </ValidatedField>
       </div>
     </div>
@@ -41,7 +41,7 @@
           @disableMobile={{true}}
           @allowInput={{false}}
           @appendDataInput={{true}}
-          @date={{readonly changeset.startTime}}
+          @date={{readonly this.changeset.startTime}}
           @dateFormat="m/d/Y"
           @onChange={{action "dateSelected"}}
         />
@@ -55,7 +55,7 @@
         <EmberFlatpickr
           class="form-control"
           @disableMobile={{true}}
-          @date={{readonly changeset.startTime}}
+          @date={{readonly this.changeset.startTime}}
           @enableTime={{true}}
           @noCalendar={{true}}
           @time_24hr={{false}}
@@ -72,7 +72,7 @@
         <EmberFlatpickr
           @class="form-control"
           @disableMobile={{true}}
-          @date={{readonly changeset.endTime}}
+          @date={{readonly this.changeset.endTime}}
           @enableTime={{true}}
           @noCalendar={{true}}
           @time_24hr={{false}}
@@ -86,14 +86,14 @@
         Link
       </label>
       <div class="col-sm-9">
-        <ValidatedField @changeset={{changeset}} @propertyName="link" as |isInvalidClass|>
-          {{input class=(concat "form-control " isInvalidClass) id="event-link" value=changeset.link}}
+        <ValidatedField @changeset={{this.changeset}} @propertyName="link" as |isInvalidClass|>
+          {{input class=(concat "form-control " isInvalidClass) id="event-link" value=this.changeset.link}}
         </ValidatedField>
       </div>
     </div>
   </Modal.body>
   <Modal.footer>
-    <button type="button" class="btn btn-secondary" {{action "close"}}>Cancel</button>
+    <button type="button" class="btn btn-secondary" {{action cancelled}}>Cancel</button>
     <TaskButton class="btn btn-primary" @task={{saveEvent}} @disabled={{saveDisabled}}>
       Save
     </TaskButton>

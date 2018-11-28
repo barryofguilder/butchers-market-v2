@@ -1,5 +1,5 @@
-<ModalDialog as |Modal|>
-  <Modal.header @close={{action "close"}}>
+<ModalDialog @size="large" as |Modal|>
+  <Modal.header @close={{action cancelled}}>
     Edit Hours
   </Modal.header>
   <Modal.body>
@@ -8,70 +8,133 @@
         {{errorMessage}}
       </div>
     {{/if}}
+
     <p class="form-info">
       <strong>Note:</strong> Required fields are marked with an {{required-field}}
     </p>
+
     <div class="form-group row">
       <label class="col-sm-3 col-form-label" for="hours-type">
         Type
+        {{#if this.changeset.isNew}}
+          {{required-field}}
+        {{/if}}
       </label>
       <div class="col-sm-9">
-        <input type="text" readonly class="form-control-plaintext" id="hours-type" value={{changeset.type}}>
+        {{#if this.changeset.isNew}}
+          <div class="form-check form-check-inline">
+            <RadioButton
+              @radioId="type-store"
+              @radioClass="form-check-input"
+              @value="Store"
+              @groupValue={{this.changeset.type}}
+            />
+            <label class="form-check-label" for="type-store">Store</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <RadioButton
+              @radioId="type-cafe"
+              @radioClass="form-check-input"
+              @value="Cafe"
+              @groupValue={{this.changeset.type}}
+            />
+            <label class="form-check-label" for="type-cafe">Cafe</label>
+          </div>
+        {{else}}
+          <input type="text" readonly class="form-control-plaintext" id="hours-type" value={{this.changeset.type}}>
+        {{/if}}
       </div>
     </div>
+
     <div class="form-group row">
       <label class="col-sm-3 col-form-label" for="hours-label">
         Label {{required-field}}
       </label>
       <div class="col-sm-9">
-        <ValidatedField @changeset={{changeset}} @propertyName="label" as |isInvalidClass|>
-          {{input class=(concat "form-control " isInvalidClass) id="hours-label" value=changeset.label}}
+        <ValidatedField @changeset={{this.changeset}} @propertyName="label" as |isInvalidClass|>
+          {{input class=(concat "form-control " isInvalidClass) id="hours-label" value=this.changeset.label}}
         </ValidatedField>
       </div>
     </div>
-    <div class="form-group row">
-      <div class="offset-sm-3 col-sm-9">
-        <div class="form-check">
-          {{input type="checkbox" class="form-check-input" id="hours-active" checked=changeset.active}}
-          <label class="form-check-label" for="hours-active">
-            Active
-          </label>
+
+    {{#if this.notDefault}}
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">
+          Active Start Date {{required-field}}
+        </label>
+        <div class="col-sm-9">
+          <EmberFlatpickr
+            class="form-control"
+            @disableMobile={{true}}
+            @allowInput={{false}}
+            @appendDataInput={{true}}
+            @date={{readonly this.changeset.activeStartDate}}
+            @dateFormat="m/d/Y"
+            @onChange={{action "startDateSelected"}}
+          />
+          <small class="form-text text-muted">
+            The date that these hours will become active on.
+          </small>
         </div>
       </div>
-    </div>
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">
+          Active End Date {{required-field}}
+        </label>
+        <div class="col-sm-9">
+          <EmberFlatpickr
+            class="form-control"
+            @disableMobile={{true}}
+            @allowInput={{false}}
+            @appendDataInput={{true}}
+            @date={{readonly this.changeset.activeEndDate}}
+            @dateFormat="m/d/Y"
+            @onChange={{action "endDateSelected"}}
+          />
+          <small class="form-text text-muted">
+            The last date that these hours will be active on.
+          </small>
+        </div>
+      </div>
+    {{/if}}
+
     <div class="form-group row">
       <label class="col-sm-3 col-form-label" for="hours-line1">
         Line 1 {{required-field}}
       </label>
       <div class="col-sm-9">
-        <ValidatedField @changeset={{changeset}} @propertyName="line1" as |isInvalidClass|>
-          {{input class=(concat "form-control " isInvalidClass) id="hours-line1" value=changeset.line1 maxlength="50"}}
+        <ValidatedField @changeset={{this.changeset}} @propertyName="line1" as |isInvalidClass|>
+          {{input class=(concat "form-control " isInvalidClass) id="hours-line1" value=this.changeset.line1 maxlength="50"}}
         </ValidatedField>
       </div>
     </div>
+
     <div class="form-group row">
       <label class="col-sm-3 col-form-label" for="hours-line2">
         Line 2
       </label>
       <div class="col-sm-9">
-        <ValidatedField @changeset={{changeset}} @propertyName="line2" as |isInvalidClass|>
-          {{input class=(concat "form-control " isInvalidClass) id="hours-line2" value=changeset.line2 maxlength="50"}}
+        <ValidatedField @changeset={{this.changeset}} @propertyName="line2" as |isInvalidClass|>
+          {{input class=(concat "form-control " isInvalidClass) id="hours-line2" value=this.changeset.line2 maxlength="50"}}
         </ValidatedField>
       </div>
     </div>
+
     <div class="form-group row">
       <label class="col-sm-3 col-form-label" for="hours-line3">
         Line 3
       </label>
       <div class="col-sm-9">
-        <ValidatedField @changeset={{changeset}} @propertyName="line3" as |isInvalidClass|>
-          {{input class=(concat "form-control " isInvalidClass) id="hours-line3" value=changeset.line3 maxlength="50"}}
+        <ValidatedField @changeset={{this.changeset}} @propertyName="line3" as |isInvalidClass|>
+          {{input class=(concat "form-control " isInvalidClass) id="hours-line3" value=this.changeset.line3 maxlength="50"}}
         </ValidatedField>
       </div>
     </div>
   </Modal.body>
   <Modal.footer>
-    <button type="button" class="btn btn-secondary" {{action "close"}}>Cancel</button>
+    <button type="button" class="btn btn-secondary" {{action cancelled}}>Cancel</button>
     <TaskButton class="btn btn-primary" @task={{saveHours}} @disabled={{saveDisabled}}>
       Save
     </TaskButton>

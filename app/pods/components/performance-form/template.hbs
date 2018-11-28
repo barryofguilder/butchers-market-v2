@@ -16,8 +16,8 @@
         Title <RequiredField />
       </label>
       <div class="col-sm-9">
-        <ValidatedField @changeset={{changeset}} @propertyName="title" as |isInvalidClass|>
-          {{input class=(concat "form-control " isInvalidClass) id="performance-title" value=changeset.title}}
+        <ValidatedField @changeset={{this.changeset}} @propertyName="title" as |isInvalidClass|>
+          {{input class=(concat "form-control " isInvalidClass) id="performance-title" value=this.changeset.title}}
         </ValidatedField>
       </div>
     </div>
@@ -26,8 +26,8 @@
         Link <RequiredField />
       </label>
       <div class="col-sm-9">
-        <ValidatedField @changeset={{changeset}} @propertyName="link" as |isInvalidClass|>
-          {{input class=(concat "form-control " isInvalidClass) id="performance-link" value=changeset.link}}
+        <ValidatedField @changeset={{this.changeset}} @propertyName="link" as |isInvalidClass|>
+          {{input class=(concat "form-control " isInvalidClass) id="performance-link" value=this.changeset.link}}
         </ValidatedField>
       </div>
     </div>

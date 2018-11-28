@@ -50,8 +50,8 @@ export default Component.extend({
           showServerError: false
         });
       }).catch((response) => {
-        if (response && response.errors && response.errors.length > 0) {
-          let error = response.errors[0];
+        if (response && response.payload && response.payload.errors && response.payload.errors.length > 0) {
+          let error = response.payload.errors[0];
 
           if (error.detail.name) {
             this.set('nameInvalid', true);

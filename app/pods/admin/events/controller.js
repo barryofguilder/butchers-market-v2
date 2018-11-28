@@ -5,22 +5,23 @@ import { isBlank } from '@ember/utils';
 import { isAfter, isBefore, isSameDay } from 'date-fns';
 
 export default Controller.extend({
-  filteredEvents: computed('model.[]', 'filter', function() {
-    let filter = this.get('filter');
+  // Using `model.@each.id` instead of `model.[]` because this wasn't getting refreshed after
+  // adding a new record.
+  filteredEvents: computed('model.@each.id', 'filter', function() {
     let now = new Date();
 
-    return this.get('model').filter((item) => {
+    return this.model.filter((item) => {
       if (item.get('isNew')) {
         return false;
       }
 
-      if (isBlank(filter)) {
+      if (isBlank(this.filter)) {
         return true;
       }
 
       let startTime = item.get('startTime');
 
-      return filter === 'upcoming'
+      return this.filter === 'upcoming'
         ? (isSameDay(startTime, now) || isAfter(startTime, now))
         : isBefore(startTime, now);
     });
@@ -43,13 +44,13 @@ export default Controller.extend({
 
   filter: null,
   pastClass: computed('filter', function() {
-    return this.get('filter') === 'past' ? 'active': null;
+    return this.filter === 'past' ? 'active': null;
   }),
   upcomingClass: computed('filter', function() {
-    return this.get('filter') === 'upcoming' ? 'active': null;
+    return this.filter === 'upcoming' ? 'active': null;
   }),
   allClass: computed('filter', function() {
-    return isBlank(this.get('filter')) ? 'active': null;
+    return isBlank(this.filter) ? 'active': null;
   }),
 
   actions: {
@@ -66,9 +67,7 @@ export default Controller.extend({
     },
 
     deleteEvent() {
-      let event = this.get('eventToDelete');
-
-      event.destroyRecord().then(() => {
+      this.eventToDelete.destroyRecord().then(() => {
         this.set('eventToDelete', null);
       }).catch((reason) => {
         this.set('errorMessage', reason);
