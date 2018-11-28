@@ -2,32 +2,38 @@
   "hours": [{
     "id":1,
     "type":"Store",
-    "label":"Store Hours (normal)",
-    "active":true,
+    "default": true,
+    "activeStartDate": null,
+    "activeEndDate": null,
+    "label":"Store Hours",
     "line1":"Mon - Sat: 9:00am - 6:00pm",
     "line2":"Sun: Closed",
     "line3":""
   }, {
     "id":2,
     "type":"Cafe",
-    "label":"Cafe Hours (normal)",
-    "active":true,
+    "default": true,
+    "label":"Cafe Hours",
     "line1":"Mon - Thurs: 9:00am - 5:30pm",
     "line2":"Fri & Sat: 9:00am - 10:00pm, last call 9:30pm",
     "line3":"Sun: Closed"
   }, {
     "id":3,
     "type":"Store",
+    "default": false,
+    "activeStartDate":"2018-11-19T00:00:00.000Z",
+    "activeEndDate":"2018-11-25T23:59:59.000Z",
     "label":"Store Hours (holiday)",
-    "active":false,
     "line1":"Closed",
     "line2":"",
     "line3":""
   }, {
     "id":4,
     "type":"Cafe",
+    "default": false,
+    "activeStartDate":"2018-11-19T00:00:00.000Z",
+    "activeEndDate":"2018-11-25T23:59:59.000Z",
     "label":"Cafe Hours (holiday)",
-    "active":false,
     "line1":"Closed",
     "line2":"",
     "line3":""
