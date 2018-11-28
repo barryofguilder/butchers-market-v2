@@ -6,7 +6,7 @@
         @targetAttachment={{targetAttachment}}
         @target={{legacyTarget}}
       >
-        <div class="modal-dialog">
+        <div class="modal-dialog {{sizeClass}}">
           <div class="modal-content">
             {{yield (hash
               header=(component "modal-dialog-header")

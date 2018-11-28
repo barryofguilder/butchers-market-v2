@@ -4,7 +4,6 @@ export default function(server) {
 
   createEvents(server);
   createPerformances(server);
-  createStoreHours(server);
 
 }
 
@@ -49,40 +48,5 @@ function createPerformances(server) {
   server.create('performance', {
     title: 'Lon Eldridge - China Town',
     link: 'https://www.youtube.com/watch?v=yDYxlQHpjFE',
-  });
-}
-
-function createStoreHours(server) {
-  server.create('hour', {
-    type: 'Cafe',
-    label: 'Cafe Hours (normal)',
-    active: true,
-    line1: 'Mon - Thurs: 9:00am - 5:30pm',
-    line2: 'Fri & Sat: 9:00am - 10:00pm, last call 9:30pm',
-    line3: 'Sun: Closed'
-  });
-
-  server.create('hour', {
-    type: 'Cafe',
-    label: 'Cafe Hours (Thanksgiving)',
-    active: false,
-    line1: 'Thanksgiving Week: Closed Thurs - Sat',
-    line2: 'Will continue regular hours Monday Nov. 26'
-  });
-
-  server.create('hour', {
-    type: 'Store',
-    label: 'Store Hours (normal)',
-    active: true,
-    line1: 'Mon - Sat: 9:00am - 6:00pm',
-    line2: 'Sun: Closed'
-  });
-
-  server.create('hour', {
-    type: 'Store',
-    label: 'Store Hours (Thanksgiving)',
-    active: false,
-    line1: 'Thanksgiving Week: Closed Thurs - Sat',
-    line2: 'Will continue regular hours Monday Nov. 26'
   });
 }

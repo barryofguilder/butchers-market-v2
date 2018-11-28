@@ -60,6 +60,7 @@ export default function() {
   });
 
   this.get('/hours.php', 'hour', { coalesce: true });
+  this.post('/hours.php', 'hour');
   this.put('/hours.php', function ({ hours }, request) {
     // This is a temporary workaround, see this GitHub issue:
     // https://github.com/samselikoff/ember-cli-mirage/issues/1384
@@ -69,6 +70,11 @@ export default function() {
     let attrs = this.normalizedRequestAttrs();
 
     return hours.find(id).update(attrs);
+  });
+  this.del('/hours.php', function ({ hours }, request) {
+    let id = request.queryParams.id;
+
+    hours.find(id).destroy();
   });
 
   this.get('/performances.php', 'performance', { coalesce: true });
