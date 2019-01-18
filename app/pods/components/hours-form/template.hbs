@@ -42,7 +42,13 @@
             <label class="form-check-label" for="type-cafe">Cafe</label>
           </div>
         {{else}}
-          <input type="text" readonly class="form-control-plaintext" id="hours-type" value={{this.changeset.type}}>
+          <input
+            type="text"
+            readonly
+            class="form-control-plaintext"
+            id="hours-type"
+            value={{this.changeset.type}}
+          >
         {{/if}}
       </div>
     </div>
@@ -106,7 +112,12 @@
       </label>
       <div class="col-sm-9">
         <ValidatedField @changeset={{this.changeset}} @propertyName="line1" as |isInvalidClass|>
-          {{input class=(concat "form-control " isInvalidClass) id="hours-line1" value=this.changeset.line1 maxlength="50"}}
+          {{input
+            class=(concat "form-control " isInvalidClass)
+            id="hours-line1"
+            value=this.changeset.line1
+            maxlength="50"
+          }}
         </ValidatedField>
       </div>
     </div>
@@ -117,7 +128,12 @@
       </label>
       <div class="col-sm-9">
         <ValidatedField @changeset={{this.changeset}} @propertyName="line2" as |isInvalidClass|>
-          {{input class=(concat "form-control " isInvalidClass) id="hours-line2" value=this.changeset.line2 maxlength="50"}}
+          {{input
+            class=(concat "form-control " isInvalidClass)
+            id="hours-line2"
+            value=this.changeset.line2
+            maxlength="50"
+          }}
         </ValidatedField>
       </div>
     </div>
@@ -128,7 +144,12 @@
       </label>
       <div class="col-sm-9">
         <ValidatedField @changeset={{this.changeset}} @propertyName="line3" as |isInvalidClass|>
-          {{input class=(concat "form-control " isInvalidClass) id="hours-line3" value=this.changeset.line3 maxlength="50"}}
+          {{input
+            class=(concat "form-control " isInvalidClass)
+            id="hours-line3"
+            value=this.changeset.line3
+            maxlength="50"
+          }}
         </ValidatedField>
       </div>
     </div>
