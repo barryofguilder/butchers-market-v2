@@ -1,0 +1,9 @@
+<div class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    {{#each @photos as |photo index|}}
+      <div class="carousel-item {{if (eq index 0) 'active'}}">
+        <img src={{photo.url}} alt={{photo.description}}>
+      </div>
+    {{/each}}
+  </div>
+</div>

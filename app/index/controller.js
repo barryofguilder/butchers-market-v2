@@ -23,6 +23,21 @@ export default Controller.extend(MediaMixin, {
     return this.get('showTacoSeason') ? 'taco-season' : null;
   }),
 
+  carouselPhotos: Object.freeze([
+    {
+      url: 'images/iPhone-loyalty-club-1.jpg',
+      description: 'Loyalty Club punch card'
+    },
+    {
+      url: 'images/iPhone-loyalty-club-2.jpg',
+      description: 'Loyalty Club discount'
+    },
+    {
+      url: 'images/iPhone-mobile-app.jpg',
+      description: 'Butchers Market mobile app'
+    }
+  ]),
+
   init() {
     this._super(...arguments);
 

@@ -2,6 +2,69 @@
 @import 'ember-modal-dialog/ember-modal-structure';
 @import 'ember-modal-dialog/ember-modal-appearance';
 @import 'font-awesome';
+@import "pod-styles.scss";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// Using the Bootstrap carousel for now
+@import "../../node_modules/bootstrap/scss/functions";
+$enable-transitions: true;
+$enable-gradients: true;
+$black: #000;
+$transition-base:             all .2s ease-in-out !default;
+$transition-fade:             opacity .15s linear !default;
+$transition-collapse:         height .35s ease !default;
+$carousel-control-color:            #fff !default;
+$carousel-control-width:            15% !default;
+$carousel-control-opacity:          .5 !default;
+$carousel-indicator-width:          30px !default;
+$carousel-indicator-height:         3px !default;
+$carousel-indicator-spacer:         3px !default;
+$carousel-indicator-active-bg:      #fff !default;
+$carousel-caption-width:            70% !default;
+$carousel-caption-color:            #fff !default;
+$carousel-control-icon-width:       20px !default;
+$carousel-control-prev-icon-bg:     str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{$carousel-control-color}' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E"), "#", "%23") !default;
+$carousel-control-next-icon-bg:     str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{$carousel-control-color}' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E"), "#", "%23") !default;
+$carousel-transition:               transform .6s ease !default; // Define transform transition first if using multiple transitions (e.g., `transform 2s ease, opacity .5s ease-out`)
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/transitions";
+@import "../../node_modules/bootstrap/scss/carousel";
+
+.iphone-carousel {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.iphone-gallery-wrapper {
+  position: absolute;
+  left: 49.8%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: 332px;
+  top: 138px;
+}
+
+.iphone {
+  width: 450px;
+  margin: 48px auto 0;
+
+  .iphone-badge {
+    position: absolute;
+    top: 5px;
+    left: -6px;
+    width: 175px;
+    height: 155px;
+  }
+}
+
 
 // Application Styles
 //
