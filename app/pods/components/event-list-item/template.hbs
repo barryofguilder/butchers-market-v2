@@ -14,7 +14,7 @@
           {{/if}}
           <p class="event-title">
             {{#if event.link}}
-              <a href="{{event.link}}" target="_blank">{{event.title}}</a>
+              <a href={{event.link}} target="_blank" rel="noopener">{{event.title}}</a>
             {{else}}
               {{event.title}}
             {{/if}}

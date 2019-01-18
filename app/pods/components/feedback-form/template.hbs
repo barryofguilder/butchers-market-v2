@@ -19,13 +19,13 @@
 {{/if}}
 {{#unless feedbackSent}}
   <form class="form-horizontal feedback-form" {{action "sendFeedback" on="submit"}}>
-    <div class="form-group {{if nameInvalid 'has-danger'}}">
+    <div class="form-group {{if nameInvalid "has-danger"}}">
       {{input class="form-control" placeholder="Your Name" value=name}}
     </div>
-    <div class="form-group {{if emailInvalid 'has-danger'}}">
+    <div class="form-group {{if emailInvalid "has-danger"}}">
       {{input type="email" class="form-control" placeholder="Your E-mail" value=email}}
     </div>
-    <div class="form-group {{if messageInvalid 'has-danger'}}">
+    <div class="form-group {{if messageInvalid "has-danger"}}">
       {{textarea class="form-control" placeholder="Your Message" cols="30" rows="7" value=message}}
     </div>
     {{#if showReCaptcha}}

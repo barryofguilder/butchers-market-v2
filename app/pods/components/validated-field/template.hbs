@@ -1,6 +1,6 @@
 {{yield isInvalidClass}}
 {{#if (get @changeset.error propertyName)}}
-  {{#each (get (get @changeset.error propertyName) 'validation') as |error|}}
+  {{#each (get (get @changeset.error propertyName) "validation") as |error|}}
     <span class="invalid-feedback">{{error}}</span>
   {{/each}}
 {{/if}}

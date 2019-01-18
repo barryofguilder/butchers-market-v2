@@ -1,6 +1,11 @@
 <EmberWormhole @to={{destinationElementId}}>
   <div class="{{wrapperClassNamesString}} {{wrapperClass}} {{componentCssClassName}}">
-    <div class={{overlayClassNamesString}} onclick={{action (ignore-children onClickOverlay)}} tabindex="-1" data-emd-overlay>
+    <div
+      class={{overlayClassNamesString}}
+      onclick={{action (ignore-children onClickOverlay)}}
+      tabindex="-1"
+      data-emd-overlay
+    >
       <EmberModalDialogPositionedContainer
         class={{containerClassNamesString}}
         @targetAttachment={{targetAttachment}}
@@ -8,11 +13,14 @@
       >
         <div class="modal-dialog {{sizeClass}}">
           <div class="modal-content">
-            {{yield (hash
-              header=(component "modal-dialog-header")
-              body=(component "modal-dialog-body")
-              footer=(component "modal-dialog-footer")
-            )}}
+            {{yield
+              (
+                hash
+                  header=(component "modal-dialog-header")
+                  body=(component "modal-dialog-body")
+                  footer=(component "modal-dialog-footer")
+              )
+            }}
           </div>
         </div>
       </EmberModalDialogPositionedContainer>

@@ -18,9 +18,9 @@
       {{#each (grouped-each cardColumns model.bundles) as |row|}}
         <div class="row">
           {{#each row as |bundle|}}
-          <div class="col-sm-6 col-md-4 feature-item">
-            <BundleListItem @product={{bundle}} />
-          </div>
+            <div class="col-sm-6 col-md-4 feature-item">
+              <BundleListItem @product={{bundle}} />
+            </div>
           {{/each}}
         </div>
       {{/each}}
