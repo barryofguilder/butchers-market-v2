@@ -32,6 +32,7 @@ switch ($method) {
     $event->startTime = clean_var($rawEvent->{"startTime"});
     $event->endTime = clean_var($rawEvent->{"endTime"});
     $event->link = clean_var($rawEvent->{"link"});
+    $event->imageUrl = clean_var($rawEvent->{"imageUrl"});
 
     $eventIndex = getIndexForId($key, $events['events']);
 
@@ -60,6 +61,7 @@ switch ($method) {
     $event->startTime = clean_var($rawEvent->{"startTime"});
     $event->endTime = clean_var($rawEvent->{"endTime"});
     $event->link = clean_var($rawEvent->{"link"});
+    $event->imageUrl = clean_var($rawEvent->{"imageUrl"});
 
     array_push($events['events'], $event);
 

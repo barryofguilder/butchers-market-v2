@@ -46,6 +46,7 @@
     "ember-concurrency": "~0.8.26",
     "ember-data": "~3.7.0",
     "ember-export-application-global": "^2.0.0",
+    "ember-file-upload": "^2.5.3",
     "ember-flatpickr": "~2.12.0",
     "ember-font-awesome": "4.0.0-rc.3",
     "ember-g-recaptcha": "~1.0.0",

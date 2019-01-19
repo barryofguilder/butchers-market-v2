@@ -1,4 +1,5 @@
 import Response from 'ember-cli-mirage/response';
+import { upload } from 'ember-file-upload/mirage';
 
 export default function() {
 
@@ -35,6 +36,10 @@ export default function() {
 
     events.find(id).destroy();
   });
+
+  this.post('/imageUpload.php', upload(function (db, request) {
+    return new Response(201, { Location: request.requestBody.file.url }, { });
+  }));
 
   this.post('/feedback.php', (server, request) => {
     let attrs = JSON.parse(request.requestBody);
