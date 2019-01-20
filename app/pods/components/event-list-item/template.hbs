@@ -1,30 +1,24 @@
-<div class="natural-products">
-  <div class="natural-products-header">
-    <h4>{{monthDisplay}}</h4>
+<div class="event-image">
+  <img src={{event.imageUrl}} alt={{concat "Image of " event.title}} class="img-fluid rounded">
+</div>
+<div class="event-details">
+  <div class="mb-2">
+    {{#if event.leadIn}}
+      <small class="text-muted">{{event.leadIn}}</small>
+    {{/if}}
+    <h6 class="event-title">
+      {{#if event.link}}
+        <a href={{event.link}} target="_blank" rel="noopener">{{event.title}}</a>
+      {{else}}
+        {{event.title}}
+      {{/if}}
+    </h6>
   </div>
-  <ul class="natural-products-items">
-    {{#each sortedEvents as |event|}}
-      <li>
-        <div class="event-item">
-          <h6 class="event-date">
-            {{date-format event.startTime "EEEE, MMMM do"}}
-          </h6>
-          {{#if event.leadIn}}
-            <p>{{event.leadIn}}:</p>
-          {{/if}}
-          <p class="event-title">
-            {{#if event.link}}
-              <a href={{event.link}} target="_blank" rel="noopener">{{event.title}}</a>
-            {{else}}
-              {{event.title}}
-            {{/if}}
-          </p>
-          <p class="event-time">
-            {{date-format event.startTime "h:mma"}} -
-            {{date-format event.endTime "h:mma"}}
-          </p>
-        </div>
-      </li>
-    {{/each}}
-  </ul>
+
+  <div>
+    <small class="event-day text-muted">{{date-format event.startTime "EEEE"}}</small>
+    <span class="event-date">
+      {{date-format event.startTime "MMM d yyyy, h:mma"}}
+    </span>
+  </div>
 </div>
