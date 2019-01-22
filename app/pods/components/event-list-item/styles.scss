@@ -1,8 +1,5 @@
 
 & {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   margin-bottom: 30px;
 
   &:hover {
@@ -10,6 +7,12 @@
       box-shadow: 0 0.15rem 0.65rem rgba(0, 0, 0, 0.45);
     }
   }
+}
+
+.event-list-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .event-image {

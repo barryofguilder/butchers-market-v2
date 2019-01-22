@@ -33,15 +33,16 @@ Router.map(function() {
   this.route('admin', function() {
     this.route('events', function() {
       this.route('new');
-      this.route('edit', { path: ':id' });
+      this.route('edit', { path: ':id/edit' });
+      this.route('delete', { path: ':id/delete' });
     });
     this.route('performances', function() {
       this.route('new');
-      this.route('edit', { path: ':id' });
+      this.route('edit', { path: ':id/edit' });
     });
     this.route('hours', function() {
       this.route('new');
-      this.route('edit', { path: ':id' });
+      this.route('edit', { path: ':id/edit' });
     });
   });
 });

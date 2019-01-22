@@ -1,24 +1,37 @@
-<div class="event-image">
-  <img src={{event.imageUrl}} alt={{concat "Image of " event.title}} class="img-fluid rounded">
-</div>
-<div class="event-details">
-  <div class="mb-2">
-    {{#if event.leadIn}}
-      <small class="text-muted">{{event.leadIn}}</small>
-    {{/if}}
-    <h6 class="event-title">
-      {{#if event.link}}
-        <a href={{event.link}} target="_blank" rel="noopener">{{event.title}}</a>
-      {{else}}
-        {{event.title}}
+<div class="event-list-item">
+  <div class="event-image">
+    <img src={{@event.imageUrl}} alt={{concat "Image of " @event.title}} class="img-fluid rounded">
+  </div>
+  <div class="event-details">
+    <div class="mb-2">
+      {{#if @event.leadIn}}
+        <small class="text-muted">{{@event.leadIn}}</small>
       {{/if}}
-    </h6>
-  </div>
+      <h6 class="event-title">
+        {{#if @event.link}}
+          <a href={{@event.link}} target="_blank" rel="noopener">{{@event.title}}</a>
+        {{else}}
+          {{@event.title}}
+        {{/if}}
+      </h6>
+    </div>
 
-  <div>
-    <small class="event-day text-muted">{{date-format event.startTime "EEEE"}}</small>
-    <span class="event-date">
-      {{date-format event.startTime "MMM d yyyy, h:mma"}}
-    </span>
+    <div>
+      <small class="event-day text-muted">{{date-format @event.startTime "EEEE"}}</small>
+      <span class="event-date">
+        {{date-format @event.startTime "MMM d yyyy, h:mma"}}
+      </span>
+    </div>
   </div>
 </div>
+
+{{#if @isAdmin}}
+  <div class="event-admin">
+    {{#link-to "admin.events.edit" @event.id}}
+      Edit
+    {{/link-to}} |
+    {{#link-to "admin.events.delete" @event.id}}
+      Delete
+    {{/link-to}}
+  </div>
+{{/if}}

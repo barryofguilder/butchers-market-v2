@@ -1,7 +1,7 @@
-{{#each (grouped-each eventColumns sortedEvents) as |row|}}
+{{#each (grouped-each this.eventColumns @events) as |row|}}
   <div class="row">
     {{#each row as |event|}}
-      <EventListItem @event={{event}} />
+      <EventListItem @event={{event}} @isAdmin={{@isAdmin}} />
     {{/each}}
   </div>
 {{/each}}

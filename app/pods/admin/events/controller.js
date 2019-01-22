@@ -1,8 +1,9 @@
-import { sort, notEmpty } from '@ember/object/computed';
 import Controller from '@ember/controller';
+import { sort } from '@ember/object/computed';
 import { computed } from '@ember/object';
 import { isBlank } from '@ember/utils';
 import { isAfter, isBefore, isSameDay } from 'date-fns';
+import dateSort from 'butchers-market/utils/date-sort';
 
 export default Controller.extend({
   // Using `model.@each.id` instead of `model.[]` because this wasn't getting refreshed after
@@ -26,28 +27,14 @@ export default Controller.extend({
         : isBefore(startTime, now);
     });
   }),
-  currentSort: null,
-  eventsSort: computed('currentSort.{sortColumn,sortDirection}', function() {
-    let sortColumn = this.get('currentSort.sortColumn');
-    let sortDirection = this.get('currentSort.sortDirection');
+  sortedEvents: sort('filteredEvents', dateSort),
 
-    if (isBlank(sortColumn)) {
-      return ['startTime:asc'];
-    }
-
-    return [`${sortColumn}:${sortDirection}`];
-  }),
-  sortedEvents: sort('filteredEvents', 'eventsSort'),
-  eventToDelete: null,
-  showDeleteModal: notEmpty('eventToDelete'),
-  errorMessage: null,
-
-  filter: null,
-  pastClass: computed('filter', function() {
-    return this.filter === 'past' ? 'active': null;
-  }),
+  filter: 'upcoming',
   upcomingClass: computed('filter', function() {
     return this.filter === 'upcoming' ? 'active': null;
+  }),
+  pastClass: computed('filter', function() {
+    return this.filter === 'past' ? 'active': null;
   }),
   allClass: computed('filter', function() {
     return isBlank(this.filter) ? 'active': null;
@@ -56,26 +43,6 @@ export default Controller.extend({
   actions: {
     filterEvents(filter) {
       this.set('filter', filter);
-    },
-
-    sortEvents(sort) {
-      this.set('currentSort', sort);
-    },
-
-    delete(event) {
-      this.set('eventToDelete', event);
-    },
-
-    deleteEvent() {
-      this.eventToDelete.destroyRecord().then(() => {
-        this.set('eventToDelete', null);
-      }).catch((reason) => {
-        this.set('errorMessage', reason);
-      });
-    },
-
-    cancelDelete() {
-      this.set('eventToDelete', null);
     }
   }
 });
