@@ -5,13 +5,12 @@ export default [
     price: '$68',
     featured: true,
     items: [
-      '5lb. Beef Ground Chuck',
-      '5lb. Bonesless Chicken Breast',
-      '5lb. Bonelesss Pork Chops',
-      '5lb. Boston Butt Pork Roast'
+      '5lb. Ground Chuck',
+      '5lb. Bonesless Chicken Breasts',
+      '5lb. Boston Butt Pork Roast',
+      '5lb. Bonelesss Pork Chops'
     ]
-  },
-  {
+  }, {
     id: 2,
     title: '30lb Meat Pack',
     price: '$77',
@@ -24,8 +23,7 @@ export default [
       '5 lbs. Boneless Chicken Breasts',
       '10 lbs. Chicken Leg Quarters'
     ]
-  },
-  {
+  }, {
     id: 3,
     title: '40lb Meat Pack',
     price: '$114',
@@ -38,21 +36,19 @@ export default [
       '6 lbs. Bone-In Chicken Breasts',
       '10 lbs. Chicken Leg Quarters'
     ]
-  },
-  {
+  }, {
     id: 4,
     title: '50lb Meat Pack',
     price: '$129',
     featured: true,
     items: [
-      '10lb. Beef Ground Chuck',
-      '10lb. Boneless Chicken Breast',
+      '10lb. Fresh Ground Chuck',
       '10lb. Boneless Pork Chops',
-      '10lb. Boneless Country Style Ribs',
+      '10lb. Country Style Pork Ribs',
+      '10lb. Boneless Chicken Breasts',
       '10lb. Chicken Leg Quarters'
     ]
-  },
-  {
+  }, {
     id: 5,
     title: '75lb Meat Pack',
     price: '$235',
@@ -90,9 +86,32 @@ export default [
       '10 lbs. Boneless Chicken Breasts',
       '10 lbs. Chicken Leg Quarters'
     ]
-  },
-  {
+  }, {
     id: 7,
+    title: 'Bundle Meat Pack #1',
+    price: '$69',
+    featured: false,
+    items: [
+      '4 (7oz) Beef Ribeye Steaks',
+      '2 lbs. Beef Cube Steaks',
+      '5 lbs. Beef Ground Chuck',
+      '2 ½ lbs. Boneless Pork Chops',
+      '3 lbs. Split Chicken Breasts'
+    ]
+  }, {
+    id: 8,
+    title: 'Bundle Meat Pack #2',
+    price: '$69',
+    featured: false,
+    items: [
+      '4 (7oz) Beef N.Y. Strip Steaks',
+      '2 lbs. Beef Stew',
+      '5 lbs. Beef Ground Chuck',
+      '2 ½ lbs. Boneless Chicken Breast',
+      '2 ½ lbs. Boneless Pork Chops'
+    ]
+  }, {
+    id: 9,
     title: 'Mega Bundle',
     price: '$119',
     featured: true,
@@ -106,32 +125,6 @@ export default [
       '3lb. Pork Sausage',
       '2 1/2 lb. Sliced Slab Bacon',
       '10lb. Bone-in Chicken Breast'
-    ]
-  },
-  {
-    id: 8,
-    title: 'Bundle Meat Pack #1',
-    price: '$69',
-    featured: false,
-    items: [
-      '4 (7oz) Beef Ribeye Steaks',
-      '2 lbs. Beef Cube Steaks',
-      '5 lbs. Beef Ground Chuck',
-      '2 ½ lbs. Boneless Pork Chops',
-      '3 lbs. Split Chicken Breasts'
-    ]
-  },
-  {
-    id: 9,
-    title: 'Bundle Meat Pack #2',
-    price: '$69',
-    featured: false,
-    items: [
-      '4 (7oz) Beef N.Y. Strip Steaks',
-      '2 lbs. Beef Stew',
-      '5 lbs. Beef Ground Chuck',
-      '2 ½ lbs. Boneless Chicken Breast',
-      '2 ½ lbs. Boneless Pork Chops'
     ]
   }
 ];
