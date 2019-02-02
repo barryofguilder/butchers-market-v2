@@ -112,6 +112,42 @@
         </ValidatedField>
       </div>
     </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">
+        Image
+      </label>
+      <div class="col-sm-9">
+        <FileUpload
+          @name="photos"
+          @accept="image/*"
+          @onfileadd={{action "uploadImage"}}
+        >
+          <a class="btn btn-secondary color-white" tabindex="0">
+            Select Image
+          </a>
+        </FileUpload>
+
+        {{#if changeset.imageUrl}}
+          <button type="button" class="btn btn-secondary" {{action (mut changeset.imageUrl) null}}>
+            Remove Image
+          </button>
+        {{/if}}
+
+        {{#if this.fileErrorMessage}}
+          <span class="text-danger">
+            {{this.fileErrorMessage}}
+          </span>
+        {{/if}}
+
+        <small class="form-text text-muted">
+          Only JPG, JPEG, PNG, and GIF files are allowed.
+        </small>
+
+        {{#if changeset.imageUrl}}
+          <img src={{changeset.imageUrl}} alt="Event image" class="w-100 d-block">
+        {{/if}}
+      </div>
+    </div>
   </Modal.body>
   <Modal.footer>
     <button type="button" class="btn btn-secondary" {{action cancelled}}>Cancel</button>

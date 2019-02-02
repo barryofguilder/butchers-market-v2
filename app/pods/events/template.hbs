@@ -6,18 +6,18 @@
         <p class="lead large">Finger Lickin'. Guitar Pickin'.</p>
       {{/if}}
       {{#if notDesktop}}
-        <CafeHours @hours={{model.hours}} />
-        <StoreHours @hours={{model.hours}} />
+        <CafeHours @hours={{this.model.hours}} />
+        <StoreHours @hours={{this.model.hours}} />
         <StoreLocation />
       {{/if}}
       <a href="https://www.facebook.com/thebutchersmarket" class="btn btn-secondary btn-lg">Like us on Facebook</a>
       {{#if isDesktop}}
-        <CafeHours @hours={{model.hours}} />
-        <StoreHours @hours={{model.hours}} />
+        <CafeHours @hours={{this.model.hours}} />
+        <StoreHours @hours={{this.model.hours}} />
         <StoreLocation />
       {{/if}}
     </div>
-    {{#if isDesktop}}
+    {{#if this.isDesktop}}
       <div class="col-md-12 col-lg-6">
         <IphoneCarousel as |Slide|>
           <Slide @src="images/iPhone-loyalty-club-3.jpg" @alt="Loyalty Club punch card" @active={{true}} />
@@ -26,7 +26,7 @@
         </IphoneCarousel>
       </div>
     {{/if}}
-    {{#if notDesktop}}
+    {{#if this.notDesktop}}
       <div class="col-md-12 col-lg-6">
         <MobileApp />
       </div>
@@ -34,12 +34,12 @@
   </div>
 </PromoSection>
 
-<ScrollToSection @shouldScroll={{events}} @selector="#events">
+<ScrollToSection @shouldScroll={{this.events}} @selector="#events">
   <div id="events" class="events">
     <div class="container">
       <HeaderTitle @title="Events" />
 
-      <EventList @events={{model.events}} />
+      <EventList @events={{this.sortedEvents}} />
     </div>
   </div>
 </ScrollToSection>
@@ -48,7 +48,7 @@
   <div class="container">
     <HeaderTitle @title="Past Performances" />
     <div class="row">
-      {{#each filteredPerformances as |performance|}}
+      {{#each this.filteredPerformances as |performance|}}
         <div class="col-sm-6 col-md-4">
           <ResponsiveVideo @url={{performance.embedLink}} />
         </div>
@@ -65,7 +65,7 @@
   </div>
 </section>
 
-<ReviewsList @title="Customer Reviews" @reviews={{model.reviews}} />
+<ReviewsList @title="Customer Reviews" @reviews={{this.model.reviews}} />
 
 <NewsletterForm @page="cafe" />
 

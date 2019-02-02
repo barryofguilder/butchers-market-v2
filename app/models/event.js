@@ -5,5 +5,6 @@ export default DS.Model.extend({
   leadIn: DS.attr('string'),
   startTime: DS.attr('date'),
   endTime: DS.attr('date'),
-  link: DS.attr('string')
+  link: DS.attr('string'),
+  imageUrl: DS.attr('string')
 });

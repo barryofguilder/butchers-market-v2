@@ -1,0 +1,40 @@
+
+& {
+  margin-bottom: 30px;
+
+  &:hover {
+    img {
+      box-shadow: 0 0.15rem 0.65rem rgba(0, 0, 0, 0.45);
+    }
+  }
+}
+
+.event-list-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.event-image {
+  width: 40%;
+
+  img {
+    transition: box-shadow .2s ease-in-out;
+  }
+}
+
+.event-details {
+  width: 60%;
+  padding-left: 10px;
+}
+
+.event-day {
+  display: block;
+  width: 100%;
+  text-transform: uppercase;
+}
+
+.event-date {
+  display: block;
+  width: 100%;
+}

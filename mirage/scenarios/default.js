@@ -26,7 +26,12 @@ function createEvents(server) {
   server.create('event', {
     title: 'Backwater Still',
     leadIn: ''
-  })
+  });
+
+  server.createList('event', 3, 'pastEvent', {
+    title: 'Across Five Aprils',
+    leadIn: 'A night of metal with'
+  });
 }
 
 function createPerformances(server) {
