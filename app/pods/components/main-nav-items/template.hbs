@@ -1,0 +1,74 @@
+<ul class="list-reset flex flex-col lg:flex-row">
+  <li>
+    {{#link-to
+      "meat"
+      class="block px-6 py-8 no-underline text-black hover:text-red text-center lg:text-left"
+      click=(action this.itemClicked)
+    }}
+      Meat
+    {{/link-to}}
+  </li>
+  <li>
+    {{#link-to
+      "deli"
+      class="block px-6 py-8 no-underline text-black hover:text-red text-center lg:text-left"
+      click=(action this.itemClicked)
+    }}
+      Deli
+    {{/link-to}}
+  </li>
+  <li>
+    <BasicDropdown @renderInPlace={{if this.notDesktop true false}} as |dd|>
+      <dd.trigger
+        class="block px-6 py-8 no-underline outline-none text-black hover:text-red focus:bg-grey-light text-center lg:text-left"
+      >
+        Dining {{fa-icon "caret-down"}}
+      </dd.trigger>
+
+      <dd.content @class={{if this.notDesktop "static"}}>
+        <div class="bg-grey-lighter text-center lg:text-left">
+          <ul class="list-reset">
+            <li>
+              <a
+                href="docs/bmmenu.pdf"
+                class="block px-6 py-4 no-underline text-black hover:text-red"
+              >
+                View Menu
+              </a>
+            </li>
+            <li>
+              {{#link-to
+                "events"
+                (query-params events=false)
+                class="block px-6 py-4 no-underline text-black hover:text-red"
+                click=(action this.itemClicked)
+              }}
+                Blues Street Cafe
+              {{/link-to}}
+            </li>
+          </ul>
+        </div>
+      </dd.content>
+    </BasicDropdown>
+  </li>
+  <li>
+    {{#link-to
+      "events"
+      (query-params events=true)
+      class="block px-6 py-8 no-underline text-black hover:text-red text-center lg:text-left"
+      click=(action this.itemClicked)
+    }}
+      Events
+    {{/link-to}}
+  </li>
+  <li>
+    {{#link-to
+      "contact"
+      (query-params events=isEventsPage)
+      class="block px-6 py-8 no-underline text-black hover:text-red text-center lg:text-left"
+      click=(action this.itemClicked)
+    }}
+      {{if this.isEventsPage "Contact, Booking, & Private Parties" "Contact"}}
+    {{/link-to}}
+  </li>
+</ul>

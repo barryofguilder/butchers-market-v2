@@ -26,15 +26,15 @@ module.exports = function(defaults) {
   // along with the exports of each module as its value.
 
   // Bootstrap dependency for dropdowns
-  app.import('node_modules/popper.js/dist/umd/popper.js');
+  //app.import('node_modules/popper.js/dist/umd/popper.js');
 
   // Bootstrap
-  app.import('node_modules/bootstrap/js/dist/util.js');
+  //app.import('node_modules/bootstrap/js/dist/util.js');
   //app.import('bower_components/bootstrap/js/dist/alert.js');
-  app.import('node_modules/bootstrap/js/dist/button.js');
-  app.import('node_modules/bootstrap/js/dist/carousel.js');
-  app.import('node_modules/bootstrap/js/dist/collapse.js');
-  app.import('node_modules/bootstrap/js/dist/dropdown.js');
+  //app.import('node_modules/bootstrap/js/dist/button.js');
+  //app.import('node_modules/bootstrap/js/dist/carousel.js');
+  //app.import('node_modules/bootstrap/js/dist/collapse.js');
+  //app.import('node_modules/bootstrap/js/dist/dropdown.js');
   //app.import('node_modules/bootstrap/js/dist/modal.js');
   //app.import('node_modules/bootstrap/js/dist/tooltip.js');
   //app.import('node_modules/bootstrap/js/dist/popover.js');
