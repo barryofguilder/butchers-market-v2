@@ -1,6 +1,14 @@
 <div class="event-list-item">
   <div class="event-image">
-    <img src={{@event.imageUrl}} alt={{concat "Image of " @event.title}} class="img-fluid rounded">
+    {{#if @event.imageUrl}}
+      <img src={{@event.imageUrl}} alt={{concat "Image of " @event.title}} class="img-fluid rounded">
+    {{else}}
+      <img
+        src="images/event-default.jpg"
+        alt="Generic image of Blues Street Cafe"
+        class="img-fluid rounded"
+      >
+    {{/if}}
   </div>
   <div class="event-details">
     <div class="mb-2">

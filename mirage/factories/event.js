@@ -29,9 +29,6 @@ export default Factory.extend({
   link() {
     return faker.internet.url();
   },
-  imageUrl() {
-    return 'http://thebutchersmarket.com/uploads/event-img.jpg';
-  },
 
   pastEvent: trait({
     startTime() {
