@@ -1,22 +1,14 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-6">
+<footer class="bg-grey-lighter mt-24 py-4">
+  <div class="container mx-auto">
+    <div class="flex justify-between items-center">
       <div class="copyright">
-        Copyright © 2018 The Butcher's Market
+        Copyright © 2019 The Butcher's Market
       </div>
-    </div>
-    <div class="col-md-6">
-      <div class="social-media-icons">
-        <a href="https://www.facebook.com/thebutchersmarket" class="social-media-icon">
-          <i class="fa fa-facebook"></i>
-        </a>
-        <a href="https://www.instagram.com/thebutchersmarket" class="social-media-icon">
-          <i class="fa fa-instagram"></i>
-        </a>
-        <a href="https://twitter.com/thebutchersmkt" class="social-media-icon">
-          <i class="fa fa-twitter"></i>
-        </a>
+      <div>
+        <SocialMediaButton @href="https://www.facebook.com/thebutchersmarket" @icon="facebook-f" />
+        <SocialMediaButton @href="https://www.instagram.com/thebutchersmarket" @icon="instagram" />
+        <SocialMediaButton @href="https://twitter.com/thebutchersmkt" @icon="twitter" />
       </div>
     </div>
   </div>
-</div>
+</footer>
