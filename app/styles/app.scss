@@ -5,4 +5,9 @@
   position: static;
 }
 
-@import "mixins/parallax";
+// Disable parallax for tablets and phones
+@media screen and (max-device-width: 1024px) {
+  .bg-fixed {
+    background-attachment: scroll !important;
+  }
+}

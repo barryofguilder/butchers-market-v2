@@ -3,32 +3,6 @@
 
 .butcher-promo-index {
   background-image: url("#{$images}/promo-index.jpg");
-
-  &.taco-season {
-    background-image: url("#{$images}/taco-season.jpg");
-
-    .taco-season-countdown {
-      margin-top: 1.5rem;
-      padding: 1rem;
-      background: rgba(0, 0, 0, .45);
-      border-radius: .4rem;
-      color: #fff;
-      text-align: center;
-
-      @include media-breakpoint-up(lg) {
-        margin-top: $height-md;
-      }
-    }
-
-    .taco-season-title {
-      margin-bottom: 1rem;
-    }
-
-    .countdown-text {
-      text-transform: uppercase;
-    }
-  }
-
   margin-bottom: 135px;
 
   @include media-breakpoint-down(md) {

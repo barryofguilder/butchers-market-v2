@@ -1,3 +1,40 @@
+<PromoSection @image="promo-index.jpg" @specialHours={{false}}>
+  <div class="row clearfix">
+    <div class="col-md-12 col-lg-6">
+      {{#if isDesktop}}
+        <h1 class="promo-title">Welcome to The Butcher's Market<br>Meat &amp; Deli</h1>
+        <p class="lead large">Small town service. Big city selection.</p>
+      {{/if}}
+      {{#if notDesktop}}
+        <StoreHours @hours={{model.hours}} />
+        <CafeHours @hours={{model.hours}} />
+        <StoreLocation />
+      {{/if}}
+      <a href="https://www.facebook.com/thebutchersmarket" class="btn btn-secondary btn-lg">Like us on Facebook</a>
+      {{#if isDesktop}}
+        <StoreHours @hours={{model.hours}} />
+        <CafeHours @hours={{model.hours}} />
+        <StoreLocation />
+      {{/if}}
+    </div>
+    {{!-- {{#if isDesktop}}
+      <div class="col-md-12 col-lg-6">
+        <IphoneCarousel as |Slide|>
+          <Slide @src="images/iPhone-loyalty-club-1.jpg" @alt="Loyalty Club punch card" @active={{true}} />
+          <Slide @src="images/iPhone-loyalty-club-2.jpg" @alt="Loyalty Club discount" />
+          <Slide @src="images/iPhone-mobile-app.jpg" @alt="Butchers Market mobile app" />
+        </IphoneCarousel>
+      </div>
+    {{/if}}
+    {{#if notDesktop}}
+      <div class="col-md-12 col-lg-6">
+        <MobileApp />
+      </div>
+    {{/if}} --}}
+  </div>
+</PromoSection>
+
+
 {{!-- <PromoSection class={{concat "butcher-promo-index " tacoSeasonClass}} @specialHours={{false}}>
   <div class="row clearfix">
     <div class="col-md-12 col-lg-6">

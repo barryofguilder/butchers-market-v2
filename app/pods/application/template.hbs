@@ -2,7 +2,10 @@
   <MainNav />
 {{/unless}}
 
-{{outlet}}
+{{! Make room for the fixed navigation }}
+<div class="mt-20">
+  {{outlet}}
+</div>
 
 {{#unless isMobileApp}}
   <MainFooter />

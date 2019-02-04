@@ -1,10 +1,10 @@
 import Component from '@ember/component';
 
 export default Component.extend({
-  tagName: 'section',
-  classNames: ['butcher-promo'],
-  classNameBindings: ['specialHours:special-hours', 'darken:darken'],
+  tagName: '',
 
+  image: null,
+  height: '750px',
   specialHours: false,
   darken: false
 });

@@ -16,6 +16,8 @@
 
 export default {
   'transparent': 'transparent',
+  'overlay': 'rgba(0, 0, 0, .3)',
+  'overlay-dark': 'rgba(0, 0, 0, .5)',
 
   'black': '#22292f',
   'grey-darkest': '#3d4852',
