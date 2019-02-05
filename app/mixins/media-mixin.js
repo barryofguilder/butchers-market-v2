@@ -1,9 +1,11 @@
-import { bool, not } from '@ember/object/computed';
 import Mixin from '@ember/object/mixin';
+import { computed } from '@ember/object';
 
 export default Mixin.create({
-  // TODO: Update to use new media breakpoint
-  isDesktop: bool('media.isDesktop'),
-  // TODO: Update to use new media breakpoint
-  notDesktop: not('media.isDesktop')
+  isDesktop: computed('media.{isLg,isXl}', function() {
+    return this.media.isLg || this.media.isXl;
+  }),
+  notDesktop: computed('media.{isSm,isMd}', function() {
+    return this.media.isSm || this.media.isMd;
+  }),
 });

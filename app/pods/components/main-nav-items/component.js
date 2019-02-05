@@ -1,5 +1,6 @@
 import Component from '@ember/component';
-import { equal, not } from '@ember/object/computed';
+import { computed } from '@ember/object';
+import { equal } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 
 export default Component.extend({
@@ -10,6 +11,8 @@ export default Component.extend({
   media: service(),
   router: service(),
 
-  notDesktop: not('media.isLg'),
+  notDesktop: computed('media.{isSm,isMd}', function() {
+    return this.media.isSm || this.media.isMd;
+  }),
   isEventsPage: equal('router.currentRouteName', 'events'),
 });

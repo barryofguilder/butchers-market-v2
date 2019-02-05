@@ -1,8 +1,10 @@
-<h3 class="store-hours-title">Store Hours</h3>
-<p class="store-hours-line">{{storeHours.line1}}</p>
+<p class="text-2xl uppercase font-black mb-2">
+  {{@hourType}} Hours
+</p>
+<p>{{storeHours.line1}}</p>
 {{#if storeHours.line2}}
-  <p class="store-hours-line">{{storeHours.line2}}</p>
+  <p class="mt-1">{{storeHours.line2}}</p>
 {{/if}}
 {{#if storeHours.line3}}
-  <p class="store-hours-line">{{storeHours.line3}}</p>
+  <p class="mt-1">{{storeHours.line3}}</p>
 {{/if}}

@@ -1,6 +1,9 @@
-<div class="location-item">
-  {{fa-icon "map-marker"}}
+<div>
+  <span class="inline-block w-6">
+    {{fa-icon "map-marker-alt" prefix="fas"}}
+  </span>
   <a
+    class="no-underline text-white hover:underline"
     href="http://maps.google.com/?q=3619 Cleveland Highway, Dalton, GA"
     target="_blank"
     rel="noopener"
@@ -8,7 +11,12 @@
     3619 Cleveland Highway, Dalton, GA
   </a>
 </div>
-<div class="location-item">
-  {{fa-icon "phone"}}
-  (706) 279-9277
+
+<div class="mt-2">
+  <span class="inline-block w-6">
+    {{fa-icon "phone" prefix="fas"}}
+  </span>
+  <a class="no-underline text-white hover:underline" href="tel:7062799277">
+    (706) 279-9277
+  </a>
 </div>

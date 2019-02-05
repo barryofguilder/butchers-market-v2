@@ -5,7 +5,13 @@
 >
   <div class="{{if this.darken "bg-overlay-dark" "bg-overlay"}} h-full text-white text-shadow">
     <div class="container mx-auto">
-      {{yield}}
+      {{yield
+        (
+          hash
+            title=(component "promo-section/title")
+            subtitle=(component "promo-section/subtitle")
+        )
+      }}
     </div>
   </div>
 </section>

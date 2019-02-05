@@ -1,23 +1,32 @@
-<PromoSection class="butcher-promo-cafe" @specialHours={{false}}>
-  <div class="row clearfix">
-    <div class="col-md-12 col-lg-6">
-      {{#if isDesktop}}
-        <h1 class="promo-title">Welcome to The Blues Street Cafe</h1>
-        <p class="lead large">Finger Lickin'. Guitar Pickin'.</p>
-      {{/if}}
-      {{#if notDesktop}}
-        <CafeHours @hours={{this.model.hours}} />
-        <StoreHours @hours={{this.model.hours}} />
-        <StoreLocation />
-      {{/if}}
-      <a href="https://www.facebook.com/thebutchersmarket" class="btn btn-secondary btn-lg">Like us on Facebook</a>
-      {{#if isDesktop}}
-        <CafeHours @hours={{this.model.hours}} />
-        <StoreHours @hours={{this.model.hours}} />
-        <StoreLocation />
-      {{/if}}
-    </div>
+<PromoSection @image="promo-cafe.jpg" as |Promo|>
+  <div class="w-full lg:w-1/2 text-center lg:text-left">
     {{#if this.isDesktop}}
+      <Promo.title>
+        Welcome to The Blues Street Cafe
+      </Promo.title>
+      <Promo.subtitle>
+        Finger Lickin'. Guitar Pickin'.
+      </Promo.subtitle>
+    {{else}}
+      <StoreHours class="pt-16" @hours={{this.model.hours}} @hourType="Cafe" />
+      <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Store" />
+      <StoreLocation class="mt-8" />
+    {{/if}}
+
+    <a
+      href="https://www.facebook.com/thebutchersmarket"
+      class="mt-8 inline-block no-underline bg-grey-darkest hover:bg-black text-white uppercase text-xl font-bold px-6 py-3"
+    >
+      Like us on Facebook
+    </a>
+
+    {{#if this.isDesktop}}
+      <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Cafe" />
+      <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Store" />
+      <StoreLocation class="mt-8" />
+    {{/if}}
+
+    {{!-- {{#if this.isDesktop}}
       <div class="col-md-12 col-lg-6">
         <IphoneCarousel as |Slide|>
           <Slide @src="images/iPhone-loyalty-club-3.jpg" @alt="Loyalty Club punch card" @active={{true}} />
@@ -30,11 +39,11 @@
       <div class="col-md-12 col-lg-6">
         <MobileApp />
       </div>
-    {{/if}}
+    {{/if}} --}}
   </div>
 </PromoSection>
 
-<ScrollToSection @shouldScroll={{this.events}} @selector="#events">
+{{!-- <ScrollToSection @shouldScroll={{this.events}} @selector="#events">
   <div id="events" class="events">
     <div class="container">
       <HeaderTitle @title="Events" />
@@ -69,4 +78,4 @@
 
 <NewsletterForm @page="cafe" />
 
-<BookingSection />
+<BookingSection /> --}}

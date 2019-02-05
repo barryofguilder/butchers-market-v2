@@ -1,6 +1,10 @@
-<PromoSection class="butcher-promo-deli" @darken={{true}}>
-  <h1 class="promo-title">Fresh Made Everything!</h1>
-  <p class="lead large">Everything in our deli is made in-house from scratch to achieve a quality and freshness like no other store can provide.</p>
+<PromoSection @image="promo-deli-2.jpg" @darken={{true}} as |Promo|>
+  <Promo.title>
+    Fresh Made Everything!
+  </Promo.title>
+  <Promo.subtitle>
+    Everything in our deli is made in-house from scratch to achieve a quality and freshness like no other store can provide.
+  </Promo.subtitle>
 
   <div class="boars-head">
     <div class="boars-head-logo"></div>

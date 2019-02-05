@@ -1,6 +1,10 @@
-<PromoSection class="butcher-promo-meat">
-  <h1 class="promo-title">Fresh Cut Everything!</h1>
-  <p class="lead large">We hand cut all of our meats in-house and stock only products that satisfy our strict quality standards.</p>
+<PromoSection @image="promo-meat.jpg" as |Promo|>
+  <Promo.title>
+    Fresh Cut Everything!
+  </Promo.title>
+  <Promo.subtitle>
+    We hand cut all of our meats in-house and stock only products that satisfy our strict quality standards.
+  </Promo.subtitle>
 
   <ProductsList @products={{model.products}} @tagName="div" />
 </PromoSection>
