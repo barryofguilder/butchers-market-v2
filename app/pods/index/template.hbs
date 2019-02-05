@@ -1,43 +1,45 @@
 <PromoSection @image="promo-index.jpg" as |Promo|>
-  <div class="w-full lg:w-1/2 text-center lg:text-left">
-    {{#if this.isDesktop}}
-      <Promo.title>
-        Welcome to The Butcher's Market<br>Meat &amp; Deli
-      </Promo.title>
-      <Promo.subtitle>
-        Small town service. Big city selection.
-      </Promo.subtitle>
+  <div class="flex flex-col lg:flex-row">
+    <div class="w-full lg:w-1/2 text-center lg:text-left">
+      {{#if this.isDesktop}}
+        <Promo.title>
+          Welcome to The Butcher's Market<br>Meat &amp; Deli
+        </Promo.title>
+        <Promo.subtitle>
+          Small town service. Big city selection.
+        </Promo.subtitle>
+      {{else}}
+        <StoreHours class="pt-16" @hours={{this.model.hours}} @hourType="Store" />
+        <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Cafe" />
+        <StoreLocation class="mt-8" />
+      {{/if}}
+
+      <a
+        href="https://www.facebook.com/thebutchersmarket"
+        class="mt-8 inline-block no-underline bg-grey-darkest hover:bg-black text-white uppercase text-xl font-bold px-6 py-3"
+      >
+        Like us on Facebook
+      </a>
+
+      {{#if this.isDesktop}}
+        <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Store" />
+        <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Cafe" />
+        <StoreLocation class="mt-8" />
+      {{/if}}
+    </div>
+
+    {{#if isDesktop}}
+      <div class="w-1/2 lg:relative">
+        <IphoneCarousel as |Slide|>
+          <Slide @src="images/iPhone-loyalty-club-1.jpg" @alt="Loyalty Club punch card" @active={{true}} />
+          <Slide @src="images/iPhone-loyalty-club-2.jpg" @alt="Loyalty Club discount" />
+          <Slide @src="images/iPhone-mobile-app.jpg" @alt="Butchers Market mobile app" />
+        </IphoneCarousel>
+      </div>
     {{else}}
-      <StoreHours class="pt-16" @hours={{this.model.hours}} @hourType="Store" />
-      <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Cafe" />
-      <StoreLocation class="mt-8" />
-    {{/if}}
-
-    <a
-      href="https://www.facebook.com/thebutchersmarket"
-      class="mt-8 inline-block no-underline bg-grey-darkest hover:bg-black text-white uppercase text-xl font-bold px-6 py-3"
-    >
-      Like us on Facebook
-    </a>
-
-    {{#if this.isDesktop}}
-      <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Store" />
-      <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Cafe" />
-      <StoreLocation class="mt-8" />
+      <MobileApp class="mt-8" />
     {{/if}}
   </div>
-
-  {{#if isDesktop}}
-    {{!-- <div class="col-md-12 col-lg-6">
-      <IphoneCarousel as |Slide|>
-        <Slide @src="images/iPhone-loyalty-club-1.jpg" @alt="Loyalty Club punch card" @active={{true}} />
-        <Slide @src="images/iPhone-loyalty-club-2.jpg" @alt="Loyalty Club discount" />
-        <Slide @src="images/iPhone-mobile-app.jpg" @alt="Butchers Market mobile app" />
-      </IphoneCarousel>
-    </div> --}}
-  {{else}}
-    <MobileApp class="mt-8" />
-  {{/if}}
 </PromoSection>
 
 

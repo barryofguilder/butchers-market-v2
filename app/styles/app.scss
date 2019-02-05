@@ -1,5 +1,13 @@
 @import "tailwind";
 @import "ember-basic-dropdown";
+@import "bootstrap-carousel";
+@import "pod-styles";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 .ember-basic-dropdown-content.static {
   position: static;
