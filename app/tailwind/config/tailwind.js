@@ -146,8 +146,8 @@ export default {
 
   plugins: [
     container({
-      // center: true,
-      // padding: '1rem',
+      center: true,
+      padding: '1rem',
     })
   ],
 

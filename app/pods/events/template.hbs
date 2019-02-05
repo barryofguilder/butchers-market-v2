@@ -34,12 +34,10 @@
           <Slide @src="images/iPhone-mobile-app.jpg" @alt="Butchers Market mobile app" />
         </IphoneCarousel>
       </div>
-    {{/if}}
-    {{#if this.notDesktop}}
-      <div class="col-md-12 col-lg-6">
-        <MobileApp />
-      </div>
     {{/if}} --}}
+    {{#if this.notDesktop}}
+      <MobileApp class="mt-8" />
+    {{/if}}
   </div>
 </PromoSection>
 

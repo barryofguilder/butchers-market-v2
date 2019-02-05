@@ -27,19 +27,17 @@
     {{/if}}
   </div>
 
-  {{!-- {{#if isDesktop}}
-    <div class="col-md-12 col-lg-6">
+  {{#if isDesktop}}
+    {{!-- <div class="col-md-12 col-lg-6">
       <IphoneCarousel as |Slide|>
         <Slide @src="images/iPhone-loyalty-club-1.jpg" @alt="Loyalty Club punch card" @active={{true}} />
         <Slide @src="images/iPhone-loyalty-club-2.jpg" @alt="Loyalty Club discount" />
         <Slide @src="images/iPhone-mobile-app.jpg" @alt="Butchers Market mobile app" />
       </IphoneCarousel>
-    </div>
+    </div> --}}
   {{else}}
-    <div class="col-md-12 col-lg-6">
-      <MobileApp />
-    </div>
-  {{/if}} --}}
+    <MobileApp class="mt-8" />
+  {{/if}}
 </PromoSection>
 
 
