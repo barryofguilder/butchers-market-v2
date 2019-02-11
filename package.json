@@ -18,6 +18,10 @@
     "test": "ember test"
   },
   "devDependencies": {
+    "@fortawesome/ember-fontawesome": "^0.1.9",
+    "@fortawesome/free-brands-svg-icons": "^5.7.1",
+    "@fortawesome/free-regular-svg-icons": "^5.7.1",
+    "@fortawesome/free-solid-svg-icons": "^5.7.1",
     "@ember/jquery": "^0.5.2",
     "@ember/optional-features": "^0.6.3",
     "babel-eslint": "^8.2.6",
@@ -48,7 +52,6 @@
     "ember-export-application-global": "^2.0.0",
     "ember-file-upload": "^2.5.3",
     "ember-flatpickr": "~2.12.0",
-    "ember-font-awesome": "4.0.0-rc.3",
     "ember-g-recaptcha": "~1.0.0",
     "ember-lifeline": "~3.0.8",
     "ember-load-initializers": "^1.1.0",
