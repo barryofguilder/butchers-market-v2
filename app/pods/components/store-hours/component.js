@@ -1,27 +1,32 @@
 import Component from '@ember/component';
-import { computed } from '@ember/object';
+import { computed, get } from '@ember/object';
 import { isAfter, isBefore } from 'date-fns';
 
 export default Component.extend({
   classNames: ['store-hours'],
 
   hours: null,
-  storeHours: computed('hours.@each.{type,activeStartDate,activeEndDate}', function() {
+  type: 'Store',
+
+  hoursForType: computed('hours.@each.{type,activeStartDate,activeEndDate}', 'type', function() {
     let now = new Date();
-    let storeHours = this.get('hours').filter((hour) => {
-      if (hour.get('type') === 'Store' && (isAfter(now, hour.activeStartDate) && isBefore(now, hour.activeEndDate))) {
+
+    // Get the hours set to be used during the time frame.
+    let storeHours = this.hours.filter((hour) => {
+      if (get(hour, 'type') === this.type && (isAfter(now, hour.activeStartDate) && isBefore(now, hour.activeEndDate))) {
         return hour;
       }
     });
 
-    if (storeHours.get('length') === 0) {
-      storeHours = this.get('hours').filter((hour) => {
-        if (hour.get('type') === 'Store' && hour.get('default')) {
+    // Get the hours marked as `default`
+    if (get(storeHours, 'length') === 0) {
+      storeHours = this.hours.filter((hour) => {
+        if (get(hour, 'type') === this.type && get(hour, 'default')) {
           return hour;
         }
       });
     }
 
-    return storeHours.get('firstObject');
+    return get(storeHours, 'firstObject');
   })
 });

@@ -1,8 +1,8 @@
-<h3 class="store-hours-title">Store Hours</h3>
-<p class="store-hours-line">{{storeHours.line1}}</p>
-{{#if storeHours.line2}}
-  <p class="store-hours-line">{{storeHours.line2}}</p>
+<h3 data-test-id="store-hours-title" class="store-hours-title">{{this.type}} Hours</h3>
+<p data-test-id="store-hours-line" class="store-hours-line">{{hoursForType.line1}}</p>
+{{#if hoursForType.line2}}
+  <p data-test-id="store-hours-line" class="store-hours-line">{{hoursForType.line2}}</p>
 {{/if}}
-{{#if storeHours.line3}}
-  <p class="store-hours-line">{{storeHours.line3}}</p>
+{{#if hoursForType.line3}}
+  <p data-test-id="store-hours-line" class="store-hours-line">{{hoursForType.line3}}</p>
 {{/if}}
