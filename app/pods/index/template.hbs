@@ -7,13 +7,13 @@
       {{/if}}
       {{#if notDesktop}}
         <StoreHours @hours={{model.hours}} />
-        <CafeHours @hours={{model.hours}} />
+        <StoreHours @hours={{model.hours}} @type="Cafe" />
         <StoreLocation />
       {{/if}}
       <a href="https://www.facebook.com/thebutchersmarket" class="btn btn-secondary btn-lg">Like us on Facebook</a>
       {{#if isDesktop}}
         <StoreHours @hours={{model.hours}} />
-        <CafeHours @hours={{model.hours}} />
+        <StoreHours @hours={{model.hours}} @type="Cafe" />
         <StoreLocation />
       {{/if}}
     </div>

@@ -64,7 +64,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="hoursMenu{{index}}">
               {{#link-to "admin.hours.edit" hours.id class="dropdown-item"}}
-                {{fa-icon "pencil"}}
+                {{fa-icon "pencil-alt"}}
                 Edit
               {{/link-to}}
               <a class="dropdown-item {{if hours.default "disabled"}}" href="#" {{action "delete" hours}}>
