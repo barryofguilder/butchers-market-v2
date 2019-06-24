@@ -17,20 +17,6 @@
         <StoreLocation />
       {{/if}}
     </div>
-    {{#if this.isDesktop}}
-      <div class="col-md-12 col-lg-6">
-        <IphoneCarousel as |Slide|>
-          <Slide @src="images/iPhone-loyalty-club-3.jpg" @alt="Loyalty Club punch card" @active={{true}} />
-          <Slide @src="images/iPhone-loyalty-club-2.jpg" @alt="Loyalty Club discount" />
-          <Slide @src="images/iPhone-mobile-app.jpg" @alt="Butchers Market mobile app" />
-        </IphoneCarousel>
-      </div>
-    {{/if}}
-    {{#if this.notDesktop}}
-      <div class="col-md-12 col-lg-6">
-        <MobileApp />
-      </div>
-    {{/if}}
   </div>
 </PromoSection>
 
