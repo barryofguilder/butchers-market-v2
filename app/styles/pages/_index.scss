@@ -3,6 +3,7 @@
 
 .butcher-promo-index {
   background-image: url("#{$images}/promo-index.jpg");
+  height: 675px;
 
   &.taco-season {
     background-image: url("#{$images}/taco-season.jpg");
@@ -33,6 +34,11 @@
 
   @include media-breakpoint-down(md) {
     margin-bottom: 100px;
+    height: inherit;
+
+    .container {
+      padding-bottom: 30px;
+    }
   }
 
   @include media-breakpoint-down(xs) {
