@@ -3,8 +3,11 @@ import Controller from '@ember/controller';
 import MediaMixin from 'butchers-market/mixins/media-mixin';
 import { computed } from '@ember/object';
 import { isAfter, isBefore, addDays } from 'date-fns';
+import { inject as service } from '@ember/service';
 
 export default Controller.extend(MediaMixin, {
+  media: service(),
+
   featuredBundles: filterBy('model.bundles', 'featured', true),
 
   tacoSeasonDate: null,
