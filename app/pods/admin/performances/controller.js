@@ -30,7 +30,7 @@ export default Controller.extend({
     return this.get('deletePerformance.isRunning');
   }),
 
-  deletePerformance: task(function * () {
+  deletePerformance: task(function*() {
     let performance = this.get('performanceToDelete');
 
     try {
@@ -50,12 +50,12 @@ export default Controller.extend({
     delete(performance) {
       this.setProperties({
         performanceToDelete: performance,
-        errorMessage: null
+        errorMessage: null,
       });
     },
 
     cancelDelete() {
       this.set('performanceToDelete', null);
-    }
-  }
+    },
+  },
 });

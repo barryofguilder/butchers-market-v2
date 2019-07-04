@@ -6,7 +6,7 @@ import MobileAppMixin from 'butchers-market/mixins/mobile-app-mixin';
 export default Route.extend(ResetScrollMixin, MobileAppMixin, {
   model() {
     return RSVP.hash({
-      items: this.store.findAll('deli-item')
+      items: this.store.findAll('deli-item'),
     });
-  }
+  },
 });

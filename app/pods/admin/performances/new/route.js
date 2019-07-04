@@ -12,6 +12,6 @@ export default Route.extend({
       if (performance.get('hasDirtyAttributes')) {
         performance.rollbackAttributes();
       }
-    }
-  }
+    },
+  },
 });

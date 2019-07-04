@@ -28,5 +28,5 @@ export default Controller.extend(MediaMixin, {
 
     // March 20, 2018 9:00am
     this.set('tacoSeasonDate', new Date(2018, 2, 20, 10, 0));
-  }
+  },
 });

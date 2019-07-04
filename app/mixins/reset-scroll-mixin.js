@@ -6,6 +6,6 @@ export default Mixin.create({
       this._super(...arguments);
 
       window.scrollTo(0, 0);
-    }
-  }
+    },
+  },
 });

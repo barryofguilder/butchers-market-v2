@@ -12,15 +12,18 @@ export default Component.extend({
     let now = new Date();
 
     // Get the hours set to be used during the time frame.
-    let storeHours = this.hours.filter((hour) => {
-      if (get(hour, 'type') === this.type && (isAfter(now, hour.activeStartDate) && isBefore(now, hour.activeEndDate))) {
+    let storeHours = this.hours.filter(hour => {
+      if (
+        get(hour, 'type') === this.type &&
+        (isAfter(now, hour.activeStartDate) && isBefore(now, hour.activeEndDate))
+      ) {
         return hour;
       }
     });
 
     // Get the hours marked as `default`
     if (get(storeHours, 'length') === 0) {
-      storeHours = this.hours.filter((hour) => {
+      storeHours = this.hours.filter(hour => {
         if (get(hour, 'type') === this.type && get(hour, 'default')) {
           return hour;
         }
@@ -28,5 +31,5 @@ export default Component.extend({
     }
 
     return get(storeHours, 'firstObject');
-  })
+  }),
 });

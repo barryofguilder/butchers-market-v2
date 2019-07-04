@@ -8,7 +8,7 @@ export default Route.extend(ResetScrollMixin, {
       hours: this.store.findAll('hour'),
       bundles: this.store.findAll('meat-bundle'),
       products: this.store.findAll('meat-product'),
-      reviews: this.store.findAll('review')
+      reviews: this.store.findAll('review'),
     });
-  }
+  },
 });

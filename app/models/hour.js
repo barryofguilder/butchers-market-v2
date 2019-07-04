@@ -8,5 +8,5 @@ export default DS.Model.extend({
   label: DS.attr('string'),
   line1: DS.attr('string'),
   line2: DS.attr('string'),
-  line3: DS.attr('string')
+  line3: DS.attr('string'),
 });

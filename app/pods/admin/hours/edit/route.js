@@ -12,6 +12,6 @@ export default Route.extend({
       if (hour.get('hasDirtyAttributes')) {
         hour.rollbackAttributes();
       }
-    }
-  }
+    },
+  },
 });

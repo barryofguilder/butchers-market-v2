@@ -6,8 +6,8 @@ import MobileAppMixin from 'butchers-market/mixins/mobile-app-mixin';
 export default Route.extend(ResetScrollMixin, MobileAppMixin, {
   queryParams: {
     events: {
-      refreshModel: true
-    }
+      refreshModel: true,
+    },
   },
 
   model() {
@@ -15,13 +15,13 @@ export default Route.extend(ResetScrollMixin, MobileAppMixin, {
       hours: this.store.findAll('hour'),
       events: this.store.findAll('event'),
       performances: this.store.findAll('performance'),
-      reviews: this.store.findAll('review')
+      reviews: this.store.findAll('review'),
     });
   },
 
-  resetController: function(controller, isExiting/*, transition*/) {
+  resetController: function(controller, isExiting /*, transition*/) {
     if (isExiting) {
       controller.set('events', false);
     }
-  }
+  },
 });

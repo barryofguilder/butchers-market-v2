@@ -4,5 +4,5 @@ export default Component.extend({
   tagName: 'h1',
   classNames: ['admin-page-title'],
 
-  title: null
+  title: null,
 });

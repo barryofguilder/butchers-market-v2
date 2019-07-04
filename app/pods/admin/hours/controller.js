@@ -16,11 +16,14 @@ export default Controller.extend({
     },
 
     deleteHours() {
-      this.hoursToDelete.destroyRecord().then(() => {
-        this.set('hoursToDelete', null);
-      }).catch((reason) => {
-        this.set('errorMessage', reason);
-      });
+      this.hoursToDelete
+        .destroyRecord()
+        .then(() => {
+          this.set('hoursToDelete', null);
+        })
+        .catch(reason => {
+          this.set('errorMessage', reason);
+        });
     },
-  }
+  },
 });

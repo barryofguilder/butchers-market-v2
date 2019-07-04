@@ -7,5 +7,5 @@ export default Component.extend({
   product: null,
   topPrice: computed('product.featured', function() {
     return this.get('product.featured') ? 'natural-products-top' : null;
-  })
+  }),
 });

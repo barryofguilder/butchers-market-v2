@@ -6,5 +6,5 @@ export default Component.extend({
   classNameBindings: ['specialHours:special-hours', 'darken:darken'],
 
   specialHours: false,
-  darken: false
+  darken: false,
 });

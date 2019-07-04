@@ -6,7 +6,7 @@ export default Mixin.create({
   mobileApp: service('mobile-app'),
   isMobileApp: bool('mobileApp.isMobileApp'),
 
-  beforeModel(params){
+  beforeModel(params) {
     let isMobileApp = params.to.queryParams.mobile ? true : false;
 
     this.set('mobileApp.isMobileApp', isMobileApp);
@@ -15,5 +15,5 @@ export default Mixin.create({
       let classNames = this.get('classNames');
       classNames.push('mobile-app');
     }
-  }
+  },
 });

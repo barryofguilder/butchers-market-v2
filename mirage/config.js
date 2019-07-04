@@ -2,7 +2,6 @@ import Response from 'ember-cli-mirage/response';
 import { upload } from 'ember-file-upload/mirage';
 
 export default function() {
-
   //this.timing = 400;
   this.namespace = '/data';
 
@@ -21,7 +20,7 @@ export default function() {
 
   this.get('/events.php', 'event', { coalesce: true });
   this.post('/events.php', 'event');
-  this.put('/events.php', function ({ events }, request) {
+  this.put('/events.php', function({ events }, request) {
     // This is a temporary workaround, see this GitHub issue:
     // https://github.com/samselikoff/ember-cli-mirage/issues/1384
     this.path = '/events';
@@ -31,15 +30,18 @@ export default function() {
 
     return events.find(id).update(attrs);
   });
-  this.del('/events.php', function ({ events }, request) {
+  this.del('/events.php', function({ events }, request) {
     let id = request.queryParams.id;
 
     events.find(id).destroy();
   });
 
-  this.post('/imageUpload.php', upload(function (db, request) {
-    return new Response(201, { Location: request.requestBody.file.url }, { });
-  }));
+  this.post(
+    '/imageUpload.php',
+    upload(function(db, request) {
+      return new Response(201, { Location: request.requestBody.file.url }, {});
+    })
+  );
 
   this.post('/feedback.php', (server, request) => {
     let attrs = JSON.parse(request.requestBody);
@@ -66,7 +68,7 @@ export default function() {
 
   this.get('/hours.php', 'hour', { coalesce: true });
   this.post('/hours.php', 'hour');
-  this.put('/hours.php', function ({ hours }, request) {
+  this.put('/hours.php', function({ hours }, request) {
     // This is a temporary workaround, see this GitHub issue:
     // https://github.com/samselikoff/ember-cli-mirage/issues/1384
     this.path = '/hours';
@@ -76,7 +78,7 @@ export default function() {
 
     return hours.find(id).update(attrs);
   });
-  this.del('/hours.php', function ({ hours }, request) {
+  this.del('/hours.php', function({ hours }, request) {
     let id = request.queryParams.id;
 
     hours.find(id).destroy();
@@ -84,7 +86,7 @@ export default function() {
 
   this.get('/performances.php', 'performance', { coalesce: true });
   this.post('/performances.php', 'performance');
-  this.put('/performances.php', function ({ performances }, request) {
+  this.put('/performances.php', function({ performances }, request) {
     // This is a temporary workaround, see this GitHub issue:
     // https://github.com/samselikoff/ember-cli-mirage/issues/1384
     this.path = '/performances';
@@ -94,7 +96,7 @@ export default function() {
 
     return performances.find(id).update(attrs);
   });
-  this.del('/performances.php', function ({ performances }, request) {
+  this.del('/performances.php', function({ performances }, request) {
     let id = request.queryParams.id;
 
     performances.find(id).destroy();

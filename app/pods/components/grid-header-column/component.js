@@ -10,7 +10,7 @@ export default Component.extend({
   currentSort: null,
   onColumnClicked: null,
 
-  sortColumn: computed('sortDirection', function () {
+  sortColumn: computed('sortDirection', function() {
     if (isEmpty(this.get('sortDirection'))) {
       return null;
     }
@@ -52,6 +52,6 @@ export default Component.extend({
 
       let onColumnClicked = this.get('onColumnClicked');
       onColumnClicked(data);
-    }
-  }
+    },
+  },
 });

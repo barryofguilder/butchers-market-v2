@@ -4,5 +4,5 @@ export default Component.extend({
   tagName: 'section',
 
   title: null,
-  products: null
+  products: null,
 });

@@ -9,19 +9,22 @@ module('Integration | Component | store-hours', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders the default hours for `Store`', async function(assert) {
-    this.set('myHours', [{
-      type: 'Store',
-      default: true,
-      line1: 'Sunday: Closed',
-      line2: 'Mon - Fri: 8am - 5pm',
-      line3: 'Saturday: 8am - 10pm'
-    }, {
-      type: 'Cafe',
-      default: true,
-      line1: 'Sunday: 1pm - 5pm',
-      line2: 'Mon - Fri: 5pm - 10pm',
-      line3: 'Saturday: 6pm - 11pm'
-    }]);
+    this.set('myHours', [
+      {
+        type: 'Store',
+        default: true,
+        line1: 'Sunday: Closed',
+        line2: 'Mon - Fri: 8am - 5pm',
+        line3: 'Saturday: 8am - 10pm',
+      },
+      {
+        type: 'Cafe',
+        default: true,
+        line1: 'Sunday: 1pm - 5pm',
+        line2: 'Mon - Fri: 5pm - 10pm',
+        line3: 'Saturday: 6pm - 11pm',
+      },
+    ]);
     await render(hbs`<StoreHours @hours={{myHours}} />`);
 
     assert.dom(testId('store-hours-title')).hasText('Store Hours');
@@ -33,19 +36,22 @@ module('Integration | Component | store-hours', function(hooks) {
   });
 
   test('it renders the hours for `Cafe`', async function(assert) {
-    this.set('myHours', [{
-      type: 'Store',
-      default: true,
-      line1: 'Sunday: Closed',
-      line2: 'Mon - Fri: 8am - 5pm',
-      line3: 'Saturday: 8am - 10pm'
-    }, {
-      type: 'Cafe',
-      default: true,
-      line1: 'Sunday: 1pm - 5pm',
-      line2: 'Mon - Fri: 5pm - 10pm',
-      line3: 'Saturday: 6pm - 11pm'
-    }]);
+    this.set('myHours', [
+      {
+        type: 'Store',
+        default: true,
+        line1: 'Sunday: Closed',
+        line2: 'Mon - Fri: 8am - 5pm',
+        line3: 'Saturday: 8am - 10pm',
+      },
+      {
+        type: 'Cafe',
+        default: true,
+        line1: 'Sunday: 1pm - 5pm',
+        line2: 'Mon - Fri: 5pm - 10pm',
+        line3: 'Saturday: 6pm - 11pm',
+      },
+    ]);
     await render(hbs`<StoreHours @hours={{myHours}} @type="Cafe" />`);
 
     assert.dom(testId('store-hours-title')).hasText('Cafe Hours');
@@ -57,12 +63,14 @@ module('Integration | Component | store-hours', function(hooks) {
   });
 
   test('it renders only two lines', async function(assert) {
-    this.set('myHours', [{
-      type: 'Store',
-      default: true,
-      line1: 'Sunday: Closed',
-      line2: 'Mon - Sat: 8am - 5pm',
-    }]);
+    this.set('myHours', [
+      {
+        type: 'Store',
+        default: true,
+        line1: 'Sunday: Closed',
+        line2: 'Mon - Sat: 8am - 5pm',
+      },
+    ]);
     await render(hbs`<StoreHours @hours={{myHours}} />`);
 
     assert.dom(testId('store-hours-title')).hasText('Store Hours');
@@ -74,11 +82,13 @@ module('Integration | Component | store-hours', function(hooks) {
   });
 
   test('it renders only one line', async function(assert) {
-    this.set('myHours', [{
-      type: 'Store',
-      default: true,
-      line1: 'Always open',
-    }]);
+    this.set('myHours', [
+      {
+        type: 'Store',
+        default: true,
+        line1: 'Always open',
+      },
+    ]);
     await render(hbs`<StoreHours @hours={{myHours}} />`);
 
     assert.dom(testId('store-hours-title')).hasText('Store Hours');
@@ -89,18 +99,21 @@ module('Integration | Component | store-hours', function(hooks) {
   test('it renders the `Store` hours for the given time frame instead of the default', async function(assert) {
     freezeDateAt(new Date(2019, 2, 18, 6, 0, 0));
 
-    this.set('myHours', [{
-      type: 'Store',
-      activeStartDate: new Date(2019, 2, 1),
-      activeEndDate: new Date(2019, 2, 30),
-      line1: 'Always open',
-    }, {
-      type: 'Store',
-      default: true,
-      line1: 'Sunday: Closed',
-      line2: 'Mon - Fri: 8am - 5pm',
-      line3: 'Saturday: 8am - 10pm'
-    }]);
+    this.set('myHours', [
+      {
+        type: 'Store',
+        activeStartDate: new Date(2019, 2, 1),
+        activeEndDate: new Date(2019, 2, 30),
+        line1: 'Always open',
+      },
+      {
+        type: 'Store',
+        default: true,
+        line1: 'Sunday: Closed',
+        line2: 'Mon - Fri: 8am - 5pm',
+        line3: 'Saturday: 8am - 10pm',
+      },
+    ]);
     await render(hbs`<StoreHours @hours={{myHours}} />`);
 
     assert.dom(testId('store-hours-title')).hasText('Store Hours');
@@ -113,18 +126,21 @@ module('Integration | Component | store-hours', function(hooks) {
   test('it renders the default `Store` hours when out of the custom time frame', async function(assert) {
     freezeDateAt(new Date(2019, 3, 1, 6, 0, 0));
 
-    this.set('myHours', [{
-      type: 'Store',
-      activeStartDate: new Date(2019, 2, 1),
-      activeEndDate: new Date(2019, 2, 30),
-      line1: 'Always open',
-    }, {
-      type: 'Store',
-      default: true,
-      line1: 'Sunday: Closed',
-      line2: 'Mon - Fri: 8am - 5pm',
-      line3: 'Saturday: 8am - 10pm'
-    }]);
+    this.set('myHours', [
+      {
+        type: 'Store',
+        activeStartDate: new Date(2019, 2, 1),
+        activeEndDate: new Date(2019, 2, 30),
+        line1: 'Always open',
+      },
+      {
+        type: 'Store',
+        default: true,
+        line1: 'Sunday: Closed',
+        line2: 'Mon - Fri: 8am - 5pm',
+        line3: 'Saturday: 8am - 10pm',
+      },
+    ]);
     await render(hbs`<StoreHours @hours={{myHours}} />`);
 
     assert.dom(testId('store-hours-title')).hasText('Store Hours');

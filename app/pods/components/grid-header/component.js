@@ -4,5 +4,5 @@ export default Component.extend({
   tagName: 'tr',
 
   currentSort: null,
-  onColumnClicked: null
+  onColumnClicked: null,
 });

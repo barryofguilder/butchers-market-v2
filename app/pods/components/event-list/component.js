@@ -10,5 +10,5 @@ export default Component.extend({
 
   eventColumns: computed('media.isMobile', function() {
     return this.get('media.isMobile') ? 1 : 2;
-  })
+  }),
 });

@@ -30,14 +30,14 @@ export default Component.extend({
 
       changeset.setProperties({
         startTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 19),
-        endTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 22)
+        endTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 22),
       });
     }
 
     this.set('changeset', changeset);
   },
 
-  saveEvent: task(function * () {
+  saveEvent: task(function*() {
     yield this.changeset.validate();
 
     if (!this.changeset.get('isValid')) {
@@ -65,36 +65,65 @@ export default Component.extend({
     }
   }).drop(),
 
-  uploadPhoto: task(function * (file) {
+  uploadPhoto: task(function*(file) {
     try {
       let url = yield file.readAsDataURL();
       this.changeset.setProperties({
         imageUrl: url,
-        image: file
+        image: file,
       });
     } catch (e) {
       this.set('fileErrorMessage', 'Could not read the file contents');
     }
-  }).maxConcurrency(3).enqueue(),
+  })
+    .maxConcurrency(3)
+    .enqueue(),
 
   actions: {
     dateSelected(date) {
       const startTime = this.changeset.get('startTime');
-      this.changeset.set('startTime', new Date(date[0].getFullYear(), date[0].getMonth(), date[0].getDate(), startTime.getHours(), startTime.getMinutes()));
+      this.changeset.set(
+        'startTime',
+        new Date(
+          date[0].getFullYear(),
+          date[0].getMonth(),
+          date[0].getDate(),
+          startTime.getHours(),
+          startTime.getMinutes()
+        )
+      );
     },
 
     startTimeSelected(time) {
       const startTime = this.changeset.get('startTime');
-      this.changeset.set('startTime', new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate(), time[0].getHours(), time[0].getMinutes()));
+      this.changeset.set(
+        'startTime',
+        new Date(
+          startTime.getFullYear(),
+          startTime.getMonth(),
+          startTime.getDate(),
+          time[0].getHours(),
+          time[0].getMinutes()
+        )
+      );
     },
 
     endTimeSelected(time) {
       const startTime = this.changeset.get('startTime');
-      this.changeset.set('endTime', new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate(), time[0].getHours(), time[0].getMinutes()));
+      this.changeset.set(
+        'endTime',
+        new Date(
+          startTime.getFullYear(),
+          startTime.getMonth(),
+          startTime.getDate(),
+          time[0].getHours(),
+          time[0].getMinutes()
+        )
+      );
     },
 
     uploadImage(file) {
       this.uploadPhoto.perform(file);
-    }
-  }
+    },
+  },
 });
