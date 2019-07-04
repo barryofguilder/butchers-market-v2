@@ -20,5 +20,5 @@ export default ModalDialog.extend({
     }
 
     return '';
-  })
+  }),
 });

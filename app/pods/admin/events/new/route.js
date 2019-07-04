@@ -12,6 +12,6 @@ export default Route.extend({
       if (event.get('hasDirtyAttributes')) {
         event.rollbackAttributes();
       }
-    }
-  }
+    },
+  },
 });

@@ -6,9 +6,7 @@ import { getOwner } from '@ember/application';
 import Ember from 'ember';
 import MediaService from 'ember-responsive/media';
 
-const {
-  K
-} = Ember;
+const { K } = Ember;
 
 MediaService.reopen({
   // Change this if you want a different default breakpoint in tests.
@@ -46,7 +44,7 @@ MediaService.reopen({
     this._super(...arguments);
 
     this._forceSetBreakpoint(this.get('_defaultBreakpoint'));
-  }
+  },
 });
 
 export default registerAsyncHelper('setBreakpoint', function(app, breakpoint) {

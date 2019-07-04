@@ -8,9 +8,10 @@ export default [
       '5lb. Ground Chuck',
       '5lb. Bonesless Chicken Breasts',
       '5lb. Boston Butt Pork Roast',
-      '5lb. Bonelesss Pork Chops'
-    ]
-  }, {
+      '5lb. Bonelesss Pork Chops',
+    ],
+  },
+  {
     id: 2,
     title: '30lb Meat Pack',
     price: '$77',
@@ -21,9 +22,10 @@ export default [
       '4 lbs. Country Style Pork Ribs',
       '2 1/2 lbs. Market Style Bacon',
       '5 lbs. Boneless Chicken Breasts',
-      '10 lbs. Chicken Leg Quarters'
-    ]
-  }, {
+      '10 lbs. Chicken Leg Quarters',
+    ],
+  },
+  {
     id: 3,
     title: '40lb Meat Pack',
     price: '$114',
@@ -34,9 +36,10 @@ export default [
       '5 lbs. Boneless Pork Chops',
       '5 lbs. Boston Butt Pork Roast',
       '6 lbs. Bone-In Chicken Breasts',
-      '10 lbs. Chicken Leg Quarters'
-    ]
-  }, {
+      '10 lbs. Chicken Leg Quarters',
+    ],
+  },
+  {
     id: 4,
     title: '50lb Meat Pack',
     price: '$129',
@@ -46,9 +49,10 @@ export default [
       '10lb. Boneless Pork Chops',
       '10lb. Country Style Pork Ribs',
       '10lb. Boneless Chicken Breasts',
-      '10lb. Chicken Leg Quarters'
-    ]
-  }, {
+      '10lb. Chicken Leg Quarters',
+    ],
+  },
+  {
     id: 5,
     title: '75lb Meat Pack',
     price: '$235',
@@ -68,9 +72,10 @@ export default [
       '10 lbs. Boneless Chicken Breasts',
       '6 lbs. Bone-In Chicken Breasts',
       '10 lbs. Chicken Leg Quarters',
-      '5 lbs. Chicken Wings'
-    ]
-  }, {
+      '5 lbs. Chicken Wings',
+    ],
+  },
+  {
     id: 6,
     title: '100lb Meat Pack',
     price: '$325',
@@ -84,9 +89,10 @@ export default [
       '10 lbs. Pork Sausage',
       '10 lbs. Sliced Smoked Bacon',
       '10 lbs. Boneless Chicken Breasts',
-      '10 lbs. Chicken Leg Quarters'
-    ]
-  }, {
+      '10 lbs. Chicken Leg Quarters',
+    ],
+  },
+  {
     id: 7,
     title: 'Bundle Meat Pack #1',
     price: '$69',
@@ -96,9 +102,10 @@ export default [
       '2 lbs. Beef Cube Steaks',
       '5 lbs. Beef Ground Chuck',
       '2 ½ lbs. Boneless Pork Chops',
-      '3 lbs. Split Chicken Breasts'
-    ]
-  }, {
+      '3 lbs. Split Chicken Breasts',
+    ],
+  },
+  {
     id: 8,
     title: 'Bundle Meat Pack #2',
     price: '$69',
@@ -108,9 +115,10 @@ export default [
       '2 lbs. Beef Stew',
       '5 lbs. Beef Ground Chuck',
       '2 ½ lbs. Boneless Chicken Breast',
-      '2 ½ lbs. Boneless Pork Chops'
-    ]
-  }, {
+      '2 ½ lbs. Boneless Pork Chops',
+    ],
+  },
+  {
     id: 9,
     title: 'Mega Bundle',
     price: '$119',
@@ -124,7 +132,7 @@ export default [
       '5lb. Boneless Pork Chops',
       '3lb. Pork Sausage',
       '2 1/2 lb. Sliced Slab Bacon',
-      '10lb. Bone-in Chicken Breast'
-    ]
-  }
+      '10lb. Bone-in Chicken Breast',
+    ],
+  },
 ];

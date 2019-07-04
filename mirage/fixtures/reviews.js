@@ -5,7 +5,7 @@ export default [
     reviewer: 'Sandi O',
     source: 'Trip Advisor Contributor',
     url: 'http://tripadvisor.com',
-    image: 'review-person1.jpg'
+    image: 'review-person1.jpg',
   },
   {
     id: 2,
@@ -13,7 +13,7 @@ export default [
     reviewer: 'Dan Peeples',
     source: 'Trip Advisor Contributor',
     url: 'http://tripadvisor.com',
-    image: 'review-person2.png'
+    image: 'review-person2.png',
   },
   {
     id: 3,
@@ -21,6 +21,6 @@ export default [
     reviewer: 'Nathan Puckett',
     source: 'Trip Advisor Contributor',
     url: 'http://tripadvisor.com',
-    image: 'review-person3.png'
-  }
+    image: 'review-person3.png',
+  },
 ];

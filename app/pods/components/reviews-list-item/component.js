@@ -7,5 +7,5 @@ export default Component.extend({
   active: equal('index', 0),
 
   review: null,
-  index: 0
+  index: 0,
 });

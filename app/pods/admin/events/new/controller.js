@@ -8,6 +8,6 @@ export default Controller.extend({
 
     eventCancelled() {
       this.transitionToRoute('admin.events');
-    }
-  }
+    },
+  },
 });

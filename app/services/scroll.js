@@ -6,25 +6,22 @@ import { warn } from '@ember/debug';
 import $ from 'jquery';
 
 const DURATION = 750;
-const EASING   = 'swing';
-const OFFSET   = 0;
+const EASING = 'swing';
+const OFFSET = 0;
 
 export default Service.extend({
-
   // ----- Static properties -----
   duration: DURATION,
-  easing:   EASING,
-  offset:   OFFSET,
-
+  easing: EASING,
+  offset: OFFSET,
 
   // ----- Computed properties -----
   scrollable: computed(function() {
     return $('html, body');
   }),
 
-
   // ----- Methods -----
-  getJQueryElement (target) {
+  getJQueryElement(target) {
     const jQueryElement = $(target);
 
     if (!jQueryElement) {
@@ -35,7 +32,7 @@ export default Service.extend({
     return jQueryElement;
   },
 
-  getScrollableTop () {
+  getScrollableTop() {
     // because the target elements top is calculated relative to the document,
     // and if the scrollable container is not the document,
     // we need to normalize the target elements top based on the top and current scrolled position of the scrollable
@@ -46,18 +43,17 @@ export default Service.extend({
     }
   },
 
-  getVerticalCoord (target, offset = 0) {
-    const  jQueryElement = this.getJQueryElement(target);
+  getVerticalCoord(target, offset = 0) {
+    const jQueryElement = this.getJQueryElement(target);
     return this.getScrollableTop() + jQueryElement.offset().top + offset;
   },
 
-  scrollVertical (target, opts = {}) {
+  scrollVertical(target, opts = {}) {
     return new Promise((resolve, reject) => {
-
       this.scrollable
         .animate(
           {
-            scrollTop: this.getVerticalCoord(target, opts.offset)
+            scrollTop: this.getVerticalCoord(target, opts.offset),
           },
           opts.duration || this.duration,
           opts.easing || this.easing,
@@ -66,5 +62,5 @@ export default Service.extend({
         .promise()
         .then(resolve, reject);
     });
-  }
+  },
 });

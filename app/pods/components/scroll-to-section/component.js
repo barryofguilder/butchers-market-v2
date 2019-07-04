@@ -32,8 +32,8 @@ export default Component.extend({
 
       // Offset is to make up for the fixed position of the navbar
       this.scroll.scrollVertical(this.get('selector'), {
-        offset
+        offset,
       });
     }
-  }
+  },
 });

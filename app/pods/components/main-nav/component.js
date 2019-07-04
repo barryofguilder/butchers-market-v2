@@ -42,5 +42,5 @@ export default Component.extend({
     if (navbarCollapse.hasClass('show')) {
       toggler.click();
     }
-  }
+  },
 });

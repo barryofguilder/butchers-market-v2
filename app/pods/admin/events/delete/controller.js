@@ -5,15 +5,18 @@ export default Controller.extend({
 
   actions: {
     deleteEvent() {
-      this.model.destroyRecord().then(() => {
-        this.transitionToRoute('admin.events');
-      }).catch((reason) => {
-        this.set('errorMessage', reason);
-      });
+      this.model
+        .destroyRecord()
+        .then(() => {
+          this.transitionToRoute('admin.events');
+        })
+        .catch(reason => {
+          this.set('errorMessage', reason);
+        });
     },
 
     cancelDelete() {
       this.transitionToRoute('admin.events');
-    }
-  }
+    },
+  },
 });

@@ -11,7 +11,7 @@ export default Controller.extend({
   filteredEvents: computed('model.@each.id', 'filter', function() {
     let now = new Date();
 
-    return this.model.filter((item) => {
+    return this.model.filter(item => {
       if (item.get('isNew')) {
         return false;
       }
@@ -23,7 +23,7 @@ export default Controller.extend({
       let startTime = item.get('startTime');
 
       return this.filter === 'upcoming'
-        ? (isSameDay(startTime, now) || isAfter(startTime, now))
+        ? isSameDay(startTime, now) || isAfter(startTime, now)
         : isBefore(startTime, now);
     });
   }),
@@ -31,18 +31,18 @@ export default Controller.extend({
 
   filter: 'upcoming',
   upcomingClass: computed('filter', function() {
-    return this.filter === 'upcoming' ? 'active': null;
+    return this.filter === 'upcoming' ? 'active' : null;
   }),
   pastClass: computed('filter', function() {
-    return this.filter === 'past' ? 'active': null;
+    return this.filter === 'past' ? 'active' : null;
   }),
   allClass: computed('filter', function() {
-    return isBlank(this.filter) ? 'active': null;
+    return isBlank(this.filter) ? 'active' : null;
   }),
 
   actions: {
     filterEvents(filter) {
       this.set('filter', filter);
-    }
-  }
+    },
+  },
 });

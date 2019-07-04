@@ -23,5 +23,5 @@ export default Component.extend({
 
   click() {
     this.get('task').perform();
-  }
+  },
 });

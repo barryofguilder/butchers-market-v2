@@ -23,7 +23,7 @@ export default Controller.extend(MediaMixin, {
       return isSameDay(date, now) || isAfter(date, now);
     });
   }),
-	sortedEvents: sort('filteredEvents', dateSort),
+  sortedEvents: sort('filteredEvents', dateSort),
 
   filteredPerformances: computed('model.performances', function() {
     let performances = this.get('model.performances');
@@ -43,5 +43,5 @@ export default Controller.extend(MediaMixin, {
     }
 
     return randomPerformances.slice(0, PERFORMANCES_TO_SHOW);
-  })
+  }),
 });

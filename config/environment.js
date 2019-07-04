@@ -14,8 +14,8 @@ module.exports = function(environment) {
       },
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
-        Date: false
-      }
+        Date: false,
+      },
     },
 
     APP: {
@@ -32,21 +32,21 @@ module.exports = function(environment) {
           // Use `analytics_debug.js` in development
           debug: environment === 'development',
           // Ensure only production env hits are sent to GA
-          sendHitTask: environment === 'production'
-        }
-      }
+          sendHitTask: environment === 'production',
+        },
+      },
     ],
 
     gReCaptcha: {
-      siteKey: '6LcrHAITAAAAACvTiT4qS4dvbwL7wgGRXhJtsKim'
+      siteKey: '6LcrHAITAAAAACvTiT4qS4dvbwL7wgGRXhJtsKim',
     },
 
     api: '',
-    showReCaptcha: true
+    showReCaptcha: true,
   };
 
   ENV['ember-body-class'] = {
-    includeRouteName: false
+    includeRouteName: false,
   };
 
   if (environment === 'development') {

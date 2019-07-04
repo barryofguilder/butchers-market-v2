@@ -11,6 +11,6 @@ export default Controller.extend({
 
     hoursCancelled() {
       this.transitionToRoute('admin.hours');
-    }
-  }
+    },
+  },
 });

@@ -9,7 +9,7 @@ export default Component.extend({
 
   didInsertElement() {
     $('.carousel').carousel({
-      interval: 7500
+      interval: 7500,
     });
-  }
+  },
 });

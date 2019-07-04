@@ -3,11 +3,7 @@ export default [
     id: 1,
     title: 'Pork',
     featured: false,
-    items: [
-      'Natural',
-      'No hormones used',
-      'Product of the USA'
-    ]
+    items: ['Natural', 'No hormones used', 'Product of the USA'],
   },
   {
     id: 2,
@@ -18,18 +14,13 @@ export default [
       'Natural',
       '30 day average aging',
       'Quality is more selective than USDA grading',
-      'Product of the USA'
-    ]
+      'Product of the USA',
+    ],
   },
   {
     id: 3,
     title: 'Chicken',
     featured: false,
-    items: [
-      'Natural',
-      'No hormones used',
-      'Only small young tender birds',
-      'Product of the USA'
-    ]
-  }
+    items: ['Natural', 'No hormones used', 'Only small young tender birds', 'Product of the USA'],
+  },
 ];

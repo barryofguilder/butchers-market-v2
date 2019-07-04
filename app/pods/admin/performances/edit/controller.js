@@ -8,6 +8,6 @@ export default Controller.extend({
 
     performanceCancelled() {
       this.transitionToRoute('admin.performances');
-    }
-  }
+    },
+  },
 });

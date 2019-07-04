@@ -23,11 +23,15 @@ export default Component.extend({
     this._super(...arguments);
 
     let performance = this.get('performance');
-    let changeset = new Changeset(performance, lookupValidator(PerformanceValidations), PerformanceValidations);
+    let changeset = new Changeset(
+      performance,
+      lookupValidator(PerformanceValidations),
+      PerformanceValidations
+    );
     this.set('changeset', changeset);
   },
 
-  savePerformance: task(function * () {
+  savePerformance: task(function*() {
     let changeset = this.get('changeset');
 
     yield changeset.validate();
@@ -48,6 +52,6 @@ export default Component.extend({
   actions: {
     close() {
       this.get('cancelled')();
-    }
-  }
+    },
+  },
 });

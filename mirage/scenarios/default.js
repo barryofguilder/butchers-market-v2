@@ -1,36 +1,34 @@
 export default function(server) {
-
   server.loadFixtures();
 
   createEvents(server);
   createPerformances(server);
-
 }
 
 function createEvents(server) {
   server.createList('event', 4, {
     title: 'Blues Street House Band',
-    leadIn: 'Classic Rock with'
+    leadIn: 'Classic Rock with',
   });
 
   server.createList('event', 3, {
     title: 'Lon Eldridge',
-    leadIn: `Sounds from the 20's & 30's with`
+    leadIn: `Sounds from the 20's & 30's with`,
   });
 
   server.createList('event', 2, {
     title: 'Ben Honeycutt',
-    leadIn: `Acoustic Evening with`
+    leadIn: `Acoustic Evening with`,
   });
 
   server.create('event', {
     title: 'Backwater Still',
-    leadIn: ''
+    leadIn: '',
   });
 
   server.createList('event', 3, 'pastEvent', {
     title: 'Across Five Aprils',
-    leadIn: 'A night of metal with'
+    leadIn: 'A night of metal with',
   });
 }
 

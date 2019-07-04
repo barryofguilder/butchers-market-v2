@@ -5,5 +5,5 @@ export default DS.Model.extend({
   reviewer: DS.attr('string'),
   source: DS.attr('string'),
   url: DS.attr('string'),
-  image: DS.attr('string')
+  image: DS.attr('string'),
 });

@@ -6,5 +6,5 @@ export default Mixin.create({
   media: service(),
 
   isDesktop: bool('media.isDesktop'),
-  notDesktop: not('media.isDesktop')
+  notDesktop: not('media.isDesktop'),
 });

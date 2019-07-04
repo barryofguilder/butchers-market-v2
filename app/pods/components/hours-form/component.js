@@ -29,14 +29,14 @@ export default Component.extend({
       changeset.setProperties({
         type: 'Store',
         activeStartDate: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0),
-        activeEndDate: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59)
+        activeEndDate: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59),
       });
     }
 
     this.set('changeset', changeset);
   },
 
-  saveHours: task(function * () {
+  saveHours: task(function*() {
     yield this.changeset.validate();
 
     if (!this.changeset.get('isValid')) {
@@ -54,11 +54,17 @@ export default Component.extend({
 
   actions: {
     startDateSelected(date) {
-      this.changeset.set('activeStartDate', new Date(date[0].getFullYear(), date[0].getMonth(), date[0].getDate(), 0, 0, 0));
+      this.changeset.set(
+        'activeStartDate',
+        new Date(date[0].getFullYear(), date[0].getMonth(), date[0].getDate(), 0, 0, 0)
+      );
     },
 
     endDateSelected(date) {
-      this.changeset.set('activeEndDate', new Date(date[0].getFullYear(), date[0].getMonth(), date[0].getDate(), 23, 59, 59));
-    }
-  }
+      this.changeset.set(
+        'activeEndDate',
+        new Date(date[0].getFullYear(), date[0].getMonth(), date[0].getDate(), 23, 59, 59)
+      );
+    },
+  },
 });
