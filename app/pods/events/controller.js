@@ -4,10 +4,13 @@ import { computed } from '@ember/object';
 import { sort } from '@ember/object/computed';
 import dateSort from 'butchers-market/utils/date-sort';
 import { isAfter, isSameDay } from 'date-fns';
+import { inject as service } from '@ember/service';
 
 const PERFORMANCES_TO_SHOW = 11;
 
 export default Controller.extend(MediaMixin, {
+  media: service(),
+
   queryParams: ['events'],
   events: false,
 

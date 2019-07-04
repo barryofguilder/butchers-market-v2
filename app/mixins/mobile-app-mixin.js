@@ -7,7 +7,7 @@ export default Mixin.create({
   isMobileApp: bool('mobileApp.isMobileApp'),
 
   beforeModel(params){
-    let isMobileApp = params.queryParams.mobile ? true : false;
+    let isMobileApp = params.to.queryParams.mobile ? true : false;
 
     this.set('mobileApp.isMobileApp', isMobileApp);
 
