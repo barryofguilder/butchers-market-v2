@@ -8,7 +8,7 @@ export default Component.extend({
   events: null,
   isAdmin: false,
 
-  eventColumns: computed('media.isMobile', function() {
-    return this.get('media.isMobile') ? 1 : 2;
+  eventColumns: computed('media.isMd', function() {
+    return this.get('media.isMd') ? 1 : 2;
   }),
 });
