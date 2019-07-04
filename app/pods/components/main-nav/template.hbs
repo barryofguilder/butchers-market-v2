@@ -1,63 +1,44 @@
-<div class="container">
-  <div class="navbar-brand">
-    {{#link-to "application"}}
-      <img src="images/butchers-market-logo.png" alt="The Butcher's Market logo">
-    {{/link-to}}
-    {{#link-to "events" (query-params events=false)}}
-      <img src="images/blues-street-logo.png" width="100px" height="100px" alt="Blues Street Cafe logo">
-    {{/link-to}}
-  </div>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#main-navigation-items"
-    aria-controls="main-navigation-items"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="main-navigation-items">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        {{#link-to "meat" class="nav-link"}}
-          Meat
-        {{/link-to}}
-      </li>
-      <li class="nav-item">
-        {{#link-to "deli" class="nav-link"}}
-          Deli
-        {{/link-to}}
-      </li>
-      <li class="nav-item dropdown">
-        <a
-          class="nav-link dropdown-toggle"
-          data-toggle="dropdown"
-          href="#"
-          role="button"
-          aria-haspopup="true"
-          aria-expanded="false"
+<header class="bg-white fixed z-50 top-0 inset-x-0">
+  <div class="container">
+    <div class="absolute pt-2 z-50 flex">
+      {{#link-to "application"}}
+        <img src="images/butchers-market-logo.png" alt="The Butcher's Market logo">
+      {{/link-to}}
+      {{#link-to "events" (query-params events=false)}}
+        <img
+          src="images/blues-street-logo.png"
+          width="100px"
+          height="100px"
+          alt="Blues Street Cafe logo"
         >
-          Dining
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="docs/bmmenu.pdf">View Menu</a>
-          {{#link-to "events" (query-params events=false) class="dropdown-item"}}
-            Blues Street Cafe
-          {{/link-to}}
-        </div>
-      </li>
-      <li class="nav-item">
-        {{#link-to "events" (query-params events=true) class="nav-link"}}
-          Events
-        {{/link-to}}
-      </li>
-      <li class="nav-item">
-        {{#link-to "contact" (query-params events=isEventsPage) class="nav-link"}}
-          {{contactText}}
-        {{/link-to}}
-      </li>
-    </ul>
+      {{/link-to}}
+    </div>
+
+    {{#if this.isMobile}}
+      <div class="flex justify-end lg:hidden">
+        <button
+          type="button"
+          class="text-gray-600 text-2xl my-5 border px-3 pt-2 pb-1 rounded"
+          aria-controls="main-navigation-items"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          {{action "toggleNavigation"}}
+        >
+          {{fa-icon "bars"}}
+        </button>
+      </div>
+
+      <AnimatedContainer class="overflow-hidden">
+        {{#animated-if showNavigation use=transition duration=300}}
+          <nav class="bg-white" id="main-navigation-items">
+            <MainNav::MainNavItems @itemClicked={{action "toggleNavigation"}} />
+          </nav>
+        {{/animated-if}}
+      </AnimatedContainer>
+    {{else}}
+      <nav class="flex justify-end" id="main-navigation-items">
+        <MainNav::MainNavItems />
+      </nav>
+    {{/if}}
   </div>
-</div>
+</header>

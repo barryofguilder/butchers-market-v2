@@ -1,0 +1,74 @@
+<ul class="list-reset flex flex-col lg:flex-row">
+  <li>
+    {{#link-to
+      "meat"
+      class="block px-6 py-4 lg:py-8 hover:text-red-600 text-center lg:text-left"
+      click=(action this.itemClicked)
+    }}
+      Meat
+    {{/link-to}}
+  </li>
+  <li>
+    {{#link-to
+      "deli"
+      class="block px-6 py-4 lg:py-8 hover:text-red-600 text-center lg:text-left"
+      click=(action this.itemClicked)
+    }}
+      Deli
+    {{/link-to}}
+  </li>
+  <li>
+    <BasicDropdown @renderInPlace={{if this.isMobile true false}} as |dd|>
+      <dd.trigger
+        class="block px-6 py-4 lg:py-8 outline-none hover:text-red-600 focus:bg-gray-300 focus:text-black text-center lg:text-left"
+      >
+        Dining {{fa-icon "caret-down"}}
+      </dd.trigger>
+
+      <dd.content @class={{if this.isMobile "static"}}>
+        <div class="bg-gray-200 text-center lg:text-left">
+          <ul class="list-reset">
+            <li>
+              <a
+                href="docs/bmmenu.pdf"
+                class="block px-6 py-4 hover:text-red-600"
+              >
+                View Menu
+              </a>
+            </li>
+            <li>
+              {{#link-to
+                "events"
+                (query-params events=false)
+                class="block px-6 py-4 hover:text-red-600"
+                click=(action this.itemClicked)
+              }}
+                Blues Street Cafe
+              {{/link-to}}
+            </li>
+          </ul>
+        </div>
+      </dd.content>
+    </BasicDropdown>
+  </li>
+  <li>
+    {{#link-to
+      "events"
+      (query-params events=true)
+      class="block px-6 py-4 lg:py-8 hover:text-red-600 text-center lg:text-left"
+      click=(action this.itemClicked)
+    }}
+      Events
+    {{/link-to}}
+  </li>
+  <li>
+    {{#link-to
+      "contact"
+      (query-params events=isEventsPage)
+      class="block px-6 py-4 lg:py-8 hover:text-red-600 text-center lg:text-left"
+      click=(action this.itemClicked)
+    }}
+      {{if this.isEventsPage "Contact, Booking, & Private Parties" "Contact"}}
+    {{/link-to}}
+  </li>
+</ul>

@@ -1,46 +1,32 @@
-import { computed } from '@ember/object';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import $ from 'jquery';
+import { computed } from '@ember/object';
+import { fadeIn, fadeOut } from 'ember-animated/motions/opacity';
 
 export default Component.extend({
-  tagName: 'nav',
+  tagName: '',
 
-  router: service(),
+  media: service(),
 
-  classNames: ['navbar', 'navbar-light', 'fixed-top', 'navbar-expand-lg'],
-  navbarClickHandler: '.nav-item:not(.dropdown), .navbar-brand, .dropdown-item',
-
-  isEventsPage: computed('router.currentRouteName', function() {
-    let currentRouteName = this.get('router.currentRouteName');
-
-    return currentRouteName === 'events';
+  isMobile: computed('media.{isLg,isXl}', function() {
+    return !this.media.isLg && !this.media.isXl;
   }),
 
-  contactText: computed('isEventsPage', function() {
-    let isEventsPage = this.get('isEventsPage');
+  showNavigation: false,
 
-    return isEventsPage ? 'Contact, Booking, & Private Parties' : 'Contact';
-  }),
-
-  didInsertElement() {
-    this._super(...arguments);
-
-    this.$().on('click', this.navbarClickHandler, this.collapseNavbar);
-  },
-
-  willDestroyElement() {
-    this._super(...arguments);
-
-    this.$().off('click', this.navbarClickHandler, this.collapseNavbar);
-  },
-
-  collapseNavbar() {
-    const toggler = $('.navbar-toggler');
-    const navbarCollapse = $('.navbar-collapse');
-
-    if (navbarCollapse.hasClass('show')) {
-      toggler.click();
+  /* eslint-disable-next-line */
+  *transition({ insertedSprites, removedSprites }) {
+    for (let sprite of insertedSprites) {
+      fadeIn(sprite);
     }
+    for (let sprite of removedSprites) {
+      fadeOut(sprite);
+    }
+  },
+
+  actions: {
+    toggleNavigation() {
+      this.toggleProperty('showNavigation');
+    },
   },
 });
