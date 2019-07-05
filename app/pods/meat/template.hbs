@@ -1,14 +1,16 @@
 <PromoSection @image="promo-meat.jpg" as |Promo|>
-  <div class="text-center lg:text-left">
-    <Promo.title>
-      Fresh Cut Everything!
-    </Promo.title>
-    <Promo.subtitle>
-      We hand cut all of our meats in-house and stock only products that satisfy our strict quality standards.
-    </Promo.subtitle>
-  </div>
+  <div class="container">
+    <div class="text-center lg:text-left">
+      <Promo.title>
+        Fresh Cut Everything!
+      </Promo.title>
+      <Promo.subtitle>
+        We hand cut all of our meats in-house and stock only products that satisfy our strict quality standards.
+      </Promo.subtitle>
+    </div>
 
-  <ProductsList @products={{this.model.products}} @tagName="div" />
+    <ProductsList @products={{this.model.products}} @tagName="div" />
+  </div>
 </PromoSection>
 
 <ScrollToSection @shouldScroll={{packages}} @selector="#bundles">

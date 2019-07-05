@@ -1,0 +1,17 @@
+{{#if @href}}
+  <a
+    href={{@href}}
+    class={{this.buttonClasses}}
+    ...attributes
+  >
+    {{yield}}
+  </a>
+{{else}}
+  <button
+    class={{this.buttonClasses}}
+    onclick={{action "click"}}
+    ...attributes
+  >
+    {{yield}}
+  </button>
+{{/if}}

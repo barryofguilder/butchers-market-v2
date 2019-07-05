@@ -4,15 +4,13 @@
   class="bg-black bg-fixed bg-center bg-cover bg-no-repeat"
 >
   <div class="py-16 text-white text-shadow">
-    <div class="container">
-      {{yield
-        (
-          hash
-            title=(component "promo-section/title")
-            subtitle=(component "promo-section/subtitle")
-        )
-      }}
-    </div>
+    {{yield
+      (
+        hash
+          title=(component "promo-section/title")
+          subtitle=(component "promo-section/subtitle")
+      )
+    }}
   </div>
 </section>
 {{! template-lint-enable no-inline-styles}}

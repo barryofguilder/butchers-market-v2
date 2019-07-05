@@ -1,72 +1,81 @@
 <PromoSection @image="promo-index.jpg" as |Promo|>
-  <div class="text-center lg:w-3/4 lg:text-left">
-    {{#if this.isDesktop}}
-      <Promo.title>
-        Welcome to The Butcher's Market Meat &amp; Deli
-      </Promo.title>
-      <Promo.subtitle>
-        Small town service. Big city selection.
-      </Promo.subtitle>
-    {{else}}
-      <StoreHours @hours={{this.model.hours}} @hourType="Store" />
-      <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Cafe" />
-      <StoreLocation class="mt-8" />
-    {{/if}}
+  <div class="container px-10">
+    <div class="text-center lg:w-3/4 sm:text-left">
+      {{#if this.media.isSm}}
+        <Promo.title>
+          Welcome to The Butcher's Market Meat &amp; Deli
+        </Promo.title>
+        <Promo.subtitle>
+          Small town service. Big city selection.
+        </Promo.subtitle>
+      {{else}}
+        <StoreHours @hours={{this.model.hours}} @hourType="Store" />
+        <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Cafe" />
+        <StoreLocation class="mt-8" />
+      {{/if}}
 
-    <a
-      href="https://www.facebook.com/thebutchersmarket"
-      class="inline-block mt-8 px-6 py-3 bg-red-800 hover:bg-red-900 text-white uppercase tracking-wider text-xl font-bold"
-    >
-      Like us on Facebook
-    </a>
+      <Button @href="https://www.facebook.com/thebutchersmarket" @variant="primary" class="mt-8">
+        Like us on Facebook
+      </Button>
 
-    {{#if this.isDesktop}}
-      <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Store" />
-      <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Cafe" />
-      <StoreLocation class="mt-8" />
-    {{/if}}
+      {{#if this.media.isSm}}
+        <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Store" />
+        <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Cafe" />
+        <StoreLocation class="mt-8" />
+      {{/if}}
+    </div>
   </div>
 </PromoSection>
 
-<div class="container">
+<section>
   <HeaderTitle @title="Featured Specials" />
-  <div class="row">
-    {{#each featuredBundles as |bundle|}}
-      <div class="col-sm-6 col-lg-3 feature-item">
-        <BundleListItem @product={{bundle}} />
-      </div>
-    {{/each}}
-    <div class="col-sm-6 col-lg-3 feature-item">
-      <h5 class="feature-title">
-        {{#link-to "meat" (query-params packages=true) class="btn btn-secondary btn-lg"}}
+
+  <div class="container px-10 mt-10">
+    <div class="flex flex-wrap -mx-2">
+      {{#each featuredBundles as |bundle|}}
+        <div class="mt-10 px-2 w-full sm:w-1/2 lg:w-1/3">
+          <h5 class="text-red-700 text-2xl font-black uppercase tracking-wide">
+            {{bundle.title}} {{bundle.price}}
+          </h5>
+          <ul class="pl-8 list-disc">
+            {{#each bundle.items as |item|}}
+              <li>{{item}}</li>
+            {{/each}}
+          </ul>
+        </div>
+      {{/each}}
+
+      <div class="mt-10 sm:w-1/2 sm:flex sm:flex-col sm:items-center lg:w-full lg:flex-row">
+        <Button @href={{href-to "meat" (query-params packages=true)}}>
           View All Packages
-        {{/link-to}}
-      </h5>
-      <p class="feature-item-description">We have a meat or grocery packages for every need and budget!</p>
+        </Button>
+        <p class="mt-4 text-center lg:ml-4 lg:mt-0">
+          We have a meat or grocery packages for every need and budget!
+        </p>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
 <section>
-  <div class="container">
-    <HeaderTitle @title="Who We Are" />
-    <div class="row">
-      <div class="col-md-8 offset-md-2">
-        <h3 class="color-primary">Each interaction is unique.</h3>
-        <p class="lead">Every customer is an individual and deserves service catered to their exact needs.</p>
-        <p>We come to work everyday to supply that type of service &amp; and to be a part of our customer's lives for years to come!</p>
-        <ul>
-          <li>Custom cut meats</li>
-          <li>Custom packaging</li>
-          <li>Custom service</li>
-        </ul>
-      </div>
+  <HeaderTitle @title="Who We Are" />
+
+  <div class="container px-10">
+    <div class="col-md-8 offset-md-2">
+      <h3 class="color-primary">Each interaction is unique.</h3>
+      <p class="lead">Every customer is an individual and deserves service catered to their exact needs.</p>
+      <p>We come to work everyday to supply that type of service &amp; and to be a part of our customer's lives for years to come!</p>
+      <ul>
+        <li>Custom cut meats</li>
+        <li>Custom packaging</li>
+        <li>Custom service</li>
+      </ul>
     </div>
   </div>
 </section>
 
 <ProductsList @title="Our Meat Products" @products={{model.products}} />
 
-{{!-- <ReviewsList @title="Customer Reviews" @reviews={{model.reviews}} /> --}}
+<ReviewsList @title="Customer Reviews" @reviews={{model.reviews}} />
 
 <ContactSection />

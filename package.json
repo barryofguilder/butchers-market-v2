@@ -55,6 +55,7 @@
     "ember-file-upload": "^2.5.3",
     "ember-flatpickr": "~2.14.1",
     "ember-g-recaptcha": "~1.0.0",
+    "ember-href-to": "^3.1.0",
     "ember-lifeline": "~4.1.5",
     "ember-load-initializers": "^2.0.0",
     "ember-maybe-import-regenerator": "^0.1.6",
