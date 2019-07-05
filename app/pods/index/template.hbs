@@ -1,47 +1,29 @@
-<PromoSection class={{concat "butcher-promo-index " tacoSeasonClass}} @specialHours={{false}}>
-  <div class="row clearfix">
-    <div class="col-md-12 col-lg-8">
-      {{#if isDesktop}}
-        <h1 class="promo-title">Welcome to The Butcher's Market Meat &amp; Deli</h1>
-        <p class="lead large">Small town service. Big city selection.</p>
-      {{/if}}
-      {{#if notDesktop}}
-        <StoreHours @hours={{model.hours}} />
-        <StoreHours @hours={{model.hours}} @type="Cafe" />
-        <StoreLocation />
-      {{/if}}
-      <a href="https://www.facebook.com/thebutchersmarket" class="btn btn-secondary btn-lg">Like us on Facebook</a>
-      {{#if isDesktop}}
-        <StoreHours @hours={{model.hours}} />
-        <StoreHours @hours={{model.hours}} @type="Cafe" />
-        <StoreLocation />
-      {{/if}}
-    </div>
-    {{#if showTacoSeason}}
-      <div class="col-md-12 col-lg-6">
-        <div class="taco-season-countdown">
-          <img src="images/taco-season-title.png" class="img-fluid taco-season-title" alt="Taco Season">
-          {{#unless tacoSeasonArrived}}
-            <CountdownTicker
-              @date={{tacoSeasonDate}}
-              @countdownText="Taco Season"
-              @finishedText="Taco Season Has Arrived!"
-            />
-          {{/unless}}
-          <div class="row">
-            <div class="col-md-12 offset-lg-1 col-lg-10">
-              {{#if isDesktop}}
-                <p class="taco-season-tag">
-                  Say goodbye to cold weather, chili, and stew... It’s time to bring back our tacos for you!
-                </p>
-              {{/if}}
-              <p class="taco-season-tag">
-                Tacos are back on the menu the first day of spring March 20th 2018!
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+<PromoSection @image="promo-index.jpg" as |Promo|>
+  <div class="text-center lg:w-3/4 lg:text-left">
+    {{#if this.isDesktop}}
+      <Promo.title>
+        Welcome to The Butcher's Market Meat &amp; Deli
+      </Promo.title>
+      <Promo.subtitle>
+        Small town service. Big city selection.
+      </Promo.subtitle>
+    {{else}}
+      <StoreHours @hours={{this.model.hours}} @hourType="Store" />
+      <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Cafe" />
+      <StoreLocation class="mt-8" />
+    {{/if}}
+
+    <a
+      href="https://www.facebook.com/thebutchersmarket"
+      class="inline-block mt-8 px-6 py-3 bg-red-800 hover:bg-red-900 text-white uppercase tracking-wider text-xl font-bold"
+    >
+      Like us on Facebook
+    </a>
+
+    {{#if this.isDesktop}}
+      <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Store" />
+      <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Cafe" />
+      <StoreLocation class="mt-8" />
     {{/if}}
   </div>
 </PromoSection>

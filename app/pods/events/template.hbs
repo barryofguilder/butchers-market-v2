@@ -1,22 +1,30 @@
-<PromoSection class="butcher-promo-cafe" @specialHours={{false}}>
-  <div class="row clearfix">
-    <div class="col-md-12 col-lg-6">
-      {{#if isDesktop}}
-        <h1 class="promo-title">Welcome to The Blues Street Cafe</h1>
-        <p class="lead large">Finger Lickin'. Guitar Pickin'.</p>
-      {{/if}}
-      {{#if notDesktop}}
-        <StoreHours @hours={{model.hours}} @type="Cafe" />
-        <StoreHours @hours={{model.hours}} />
-        <StoreLocation />
-      {{/if}}
-      <a href="https://www.facebook.com/thebutchersmarket" class="btn btn-secondary btn-lg">Like us on Facebook</a>
-      {{#if isDesktop}}
-        <StoreHours @hours={{model.hours}} @type="Cafe" />
-        <StoreHours @hours={{model.hours}} />
-        <StoreLocation />
-      {{/if}}
-    </div>
+<PromoSection @image="promo-cafe.jpg" as |Promo|>
+  <div class="text-center lg:w-1/2 lg:text-left">
+    {{#if this.isDesktop}}
+      <Promo.title>
+        Welcome to The Blues Street Cafe
+      </Promo.title>
+      <Promo.subtitle>
+        Finger Lickin'. Guitar Pickin'.
+      </Promo.subtitle>
+    {{else}}
+      <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Cafe" />
+      <StoreHours @hours={{this.model.hours}} @hourType="Store" />
+      <StoreLocation class="mt-8" />
+    {{/if}}
+
+    <a
+      href="https://www.facebook.com/thebutchersmarket"
+      class="inline-block mt-8 px-6 py-3 bg-red-800 hover:bg-red-900 text-white uppercase tracking-wider text-xl font-bold"
+    >
+      Like us on Facebook
+    </a>
+
+    {{#if this.isDesktop}}
+      <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Cafe" />
+      <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Store" />
+      <StoreLocation class="mt-8" />
+    {{/if}}
   </div>
 </PromoSection>
 

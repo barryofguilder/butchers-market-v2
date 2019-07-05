@@ -1,9 +1,11 @@
-{{#unless isMobileApp}}
+{{#unless this.isMobileApp}}
   <MainNav />
 {{/unless}}
 
-{{outlet}}
+<div class="mt-20">
+  {{outlet}}
+</div>
 
-{{#unless isMobileApp}}
+{{#unless this.isMobileApp}}
   <MainFooter />
 {{/unless}}

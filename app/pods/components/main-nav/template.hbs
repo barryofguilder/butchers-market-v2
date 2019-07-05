@@ -29,7 +29,7 @@
       </div>
 
       <AnimatedContainer class="overflow-hidden">
-        {{#animated-if showNavigation use=transition duration=300}}
+        {{#animated-if this.showNavigation use=transition duration=300}}
           <nav class="bg-white" id="main-navigation-items">
             <MainNav::MainNavItems @itemClicked={{action "toggleNavigation"}} />
           </nav>

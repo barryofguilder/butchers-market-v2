@@ -4,6 +4,11 @@
 
 @tailwind utilities;
 
+/* Additional Tailwind Utilities */
+.text-shadow {
+  text-shadow: 1px 1px 1px theme('colors.black');
+}
+
 
 /* Ember Basic Dropdown */
 

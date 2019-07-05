@@ -1,5 +1,18 @@
-<div class="promo-dark">
-  <div class="container">
-    {{yield}}
+{{! template-lint-disable no-inline-styles}}
+<section
+  style={{html-safe (concat "background-image: url('../images/" @image "');")}}
+  class="bg-black bg-fixed bg-center bg-cover bg-no-repeat"
+>
+  <div class="py-16 text-white text-shadow">
+    <div class="container">
+      {{yield
+        (
+          hash
+            title=(component "promo-section/title")
+            subtitle=(component "promo-section/subtitle")
+        )
+      }}
+    </div>
   </div>
-</div>
+</section>
+{{! template-lint-enable no-inline-styles}}
