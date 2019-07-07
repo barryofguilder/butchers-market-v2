@@ -1,75 +1,66 @@
 <PromoSection @image="promo-deli.jpg" as |Promo|>
-  <div class="container">
-    <div class="text-center lg:text-left">
+  <Container>
+    <div class="text-center lg:w-3/4 lg:text-left">
       <Promo.title>
         Fresh Made Everything!
       </Promo.title>
       <Promo.subtitle>
-        Everything in our deli is made in-house from scratch to achieve a quality and freshness like no other store can provide.
+        Everything in our deli is made in-house from scratch to achieve a quality and freshness
+        like no other store can provide.
       </Promo.subtitle>
     </div>
 
-    <div class="boars-head">
-      <div class="boars-head-logo"></div>
-      {{#unless this.media.isMd}}
-        <div class="boars-head-meat"></div>
-      {{/unless}}
+    <div class="mt-16 md:mt-24">
+      <img class="w-40 mx-auto lg:mx-0" src="images/serving-boars-head.png" alt="Boars Head logo">
     </div>
-  </div>
+  </Container>
 </PromoSection>
 
 <section>
-  <div class="container">
-    <HeaderTitle @title="Everyday Deli Items" />
+  <HeaderTitle @title="Everyday Deli Items" />
 
-    {{#each (grouped-each cardColumns model.items) as |row|}}
-      <div class="row">
-        {{#each row as |item|}}
-          <div class="col-sm-6 col-md-3">
-            <div class="card card-plain">
-              <img
-                class="card-img-top w-100"
-                src="images/{{item.image}}"
-                alt="Image of {{item.title}}"
-              >
-              <div class="card-block">
-                <h4 class="card-title deli-item-title">{{item.title}}</h4>
-              </div>
-            </div>
-          </div>
-        {{/each}}
-      </div>
-    {{/each}}
+  <Container>
+    <div class="flex flex-wrap -mx-4">
+      {{#each this.model.items as |item|}}
+        <div class="mt-10 px-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+          <img
+            class="w-full shadow-md"
+            src="images/{{item.image}}"
+            alt="Image of {{item.title}}"
+          >
+          <h4 class="mt-2 text-xl font-bold text-center text-gray-900">{{item.title}}</h4>
+        </div>
+      {{/each}}
+    </div>
+  </Container>
+</section>
 
-    <HeaderTitle @title="Party Platters" />
-    <div class="row">
-      <div class="col-sm-6 col-md-3">
-        <div class="card card-plain">
-          <img
-            class="card-img-top w-100"
-            src="images/sandwich-platter.jpg"
-            alt="Image of Sandwich Platters"
-          >
-          <div class="card-block">
-            <h4 class="card-title deli-item-title">Sandwich Platters</h4>
-          </div>
-        </div>
+<section>
+  <HeaderTitle @title="Party Platters" />
+
+  <Container>
+    <div class="flex flex-wrap -mx-4">
+      <div class="mt-10 px-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <img
+          class="w-full shadow-md"
+          src="images/sandwich-platter.jpg"
+          alt="Image of Sandwich Platters"
+        >
+        <h4 class="mt-2 text-xl font-bold text-center text-gray-900">Sandwich Platters</h4>
       </div>
-      <div class="col-sm-6 col-md-3">
-        <div class="card card-plain">
-          <img
-            class="card-img-top w-100"
-            src="images/meat-cheese-platter.jpg"
-            alt="Image of Meat &amp; Cheese Platters"
-          >
-          <div class="card-block">
-            <h4 class="card-title deli-item-title">Meat &amp; Cheese Platters</h4>
-          </div>
-        </div>
+      <div class="mt-10 px-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <img
+          class="w-full shadow-md"
+          src="images/meat-cheese-platter.jpg"
+          alt="Image of Meat &amp; Cheese Platters"
+        >
+        <h4 class="mt-2 text-xl font-bold text-center text-gray-900">Meat &amp; Cheese Platters</h4>
       </div>
-      <div class="col-sm-12 col-md-6 deli-platters-col">
-        <a class="btn btn-secondary btn-lg" href="docs/bmpartyplatters.pdf">View All Platters</a>
+      <div class="mt-10 px-4 text-center w-full lg:w-1/2 lg:text-left">
+        <Button @href="docs/bmpartyplatters.pdf">
+          View All Platters
+        </Button>
       </div>
     </div>
-  </div>
+  </Container>
 </section>
