@@ -30,14 +30,14 @@
 <section>
   <HeaderTitle @title="Featured Specials" />
 
-  <div class="container px-10 mt-10">
+  <div class="container px-10">
     <div class="flex flex-wrap -mx-2">
-      {{#each featuredBundles as |bundle|}}
+      {{#each this.featuredBundles as |bundle|}}
         <div class="mt-10 px-2 w-full sm:w-1/2 lg:w-1/3">
-          <h5 class="text-red-700 text-2xl font-black uppercase tracking-wide">
+          <h5 class="text-red-700 text-xl sm:text-2xl font-black uppercase tracking-wide">
             {{bundle.title}} {{bundle.price}}
           </h5>
-          <ul class="pl-8 list-disc">
+          <ul class="pl-8 list-disc sm:text-lg">
             {{#each bundle.items as |item|}}
               <li>{{item}}</li>
             {{/each}}
@@ -45,11 +45,13 @@
         </div>
       {{/each}}
 
-      <div class="mt-10 sm:w-1/2 sm:flex sm:flex-col sm:items-center lg:w-full lg:flex-row">
+      <div
+        class="mt-10 text-center sm:w-1/2 sm:flex sm:flex-col sm:items-center lg:w-full lg:flex-row lg:text-left"
+      >
         <Button @href={{href-to "meat" (query-params packages=true)}}>
           View All Packages
         </Button>
-        <p class="mt-4 text-center lg:ml-4 lg:mt-0">
+        <p class="mt-4 lg:ml-4 lg:mt-0 sm:text-lg">
           We have a meat or grocery packages for every need and budget!
         </p>
       </div>
@@ -61,11 +63,11 @@
   <HeaderTitle @title="Who We Are" />
 
   <div class="container px-10">
-    <div class="col-md-8 offset-md-2">
-      <h3 class="color-primary">Each interaction is unique.</h3>
-      <p class="lead">Every customer is an individual and deserves service catered to their exact needs.</p>
-      <p>We come to work everyday to supply that type of service &amp; and to be a part of our customer's lives for years to come!</p>
-      <ul>
+    <div class="mt-10 max-w-3xl mx-auto">
+      <h3 class="text-red-700 text-xl sm:text-3xl uppercase tracking-wide font-black">Each interaction is unique.</h3>
+      <p class="mt-4 text-lg sm:text-2xl">Every customer is an individual and deserves service catered to their exact needs.</p>
+      <p class="mt-4 sm:text-lg">We come to work everyday to supply that type of service &amp; and to be a part of our customer's lives for years to come!</p>
+      <ul class="mt-4 pl-8 list-disc sm:text-lg">
         <li>Custom cut meats</li>
         <li>Custom packaging</li>
         <li>Custom service</li>
@@ -74,8 +76,57 @@
   </div>
 </section>
 
-<ProductsList @title="Our Meat Products" @products={{model.products}} />
+<section>
+  <HeaderTitle @title="Our Meat Products" />
 
-<ReviewsList @title="Customer Reviews" @reviews={{model.reviews}} />
+  <div class="container px-10">
+    <div class="mt-10 max-w-4xl mx-auto">
+      <div class="sm:-mx-4 sm:flex">
+        {{#each this.model.products as |product|}}
+          <div class="mt-8 w-full sm:mt-0 sm:w-1/3 sm:px-4 {{if product.featured "sm:-pt-10" "sm:pt-10"}}">
+            <div class="border border-gray-300">
+              {{!template-lint-disable attribute-indentation}}
+              <h4
+                class="text-xl sm:text-2xl uppercase tracking-wide font-black text-center {{if product.featured "bg-gray-700 text-white px-6 py-3 sm:px-8 sm:py-4 text-2xl -m-px" "bg-gray-300 px-3 py-2 sm:px-4"}}"
+              >
+                {{product.title}}
+              </h4>
+              {{!template-lint-enable attribute-indentation}}
+              <ul class="natural-products-items">
+                {{#each product.items as |item index|}}
+                  <li class="p-3 sm:p-4 text-center sm:text-lg {{if (gt index 0) "border-t border-gray-300"}}">{{item}}</li>
+                {{/each}}
+              </ul>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</section>
 
-<ContactSection />
+<section>
+  <HeaderTitle @title="Customer Reviews" />
+
+  <div class="container px-10">
+    {{#each this.model.reviews as |review|}}
+      <div class="sm:mt-8 mt-12 max-w-2xl mx-auto flex flex-col sm:flex-row items-center">
+        <div>
+          <img class="rounded-full w-16 sm:w-20 shadow-md" src="images/{{review.image}}" alt="Review person">
+        </div>
+        <div class="mt-2 text-center sm:mt-0 sm:ml-6 sm:text-left">
+          <p class="text-lg sm:text-xl">&ldquo;{{review.text}}&rdquo;</p>
+          <p class="text-sm sm:text-base">
+            <span class="text-gray-700">{{review.reviewer}},</span>
+            <br class="sm:hidden">
+            <a class="text-red-800" href={{review.url}} target="_blank" rel="noopener">
+              {{review.source}}
+            </a>
+          </p>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</section>
+
+<ContactSection class="mt-16 sm:mt-32" />

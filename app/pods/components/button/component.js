@@ -23,16 +23,16 @@ export default Component.extend({
         break;
     }
 
-    return `inline-block px-6 py-3 whitespace-no-wrap uppercase tracking-wider text-xl font-bold ${variantClasses}`;
+    return `inline-block px-6 py-3 whitespace-no-wrap uppercase tracking-wider font-bold ${variantClasses} sm:text-xl`;
   }),
 
   actions: {
     click(event) {
-      event.preventDefault();
-
       if (this.task) {
+        event.preventDefault();
         this.task.perform();
       } else if (this.onClick) {
+        event.preventDefault();
         this.onClick();
       }
     },
