@@ -1,5 +1,5 @@
 <PromoSection @image="promo-index.jpg" as |Promo|>
-  <div class="container px-10">
+  <Container>
     <div class="text-center lg:w-3/4 sm:text-left">
       {{#if this.media.isSm}}
         <Promo.title>
@@ -24,27 +24,14 @@
         <StoreLocation class="mt-8" />
       {{/if}}
     </div>
-  </div>
+  </Container>
 </PromoSection>
 
 <section>
   <HeaderTitle @title="Featured Specials" />
 
-  <div class="container px-10">
-    <div class="flex flex-wrap -mx-2">
-      {{#each this.featuredBundles as |bundle|}}
-        <div class="mt-10 px-2 w-full sm:w-1/2 lg:w-1/3">
-          <h5 class="text-red-700 text-xl sm:text-2xl font-black uppercase tracking-wide">
-            {{bundle.title}} {{bundle.price}}
-          </h5>
-          <ul class="pl-8 list-disc sm:text-lg">
-            {{#each bundle.items as |item|}}
-              <li>{{item}}</li>
-            {{/each}}
-          </ul>
-        </div>
-      {{/each}}
-
+  <Container>
+    <ProductsList @products={{this.featuredBundles}}>
       <div
         class="mt-10 text-center sm:w-1/2 sm:flex sm:flex-col sm:items-center lg:w-full lg:flex-row lg:text-left"
       >
@@ -55,14 +42,14 @@
           We have a meat or grocery packages for every need and budget!
         </p>
       </div>
-    </div>
-  </div>
+    </ProductsList>
+  </Container>
 </section>
 
 <section>
   <HeaderTitle @title="Who We Are" />
 
-  <div class="container px-10">
+  <Container>
     <div class="mt-10 max-w-3xl mx-auto">
       <h3 class="text-red-700 text-xl sm:text-3xl uppercase tracking-wide font-black">Each interaction is unique.</h3>
       <p class="mt-4 text-lg sm:text-2xl">Every customer is an individual and deserves service catered to their exact needs.</p>
@@ -73,25 +60,23 @@
         <li>Custom service</li>
       </ul>
     </div>
-  </div>
+  </Container>
 </section>
 
 <section>
   <HeaderTitle @title="Our Meat Products" />
 
-  <div class="container px-10">
+  <Container>
     <div class="mt-10 max-w-4xl mx-auto">
       <div class="sm:-mx-4 sm:flex">
         {{#each this.model.products as |product|}}
           <div class="mt-8 w-full sm:mt-0 sm:w-1/3 sm:px-4 {{if product.featured "sm:-pt-10" "sm:pt-10"}}">
             <div class="border border-gray-300">
-              {{!template-lint-disable attribute-indentation}}
               <h4
-                class="text-xl sm:text-2xl uppercase tracking-wide font-black text-center {{if product.featured "bg-gray-700 text-white px-6 py-3 sm:px-8 sm:py-4 text-2xl -m-px" "bg-gray-300 px-3 py-2 sm:px-4"}}"
+                class="text-xl sm:text-2xl uppercase tracking-wide font-black text-center bg-gray-300 {{if product.featured "px-6 py-3 sm:px-8 sm:py-4 text-2xl" "px-3 py-2 sm:px-4"}}"
               >
                 {{product.title}}
               </h4>
-              {{!template-lint-enable attribute-indentation}}
               <ul class="natural-products-items">
                 {{#each product.items as |item index|}}
                   <li class="p-3 sm:p-4 text-center sm:text-lg {{if (gt index 0) "border-t border-gray-300"}}">{{item}}</li>
@@ -102,13 +87,13 @@
         {{/each}}
       </div>
     </div>
-  </div>
+  </Container>
 </section>
 
 <section>
   <HeaderTitle @title="Customer Reviews" />
 
-  <div class="container px-10">
+  <Container>
     {{#each this.model.reviews as |review|}}
       <div class="sm:mt-8 mt-12 max-w-2xl mx-auto flex flex-col sm:flex-row items-center">
         <div>
@@ -126,7 +111,7 @@
         </div>
       </div>
     {{/each}}
-  </div>
+  </Container>
 </section>
 
 <ContactSection class="mt-16 sm:mt-32" />

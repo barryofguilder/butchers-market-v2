@@ -1,6 +1,6 @@
 <PromoSection @image="promo-meat.jpg" as |Promo|>
-  <div class="container">
-    <div class="text-center lg:text-left">
+  <Container>
+    <div class="text-center lg:w-3/4 lg:text-left">
       <Promo.title>
         Fresh Cut Everything!
       </Promo.title>
@@ -9,149 +9,177 @@
       </Promo.subtitle>
     </div>
 
-    <ProductsList @products={{this.model.products}} @tagName="div" />
-  </div>
+    <div class="mt-16 sm:mt-24 max-w-4xl mx-auto">
+      <div class="sm:-mx-4 sm:flex">
+        {{#each this.model.products as |product|}}
+          <div class="mt-8 w-full sm:mt-0 sm:w-1/3 sm:px-4 {{if product.featured "sm:-pt-10" "sm:pt-10"}}">
+            <div>
+              <h4
+                class="text-xl sm:text-2xl uppercase tracking-wide font-black text-center bg-black text-yellow-700 {{if product.featured "px-6 py-3 sm:px-8 sm:py-4 text-2xl" "px-3 py-2 sm:px-4"}}"
+              >
+                {{product.title}}
+              </h4>
+              <ul class="natural-products-items">
+                {{#each product.items as |item|}}
+                  <li class="mt-1 p-3 sm:p-4 bg-overlay-light text-center sm:text-lg">{{item}}</li>
+                {{/each}}
+              </ul>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </Container>
 </PromoSection>
 
 <ScrollToSection @shouldScroll={{packages}} @selector="#bundles">
   <div id="bundles">
-    <div class="container">
-      <HeaderTitle @title="Bundle Packs" class="meat-header" />
-      <div class="meat-print">
-        <a href="docs/bundles-mixnmatch.pdf" class="btn btn-secondary btn-lg">
-          Print Flyer
-        </a>
-      </div>
+    <section>
+      <HeaderTitle @title="Bundle Packs" />
 
-      {{#each (grouped-each cardColumns model.bundles) as |row|}}
-        <div class="row">
-          {{#each row as |bundle|}}
-            <div class="col-sm-6 col-md-4 feature-item">
-              <BundleListItem @product={{bundle}} />
-            </div>
-          {{/each}}
+      <Container>
+        <div class="mt-8 text-center">
+          <Button @href="docs/bundles-mixnmatch.pdf">
+            Print Flyer
+          </Button>
         </div>
-      {{/each}}
 
-      <HeaderTitle @title="Mix N' Match" class="meat-header" />
-      <div class="meat-print">
-        <a href="docs/bundles-mixnmatch.pdf" class="btn btn-secondary btn-lg">
-          Print Flyer
-        </a>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <ul class="list-unstyled">
-            <li class="h4">Pick 5 for $53</li>
-            <li class="h4">Pick 10 for $99</li>
-            <li class="h4">Pick 20 for $195</li>
-          </ul>
-        </div>
-        <div class="col-md-4">
-          <ul>
-            <li>2 (7 oz.) Beef Ribeye Steaks</li>
-            <li>2 (7 oz.) Beef N.Y. Strip Steaks</li>
-            <li>2 lbs. Beef Chuck Roast</li>
-            <li>2 lbs. Beef Chuck Tender Roast</li>
-            <li>2 lbs. Beef Sirloin Tip Roast</li>
-            <li>2 lbs. Beef Cube Steaks</li>
-            <li>2 lbs. Beef Stew</li>
-            <li>2 ½ lbs. Beef Ground Chuck</li>
-            <li>2 ¼ lbs. Beef Ground Round</li>
-            <li>2 ½ lbs. Boneless Pork Chops</li>
-            <li>5 lbs. Boston Butt Pork Roast</li>
-            <li>4 lbs. Country Style Pork Ribs</li>
-          </ul>
-        </div>
-        <div class="col-md-4">
-          <ul>
-            <li>2 ½ lbs. Baby Back Pork Ribs</li>
-            <li>3 lbs. Fresh Made Pork Sausage</li>
-            <li>3 lbs. Bratwurst or Italian Sausages</li>
-            <li>3 lbs. Smoked Pork Sausage</li>
-            <li>2 ½ lbs. Sliced Slab Bacon</li>
-            <li>2 ½ lbs. Boneless Chicken Breast</li>
-            <li>2 ½ lbs. Boneless Chicken Tenders</li>
-            <li>4 ½ lbs. Split Chicken Breast</li>
-            <li>5 lbs. Chicken Wings</li>
-            <li>4 lbs. Tilapia or Swai Fish Fillets</li>
-            <li>2 lbs. Raw Shrimp</li>
-            <li>2 (4oz.) Lobster Tails</li>
-          </ul>
-        </div>
-      </div>
+        <ProductsList @products={{this.model.bundles}} />
+      </Container>
+    </section>
 
-      <HeaderTitle @title="Ice Box Mix N' Match" class="meat-header" />
-      <div class="meat-print">
-        <a href="docs/iceboxflyer.pdf" class="btn btn-secondary btn-lg">
-          Print Flyer
-        </a>
-      </div>
-      <div class="row">
-        <div class="col-md-3">
-          <ul class="list-unstyled">
-            <li class="h4">Pick 5 for $19.99</li>
-            <li class="h4">Pick 10 for $37.99</li>
-            <li class="h4">Pick 20 for $75.99</li>
-          </ul>
+    <section>
+      <HeaderTitle @title="Mix N' Match" />
+
+      <Container>
+        <div class="mt-8 text-center">
+          <Button @href="docs/bundles-mixnmatch.pdf">
+            Print Flyer
+          </Button>
         </div>
-        <div class="col-md-3">
-          <ul>
-            <li>Spicy Chicken Tenders</li>
-            <li>Popcorn Chicken</li>
-            <li>Breaded Chicken Tenders</li>
-            <li>Breaded Chicken Nuggets</li>
-            <li>Breaded Chicken Fries</li>
-            <li>Breaded Chicken Wings</li>
-            <li>Meatballs</li>
-            <li>Corndogs</li>
-            <li>Mini Corndogs</li>
-            <li>Sausage Biscuits</li>
-            <li>Sausage Croissants</li>
-            <li>Sausage, Egg, Cheese Biscuits</li>
-            <li>Chicken Biscuits</li>
-            <li>Cheeseburger Sliders</li>
-            <li>Chicken Sliders</li>
-          </ul>
+
+        <div class="mt-12 md:flex md:flex-wrap">
+          <div class="text-lg font-black md:text-2xl md:w-full lg:w-1/3">
+            <ul>
+              <li>Pick 5 for $53</li>
+              <li>Pick 10 for $99</li>
+              <li>Pick 20 for $195</li>
+            </ul>
+          </div>
+          {{!-- TODO: Programatically split the content into columns  --}}
+          <div class="mt-4 sm:text-lg md:w-1/2 lg:mt-0 lg:w-1/3">
+            <ul class="pl-8 list-disc">
+              <li>2 (7 oz.) Beef Ribeye Steaks</li>
+              <li>2 (7 oz.) Beef N.Y. Strip Steaks</li>
+              <li>2 lbs. Beef Chuck Roast</li>
+              <li>2 lbs. Beef Chuck Tender Roast</li>
+              <li>2 lbs. Beef Sirloin Tip Roast</li>
+              <li>2 lbs. Beef Cube Steaks</li>
+              <li>2 lbs. Beef Stew</li>
+              <li>2 ½ lbs. Beef Ground Chuck</li>
+              <li>2 ¼ lbs. Beef Ground Round</li>
+              <li>2 ½ lbs. Boneless Pork Chops</li>
+              <li>5 lbs. Boston Butt Pork Roast</li>
+              <li>4 lbs. Country Style Pork Ribs</li>
+            </ul>
+          </div>
+          <div class="sm:text-lg md:mt-4 md:w-1/2 lg:mt-0 lg:w-1/3">
+            <ul class="pl-8 list-disc">
+              <li>2 ½ lbs. Baby Back Pork Ribs</li>
+              <li>3 lbs. Fresh Made Pork Sausage</li>
+              <li>3 lbs. Bratwurst or Italian Sausages</li>
+              <li>3 lbs. Smoked Pork Sausage</li>
+              <li>2 ½ lbs. Sliced Slab Bacon</li>
+              <li>2 ½ lbs. Boneless Chicken Breast</li>
+              <li>2 ½ lbs. Boneless Chicken Tenders</li>
+              <li>4 ½ lbs. Split Chicken Breast</li>
+              <li>5 lbs. Chicken Wings</li>
+              <li>4 lbs. Tilapia or Swai Fish Fillets</li>
+              <li>2 lbs. Raw Shrimp</li>
+              <li>2 (4oz.) Lobster Tails</li>
+            </ul>
+          </div>
         </div>
-        <div class="col-md-3">
-          <ul>
-            <li>Chicken Tamales</li>
-            <li>Breaded Fish Sticks</li>
-            <li>Pepperoni Pizzas</li>
-            <li>Supreme Pizza</li>
-            <li>Cooked Sausage Patties</li>
-            <li>Hash Brown Patties</li>
-            <li>Crinkle Cut Fries</li>
-            <li>Tater Tots</li>
-            <li>Seasoned Potato Wedges</li>
-            <li>Sweet Potato Fries</li>
-            <li>Steak Cut Fries</li>
-            <li>Shoestring Fries</li>
-            <li>Mixed Vegetables</li>
-            <li>California Blend Mix Vegetables</li>
-          </ul>
+      </Container>
+    </section>
+
+    <section>
+      <HeaderTitle @title="Ice Box Mix N' Match" />
+
+      <Container>
+        <div class="mt-8 text-center">
+          <Button @href="docs/iceboxflyer.pdf">
+            Print Flyer
+          </Button>
         </div>
-        <div class="col-md-3">
-          <ul>
-            <li>Cut Green Beans</li>
-            <li>Butter Peas</li>
-            <li>Breaded Okra</li>
-            <li>Sliced Yellow Squash</li>
-            <li>Corn on the Cob</li>
-            <li>Shoepeg Cut Corn</li>
-            <li>Onion Rings</li>
-            <li>Hush Puppies</li>
-            <li>Corn Nuggets</li>
-            <li>Yeast Rolls</li>
-            <li>Garlic Cheese Breadstick</li>
-            <li>Southern Style Biscuits</li>
-            <li>Belgian Waffles</li>
-            <li>Cinnamon Rolls</li>
-            <li>Chocolate Chip Cookies</li>
-          </ul>
+
+        <div class="mt-12 md:flex md:flex-wrap">
+          <div class="text-lg font-black md:text-2xl md:w-full lg:mt-0 lg:w-1/4">
+            <ul>
+              <li>Pick 5 for $19.99</li>
+              <li>Pick 10 for $37.99</li>
+              <li>Pick 20 for $75.99</li>
+            </ul>
+          </div>
+          {{!-- TODO: Programatically split the content into columns  --}}
+          <div class="mt-4 sm:text-lg md:w-1/2 lg:w-1/4 lg:mt-0">
+            <ul class="pl-8 list-disc">
+              <li>Spicy Chicken Tenders</li>
+              <li>Popcorn Chicken</li>
+              <li>Breaded Chicken Tenders</li>
+              <li>Breaded Chicken Nuggets</li>
+              <li>Breaded Chicken Fries</li>
+              <li>Breaded Chicken Wings</li>
+              <li>Meatballs</li>
+              <li>Corndogs</li>
+              <li>Mini Corndogs</li>
+              <li>Sausage Biscuits</li>
+              <li>Sausage Croissants</li>
+              <li>Sausage, Egg, Cheese Biscuits</li>
+              <li>Chicken Biscuits</li>
+              <li>Cheeseburger Sliders</li>
+              <li>Chicken Sliders</li>
+            </ul>
+          </div>
+          <div class="sm:text-lg md:mt-4 md:w-1/2 lg:mt-0 lg:w-1/4">
+            <ul class="pl-8 list-disc">
+              <li>Chicken Tamales</li>
+              <li>Breaded Fish Sticks</li>
+              <li>Pepperoni Pizzas</li>
+              <li>Supreme Pizza</li>
+              <li>Cooked Sausage Patties</li>
+              <li>Hash Brown Patties</li>
+              <li>Crinkle Cut Fries</li>
+              <li>Tater Tots</li>
+              <li>Seasoned Potato Wedges</li>
+              <li>Sweet Potato Fries</li>
+              <li>Steak Cut Fries</li>
+              <li>Shoestring Fries</li>
+              <li>Mixed Vegetables</li>
+              <li>California Blend Mix Vegetables</li>
+            </ul>
+          </div>
+          <div class="sm:text-lg md:w-1/2 lg:w-1/4">
+            <ul class="pl-8 list-disc">
+              <li>Cut Green Beans</li>
+              <li>Butter Peas</li>
+              <li>Breaded Okra</li>
+              <li>Sliced Yellow Squash</li>
+              <li>Corn on the Cob</li>
+              <li>Shoepeg Cut Corn</li>
+              <li>Onion Rings</li>
+              <li>Hush Puppies</li>
+              <li>Corn Nuggets</li>
+              <li>Yeast Rolls</li>
+              <li>Garlic Cheese Breadstick</li>
+              <li>Southern Style Biscuits</li>
+              <li>Belgian Waffles</li>
+              <li>Cinnamon Rolls</li>
+              <li>Chocolate Chip Cookies</li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </div>
+      </Container>
+    </section>
   </div>
 </ScrollToSection>

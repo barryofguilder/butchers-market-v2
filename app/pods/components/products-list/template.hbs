@@ -1,14 +1,16 @@
-<div class="container">
-  {{#if @title}}
-    <HeaderTitle @title={{@title}} />
-  {{/if}}
-  <div class="row">
-    <div class="col-md-10 offset-md-1 col-sm-12">
-      <div class="row">
-        {{#each @products as |product|}}
-          <ProductsListItem @product={{product}} />
+<div class="flex flex-wrap -mx-4">
+  {{#each @products as |product|}}
+    <div class="mt-12 px-4 w-full sm:w-1/2 lg:w-1/3">
+      <h5 class="text-red-700 text-xl sm:text-2xl font-black uppercase tracking-wide">
+        {{product.title}} {{product.price}}
+      </h5>
+      <ul class="pl-8 list-disc sm:text-lg">
+        {{#each product.items as |item|}}
+          <li>{{item}}</li>
         {{/each}}
-      </div>
+      </ul>
     </div>
-  </div>
+  {{/each}}
+
+  {{yield}}
 </div>

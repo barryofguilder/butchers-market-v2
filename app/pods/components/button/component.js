@@ -19,7 +19,7 @@ export default Component.extend({
 
       case 'secondary':
       default:
-        variantClasses = 'bg-gray-700 hover:bg-gray-900 text-white';
+        variantClasses = 'bg-gray-800 hover:bg-gray-900 text-white';
         break;
     }
 
