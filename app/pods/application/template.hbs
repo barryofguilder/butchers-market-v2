@@ -2,7 +2,7 @@
   <MainNav />
 {{/unless}}
 
-<div class="mt-20">
+<div class={{if this.isMobileApp "mb-20" "mt-20"}}>
   {{outlet}}
 </div>
 
