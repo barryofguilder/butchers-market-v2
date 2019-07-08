@@ -1,9 +1,7 @@
 import Component from '@ember/component';
 
 export default Component.extend({
-  url: null,
+  tagName: '',
 
-  didInsertElement() {
-    this._super(...arguments);
-  },
+  url: null,
 });

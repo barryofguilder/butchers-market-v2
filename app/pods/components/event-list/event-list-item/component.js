@@ -3,6 +3,6 @@ import Component from '@ember/component';
 export default Component.extend({
   tagName: '',
 
-  events: null,
+  event: null,
   isAdmin: false,
 });
