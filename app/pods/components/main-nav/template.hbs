@@ -1,16 +1,11 @@
 <header class="bg-white fixed z-50 top-0 inset-x-0">
-  <Container>
+  <Container @isMainNav={{true}}>
     <div class="absolute pt-2 z-50 flex">
       {{#link-to "application"}}
-        <img src="images/butchers-market-logo.png" alt="The Butcher's Market logo">
+        <img class="w-32" src="images/butchers-market-logo.png" alt="The Butcher's Market logo">
       {{/link-to}}
       {{#link-to "events" (query-params events=false)}}
-        <img
-          src="images/blues-street-logo.png"
-          width="100px"
-          height="100px"
-          alt="Blues Street Cafe logo"
-        >
+        <img class="w-logo" src="images/blues-street-logo.png" alt="Blues Street Cafe logo">
       {{/link-to}}
     </div>
 
