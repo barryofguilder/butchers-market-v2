@@ -1,11 +1,11 @@
 <form class="max-w-md" {{action "sendFeedback" on="submit"}}>
-  {{#if feedbackSent}}
+  {{#if this.feedbackSent}}
     <div class="mb-4 bg-green-200 text-green-800 px-4 py-2">
       Thank you for contacting us! If you require immediate assistance, please call us at (706) 279-9277.
     </div>
   {{/if}}
 
-  {{#if showServerError}}
+  {{#if this.showServerError}}
     <div class="mb-4 bg-red-200 text-red-800 px-4 py-2">
       Oops, something went wrong. Please try again.
     </div>
@@ -13,7 +13,7 @@
 
   {{#if showInvalidFormError}}
     <div class="mb-4 bg-red-200 text-red-800 px-4 py-2">
-      {{#if recaptchaInvalid}}
+      {{#if this.recaptchaInvalid}}
         Invalid reCaptcha response, please try again
       {{else}}
         Please fill out the form and try sending again.
@@ -21,34 +21,18 @@
     </div>
   {{/if}}
 
-  {{#unless feedbackSent}}
+  {{#unless this.feedbackSent}}
     <div>
       <label class="sr-only" for="name">Your Name</label>
-      {{input
-        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-        id="name"
-        placeholder="Your Name"
-        value=name
-      }}
+      <UiTextbox id="name" placeholder="Your Name" @value={{this.name}} />
     </div>
     <div class="mt-4">
       <label class="sr-only" for="email">Your E-mail</label>
-      {{input
-        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-        id="email"
-        placeholder="Your E-mail"
-        value=email
-      }}
+      <UiTextbox @type="email" id="email" placeholder="Your E-mail" @value={{this.email}} />
     </div>
     <div class="mt-4">
       <label class="sr-only" for="message">Your Message</label>
-      {{textarea
-        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-        id="message"
-        placeholder="Your Message"
-        rows="7"
-        value=message
-      }}
+      <UiTextarea id="message" placeholder="Your Message" rows="7" @value={{this.message}} />
     </div>
     {{#if showReCaptcha}}
       <div class="mt-4">

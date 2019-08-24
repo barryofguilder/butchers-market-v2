@@ -1,0 +1,41 @@
+<AdminTitle @title="Events" />
+
+<div class="mt-8 flex items-center justify-between">
+  <div>
+    <Button @href={{href-to "admin.events.new"}} @size="medium" @variant="plain">
+      {{fa-icon "plus"}}
+      New
+    </Button>
+  </div>
+
+  <div>
+    <label>
+      {{radio-button
+        value="upcoming"
+        groupValue=this.filter
+        changed=(action "filterEvents")
+      }}
+      <span class="leading-none">Upcoming</span>
+    </label>
+    <label class="ml-4">
+      {{radio-button
+        value="past"
+        groupValue=this.filter
+        changed=(action "filterEvents")
+      }}
+      <span class="leading-none">Past</span>
+    </label>
+    <label class="ml-4">
+      {{radio-button
+        value="all"
+        groupValue=this.filter
+        changed=(action "filterEvents")
+      }}
+      <span class="leading-none">All</span>
+    </label>
+  </div>
+</div>
+
+<EventList @events={{this.sortedEvents}} @isAdmin={{true}} />
+
+{{outlet}}

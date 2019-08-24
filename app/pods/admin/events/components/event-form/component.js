@@ -7,8 +7,8 @@ import { task } from 'ember-concurrency';
 
 export default Component.extend({
   event: null,
-  saved: null,
-  cancelled: null,
+  saved() {},
+  cancelled() {},
 
   changeset: null,
   errorMessage: null,

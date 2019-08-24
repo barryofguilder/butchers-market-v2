@@ -1,0 +1,21 @@
+{{!--
+
+  NOTE: For the `readonly`, `textarea`, and `textbox` components, we are using `id` instead of
+        `elementId`. This is a workaround for a bug in Ember 3.11.
+
+        See: https://github.com/emberjs/ember.js/issues/18147
+
+--}}
+<div class={{if this.useDefaultMargin "mb-6"}} ...attributes>
+  {{yield
+    (
+      hash
+        datepicker=(component "admin/components/admin-form/datepicker" id=uniqueId errors=errors)
+        label=(component "admin/components/admin-form/label" for=uniqueId errors=errors)
+        textarea=(component "ui-textarea" id=uniqueId errors=errors)
+        textbox=(component "ui-textbox" id=uniqueId errors=errors)
+        uniqueId=uniqueId
+        validationErrors=(component "admin/components/admin-form/validation-errors" errors=errors)
+    )
+  }}
+</div>

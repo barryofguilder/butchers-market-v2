@@ -1,5 +1,6 @@
 {{#if @href}}
   <a
+    data-test-id={{this.data-test-id}}
     href={{@href}}
     class={{this.buttonClasses}}
     ...attributes
@@ -8,6 +9,7 @@
   </a>
 {{else}}
   <button
+    data-test-id={{this.data-test-id}}
     class={{this.buttonClasses}}
     onclick={{action "click"}}
     ...attributes
