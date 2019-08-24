@@ -45,8 +45,8 @@
     {{#link-to "admin.events.edit" @event.id class="text-red-700 hover:underline"}}
       Edit
     {{/link-to}} |
-    {{#link-to "admin.events.delete" @event.id class="text-red-700 hover:underline"}}
+    <button type="button" class="text-red-700 hover:underline" {{action @onDelete @event}}>
       Delete
-    {{/link-to}}
+    </button>
   </div>
 {{/if}}

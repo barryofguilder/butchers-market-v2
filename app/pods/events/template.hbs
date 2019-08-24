@@ -32,7 +32,13 @@
     <HeaderTitle @title="Events" />
 
     <Container>
-      <EventList @events={{this.sortedEvents}} />
+      {{#if (gt this.sortedEvents.length 0)}}
+        <EventList @events={{this.sortedEvents}} />
+      {{else}}
+        <p class="mt-8 text-lg text-gray-700 sm:text-xl">
+          There are no events scheduled at this time, check back later.
+        </p>
+      {{/if}}
     </Container>
   </section>
 </ScrollToSection>

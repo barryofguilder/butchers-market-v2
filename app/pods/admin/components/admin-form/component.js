@@ -1,10 +1,7 @@
 import Component from '@ember/component';
-import layout from './template';
 import { task } from 'ember-concurrency';
 
 export default Component.extend({
-  layout,
-
   tagName: '',
 
   readOnly: false,

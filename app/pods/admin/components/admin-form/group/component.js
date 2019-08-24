@@ -1,11 +1,8 @@
 import Component from '@ember/component';
-import layout from './template';
 import { computed, defineProperty, get } from '@ember/object';
 import { guidFor } from '@ember/object/internals';
 
 export default Component.extend({
-  layout,
-
   tagName: '',
 
   useDefaultMargin: true,

@@ -8,6 +8,7 @@ export default Component.extend({
   'data-test-id': 'button',
   variant: 'secondary',
   size: 'large',
+  disabled: false,
   href: null,
   task: null,
   onClick: null,
@@ -17,17 +18,18 @@ export default Component.extend({
 
     switch (this.variant) {
       case 'primary':
-        variantClasses = 'bg-red-800 text-white hover:bg-red-900';
+        variantClasses = `bg-red-800 text-white ${this.disabled ? '' : 'hover:bg-red-900'}`;
         break;
 
       case 'plain':
-        variantClasses =
-          'bg-transparent border border-gray-300 hover:bg-gray-300 hover:border-transparent';
+        variantClasses = `bg-transparent border border-gray-300 ${
+          this.disabled ? '' : 'hover:bg-gray-300 hover:border-transparent'
+        }`;
         break;
 
       case 'secondary':
       default:
-        variantClasses = 'bg-gray-800 text-white hover:bg-gray-900';
+        variantClasses = `bg-gray-800 text-white ${this.disabled ? '' : 'hover:bg-gray-900'}`;
         break;
     }
 
@@ -44,7 +46,7 @@ export default Component.extend({
         break;
     }
 
-    return `inline-block whitespace-no-wrap ${variantClasses} ${sizeClasses} transition-form-element focus:outline-none focus:shadow-outline`;
+    return `inline-block whitespace-no-wrap ${variantClasses} ${sizeClasses} ${this.disabled ? 'opacity-50 cursor-not-allowed' : ''} transition-form-element focus:outline-none focus:shadow-outline`;
   }),
 
   actions: {

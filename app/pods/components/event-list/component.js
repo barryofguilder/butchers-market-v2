@@ -5,4 +5,5 @@ export default Component.extend({
 
   events: null,
   isAdmin: false,
+  onDelete() {},
 });

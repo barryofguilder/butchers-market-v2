@@ -1,29 +1,23 @@
-<EmberWormhole @to={{destinationElementId}}>
-  <div class="{{wrapperClassNamesString}} {{wrapperClass}} {{componentCssClassName}}">
-    <div
-      class={{overlayClassNamesString}}
-      onclick={{action (ignore-children onClickOverlay)}}
-      tabindex="-1"
-      data-emd-overlay
-    >
-      <EmberModalDialogPositionedContainer
-        class={{containerClassNamesString}}
-        @targetAttachment={{targetAttachment}}
-        @target={{legacyTarget}}
-      >
-        <div class="modal-dialog {{sizeClass}}">
+{{#ember-wormhole to=destinationElementId}}
+  <div class={{this.wrapperClasses}} data-test-id={{this.data-test-id}} ...attributes>
+    <div class={{this.overlayClasses}} tabindex="-1" data-emd-overlay>
+      {{#ember-modal-dialog-positioned-container
+        class=this.containerClasses
+        targetAttachment=this.targetAttachment
+      }}
+        <div class="modal-dialog">
           <div class="modal-content">
             {{yield
               (
                 hash
-                  header=(component "modal-dialog-header")
-                  body=(component "modal-dialog-body")
-                  footer=(component "modal-dialog-footer")
+                  header=(component "modal-dialog/header")
+                  body=(component "modal-dialog/body")
+                  footer=(component "modal-dialog/footer")
               )
             }}
           </div>
         </div>
-      </EmberModalDialogPositionedContainer>
+      {{/ember-modal-dialog-positioned-container}}
     </div>
   </div>
-</EmberWormhole>
+{{/ember-wormhole}}
