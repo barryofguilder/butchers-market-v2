@@ -12,3 +12,14 @@
 .animated-tools {
   z-index: 100;
 }
+
+.parallax-background {
+  @apply bg-fixed;
+}
+
+/* Disable parallax for tablets and phones */
+@media only screen and (max-device-width: 1024px) {
+  .parallax-background {
+    @apply bg-scroll;
+  }
+}
