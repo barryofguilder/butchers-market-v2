@@ -1,5 +1,4 @@
 import Controller from '@ember/controller';
-import MediaMixin from 'butchers-market/mixins/media-mixin';
 import { computed } from '@ember/object';
 import { sort } from '@ember/object/computed';
 import dateSort from 'butchers-market/utils/date-sort';
@@ -8,7 +7,7 @@ import { inject as service } from '@ember/service';
 
 const PERFORMANCES_TO_SHOW = 11;
 
-export default Controller.extend(MediaMixin, {
+export default Controller.extend({
   media: service(),
 
   queryParams: ['events'],

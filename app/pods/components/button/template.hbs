@@ -1,0 +1,38 @@
+{{#if @href}}
+  <a
+    data-test-id={{this.data-test-id}}
+    href={{@href}}
+    class={{this.buttonClasses}}
+    ...attributes
+  >
+    {{#if this.hasIcon}}
+      <UiIcon
+        data-test-id="button-icon"
+        @icon={{@icon}}
+        @iconPrefix={{@iconPrefix}}
+        @variant={{if this.iconOnly this.iconOnlyVariant "inherit"}}
+      />
+    {{/if}}
+
+    {{yield}}
+  </a>
+{{else}}
+  <button
+    data-test-id={{this.data-test-id}}
+    class={{this.buttonClasses}}
+    disabled={{this.disabled}}
+    onclick={{action "click"}}
+    ...attributes
+  >
+    {{#if this.hasIcon}}
+      <UiIcon
+        data-test-id="button-icon"
+        @icon={{@icon}}
+        @iconPrefix={{@iconPrefix}}
+        @variant={{if this.iconOnly this.iconOnlyVariant "inherit"}}
+      />
+    {{/if}}
+
+    {{yield}}
+  </button>
+{{/if}}

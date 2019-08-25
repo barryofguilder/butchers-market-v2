@@ -1,0 +1,52 @@
+<div class="mt-10 flex items-center" ...attributes>
+  <div class="w-2/5">
+    <img
+      class="w-100 rounded shadow-md"
+      src={{if @event.imageUrl @event.imageUrl "images/event-default.jpg"}}
+      alt={{if @event.imageUrl (concat "Image of " @event.title) "Generic image of Blues Street Cafe"}}
+    >
+  </div>
+  <div class="w-3/5">
+    <div class="ml-2">
+      <div>
+        {{#if @event.leadIn}}
+          <span class="block text-sm text-gray-700">{{@event.leadIn}}</span>
+        {{/if}}
+        <h6 class="font-bold uppercase tracking-wide md:text-lg">
+          {{#if @event.link}}
+            <a
+              class="text-red-700"
+              href={{@event.link}}
+              target="_blank"
+              rel="noopener"
+            >
+              {{@event.title}}
+            </a>
+          {{else}}
+            {{@event.title}}
+          {{/if}}
+        </h6>
+      </div>
+
+      <div class="mt-2">
+        <span class="block text-sm text-gray-700 uppercase tracking-wide">
+          {{date-format @event.startTime "EEEE"}}
+        </span>
+        <span class="block">
+          {{date-format @event.startTime "MMM d yyyy, h:mma"}}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{#if @isAdmin}}
+  <div>
+    {{#link-to "admin.events.edit" @event.id class="text-red-700 hover:underline"}}
+      Edit
+    {{/link-to}} |
+    <button type="button" class="text-red-700 hover:underline" {{action @onDelete @event}}>
+      Delete
+    </button>
+  </div>
+{{/if}}

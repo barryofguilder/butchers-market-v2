@@ -1,10 +1,12 @@
-<div class="container contact-page">
-  <div class="row">
-    <div class="col-md-6">
-      <ContactDetails />
+<section ...attributes>
+  <Container>
+    <div class="flex flex-col sm:-mx-4 sm:flex-row">
+      <div class="sm:px-4 sm:w-1/2">
+        <ContactSection::ContactDetails />
+      </div>
+      <div class="mt-10 sm:mt-0 sm:px-4 sm:w-1/2">
+        <FeedbackForm />
+      </div>
     </div>
-    <div class="col-md-6">
-      <FeedbackForm />
-    </div>
-  </div>
-</div>
+  </Container>
+</section>

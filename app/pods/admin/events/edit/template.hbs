@@ -1,4 +1,6 @@
-<EventForm
+<Admin::Components::Title @title="Edit Event" />
+
+<Admin::Events::Components::EventForm
   @event={{this.model}}
   @saved={{action "eventSaved"}}
   @cancelled={{action "eventCancelled"}}

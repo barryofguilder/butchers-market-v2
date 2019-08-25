@@ -10,7 +10,7 @@ const { K } = Ember;
 
 MediaService.reopen({
   // Change this if you want a different default breakpoint in tests.
-  _defaultBreakpoint: 'desktop',
+  _defaultBreakpoint: 'lg',
 
   _breakpointArr: computed('breakpoints', function() {
     return Object.keys(this.get('breakpoints')) || A([]);

@@ -1,0 +1,56 @@
+<Admin::Components::Title @title="Events" />
+
+<div class="mt-8 flex items-center justify-between">
+  <div>
+    <Button @href={{href-to "admin.events.new"}} @icon="plus" @size="medium" @variant="plain">
+      New
+    </Button>
+  </div>
+
+  <div>
+    <label>
+      {{radio-button
+        value="upcoming"
+        groupValue=this.filter
+        changed=(action "filterEvents")
+      }}
+      <span class="leading-none">Upcoming</span>
+    </label>
+    <label class="ml-4">
+      {{radio-button
+        value="past"
+        groupValue=this.filter
+        changed=(action "filterEvents")
+      }}
+      <span class="leading-none">Past</span>
+    </label>
+    <label class="ml-4">
+      {{radio-button
+        value="all"
+        groupValue=this.filter
+        changed=(action "filterEvents")
+      }}
+      <span class="leading-none">All</span>
+    </label>
+  </div>
+</div>
+
+{{#if (gt this.sortedEvents.length 0)}}
+  <EventList
+    @events={{this.sortedEvents}}
+    @isAdmin={{true}}
+    @onDelete={{action (mut this.eventToDelete)}}
+  />
+{{else}}
+  <p class="mt-12 text-lg text-gray-700 sm:text-xl">No events found</p>
+{{/if}}
+
+{{#if this.eventToDelete}}
+  <Admin::Events::Components::DeleteEventForm
+    @event={{this.eventToDelete}}
+    @onSave={{action (mut this.eventToDelete) null}}
+    @onCancel={{action (mut this.eventToDelete) null}}
+  />
+{{/if}}
+
+{{outlet}}

@@ -1,15 +1,7 @@
 import Component from '@ember/component';
-import $ from 'jquery';
 
 export default Component.extend({
-  tagName: 'section',
+  tagName: '',
 
-  title: null,
   reviews: null,
-
-  didInsertElement() {
-    $('.carousel').carousel({
-      interval: 7500,
-    });
-  },
 });

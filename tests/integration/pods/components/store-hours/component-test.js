@@ -52,7 +52,7 @@ module('Integration | Component | store-hours', function(hooks) {
         line3: 'Saturday: 6pm - 11pm',
       },
     ]);
-    await render(hbs`<StoreHours @hours={{myHours}} @type="Cafe" />`);
+    await render(hbs`<StoreHours @hours={{myHours}} @hourType="Cafe" />`);
 
     assert.dom(testId('store-hours-title')).hasText('Cafe Hours');
 

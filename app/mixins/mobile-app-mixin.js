@@ -3,7 +3,8 @@ import { inject as service } from '@ember/service';
 import Mixin from '@ember/object/mixin';
 
 export default Mixin.create({
-  mobileApp: service('mobile-app'),
+  mobileApp: service(),
+
   isMobileApp: bool('mobileApp.isMobileApp'),
 
   beforeModel(params) {

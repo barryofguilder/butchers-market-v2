@@ -1,9 +1,14 @@
-{{#unless isMobileApp}}
+{{#unless this.isMobileApp}}
   <MainNav />
 {{/unless}}
 
-{{outlet}}
+<div class={{if this.isMobileApp "mb-20" "mt-20"}}>
+  {{outlet}}
+</div>
 
-{{#unless isMobileApp}}
+{{#unless this.isMobileApp}}
   <MainFooter />
 {{/unless}}
+
+{{!-- This adds the tools for debugging animations when developping locally. --}}
+{{!-- <AnimatedTools /> --}}

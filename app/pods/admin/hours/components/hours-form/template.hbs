@@ -1,0 +1,110 @@
+<Admin::Components::AdminForm class="max-w-xl" @onSubmit={{perform this.saveHours}} as |Form|>
+  {{#if this.errorMessage}}
+    <UiAlert data-test-id="server-error" @variant="danger">
+      {{this.errorMessage}}
+    </UiAlert>
+  {{/if}}
+
+  <p class="mb-8">
+    <strong>Note:</strong> Required fields are marked with an <Admin::Components::Required />
+  </p>
+
+  <Form.group data-test-id="type" @model={{this.changeset}} @property="type" as |Group|>
+    <Group.label>
+      Type {{#if this.changeset.isNew}}<Admin::Components::Required />{{/if}}
+    </Group.label>
+    {{#if this.changeset.isNew}}
+      <div class="flex mt-2">
+        <label class="flex items-center">
+          <RadioButton
+            @radioId="type-store"
+            @value="Store"
+            @groupValue={{this.changeset.type}}
+          />
+          <span class="ml-2">Store</span>
+        </label>
+        <label class="ml-4 flex items-center">
+          <RadioButton
+            @radioId="type-cafe"
+            @radioClass="form-check-input"
+            @value="Cafe"
+            @groupValue={{this.changeset.type}}
+          />
+          <span class="ml-2">Cafe</span>
+        </label>
+      </div>
+    {{else}}
+      <Group.readonly @value={{this.changeset.type}} />
+    {{/if}}
+  </Form.group>
+
+  <Form.group data-test-id="label" @model={{this.changeset}} @property="label" as |Group|>
+    <Group.label>Label <Admin::Components::Required /></Group.label>
+    <Group.textbox @value={{this.changeset.label}} />
+  </Form.group>
+
+  <Form.group
+    data-test-id="start-date"
+    @model={{this.changeset}}
+    @property="activeStartDate" as |Group|
+  >
+    <Group.label>Active Start Date <Admin::Components::Required /></Group.label>
+    <Group.datepicker
+      @disableMobile={{true}}
+      @allowInput={{false}}
+      @appendDataInput={{true}}
+      @date={{readonly this.changeset.activeStartDate}}
+      @dateFormat="m/d/Y"
+      @onChange={{action "startDateSelected"}}
+    />
+    <Group.help>
+      The date that these hours will become active on.
+    </Group.help>
+  </Form.group>
+
+  <Form.group
+    data-test-id="end-date"
+    @model={{this.changeset}}
+    @property="activeEndDate" as |Group|
+  >
+    <Group.label>Active End Date <Admin::Components::Required /></Group.label>
+    <Group.datepicker
+      @disableMobile={{true}}
+      @allowInput={{false}}
+      @appendDataInput={{true}}
+      @date={{readonly this.changeset.activeEndDate}}
+      @dateFormat="m/d/Y"
+      @onChange={{action "endDateSelected"}}
+    />
+    <Group.help>
+      The last date that these hours will be active on.
+    </Group.help>
+  </Form.group>
+
+  <Form.group data-test-id="line1" @model={{this.changeset}} @property="line1" as |Group|>
+    <Group.label>Line 1 <Admin::Components::Required /></Group.label>
+    <Group.textbox @value={{this.changeset.line1}} />
+  </Form.group>
+
+  <Form.group data-test-id="line2" @model={{this.changeset}} @property="line2" as |Group|>
+    <Group.label>Line 2</Group.label>
+    <Group.textbox @value={{this.changeset.line2}} />
+  </Form.group>
+
+  <Form.group data-test-id="line3" @model={{this.changeset}} @property="line3" as |Group|>
+    <Group.label>Line 3</Group.label>
+    <Group.textbox @value={{this.changeset.line3}} />
+  </Form.group>
+
+  <div class="mt-8">
+    {{#if this.changeset.errors}}
+      <div class="mb-2 text-red-600">
+        Please fix the errors above and try again.
+      </div>
+    {{/if}}
+    <Form.submit @disabled={{this.saveDisabled}}>
+      Save
+    </Form.submit>
+    <Button class="ml-2" @variant="plain" @onClick={{action cancelled}}>Cancel</Button>
+  </div>
+</Admin::Components::AdminForm>

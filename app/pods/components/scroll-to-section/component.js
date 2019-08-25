@@ -6,7 +6,7 @@ export default Component.extend({
   tagName: 'section',
 
   scroll: service(),
-  mobileApp: service('mobile-app'),
+  mobileApp: service(),
 
   shouldScroll: false,
   selector: null,

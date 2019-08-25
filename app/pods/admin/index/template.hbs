@@ -1,7 +1,19 @@
-<AdminTitle @title="What would you like to do?" class="mb-4" />
+<Admin::Components::Title @title="What would you like to do?" />
 
-<ul>
-  <li>{{#link-to "admin.events"}}Manage Events{{/link-to}}</li>
-  <li>{{#link-to "admin.performances"}}Manage Past Performances{{/link-to}}</li>
-  <li>{{#link-to "admin.hours"}}Manage Store Hours{{/link-to}}</li>
+<ul class="mt-4">
+  <li>
+    {{#link-to "admin.events" class="text-red-700 hover:underline"}}
+      Manage Events
+    {{/link-to}}
+  </li>
+  <li class="mt-2">
+    {{#link-to "admin.performances" class="text-red-700 hover:underline"}}
+      Manage Past Performances
+    {{/link-to}}
+  </li>
+  <li class="mt-2">
+    {{#link-to "admin.hours" class="text-red-700 hover:underline"}}
+      Manage Store Hours
+    {{/link-to}}
+  </li>
 </ul>

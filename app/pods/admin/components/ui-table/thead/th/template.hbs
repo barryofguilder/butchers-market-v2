@@ -1,0 +1,19 @@
+<th
+  data-test-id="table-head-cell"
+  class="font-semibold text-sm uppercase p-3 text-left"
+  ...attributes
+>
+  {{#if this.name}}
+    <a data-test-id="table-head-link" href="#" class="text-gray-900" {{action "columnClicked"}}>
+      {{yield}}
+
+      {{#if this.isAscending}}
+        {{fa-icon "chevron-up" class="ml-1"}}
+      {{else if this.isDescending}}
+        {{fa-icon "chevron-down" class="ml-1"}}
+      {{/if}}
+    </a>
+  {{else}}
+    {{yield}}
+  {{/if}}
+</th>

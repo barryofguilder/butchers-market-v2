@@ -1,18 +1,17 @@
-<div class="container">
-  <HeaderTitle @title={{@title}} />
-  <div id="review-carousel" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
-      {{#each @reviews as |review index|}}
-        <ReviewsListItem @review={{review}} @index={{index}} />
-      {{/each}}
+{{#each @reviews as |review|}}
+  <div class="sm:mt-8 mt-12 max-w-2xl mx-auto flex flex-col sm:flex-row items-center">
+    <div>
+      <img class="rounded-full w-16 sm:w-20 shadow-md" src="images/{{review.image}}" alt="Review person">
     </div>
-    <a class="carousel-control-prev" href="#review-carousel" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#review-carousel" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
+    <div class="mt-2 text-center sm:mt-0 sm:ml-6 sm:text-left">
+      <p class="text-lg sm:text-xl">&ldquo;{{review.text}}&rdquo;</p>
+      <p class="text-sm sm:text-base">
+        <span class="text-gray-700">{{review.reviewer}},</span>
+        <br class="sm:hidden">
+        <a class="text-red-800" href={{review.url}} target="_blank" rel="noopener">
+          {{review.source}}
+        </a>
+      </p>
+    </div>
   </div>
-</div>
+{{/each}}
