@@ -12,7 +12,7 @@ export default EmberFlatpickr.extend({
   hasErrors: gt('errors.length', 0),
 
   inputClasses: computed('hasErrors', function() {
-    let classes = 'styled-textbox';
+    let classes = 'styled-textbox ember-flatpickr';
 
     if (this.hasErrors) {
       classes += ' has-errors';

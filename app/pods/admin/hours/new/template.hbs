@@ -1,5 +1,7 @@
-<HoursForm
-  @hours={{model}}
+<AdminTitle @title="New Hours" />
+
+<Admin::Hours::Components::HoursForm
+  @hours={{this.model}}
   @saved={{action "hoursSaved"}}
   @cancelled={{action "hoursCancelled"}}
 />
