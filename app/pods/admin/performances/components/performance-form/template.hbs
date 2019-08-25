@@ -6,16 +6,16 @@
   {{/if}}
 
   <p class="mb-8">
-    <strong>Note:</strong> Required fields are marked with an <RequiredField />
+    <strong>Note:</strong> Required fields are marked with an <Admin::Components::Required />
   </p>
 
   <Form.group data-test-id="title" @model={{this.changeset}} @property="title" as |Group|>
-    <Group.label>Title <RequiredField /></Group.label>
+    <Group.label>Title <Admin::Components::Required /></Group.label>
     <Group.textbox @value={{this.changeset.title}} />
   </Form.group>
 
   <Form.group data-test-id="link" @model={{this.changeset}} @property="link" as |Group|>
-    <Group.label>Link <RequiredField /></Group.label>
+    <Group.label>Link <Admin::Components::Required /></Group.label>
     <Group.textbox @value={{this.changeset.link}} />
   </Form.group>
 

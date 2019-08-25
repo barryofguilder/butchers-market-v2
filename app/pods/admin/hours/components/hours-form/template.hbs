@@ -6,11 +6,13 @@
   {{/if}}
 
   <p class="mb-8">
-    <strong>Note:</strong> Required fields are marked with an <RequiredField />
+    <strong>Note:</strong> Required fields are marked with an <Admin::Components::Required />
   </p>
 
   <Form.group data-test-id="type" @model={{this.changeset}} @property="type" as |Group|>
-    <Group.label>Type {{#if this.changeset.isNew}}<RequiredField />{{/if}}</Group.label>
+    <Group.label>
+      Type {{#if this.changeset.isNew}}<Admin::Components::Required />{{/if}}
+    </Group.label>
     {{#if this.changeset.isNew}}
       <div class="flex mt-2">
         <label class="flex items-center">
@@ -37,7 +39,7 @@
   </Form.group>
 
   <Form.group data-test-id="label" @model={{this.changeset}} @property="label" as |Group|>
-    <Group.label>Label <RequiredField /></Group.label>
+    <Group.label>Label <Admin::Components::Required /></Group.label>
     <Group.textbox @value={{this.changeset.label}} />
   </Form.group>
 
@@ -46,7 +48,7 @@
     @model={{this.changeset}}
     @property="activeStartDate" as |Group|
   >
-    <Group.label>Active Start Date <RequiredField /></Group.label>
+    <Group.label>Active Start Date <Admin::Components::Required /></Group.label>
     <Group.datepicker
       @disableMobile={{true}}
       @allowInput={{false}}
@@ -65,7 +67,7 @@
     @model={{this.changeset}}
     @property="activeEndDate" as |Group|
   >
-    <Group.label>Active End Date <RequiredField /></Group.label>
+    <Group.label>Active End Date <Admin::Components::Required /></Group.label>
     <Group.datepicker
       @disableMobile={{true}}
       @allowInput={{false}}
@@ -80,7 +82,7 @@
   </Form.group>
 
   <Form.group data-test-id="line1" @model={{this.changeset}} @property="line1" as |Group|>
-    <Group.label>Line 1 <RequiredField /></Group.label>
+    <Group.label>Line 1 <Admin::Components::Required /></Group.label>
     <Group.textbox @value={{this.changeset.line1}} />
   </Form.group>
 

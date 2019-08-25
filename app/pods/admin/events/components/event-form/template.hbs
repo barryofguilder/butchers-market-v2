@@ -6,11 +6,11 @@
   {{/if}}
 
   <p class="mb-8">
-    <strong>Note:</strong> Required fields are marked with an <RequiredField />
+    <strong>Note:</strong> Required fields are marked with an <Admin::Components::Required />
   </p>
 
   <Form.group data-test-id="title" @model={{this.changeset}} @property="title" as |Group|>
-    <Group.label>Title <RequiredField /></Group.label>
+    <Group.label>Title <Admin::Components::Required /></Group.label>
     <Group.textbox @value={{this.changeset.title}} />
   </Form.group>
 
@@ -20,7 +20,7 @@
   </Form.group>
 
   <Form.group data-test-id="date" @model={{this.changeset}} @property="startTime" as |Group|>
-    <Group.label>Date <RequiredField /></Group.label>
+    <Group.label>Date <Admin::Components::Required /></Group.label>
     <Group.datepicker
       @disableMobile={{true}}
       @allowInput={{false}}
@@ -32,7 +32,7 @@
   </Form.group>
 
   <Form.group data-test-id="end-time" @model={{this.changeset}} @property="endTime" as |Group|>
-    <Group.label>End Time <RequiredField /></Group.label>
+    <Group.label>End Time <Admin::Components::Required /></Group.label>
     <Group.datepicker
       @disableMobile={{true}}
       @date={{readonly this.changeset.endTime}}
