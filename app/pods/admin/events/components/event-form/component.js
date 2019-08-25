@@ -13,9 +13,6 @@ export default Component.extend({
   changeset: null,
   errorMessage: null,
   fileErrorMessage: null,
-  dialogTitle: computed('event.isNew', function() {
-    return this.get('event.isNew') ? 'New Event' : 'Edit Event';
-  }),
   saveDisabled: computed('changeset.isInvalid', function() {
     return this.get('changeset.isInvalid');
   }),
@@ -60,8 +57,6 @@ export default Component.extend({
       } else {
         this.set('errorMessage', ex);
       }
-
-      this.event.rollbackAttributes();
     }
   }).drop(),
 

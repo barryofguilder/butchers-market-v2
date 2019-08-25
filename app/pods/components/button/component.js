@@ -1,19 +1,62 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
+import { notEmpty } from '@ember/object/computed';
 
 export default Component.extend({
   tagName: '',
   supportsDataTestProperties: true,
 
   'data-test-id': 'button',
-  variant: 'secondary',
+  _variant: null,
+  // This is a computed property so that we can tell if the user has actually set the `variant`
+  // property themselves or if it is just using the default.
+  variant: computed('_variant', {
+    get(/* key */) {
+      if (!this._variant) {
+        return 'secondary';
+      }
+
+      return this.variant;
+    },
+    set(key, value) {
+      this.set('_variant', value);
+      return value;
+    },
+  }),
   size: 'large',
   disabled: false,
-  href: null,
+  icon: null,
+  iconPrefix: null,
+  iconOnly: false,
   task: null,
   onClick: null,
 
-  buttonClasses: computed('variant', 'size', 'active', function() {
+  _iconOnlyClasses() {
+    const baseClasses =
+      'inline-block leading-tight text-center bg-transparent focus:shadow-outline focus:outline-none';
+    const sizeClasses = 'p-2';
+    const fontClasses = 'text-sm font-semibold';
+    const disabledClasses = this.buttonDisabled ? 'opacity-50 cursor-not-allowed' : '';
+    const hoverClass = `${!this.buttonDisabled ? `hover:opacity-75` : ''}`;
+
+    return `${baseClasses} ${disabledClasses} ${sizeClasses} ${fontClasses} ${hoverClass}`;
+  },
+
+  hasIcon: notEmpty('icon'),
+  buttonDisabled: computed('task.isRunning', 'disabled', function() {
+    return this.get('task.isRunning') || this.disabled;
+  }),
+  iconOnlyVariant: computed('_variant', 'iconOnly', function() {
+    if (this.iconOnly) {
+      return this._variant ? this._variant : 'inherit';
+    }
+  }),
+
+  buttonClasses: computed('variant', 'size', 'active', 'disabled', 'iconOnly', function() {
+    if (this.iconOnly) {
+      return this._iconOnlyClasses();
+    }
+
     let variantClasses;
 
     switch (this.variant) {

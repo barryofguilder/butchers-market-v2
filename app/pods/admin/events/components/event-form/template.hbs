@@ -49,7 +49,7 @@
     <Group.textbox @value={{this.changeset.link}} />
   </Form.group>
 
-  <Form.group data-test-id="link" @model={{this.changeset}} @property="link" as |Group|>
+  <Form.group data-test-id="image" @model={{this.changeset}} @property="imageUrl" as |Group|>
     <Group.label>Image</Group.label>
     <div class="mt-2">
       <FileUpload

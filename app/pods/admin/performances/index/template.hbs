@@ -1,0 +1,66 @@
+<AdminTitle @title="Past Performances" />
+
+<div class="mt-8">
+  <Button @href={{href-to "admin.performances.new"}} @size="medium" @variant="plain">
+    {{fa-icon "plus"}}
+    New
+  </Button>
+</div>
+
+<Admin::Components::UiTable class="mt-8" as |Table|>
+  <Table.head
+    @currentSort={{this.currentSort}}
+    @onColumnClicked={{action "sortPerformances"}} as |Thead|
+  >
+    <Thead.th @name="title">Title</Thead.th>
+    <Thead.th @name="link">Link</Thead.th>
+    <Thead.th></Thead.th>
+  </Table.head>
+  <Table.body as |Tbody|>
+    {{#each this.sortedPerformances as |performance|}}
+      <Tbody.tr as |Row|>
+        <Row.td>{{performance.title}}</Row.td>
+        <Row.td>
+          <a
+            href={{performance.link}}
+            class="text-red-700 hover:underline"
+          >
+            {{performance.link}}
+          </a>
+        </Row.td>
+        <Row.td>
+          <div class="flex">
+            <Button
+              @href={{href-to "admin.performances.edit" performance.id}}
+              @iconOnly={{true}}
+              @icon="pencil-alt"
+              @variant="secondary"
+            />
+
+            <Button
+              class="ml-1"
+              @iconOnly={{true}}
+              @icon="trash-alt"
+              @variant="danger"
+              @onClick={{action (mut this.performanceToDelete) performance}}
+            />
+          </div>
+        </Row.td>
+      </Tbody.tr>
+    {{else}}
+      <Tbody.empty>
+        No performances found.
+      </Tbody.empty>
+    {{/each}}
+  </Table.body>
+</Admin::Components::UiTable>
+
+{{#if this.performanceToDelete}}
+  <Admin::Performances::Components::DeletePerformanceForm
+    @performance={{this.performanceToDelete}}
+    @onSave={{action (mut this.performanceToDelete) null}}
+    @onCancel={{action (mut this.performanceToDelete) null}}
+  />
+{{/if}}
+
+{{outlet}}

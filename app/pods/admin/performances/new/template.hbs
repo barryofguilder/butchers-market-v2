@@ -1,5 +1,7 @@
-<PerformanceForm
-  @performance={{model}}
+<AdminTitle @title="New Performance" />
+
+<Admin::Performances::Components::PerformanceForm
+  @performance={{this.model}}
   @saved={{action "performanceSaved"}}
   @cancelled={{action "performanceCancelled"}}
 />

@@ -7,14 +7,11 @@ import { task } from 'ember-concurrency';
 
 export default Component.extend({
   performance: null,
-  saved: null,
-  cancelled: null,
+  saved() {},
+  cancelled() {},
 
   changeset: null,
   errorMessage: null,
-  dialogTitle: computed('changeset.isNew', function() {
-    return this.get('changeset.isNew') ? 'New Performance' : 'Edit Performance';
-  }),
   saveDisabled: computed('changeset.isInvalid', function() {
     return this.get('changeset.isInvalid');
   }),
@@ -22,9 +19,8 @@ export default Component.extend({
   init() {
     this._super(...arguments);
 
-    let performance = this.get('performance');
     let changeset = new Changeset(
-      performance,
+      this.performance,
       lookupValidator(PerformanceValidations),
       PerformanceValidations
     );
@@ -32,26 +28,21 @@ export default Component.extend({
   },
 
   savePerformance: task(function*() {
-    let changeset = this.get('changeset');
+    yield this.changeset.validate();
 
-    yield changeset.validate();
-
-    if (!changeset.get('isValid')) {
+    if (!this.changeset.get('isValid')) {
       return;
     }
 
     try {
-      yield changeset.save();
-      this.get('saved')();
-    } catch (reason) {
-      this.get('performance').rollbackAttributes();
-      this.set('errorMessage', reason);
+      yield this.changeset.save();
+      this.saved();
+    } catch (ex) {
+      if (ex.body) {
+        this.set('errorMessage', ex.body.error);
+      } else {
+        this.set('errorMessage', ex);
+      }
     }
   }).drop(),
-
-  actions: {
-    close() {
-      this.get('cancelled')();
-    },
-  },
 });

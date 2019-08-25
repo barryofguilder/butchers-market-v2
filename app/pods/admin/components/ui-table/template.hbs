@@ -1,0 +1,13 @@
+<table
+  data-test-id="table"
+  class="table-auto w-full"
+  ...attributes
+>
+  {{yield
+    (
+      hash
+        head=(component "admin/components/ui-table/thead")
+        body=(component "admin/components/ui-table/tbody")
+    )
+  }}
+</table>

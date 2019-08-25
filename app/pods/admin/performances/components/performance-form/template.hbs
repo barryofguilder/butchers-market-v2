@@ -1,0 +1,33 @@
+<Admin::Components::AdminForm class="max-w-xl" @onSubmit={{perform this.savePerformance}} as |Form|>
+  {{#if this.errorMessage}}
+    <UiAlert data-test-id="server-error" @variant="danger">
+      {{this.errorMessage}}
+    </UiAlert>
+  {{/if}}
+
+  <p class="mb-8">
+    <strong>Note:</strong> Required fields are marked with an <RequiredField />
+  </p>
+
+  <Form.group data-test-id="title" @model={{this.changeset}} @property="title" as |Group|>
+    <Group.label>Title <RequiredField /></Group.label>
+    <Group.textbox @value={{this.changeset.title}} />
+  </Form.group>
+
+  <Form.group data-test-id="link" @model={{this.changeset}} @property="link" as |Group|>
+    <Group.label>Link <RequiredField /></Group.label>
+    <Group.textbox @value={{this.changeset.link}} />
+  </Form.group>
+
+  <div class="mt-8">
+    {{#if this.changeset.errors}}
+      <div class="mb-2 text-red-600">
+        Please fix the errors above and try again.
+      </div>
+    {{/if}}
+    <Form.submit @disabled={{this.saveDisabled}}>
+      Save
+    </Form.submit>
+    <Button class="ml-2" @variant="plain" @onClick={{action cancelled}}>Cancel</Button>
+  </div>
+</Admin::Components::AdminForm>

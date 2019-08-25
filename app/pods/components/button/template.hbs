@@ -5,6 +5,15 @@
     class={{this.buttonClasses}}
     ...attributes
   >
+    {{#if this.hasIcon}}
+      <UiIcon
+        data-test-id="button-icon"
+        @icon={{@icon}}
+        @iconPrefix={{@iconPrefix}}
+        @variant={{if this.iconOnly this.iconOnlyVariant "inherit"}}
+      />
+    {{/if}}
+
     {{yield}}
   </a>
 {{else}}
@@ -15,6 +24,15 @@
     onclick={{action "click"}}
     ...attributes
   >
+    {{#if this.hasIcon}}
+      <UiIcon
+        data-test-id="button-icon"
+        @icon={{@icon}}
+        @iconPrefix={{@iconPrefix}}
+        @variant={{if this.iconOnly this.iconOnlyVariant "inherit"}}
+      />
+    {{/if}}
+
     {{yield}}
   </button>
 {{/if}}
