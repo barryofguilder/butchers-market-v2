@@ -13,7 +13,7 @@
     </UiAlert>
   {{/if}}
 
-  {{#if showInvalidFormError}}
+  {{#if this.showInvalidFormError}}
     <UiAlert data-test-id="feedback-error" @variant="danger">
       {{#if this.recaptchaInvalid}}
         Invalid reCaptcha response, please try again
