@@ -1,24 +1,26 @@
 <form class="max-w-md" {{action "sendFeedback" on="submit"}}>
   {{#if this.feedbackSent}}
-    <div class="mb-4 bg-green-200 text-green-800 px-4 py-2">
-      Thank you for contacting us! If you require immediate assistance, please call us at (706) 279-9277.
-    </div>
+    <UiAlert data-test-id="feedback-success" @variant="success">
+      Thank you for contacting us! If you require immediate assistance, please call us at 
+      <br>
+      (706) 279-9277.
+    </UiAlert>
   {{/if}}
 
   {{#if this.showServerError}}
-    <div class="mb-4 bg-red-200 text-red-800 px-4 py-2">
+    <UiAlert data-test-id="server-error" @variant="danger">
       Oops, something went wrong. Please try again.
-    </div>
+    </UiAlert>
   {{/if}}
 
   {{#if showInvalidFormError}}
-    <div class="mb-4 bg-red-200 text-red-800 px-4 py-2">
+    <UiAlert data-test-id="feedback-error" @variant="danger">
       {{#if this.recaptchaInvalid}}
         Invalid reCaptcha response, please try again
       {{else}}
         Please fill out the form and try sending again.
       {{/if}}
-    </div>
+    </UiAlert>
   {{/if}}
 
   {{#unless this.feedbackSent}}
