@@ -15,9 +15,6 @@ module.exports = {
       fontFamily: {
         sans: ['"Source Sans Pro"', ...defaultTheme.fontFamily.sans],
       },
-      width: {
-        logo: '6.45rem', // This is the width for the Blues Street Cafe logo
-      },
     },
   },
   variants: {

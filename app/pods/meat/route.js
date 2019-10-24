@@ -10,10 +10,4 @@ export default Route.extend(ResetScrollMixin, MobileAppMixin, {
       products: this.store.findAll('meat-product'),
     });
   },
-
-  resetController: function(controller, isExiting /*, transition*/) {
-    if (isExiting) {
-      controller.set('packages', false);
-    }
-  },
 });
