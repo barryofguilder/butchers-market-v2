@@ -27,27 +27,25 @@
   </Container>
 </PromoSection>
 
-<ScrollToSection @shouldScroll={{this.events}} @selector="#events">
-  <section id="events">
-    <HeaderTitle @title="Events" />
+<section id="events">
+  <HeaderTitle @title="Events" />
 
-    <Container>
-      {{#if (gt this.sortedEvents.length 0)}}
-        <EventList @events={{this.sortedEvents}} />
-      {{else}}
-        <p class="mt-8 text-lg text-gray-700 sm:text-xl">
-          Check out the events on our
-          <a
-            class="text-red-800 hover:underline"
-            href="https://www.facebook.com/pg/thebutchersmarket/events/"
-          >
-            Facebook page
-          </a>.
-        </p>
-      {{/if}}
-    </Container>
-  </section>
-</ScrollToSection>
+  <Container>
+    {{#if (gt this.sortedEvents.length 0)}}
+      <EventList @events={{this.sortedEvents}} />
+    {{else}}
+      <p class="mt-8 text-lg text-gray-700 sm:text-xl">
+        Check out the events on our
+        <a
+          class="text-red-800 hover:underline"
+          href="https://www.facebook.com/pg/thebutchersmarket/events/"
+        >
+          Facebook page
+        </a>.
+      </p>
+    {{/if}}
+  </Container>
+</section>
 
 <section>
   <HeaderTitle @title="Past Performances" />
