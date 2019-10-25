@@ -12,6 +12,9 @@ export default Route.extend({
       if (packageBundle.get('hasDirtyAttributes')) {
         packageBundle.rollbackAttributes();
       }
+
+      // Makes sure that the page gets scrolled to the top when changing routes.
+      window.scrollTo(0, 0);
     },
   },
 });
