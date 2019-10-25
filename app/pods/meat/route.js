@@ -6,6 +6,7 @@ export default Route.extend({
     return RSVP.hash({
       bundles: this.store.findAll('meat-bundle'),
       products: this.store.findAll('meat-product'),
+      packageBundles: this.store.findAll('package-bundle'),
     });
   },
 

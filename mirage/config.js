@@ -10,6 +10,7 @@ export default function() {
   this.get('/hours.json', 'hour');
   this.get('/meatBundles.json', 'meat-bundle');
   this.get('/meatProducts.json', 'meat-product');
+  this.get('/packageBundles.json', 'package-bundle');
   this.get('/performances.json', 'performance');
   this.get('/reviews.json', 'review');
 
