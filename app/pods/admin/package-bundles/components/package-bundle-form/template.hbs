@@ -27,10 +27,16 @@
 
   <Form.group data-test-id="prices">
     <Form.label>Prices</Form.label>
-    {{#each this.prices as |price index|}}
+
+    <DragSortList
+      @items={{this.prices}}
+      @handle=".handle"
+      @dragEndAction={{action "reorderPrices"}} as |price index|
+    >
       <div data-test-id="price-{{index}}" class={{if (gt index 0) "mt-2"}}>
         <div class="flex items-center">
-          <UiTextbox @value={{price}} @keyUp={{action "priceChanged" index}} />
+          <span class="handle" draggable="true">☰</span>
+          <UiTextbox class="ml-2" @value={{price}} @keyUp={{action "priceChanged" index}} />
           <Button
             @iconOnly={{true}}
             @icon="trash-alt"
@@ -40,7 +46,7 @@
           />
         </div>
       </div>
-    {{/each}}
+    </DragSortList>
 
     <div class="mt-2">
       <Button
@@ -56,10 +62,16 @@
 
   <Form.group data-test-id="items">
     <Form.label>Items</Form.label>
-    {{#each this.items as |item index|}}
+
+    <DragSortList
+      @items={{this.items}}
+      @handle=".handle"
+      @dragEndAction={{action "reorderItems"}} as |item index|
+    >
       <div data-test-id="item-{{index}}" class={{if (gt index 0) "mt-2"}}>
         <div class="flex items-center">
-          <UiTextbox @value={{item}} @keyUp={{action "itemChanged" index}} />
+          <span class="handle" draggable="true">☰</span>
+          <UiTextbox class="ml-2" @value={{item}} @keyUp={{action "itemChanged" index}} />
           <Button
             @iconOnly={{true}}
             @icon="trash-alt"
@@ -69,7 +81,7 @@
           />
         </div>
       </div>
-    {{/each}}
+    </DragSortList>
 
     <div class="mt-2">
       <Button

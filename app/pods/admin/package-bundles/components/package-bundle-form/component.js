@@ -90,6 +90,18 @@ export default Component.extend({
       this.set('prices', prices);
     },
 
+    reorderPrices({ sourceIndex, sourceList, targetIndex, targetList }) {
+      if (sourceIndex === targetIndex) {
+        // Not moving up or down
+        return;
+      }
+
+      const item = sourceList.objectAt(sourceIndex);
+
+      sourceList.removeAt(sourceIndex);
+      targetList.insertAt(targetIndex, item);
+    },
+
     addItem() {
       this.items.pushObject('');
     },
@@ -107,6 +119,18 @@ export default Component.extend({
       }
 
       this.set('items', items);
+    },
+
+    reorderItems({ sourceIndex, sourceList, targetIndex, targetList }) {
+      if (sourceIndex === targetIndex) {
+        // Not moving up or down
+        return;
+      }
+
+      const item = sourceList.objectAt(sourceIndex);
+
+      sourceList.removeAt(sourceIndex);
+      targetList.insertAt(targetIndex, item);
     },
   },
 });
