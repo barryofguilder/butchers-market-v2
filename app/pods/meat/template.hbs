@@ -47,16 +47,18 @@
   </Container>
 </section>
 
-{{#each this.model.packageBundles as |bundle|}}
+{{#each (sort-by "displayOrder" this.model.packageBundles) as |bundle|}}
   <section>
     <HeaderTitle @title={{bundle.title}} />
 
     <Container>
-      <div class="mt-8 text-center">
-        <Button @href={{bundle.flyerDownloadLink}}>
-          Print Flyer
-        </Button>
-      </div>
+      {{#if bundle.flyerDownloadLink}}
+        <div class="mt-8 text-center">
+          <Button @href={{bundle.flyerDownloadLink}}>
+            Print Flyer
+          </Button>
+        </div>
+      {{/if}}
 
       <div class="mt-12 sm:flex sm:flex-wrap">
         <div class="text-lg font-black md:text-2xl sm:w-full lg:w-1/3">
