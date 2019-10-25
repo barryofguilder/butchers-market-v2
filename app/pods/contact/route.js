@@ -1,10 +1,18 @@
 import Route from '@ember/routing/route';
-import ResetScrollMixin from 'butchers-market/mixins/reset-scroll-mixin';
 
-export default Route.extend(ResetScrollMixin, {
+export default Route.extend({
   queryParams: {
     events: {
       refreshModel: true,
+    },
+  },
+
+  actions: {
+    willTransition: function(/*transition*/) {
+      this._super(...arguments);
+
+      // Makes sure that the page gets scrolled to the top when changing routes.
+      window.scrollTo(0, 0);
     },
   },
 });

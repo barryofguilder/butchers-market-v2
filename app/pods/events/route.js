@@ -1,8 +1,7 @@
 import Route from '@ember/routing/route';
 import RSVP from 'rsvp';
-import ResetScrollMixin from 'butchers-market/mixins/reset-scroll-mixin';
 
-export default Route.extend(ResetScrollMixin, {
+export default Route.extend({
   queryParams: {
     events: {
       refreshModel: true,
@@ -22,5 +21,14 @@ export default Route.extend(ResetScrollMixin, {
     if (isExiting) {
       controller.set('events', false);
     }
+  },
+
+  actions: {
+    willTransition: function(/*transition*/) {
+      this._super(...arguments);
+
+      // Makes sure that the page gets scrolled to the top when changing routes.
+      window.scrollTo(0, 0);
+    },
   },
 });
