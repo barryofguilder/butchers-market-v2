@@ -1,6 +1,6 @@
 {
   "name": "butchers-market",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "private": true,
   "description": "Small description for butchers-market goes here",
   "repository": "",
@@ -57,7 +57,7 @@
     "ember-lifeline": "~4.1.5",
     "ember-load-initializers": "^2.1.0",
     "ember-maybe-import-regenerator": "^0.1.6",
-    "ember-metrics": "~0.13.0",
+    "ember-metrics": "~0.14.0",
     "ember-mockdate-shim": "^0.1.0",
     "ember-modal-dialog": "^3.0.0-beta.4",
     "ember-qunit": "^4.5.1",
