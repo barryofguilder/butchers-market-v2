@@ -12,6 +12,9 @@ export default Route.extend({
       if (performance.get('hasDirtyAttributes')) {
         performance.rollbackAttributes();
       }
+
+      // Makes sure that the page gets scrolled to the top when changing routes.
+      window.scrollTo(0, 0);
     },
   },
 });

@@ -1,16 +1,16 @@
 import Route from '@ember/routing/route';
 
 export default Route.extend({
-  model() {
-    return this.store.createRecord('event');
+  model(params) {
+    return this.store.findRecord('package-bundle', params.id);
   },
 
   actions: {
     willTransition(/*transition*/) {
-      let event = this.modelFor(this.routeName);
+      let packageBundle = this.modelFor(this.routeName);
 
-      if (event.get('hasDirtyAttributes')) {
-        event.rollbackAttributes();
+      if (packageBundle.get('hasDirtyAttributes')) {
+        packageBundle.rollbackAttributes();
       }
 
       // Makes sure that the page gets scrolled to the top when changing routes.

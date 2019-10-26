@@ -47,9 +47,7 @@ export default Component.extend({
     return this.get('task.isRunning') || this.disabled;
   }),
   iconOnlyVariant: computed('_variant', 'iconOnly', function() {
-    if (this.iconOnly) {
-      return this._variant ? this._variant : 'inherit';
-    }
+    return this.iconOnly && this._variant ? this._variant : 'inherit';
   }),
 
   buttonClasses: computed('variant', 'size', 'active', 'disabled', 'iconOnly', function() {

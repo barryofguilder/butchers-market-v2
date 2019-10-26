@@ -1,0 +1,73 @@
+<Admin::Components::Title @title="Package Bundles" />
+
+{{! Hiding the new button until it's needed }}
+{{!-- <div class="mt-8">
+  <Button @href={{href-to "admin.package-bundles.new"}} @icon="plus" @size="medium" @variant="plain">
+    New
+  </Button>
+</div> --}}
+
+<Admin::Components::UiTable class="mt-8" as |Table|>
+  <Table.head as |Thead|>
+    <Thead.th>Title</Thead.th>
+    <Thead.th>Flyer Download Link</Thead.th>
+    <Thead.th>Prices</Thead.th>
+    <Thead.th>Items</Thead.th>
+    <Thead.th></Thead.th>
+  </Table.head>
+  <Table.body as |Tbody|>
+    {{#each this.sortedBundles as |bundle|}}
+      <Tbody.tr as |Row|>
+        <Row.td>{{bundle.title}}</Row.td>
+        <Row.td>{{bundle.flyerDownloadLink}}</Row.td>
+        <Row.td>
+          <ul>
+            {{#each bundle.prices as |price|}}
+              <li>{{price}}</li>
+            {{/each}}
+          </ul>
+        </Row.td>
+        <Row.td>
+          {{#if bundle.items}}
+            {{bundle.items.length}} Items
+          {{else}}
+            0 Items
+          {{/if}}
+        </Row.td>
+        <Row.td>
+          <div class="flex justify-end">
+            <Button
+              @href={{href-to "admin.package-bundles.edit" bundle.id}}
+              @iconOnly={{true}}
+              @icon="pencil-alt"
+              @variant="secondary"
+            />
+
+            {{! Hiding the delete button until it's needed }}
+            {{!-- <Button
+              class="ml-1"
+              @iconOnly={{true}}
+              @icon="trash-alt"
+              @variant="danger"
+              @onClick={{action (mut this.bundleToDelete) bundle}}
+            /> --}}
+          </div>
+        </Row.td>
+      </Tbody.tr>
+    {{else}}
+      <Tbody.empty>
+        No package bundles found.
+      </Tbody.empty>
+    {{/each}}
+  </Table.body>
+</Admin::Components::UiTable>
+
+{{#if this.bundleToDelete}}
+  <Admin::PackageBundles::Components::DeletePackageBundleForm
+    @bundle={{this.bundleToDelete}}
+    @onSave={{action (mut this.bundleToDelete) null}}
+    @onCancel={{action (mut this.bundleToDelete) null}}
+  />
+{{/if}}
+
+{{outlet}}

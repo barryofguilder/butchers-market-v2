@@ -1,0 +1,111 @@
+<Admin::Components::AdminForm class="max-w-xl" @onSubmit={{perform this.saveBundle}} as |Form|>
+  {{#if this.errorMessage}}
+    <UiAlert data-test-id="server-error" @variant="danger">
+      {{this.errorMessage}}
+    </UiAlert>
+  {{/if}}
+
+  <p class="mb-8">
+    <strong>Note:</strong> Required fields are marked with an <Admin::Components::Required />
+  </p>
+
+  <Form.group data-test-id="title" @model={{this.changeset}} @property="title" as |Group|>
+    <Group.label>
+      Title <Admin::Components::Required />
+    </Group.label>
+    <Group.textbox @value={{this.changeset.title}} />
+  </Form.group>
+
+  <Form.group
+    data-test-id="flyer-download-link"
+    @model={{this.changeset}}
+    @property="flyerDownloadLink" as |Group|
+  >
+    <Group.label>Flyer Download Link</Group.label>
+    <Group.textbox @value={{this.changeset.flyerDownloadLink}} />
+  </Form.group>
+
+  <Form.group data-test-id="prices">
+    <Form.label>Prices</Form.label>
+
+    <DragSortList
+      @items={{this.prices}}
+      @handle=".handle"
+      @dragEndAction={{action "reorderPrices"}} as |price index|
+    >
+      <div data-test-id="price-{{index}}" class="{{if (gt index 0) "pt-1"}} pb-1">
+        <div class="flex items-center">
+          <span class="handle text-gray-600" draggable="true">☰</span>
+          <UiTextbox class="ml-2" @value={{price}} @keyUp={{action "priceChanged" index}} />
+          <Button
+            class="mr-1"
+            @iconOnly={{true}}
+            @icon="trash-alt"
+            @variant="danger"
+            title="Delete price"
+            @onClick={{action "deletePrice" index}}
+          />
+        </div>
+      </div>
+    </DragSortList>
+
+    <div class="mt-2">
+      <Button
+        @icon="plus"
+        @size="medium"
+        @variant="plain"
+        @onClick={{action "addPrice"}}
+      >
+        New Price
+      </Button>
+    </div>
+  </Form.group>
+
+  <Form.group data-test-id="items">
+    <Form.label>Items</Form.label>
+
+    <DragSortList
+      @items={{this.items}}
+      @handle=".handle"
+      @dragEndAction={{action "reorderItems"}} as |item index|
+    >
+      <div data-test-id="item-{{index}}" class="{{if (gt index 0) "pt-1"}} pb-1">
+        <div class="flex items-center">
+          <span class="handle text-gray-600" draggable="true">☰</span>
+          <UiTextbox class="ml-2" @value={{item}} @keyUp={{action "itemChanged" index}} />
+          <Button
+            class="mr-1"
+            @iconOnly={{true}}
+            @icon="trash-alt"
+            @variant="danger"
+            title="Delete item"
+            @onClick={{action "deleteItem" index}}
+          />
+        </div>
+      </div>
+    </DragSortList>
+
+    <div class="mt-2">
+      <Button
+        @icon="plus"
+        @size="medium"
+        @variant="plain"
+        @onClick={{action "addItem"}}
+      >
+        New Item
+      </Button>
+    </div>
+  </Form.group>
+
+  <div class="mt-8">
+    {{#if this.changeset.errors}}
+      <div class="mb-2 text-red-600">
+        Please fix the errors above and try again.
+      </div>
+    {{/if}}
+    <Form.submit @disabled={{this.saveDisabled}}>
+      Save
+    </Form.submit>
+    <Button class="ml-2" @variant="plain" @onClick={{action cancelled}}>Cancel</Button>
+  </div>
+</Admin::Components::AdminForm>

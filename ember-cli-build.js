@@ -8,6 +8,14 @@ module.exports = function(defaults) {
       exclude: ['apple-touch-icon.png', 'images/*.*'],
     },
 
+    babel: {
+      plugins: ['transform-object-rest-spread'],
+    },
+
+    'ember-composable-helpers': {
+      only: ['sort-by'],
+    },
+
     postcssOptions: {
       compile: {
         plugins: [

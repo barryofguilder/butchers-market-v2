@@ -1,0 +1,53 @@
+<ModalDialog as |Modal|>
+  <Modal.header>
+    Delete Package Bundle?
+  </Modal.header>
+  <Admin::Components::AdminForm
+    class="max-w-xl"
+    @onSubmit={{perform this.deleteBundle}} as |Form|
+  >
+    <Modal.body>
+      {{#if this.errorMessage}}
+        <UiAlert data-test-id="server-error" @variant="danger">
+          {{this.errorMessage}}
+        </UiAlert>
+      {{/if}}
+
+      <p class="mb-8">
+        Do you really want to delete this package bundle?
+      </p>
+
+      <Form.group data-test-id="title" as |Group|>
+        <Group.label>Title</Group.label>
+        <Group.readonly @value={{@bundle.title}} />
+      </Form.group>
+
+      <Form.group data-test-id="flyer-download-link" as |Group|>
+        <Group.label>Flyer Download Link</Group.label>
+        <Group.readonly @value={{@bundle.flyerDownloadLink}} />
+      </Form.group>
+
+      <Form.group data-test-id="prices" as |Group|>
+        <Group.label>Prices</Group.label>
+        <ul class="list-disc list-inside">
+          {{#each @bundle.prices as |price|}}
+            <li>{{price}}</li>
+          {{/each}}
+        </ul>
+      </Form.group>
+
+      <Form.group data-test-id="items" as |Group|>
+        <Group.label>Items</Group.label>
+        {{@bundle.items.length}} Items
+      </Form.group>
+    </Modal.body>
+    <Modal.footer>
+      <Button @variant="plain" @onClick={{action this.onCancel}}>
+        No
+      </Button>
+      <Form.submit class="ml-2" @disabled={{if this.deleteBundle.isRunning true false}}>
+        Yes
+      </Form.submit>
+    </Modal.footer>
+  </Admin::Components::AdminForm>
+</ModalDialog>

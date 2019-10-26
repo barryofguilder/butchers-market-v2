@@ -10,6 +10,7 @@ export default function() {
   this.get('/hours.json', 'hour');
   this.get('/meatBundles.json', 'meat-bundle');
   this.get('/meatProducts.json', 'meat-product');
+  this.get('/packageBundles.json', 'package-bundle');
   this.get('/performances.json', 'performance');
   this.get('/reviews.json', 'review');
 
@@ -100,5 +101,23 @@ export default function() {
     let id = request.queryParams.id;
 
     performances.find(id).destroy();
+  });
+
+  this.get('/packageBundles.php', 'package-bundle', { coalesce: true });
+  this.post('/packageBundles.php', 'package-bundle');
+  this.put('/packageBundles.php', function({ packageBundles }, request) {
+    // This is a temporary workaround, see this GitHub issue:
+    // https://github.com/samselikoff/ember-cli-mirage/issues/1384
+    this.path = '/packageBundles';
+
+    let id = request.queryParams.id;
+    let attrs = this.normalizedRequestAttrs();
+
+    return packageBundles.find(id).update(attrs);
+  });
+  this.del('/packageBundles.php', function({ packageBundles }, request) {
+    let id = request.queryParams.id;
+
+    packageBundles.find(id).destroy();
   });
 }
