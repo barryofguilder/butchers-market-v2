@@ -1,10 +1,11 @@
 <Admin::Components::Title @title="Package Bundles" />
 
-<div class="mt-8">
+{{! Hiding the new button until it's needed }}
+{{!-- <div class="mt-8">
   <Button @href={{href-to "admin.package-bundles.new"}} @icon="plus" @size="medium" @variant="plain">
     New
   </Button>
-</div>
+</div> --}}
 
 <Admin::Components::UiTable class="mt-8" as |Table|>
   <Table.head as |Thead|>
@@ -42,13 +43,14 @@
               @variant="secondary"
             />
 
-            <Button
+            {{! Hiding the delete button until it's needed }}
+            {{!-- <Button
               class="ml-1"
               @iconOnly={{true}}
               @icon="trash-alt"
               @variant="danger"
               @onClick={{action (mut this.bundleToDelete) bundle}}
-            />
+            /> --}}
           </div>
         </Row.td>
       </Tbody.tr>
