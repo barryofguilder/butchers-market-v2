@@ -1,19 +1,16 @@
-import DS from 'ember-data';
-import { computed } from '@ember/object';
+import Model, { attr } from '@ember-data/model';
 import { isBlank } from '@ember/utils';
 
-export default DS.Model.extend({
-  title: DS.attr('string'),
-  link: DS.attr('string'),
+export default class Performance extends Model {
+  @attr('string') title;
+  @attr('string') link;
 
-  embedLink: computed('link', function() {
-    let link = this.get('link');
-
-    if (isBlank(link)) {
-      return;
+  get embedLink() {
+    if (isBlank(this.link)) {
+      return null;
     }
 
-    let embedLink = link.replace('watch?v=', 'embed/');
+    let embedLink = this.link.replace('watch?v=', 'embed/');
     let paramIndex = embedLink.indexOf('&');
 
     if (paramIndex > 0) {
@@ -21,5 +18,5 @@ export default DS.Model.extend({
     }
 
     return embedLink;
-  }),
-});
+  }
+}

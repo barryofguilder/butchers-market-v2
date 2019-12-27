@@ -1,10 +1,10 @@
-import DS from 'ember-data';
+import Model, { attr } from '@ember-data/model';
 
-export default DS.Model.extend({
-  title: DS.attr('string'),
-  leadIn: DS.attr('string'),
-  startTime: DS.attr('date'),
-  endTime: DS.attr('date'),
-  link: DS.attr('string'),
-  imageUrl: DS.attr('string'),
-});
+export default class Event extends Model {
+  @attr('string') title;
+  @attr('string') leadIn;
+  @attr('date') startTime;
+  @attr('date') endTime;
+  @attr('string') link;
+  @attr('string') imageUrl;
+}
