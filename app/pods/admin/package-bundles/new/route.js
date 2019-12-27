@@ -1,20 +1,20 @@
 import Route from '@ember/routing/route';
+import { action } from '@ember/object';
 
-export default Route.extend({
+export default class AdminPackageBundlesNewRoute extends Route {
   model() {
     return this.store.createRecord('package-bundle', { prices: [], items: [] });
-  },
+  }
 
-  actions: {
-    willTransition(/*transition*/) {
-      let packageBundle = this.modelFor(this.routeName);
+  @action
+  willTransition(/*transition*/) {
+    let packageBundle = this.modelFor(this.routeName);
 
-      if (packageBundle.get('hasDirtyAttributes')) {
-        packageBundle.rollbackAttributes();
-      }
+    if (packageBundle.hasDirtyAttributes) {
+      packageBundle.rollbackAttributes();
+    }
 
-      // Makes sure that the page gets scrolled to the top when changing routes.
-      window.scrollTo(0, 0);
-    },
-  },
-});
+    // Makes sure that the page gets scrolled to the top when changing routes.
+    window.scrollTo(0, 0);
+  }
+}

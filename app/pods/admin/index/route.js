@@ -1,12 +1,10 @@
 import Route from '@ember/routing/route';
+import { action } from '@ember/object';
 
-export default Route.extend({
-  actions: {
-    willTransition: function(/*transition*/) {
-      this._super(...arguments);
-
-      // Makes sure that the page gets scrolled to the top when changing routes.
-      window.scrollTo(0, 0);
-    },
-  },
-});
+export default class AdminIndexRoute extends Route {
+  @action
+  willTransition(/*transition*/) {
+    // Makes sure that the page gets scrolled to the top when changing routes.
+    window.scrollTo(0, 0);
+  }
+}

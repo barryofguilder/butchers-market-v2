@@ -1,6 +1,5 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import { tracked } from '@glimmer/tracking';
 import { sort } from '@ember/object/computed';
 import dateSort from 'butchers-market/utils/date-sort';
 import { isAfter, isSameDay } from 'date-fns';
@@ -9,10 +8,6 @@ const PERFORMANCES_TO_SHOW = 11;
 
 export default class EventsController extends Controller {
   @service media;
-
-  queryParams = ['events'];
-
-  @tracked events = false;
 
   get filteredEvents() {
     let now = new Date();
