@@ -21,7 +21,7 @@ export default Component.extend({
 
     let changeset = new Changeset(this.hours, lookupValidator(HoursValidations), HoursValidations);
 
-    if (changeset.get('isNew')) {
+    if (this.hours.get('isNew')) {
       let now = new Date();
 
       changeset.setProperties({

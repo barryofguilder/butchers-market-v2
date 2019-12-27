@@ -22,7 +22,7 @@ export default Component.extend({
 
     let changeset = new Changeset(this.event, lookupValidator(EventValidations), EventValidations);
 
-    if (changeset.get('isNew')) {
+    if (this.event.get('isNew')) {
       let now = new Date();
 
       changeset.setProperties({

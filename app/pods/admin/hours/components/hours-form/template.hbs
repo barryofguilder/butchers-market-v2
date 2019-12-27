@@ -43,43 +43,45 @@
     <Group.textbox @value={{this.changeset.label}} />
   </Form.group>
 
-  <Form.group
-    data-test-id="start-date"
-    @model={{this.changeset}}
-    @property="activeStartDate" as |Group|
-  >
-    <Group.label>Active Start Date <Admin::Components::Required /></Group.label>
-    <Group.datepicker
-      @disableMobile={{true}}
-      @allowInput={{false}}
-      @appendDataInput={{true}}
-      @date={{readonly this.changeset.activeStartDate}}
-      @dateFormat="m/d/Y"
-      @onChange={{action "startDateSelected"}}
-    />
-    <Group.help>
-      The date that these hours will become active on.
-    </Group.help>
-  </Form.group>
+  {{#unless this.changeset.default}}
+    <Form.group
+      data-test-id="start-date"
+      @model={{this.changeset}}
+      @property="activeStartDate" as |Group|
+    >
+      <Group.label>Active Start Date <Admin::Components::Required /></Group.label>
+      <Group.datepicker
+        @disableMobile={{true}}
+        @allowInput={{false}}
+        @appendDataInput={{true}}
+        @date={{readonly this.changeset.activeStartDate}}
+        @dateFormat="m/d/Y"
+        @onChange={{action "startDateSelected"}}
+      />
+      <Group.help>
+        The date that these hours will become active on.
+      </Group.help>
+    </Form.group>
 
-  <Form.group
-    data-test-id="end-date"
-    @model={{this.changeset}}
-    @property="activeEndDate" as |Group|
-  >
-    <Group.label>Active End Date <Admin::Components::Required /></Group.label>
-    <Group.datepicker
-      @disableMobile={{true}}
-      @allowInput={{false}}
-      @appendDataInput={{true}}
-      @date={{readonly this.changeset.activeEndDate}}
-      @dateFormat="m/d/Y"
-      @onChange={{action "endDateSelected"}}
-    />
-    <Group.help>
-      The last date that these hours will be active on.
-    </Group.help>
-  </Form.group>
+    <Form.group
+      data-test-id="end-date"
+      @model={{this.changeset}}
+      @property="activeEndDate" as |Group|
+    >
+      <Group.label>Active End Date <Admin::Components::Required /></Group.label>
+      <Group.datepicker
+        @disableMobile={{true}}
+        @allowInput={{false}}
+        @appendDataInput={{true}}
+        @date={{readonly this.changeset.activeEndDate}}
+        @dateFormat="m/d/Y"
+        @onChange={{action "endDateSelected"}}
+      />
+      <Group.help>
+        The last date that these hours will be active on.
+      </Group.help>
+    </Form.group>
+  {{/unless}}
 
   <Form.group data-test-id="line1" @model={{this.changeset}} @property="line1" as |Group|>
     <Group.label>Line 1 <Admin::Components::Required /></Group.label>
