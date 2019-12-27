@@ -9,7 +9,7 @@
 <Admin::Components::UiTable class="mt-8" as |Table|>
   <Table.head
     @currentSort={{this.currentSort}}
-    @onColumnClicked={{action "sortPerformances"}} as |Thead|
+    @onColumnClicked={{action this.sortPerformances}} as |Thead|
   >
     <Thead.th @name="title">Title</Thead.th>
     <Thead.th @name="link">Link</Thead.th>

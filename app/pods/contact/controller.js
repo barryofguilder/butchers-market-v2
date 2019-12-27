@@ -1,9 +1,12 @@
-import { bool } from '@ember/object/computed';
 import Controller from '@ember/controller';
+import { tracked } from '@glimmer/tracking';
 
-export default Controller.extend({
-  queryParams: ['events'],
-  events: false,
+export default class ContactController extends Controller {
+  queryParams = ['events'];
 
-  isEventsPage: bool('events'),
-});
+  @tracked events = false;
+
+  get isEventsPage() {
+    return this.events;
+  }
+}

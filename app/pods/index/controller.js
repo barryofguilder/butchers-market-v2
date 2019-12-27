@@ -1,9 +1,10 @@
-import { filterBy } from '@ember/object/computed';
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import { filterBy } from '@ember/object/computed';
 
-export default Controller.extend({
-  media: service(),
+export default class IndexController extends Controller {
+  @service media;
 
-  featuredBundles: filterBy('model.bundles', 'featured', true),
-});
+  @filterBy('model.bundles', 'featured', true)
+  featuredBundles;
+}

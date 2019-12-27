@@ -1,11 +1,10 @@
-import { computed } from '@ember/object';
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 
-export default Controller.extend({
-  media: service(),
+export default class DeliController extends Controller {
+  @service media;
 
-  cardColumns: computed('media.isMd', function() {
-    return this.get('media.isMd') ? 2 : 4;
-  }),
-});
+  get cardColumns() {
+    return this.media.isMd ? 2 : 4;
+  }
+}
