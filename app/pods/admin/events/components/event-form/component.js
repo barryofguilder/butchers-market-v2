@@ -28,8 +28,8 @@ export default class EventForm extends Component {
     if (this.args.event.isNew) {
       let now = new Date();
 
-      changeset.startTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 19);
-      changeset.endTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 22);
+      changeset.set('startTime', new Date(now.getFullYear(), now.getMonth(), now.getDate(), 19));
+      changeset.set('endTime', new Date(now.getFullYear(), now.getMonth(), now.getDate(), 22));
     }
 
     this.changeset = changeset;
@@ -43,11 +43,11 @@ export default class EventForm extends Component {
     }
 
     try {
-      let image = this.changeset.image;
+      let image = this.changeset.get('image');
 
       if (image) {
         let response = yield image.upload('/server/imageUpload.php');
-        this.changeset.imageUrl = response.headers.location;
+        this.changeset.set('imageUrl', response.headers.location);
       }
 
       yield this.changeset.save();
@@ -65,8 +65,8 @@ export default class EventForm extends Component {
   @(task(function*(file) {
     try {
       let url = yield file.readAsDataURL();
-      this.changeset.imageUrl = url;
-      this.changeset.image = file;
+      this.changeset.set('imageUrl', url);
+      this.changeset.set('image', file);
     } catch (e) {
       this.fileErrorMessage = 'Could not read the file contents';
     }
@@ -78,36 +78,45 @@ export default class EventForm extends Component {
   @action
   dateSelected(date) {
     const startTime = this.changeset.startTime;
-    this.changeset.startTime = new Date(
-      date[0].getFullYear(),
-      date[0].getMonth(),
-      date[0].getDate(),
-      startTime.getHours(),
-      startTime.getMinutes()
+    this.changeset.set(
+      'startTime',
+      new Date(
+        date[0].getFullYear(),
+        date[0].getMonth(),
+        date[0].getDate(),
+        startTime.getHours(),
+        startTime.getMinutes()
+      )
     );
   }
 
   @action
   startTimeSelected(time) {
     const startTime = this.changeset.startTime;
-    this.changeset.startTime = new Date(
-      startTime.getFullYear(),
-      startTime.getMonth(),
-      startTime.getDate(),
-      time[0].getHours(),
-      time[0].getMinutes()
+    this.changeset.set(
+      'startTime',
+      new Date(
+        startTime.getFullYear(),
+        startTime.getMonth(),
+        startTime.getDate(),
+        time[0].getHours(),
+        time[0].getMinutes()
+      )
     );
   }
 
   @action
   endTimeSelected(time) {
     const startTime = this.changeset.startTime;
-    this.changeset.endTime = new Date(
-      startTime.getFullYear(),
-      startTime.getMonth(),
-      startTime.getDate(),
-      time[0].getHours(),
-      time[0].getMinutes()
+    this.changeset.set(
+      'endTime',
+      new Date(
+        startTime.getFullYear(),
+        startTime.getMonth(),
+        startTime.getDate(),
+        time[0].getHours(),
+        time[0].getMinutes()
+      )
     );
   }
 
