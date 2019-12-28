@@ -1,7 +1,4 @@
 module.exports = {
-  globals: {
-    server: true,
-  },
   root: true,
   parser: 'babel-eslint',
   parserOptions: {
@@ -20,12 +17,16 @@ module.exports = {
     'ember/no-jquery': 'error',
     'prettier/prettier': 'error',
   },
+  globals: {
+    server: true,
+  },
   overrides: [
     // node files
     {
       files: [
         '.eslintrc.js',
         '.template-lintrc.js',
+        '.prettierrc.js',
         'ember-cli-build.js',
         'testem.js',
         'blueprints/*/index.js',
