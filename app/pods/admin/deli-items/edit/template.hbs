@@ -1,0 +1,7 @@
+<Admin::Components::Title @title="Edit Deli Item" />
+
+<Admin::DeliItems::Components::DeliItemForm
+  @item={{this.model}}
+  @saved={{action this.deliItemSaved}}
+  @cancelled={{action this.deliItemCancelled}}
+/>

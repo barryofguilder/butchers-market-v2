@@ -2,6 +2,9 @@ import Response from 'ember-cli-mirage/response';
 import { upload } from 'ember-file-upload/mirage';
 
 export default function() {
+  // Allows us to access the Mirage server in the console using `window.server`.
+  window.server = this;
+
   //this.timing = 400;
   this.namespace = '/data';
 
@@ -22,12 +25,8 @@ export default function() {
   this.get('/events.php', 'event', { coalesce: true });
   this.post('/events.php', 'event');
   this.put('/events.php', function({ events }, request) {
-    // This is a temporary workaround, see this GitHub issue:
-    // https://github.com/samselikoff/ember-cli-mirage/issues/1384
-    this.path = '/events';
-
     let id = request.queryParams.id;
-    let attrs = this.normalizedRequestAttrs();
+    let attrs = this.normalizedRequestAttrs('event');
 
     return events.find(id).update(attrs);
   });
@@ -40,7 +39,7 @@ export default function() {
   this.post(
     '/imageUpload.php',
     upload(function(db, request) {
-      return new Response(201, { Location: request.requestBody.file.url }, {});
+      return new Response(201, { location: request.requestBody.file.url }, {});
     })
   );
 
@@ -70,12 +69,8 @@ export default function() {
   this.get('/hours.php', 'hour', { coalesce: true });
   this.post('/hours.php', 'hour');
   this.put('/hours.php', function({ hours }, request) {
-    // This is a temporary workaround, see this GitHub issue:
-    // https://github.com/samselikoff/ember-cli-mirage/issues/1384
-    this.path = '/hours';
-
     let id = request.queryParams.id;
-    let attrs = this.normalizedRequestAttrs();
+    let attrs = this.normalizedRequestAttrs('hour');
 
     return hours.find(id).update(attrs);
   });
@@ -88,12 +83,8 @@ export default function() {
   this.get('/performances.php', 'performance', { coalesce: true });
   this.post('/performances.php', 'performance');
   this.put('/performances.php', function({ performances }, request) {
-    // This is a temporary workaround, see this GitHub issue:
-    // https://github.com/samselikoff/ember-cli-mirage/issues/1384
-    this.path = '/performances';
-
     let id = request.queryParams.id;
-    let attrs = this.normalizedRequestAttrs();
+    let attrs = this.normalizedRequestAttrs('performance');
 
     return performances.find(id).update(attrs);
   });
@@ -106,12 +97,8 @@ export default function() {
   this.get('/packageBundles.php', 'package-bundle', { coalesce: true });
   this.post('/packageBundles.php', 'package-bundle');
   this.put('/packageBundles.php', function({ packageBundles }, request) {
-    // This is a temporary workaround, see this GitHub issue:
-    // https://github.com/samselikoff/ember-cli-mirage/issues/1384
-    this.path = '/packageBundles';
-
     let id = request.queryParams.id;
-    let attrs = this.normalizedRequestAttrs();
+    let attrs = this.normalizedRequestAttrs('package-bundle');
 
     return packageBundles.find(id).update(attrs);
   });
@@ -119,5 +106,19 @@ export default function() {
     let id = request.queryParams.id;
 
     packageBundles.find(id).destroy();
+  });
+
+  this.get('/deliItems.php', 'deli-item', { coalesce: true });
+  this.post('/deliItems.php', 'deli-item');
+  this.put('/deliItems.php', function({ deliItems }, request) {
+    let id = request.queryParams.id;
+    let attrs = this.normalizedRequestAttrs('deli-item');
+
+    return deliItems.find(id).update(attrs);
+  });
+  this.del('/deliItems.php', function({ deliItems }, request) {
+    let id = request.queryParams.id;
+
+    deliItems.find(id).destroy();
   });
 }

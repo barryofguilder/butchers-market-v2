@@ -1,0 +1,81 @@
+<Admin::Components::AdminForm class="max-w-xl" @onSubmit={{perform this.saveItem}} as |Form|>
+  {{#if this.errorMessage}}
+    <UiAlert data-test-id="server-error" @variant="danger">
+      {{this.errorMessage}}
+    </UiAlert>
+  {{/if}}
+
+  <p class="mb-8">
+    <strong>Note:</strong> Required fields are marked with an <Admin::Components::Required />
+  </p>
+
+  <Form.group data-test-id="title" @model={{this.changeset}} @property="title" as |Group|>
+    <Group.label>Title <Admin::Components::Required /></Group.label>
+    <Group.textbox @value={{this.changeset.title}} />
+  </Form.group>
+
+  <Form.group data-test-id="ingredients" @model={{this.changeset}} @property="ingredients" as |Group|>
+    <Group.label>Ingredients</Group.label>
+    <Group.textarea @value={{this.changeset.ingredients}} />
+  </Form.group>
+
+  <Form.group data-test-id="image" @model={{this.changeset}} @property="imageUrl" as |Group|>
+    <Group.label>Image <Admin::Components::Required /></Group.label>
+    <div class="mt-2">
+      <FileUpload
+        @id={{Group.uniqueId}}
+        @name="photos"
+        @accept="image/*"
+        @onfileadd={{action this.uploadImage}}
+      >
+        <a
+          class="inline-block px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-none focus:shadow-outline"
+          tabindex="0"
+        >
+          Select Image
+        </a>
+      </FileUpload>
+
+      {{#if this.changeset.imageUrl}}
+        <button
+          type="button"
+          class="inline-block ml-2 px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-none focus:shadow-outline"
+          {{action (mut this.changeset.imageUrl) null}}
+        >
+          Remove Image
+        </button>
+      {{/if}}
+
+      {{#if this.fileErrorMessage}}
+        <span class="block mt-2 text-red-500">
+          This is an error message.
+          {{this.fileErrorMessage}}
+        </span>
+      {{/if}}
+
+      <small
+        class="block mt-3 text-gray-700 {{if this.fileErrorMessage "" "sm:inline-block sm:mt-0 sm:ml-2"}}"
+      >
+        Only JPG, JPEG, PNG, and GIF files are allowed.
+      </small>
+
+      {{#if this.changeset.imageUrl}}
+        <div class="mt-4">
+          <img src={{this.changeset.imageUrl}} alt="Deli item image" class="w-full block">
+        </div>
+      {{/if}}
+    </div>
+  </Form.group>
+
+  <div class="mt-8">
+    {{#if this.changeset.errors}}
+      <div class="mb-2 text-red-600">
+        Please fix the errors above and try again.
+      </div>
+    {{/if}}
+    <Form.submit @disabled={{this.saveDisabled}}>
+      Save
+    </Form.submit>
+    <Button class="ml-2" @variant="plain" @onClick={{@cancelled}}>Cancel</Button>
+  </div>
+</Admin::Components::AdminForm>
