@@ -1,71 +1,95 @@
-import Component from '@ember/component';
-import { computed } from '@ember/object';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 import HoursValidations from 'butchers-market/validations/hour';
 import { task } from 'ember-concurrency';
 
-export default Component.extend({
-  hours: null,
-  saved() {},
-  cancelled() {},
+export default class HoursForm extends Component {
+  changeset;
 
-  changeset: null,
-  errorMessage: null,
-  saveDisabled: computed('changeset.isInvalid', function() {
-    return this.get('changeset.isInvalid');
-  }),
+  @tracked errorMessage;
 
-  init() {
-    this._super(...arguments);
+  get saveDisabled() {
+    return this.changeset && this.changeset.isInvalid;
+  }
 
-    let changeset = new Changeset(this.hours, lookupValidator(HoursValidations), HoursValidations);
+  constructor() {
+    super(...arguments);
 
-    if (this.hours.get('isNew')) {
+    let changeset = new Changeset(
+      this.args.hours,
+      lookupValidator(HoursValidations),
+      HoursValidations
+    );
+
+    if (this.args.hours.isNew) {
       let now = new Date();
 
-      changeset.setProperties({
-        type: 'Store',
-        activeStartDate: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0),
-        activeEndDate: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59),
-      });
+      changeset.type = 'Store';
+      changeset.activeStartDate = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate(),
+        0,
+        0,
+        0
+      );
+      changeset.activeEndDate = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate(),
+        23,
+        59,
+        59
+      );
     }
 
-    this.set('changeset', changeset);
-  },
+    this.changeset = changeset;
+  }
 
-  saveHours: task(function*() {
+  @(task(function*() {
     yield this.changeset.validate();
 
-    if (!this.changeset.get('isValid')) {
+    if (!this.changeset.isValid) {
       return;
     }
 
     try {
       yield this.changeset.save();
-      this.saved();
+      this.args.saved();
     } catch (ex) {
       if (ex.body) {
-        this.set('errorMessage', ex.body.error);
+        this.errorMessage = ex.body.error;
       } else {
-        this.set('errorMessage', ex);
+        this.errorMessage = ex;
       }
     }
-  }).drop(),
+  }).drop())
+  saveHours;
 
-  actions: {
-    startDateSelected(date) {
-      this.changeset.set(
-        'activeStartDate',
-        new Date(date[0].getFullYear(), date[0].getMonth(), date[0].getDate(), 0, 0, 0)
-      );
-    },
+  @action
+  startDateSelected(date) {
+    this.changeset.activeStartDate = new Date(
+      date[0].getFullYear(),
+      date[0].getMonth(),
+      date[0].getDate(),
+      0,
+      0,
+      0
+    );
+  }
 
-    endDateSelected(date) {
-      this.changeset.set(
-        'activeEndDate',
-        new Date(date[0].getFullYear(), date[0].getMonth(), date[0].getDate(), 23, 59, 59)
-      );
-    },
-  },
-});
+  @action
+  endDateSelected(date) {
+    this.changeset.activeEndDate = new Date(
+      date[0].getFullYear(),
+      date[0].getMonth(),
+      date[0].getDate(),
+      23,
+      59,
+      59
+    );
+  }
+}

@@ -1,8 +1,8 @@
-<form class="m-0" {{action "submit" on="submit"}} ...attributes>
+<form class="m-0" {{action this.submit on="submit"}} ...attributes>
   {{yield
     (
       hash
-        group=(component "admin/components/admin-form/group" readOnly=this.readonly)
+        group=(component "admin/components/admin-form/group" readOnly=@readonly)
         label=(component "admin/components/admin-form/label")
         submit=(
           component

@@ -1,48 +1,47 @@
-import Component from '@ember/component';
-import { computed } from '@ember/object';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 import PerformanceValidations from 'butchers-market/validations/performance';
 import { task } from 'ember-concurrency';
 
-export default Component.extend({
-  performance: null,
-  saved() {},
-  cancelled() {},
+export default class PerformanceForm extends Component {
+  changeset;
 
-  changeset: null,
-  errorMessage: null,
-  saveDisabled: computed('changeset.isInvalid', function() {
-    return this.get('changeset.isInvalid');
-  }),
+  @tracked errorMessage;
 
-  init() {
-    this._super(...arguments);
+  get saveDisabled() {
+    return this.changeset && this.changeset.isInvalid;
+  }
+
+  constructor() {
+    super(...arguments);
 
     let changeset = new Changeset(
-      this.performance,
+      this.args.performance,
       lookupValidator(PerformanceValidations),
       PerformanceValidations
     );
-    this.set('changeset', changeset);
-  },
+    this.changeset = changeset;
+  }
 
-  savePerformance: task(function*() {
+  @(task(function*() {
     yield this.changeset.validate();
 
-    if (!this.changeset.get('isValid')) {
+    if (!this.changeset.isValid) {
       return;
     }
 
     try {
       yield this.changeset.save();
-      this.saved();
+      this.args.saved();
     } catch (ex) {
       if (ex.body) {
-        this.set('errorMessage', ex.body.error);
+        this.errorMessage = ex.body.error;
       } else {
-        this.set('errorMessage', ex);
+        this.errorMessage = ex;
       }
     }
-  }).drop(),
-});
+  }).drop())
+  savePerformance;
+}

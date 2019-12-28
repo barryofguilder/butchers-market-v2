@@ -1,10 +1,11 @@
 <th
   data-test-id="table-head-cell"
   class="font-semibold text-sm uppercase p-3 text-left"
+  {{did-update this.setSortDirection @currentSort}}
   ...attributes
 >
-  {{#if this.name}}
-    <a data-test-id="table-head-link" href="#" class="text-gray-900" {{action "columnClicked"}}>
+  {{#if @name}}
+    <a data-test-id="table-head-link" href="#" class="text-gray-900" {{action this.columnClicked}}>
       {{yield}}
 
       {{#if this.isAscending}}

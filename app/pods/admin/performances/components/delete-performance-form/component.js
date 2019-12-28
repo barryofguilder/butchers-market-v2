@@ -1,19 +1,17 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { task } from 'ember-concurrency';
 
-export default Component.extend({
-  performance: null,
-  onCancel() {},
-  onSave() {},
+export default class DeletePerformanceForm extends Component {
+  @tracked errorMessage;
 
-  errorMessage: null,
-
-  deletePerformance: task(function*() {
+  @(task(function*() {
     try {
-      yield this.performance.destroyRecord();
-      this.onSave();
+      yield this.args.performance.destroyRecord();
+      this.args.onSave();
     } catch (ex) {
-      this.set('errorMessage', ex);
+      this.errorMessage = ex;
     }
-  }).drop(),
-});
+  }).drop())
+  deletePerformance;
+}

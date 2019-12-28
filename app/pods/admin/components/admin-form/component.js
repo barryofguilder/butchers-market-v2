@@ -1,21 +1,21 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
+import { action } from '@ember/object';
 import { task } from 'ember-concurrency';
 
-export default Component.extend({
-  tagName: '',
+export default class AdminForm extends Component {
+  @task(function*() {
+    if (this.args.onSubmit) {
+      yield this.args.onSubmit();
+    }
 
-  readOnly: false,
-  onSubmit() {},
-  afterSubmit() {},
+    if (this.args.afterSubmit) {
+      yield this.args.afterSubmit();
+    }
+  })
+  submitTask;
 
-  submitTask: task(function*() {
-    yield this.onSubmit();
-    yield this.afterSubmit();
-  }),
-
-  actions: {
-    submit() {
-      this.submitTask.perform();
-    },
-  },
-});
+  @action
+  submit() {
+    this.submitTask.perform();
+  }
+}

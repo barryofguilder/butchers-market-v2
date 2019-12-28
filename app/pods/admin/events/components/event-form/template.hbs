@@ -27,7 +27,7 @@
       @appendDataInput={{true}}
       @date={{readonly this.changeset.startTime}}
       @dateFormat="m/d/Y"
-      @onChange={{action "dateSelected"}}
+      @onChange={{action this.dateSelected}}
     />
   </Form.group>
 
@@ -40,7 +40,7 @@
       @noCalendar={{true}}
       @time_24hr={{false}}
       @dateFormat="h:i K"
-      @onChange={{action "endTimeSelected"}}
+      @onChange={{action this.endTimeSelected}}
     />
   </Form.group>
 
@@ -56,7 +56,7 @@
         @id={{Group.uniqueId}}
         @name="photos"
         @accept="image/*"
-        @onfileadd={{action "uploadImage"}}
+        @onfileadd={{action this.uploadImage}}
       >
         <a
           class="inline-block px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-none focus:shadow-outline"
@@ -106,6 +106,6 @@
     <Form.submit @disabled={{this.saveDisabled}}>
       Save
     </Form.submit>
-    <Button class="ml-2" @variant="plain" @onClick={{action cancelled}}>Cancel</Button>
+    <Button class="ml-2" @variant="plain" @onClick={{@cancelled}}>Cancel</Button>
   </div>
 </Admin::Components::AdminForm>

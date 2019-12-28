@@ -1,6 +1,9 @@
 <Input
   data-test-id="textbox"
+  id={{this.id}}
   class={{this.inputClasses}}
+  readonly={{this.readonly}}
   @value={{@value}}
+  @keyUp={{@keyUp}}
   ...attributes
 />

@@ -1,48 +1,45 @@
-import Component from '@ember/component';
-import layout from './template';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
 import { equal } from '@ember/object/computed';
-import { computed } from '@ember/object';
 
-export default Component.extend({
-  layout,
+export default class UiTableTheadTh extends Component {
+  @tracked sortDirection;
 
-  tagName: '',
+  get sortColumn() {
+    return this.sortDirection ? this.args.name : null;
+  }
 
-  name: null,
-  currentSort: null,
-  onColumnClicked() {},
+  @equal('sortDirection', 'asc')
+  isAscending;
 
-  sortDirection: null,
-  sortColumn: computed('sortDirection', function() {
-    return this.sortDirection ? this.name : null;
-  }),
-  isAscending: equal('sortDirection', 'asc'),
-  isDescending: equal('sortDirection', 'desc'),
+  @equal('sortDirection', 'desc')
+  isDescending;
 
-  didReceiveAttrs() {
-    this._super(...arguments);
-
-    if (this.currentSort && this.currentSort.sortColumn === this.name) {
-      this.set('sortDirection', this.currentSort.sortDirection);
+  @action
+  columnClicked() {
+    if (this.isAscending) {
+      this.sortDirection = 'desc';
+    } else if (this.isDescending) {
+      this.sortDirection = null;
     } else {
-      this.set('sortDirection', null);
+      this.sortDirection = 'asc';
     }
-  },
 
-  actions: {
-    columnClicked() {
-      if (this.isAscending) {
-        this.set('sortDirection', 'desc');
-      } else if (this.isDescending) {
-        this.set('sortDirection', null);
-      } else {
-        this.set('sortDirection', 'asc');
-      }
-
-      this.onColumnClicked({
+    if (this.args.onColumnClicked) {
+      this.args.onColumnClicked({
         sortColumn: this.sortColumn,
         sortDirection: this.sortDirection,
       });
-    },
-  },
-});
+    }
+  }
+
+  @action
+  setSortDirection() {
+    if (this.args.currentSort && this.args.currentSort.sortColumn === this.args.name) {
+      this.sortDirection = this.args.currentSort.sortDirection;
+    } else {
+      this.sortDirection = null;
+    }
+  }
+}

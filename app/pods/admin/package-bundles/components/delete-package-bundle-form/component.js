@@ -1,19 +1,17 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { task } from 'ember-concurrency';
 
-export default Component.extend({
-  bundle: null,
-  onCancel() {},
-  onSave() {},
+export default class DeletePackageBundleForm extends Component {
+  @tracked errorMessage;
 
-  errorMessage: null,
-
-  deleteBundle: task(function*() {
+  @(task(function*() {
     try {
-      yield this.bundle.destroyRecord();
-      this.onSave();
+      yield this.args.bundle.destroyRecord();
+      this.args.onSave();
     } catch (ex) {
-      this.set('errorMessage', ex);
+      this.errorMessage = ex;
     }
-  }).drop(),
-});
+  }).drop())
+  deleteBundle;
+}

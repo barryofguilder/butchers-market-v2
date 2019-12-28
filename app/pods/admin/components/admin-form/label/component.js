@@ -1,11 +1,7 @@
-import Component from '@ember/component';
-import { gt } from '@ember/object/computed';
+import Component from '@glimmer/component';
 
-export default Component.extend({
-  tagName: '',
-
-  for: null,
-  errors: null,
-
-  hasErrors: gt('errors.length', 0),
-});
+export default class Label extends Component {
+  get hasErrors() {
+    return this.args.errors && this.args.errors.length > 0;
+  }
+}

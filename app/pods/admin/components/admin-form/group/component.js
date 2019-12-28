@@ -1,40 +1,26 @@
-import Component from '@ember/component';
-import { computed, defineProperty, get } from '@ember/object';
+import Component from '@glimmer/component';
 import { guidFor } from '@ember/object/internals';
+import { valueOrDefault } from 'butchers-market/utils/value-or-default';
 
-export default Component.extend({
-  tagName: '',
+export default class Button extends Component {
+  uniqueId = `${guidFor(this)}-field`;
 
-  useDefaultMargin: true,
-  model: null,
-  property: null,
-  readOnly: false,
+  get useDefaultMargin() {
+    return valueOrDefault(this.args.useDefaultMargin, true);
+  }
 
-  uniqueId: computed(function() {
-    return `${guidFor(this)}-field`;
-  }),
+  get errors() {
+    // Skip checking for errors if no `model` or `property` was passed in.
+    if (!this.args.model || !this.args.property) {
+      return [];
+    }
 
-  init() {
-    this._super(...arguments);
+    const fieldErrors = this.args.model.errors.findBy('key', this.args.property);
 
-    defineProperty(
-      this,
-      'errors',
-      computed(`model.errors.@each.key`, function() {
-        // Skip checking for errors if no `model` or `property` was passed in.
-        if (!this.model || !this.property) {
-          return [];
-        }
+    if (fieldErrors) {
+      return fieldErrors.validation;
+    }
 
-        const errors = get(this, 'model.errors');
-        const fieldErrors = errors.findBy('key', this.property);
-
-        if (fieldErrors) {
-          return get(fieldErrors, 'validation');
-        }
-
-        return [];
-      })
-    );
-  },
-});
+    return [];
+  }
+}

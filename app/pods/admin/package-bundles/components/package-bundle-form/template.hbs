@@ -31,19 +31,19 @@
     <DragSortList
       @items={{this.prices}}
       @handle=".handle"
-      @dragEndAction={{action "reorderPrices"}} as |price index|
+      @dragEndAction={{action this.reorderPrices}} as |price index|
     >
       <div data-test-id="price-{{index}}" class="{{if (gt index 0) "pt-1"}} pb-1">
         <div class="flex items-center">
           <span class="handle text-gray-600" draggable="true">☰</span>
-          <UiTextbox class="ml-2" @value={{price}} @keyUp={{action "priceChanged" index}} />
+          <UiTextbox class="ml-2" @value={{price}} @keyUp={{action this.priceChanged index}} />
           <Button
             class="mr-1"
             @iconOnly={{true}}
             @icon="trash-alt"
             @variant="danger"
             title="Delete price"
-            @onClick={{action "deletePrice" index}}
+            @onClick={{action this.deletePrice index}}
           />
         </div>
       </div>
@@ -54,7 +54,7 @@
         @icon="plus"
         @size="medium"
         @variant="plain"
-        @onClick={{action "addPrice"}}
+        @onClick={{action this.addPrice}}
       >
         New Price
       </Button>
@@ -67,19 +67,19 @@
     <DragSortList
       @items={{this.items}}
       @handle=".handle"
-      @dragEndAction={{action "reorderItems"}} as |item index|
+      @dragEndAction={{action this.reorderItems}} as |item index|
     >
       <div data-test-id="item-{{index}}" class="{{if (gt index 0) "pt-1"}} pb-1">
         <div class="flex items-center">
           <span class="handle text-gray-600" draggable="true">☰</span>
-          <UiTextbox class="ml-2" @value={{item}} @keyUp={{action "itemChanged" index}} />
+          <UiTextbox class="ml-2" @value={{item}} @keyUp={{action this.itemChanged index}} />
           <Button
             class="mr-1"
             @iconOnly={{true}}
             @icon="trash-alt"
             @variant="danger"
             title="Delete item"
-            @onClick={{action "deleteItem" index}}
+            @onClick={{action this.deleteItem index}}
           />
         </div>
       </div>
@@ -90,7 +90,7 @@
         @icon="plus"
         @size="medium"
         @variant="plain"
-        @onClick={{action "addItem"}}
+        @onClick={{action this.addItem}}
       >
         New Item
       </Button>
@@ -106,6 +106,6 @@
     <Form.submit @disabled={{this.saveDisabled}}>
       Save
     </Form.submit>
-    <Button class="ml-2" @variant="plain" @onClick={{action cancelled}}>Cancel</Button>
+    <Button class="ml-2" @variant="plain" @onClick={{@cancelled}}>Cancel</Button>
   </div>
 </Admin::Components::AdminForm>

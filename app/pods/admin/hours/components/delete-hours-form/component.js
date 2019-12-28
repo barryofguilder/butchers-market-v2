@@ -1,19 +1,17 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { task } from 'ember-concurrency';
 
-export default Component.extend({
-  hours: null,
-  onCancel() {},
-  onSave() {},
+export default class DeleteHoursForm extends Component {
+  @tracked errorMessage;
 
-  errorMessage: null,
-
-  deleteHours: task(function*() {
+  @(task(function*() {
     try {
-      yield this.hours.destroyRecord();
-      this.onSave();
+      yield this.args.hours.destroyRecord();
+      this.args.onSave();
     } catch (ex) {
-      this.set('errorMessage', ex);
+      this.errorMessage = ex;
     }
-  }).drop(),
-});
+  }).drop())
+  deleteHours;
+}
