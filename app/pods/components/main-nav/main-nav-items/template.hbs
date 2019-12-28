@@ -3,7 +3,7 @@
     <LinkTo
       @route="meat"
       class="block px-6 py-4 lg:py-8 hover:text-red-600 text-center lg:text-left"
-      {{on "click" @itemClicked}}
+      {{on "click" this.itemClicked}}
     >
       Meat
     </LinkTo>
@@ -12,7 +12,7 @@
     <LinkTo
       @route="deli"
       class="block px-6 py-4 lg:py-8 hover:text-red-600 text-center lg:text-left"
-      {{on "click" @itemClicked}}
+      {{on "click" this.itemClicked}}
     >
       Deli
     </LinkTo>
@@ -40,7 +40,7 @@
               <LinkTo
                 @route="events"
                 class="block px-6 py-4 hover:text-red-600"
-                {{on "click" @itemClicked}}
+                {{on "click" this.itemClicked}}
               >
                 Butcher's Market Cafe
               </LinkTo>
@@ -54,7 +54,7 @@
     <LinkTo
       @route="events"
       class="block px-6 py-4 lg:py-8 hover:text-red-600 text-center lg:text-left"
-      {{on "click" @itemClicked}}
+      {{on "click" this.itemClicked}}
     >
       Events
     </LinkTo>
@@ -63,7 +63,7 @@
     <LinkTo
       @route="contact"
       class="block px-6 py-4 lg:py-8 hover:text-red-600 text-center lg:text-left"
-      {{on "click" @itemClicked}}
+      {{on "click" this.itemClicked}}
     >
       Contact
     </LinkTo>
