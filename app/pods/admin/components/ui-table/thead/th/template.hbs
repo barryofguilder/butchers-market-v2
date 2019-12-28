@@ -9,9 +9,9 @@
       {{yield}}
 
       {{#if this.isAscending}}
-        {{fa-icon "chevron-up" class="ml-1"}}
+        <FaIcon @icon="chevron-up" class="ml-1" />
       {{else if this.isDescending}}
-        {{fa-icon "chevron-down" class="ml-1"}}
+        <FaIcon @icon="chevron-down" class="ml-1" />
       {{/if}}
     </a>
   {{else}}
