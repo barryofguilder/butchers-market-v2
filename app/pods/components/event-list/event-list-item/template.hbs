@@ -42,9 +42,9 @@
 
 {{#if @isAdmin}}
   <div>
-    {{#link-to "admin.events.edit" @event.id class="text-red-700 hover:underline"}}
+    <LinkTo @route="admin.events.edit" @model={{@event.id}} class="text-red-700 hover:underline">
       Edit
-    {{/link-to}} |
+    </LinkTo> |
     <button type="button" class="text-red-700 hover:underline" {{action @onDelete @event}}>
       Delete
     </button>

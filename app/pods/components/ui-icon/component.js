@@ -1,17 +1,17 @@
-import Component from '@ember/component';
-import { computed } from '@ember/object';
+import Component from '@glimmer/component';
+import { valueOrDefault } from 'butchers-market/utils/value-or-default';
 
-export default Component.extend({
-  tagName: '',
+export default class UiIcon extends Component {
+  get iconPrefix() {
+    return valueOrDefault(this.args.iconPrefix, 'fas');
+  }
 
-  icon: null,
-  iconPrefix: 'fas',
-  variant: 'inherit',
-  size: null,
-  spin: false,
+  get variant() {
+    return valueOrDefault(this.args.variant, 'inherit');
+  }
 
-  color: computed('variant', 'disabled', function() {
-    if (this.disabled) {
+  get color() {
+    if (this.args.disabled) {
       return null;
     }
 
@@ -29,5 +29,5 @@ export default Component.extend({
       default:
         return null;
     }
-  }),
-});
+  }
+}

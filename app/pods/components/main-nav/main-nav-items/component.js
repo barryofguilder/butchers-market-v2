@@ -1,15 +1,15 @@
-import Component from '@ember/component';
-import { computed } from '@ember/object';
+import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
+import { valueOrDefault } from 'butchers-market/utils/value-or-default';
 
-export default Component.extend({
-  tagName: '',
+export default class MainNavItems extends Component {
+  @service media;
 
-  itemClicked() {},
-
-  media: service(),
-
-  isMobile: computed('media.{isLg,isXl}', function() {
+  get isMobile() {
     return !this.media.isLg && !this.media.isXl;
-  }),
-});
+  }
+
+  get itemClicked() {
+    return valueOrDefault(this.args.itemClicked, () => {});
+  }
+}

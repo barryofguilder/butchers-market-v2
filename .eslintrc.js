@@ -1,12 +1,12 @@
 module.exports = {
-  globals: {
-    server: true,
-  },
   root: true,
   parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
+    ecmaFeatures: {
+      legacyDecorators: true,
+    },
   },
   plugins: ['ember', 'prettier'],
   extends: ['eslint:recommended', 'plugin:ember/recommended', 'plugin:prettier/recommended'],
@@ -17,12 +17,16 @@ module.exports = {
     'ember/no-jquery': 'error',
     'prettier/prettier': 'error',
   },
+  globals: {
+    server: true,
+  },
   overrides: [
     // node files
     {
       files: [
         '.eslintrc.js',
         '.template-lintrc.js',
+        '.prettierrc.js',
         'ember-cli-build.js',
         'testem.js',
         'blueprints/*/index.js',

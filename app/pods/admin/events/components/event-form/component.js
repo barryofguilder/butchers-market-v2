@@ -1,124 +1,118 @@
-import Component from '@ember/component';
-import { computed } from '@ember/object';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 import EventValidations from 'butchers-market/validations/event';
 import { task } from 'ember-concurrency';
 
-export default Component.extend({
-  event: null,
-  saved() {},
-  cancelled() {},
+export default class EventForm extends Component {
+  changeset;
 
-  changeset: null,
-  errorMessage: null,
-  fileErrorMessage: null,
-  saveDisabled: computed('changeset.isInvalid', function() {
-    return this.get('changeset.isInvalid');
-  }),
+  @tracked errorMessage;
+  @tracked fileErrorMessage;
 
-  init() {
-    this._super(...arguments);
+  get saveDisabled() {
+    return this.changeset && this.changeset.isInvalid;
+  }
 
-    let changeset = new Changeset(this.event, lookupValidator(EventValidations), EventValidations);
+  constructor() {
+    super(...arguments);
 
-    if (changeset.get('isNew')) {
+    let changeset = new Changeset(
+      this.args.event,
+      lookupValidator(EventValidations),
+      EventValidations
+    );
+
+    if (this.args.event.isNew) {
       let now = new Date();
 
-      changeset.setProperties({
-        startTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 19),
-        endTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 22),
-      });
+      changeset.startTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 19);
+      changeset.endTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 22);
     }
 
-    this.set('changeset', changeset);
-  },
+    this.changeset = changeset;
+  }
 
-  saveEvent: task(function*() {
+  @(task(function*() {
     yield this.changeset.validate();
 
-    if (!this.changeset.get('isValid')) {
+    if (!this.changeset.isValid) {
       return;
     }
 
     try {
-      let image = this.changeset.get('image');
+      let image = this.changeset.image;
 
       if (image) {
         let response = yield image.upload('/server/imageUpload.php');
-        this.changeset.set('imageUrl', response.headers.location);
+        this.changeset.imageUrl = response.headers.location;
       }
 
       yield this.changeset.save();
-      this.saved();
+      this.args.saved();
     } catch (ex) {
       if (ex.body) {
-        this.set('errorMessage', ex.body.error);
+        this.errorMessage = ex.body.error;
       } else {
-        this.set('errorMessage', ex);
+        this.errorMessage = ex;
       }
     }
-  }).drop(),
+  }).drop())
+  saveEvent;
 
-  uploadPhoto: task(function*(file) {
+  @(task(function*(file) {
     try {
       let url = yield file.readAsDataURL();
-      this.changeset.setProperties({
-        imageUrl: url,
-        image: file,
-      });
+      this.changeset.imageUrl = url;
+      this.changeset.image = file;
     } catch (e) {
-      this.set('fileErrorMessage', 'Could not read the file contents');
+      this.fileErrorMessage = 'Could not read the file contents';
     }
   })
     .maxConcurrency(3)
-    .enqueue(),
+    .enqueue())
+  uploadPhoto;
 
-  actions: {
-    dateSelected(date) {
-      const startTime = this.changeset.get('startTime');
-      this.changeset.set(
-        'startTime',
-        new Date(
-          date[0].getFullYear(),
-          date[0].getMonth(),
-          date[0].getDate(),
-          startTime.getHours(),
-          startTime.getMinutes()
-        )
-      );
-    },
+  @action
+  dateSelected(date) {
+    const startTime = this.changeset.startTime;
+    this.changeset.startTime = new Date(
+      date[0].getFullYear(),
+      date[0].getMonth(),
+      date[0].getDate(),
+      startTime.getHours(),
+      startTime.getMinutes()
+    );
+  }
 
-    startTimeSelected(time) {
-      const startTime = this.changeset.get('startTime');
-      this.changeset.set(
-        'startTime',
-        new Date(
-          startTime.getFullYear(),
-          startTime.getMonth(),
-          startTime.getDate(),
-          time[0].getHours(),
-          time[0].getMinutes()
-        )
-      );
-    },
+  @action
+  startTimeSelected(time) {
+    const startTime = this.changeset.startTime;
+    this.changeset.startTime = new Date(
+      startTime.getFullYear(),
+      startTime.getMonth(),
+      startTime.getDate(),
+      time[0].getHours(),
+      time[0].getMinutes()
+    );
+  }
 
-    endTimeSelected(time) {
-      const startTime = this.changeset.get('startTime');
-      this.changeset.set(
-        'endTime',
-        new Date(
-          startTime.getFullYear(),
-          startTime.getMonth(),
-          startTime.getDate(),
-          time[0].getHours(),
-          time[0].getMinutes()
-        )
-      );
-    },
+  @action
+  endTimeSelected(time) {
+    const startTime = this.changeset.startTime;
+    this.changeset.endTime = new Date(
+      startTime.getFullYear(),
+      startTime.getMonth(),
+      startTime.getDate(),
+      time[0].getHours(),
+      time[0].getMinutes()
+    );
+  }
 
-    uploadImage(file) {
-      this.uploadPhoto.perform(file);
-    },
-  },
-});
+  @action
+  uploadImage(file) {
+    this.uploadPhoto.perform(file);
+  }
+}

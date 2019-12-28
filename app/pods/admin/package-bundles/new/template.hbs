@@ -2,6 +2,6 @@
 
 <Admin::PackageBundles::Components::PackageBundleForm
   @bundle={{this.model}}
-  @saved={{action "bundleSaved"}}
-  @cancelled={{action "bundleCancelled"}}
+  @saved={{action this.bundleSaved}}
+  @cancelled={{action this.bundleCancelled}}
 />

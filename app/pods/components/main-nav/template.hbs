@@ -1,9 +1,9 @@
 <header class="bg-white fixed z-40 top-0 inset-x-0">
   <Container @isMainNav={{true}}>
     <div class="absolute pt-2 z-40 flex">
-      {{#link-to "application"}}
+      <LinkTo @route="application">
         <img class="w-32" src="images/butchers-market-logo.png" alt="The Butcher's Market logo">
-      {{/link-to}}
+      </LinkTo>
     </div>
 
     {{#if this.isMobile}}
@@ -14,16 +14,16 @@
           aria-controls="main-navigation-items"
           aria-expanded="false"
           aria-label="Toggle navigation"
-          {{action "toggleNavigation"}}
+          {{action this.toggleNavigation}}
         >
-          {{fa-icon "bars"}}
+          <FaIcon @icon="bars" />
         </button>
       </div>
 
       <AnimatedContainer class="overflow-hidden">
-        {{#animated-if this.showNavigation use=transition duration=300}}
+        {{#animated-if this.showNavigation use=this.transition duration=300}}
           <nav class="bg-white mt-8" id="main-navigation-items">
-            <MainNav::MainNavItems @itemClicked={{action "toggleNavigation"}} />
+            <MainNav::MainNavItems @itemClicked={{action this.toggleNavigation}} />
           </nav>
         {{/animated-if}}
       </AnimatedContainer>

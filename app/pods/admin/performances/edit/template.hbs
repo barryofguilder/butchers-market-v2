@@ -2,6 +2,6 @@
 
 <Admin::Performances::Components::PerformanceForm
   @performance={{this.model}}
-  @saved={{action "performanceSaved"}}
-  @cancelled={{action "performanceCancelled"}}
+  @saved={{action this.performanceSaved}}
+  @cancelled={{action this.performanceCancelled}}
 />

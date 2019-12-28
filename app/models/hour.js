@@ -1,12 +1,12 @@
-import DS from 'ember-data';
+import Model, { attr } from '@ember-data/model';
 
-export default DS.Model.extend({
-  type: DS.attr('string'),
-  default: DS.attr('boolean'),
-  activeStartDate: DS.attr('date'),
-  activeEndDate: DS.attr('date'),
-  label: DS.attr('string'),
-  line1: DS.attr('string'),
-  line2: DS.attr('string'),
-  line3: DS.attr('string'),
-});
+export default class Hour extends Model {
+  @attr('string') type;
+  @attr('boolean') default;
+  @attr('date') activeStartDate;
+  @attr('date') activeEndDate;
+  @attr('string') label;
+  @attr('string') line1;
+  @attr('string') line2;
+  @attr('string') line3;
+}

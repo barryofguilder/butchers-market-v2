@@ -1,9 +1,9 @@
-import DS from 'ember-data';
+import Model, { attr } from '@ember-data/model';
 
-export default DS.Model.extend({
-  title: DS.attr('string'),
-  displayOrder: DS.attr('number'),
-  flyerDownloadLink: DS.attr('string'),
-  prices: DS.attr(), // Array of strings
-  items: DS.attr(), // Array of strings
-});
+export default class PackageBundle extends Model {
+  @attr('string') title;
+  @attr('number') displayOrder;
+  @attr('string') flyerDownloadLink;
+  @attr prices; // Array of strings
+  @attr items; // Array of strings
+}

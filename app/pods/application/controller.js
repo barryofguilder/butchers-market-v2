@@ -1,9 +1,10 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import { bool } from '@ember/object/computed';
 
-export default Controller.extend({
-  mobileApp: service(),
+export default class ApplicationController extends Controller {
+  @service mobileApp;
 
-  isMobileApp: bool('mobileApp.isMobileApp'),
-});
+  get isMobileApp() {
+    return this.mobileApp.isMobileApp;
+  }
+}

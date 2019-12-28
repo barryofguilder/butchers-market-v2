@@ -1,29 +1,27 @@
-import Component from '@ember/component';
-import { computed } from '@ember/object';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 import PackageBundleValidations from 'butchers-market/validations/package-bundle';
 import { task } from 'ember-concurrency';
 
-export default Component.extend({
-  bundle: null,
-  saved() {},
-  cancelled() {},
+export default class PackageBundleForm extends Component {
+  changeset;
 
-  changeset: null,
-  prices: null,
-  items: null,
+  @tracked prices;
+  @tracked items;
+  @tracked errorMessage;
 
-  errorMessage: null,
-  saveDisabled: computed('changeset.isInvalid', function() {
-    return this.get('changeset.isInvalid');
-  }),
+  get saveDisabled() {
+    return this.changeset && this.changeset.isInvalid;
+  }
 
-  init() {
-    this._super(...arguments);
+  constructor() {
+    super(...arguments);
 
     let changeset = new Changeset(
-      this.bundle,
+      this.args.bundle,
       lookupValidator(PackageBundleValidations),
       PackageBundleValidations
     );
@@ -41,96 +39,101 @@ export default Component.extend({
       items.pushObject('');
     }
 
-    this.setProperties({
-      changeset,
-      prices,
-      items,
-    });
-  },
+    this.changeset = changeset;
+    this.prices = prices;
+    this.items = items;
+  }
 
-  saveBundle: task(function*() {
+  @(task(function*() {
     this.changeset.set('prices', this.prices);
     this.changeset.set('items', this.items);
 
     yield this.changeset.validate();
 
-    if (!this.changeset.get('isValid')) {
+    if (!this.changeset.isValid) {
       return;
     }
 
     try {
       yield this.changeset.save();
-      this.saved();
+      this.args.saved();
     } catch (ex) {
       if (ex.body) {
-        this.set('errorMessage', ex.body.error);
+        this.errorMessage = ex.body.error;
       } else {
-        this.set('errorMessage', ex);
+        this.errorMessage = ex;
       }
     }
-  }).drop(),
+  }).drop())
+  saveBundle;
 
-  actions: {
-    addPrice() {
-      this.prices.pushObject('');
-    },
+  @action
+  addPrice() {
+    this.prices.pushObject('');
+  }
 
-    priceChanged(index, event) {
-      this.prices[index] = event.target.value;
-    },
+  @action
+  priceChanged(index, event) {
+    this.prices[index] = event.target.value;
+  }
 
-    deletePrice(index) {
-      let prices = this.prices.filter((price, priceIndex) => priceIndex !== index);
+  @action
+  deletePrice(index) {
+    let prices = this.prices.filter((price, priceIndex) => priceIndex !== index);
 
-      // Ensure there's always a price field
-      if (prices.length === 0) {
-        prices.pushObject('');
-      }
+    // Ensure there's always a price field
+    if (prices.length === 0) {
+      prices.pushObject('');
+    }
 
-      this.set('prices', prices);
-    },
+    this.prices = prices;
+  }
 
-    reorderPrices({ sourceIndex, sourceList, targetIndex, targetList }) {
-      if (sourceIndex === targetIndex) {
-        // Not moving up or down
-        return;
-      }
+  @action
+  reorderPrices({ sourceIndex, sourceList, targetIndex, targetList }) {
+    if (sourceIndex === targetIndex) {
+      // Not moving up or down
+      return;
+    }
 
-      const item = sourceList.objectAt(sourceIndex);
+    const item = sourceList.objectAt(sourceIndex);
 
-      sourceList.removeAt(sourceIndex);
-      targetList.insertAt(targetIndex, item);
-    },
+    sourceList.removeAt(sourceIndex);
+    targetList.insertAt(targetIndex, item);
+  }
 
-    addItem() {
-      this.items.pushObject('');
-    },
+  @action
+  addItem() {
+    this.items.pushObject('');
+  }
 
-    itemChanged(index, event) {
-      this.items[index] = event.target.value;
-    },
+  @action
+  itemChanged(index, event) {
+    this.items[index] = event.target.value;
+  }
 
-    deleteItem(index) {
-      let items = this.items.filter((item, itemIndex) => itemIndex !== index);
+  @action
+  deleteItem(index) {
+    let items = this.items.filter((item, itemIndex) => itemIndex !== index);
 
-      // Ensure there's always an item field
-      if (items.length === 0) {
-        items.pushObject('');
-      }
+    // Ensure there's always an item field
+    if (items.length === 0) {
+      items.pushObject('');
+    }
 
-      this.set('items', items);
-    },
+    this.items = items;
+  }
 
-    reorderItems({ sourceIndex, sourceList, targetIndex, targetList }) {
-      if (sourceIndex === targetIndex) {
-        // Not moving up or down
-        return;
-      }
+  @action
+  reorderItems({ sourceIndex, sourceList, targetIndex, targetList }) {
+    if (sourceIndex === targetIndex) {
+      // Not moving up or down
+      return;
+    }
 
-      const item = sourceList.objectAt(sourceIndex);
+    const item = sourceList.objectAt(sourceIndex);
 
-      sourceList.removeAt(sourceIndex);
-      targetList.insertAt(targetIndex, item);
-    },
-  },
-});
+    sourceList.removeAt(sourceIndex);
+    targetList.insertAt(targetIndex, item);
+  }
+}

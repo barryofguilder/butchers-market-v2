@@ -12,7 +12,7 @@
       {{radio-button
         value="upcoming"
         groupValue=this.filter
-        changed=(action "filterEvents")
+        changed=(action this.filterEvents)
       }}
       <span class="leading-none">Upcoming</span>
     </label>
@@ -20,7 +20,7 @@
       {{radio-button
         value="past"
         groupValue=this.filter
-        changed=(action "filterEvents")
+        changed=(action this.filterEvents)
       }}
       <span class="leading-none">Past</span>
     </label>
@@ -28,16 +28,16 @@
       {{radio-button
         value="all"
         groupValue=this.filter
-        changed=(action "filterEvents")
+        changed=(action this.filterEvents)
       }}
       <span class="leading-none">All</span>
     </label>
   </div>
 </div>
 
-{{#if (gt this.sortedEvents.length 0)}}
+{{#if (gt this.filteredEvents.length 0)}}
   <EventList
-    @events={{this.sortedEvents}}
+    @events={{this.filteredEvents}}
     @isAdmin={{true}}
     @onDelete={{action (mut this.eventToDelete)}}
   />

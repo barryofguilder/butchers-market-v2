@@ -1,28 +1,28 @@
 <ul class="list-reset flex flex-col lg:flex-row">
   <li>
-    {{#link-to
-      "meat"
+    <LinkTo
+      @route="meat"
       class="block px-6 py-4 lg:py-8 hover:text-red-600 text-center lg:text-left"
-      click=(action this.itemClicked)
-    }}
+      {{on "click" this.itemClicked}}
+    >
       Meat
-    {{/link-to}}
+    </LinkTo>
   </li>
   <li>
-    {{#link-to
-      "deli"
+    <LinkTo
+      @route="deli"
       class="block px-6 py-4 lg:py-8 hover:text-red-600 text-center lg:text-left"
-      click=(action this.itemClicked)
-    }}
+      {{on "click" this.itemClicked}}
+    >
       Deli
-    {{/link-to}}
+    </LinkTo>
   </li>
   <li>
     <BasicDropdown @renderInPlace={{if this.isMobile true false}} as |dd|>
       <dd.trigger
         class="block px-6 py-4 lg:py-8 outline-none hover:text-red-600 focus:bg-gray-300 focus:text-gray-900 text-center lg:text-left"
       >
-        Dining {{fa-icon "caret-down"}}
+        Dining <FaIcon @icon="caret-down" />
       </dd.trigger>
 
       <dd.content @class={{if this.isMobile "static"}}>
@@ -37,13 +37,13 @@
               </a>
             </li>
             <li>
-              {{#link-to
-                "events"
+              <LinkTo
+                @route="events"
                 class="block px-6 py-4 hover:text-red-600"
-                click=(action this.itemClicked)
-              }}
+                {{on "click" this.itemClicked}}
+              >
                 Butcher's Market Cafe
-              {{/link-to}}
+              </LinkTo>
             </li>
           </ul>
         </div>
@@ -51,21 +51,21 @@
     </BasicDropdown>
   </li>
   <li>
-    {{#link-to
-      "events"
+    <LinkTo
+      @route="events"
       class="block px-6 py-4 lg:py-8 hover:text-red-600 text-center lg:text-left"
-      click=(action this.itemClicked)
-    }}
+      {{on "click" this.itemClicked}}
+    >
       Events
-    {{/link-to}}
+    </LinkTo>
   </li>
   <li>
-    {{#link-to
-      "contact"
+    <LinkTo
+      @route="contact"
       class="block px-6 py-4 lg:py-8 hover:text-red-600 text-center lg:text-left"
-      click=(action this.itemClicked)
-    }}
+      {{on "click" this.itemClicked}}
+    >
       Contact
-    {{/link-to}}
+    </LinkTo>
   </li>
 </ul>

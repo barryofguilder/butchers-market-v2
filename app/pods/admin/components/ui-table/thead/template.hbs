@@ -3,7 +3,7 @@
     {{yield
       (
         hash
-          th=(component "admin/components/ui-table/thead/th" onColumnClicked=onColumnClicked currentSort=currentSort)
+          th=(component "admin/components/ui-table/thead/th" onColumnClicked=@onColumnClicked currentSort=@currentSort)
       )
     }}
   </tr>

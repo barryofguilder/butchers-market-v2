@@ -1,13 +1,14 @@
 import Controller from '@ember/controller';
+import { action } from '@ember/object';
 
-export default Controller.extend({
-  actions: {
-    performanceSaved() {
-      this.transitionToRoute('admin.performances');
-    },
+export default class AdminPerformancesNewController extends Controller {
+  @action
+  performanceSaved() {
+    this.transitionToRoute('admin.performances');
+  }
 
-    performanceCancelled() {
-      this.transitionToRoute('admin.performances');
-    },
-  },
-});
+  @action
+  performanceCancelled() {
+    this.transitionToRoute('admin.performances');
+  }
+}

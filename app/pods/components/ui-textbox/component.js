@@ -1,17 +1,21 @@
-import TextField from '@ember/component/text-field';
-import { computed } from '@ember/object';
-import { gt } from '@ember/object/computed';
+import Component from '@glimmer/component';
+import { guidFor } from '@ember/object/internals';
+import { valueOrDefault } from 'butchers-market/utils/value-or-default';
 
-export default TextField.extend({
-  classNameBindings: ['inputClasses'],
-  attributeBindings: ['data-test-id'],
+export default class UiTextbox extends Component {
+  get id() {
+    return valueOrDefault(this.args.id, guidFor(this));
+  }
 
-  'data-test-id': 'textbox',
-  errors: null,
+  get readonly() {
+    return valueOrDefault(this.args.readonly, false);
+  }
 
-  hasErrors: gt('errors.length', 0),
+  get hasErrors() {
+    return this.args.errors && this.args.errors.length > 0;
+  }
 
-  inputClasses: computed('hasErrors', function() {
+  get inputClasses() {
     let classes = 'styled-textbox';
 
     if (this.hasErrors) {
@@ -19,5 +23,5 @@ export default TextField.extend({
     }
 
     return classes;
-  }),
-});
+  }
+}

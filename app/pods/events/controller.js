@@ -1,38 +1,35 @@
 import Controller from '@ember/controller';
-import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
 import { sort } from '@ember/object/computed';
 import dateSort from 'butchers-market/utils/date-sort';
 import { isAfter, isSameDay } from 'date-fns';
-import { inject as service } from '@ember/service';
 
 const PERFORMANCES_TO_SHOW = 11;
 
-export default Controller.extend({
-  media: service(),
+export default class EventsController extends Controller {
+  @service media;
 
-  queryParams: ['events'],
-  events: false,
-
-  filteredEvents: computed('model.events.[]', function() {
+  get filteredEvents() {
     let now = new Date();
 
     return this.model.events.filter(event => {
-      let date = event.get('startTime');
+      let date = event.startTime;
       // Only return events that are today or in the future.
       return isSameDay(date, now) || isAfter(date, now);
     });
-  }),
-  sortedEvents: sort('filteredEvents', dateSort),
+  }
 
-  filteredPerformances: computed('model.performances', function() {
-    let performances = this.get('model.performances');
-    let performanceCount = performances.get('length');
+  @sort('filteredEvents', dateSort)
+  sortedEvents;
+
+  get filteredPerformances() {
+    let performances = this.model.performances;
+    let performanceCount = performances.length;
     let randomPerformances = [];
 
-    while (randomPerformances.get('length') < performanceCount) {
+    while (randomPerformances.length < performanceCount) {
       let performance = performances.objectAt(Math.floor(Math.random() * performanceCount));
-
-      let found = randomPerformances.findBy('id', performance.get('id'));
+      let found = randomPerformances.findBy('id', performance.id);
 
       if (found) {
         continue;
@@ -42,5 +39,5 @@ export default Controller.extend({
     }
 
     return randomPerformances.slice(0, PERFORMANCES_TO_SHOW);
-  }),
-});
+  }
+}

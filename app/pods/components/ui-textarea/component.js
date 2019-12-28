@@ -1,24 +1,25 @@
-import TextArea from '@ember/component/text-area';
-import { computed } from '@ember/object';
-import { gt } from '@ember/object/computed';
+import Component from '@glimmer/component';
+import { guidFor } from '@ember/object/internals';
+import { valueOrDefault } from 'butchers-market/utils/value-or-default';
 
-export default TextArea.extend({
-  classNameBindings: ['inputClasses'],
-  attributeBindings: ['data-test-id'],
+export default class UiTextarea extends Component {
+  get id() {
+    return valueOrDefault(this.args.id, guidFor(this));
+  }
 
-  'data-test-id': 'textarea',
+  get readonly() {
+    return valueOrDefault(this.args.readonly, false);
+  }
 
-  errors: null,
+  get hasErrors() {
+    return this.args.errors && this.args.errors.length > 0;
+  }
 
-  hasErrors: gt('errors.length', 0),
-
-  inputClasses: computed('hasErrors', function() {
+  get inputClasses() {
     let classes = 'styled-textbox';
-
     if (this.hasErrors) {
       classes += ' has-errors';
     }
-
     return classes;
-  }),
-});
+  }
+}

@@ -2,6 +2,6 @@
 
 <Admin::Events::Components::EventForm
   @event={{this.model}}
-  @saved={{action "eventSaved"}}
-  @cancelled={{action "eventCancelled"}}
+  @saved={{action this.eventSaved}}
+  @cancelled={{action this.eventCancelled}}
 />

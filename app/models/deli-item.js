@@ -1,7 +1,7 @@
-import DS from 'ember-data';
+import Model, { attr } from '@ember-data/model';
 
-export default DS.Model.extend({
-  title: DS.attr('string'),
-  image: DS.attr('string'),
-  ingredients: DS.attr('string'),
-});
+export default class DeliItem extends Model {
+  @attr('string') title;
+  @attr('string') image;
+  @attr('string') ingredients;
+}

@@ -1,8 +1,8 @@
-import DS from 'ember-data';
+import Model, { attr } from '@ember-data/model';
 
-export default DS.Model.extend({
-  title: DS.attr('string'),
-  price: DS.attr('string'),
-  featured: DS.attr('boolean'),
-  items: DS.attr(),
-});
+export default class MeatBundle extends Model {
+  @attr('string') title;
+  @attr('string') price;
+  @attr('boolean') featured;
+  @attr items; // Array of strings
+}

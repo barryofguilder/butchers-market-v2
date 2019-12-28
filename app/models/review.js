@@ -1,9 +1,9 @@
-import DS from 'ember-data';
+import Model, { attr } from '@ember-data/model';
 
-export default DS.Model.extend({
-  text: DS.attr('string'),
-  reviewer: DS.attr('string'),
-  source: DS.attr('string'),
-  url: DS.attr('string'),
-  image: DS.attr('string'),
-});
+export default class Review extends Model {
+  @attr('string') text;
+  @attr('string') reviewer;
+  @attr('string') source;
+  @attr('string') url;
+  @attr('string') image;
+}

@@ -1,18 +1,23 @@
 <th
   data-test-id="table-head-cell"
   class="font-semibold text-sm uppercase p-3 text-left"
+  {{did-update this.setSortDirection @currentSort}}
   ...attributes
 >
-  {{#if this.name}}
-    <a data-test-id="table-head-link" href="#" class="text-gray-900" {{action "columnClicked"}}>
+  {{#if @name}}
+    <button
+      data-test-id="table-head-link"
+      class="font-semibold text-sm uppercase text-gray-900 focus:outline-none focus:underline"
+      {{on "click" this.columnClicked}}
+    >
       {{yield}}
 
       {{#if this.isAscending}}
-        {{fa-icon "chevron-up" class="ml-1"}}
+        <FaIcon @icon="chevron-up" class="ml-1" />
       {{else if this.isDescending}}
-        {{fa-icon "chevron-down" class="ml-1"}}
+        <FaIcon @icon="chevron-down" class="ml-1" />
       {{/if}}
-    </a>
+    </button>
   {{else}}
     {{yield}}
   {{/if}}
