@@ -1,18 +1,17 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
-import { computed } from '@ember/object';
+import { action } from '@ember/object';
 import { fadeIn, fadeOut } from 'ember-animated/motions/opacity';
 
-export default Component.extend({
-  tagName: '',
+export default class MainNav extends Component {
+  @service media;
 
-  media: service(),
+  @tracked showNavigation = false;
 
-  isMobile: computed('media.{isLg,isXl}', function() {
+  get isMobile() {
     return !this.media.isLg && !this.media.isXl;
-  }),
-
-  showNavigation: false,
+  }
 
   /* eslint-disable-next-line */
   *transition({ insertedSprites, removedSprites }) {
@@ -22,11 +21,10 @@ export default Component.extend({
     for (let sprite of removedSprites) {
       fadeOut(sprite);
     }
-  },
+  }
 
-  actions: {
-    toggleNavigation() {
-      this.toggleProperty('showNavigation');
-    },
-  },
-});
+  @action
+  toggleNavigation() {
+    this.showNavigation = !this.showNavigation;
+  }
+}

@@ -1,4 +1,4 @@
-<form class="max-w-md" {{action "sendFeedback" on="submit"}}>
+<form class="max-w-md" {{action this.sendFeedback on="submit"}}>
   {{#if this.feedbackSent}}
     <UiAlert data-test-id="feedback-success" @variant="success">
       Thank you for contacting us! If you require immediate assistance, please call us at
@@ -38,11 +38,11 @@
     </div>
     {{#if showReCaptcha}}
       <div class="mt-4">
-        <GRecaptcha @onSuccess={{action "onCaptchaResolved"}} />
+        <GRecaptcha @onSuccess={{action this.onCaptchaResolved}} />
       </div>
     {{/if}}
     <div class="mt-4">
-      <Button type="submit" @disabled={{this.sendFeedbackTask.isRunning}}>Send</Button>
+      <Button @type="submit" @disabled={{this.sendFeedbackTask.isRunning}}>Send</Button>
     </div>
   {{/unless}}
 </form>

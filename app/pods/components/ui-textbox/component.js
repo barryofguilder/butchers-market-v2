@@ -1,17 +1,11 @@
-import TextField from '@ember/component/text-field';
-import { computed } from '@ember/object';
+import Component from '@glimmer/component';
 import { gt } from '@ember/object/computed';
 
-export default TextField.extend({
-  classNameBindings: ['inputClasses'],
-  attributeBindings: ['data-test-id'],
+export default class UiTextbox extends Component {
+  @gt('errors.length', 0)
+  hasErrors;
 
-  'data-test-id': 'textbox',
-  errors: null,
-
-  hasErrors: gt('errors.length', 0),
-
-  inputClasses: computed('hasErrors', function() {
+  get inputClasses() {
     let classes = 'styled-textbox';
 
     if (this.hasErrors) {
@@ -19,5 +13,5 @@ export default TextField.extend({
     }
 
     return classes;
-  }),
-});
+  }
+}

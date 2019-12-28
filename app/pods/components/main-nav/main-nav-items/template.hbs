@@ -3,7 +3,7 @@
     {{#link-to
       "meat"
       class="block px-6 py-4 lg:py-8 hover:text-red-600 text-center lg:text-left"
-      click=(action this.itemClicked)
+      click=@itemClicked
     }}
       Meat
     {{/link-to}}
@@ -12,7 +12,7 @@
     {{#link-to
       "deli"
       class="block px-6 py-4 lg:py-8 hover:text-red-600 text-center lg:text-left"
-      click=(action this.itemClicked)
+      click=@itemClicked
     }}
       Deli
     {{/link-to}}
@@ -40,7 +40,7 @@
               {{#link-to
                 "events"
                 class="block px-6 py-4 hover:text-red-600"
-                click=(action this.itemClicked)
+                click=@itemClicked
               }}
                 Butcher's Market Cafe
               {{/link-to}}
@@ -54,7 +54,7 @@
     {{#link-to
       "events"
       class="block px-6 py-4 lg:py-8 hover:text-red-600 text-center lg:text-left"
-      click=(action this.itemClicked)
+      click=@itemClicked
     }}
       Events
     {{/link-to}}
@@ -63,7 +63,7 @@
     {{#link-to
       "contact"
       class="block px-6 py-4 lg:py-8 hover:text-red-600 text-center lg:text-left"
-      click=(action this.itemClicked)
+      click=@itemClicked
     }}
       Contact
     {{/link-to}}

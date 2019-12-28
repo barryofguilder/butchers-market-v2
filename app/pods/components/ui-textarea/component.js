@@ -1,24 +1,15 @@
-import TextArea from '@ember/component/text-area';
-import { computed } from '@ember/object';
+import Component from '@glimmer/component';
 import { gt } from '@ember/object/computed';
 
-export default TextArea.extend({
-  classNameBindings: ['inputClasses'],
-  attributeBindings: ['data-test-id'],
+export default class UiTextarea extends Component {
+  @gt('errors.length', 0)
+  hasErrors;
 
-  'data-test-id': 'textarea',
-
-  errors: null,
-
-  hasErrors: gt('errors.length', 0),
-
-  inputClasses: computed('hasErrors', function() {
+  get inputClasses() {
     let classes = 'styled-textbox';
-
     if (this.hasErrors) {
       classes += ' has-errors';
     }
-
     return classes;
-  }),
-});
+  }
+}

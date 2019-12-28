@@ -11,6 +11,12 @@ export default class MeatRoute extends Route {
     });
   }
 
+  resetController(controller, isExiting /*, transition*/) {
+    if (isExiting) {
+      controller.packages = false;
+    }
+  }
+
   @action
   willTransition(/*transition*/) {
     // Makes sure that the page gets scrolled to the top when changing routes.

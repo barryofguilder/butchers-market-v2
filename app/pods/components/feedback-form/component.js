@@ -1,46 +1,36 @@
-import Component from '@ember/component';
-import { computed } from '@ember/object';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
 import config from 'butchers-market/config/environment';
 import { task } from 'ember-concurrency';
 import fetch from 'fetch';
 
-export default Component.extend({
-  tagName: '',
+export default class FeedbackForm extends Component {
+  showReCaptcha = config.showReCaptcha;
 
-  showReCaptcha: config.showReCaptcha,
-  name: null,
-  email: null,
-  message: null,
-  recaptcha: null,
-  feedbackSent: false,
-  nameInvalid: false,
-  emailInvalid: false,
-  messageInvalid: false,
-  recaptchaInvalid: false,
-  showServerError: false,
-  showInvalidFormError: computed(
-    'nameInvalid',
-    'emailInvalid',
-    'messageInvalid',
-    'recaptchaInvalid',
-    function() {
-      return (
-        this.get('nameInvalid') ||
-        this.get('emailInvalid') ||
-        this.get('messageInvalid') ||
-        this.get('recaptchaInvalid')
-      );
-    }
-  ),
+  @tracked name;
+  @tracked email;
+  @tracked message;
+  @tracked recaptcha;
+  @tracked feedbackSent = false;
+  @tracked nameInvalid = false;
+  @tracked emailInvalid = false;
+  @tracked messageInvalid = false;
+  @tracked recaptchaInvalid = false;
+  @tracked showServerError = false;
 
-  sendFeedbackTask: task(function*() {
+  get showInvalidFormError() {
+    return this.nameInvalid || this.emailInvalid || this.messageInvalid || this.recaptchaInvalid;
+  }
+
+  @(task(function*() {
     let payload = {
       method: 'POST',
       body: JSON.stringify({
-        name: this.get('name'),
-        email: this.get('email'),
-        message: this.get('message'),
-        recaptcha: this.get('recaptcha'),
+        name: this.name,
+        email: this.email,
+        message: this.message,
+        recaptcha: this.recaptcha,
       }),
     };
 
@@ -48,54 +38,53 @@ export default Component.extend({
     const json = yield response.json();
 
     if (response.status >= 200 && response.status < 300) {
-      this.setProperties({
-        feedbackSent: true,
-        nameInvalid: false,
-        emailInvalid: false,
-        messageInvalid: false,
-        recaptchaInvalid: false,
-        showServerError: false,
-      });
+      this.feedbackSent = true;
+      this.nameInvalid = false;
+      this.emailInvalid = false;
+      this.messageInvalid = false;
+      this.recaptchaInvalid = false;
+      this.showServerError = false;
     } else {
       if (json && json.errors && json.errors.length > 0) {
         let error = json.errors[0];
 
         if (error.detail.name) {
-          this.set('nameInvalid', true);
+          this.nameInvalid = true;
         } else {
-          this.set('nameInvalid', false);
+          this.nameInvalid = false;
         }
 
         if (error.detail.email) {
-          this.set('emailInvalid', true);
+          this.emailInvalid = true;
         } else {
-          this.set('emailInvalid', false);
+          this.emailInvalid = false;
         }
 
         if (error.detail.message) {
-          this.set('messageInvalid', true);
+          this.messageInvalid = true;
         } else {
-          this.set('messageInvalid', false);
+          this.messageInvalid = false;
         }
 
         if (error.detail.recaptcha) {
-          this.set('recaptchaInvalid', true);
+          this.recaptchaInvalid = true;
         } else {
-          this.set('recaptchaInvalid', false);
+          this.recaptchaInvalid = false;
         }
       } else {
-        this.set('showServerError', true);
+        this.showServerError = true;
       }
     }
-  }).drop(),
+  }).drop())
+  sendFeedbackTask;
 
-  actions: {
-    onCaptchaResolved(reCaptchaResponse) {
-      this.set('recaptcha', reCaptchaResponse);
-    },
+  @action
+  onCaptchaResolved(reCaptchaResponse) {
+    this.recaptcha = reCaptchaResponse;
+  }
 
-    sendFeedback() {
-      this.sendFeedbackTask.perform();
-    },
-  },
-});
+  @action
+  sendFeedback() {
+    this.sendFeedbackTask.perform();
+  }
+}

@@ -14,16 +14,16 @@
           aria-controls="main-navigation-items"
           aria-expanded="false"
           aria-label="Toggle navigation"
-          {{action "toggleNavigation"}}
+          {{action this.toggleNavigation}}
         >
           {{fa-icon "bars"}}
         </button>
       </div>
 
       <AnimatedContainer class="overflow-hidden">
-        {{#animated-if this.showNavigation use=transition duration=300}}
+        {{#animated-if this.showNavigation use=this.transition duration=300}}
           <nav class="bg-white mt-8" id="main-navigation-items">
-            <MainNav::MainNavItems @itemClicked={{action "toggleNavigation"}} />
+            <MainNav::MainNavItems @itemClicked={{action this.toggleNavigation}} />
           </nav>
         {{/animated-if}}
       </AnimatedContainer>

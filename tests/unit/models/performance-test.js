@@ -10,13 +10,11 @@ module('Unit | Model | performance', function(hooks) {
       link: 'https://www.youtube.com/watch?v=8ODVyWKIZMw',
     });
 
-    assert.equal(model.get('embedLink'), 'https://www.youtube.com/embed/8ODVyWKIZMw');
+    assert.equal(model.embedLink, 'https://www.youtube.com/embed/8ODVyWKIZMw');
 
-    model.set(
-      'link',
-      'https://www.youtube.com/watch?v=8cfi5r_7qps&list=PLaUocYlB3j2hIoFGQDlkAwtAE7KcxzhFV&index=1'
-    );
+    model.link =
+      'https://www.youtube.com/watch?v=8cfi5r_7qps&list=PLaUocYlB3j2hIoFGQDlkAwtAE7KcxzhFV&index=1';
 
-    assert.equal(model.get('embedLink'), 'https://www.youtube.com/embed/8cfi5r_7qps');
+    assert.equal(model.embedLink, 'https://www.youtube.com/embed/8cfi5r_7qps');
   });
 });

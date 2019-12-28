@@ -5,12 +5,12 @@
     class={{this.buttonClasses}}
     ...attributes
   >
-    {{#if this.hasIcon}}
+    {{#if @icon}}
       <UiIcon
         data-test-id="button-icon"
         @icon={{@icon}}
         @iconPrefix={{@iconPrefix}}
-        @variant={{if this.iconOnly this.iconOnlyVariant "inherit"}}
+        @variant={{if @iconOnly this.iconOnlyVariant "inherit"}}
       />
     {{/if}}
 
@@ -20,16 +20,17 @@
   <button
     data-test-id={{this.data-test-id}}
     class={{this.buttonClasses}}
-    disabled={{this.disabled}}
-    onclick={{action "click"}}
+    type={{this.type}}
+    disabled={{@disabled}}
+    {{on "click" this.click}}
     ...attributes
   >
-    {{#if this.hasIcon}}
+    {{#if @icon}}
       <UiIcon
         data-test-id="button-icon"
         @icon={{@icon}}
         @iconPrefix={{@iconPrefix}}
-        @variant={{if this.iconOnly this.iconOnlyVariant "inherit"}}
+        @variant={{if @iconOnly this.iconOnlyVariant "inherit"}}
       />
     {{/if}}
 
