@@ -35,7 +35,7 @@
       </Form.group>
     </Modal.body>
     <Modal.footer>
-      <Button @variant="plain" @onClick={{action @onCancel}}>
+      <Button @variant="plain" @onClick={{@onCancel}}>
         No
       </Button>
       <Form.submit class="ml-2" @disabled={{if this.deleteEvent.isRunning true false}}>
