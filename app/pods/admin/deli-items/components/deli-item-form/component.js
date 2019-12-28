@@ -3,10 +3,10 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
-import EventValidations from 'butchers-market/validations/event';
+import DeliItemValidations from 'butchers-market/validations/deli-item';
 import { task } from 'ember-concurrency';
 
-export default class EventForm extends Component {
+export default class DeliItemForm extends Component {
   changeset;
 
   @tracked errorMessage;
@@ -20,18 +20,10 @@ export default class EventForm extends Component {
     super(...arguments);
 
     let changeset = new Changeset(
-      this.args.event,
-      lookupValidator(EventValidations),
-      EventValidations
+      this.args.item,
+      lookupValidator(DeliItemValidations),
+      DeliItemValidations
     );
-
-    if (this.args.event.isNew) {
-      let now = new Date();
-
-      changeset.set('startTime', new Date(now.getFullYear(), now.getMonth(), now.getDate(), 19));
-      changeset.set('endTime', new Date(now.getFullYear(), now.getMonth(), now.getDate(), 22));
-    }
-
     this.changeset = changeset;
   }
 
@@ -60,7 +52,7 @@ export default class EventForm extends Component {
       }
     }
   }).drop())
-  saveEvent;
+  saveItem;
 
   @(task(function*(file) {
     try {
@@ -74,51 +66,6 @@ export default class EventForm extends Component {
     .maxConcurrency(3)
     .enqueue())
   uploadPhoto;
-
-  @action
-  dateSelected(date) {
-    const startTime = this.changeset.startTime;
-    this.changeset.set(
-      'startTime',
-      new Date(
-        date[0].getFullYear(),
-        date[0].getMonth(),
-        date[0].getDate(),
-        startTime.getHours(),
-        startTime.getMinutes()
-      )
-    );
-  }
-
-  @action
-  startTimeSelected(time) {
-    const startTime = this.changeset.startTime;
-    this.changeset.set(
-      'startTime',
-      new Date(
-        startTime.getFullYear(),
-        startTime.getMonth(),
-        startTime.getDate(),
-        time[0].getHours(),
-        time[0].getMinutes()
-      )
-    );
-  }
-
-  @action
-  endTimeSelected(time) {
-    const startTime = this.changeset.startTime;
-    this.changeset.set(
-      'endTime',
-      new Date(
-        startTime.getFullYear(),
-        startTime.getMonth(),
-        startTime.getDate(),
-        time[0].getHours(),
-        time[0].getMinutes()
-      )
-    );
-  }
 
   @action
   uploadImage(file) {

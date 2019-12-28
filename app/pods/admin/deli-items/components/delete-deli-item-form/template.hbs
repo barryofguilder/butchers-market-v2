@@ -1,0 +1,36 @@
+<ModalDialog as |Modal|>
+  <Modal.header>
+    Delete Deli Item?
+  </Modal.header>
+  <Admin::Components::AdminForm class="max-w-xl" @onSubmit={{perform this.deleteItem}} as |Form|>
+    <Modal.body>
+      {{#if this.errorMessage}}
+        <UiAlert data-test-id="server-error" @variant="danger">
+          {{this.errorMessage}}
+        </UiAlert>
+      {{/if}}
+
+      <p class="mb-8">
+        Do you really want to delete this deli item?
+      </p>
+
+      <Form.group data-test-id="title" as |Group|>
+        <Group.label>Title</Group.label>
+        <Group.readonly @value={{@item.title}} />
+      </Form.group>
+
+      <Form.group data-test-id="lead-in" as |Group|>
+        <Group.label>Ingredients</Group.label>
+        <Group.textarea @value={{@item.ingredients}} readonly={{true}} />
+      </Form.group>
+    </Modal.body>
+    <Modal.footer>
+      <Button @variant="plain" @onClick={{@onCancel}}>
+        No
+      </Button>
+      <Form.submit class="ml-2" @disabled={{if this.deleteItem.isRunning true false}}>
+        Yes
+      </Form.submit>
+    </Modal.footer>
+  </Admin::Components::AdminForm>
+</ModalDialog>
