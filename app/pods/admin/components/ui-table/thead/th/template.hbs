@@ -5,7 +5,11 @@
   ...attributes
 >
   {{#if @name}}
-    <a data-test-id="table-head-link" href="#" class="text-gray-900" {{action this.columnClicked}}>
+    <button
+      data-test-id="table-head-link"
+      class="font-semibold text-sm uppercase text-gray-900 focus:outline-none focus:underline"
+      {{on "click" this.columnClicked}}
+    >
       {{yield}}
 
       {{#if this.isAscending}}
@@ -13,7 +17,7 @@
       {{else if this.isDescending}}
         <FaIcon @icon="chevron-down" class="ml-1" />
       {{/if}}
-    </a>
+    </button>
   {{else}}
     {{yield}}
   {{/if}}
