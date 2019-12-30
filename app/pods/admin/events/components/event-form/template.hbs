@@ -31,6 +31,19 @@
     />
   </Form.group>
 
+  <Form.group data-test-id="start-time" @model={{this.changeset}} @property="startTime" as |Group|>
+    <Group.label>Start Time <Admin::Components::Required /></Group.label>
+    <Group.datepicker
+      @disableMobile={{true}}
+      @date={{readonly this.changeset.startTime}}
+      @enableTime={{true}}
+      @noCalendar={{true}}
+      @time_24hr={{false}}
+      @dateFormat="h:i K"
+      @onChange={{action this.startTimeSelected}}
+    />
+  </Form.group>
+
   <Form.group data-test-id="end-time" @model={{this.changeset}} @property="endTime" as |Group|>
     <Group.label>End Time <Admin::Components::Required /></Group.label>
     <Group.datepicker
