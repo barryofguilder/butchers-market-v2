@@ -77,7 +77,7 @@ export default class EventForm extends Component {
 
   @action
   dateSelected(date) {
-    const startTime = this.changeset.startTime;
+    const startTime = this.changeset.get('startTime');
     this.changeset.set(
       'startTime',
       new Date(
@@ -92,7 +92,7 @@ export default class EventForm extends Component {
 
   @action
   startTimeSelected(time) {
-    const startTime = this.changeset.startTime;
+    const startTime = this.changeset.get('startTime');
     this.changeset.set(
       'startTime',
       new Date(
@@ -107,7 +107,7 @@ export default class EventForm extends Component {
 
   @action
   endTimeSelected(time) {
-    const startTime = this.changeset.startTime;
+    const startTime = this.changeset.get('startTime');
     this.changeset.set(
       'endTime',
       new Date(
