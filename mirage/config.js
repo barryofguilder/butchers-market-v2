@@ -6,10 +6,45 @@ export default function() {
   window.server = this;
 
   //this.timing = 400;
-  this.namespace = '/data';
+  this.namespace = '/api';
+
+  this.post(
+    '/upload',
+    upload(function(db, request) {
+      return new Response(201, { 'Content-Type': 'text/plain' }, request.requestBody.file.url);
+    })
+  );
+
+  this.get('/events', ({ events }, request) => {
+    const range = request.queryParams['filter[range]'];
+    let response = events.all();
+
+    if (range) {
+      const date = new Date();
+
+      if (range === 'upcoming') {
+        date.setHours(0, 0, 0, 0);
+
+        response.models = response.models.filter(event => {
+          return new Date(event.startTime) > date;
+        });
+      } else if (range === 'past') {
+        response.models = response.models.filter(event => {
+          return new Date(event.startTime) < date;
+        });
+      }
+    }
+
+    // TODO: Sort by `startTime`
+
+    return response;
+  });
+  this.get('/events/:id');
+  this.post('/events');
+  this.patch('/events/:id');
+  this.del('/events/:id');
 
   this.get('/deliItems.json', 'deli-item');
-  this.get('/events.json', 'event');
   this.get('/hours.json', 'hour');
   this.get('/meatBundles.json', 'meat-bundle');
   this.get('/meatProducts.json', 'meat-product');
@@ -21,27 +56,6 @@ export default function() {
   // Admin CRUD
   //
   this.namespace = '/server';
-
-  this.get('/events.php', 'event', { coalesce: true });
-  this.post('/events.php', 'event');
-  this.put('/events.php', function({ events }, request) {
-    let id = request.queryParams.id;
-    let attrs = this.normalizedRequestAttrs('event');
-
-    return events.find(id).update(attrs);
-  });
-  this.del('/events.php', function({ events }, request) {
-    let id = request.queryParams.id;
-
-    events.find(id).destroy();
-  });
-
-  this.post(
-    '/imageUpload.php',
-    upload(function(db, request) {
-      return new Response(201, { location: request.requestBody.file.url }, {});
-    })
-  );
 
   this.post('/feedback.php', (server, request) => {
     let attrs = JSON.parse(request.requestBody);

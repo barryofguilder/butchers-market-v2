@@ -2,7 +2,7 @@
   <div class="w-2/5">
     <img
       class="w-100 rounded shadow-md"
-      src={{if @event.imageUrl @event.imageUrl "images/event-default.jpg"}}
+      src={{if @event.imageUrl @event.imageUrlPath "images/event-default.jpg"}}
       alt={{if @event.imageUrl (concat "Image of " @event.title) "Generic image of Butcher's Market Cafe"}}
     >
   </div>

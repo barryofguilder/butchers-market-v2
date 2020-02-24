@@ -26,11 +26,11 @@ module.exports = function(environment) {
     metricsAdapters: [
       {
         name: 'GoogleAnalytics',
-        environments: ['development', 'production'],
+        environments: [/*'development',*/ 'production'],
         config: {
           id: 'UA-59988645-1',
           // Use `analytics_debug.js` in development
-          debug: environment === 'development',
+          //debug: environment === 'development',
           // Ensure only production env hits are sent to GA
           sendHitTask: environment === 'production',
         },
@@ -41,8 +41,10 @@ module.exports = function(environment) {
       siteKey: '6LcrHAITAAAAACvTiT4qS4dvbwL7wgGRXhJtsKim',
     },
 
-    api: '',
-    showReCaptcha: true,
+    api: '/',
+    namespace: 'api',
+    showReCaptcha: false,
+    uploadsDir: '/',
   };
 
   if (environment === 'development') {
@@ -52,7 +54,16 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
 
-    ENV.showReCaptcha = false;
+    ENV['ember-cli-mirage'] = {
+      enabled: true,
+    };
+
+    ENV.uploadsDir = '';
+
+    if (ENV['ember-cli-mirage'].enabled === false) {
+      ENV.api = 'http://localhost:3000';
+      ENV.uploadsDir = '/uploads/';
+    }
   }
 
   if (environment === 'test') {
@@ -68,7 +79,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.api = '/';
+    ENV.showReCaptcha = true;
   }
 
   return ENV;

@@ -24,9 +24,14 @@
         <Group.readonly @value={{@event.leadIn}} />
       </Form.group>
 
+      <Form.group data-test-id="date" as |Group|>
+        <Group.label>Date</Group.label>
+        <p>{{date-format @event.startTime "EEEE, MMM d yyyy"}}</p>
+      </Form.group>
+
       <Form.group data-test-id="start-time" as |Group|>
         <Group.label>Start Time</Group.label>
-        <p>{{date-format @event.startTime "EEEE do yyyy"}}</p>
+        <p>{{date-format @event.startTime "h:mma"}}</p>
       </Form.group>
 
       <Form.group data-test-id="end-time" as |Group|>
