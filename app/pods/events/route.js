@@ -5,8 +5,8 @@ import RSVP from 'rsvp';
 export default class EventsRoute extends Route {
   model() {
     return RSVP.hash({
-      hours: this.store.findAll('hour'),
       events: this.store.findAll('event'),
+      hours: this.store.findAll('hour'),
       performances: this.store.findAll('performance'),
       reviews: this.store.findAll('review'),
     });

@@ -3,6 +3,7 @@ export default function(server) {
 
   createDeliItems(server);
   createEvents(server);
+  createHours(server);
   createPerformances(server);
 }
 
@@ -72,6 +73,44 @@ function createEvents(server) {
   server.createList('event', 3, 'pastEvent', {
     title: 'Across Five Aprils',
     leadIn: 'A night of metal with',
+  });
+}
+
+function createHours(server) {
+  server.create('hour', {
+    type: 'Store',
+    default: true,
+    label: 'Store Hours',
+    line1: 'Mon - Sat: 9:00am - 6:00pm',
+    line2: 'Sun: Closed',
+    line3: null,
+  });
+
+  server.create('hour', {
+    type: 'Cafe',
+    default: true,
+    label: 'Cafe Hours',
+    line1: 'Mon - Thurs: 9:00am - 5:30pm',
+    line2: 'Fri & Sat: 9:00am - 10:00pm, last call 9:30pm',
+    line3: 'Sun: Closed',
+  });
+
+  server.create('hour', {
+    type: 'Store',
+    default: false,
+    label: 'Store Hours (holiday)',
+    line1: 'Closed',
+    line2: null,
+    line3: null,
+  });
+
+  server.create('hour', {
+    type: 'Cafe',
+    default: false,
+    label: 'Cafe Hours (holiday)',
+    line1: 'Closed',
+    line2: null,
+    line3: null,
   });
 }
 

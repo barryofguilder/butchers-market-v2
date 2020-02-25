@@ -9,9 +9,8 @@
           Small town service. Big city selection.
         </Promo.subtitle>
       {{else}}
-        <StoreHours @hours={{this.model.hours}} @hourType="Store" />
-        <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Cafe" />
-        <StoreLocation class="mt-8" />
+        <StoreHours @hours={{@model.hours}} @primaryType="Store" class="mt-8" />
+        <StoreLocation class="mt-8" class="mt-8" />
       {{/if}}
 
       <Button @href="https://www.facebook.com/thebutchersmarket" @variant="primary" class="mt-8">
@@ -19,8 +18,7 @@
       </Button>
 
       {{#if this.media.isSm}}
-        <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Store" />
-        <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Cafe" />
+        <StoreHours @hours={{@model.hours}} @primaryType="Store" class="mt-8" />
         <StoreLocation class="mt-8" />
       {{/if}}
     </div>

@@ -1,12 +1,4 @@
 <div ...attributes>
-  <h3 data-test-id="store-hours-title" class="text-2xl tracking-wide uppercase font-black">
-    {{this.hourType}} Hours
-  </h3>
-  <p data-test-id="store-hours-line">{{this.hoursForType.line1}}</p>
-  {{#if this.hoursForType.line2}}
-    <p data-test-id="store-hours-line" class="mt-1">{{this.hoursForType.line2}}</p>
-  {{/if}}
-  {{#if this.hoursForType.line3}}
-    <p data-test-id="store-hours-line" class="mt-1">{{this.hoursForType.line3}}</p>
-  {{/if}}
+  <Components::StoreHours::Hours @hours={{this.primaryHours}} />
+  <Components::StoreHours::Hours @hours={{this.secondaryHours}} class="mt-8" />
 </div>

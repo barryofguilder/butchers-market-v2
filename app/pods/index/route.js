@@ -5,8 +5,8 @@ import RSVP from 'rsvp';
 export default class IndexRoute extends Route {
   model() {
     return RSVP.hash({
-      hours: this.store.findAll('hour'),
       bundles: this.store.findAll('meat-bundle'),
+      hours: this.store.findAll('hour'),
       products: this.store.findAll('meat-product'),
       reviews: this.store.findAll('review'),
     });

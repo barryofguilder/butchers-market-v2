@@ -42,6 +42,7 @@ export default function() {
   });
 
   this.resource('deli-items');
+  this.resource('hours');
 
   //
   // Admin CRUD
@@ -69,20 +70,6 @@ export default function() {
     }
 
     return new Response(201, {}, {});
-  });
-
-  this.get('/hours.php', 'hour', { coalesce: true });
-  this.post('/hours.php', 'hour');
-  this.put('/hours.php', function({ hours }, request) {
-    let id = request.queryParams.id;
-    let attrs = this.normalizedRequestAttrs('hour');
-
-    return hours.find(id).update(attrs);
-  });
-  this.del('/hours.php', function({ hours }, request) {
-    let id = request.queryParams.id;
-
-    hours.find(id).destroy();
   });
 
   this.get('/performances.php', 'performance', { coalesce: true });
