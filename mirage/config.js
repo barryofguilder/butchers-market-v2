@@ -15,6 +15,7 @@ export default function() {
     })
   );
 
+  this.resource('events');
   this.get('/events', ({ events }, request) => {
     const range = request.queryParams['filter[range]'];
     let response = events.all();
@@ -39,18 +40,8 @@ export default function() {
 
     return response;
   });
-  this.get('/events/:id');
-  this.post('/events');
-  this.patch('/events/:id');
-  this.del('/events/:id');
 
-  this.get('/deliItems.json', 'deli-item');
-  this.get('/hours.json', 'hour');
-  this.get('/meatBundles.json', 'meat-bundle');
-  this.get('/meatProducts.json', 'meat-product');
-  this.get('/packageBundles.json', 'package-bundle');
-  this.get('/performances.json', 'performance');
-  this.get('/reviews.json', 'review');
+  this.resource('deli-items');
 
   //
   // Admin CRUD
@@ -120,19 +111,5 @@ export default function() {
     let id = request.queryParams.id;
 
     packageBundles.find(id).destroy();
-  });
-
-  this.get('/deliItems.php', 'deli-item', { coalesce: true });
-  this.post('/deliItems.php', 'deli-item');
-  this.put('/deliItems.php', function({ deliItems }, request) {
-    let id = request.queryParams.id;
-    let attrs = this.normalizedRequestAttrs('deli-item');
-
-    return deliItems.find(id).update(attrs);
-  });
-  this.del('/deliItems.php', function({ deliItems }, request) {
-    let id = request.queryParams.id;
-
-    deliItems.find(id).destroy();
   });
 }

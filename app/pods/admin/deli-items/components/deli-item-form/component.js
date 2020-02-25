@@ -5,12 +5,27 @@ import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 import DeliItemValidations from 'butchers-market/validations/deli-item';
 import { task } from 'ember-concurrency';
+import baseUrl from 'butchers-market/utils/base-url';
 
 export default class DeliItemForm extends Component {
   changeset;
 
+  @tracked image;
+  @tracked tempImageUrl;
   @tracked errorMessage;
   @tracked fileErrorMessage;
+
+  get hasImage() {
+    return this.changeset.get('imageUrl') || this.tempImageUrl;
+  }
+
+  get imageUrl() {
+    if (this.tempImageUrl) {
+      return this.tempImageUrl;
+    }
+
+    return this.changeset.get('imageUrlPath');
+  }
 
   get saveDisabled() {
     return this.changeset && this.changeset.isInvalid;
@@ -35,11 +50,9 @@ export default class DeliItemForm extends Component {
     }
 
     try {
-      let image = this.changeset.get('image');
-
-      if (image) {
-        let response = yield image.upload('/server/imageUpload.php');
-        this.changeset.set('imageUrl', response.headers.location);
+      if (this.image) {
+        let response = yield this.image.upload(`${baseUrl}/upload`);
+        this.changeset.set('imageUrl', response.body);
       }
 
       yield this.changeset.save();
@@ -57,8 +70,11 @@ export default class DeliItemForm extends Component {
   @(task(function*(file) {
     try {
       let url = yield file.readAsDataURL();
+      this.tempImageUrl = url;
+      this.image = file;
+
+      // Only setting this to make the validation happy. It gets set to the actual url on save.
       this.changeset.set('imageUrl', url);
-      this.changeset.set('image', file);
     } catch (e) {
       this.fileErrorMessage = 'Could not read the file contents';
     }
@@ -70,5 +86,13 @@ export default class DeliItemForm extends Component {
   @action
   uploadImage(file) {
     this.uploadPhoto.perform(file);
+  }
+
+  @action
+  removeImage() {
+    this.image = null;
+    this.tempImageUrl = null;
+
+    this.changeset.set('imageUrl', null);
   }
 }

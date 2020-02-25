@@ -1,8 +1,51 @@
 export default function(server) {
   server.loadFixtures();
 
+  createDeliItems(server);
   createEvents(server);
   createPerformances(server);
+}
+
+function createDeliItems(server) {
+  server.create('deli-item', {
+    title: 'Rotisserie Chicken Salad',
+    ingredients: 'grapes, pecans',
+  });
+
+  server.create('deli-item', {
+    title: 'Traditional Chicken Salad',
+    ingredients: 'pimientos, tomatoes, carrots',
+  });
+
+  server.create('deli-item', {
+    title: 'Olive Salad',
+    ingredients: 'assorted olives, garlic, cocktail onions, assorted peppers, pimientos',
+  });
+
+  server.create('deli-item', {
+    title: 'Pimiento Cheese',
+    ingredients: null,
+  });
+
+  server.create('deli-item', {
+    title: 'Broccoli Salad',
+    ingredients: 'broccoli, cauliflower, tomatoes, red onion, ranch dressing',
+  });
+
+  server.create('deli-item', {
+    title: 'Fresh Salsa',
+    ingredients: null,
+  });
+
+  server.create('deli-item', {
+    title: 'Bacon Ranch Potato Salad',
+    ingredients: null,
+  });
+
+  server.create('deli-item', {
+    title: 'Original Twice Baked Potato',
+    ingredients: 'milk, butter, sour cream, cheddar cheese, chives',
+  });
 }
 
 function createEvents(server) {
