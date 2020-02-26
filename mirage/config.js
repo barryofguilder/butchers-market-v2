@@ -60,6 +60,7 @@ export default function() {
     return response;
   });
 
+  this.resource('performances');
   this.resource('package-bundles', { except: ['create', 'delete'] });
 
   this.get('/reviews');
@@ -90,19 +91,5 @@ export default function() {
     }
 
     return new Response(201, {}, {});
-  });
-
-  this.get('/performances.php', 'performance', { coalesce: true });
-  this.post('/performances.php', 'performance');
-  this.put('/performances.php', function({ performances }, request) {
-    let id = request.queryParams.id;
-    let attrs = this.normalizedRequestAttrs('performance');
-
-    return performances.find(id).update(attrs);
-  });
-  this.del('/performances.php', function({ performances }, request) {
-    let id = request.queryParams.id;
-
-    performances.find(id).destroy();
   });
 }
