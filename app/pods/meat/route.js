@@ -6,7 +6,6 @@ export default class MeatRoute extends Route {
   model() {
     return RSVP.hash({
       bundles: this.store.findAll('meat-bundle'),
-      products: this.store.findAll('meat-product'),
       packageBundles: this.store.findAll('package-bundle'),
     });
   }
