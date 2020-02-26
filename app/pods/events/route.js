@@ -1,14 +1,17 @@
 import Route from '@ember/routing/route';
 import { action } from '@ember/object';
-import RSVP from 'rsvp';
 
 export default class EventsRoute extends Route {
-  model() {
-    return RSVP.hash({
-      events: this.store.findAll('event'),
-      hours: this.store.findAll('hour'),
-      performances: this.store.findAll('performance'),
-    });
+  async model() {
+    const events = await this.store.findAll('event');
+    const hours = await this.store.findAll('hour');
+    const performances = await this.store.findAll('performance');
+
+    return {
+      events,
+      hours,
+      performances,
+    };
   }
 
   @action

@@ -1,13 +1,15 @@
 import Route from '@ember/routing/route';
 import { action } from '@ember/object';
-import RSVP from 'rsvp';
 
 export default class IndexRoute extends Route {
-  model() {
-    return RSVP.hash({
-      bundles: this.store.query('meat-bundle', { filter: { featured: true } }),
-      hours: this.store.findAll('hour'),
-    });
+  async model() {
+    const bundles = await this.store.query('meat-bundle', { filter: { featured: true } });
+    const hours = await this.store.findAll('hour');
+
+    return {
+      bundles,
+      hours,
+    };
   }
 
   @action
