@@ -15,7 +15,7 @@ export default function() {
     })
   );
 
-  this.resource('events');
+  this.resource('events', { except: ['index'] });
   this.get('/events', ({ events }, request) => {
     const range = request.queryParams['filter[range]'];
     let response = events.all();
@@ -44,7 +44,7 @@ export default function() {
   this.resource('deli-items');
   this.resource('hours');
 
-  this.get('/meat-bundles');
+  this.get('/meat-bundles', { except: ['index'] });
   this.get('/meat-bundles', ({ meatBundles }, request) => {
     const featured = request.queryParams['filter[featured]'];
     let response;
@@ -59,6 +59,8 @@ export default function() {
 
     return response;
   });
+
+  this.resource('package-bundles', { except: ['create', 'delete'] });
 
   this.get('/reviews');
 
@@ -102,19 +104,5 @@ export default function() {
     let id = request.queryParams.id;
 
     performances.find(id).destroy();
-  });
-
-  this.get('/packageBundles.php', 'package-bundle', { coalesce: true });
-  this.post('/packageBundles.php', 'package-bundle');
-  this.put('/packageBundles.php', function({ packageBundles }, request) {
-    let id = request.queryParams.id;
-    let attrs = this.normalizedRequestAttrs('package-bundle');
-
-    return packageBundles.find(id).update(attrs);
-  });
-  this.del('/packageBundles.php', function({ packageBundles }, request) {
-    let id = request.queryParams.id;
-
-    packageBundles.find(id).destroy();
   });
 }
