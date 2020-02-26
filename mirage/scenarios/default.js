@@ -6,6 +6,7 @@ export default function(server) {
   createHours(server);
   createMeatBundles(server);
   createPerformances(server);
+  createReviews(server);
 }
 
 function createDeliItems(server) {
@@ -273,4 +274,10 @@ function createPerformances(server) {
     title: 'Lon Eldridge - China Town',
     link: 'https://www.youtube.com/watch?v=yDYxlQHpjFE',
   });
+}
+
+function createReviews(server) {
+  server.create('review', { image: 'images/review-person1.jpg' });
+  server.create('review', { image: 'images/review-person2.png' });
+  server.create('review', { image: 'images/review-person3.png' });
 }

@@ -60,6 +60,8 @@ export default function() {
     return response;
   });
 
+  this.get('/reviews');
+
   //
   // Admin CRUD
   //

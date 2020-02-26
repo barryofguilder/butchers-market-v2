@@ -8,7 +8,6 @@ export default class IndexRoute extends Route {
       bundles: this.store.query('meat-bundle', { filter: { featured: true } }),
       hours: this.store.findAll('hour'),
       products: this.store.findAll('meat-product'),
-      reviews: this.store.findAll('review'),
     });
   }
 

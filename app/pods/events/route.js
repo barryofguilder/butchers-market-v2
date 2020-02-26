@@ -8,7 +8,6 @@ export default class EventsRoute extends Route {
       events: this.store.findAll('event'),
       hours: this.store.findAll('hour'),
       performances: this.store.findAll('performance'),
-      reviews: this.store.findAll('review'),
     });
   }
 
