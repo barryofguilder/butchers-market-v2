@@ -12,7 +12,7 @@
 
     <div class="mt-16 sm:mt-24 max-w-4xl mx-auto">
       <div class="sm:-mx-4 sm:flex">
-        {{#each this.model.products as |product|}}
+        {{#each @model.products as |product|}}
           <div class="mt-8 w-full sm:mt-0 sm:w-1/3 sm:px-4 {{if product.featured "sm:-pt-10" "sm:pt-10"}}">
             <div>
               <h4
@@ -43,11 +43,11 @@
       </Button>
     </div>
 
-    <ProductsList @products={{this.model.bundles}} />
+    <ProductsList @products={{@model.bundles}} />
   </Container>
 </section>
 
-{{#each (sort-by "displayOrder" this.model.packageBundles) as |bundle|}}
+{{#each (sort-by "displayOrder" @model.packageBundles) as |bundle|}}
   <section>
     <HeaderTitle @title={{bundle.title}} />
 

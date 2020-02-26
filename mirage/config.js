@@ -44,6 +44,22 @@ export default function() {
   this.resource('deli-items');
   this.resource('hours');
 
+  this.get('/meat-bundles');
+  this.get('/meat-bundles', ({ meatBundles }, request) => {
+    const featured = request.queryParams['filter[featured]'];
+    let response;
+
+    if (featured === undefined) {
+      response = meatBundles.all();
+    } else {
+      response = meatBundles.where({ featured: true });
+    }
+
+    // TODO: Sort by `displayOrder`
+
+    return response;
+  });
+
   //
   // Admin CRUD
   //
