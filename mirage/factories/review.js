@@ -1,5 +1,4 @@
-import { Factory, trait } from 'ember-cli-mirage';
-import { getYear, getMonth, getDay } from 'date-fns';
+import { Factory } from 'ember-cli-mirage';
 import faker from 'faker';
 
 export default Factory.extend({
@@ -7,7 +6,7 @@ export default Factory.extend({
     return `${faker.name.firstName()} ${faker.name.lastName()}`;
   },
 
-  image() {
+  imageUrl() {
     return 'images/review-person3.png';
   },
 

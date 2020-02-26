@@ -277,7 +277,7 @@ function createPerformances(server) {
 }
 
 function createReviews(server) {
-  server.create('review', { image: 'images/review-person1.jpg' });
-  server.create('review', { image: 'images/review-person2.png' });
-  server.create('review', { image: 'images/review-person3.png' });
+  server.create('review', { imageUrl: 'images/review-person1.jpg' });
+  server.create('review', { imageUrl: 'images/review-person2.png' });
+  server.create('review', { imageUrl: 'images/review-person3.png' });
 }
