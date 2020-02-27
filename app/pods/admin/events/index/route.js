@@ -3,13 +3,19 @@ import { action } from '@ember/object';
 
 export default class AdminEventsIndexRoute extends Route {
   queryParams = {
+    page: {
+      refreshModel: true,
+    },
     range: {
       refreshModel: true,
     },
   };
 
   model(params) {
-    return this.store.query('event', { filter: { range: params.range } });
+    return this.store.query('event', {
+      filter: { range: params.range },
+      page: { number: params.page },
+    });
   }
 
   @action
