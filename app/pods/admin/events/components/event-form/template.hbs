@@ -1,4 +1,4 @@
-<Admin::Components::AdminForm class="max-w-xl" @onSubmit={{perform this.saveEvent}} as |Form|>
+<Admin::Components::AdminForm class="max-w-xl" enctype="multipart/form-data" @onSubmit={{perform this.saveEvent}} as |Form|>
   {{#if this.errorMessage}}
     <UiAlert data-test-id="server-error" @variant="danger">
       {{this.errorMessage}}
@@ -79,11 +79,11 @@
         </a>
       </FileUpload>
 
-      {{#if this.changeset.imageUrl}}
+      {{#if this.hasImage}}
         <button
           type="button"
           class="inline-block ml-2 px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-none focus:shadow-outline"
-          {{action (mut this.changeset.imageUrl) null}}
+          {{on "click" this.removeImage}}
         >
           Remove Image
         </button>
@@ -102,9 +102,9 @@
         Only JPG, JPEG, PNG, and GIF files are allowed.
       </small>
 
-      {{#if this.changeset.imageUrl}}
+      {{#if this.hasImage}}
         <div class="mt-4">
-          <img src={{this.changeset.imageUrl}} alt="Event image" class="w-full block">
+          <img src={{this.imageUrl}} alt="Event image" class="w-full block">
         </div>
       {{/if}}
     </div>

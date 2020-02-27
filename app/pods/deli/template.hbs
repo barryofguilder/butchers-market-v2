@@ -21,11 +21,11 @@
 
   <Container>
     <div class="flex flex-wrap -mx-4">
-      {{#each (sort-by "title" this.model) as |item|}}
+      {{#each (sort-by "title" @model) as |item|}}
         <div class="mt-10 px-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
           <img
             class="w-full shadow-md"
-            src="{{item.imageUrl}}"
+            src="{{item.imageUrlPath}}"
             alt="Image of {{item.title}}"
           >
           <h4 class="mt-2 text-xl font-bold text-center text-gray-900">{{item.title}}</h4>

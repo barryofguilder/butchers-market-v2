@@ -2,8 +2,14 @@ import Route from '@ember/routing/route';
 import { action } from '@ember/object';
 
 export default class AdminEventsIndexRoute extends Route {
-  model() {
-    return this.store.findAll('event');
+  queryParams = {
+    range: {
+      refreshModel: true,
+    },
+  };
+
+  model(params) {
+    return this.store.query('event', { filter: { range: params.range } });
   }
 
   @action

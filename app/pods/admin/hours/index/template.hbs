@@ -16,7 +16,7 @@
     <Thead.th></Thead.th>
   </Table.head>
   <Table.body as |Tbody|>
-    {{#each this.sortedHours as |hours|}}
+    {{#each @model as |hours|}}
       <Tbody.tr as |Row|>
         <Row.td>
           <div>{{hours.type}}</div>

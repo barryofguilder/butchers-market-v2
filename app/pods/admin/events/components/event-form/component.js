@@ -5,12 +5,27 @@ import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 import EventValidations from 'butchers-market/validations/event';
 import { task } from 'ember-concurrency';
+import baseUrl from 'butchers-market/utils/base-url';
 
 export default class EventForm extends Component {
   changeset;
 
+  @tracked image;
+  @tracked tempImageUrl;
   @tracked errorMessage;
   @tracked fileErrorMessage;
+
+  get hasImage() {
+    return this.changeset.get('imageUrl') || this.tempImageUrl;
+  }
+
+  get imageUrl() {
+    if (this.tempImageUrl) {
+      return this.tempImageUrl;
+    }
+
+    return this.changeset.get('imageUrlPath');
+  }
 
   get saveDisabled() {
     return this.changeset && this.changeset.isInvalid;
@@ -43,11 +58,9 @@ export default class EventForm extends Component {
     }
 
     try {
-      let image = this.changeset.get('image');
-
-      if (image) {
-        let response = yield image.upload('/server/imageUpload.php');
-        this.changeset.set('imageUrl', response.headers.location);
+      if (this.image) {
+        let response = yield this.image.upload(`${baseUrl}/upload`);
+        this.changeset.set('imageUrl', response.body);
       }
 
       yield this.changeset.save();
@@ -65,8 +78,8 @@ export default class EventForm extends Component {
   @(task(function*(file) {
     try {
       let url = yield file.readAsDataURL();
-      this.changeset.set('imageUrl', url);
-      this.changeset.set('image', file);
+      this.tempImageUrl = url;
+      this.image = file;
     } catch (e) {
       this.fileErrorMessage = 'Could not read the file contents';
     }
@@ -88,6 +101,18 @@ export default class EventForm extends Component {
         startTime.getMinutes()
       )
     );
+
+    const endTime = this.changeset.get('endTime');
+    this.changeset.set(
+      'endTime',
+      new Date(
+        date[0].getFullYear(),
+        date[0].getMonth(),
+        date[0].getDate(),
+        endTime.getHours(),
+        endTime.getMinutes()
+      )
+    );
   }
 
   @action
@@ -101,6 +126,18 @@ export default class EventForm extends Component {
         startTime.getDate(),
         time[0].getHours(),
         time[0].getMinutes()
+      )
+    );
+
+    const endTime = this.changeset.get('endTime');
+    this.changeset.set(
+      'endTime',
+      new Date(
+        startTime.getFullYear(),
+        startTime.getMonth(),
+        startTime.getDate(),
+        endTime.getHours(),
+        endTime.getMinutes()
       )
     );
   }
@@ -123,5 +160,13 @@ export default class EventForm extends Component {
   @action
   uploadImage(file) {
     this.uploadPhoto.perform(file);
+  }
+
+  @action
+  removeImage() {
+    this.image = null;
+    this.tempImageUrl = null;
+
+    this.changeset.set('imageUrl', null);
   }
 }

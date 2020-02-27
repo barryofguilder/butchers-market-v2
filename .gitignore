@@ -26,3 +26,6 @@
 
 # Mac junk
 .DS_Store
+
+# Uploads directory
+/public/uploads

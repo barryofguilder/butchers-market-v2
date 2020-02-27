@@ -1,14 +1,15 @@
 import Route from '@ember/routing/route';
 import { action } from '@ember/object';
-import RSVP from 'rsvp';
 
 export default class MeatRoute extends Route {
-  model() {
-    return RSVP.hash({
-      bundles: this.store.findAll('meat-bundle'),
-      products: this.store.findAll('meat-product'),
-      packageBundles: this.store.findAll('package-bundle'),
-    });
+  async model() {
+    const bundles = await this.store.findAll('meat-bundle');
+    const packageBundles = await this.store.findAll('package-bundle');
+
+    return {
+      bundles,
+      packageBundles,
+    };
   }
 
   resetController(controller, isExiting /*, transition*/) {

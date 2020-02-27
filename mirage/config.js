@@ -6,44 +6,37 @@ export default function() {
   window.server = this;
 
   //this.timing = 400;
-  this.namespace = '/data';
+  this.namespace = '/api';
 
-  this.get('/deliItems.json', 'deli-item');
-  this.get('/events.json', 'event');
-  this.get('/hours.json', 'hour');
-  this.get('/meatBundles.json', 'meat-bundle');
-  this.get('/meatProducts.json', 'meat-product');
-  this.get('/packageBundles.json', 'package-bundle');
-  this.get('/performances.json', 'performance');
-  this.get('/reviews.json', 'review');
+  this.resource('deli-items');
 
-  //
-  // Admin CRUD
-  //
-  this.namespace = '/server';
+  this.resource('events', { except: ['index'] });
+  this.get('/events', ({ events }, request) => {
+    const range = request.queryParams['filter[range]'];
+    let response = events.all();
 
-  this.get('/events.php', 'event', { coalesce: true });
-  this.post('/events.php', 'event');
-  this.put('/events.php', function({ events }, request) {
-    let id = request.queryParams.id;
-    let attrs = this.normalizedRequestAttrs('event');
+    if (range) {
+      const date = new Date();
 
-    return events.find(id).update(attrs);
+      if (range === 'upcoming') {
+        date.setHours(0, 0, 0, 0);
+
+        response.models = response.models.filter(event => {
+          return new Date(event.startTime) > date;
+        });
+      } else if (range === 'past') {
+        response.models = response.models.filter(event => {
+          return new Date(event.startTime) < date;
+        });
+      }
+    }
+
+    // TODO: Sort by `startTime`
+
+    return response;
   });
-  this.del('/events.php', function({ events }, request) {
-    let id = request.queryParams.id;
 
-    events.find(id).destroy();
-  });
-
-  this.post(
-    '/imageUpload.php',
-    upload(function(db, request) {
-      return new Response(201, { location: request.requestBody.file.url }, {});
-    })
-  );
-
-  this.post('/feedback.php', (server, request) => {
+  this.post('/feedback', (server, request) => {
     let attrs = JSON.parse(request.requestBody);
     let errors = [];
 
@@ -60,65 +53,39 @@ export default function() {
     }
 
     if (errors.length > 0) {
-      return new Response(400, {}, { errors });
+      return new Response(422, {}, { errors });
     }
 
     return new Response(201, {}, {});
   });
 
-  this.get('/hours.php', 'hour', { coalesce: true });
-  this.post('/hours.php', 'hour');
-  this.put('/hours.php', function({ hours }, request) {
-    let id = request.queryParams.id;
-    let attrs = this.normalizedRequestAttrs('hour');
+  this.resource('hours');
 
-    return hours.find(id).update(attrs);
-  });
-  this.del('/hours.php', function({ hours }, request) {
-    let id = request.queryParams.id;
+  this.get('/meat-bundles', { except: ['index'] });
+  this.get('/meat-bundles', ({ meatBundles }, request) => {
+    const featured = request.queryParams['filter[featured]'];
+    let response;
 
-    hours.find(id).destroy();
-  });
+    if (featured === undefined) {
+      response = meatBundles.all();
+    } else {
+      response = meatBundles.where({ featured: true });
+    }
 
-  this.get('/performances.php', 'performance', { coalesce: true });
-  this.post('/performances.php', 'performance');
-  this.put('/performances.php', function({ performances }, request) {
-    let id = request.queryParams.id;
-    let attrs = this.normalizedRequestAttrs('performance');
+    // TODO: Sort by `displayOrder`
 
-    return performances.find(id).update(attrs);
-  });
-  this.del('/performances.php', function({ performances }, request) {
-    let id = request.queryParams.id;
-
-    performances.find(id).destroy();
+    return response;
   });
 
-  this.get('/packageBundles.php', 'package-bundle', { coalesce: true });
-  this.post('/packageBundles.php', 'package-bundle');
-  this.put('/packageBundles.php', function({ packageBundles }, request) {
-    let id = request.queryParams.id;
-    let attrs = this.normalizedRequestAttrs('package-bundle');
+  this.resource('performances');
+  this.resource('package-bundles', { except: ['create', 'delete'] });
 
-    return packageBundles.find(id).update(attrs);
-  });
-  this.del('/packageBundles.php', function({ packageBundles }, request) {
-    let id = request.queryParams.id;
+  this.get('/reviews');
 
-    packageBundles.find(id).destroy();
-  });
-
-  this.get('/deliItems.php', 'deli-item', { coalesce: true });
-  this.post('/deliItems.php', 'deli-item');
-  this.put('/deliItems.php', function({ deliItems }, request) {
-    let id = request.queryParams.id;
-    let attrs = this.normalizedRequestAttrs('deli-item');
-
-    return deliItems.find(id).update(attrs);
-  });
-  this.del('/deliItems.php', function({ deliItems }, request) {
-    let id = request.queryParams.id;
-
-    deliItems.find(id).destroy();
-  });
+  this.post(
+    '/upload',
+    upload(function(db, request) {
+      return new Response(201, { 'Content-Type': 'text/plain' }, request.requestBody.file.url);
+    })
+  );
 }

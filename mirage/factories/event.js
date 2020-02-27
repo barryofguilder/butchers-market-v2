@@ -8,11 +8,13 @@ export default Factory.extend({
 
     return new Date(getYear(date), getMonth(date), getDay(date), 19, 0, 0);
   },
+
   endTime() {
     let date = this.startTime;
 
     return new Date(getYear(date), getMonth(date), getDay(date), 22, 0, 0);
   },
+
   link() {
     return faker.internet.url();
   },
@@ -23,6 +25,7 @@ export default Factory.extend({
 
       return new Date(getYear(date), getMonth(date), getDay(date), 19, 0, 0);
     },
+
     endTime() {
       let date = this.startTime;
 
@@ -36,6 +39,7 @@ export default Factory.extend({
 
       return new Date(getYear(date), getMonth(date), getDay(date), 19, 0, 0);
     },
+
     endTime() {
       let date = this.startTime;
 

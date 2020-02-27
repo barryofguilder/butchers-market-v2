@@ -36,11 +36,11 @@
         </a>
       </FileUpload>
 
-      {{#if this.changeset.imageUrl}}
+      {{#if this.hasImage}}
         <button
           type="button"
           class="inline-block ml-2 px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-none focus:shadow-outline"
-          {{action (mut this.changeset.imageUrl) null}}
+          {{on "click" this.removeImage}}
         >
           Remove Image
         </button>
@@ -59,9 +59,9 @@
         Only JPG, JPEG, PNG, and GIF files are allowed.
       </small>
 
-      {{#if this.changeset.imageUrl}}
+      {{#if this.hasImage}}
         <div class="mt-4">
-          <img src={{this.changeset.imageUrl}} alt="Deli item image" class="w-full block">
+          <img src={{this.imageUrl}} alt="Deli item image" class="w-full block">
         </div>
       {{/if}}
     </div>

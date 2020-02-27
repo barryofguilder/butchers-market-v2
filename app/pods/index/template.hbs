@@ -9,9 +9,8 @@
           Small town service. Big city selection.
         </Promo.subtitle>
       {{else}}
-        <StoreHours @hours={{this.model.hours}} @hourType="Store" />
-        <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Cafe" />
-        <StoreLocation class="mt-8" />
+        <StoreHours @hours={{@model.hours}} @primaryType="Store" class="mt-8" />
+        <StoreLocation class="mt-8" class="mt-8" />
       {{/if}}
 
       <Button @href="https://www.facebook.com/thebutchersmarket" @variant="primary" class="mt-8">
@@ -19,8 +18,7 @@
       </Button>
 
       {{#if this.media.isSm}}
-        <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Store" />
-        <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Cafe" />
+        <StoreHours @hours={{@model.hours}} @primaryType="Store" class="mt-8" />
         <StoreLocation class="mt-8" />
       {{/if}}
     </div>
@@ -31,7 +29,7 @@
   <HeaderTitle @title="Featured Specials" />
 
   <Container>
-    <ProductsList @products={{this.featuredBundles}}>
+    <ProductsList @products={{@model.bundles}}>
       <div
         class="mt-10 text-center sm:w-1/2 sm:flex sm:flex-col sm:items-center lg:w-full lg:flex-row lg:text-left"
       >
@@ -71,22 +69,24 @@
   <Container>
     <div class="mt-10 max-w-4xl mx-auto">
       <div class="sm:-mx-4 sm:flex">
-        {{#each this.model.products as |product|}}
-          <div class="mt-8 w-full sm:mt-0 sm:w-1/3 sm:px-4 {{if product.featured "sm:-pt-10" "sm:pt-10"}}">
-            <div class="border border-gray-300">
-              <h4
-                class="text-xl sm:text-2xl uppercase tracking-wide font-black text-center bg-gray-300 {{if product.featured "px-6 py-3 sm:px-8 sm:py-4 text-2xl" "px-3 py-2 sm:px-4"}}"
-              >
-                {{product.title}}
-              </h4>
-              <ul class="natural-products-items">
-                {{#each product.items as |item index|}}
-                  <li class="p-3 sm:p-4 text-center sm:text-lg {{if (gt index 0) "border-t border-gray-300"}}">{{item}}</li>
-                {{/each}}
-              </ul>
+        <MeatProductsProvider as |provider|>
+          {{#each provider.products as |product|}}
+            <div class="mt-8 w-full sm:mt-0 sm:w-1/3 sm:px-4 {{if product.featured "sm:-pt-10" "sm:pt-10"}}">
+              <div class="border border-gray-300">
+                <h4
+                  class="text-xl sm:text-2xl uppercase tracking-wide font-black text-center bg-gray-300 {{if product.featured "px-6 py-3 sm:px-8 sm:py-4 text-2xl" "px-3 py-2 sm:px-4"}}"
+                >
+                  {{product.title}}
+                </h4>
+                <ul class="natural-products-items">
+                  {{#each product.items as |item index|}}
+                    <li class="p-3 sm:p-4 text-center sm:text-lg {{if (gt index 0) "border-t border-gray-300"}}">{{item}}</li>
+                  {{/each}}
+                </ul>
+              </div>
             </div>
-          </div>
-        {{/each}}
+          {{/each}}
+        </MeatProductsProvider>
       </div>
     </div>
   </Container>
@@ -96,7 +96,7 @@
   <HeaderTitle @title="Customer Reviews" />
 
   <Container>
-    <ReviewsList @reviews={{this.model.reviews}} />
+    <ReviewsList />
   </Container>
 </section>
 

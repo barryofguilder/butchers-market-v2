@@ -9,8 +9,7 @@
           Finger Lickin'. Guitar Pickin'.
         </Promo.subtitle>
       {{else}}
-        <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Cafe" />
-        <StoreHours @hours={{this.model.hours}} @hourType="Store" />
+        <StoreHours @hours={{@model.hours}} @primaryType="Cafe" class="mt-8" />
         <StoreLocation class="mt-8" />
       {{/if}}
 
@@ -19,8 +18,7 @@
       </Button>
 
       {{#if this.media.isSm}}
-        <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Cafe" />
-        <StoreHours class="mt-8" @hours={{this.model.hours}} @hourType="Store" />
+        <StoreHours @hours={{@model.hours}} @primaryType="Cafe" class="mt-8" />
         <StoreLocation class="mt-8" />
       {{/if}}
     </div>
@@ -31,8 +29,8 @@
   <HeaderTitle @title="Events" />
 
   <Container>
-    {{#if (gt this.sortedEvents.length 0)}}
-      <EventList @events={{this.sortedEvents}} />
+    {{#if (gt @model.events.length 0)}}
+      <EventList @events={{@model.events}} />
     {{else}}
       <p class="mt-8 text-lg text-gray-700 sm:text-xl">
         Check out the events on our
@@ -72,7 +70,7 @@
   <HeaderTitle @title="Customer Reviews" />
 
   <Container>
-    <ReviewsList @reviews={{this.model.reviews}} />
+    <ReviewsList />
   </Container>
 </section>
 
