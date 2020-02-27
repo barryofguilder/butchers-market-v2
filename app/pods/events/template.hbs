@@ -29,8 +29,8 @@
   <HeaderTitle @title="Events" />
 
   <Container>
-    {{#if (gt this.sortedEvents.length 0)}}
-      <EventList @events={{this.sortedEvents}} />
+    {{#if (gt @model.events.length 0)}}
+      <EventList @events={{@model.events}} />
     {{else}}
       <p class="mt-8 text-lg text-gray-700 sm:text-xl">
         Check out the events on our
