@@ -8,7 +8,7 @@ export default Factory.extend({
   },
 
   imageUrl() {
-    return 'images/generic-deli-item.jpg';
+    return 'generic-deli-item.jpg';
   },
 
   ingredients() {

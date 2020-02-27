@@ -44,7 +44,7 @@ module.exports = function(environment) {
     api: '/',
     namespace: 'api',
     showReCaptcha: false,
-    uploadsDir: '/',
+    uploadsDir: '/uploads/',
   };
 
   if (environment === 'development') {
@@ -58,11 +58,8 @@ module.exports = function(environment) {
       enabled: true,
     };
 
-    ENV.uploadsDir = '';
-
     if (ENV['ember-cli-mirage'].enabled === false) {
       ENV.api = 'http://localhost:3000';
-      ENV.uploadsDir = '/uploads/';
     }
   }
 

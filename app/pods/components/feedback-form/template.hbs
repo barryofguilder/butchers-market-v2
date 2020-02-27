@@ -15,11 +15,7 @@
 
   {{#if this.showInvalidFormError}}
     <UiAlert data-test-id="feedback-error" @variant="danger">
-      {{#if this.recaptchaInvalid}}
-        Invalid reCaptcha response, please try again
-      {{else}}
-        Please fill out the form and try sending again.
-      {{/if}}
+      Please fill out the form and try sending again.
     </UiAlert>
   {{/if}}
 
@@ -38,7 +34,7 @@
     </div>
     {{#if showReCaptcha}}
       <div class="mt-4">
-        <GRecaptcha @onSuccess={{action this.onCaptchaResolved}} />
+        <GRecaptcha @onSuccess={{this.onCaptchaResolved}} />
       </div>
     {{/if}}
     <div class="mt-4">

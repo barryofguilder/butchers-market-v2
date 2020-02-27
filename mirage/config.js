@@ -8,12 +8,7 @@ export default function() {
   //this.timing = 400;
   this.namespace = '/api';
 
-  this.post(
-    '/upload',
-    upload(function(db, request) {
-      return new Response(201, { 'Content-Type': 'text/plain' }, request.requestBody.file.url);
-    })
-  );
+  this.resource('deli-items');
 
   this.resource('events', { except: ['index'] });
   this.get('/events', ({ events }, request) => {
@@ -41,7 +36,29 @@ export default function() {
     return response;
   });
 
-  this.resource('deli-items');
+  this.post('/feedback', (server, request) => {
+    let attrs = JSON.parse(request.requestBody);
+    let errors = [];
+
+    if (!attrs.name) {
+      errors.push({ detail: { name: 'empty' } });
+    }
+
+    if (!attrs.email) {
+      errors.push({ detail: { email: 'empty' } });
+    }
+
+    if (!attrs.message) {
+      errors.push({ detail: { message: 'empty' } });
+    }
+
+    if (errors.length > 0) {
+      return new Response(422, {}, { errors });
+    }
+
+    return new Response(201, {}, {});
+  });
+
   this.resource('hours');
 
   this.get('/meat-bundles', { except: ['index'] });
@@ -65,31 +82,10 @@ export default function() {
 
   this.get('/reviews');
 
-  //
-  // Admin CRUD
-  //
-  this.namespace = '/server';
-
-  this.post('/feedback.php', (server, request) => {
-    let attrs = JSON.parse(request.requestBody);
-    let errors = [];
-
-    if (!attrs.name) {
-      errors.push({ detail: { name: 'empty' } });
-    }
-
-    if (!attrs.email) {
-      errors.push({ detail: { email: 'empty' } });
-    }
-
-    if (!attrs.message) {
-      errors.push({ detail: { message: 'empty' } });
-    }
-
-    if (errors.length > 0) {
-      return new Response(400, {}, { errors });
-    }
-
-    return new Response(201, {}, {});
-  });
+  this.post(
+    '/upload',
+    upload(function(db, request) {
+      return new Response(201, { 'Content-Type': 'text/plain' }, request.requestBody.file.url);
+    })
+  );
 }
