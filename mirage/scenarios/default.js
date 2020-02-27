@@ -1,6 +1,4 @@
 export default function(server) {
-  server.loadFixtures();
-
   createDeliItems(server);
   createEvents(server);
   createHours(server);
