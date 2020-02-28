@@ -45,6 +45,13 @@
   <p class="mt-12 text-lg text-gray-700 sm:text-xl">No events found</p>
 {{/if}}
 
+<Admin::Components::UiPagination
+  @page={{this.page}}
+  @totalPages={{this.pageMeta.total}}
+  @totalResults={{this.pageMeta.totalResults}}
+  @onPageChange={{this.pageChanged}}
+/>
+
 {{#if this.eventToDelete}}
   <Admin::Events::Components::DeleteEventForm
     @event={{this.eventToDelete}}
