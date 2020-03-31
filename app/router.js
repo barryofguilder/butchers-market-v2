@@ -22,10 +22,11 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function() {
-  this.route('meat');
-  this.route('deli');
   this.route('contact');
+  this.route('deli');
   this.route('events');
+  this.route('meat');
+  this.route('menu');
 
   this.route('admin', function() {
     this.route('deli-items', function() {
