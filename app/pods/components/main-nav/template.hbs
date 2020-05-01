@@ -14,7 +14,7 @@
           aria-controls="main-navigation-items"
           aria-expanded="false"
           aria-label="Toggle navigation"
-          {{this.toggleNavigation}}
+          {{on "click" this.toggleNavigation}}
         >
           <FaIcon @icon="bars" />
         </button>
