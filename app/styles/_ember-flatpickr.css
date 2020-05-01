@@ -2,7 +2,7 @@
  * Ember Flatpickr
  */
 
- .flatpickr-calendar {
+.flatpickr-calendar {
   @apply rounded-lg;
 }
 
