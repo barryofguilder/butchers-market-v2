@@ -61,7 +61,7 @@ export default function() {
 
   this.resource('hours');
 
-  this.get('/meat-bundles', { except: ['index'] });
+  this.resource('meat-bundles', { only: ['show', 'update'] });
   this.get('/meat-bundles', ({ meatBundles }, request) => {
     const featured = request.queryParams['filter[featured]'];
     let response;
