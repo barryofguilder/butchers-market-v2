@@ -66,7 +66,8 @@ export default class FeedbackForm extends Component {
   }
 
   @action
-  sendFeedback() {
+  sendFeedback(event) {
+    event.preventDefault();
     this.sendFeedbackTask.perform();
   }
 }

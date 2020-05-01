@@ -1,4 +1,4 @@
-<form class="max-w-md" {{action this.sendFeedback on="submit"}}>
+<form class="max-w-md" {{on "submit" this.sendFeedback}}>
   {{#if this.feedbackSent}}
     <UiAlert data-test-id="feedback-success" @variant="success">
       Thank you for contacting us! If you require immediate assistance, please call us at
@@ -32,7 +32,7 @@
       <label class="sr-only" for="message">Your Message</label>
       <UiTextarea id="message" placeholder="Your Message" rows="7" @value={{this.message}} />
     </div>
-    {{#if showReCaptcha}}
+    {{#if this.showReCaptcha}}
       <div class="mt-4">
         <GRecaptcha @onSuccess={{this.onCaptchaResolved}} />
       </div>

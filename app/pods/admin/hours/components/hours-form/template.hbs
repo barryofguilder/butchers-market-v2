@@ -56,7 +56,7 @@
         @appendDataInput={{true}}
         @date={{readonly this.changeset.activeStartDate}}
         @dateFormat="m/d/Y"
-        @onChange={{action this.startDateSelected}}
+        @onChange={{this.startDateSelected}}
       />
       <Group.help>
         The date that these hours will become active on.
@@ -75,7 +75,7 @@
         @appendDataInput={{true}}
         @date={{readonly this.changeset.activeEndDate}}
         @dateFormat="m/d/Y"
-        @onChange={{action this.endDateSelected}}
+        @onChange={{this.endDateSelected}}
       />
       <Group.help>
         The last date that these hours will be active on.

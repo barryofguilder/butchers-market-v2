@@ -1,6 +1,17 @@
 import Response from 'ember-cli-mirage/response';
 import { upload } from 'ember-file-upload/mirage';
 
+const generateValidationError = function(field, title) {
+  return {
+    status: 422,
+    code: 100,
+    title,
+    source: {
+      pointer: `/data/attributes/${field}`,
+    },
+  };
+};
+
 export default function() {
   // Allows us to access the Mirage server in the console using `window.server`.
   window.server = this;
@@ -37,26 +48,26 @@ export default function() {
   });
 
   this.post('/feedback', (server, request) => {
-    let attrs = JSON.parse(request.requestBody);
+    let attrs = JSON.parse(request.requestBody).data.attributes;
     let errors = [];
 
     if (!attrs.name) {
-      errors.push({ detail: { name: 'empty' } });
+      errors.push(generateValidationError('name', 'Name is required'));
     }
 
     if (!attrs.email) {
-      errors.push({ detail: { email: 'empty' } });
+      errors.push(generateValidationError('email', 'Email is required'));
     }
 
     if (!attrs.message) {
-      errors.push({ detail: { message: 'empty' } });
+      errors.push(generateValidationError('message', 'Message is required'));
     }
 
     if (errors.length > 0) {
       return new Response(422, {}, { errors });
     }
 
-    return new Response(201, {}, {});
+    return new Response(204);
   });
 
   this.resource('hours');
