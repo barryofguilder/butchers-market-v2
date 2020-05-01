@@ -65,8 +65,8 @@
 {{#if this.bundleToDelete}}
   <Admin::PackageBundles::Components::DeletePackageBundleForm
     @bundle={{this.bundleToDelete}}
-    @onSave={{action (mut this.bundleToDelete) null}}
-    @onCancel={{action (mut this.bundleToDelete) null}}
+    @onSave={{fn (mut this.bundleToDelete) null}}
+    @onCancel={{fn (mut this.bundleToDelete) null}}
   />
 {{/if}}
 
