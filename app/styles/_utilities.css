@@ -2,9 +2,9 @@
  * Utilities
  */
 
- .text-shadow {
-   text-shadow: 1px 1px 1px theme('colors.gray.900');
- }
+.text-shadow {
+  text-shadow: 1px 1px 1px theme('colors.gray.900');
+}
 
 .transition-form-element {
   transition: border .15s ease-in-out, background .15s ease-in-out;

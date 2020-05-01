@@ -1,3 +1,8 @@
+{{!
+  TODO: Adding template lint ignore due to this mainly being copied from `ember-modal-dialog`.
+}}
+{{!-- template-lint-disable no-curly-component-invocation --}}
+{{!-- template-lint-disable no-implicit-this --}}
 {{#ember-wormhole to=destinationElementId}}
   <div class={{this.wrapperClasses}} data-test-id={{this.data-test-id}} ...attributes>
     <div class={{this.overlayClasses}} tabindex="-1" data-emd-overlay>

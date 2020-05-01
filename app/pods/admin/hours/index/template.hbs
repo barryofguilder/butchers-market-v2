@@ -61,7 +61,7 @@
               @icon="trash-alt"
               @variant="danger"
               @disabled={{if hours.default true false}}
-              @onClick={{action (mut this.hoursToDelete) hours}}
+              @onClick={{fn (mut this.hoursToDelete) hours}}
             />
           </div>
         </Row.td>
@@ -78,8 +78,8 @@
 {{#if this.hoursToDelete}}
   <Admin::Hours::Components::DeleteHoursForm
     @hours={{this.hoursToDelete}}
-    @onSave={{action (mut this.hoursToDelete) null}}
-    @onCancel={{action (mut this.hoursToDelete) null}}
+    @onSave={{fn (mut this.hoursToDelete) null}}
+    @onCancel={{fn (mut this.hoursToDelete) null}}
   />
 {{/if}}
 

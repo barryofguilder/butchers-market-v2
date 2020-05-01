@@ -117,6 +117,7 @@ function createHours(server) {
 
 function createMeatBundles(server) {
   server.create('meat-bundle', {
+    displayOrder: 1,
     title: '20lb Meat Pack',
     price: '$68',
     featured: true,
@@ -129,6 +130,7 @@ function createMeatBundles(server) {
   });
 
   server.create('meat-bundle', {
+    displayOrder: 2,
     title: '30lb Meat Pack',
     price: '$77',
     featured: false,
@@ -143,6 +145,7 @@ function createMeatBundles(server) {
   });
 
   server.create('meat-bundle', {
+    displayOrder: 3,
     title: '40lb Meat Pack',
     price: '$114',
     featured: false,
@@ -157,6 +160,7 @@ function createMeatBundles(server) {
   });
 
   server.create('meat-bundle', {
+    displayOrder: 4,
     title: '50lb Meat Pack',
     price: '$129',
     featured: true,
@@ -170,6 +174,7 @@ function createMeatBundles(server) {
   });
 
   server.create('meat-bundle', {
+    displayOrder: 5,
     title: '75lb Meat Pack',
     price: '$235',
     featured: false,
@@ -193,6 +198,7 @@ function createMeatBundles(server) {
   });
 
   server.create('meat-bundle', {
+    displayOrder: 6,
     title: '100lb Meat Pack',
     price: '$325',
     featured: false,
@@ -210,6 +216,7 @@ function createMeatBundles(server) {
   });
 
   server.create('meat-bundle', {
+    displayOrder: 7,
     title: 'Bundle Meat Pack #1',
     price: '$69',
     featured: false,
@@ -223,6 +230,7 @@ function createMeatBundles(server) {
   });
 
   server.create('meat-bundle', {
+    displayOrder: 8,
     title: 'Bundle Meat Pack #2',
     price: '$69',
     featured: false,
@@ -236,6 +244,7 @@ function createMeatBundles(server) {
   });
 
   server.create('meat-bundle', {
+    displayOrder: 9,
     title: 'Mega Bundle',
     price: '$119',
     featured: true,

@@ -18,7 +18,7 @@
               class="text-red-700"
               href={{@event.link}}
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
             >
               {{@event.title}}
             </a>
@@ -45,7 +45,7 @@
     <LinkTo @route="admin.events.edit" @model={{@event.id}} class="text-red-700 hover:underline">
       Edit
     </LinkTo> |
-    <button type="button" class="text-red-700 hover:underline" {{action @onDelete @event}}>
+    <button type="button" class="text-red-700 hover:underline" {{fn @onDelete @event}}>
       Delete
     </button>
   </div>

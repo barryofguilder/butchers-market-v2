@@ -15,7 +15,8 @@ export default class AdminForm extends Component {
   submitTask;
 
   @action
-  submit() {
+  submit(event) {
+    event.preventDefault();
     this.submitTask.perform();
   }
 }

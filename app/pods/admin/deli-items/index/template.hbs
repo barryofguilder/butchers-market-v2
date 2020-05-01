@@ -9,7 +9,7 @@
 <Admin::Components::UiTable class="mt-8" as |Table|>
   <Table.head
     @currentSort={{this.currentSort}}
-    @onColumnClicked={{action this.sortDeliItems}} as |Thead|
+    @onColumnClicked={{this.sortDeliItems}} as |Thead|
   >
     <Thead.th @name="title">Title</Thead.th>
     <Thead.th @name="ingredients">Ingredients</Thead.th>
@@ -34,7 +34,7 @@
               @iconOnly={{true}}
               @icon="trash-alt"
               @variant="danger"
-              @onClick={{action (mut this.itemToDelete) item}}
+              @onClick={{fn (mut this.itemToDelete) item}}
             />
           </div>
         </Row.td>
@@ -50,8 +50,8 @@
 {{#if this.itemToDelete}}
   <Admin::DeliItems::Components::DeleteDeliItemForm
     @item={{this.itemToDelete}}
-    @onSave={{action (mut this.itemToDelete) null}}
-    @onCancel={{action (mut this.itemToDelete) null}}
+    @onSave={{fn (mut this.itemToDelete) null}}
+    @onCancel={{fn (mut this.itemToDelete) null}}
   />
 {{/if}}
 

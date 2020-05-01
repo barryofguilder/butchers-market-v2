@@ -18,14 +18,17 @@
     </LinkTo>
   </li>
   <li>
-    <BasicDropdown @renderInPlace={{if this.isMobile true false}} as |dd|>
-      <dd.trigger
+    <BasicDropdown
+      @renderInPlace={{if this.isMobile true false}}
+      @registerAPI={{this.setDropdown}} as |Dropdown|
+    >
+      <Dropdown.Trigger
         class="block px-6 py-4 lg:py-8 outline-none hover:text-red-600 focus:bg-gray-300 focus:text-gray-900 text-center lg:text-left"
       >
         Dining <FaIcon @icon="caret-down" />
-      </dd.trigger>
+      </Dropdown.Trigger>
 
-      <dd.content @class={{if this.isMobile "static"}}>
+      <Dropdown.Content class={{if this.isMobile "static"}}>
         <div class="bg-gray-200 text-center lg:text-left lg:shadow-md">
           <ul class="list-reset">
             <li>
@@ -40,14 +43,14 @@
               <LinkTo
                 @route="events"
                 class="block px-6 py-4 hover:text-red-600"
-                {{on "click" this.itemClicked}}
+                {{on "click" this.dropdowmMenuClicked}}
               >
                 Butcher's Market Cafe
               </LinkTo>
             </li>
           </ul>
         </div>
-      </dd.content>
+      </Dropdown.Content>
     </BasicDropdown>
   </li>
   <li>

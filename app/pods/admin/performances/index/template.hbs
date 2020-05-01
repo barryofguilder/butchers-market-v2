@@ -9,7 +9,7 @@
 <Admin::Components::UiTable class="mt-8" as |Table|>
   <Table.head
     @currentSort={{this.currentSort}}
-    @onColumnClicked={{action this.sortPerformances}} as |Thead|
+    @onColumnClicked={{this.sortPerformances}} as |Thead|
   >
     <Thead.th @name="title">Title</Thead.th>
     <Thead.th @name="link">Link</Thead.th>
@@ -41,7 +41,7 @@
               @iconOnly={{true}}
               @icon="trash-alt"
               @variant="danger"
-              @onClick={{action (mut this.performanceToDelete) performance}}
+              @onClick={{fn (mut this.performanceToDelete) performance}}
             />
           </div>
         </Row.td>
@@ -57,8 +57,8 @@
 {{#if this.performanceToDelete}}
   <Admin::Performances::Components::DeletePerformanceForm
     @performance={{this.performanceToDelete}}
-    @onSave={{action (mut this.performanceToDelete) null}}
-    @onCancel={{action (mut this.performanceToDelete) null}}
+    @onSave={{fn (mut this.performanceToDelete) null}}
+    @onCancel={{fn (mut this.performanceToDelete) null}}
   />
 {{/if}}
 

@@ -1,6 +1,6 @@
-import makeFunctionalModifier from 'ember-functional-modifiers';
+import { modifier } from 'ember-modifier';
 
-export default makeFunctionalModifier((element, [shouldScroll = true]) => {
+export default modifier((element, [shouldScroll = true]) => {
   if (shouldScroll) {
     element.scrollIntoView();
   }

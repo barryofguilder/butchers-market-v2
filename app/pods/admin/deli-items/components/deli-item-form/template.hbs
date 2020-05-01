@@ -26,8 +26,9 @@
         @id={{Group.uniqueId}}
         @name="photos"
         @accept="image/*"
-        @onfileadd={{action this.uploadImage}}
+        @onfileadd={{this.uploadImage}}
       >
+        {{! template-lint-disable link-href-attributes }}
         <a
           class="inline-block px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-none focus:shadow-outline"
           tabindex="0"
@@ -61,7 +62,7 @@
 
       {{#if this.hasImage}}
         <div class="mt-4">
-          <img src={{this.imageUrl}} alt="Deli item image" class="w-full block">
+          <img src={{this.imageUrl}} alt="Deli item" class="w-full block">
         </div>
       {{/if}}
     </div>

@@ -17,48 +17,23 @@
   </Form.group>
 
   <Form.group
-    data-test-id="flyer-download-link"
+    data-test-id="price"
     @model={{this.changeset}}
-    @property="flyerDownloadLink" as |Group|
+    @property="price" as |Group|
   >
-    <Group.label>Flyer Download Link</Group.label>
-    <Group.textbox @value={{this.changeset.flyerDownloadLink}} />
+    <Group.label>Price <Admin::Components::Required /></Group.label>
+    <Group.textbox @value={{this.changeset.price}} />
   </Form.group>
 
-  <Form.group data-test-id="prices">
-    <Form.label>Prices</Form.label>
-
-    <DragSortList
-      @items={{this.prices}}
-      @handle=".handle"
-      @dragEndAction={{this.reorderPrices}} as |price index|
-    >
-      <div data-test-id="price-{{index}}" class="{{if (gt index 0) "pt-1"}} pb-1">
-        <div class="flex items-center">
-          <span class="handle text-gray-600" draggable="true">☰</span>
-          <UiTextbox class="ml-2" @value={{price}} @keyUp={{fn this.priceChanged index}} />
-          <Button
-            class="mr-1"
-            @iconOnly={{true}}
-            @icon="trash-alt"
-            @variant="danger"
-            title="Delete price"
-            @onClick={{fn this.deletePrice index}}
-          />
-        </div>
-      </div>
-    </DragSortList>
-
-    <div class="mt-2">
-      <Button
-        @icon="plus"
-        @size="medium"
-        @variant="plain"
-        @onClick={{this.addPrice}}
-      >
-        New Price
-      </Button>
-    </div>
+  <Form.group
+    data-test-id="featured"
+    @model={{this.changeset}}
+    @property="featured"
+  >
+    <label>
+      <input type="checkbox" checked={{this.changeset.featured}} {{on "change" this.updateFeatured}}>
+      <span class="ml-2">Is featured on home page</span>
+    </label>
   </Form.group>
 
   <Form.group data-test-id="items">
