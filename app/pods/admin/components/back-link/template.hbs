@@ -1,0 +1,14 @@
+<div ...attributes>
+  <LinkTo @route={{@route}} class="inline-block">
+    <div class="flex items-center text-red-700 hover:text-red-800 focus:text-red-800">
+      <UiIcon @icon="chevron-left" @size="sm" />
+      <div class="ml-2">
+        {{#if (has-block)}}
+          {{yield}}
+        {{else}}
+          {{@text}}
+        {{/if}}
+      </div>
+    </div>
+  </LinkTo>
+</div>
