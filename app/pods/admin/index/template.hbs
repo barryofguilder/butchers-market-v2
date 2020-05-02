@@ -1,34 +1,36 @@
-<Admin::Components::Title @title="What would you like to do?" />
+<Admin::Components::Title @title="Manage" />
 
-<ul class="mt-4">
-  <li>
-    <LinkTo @route="admin.events" class="text-red-700 hover:underline">
-      Manage Events
-    </LinkTo>
-  </li>
-  <li class="mt-2">
-    <LinkTo @route="admin.performances" class="text-red-700 hover:underline">
-      Manage Past Performances
-    </LinkTo>
-  </li>
-  <li class="mt-2">
-    <LinkTo @route="admin.hours" class="text-red-700 hover:underline">
-      Manage Store Hours
-    </LinkTo>
-  </li>
-  <li class="mt-2">
-    <LinkTo @route="admin.package-bundles" class="text-red-700 hover:underline">
-      Manage Package Bundles
-    </LinkTo>
-  </li>
-  <li class="mt-2">
-    <LinkTo @route="admin.deli-items" class="text-red-700 hover:underline">
-      Manage Deli Items
-    </LinkTo>
-  </li>
-  <li class="mt-2">
-    <LinkTo @route="admin.meat-bundles" class="text-red-700 hover:underline">
-      Manage Meat Bundles
-    </LinkTo>
-  </li>
-</ul>
+<div class="max-w-sm shadow rounded-md overflow-hidden">
+  <ul>
+    <li>
+      <Admin::Index::Components::PageLink @route="admin.deli-items">
+        Deli Items
+      </Admin::Index::Components::PageLink>
+    </li>
+    <li class="border-t border-gray-200">
+      <Admin::Index::Components::PageLink @route="admin.events">
+        Events
+      </Admin::Index::Components::PageLink>
+    </li>
+    <li class="border-t border-gray-200">
+      <Admin::Index::Components::PageLink @route="admin.meat-bundles">
+        Meat Bundles
+      </Admin::Index::Components::PageLink>
+    </li>
+    <li class="border-t border-gray-200">
+      <Admin::Index::Components::PageLink @route="admin.package-bundles">
+        Package Bundles
+      </Admin::Index::Components::PageLink>
+    </li>
+    <li class="border-t border-gray-200">
+      <Admin::Index::Components::PageLink @route="admin.performances">
+        Performances
+      </Admin::Index::Components::PageLink>
+    </li>
+    <li class="border-t border-gray-200">
+      <Admin::Index::Components::PageLink @route="admin.hours">
+        Store Hours
+      </Admin::Index::Components::PageLink>
+    </li>
+  </ul>
+</div>
