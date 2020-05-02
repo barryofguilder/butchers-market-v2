@@ -45,7 +45,7 @@
     <LinkTo @route="admin.events.edit" @model={{@event.id}} class="text-red-700 hover:underline">
       Edit
     </LinkTo> |
-    <button type="button" class="text-red-700 hover:underline" {{fn @onDelete @event}}>
+    <button type="button" class="text-red-700 hover:underline" {{on "click" (fn @onDelete @event)}}>
       Delete
     </button>
   </div>
