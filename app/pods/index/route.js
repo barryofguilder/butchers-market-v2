@@ -3,7 +3,9 @@ import { action } from '@ember/object';
 
 export default class IndexRoute extends Route {
   async model() {
-    const bundles = await this.store.query('meat-bundle', { filter: { featured: true } });
+    const bundles = await this.store.query('meat-bundle', {
+      filter: { featured: true, isHidden: false },
+    });
     const hours = await this.store.findAll('hour');
 
     return {

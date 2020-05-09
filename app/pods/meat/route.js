@@ -3,7 +3,7 @@ import { action } from '@ember/object';
 
 export default class MeatRoute extends Route {
   async model() {
-    const bundles = await this.store.findAll('meat-bundle');
+    const bundles = await this.store.query('meat-bundle', { filter: { isHidden: false } });
     const packageBundles = await this.store.findAll('package-bundle');
 
     return {

@@ -64,6 +64,11 @@ export default class MeatBundleForm extends Component {
   }
 
   @action
+  updateHidden() {
+    this.changeset.set('isHidden', !this.changeset.get('isHidden'));
+  }
+
+  @action
   addItem() {
     this.items.pushObject('');
   }

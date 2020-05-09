@@ -15,6 +15,8 @@ export default Factory.extend({
     return faker.random.boolean();
   },
 
+  isHidden: false,
+
   items() {
     return [
       '5 lbs. Fresh Ground Chuck',

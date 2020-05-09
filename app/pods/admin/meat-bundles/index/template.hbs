@@ -16,6 +16,7 @@
     <Thead.th>Price</Thead.th>
     <Thead.th>Items</Thead.th>
     <Thead.th>Is Featured?</Thead.th>
+    <Thead.th>Is Hidden?</Thead.th>
     <Thead.th></Thead.th>
   </Table.head>
   <Table.body as |Tbody|>
@@ -34,6 +35,11 @@
         <Row.td>
           {{#if bundle.featured}}
             <span class="inline-block px-2 bg-blue-200 text-blue-800 text-sm rounded">Featured</span>
+          {{/if}}
+        </Row.td>
+        <Row.td>
+          {{#if bundle.isHidden}}
+            <span class="inline-block px-2 bg-blue-200 text-blue-800 text-sm rounded">Hidden</span>
           {{/if}}
         </Row.td>
         <Row.td>
