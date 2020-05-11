@@ -12,11 +12,25 @@ export default class Router extends EmberRouter {
   constructor() {
     super(...arguments);
 
+    let ADMIN_ONLY = false;
+
+    if (document && document.getElementById('admin-only')) {
+      ADMIN_ONLY = true;
+    }
+
     this.on('routeDidChange', () => {
       const page = this.router.currentURL;
       const title = this.router.currentRouteName || 'unknown';
 
       this.metrics.trackPage({ page, title });
+
+      if (ADMIN_ONLY) {
+        const routeName = this.router.currentRouteName;
+
+        if (!routeName.startsWith('admin') && routeName !== 'down') {
+          this.router.transitionTo('down');
+        }
+      }
     });
   }
 }
@@ -27,6 +41,8 @@ Router.map(function() {
   this.route('events');
   this.route('meat');
   this.route('menu');
+
+  this.route('down');
 
   this.route('admin', function() {
     this.route('deli-items', function() {
