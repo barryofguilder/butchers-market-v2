@@ -79,7 +79,7 @@ export default function() {
     let whereStatement = {};
 
     if (featured !== undefined) {
-      whereStatement.featured = featured;
+      whereStatement.featured = true;
     }
 
     if (isHidden !== undefined) {
