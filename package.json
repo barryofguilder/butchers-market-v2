@@ -87,6 +87,9 @@
     "qunit-dom": "^1.1.0",
     "tailwindcss": "~1.4.4"
   },
+  "dependencies": {
+    "jwt-decode": "^2.2.0"
+  },
   "engines": {
     "node": "10.* || >= 12"
   },

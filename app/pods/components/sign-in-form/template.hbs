@@ -1,0 +1,23 @@
+<Admin::Components::AdminForm class="max-w-md" @onSubmit={{perform this.signIn}} as |Form|>
+  {{#if this.hasError}}
+    <UiAlert data-test-id="server-error" @variant="danger">
+      Invalid email address or password.
+    </UiAlert>
+  {{/if}}
+
+  <Form.group data-test-id="email" as |Group|>
+    <Group.label>Email</Group.label>
+    <Group.textbox type="email" autocomplete="username" @value={{this.email}} />
+  </Form.group>
+
+  <Form.group data-test-id="password" as |Group|>
+    <Group.label>Password</Group.label>
+    <Group.textbox type="password" autocomplete="current-password" @value={{this.password}} />
+  </Form.group>
+
+  <div class="mt-8">
+    <Form.submit>
+      Sign In
+    </Form.submit>
+  </div>
+</Admin::Components::AdminForm>

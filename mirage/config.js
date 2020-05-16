@@ -95,6 +95,20 @@ export default function() {
 
   this.get('/reviews');
 
+  this.post('/token', (server, request) => {
+    let attrs = JSON.parse(request.requestBody);
+
+    if (attrs.email.toLowerCase() === 'admin@email.com' && attrs.password === 'password') {
+      return new Response(
+        201,
+        { 'Content-Type': 'text/plain' },
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJleHAiOjE1NDc5NzQwODJ9.ookaE80Q3kIZCxANnSgVfMJGtnhA5bPfnUfUsViOzUk'
+      );
+    }
+
+    return new Response(401);
+  });
+
   this.post(
     '/upload',
     upload(function(db, request) {
