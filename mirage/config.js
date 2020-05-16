@@ -75,17 +75,19 @@ export default function() {
   this.resource('meat-bundles', { only: ['show', 'update'] });
   this.get('/meat-bundles', ({ meatBundles }, request) => {
     const featured = request.queryParams['filter[featured]'];
-    let response;
+    const isHidden = request.queryParams['filter[isHidden]'];
+    let whereStatement = {};
 
-    if (featured === undefined) {
-      response = meatBundles.all();
-    } else {
-      response = meatBundles.where({ featured: true });
+    if (featured !== undefined) {
+      whereStatement.featured = true;
+    }
+
+    if (isHidden !== undefined) {
+      whereStatement.isHidden = isHidden;
     }
 
     // TODO: Sort by `displayOrder`
-
-    return response;
+    return meatBundles.where(whereStatement);
   });
 
   this.resource('performances');

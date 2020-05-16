@@ -5,5 +5,7 @@ export default class MeatBundle extends Model {
   @attr('string') title;
   @attr('string') price;
   @attr('boolean') featured;
+  @attr('boolean') isHidden;
+  @attr('boolean') orderEnabled;
   @attr items; // Array of strings
 }
