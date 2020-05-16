@@ -69,6 +69,11 @@ export default class MeatBundleForm extends Component {
   }
 
   @action
+  updateOrderEnabled() {
+    this.changeset.set('orderEnabled', !this.changeset.get('orderEnabled'));
+  }
+
+  @action
   addItem() {
     this.items.pushObject('');
   }

@@ -50,6 +50,20 @@
     </small>
   </Form.group>
 
+  <Form.group
+    data-test-id="order"
+    @model={{this.changeset}}
+    @property="orderEnabled"
+  >
+    <label>
+      <input type="checkbox" checked={{this.changeset.orderEnabled}} {{on "change" this.updateOrderEnabled}}>
+      <span class="ml-2">Can order online</span>
+    </label>
+    <small class="block mt-3 text-gray-700">
+      When checked, this means the "Order Now" button is displayed to take them to the online store.
+    </small>
+  </Form.group>
+
   <Form.group data-test-id="items">
     <Form.label>Items</Form.label>
 
