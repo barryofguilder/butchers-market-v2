@@ -5,18 +5,27 @@ import * as jwt_decode from 'jwt-decode';
 
 export default class AdminRoute extends Route {
   @service localStorage;
+  @service session;
 
   beforeModel(transition) {
     try {
       const token = localStorage.getItem(TOKEN);
-      const decoded = jwt_decode(token);
+      const decodedToken = jwt_decode(token);
 
-      // TODO: Store decoded token
-      console.log({ decoded });
+      this.session.updateToken(token, decodedToken);
+
+      // TODO: Verify that the token hasn't expired
     } catch (error) {
-      // TODO: Store transition for later
       transition.abort();
-      this.transitionTo('sign-in');
+
+      this._transitionToSignIn(transition);
     }
+  }
+
+  _transitionToSignIn(transition) {
+    const controller = this.controllerFor('sign-in');
+    controller.previousTransition = transition;
+
+    this.transitionTo('sign-in');
   }
 }
