@@ -12,6 +12,14 @@ const generateValidationError = function(field, title) {
   };
 };
 
+const TOKEN =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImV4cCI6MjUyNDYwODAwMDAwMH0.izNBdwP_Io0sP_HWl6O5fDB-tP3q53rPlhVf_30l7i8';
+// Expired Token
+// 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImV4cCI6MTU4OTY4NzI3fQ.Ax6CzLX--nGiT5BiMjmN5mmqLOP4pwG6Qq-2P5gsyfA';
+
+// Future Token
+// 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImV4cCI6MjUyNDYwODAwMDAwMH0.izNBdwP_Io0sP_HWl6O5fDB-tP3q53rPlhVf_30l7i8';
+
 export default function() {
   // Allows us to access the Mirage server in the console using `window.server`.
   window.server = this;
@@ -99,11 +107,7 @@ export default function() {
     let attrs = JSON.parse(request.requestBody);
 
     if (attrs.email.toLowerCase() === 'admin@email.com' && attrs.password === 'password') {
-      return new Response(
-        201,
-        { 'Content-Type': 'text/plain' },
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImV4cCI6MjUyNDYwODAwMDAwMH0.izNBdwP_Io0sP_HWl6O5fDB-tP3q53rPlhVf_30l7i8'
-      );
+      return new Response(201, { 'Content-Type': 'text/plain' }, TOKEN);
     }
 
     return new Response(401);

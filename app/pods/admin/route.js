@@ -14,20 +14,14 @@ export default class AdminRoute extends Route {
 
       this.session.updateToken(token, decodedToken);
 
-      if (this.session.isTokenExpired()) {
-        this._transitionToSignIn(transition);
+      // Require sign in if the token has expired or if it expires in the next day.
+      if (this.session.isTokenExpired() || this.session.doesTokenExpireToday()) {
+        transition.abort();
+        this.session.redirectToSignIn(transition);
       }
     } catch (error) {
-      this._transitionToSignIn(transition);
+      transition.abort();
+      this.session.redirectToSignIn(transition);
     }
-  }
-
-  _transitionToSignIn(transition) {
-    transition.abort();
-
-    const controller = this.controllerFor('sign-in');
-    controller.previousTransition = transition;
-
-    this.transitionTo('sign-in');
   }
 }

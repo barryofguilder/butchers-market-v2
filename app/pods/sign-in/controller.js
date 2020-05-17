@@ -7,15 +7,22 @@ export default class SignInController extends Controller {
   @service localStorage;
   @service router;
 
+  previousTransitionOrUrl = null;
+
   @action
   authenticated(token) {
     this.localStorage.setItem(TOKEN, token);
 
-    let transition = this.previousTransition;
+    let previousTransitionOrUrl = this.previousTransitionOrUrl;
 
-    if (transition) {
-      this.previousTransition = null;
-      transition.retry();
+    if (previousTransitionOrUrl) {
+      this.previousTransitionOrUrl = null;
+
+      if (typeof previousTransitionOrUrl === 'string') {
+        this.router.transitionTo(previousTransitionOrUrl);
+      } else {
+        previousTransitionOrUrl.retry();
+      }
     } else {
       this.router.transitionTo('admin');
     }

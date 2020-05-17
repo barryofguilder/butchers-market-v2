@@ -1,6 +1,10 @@
-import Service from '@ember/service';
+import Service, { inject as service } from '@ember/service';
+import { getOwner } from '@ember/application';
+import addDays from 'date-fns/addDays';
 
 export default class SessionService extends Service {
+  @service router;
+
   token = null;
   payload = null;
 
@@ -24,5 +28,20 @@ export default class SessionService extends Service {
 
   isTokenExpired() {
     return !this.isTokenAlive();
+  }
+
+  doesTokenExpireToday() {
+    const expireDate = new Date(this.payload.exp * 1000);
+    const dayFromNow = addDays(new Date(), 1);
+
+    return expireDate < dayFromNow;
+  }
+
+  redirectToSignIn(transitionOrUrl) {
+    const owner = getOwner(this);
+    const controller = owner.lookup('controller:sign-in');
+    controller.previousTransitionOrUrl = transitionOrUrl;
+
+    this.router.transitionTo('sign-in');
   }
 }
