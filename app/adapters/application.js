@@ -1,7 +1,3 @@
-import JSONAPIAdapter from '@ember-data/adapter/json-api';
-import config from 'butchers-market/config/environment';
+import AuthenticatedJSONAPIAdapter from './base/authenticated-json-api';
 
-export default class ApplicationAdapter extends JSONAPIAdapter {
-  host = config.api;
-  namespace = config.namespace;
-}
+export default class ApplicationAdapter extends AuthenticatedJSONAPIAdapter {}

@@ -44,6 +44,8 @@ Router.map(function() {
 
   this.route('down');
 
+  this.route('sign-in');
+
   this.route('admin', function() {
     this.route('deli-items', function() {
       this.route('new');

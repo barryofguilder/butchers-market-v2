@@ -12,6 +12,14 @@ const generateValidationError = function(field, title) {
   };
 };
 
+const TOKEN =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTg5NzQyODQ2LCJleHAiOjI1OTIzMzQ4NDZ9.YBJOag4Kyeq4yBBdAPXYttZMxqX9J_N-L5f5OrWX95w';
+// Expired Token
+// 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTg5NzQyODQ2LCJleHAiOjE1ODk3NDI4NDZ9.fQj7CW8SnULIzJtL7TyDmmH1nVWWqZqNuv5m0kVwFHw';
+
+// Future Token
+// 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTg5NzQyODQ2LCJleHAiOjI1OTIzMzQ4NDZ9.YBJOag4Kyeq4yBBdAPXYttZMxqX9J_N-L5f5OrWX95w';
+
 export default function() {
   // Allows us to access the Mirage server in the console using `window.server`.
   window.server = this;
@@ -94,6 +102,16 @@ export default function() {
   this.resource('package-bundles', { except: ['create', 'delete'] });
 
   this.get('/reviews');
+
+  this.post('/token', (server, request) => {
+    let attrs = JSON.parse(request.requestBody).data.attributes;
+
+    if (attrs.username.toLowerCase() === 'admin' && attrs.password === 'password') {
+      return new Response(201, { 'Content-Type': 'text/plain' }, TOKEN);
+    }
+
+    return new Response(401);
+  });
 
   this.post(
     '/upload',
