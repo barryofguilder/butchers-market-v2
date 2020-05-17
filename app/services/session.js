@@ -8,12 +8,8 @@ export default class SessionService extends Service {
   token = null;
   payload = null;
 
-  get email() {
-    return this.payload ? this.payload.email : null;
-  }
-
-  get name() {
-    return this.payload ? this.payload.name : null;
+  get username() {
+    return this.payload ? this.payload.username : null;
   }
 
   updateToken(token, decodedToken) {

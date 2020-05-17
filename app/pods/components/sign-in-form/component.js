@@ -5,18 +5,26 @@ import fetch from 'fetch';
 import baseUrl from 'butchers-market/utils/base-url';
 
 export default class SignInFormComponent extends Component {
-  email = '';
+  username = '';
   password = '';
 
   @tracked hasError = false;
 
   @(task(function*() {
     let body = JSON.stringify({
-      email: this.email,
-      password: this.password,
+      data: {
+        type: 'tokens',
+        attributes: {
+          username: this.username,
+          password: this.password,
+        },
+      },
     });
     let payload = {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/vnd.api+json',
+      },
       body,
     };
 
