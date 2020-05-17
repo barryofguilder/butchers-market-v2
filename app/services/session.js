@@ -16,4 +16,13 @@ export default class SessionService extends Service {
     this.token = token;
     this.payload = decodedToken;
   }
+
+  isTokenAlive() {
+    const now = Date.now() / 1000;
+    return this.payload.exp > now;
+  }
+
+  isTokenExpired() {
+    return !this.isTokenAlive();
+  }
 }

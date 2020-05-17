@@ -102,7 +102,7 @@ export default function() {
       return new Response(
         201,
         { 'Content-Type': 'text/plain' },
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImV4cCI6MTU0Nzk3NDA4Mn0.lWZ3mH_faEw2yJ6NPthdt8Ae8LHZyBvIQDYbUoOOQX8'
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImV4cCI6MjUyNDYwODAwMDAwMH0.izNBdwP_Io0sP_HWl6O5fDB-tP3q53rPlhVf_30l7i8'
       );
     }
 
