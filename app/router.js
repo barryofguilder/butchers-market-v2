@@ -1,5 +1,5 @@
 import EmberRouter from '@ember/routing/router';
-import config from './config/environment';
+import config from 'butchers-market/config/environment';
 import { inject as service } from '@ember/service';
 
 export default class Router extends EmberRouter {

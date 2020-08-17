@@ -16,7 +16,6 @@ module.exports = {
     browser: true,
   },
   rules: {
-    'ember/no-jquery': 'error',
     'prettier/prettier': 'error',
   },
   globals: {
@@ -44,9 +43,8 @@ module.exports = {
         node: true,
       },
       plugins: ['node'],
-      rules: Object.assign({}, require('eslint-plugin-node').configs.recommended.rules, {
-        // add your custom rules and overrides for node files here
-
+      extends: ['plugin:node/recommended'],
+      rules: {
         // this can be removed once the following is fixed
         // https://github.com/mysticatea/eslint-plugin-node/issues/77
         'node/no-unpublished-require': 'off',
