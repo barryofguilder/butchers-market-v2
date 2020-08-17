@@ -33,7 +33,7 @@
     "babel-eslint": "^10.1.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "broccoli-asset-rev": "^3.0.0",
-    "date-fns": "^2.0.0-alpha.25",
+    "date-fns": "^2.15.0",
     "ember-animated": "~0.10.1",
     "ember-animated-tools": "^0.4.1",
     "ember-auto-import": "^1.6.0",
