@@ -1,13 +1,7 @@
 <ul class="list-reset flex flex-col lg:flex-row lg:items-center">
   {{#unless this.isMobile}}
     <li>
-      <Button
-        @variant="primary"
-        @size="medium"
-        @href="https://my-site-101502-109014.square.site/s/order"
-      >
-        Order Online
-      </Button>
+      <MainNav::OrderButton />
     </li>
   {{/unless}}
   <li class="lg:ml-8">
