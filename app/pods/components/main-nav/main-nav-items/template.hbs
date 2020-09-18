@@ -1,5 +1,10 @@
-<ul class="list-reset flex flex-col lg:flex-row">
-  <li>
+<ul class="list-reset flex flex-col lg:flex-row lg:items-center">
+  {{#unless this.isMobile}}
+    <li>
+      <MainNav::OrderButton />
+    </li>
+  {{/unless}}
+  <li class="lg:ml-8">
     <LinkTo
       @route="meat"
       class="block px-6 py-4 lg:py-8 hover:text-red-600 text-center lg:text-left"

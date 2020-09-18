@@ -72,6 +72,10 @@ export default class Button extends Component {
         sizeClasses = 'px-6 py-3 uppercase tracking-wider font-bold sm:text-xl';
         break;
 
+      case 'small':
+        sizeClasses = 'px-2 py-1 font-semibold text-xs';
+        break;
+
       case 'medium':
       default:
         sizeClasses = 'px-4 py-2 font-semibold text-sm';

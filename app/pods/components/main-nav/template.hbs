@@ -7,10 +7,13 @@
     </div>
 
     {{#if this.isMobile}}
-      <div class="flex justify-end lg:hidden">
+      <div class="flex items-center justify-end h-20 lg:hidden">
         <button
           type="button"
-          class="text-gray-600 text-2xl my-5 border px-3 pt-2 pb-1 rounded focus:outline-none focus:shadow-outline"
+          class="
+            flex items-center justify-center h-12 px-3 text-gray-600 text-2xl border rounded
+            focus:outline-none focus:shadow-outline
+          "
           aria-controls="main-navigation-items"
           aria-expanded="false"
           aria-label="Toggle navigation"
@@ -28,7 +31,7 @@
         {{/animated-if}}
       </AnimatedContainer>
     {{else}}
-      <nav class="flex justify-end" id="main-navigation-items">
+      <nav class="flex justify-end h-20" id="main-navigation-items">
         <MainNav::MainNavItems />
       </nav>
     {{/if}}
