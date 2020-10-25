@@ -45,6 +45,8 @@ module.exports = function(environment) {
     namespace: 'api',
     showReCaptcha: false,
     uploadsDir: '/uploads/',
+    orderOnlineUrl: 'https://my-site-101502-109014.square.site/s/order',
+    showOrderOnline: false,
   };
 
   if (environment === 'development') {
@@ -77,6 +79,7 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     ENV.showReCaptcha = true;
+    ENV.showOrderOnline = false;
   }
 
   return ENV;

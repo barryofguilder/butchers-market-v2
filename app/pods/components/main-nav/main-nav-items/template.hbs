@@ -1,8 +1,10 @@
 <ul class="list-reset flex flex-col lg:flex-row lg:items-center">
   {{#unless this.isMobile}}
-    <li>
-      <MainNav::OrderButton />
-    </li>
+    {{#if this.showOrderOnline}}
+      <li>
+        <MainNav::OrderButton />
+      </li>
+    {{/if}}
   {{/unless}}
   <li class="lg:ml-8">
     <LinkTo
