@@ -1,36 +1,38 @@
 <ul class="list-reset flex flex-col lg:flex-row lg:items-center">
   {{#unless this.isMobile}}
-    <li>
-      <MainNav::OrderButton />
-    </li>
+    {{#if this.showOrderOnline}}
+      <li>
+        <MainNav::OrderButton />
+      </li>
+    {{/if}}
   {{/unless}}
-  <li class="lg:ml-8">
+  <li class="lg:ml-8 lg:block lg:h-full">
     <LinkTo
       @route="meat"
-      class="block px-6 py-4 lg:py-8 hover:text-red-600 text-center lg:text-left"
+      class="block px-6 py-4 lg:flex lg:items-center lg:py-0 lg:h-full hover:text-red-600 text-center lg:text-left"
       {{on "click" this.itemClicked}}
     >
       Meat
     </LinkTo>
   </li>
-  <li>
+  <li class="lg:block lg:h-full">
     <LinkTo
       @route="deli"
-      class="block px-6 py-4 lg:py-8 hover:text-red-600 text-center lg:text-left"
+      class="block px-6 py-4 lg:flex lg:items-center lg:py-0 lg:h-full hover:text-red-600 text-center lg:text-left"
       {{on "click" this.itemClicked}}
     >
       Deli
     </LinkTo>
   </li>
-  <li>
+  <li class="lg:block lg:h-full">
     <BasicDropdown
       @renderInPlace={{if this.isMobile true false}}
       @registerAPI={{this.setDropdown}} as |Dropdown|
     >
       <Dropdown.Trigger
-        class="block px-6 py-4 lg:py-8 outline-none hover:text-red-600 focus:bg-gray-300 focus:text-gray-900 text-center lg:text-left"
+        class="block px-6 py-4 outline-none lg:flex lg:items-center lg:py-0 lg:h-full hover:text-red-600 focus:bg-gray-300 focus:text-gray-900 text-center lg:text-left"
       >
-        Dining <FaIcon @icon="caret-down" />
+        Dining <FaIcon @icon="caret-down" class="ml-1" />
       </Dropdown.Trigger>
 
       <Dropdown.Content class={{if this.isMobile "static"}}>
@@ -58,19 +60,19 @@
       </Dropdown.Content>
     </BasicDropdown>
   </li>
-  <li>
+  <li class="lg:block lg:h-full">
     <LinkTo
       @route="events"
-      class="block px-6 py-4 lg:py-8 hover:text-red-600 text-center lg:text-left"
+      class="block px-6 py-4 lg:flex lg:items-center lg:py-0 lg:h-full hover:text-red-600 text-center lg:text-left"
       {{on "click" this.itemClicked}}
     >
       Events
     </LinkTo>
   </li>
-  <li>
+  <li class="lg:block lg:h-full">
     <LinkTo
       @route="contact"
-      class="block px-6 py-4 lg:py-8 hover:text-red-600 text-center lg:text-left"
+      class="block px-6 py-4 lg:flex lg:items-center lg:py-0 lg:h-full hover:text-red-600 text-center lg:text-left"
       {{on "click" this.itemClicked}}
     >
       Contact

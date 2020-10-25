@@ -10,7 +10,7 @@
         {{/each}}
       </ul>
 
-      {{#if product.orderEnabled}}
+      {{#if (and product.orderEnabled this.showOrderOnline)}}
         <OrderButton class="mt-4" />
       {{/if}}
     </div>
