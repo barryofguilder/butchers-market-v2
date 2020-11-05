@@ -45,8 +45,8 @@ module.exports = function(environment) {
     namespace: 'api',
     showReCaptcha: false,
     uploadsDir: '/uploads/',
-    orderOnlineUrl: 'https://my-site-101502-109014.square.site/s/order',
-    showOrderOnline: false,
+    orderOnlineUrl: 'https://thebutchersmarketmeatanddeli.godaddysites.com/order-online',
+    showOrderOnline: true,
   };
 
   if (environment === 'development') {
@@ -79,7 +79,7 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     ENV.showReCaptcha = true;
-    ENV.showOrderOnline = false;
+    ENV.showOrderOnline = true;
   }
 
   return ENV;
