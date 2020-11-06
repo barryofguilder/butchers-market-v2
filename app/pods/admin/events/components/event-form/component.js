@@ -4,7 +4,7 @@ import { action } from '@ember/object';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 import EventValidations from 'butchers-market/validations/event';
-import { task } from 'ember-concurrency';
+import { dropTask, enqueueTask } from 'ember-concurrency-decorators';
 import baseUrl from 'butchers-market/utils/base-url';
 
 export default class EventForm extends Component {
@@ -43,7 +43,8 @@ export default class EventForm extends Component {
     this.changeset = changeset;
   }
 
-  @(task(function* () {
+  @dropTask
+  *saveEvent() {
     yield this.changeset.validate();
 
     if (!this.changeset.isValid) {
@@ -65,10 +66,10 @@ export default class EventForm extends Component {
         this.errorMessage = ex;
       }
     }
-  }).drop())
-  saveEvent;
+  }
 
-  @(task(function* (file) {
+  @enqueueTask({ maxConcurrency: 3 })
+  *uploadPhoto(file) {
     try {
       let url = yield file.readAsDataURL();
       this.tempImageUrl = url;
@@ -76,10 +77,7 @@ export default class EventForm extends Component {
     } catch (e) {
       this.fileErrorMessage = 'Could not read the file contents';
     }
-  })
-    .maxConcurrency(3)
-    .enqueue())
-  uploadPhoto;
+  }
 
   @action
   dateSelected(date) {

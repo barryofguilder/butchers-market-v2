@@ -4,7 +4,7 @@ import { action } from '@ember/object';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 import HoursValidations from 'butchers-market/validations/hour';
-import { task } from 'ember-concurrency';
+import { dropTask } from 'ember-concurrency-decorators';
 
 export default class HoursForm extends Component {
   changeset;
@@ -27,7 +27,8 @@ export default class HoursForm extends Component {
     this.changeset = changeset;
   }
 
-  @(task(function* () {
+  @dropTask
+  *saveHours() {
     yield this.changeset.validate();
 
     if (!this.changeset.isValid) {
@@ -44,8 +45,7 @@ export default class HoursForm extends Component {
         this.errorMessage = ex;
       }
     }
-  }).drop())
-  saveHours;
+  }
 
   @action
   startDateSelected(date) {

@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
-import { task } from 'ember-concurrency';
+import { restartableTask } from 'ember-concurrency-decorators';
 
 export default class ReviewsList extends Component {
   @service store;
@@ -14,8 +14,8 @@ export default class ReviewsList extends Component {
     this.loadReviews.perform();
   }
 
-  @(task(function* () {
+  @restartableTask
+  *loadReviews() {
     this.reviews = yield this.store.findAll('review');
-  }).restartable())
-  loadReviews;
+  }
 }

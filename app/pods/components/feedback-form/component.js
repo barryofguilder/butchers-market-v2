@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import config from 'butchers-market/config/environment';
-import { task } from 'ember-concurrency';
+import { dropTask } from 'ember-concurrency-decorators';
 import fetch from 'fetch';
 import baseUrl from 'butchers-market/utils/base-url';
 
@@ -27,7 +27,8 @@ export default class FeedbackForm extends Component {
     return this.formState === 'ServerError';
   }
 
-  @(task(function* () {
+  @dropTask
+  *sendFeedbackTask() {
     let body = JSON.stringify({
       data: {
         attributes: {
@@ -57,8 +58,7 @@ export default class FeedbackForm extends Component {
     } else {
       this.formState = 'ServerError';
     }
-  }).drop())
-  sendFeedbackTask;
+  }
 
   @action
   onCaptchaResolved(reCaptchaResponse) {
