@@ -4,7 +4,7 @@ import { action } from '@ember/object';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 import DeliItemValidations from 'butchers-market/validations/deli-item';
-import { task } from 'ember-concurrency';
+import { dropTask, enqueueTask } from 'ember-concurrency-decorators';
 import baseUrl from 'butchers-market/utils/base-url';
 
 export default class DeliItemForm extends Component {
@@ -42,7 +42,8 @@ export default class DeliItemForm extends Component {
     this.changeset = changeset;
   }
 
-  @(task(function* () {
+  @dropTask
+  *saveItem() {
     yield this.changeset.validate();
 
     if (!this.changeset.isValid) {
@@ -64,10 +65,10 @@ export default class DeliItemForm extends Component {
         this.errorMessage = ex;
       }
     }
-  }).drop())
-  saveItem;
+  }
 
-  @(task(function* (file) {
+  @enqueueTask({ maxConcurrency: 3 })
+  *uploadPhoto(file) {
     try {
       let url = yield file.readAsDataURL();
       this.tempImageUrl = url;
@@ -78,10 +79,7 @@ export default class DeliItemForm extends Component {
     } catch (e) {
       this.fileErrorMessage = 'Could not read the file contents';
     }
-  })
-    .maxConcurrency(3)
-    .enqueue())
-  uploadPhoto;
+  }
 
   @action
   uploadImage(file) {

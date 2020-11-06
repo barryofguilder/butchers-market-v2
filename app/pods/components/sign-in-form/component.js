@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { task } from 'ember-concurrency';
+import { dropTask } from 'ember-concurrency-decorators';
 import fetch from 'fetch';
 import baseUrl from 'butchers-market/utils/base-url';
 
@@ -10,7 +10,8 @@ export default class SignInFormComponent extends Component {
 
   @tracked hasError = false;
 
-  @(task(function* () {
+  @dropTask
+  *signIn() {
     let body = JSON.stringify({
       data: {
         type: 'tokens',
@@ -38,6 +39,5 @@ export default class SignInFormComponent extends Component {
     } else {
       this.hasError = true;
     }
-  }).drop())
-  signIn;
+  }
 }

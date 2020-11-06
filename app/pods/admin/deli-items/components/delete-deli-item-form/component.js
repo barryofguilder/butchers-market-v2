@@ -1,17 +1,17 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { task } from 'ember-concurrency';
+import { dropTask } from 'ember-concurrency-decorators';
 
 export default class DeleteDeliItemForm extends Component {
   @tracked errorMessage;
 
-  @(task(function* () {
+  @dropTask
+  *deleteItem() {
     try {
       yield this.args.item.destroyRecord();
       this.args.onSave();
     } catch (ex) {
       this.errorMessage = ex;
     }
-  }).drop())
-  deleteItem;
+  }
 }

@@ -3,7 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 import PerformanceValidations from 'butchers-market/validations/performance';
-import { task } from 'ember-concurrency';
+import { dropTask } from 'ember-concurrency-decorators';
 
 export default class PerformanceForm extends Component {
   changeset;
@@ -25,7 +25,8 @@ export default class PerformanceForm extends Component {
     this.changeset = changeset;
   }
 
-  @(task(function* () {
+  @dropTask
+  *savePerformance() {
     yield this.changeset.validate();
 
     if (!this.changeset.isValid) {
@@ -42,6 +43,5 @@ export default class PerformanceForm extends Component {
         this.errorMessage = ex;
       }
     }
-  }).drop())
-  savePerformance;
+  }
 }

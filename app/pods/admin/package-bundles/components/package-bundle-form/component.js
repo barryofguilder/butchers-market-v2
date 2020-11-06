@@ -4,7 +4,7 @@ import { action } from '@ember/object';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 import PackageBundleValidations from 'butchers-market/validations/package-bundle';
-import { task } from 'ember-concurrency';
+import { dropTask } from 'ember-concurrency-decorators';
 
 export default class PackageBundleForm extends Component {
   changeset;
@@ -44,7 +44,8 @@ export default class PackageBundleForm extends Component {
     this.items = items;
   }
 
-  @(task(function* () {
+  @dropTask
+  *saveBundle() {
     this.changeset.set('prices', this.prices);
     this.changeset.set('items', this.items);
 
@@ -64,8 +65,7 @@ export default class PackageBundleForm extends Component {
         this.errorMessage = ex;
       }
     }
-  }).drop())
-  saveBundle;
+  }
 
   @action
   addPrice() {
