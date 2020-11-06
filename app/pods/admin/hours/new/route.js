@@ -3,7 +3,14 @@ import { action } from '@ember/object';
 
 export default class AdminHoursNewRoute extends Route {
   model() {
-    return this.store.createRecord('hour');
+    const now = new Date();
+    const activeStartDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
+    const activeEndDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+
+    return this.store.createRecord('hour', {
+      activeStartDate,
+      activeEndDate,
+    });
   }
 
   @action

@@ -51,7 +51,6 @@
     >
       <Group.label>Active Start Date <Admin::Components::Required /></Group.label>
       <Group.datepicker
-        @disableMobile={{true}}
         @allowInput={{false}}
         @appendDataInput={{true}}
         @date={{readonly this.changeset.activeStartDate}}
@@ -70,7 +69,6 @@
     >
       <Group.label>Active End Date <Admin::Components::Required /></Group.label>
       <Group.datepicker
-        @disableMobile={{true}}
         @allowInput={{false}}
         @appendDataInput={{true}}
         @date={{readonly this.changeset.activeEndDate}}
