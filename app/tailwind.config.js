@@ -1,8 +1,10 @@
-// eslint-disable-next-line no-undef
 const defaultTheme = require('tailwindcss/defaultTheme');
 
-/* eslint-disable-next-line */
 module.exports = {
+  future: {
+    removeDeprecatedGapUtilities: true,
+  },
+  purge: [],
   theme: {
     container: {
       center: true,
