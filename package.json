@@ -5,7 +5,7 @@
   "description": "Source code for The Butcher's Market website.",
   "repository": "https://github.com/stewartandrewmiller/butchers-market-v2",
   "license": "MIT",
-  "author": "Jason Barry <barryofguilder@gmail.com>",
+  "author": "Jason Barry <jbarry@hey.com>",
   "directories": {
     "doc": "doc",
     "test": "tests"
