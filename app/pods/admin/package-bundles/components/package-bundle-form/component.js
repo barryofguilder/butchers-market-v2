@@ -44,7 +44,7 @@ export default class PackageBundleForm extends Component {
     this.items = items;
   }
 
-  @(task(function*() {
+  @(task(function* () {
     this.changeset.set('prices', this.prices);
     this.changeset.set('items', this.items);
 

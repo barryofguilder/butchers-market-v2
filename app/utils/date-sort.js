@@ -1,6 +1,6 @@
 import { isAfter, isBefore } from 'date-fns';
 
-export default function(a, b) {
+export default function (a, b) {
   let timeA = a.get('startTime');
   let timeB = b.get('startTime');
 

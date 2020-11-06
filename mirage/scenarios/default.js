@@ -1,4 +1,4 @@
-export default function(server) {
+export default function (server) {
   createDeliItems(server);
   createEvents(server);
   createHours(server);

@@ -20,11 +20,11 @@ export default ModalDialog.extend({
   },
 
   wrapperClasses: 'fixed z-50 inset-0 overflow-auto bg-overlay flex',
-  overlayClasses: computed('sizeClass', function() {
+  overlayClasses: computed('sizeClass', function () {
     return `relative shadow-overlay mx-6 mt-6 mb-auto p-6 bg-white rounded ${this.sizeClass} focus:outline-none focus:shadow-outline sm:mt-16 sm:mx-auto`;
   }),
 
-  sizeClass: computed('size', function() {
+  sizeClass: computed('size', function () {
     switch (this.size) {
       case 'small':
         return 'max-w-xl';

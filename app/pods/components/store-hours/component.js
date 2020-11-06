@@ -34,10 +34,11 @@ export default class StoreHours extends Component {
     let now = new Date();
 
     // Get the hours set to be used during the time frame.
-    let storeHours = hours.filter(hour => {
+    let storeHours = hours.filter((hour) => {
       if (
         hour.type === hourType &&
-        (isAfter(now, hour.activeStartDate) && isBefore(now, hour.activeEndDate))
+        isAfter(now, hour.activeStartDate) &&
+        isBefore(now, hour.activeEndDate)
       ) {
         return hour;
       }
@@ -45,7 +46,7 @@ export default class StoreHours extends Component {
 
     // Get the hours marked as `default`
     if (storeHours.length === 0) {
-      storeHours = hours.filter(hour => {
+      storeHours = hours.filter((hour) => {
         if (hour.type === hourType && hour.default) {
           return hour;
         }

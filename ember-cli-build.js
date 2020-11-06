@@ -16,7 +16,7 @@ const purgeCSS = {
     ],
 
     // This is the function used to extract class names from your templates
-    defaultExtractor: content => {
+    defaultExtractor: (content) => {
       // Capture as liberally as possible, including things like `h-(screen-1.5)`
       const broadMatches = content.match(/[^<>"'`\s]*[^<>"'`\s:]/g) || [];
 
@@ -28,7 +28,7 @@ const purgeCSS = {
   },
 };
 
-module.exports = function(defaults) {
+module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
     fingerprint: {
       exclude: ['apple-touch-icon.png', 'images/*.*'],

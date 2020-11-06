@@ -5,7 +5,7 @@ import { task } from 'ember-concurrency';
 export default class DeleteHoursForm extends Component {
   @tracked errorMessage;
 
-  @(task(function*() {
+  @(task(function* () {
     try {
       yield this.args.hours.destroyRecord();
       this.args.onSave();

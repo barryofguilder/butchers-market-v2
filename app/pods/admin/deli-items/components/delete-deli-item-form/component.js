@@ -5,7 +5,7 @@ import { task } from 'ember-concurrency';
 export default class DeleteDeliItemForm extends Component {
   @tracked errorMessage;
 
-  @(task(function*() {
+  @(task(function* () {
     try {
       yield this.args.item.destroyRecord();
       this.args.onSave();

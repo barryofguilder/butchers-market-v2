@@ -27,7 +27,7 @@ export default class FeedbackForm extends Component {
     return this.formState === 'ServerError';
   }
 
-  @(task(function*() {
+  @(task(function* () {
     let body = JSON.stringify({
       data: {
         attributes: {

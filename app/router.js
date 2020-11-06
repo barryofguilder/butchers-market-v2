@@ -35,7 +35,7 @@ export default class Router extends EmberRouter {
   }
 }
 
-Router.map(function() {
+Router.map(function () {
   this.route('contact');
   this.route('deli');
   this.route('events');
@@ -46,30 +46,30 @@ Router.map(function() {
 
   this.route('sign-in');
 
-  this.route('admin', function() {
-    this.route('deli-items', function() {
+  this.route('admin', function () {
+    this.route('deli-items', function () {
       this.route('new');
       this.route('edit', { path: ':id/edit' });
       this.route('delete', { path: ':id/delete' });
     });
-    this.route('events', function() {
+    this.route('events', function () {
       this.route('new');
       this.route('edit', { path: ':id/edit' });
       this.route('delete', { path: ':id/delete' });
     });
-    this.route('hours', function() {
+    this.route('hours', function () {
       this.route('new');
       this.route('edit', { path: ':id/edit' });
     });
-    this.route('meat-bundles', function() {
+    this.route('meat-bundles', function () {
       this.route('edit', { path: ':id/edit' });
     });
-    this.route('package-bundles', function() {
+    this.route('package-bundles', function () {
       this.route('new');
       this.route('edit', { path: ':id/edit' });
       this.route('delete', { path: ':id/delete' });
     });
-    this.route('performances', function() {
+    this.route('performances', function () {
       this.route('new');
       this.route('edit', { path: ':id/edit' });
     });

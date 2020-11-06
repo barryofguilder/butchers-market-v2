@@ -43,7 +43,7 @@ export default class EventForm extends Component {
     this.changeset = changeset;
   }
 
-  @(task(function*() {
+  @(task(function* () {
     yield this.changeset.validate();
 
     if (!this.changeset.isValid) {
@@ -68,7 +68,7 @@ export default class EventForm extends Component {
   }).drop())
   saveEvent;
 
-  @(task(function*(file) {
+  @(task(function* (file) {
     try {
       let url = yield file.readAsDataURL();
       this.tempImageUrl = url;
