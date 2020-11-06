@@ -3,7 +3,14 @@ import { action } from '@ember/object';
 
 export default class AdminEventsNewRoute extends Route {
   model() {
-    return this.store.createRecord('event');
+    const now = new Date();
+    const startTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 19);
+    const endTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 22);
+
+    return this.store.createRecord('event', {
+      startTime,
+      endTime,
+    });
   }
 
   @action

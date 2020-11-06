@@ -40,13 +40,6 @@ export default class EventForm extends Component {
       EventValidations
     );
 
-    if (this.args.event.isNew) {
-      let now = new Date();
-
-      changeset.set('startTime', new Date(now.getFullYear(), now.getMonth(), now.getDate(), 19));
-      changeset.set('endTime', new Date(now.getFullYear(), now.getMonth(), now.getDate(), 22));
-    }
-
     this.changeset = changeset;
   }
 

@@ -24,20 +24,6 @@ export default class HoursForm extends Component {
       HoursValidations
     );
 
-    if (this.args.hours.isNew) {
-      let now = new Date();
-
-      changeset.set('type', 'Store');
-      changeset.set(
-        'activeStartDate',
-        new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0)
-      );
-      changeset.set(
-        'activeEndDate',
-        new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59)
-      );
-    }
-
     this.changeset = changeset;
   }
 

@@ -1,17 +1,11 @@
-import EmberFlatpickr from 'ember-flatpickr/components/ember-flatpickr';
-import { computed } from '@ember/object';
-import { gt } from '@ember/object/computed';
+import Component from '@glimmer/component';
 
-export default EmberFlatpickr.extend({
-  attributeBindings: ['data-test-id'],
-  classNameBindings: ['inputClasses'],
+export default class DatePickerComponent extends Component {
+  get hasErrors() {
+    return this.args.errors?.length > 0;
+  }
 
-  'data-test-id': 'datepicker',
-  errors: null,
-
-  hasErrors: gt('errors.length', 0),
-
-  inputClasses: computed('hasErrors', function() {
+  get inputClasses() {
     let classes = 'styled-textbox ember-flatpickr';
 
     if (this.hasErrors) {
@@ -19,5 +13,5 @@ export default EmberFlatpickr.extend({
     }
 
     return classes;
-  }),
-});
+  }
+}
