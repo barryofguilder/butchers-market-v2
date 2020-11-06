@@ -27,7 +27,7 @@ export default class HoursForm extends Component {
     this.changeset = changeset;
   }
 
-  @(task(function*() {
+  @(task(function* () {
     yield this.changeset.validate();
 
     if (!this.changeset.isValid) {

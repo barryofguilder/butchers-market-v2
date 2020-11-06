@@ -36,7 +36,7 @@ export default class MeatBundleForm extends Component {
     this.items = items;
   }
 
-  @(task(function*() {
+  @(task(function* () {
     this.changeset.set('items', this.items);
 
     yield this.changeset.validate();

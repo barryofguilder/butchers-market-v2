@@ -1,7 +1,7 @@
 import Response from 'ember-cli-mirage/response';
 import { upload } from 'ember-file-upload/mirage';
 
-const generateValidationError = function(field, title) {
+const generateValidationError = function (field, title) {
   return {
     status: 422,
     code: 100,
@@ -20,7 +20,7 @@ const TOKEN =
 // Future Token
 // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTg5NzQyODQ2LCJleHAiOjI1OTIzMzQ4NDZ9.YBJOag4Kyeq4yBBdAPXYttZMxqX9J_N-L5f5OrWX95w';
 
-export default function() {
+export default function () {
   // Allows us to access the Mirage server in the console using `window.server`.
   window.server = this;
 
@@ -40,11 +40,11 @@ export default function() {
       if (range === 'upcoming') {
         date.setHours(0, 0, 0, 0);
 
-        response.models = response.models.filter(event => {
+        response.models = response.models.filter((event) => {
           return new Date(event.startTime) > date;
         });
       } else if (range === 'past') {
-        response.models = response.models.filter(event => {
+        response.models = response.models.filter((event) => {
           return new Date(event.startTime) < date;
         });
       }
@@ -115,7 +115,7 @@ export default function() {
 
   this.post(
     '/upload',
-    upload(function(db, request) {
+    upload(function (db, request) {
       return new Response(201, { 'Content-Type': 'text/plain' }, request.requestBody.file.url);
     })
   );

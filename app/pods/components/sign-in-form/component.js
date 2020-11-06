@@ -10,7 +10,7 @@ export default class SignInFormComponent extends Component {
 
   @tracked hasError = false;
 
-  @(task(function*() {
+  @(task(function* () {
     let body = JSON.stringify({
       data: {
         type: 'tokens',

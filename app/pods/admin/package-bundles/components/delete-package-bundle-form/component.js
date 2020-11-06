@@ -5,7 +5,7 @@ import { task } from 'ember-concurrency';
 export default class DeletePackageBundleForm extends Component {
   @tracked errorMessage;
 
-  @(task(function*() {
+  @(task(function* () {
     try {
       yield this.args.bundle.destroyRecord();
       this.args.onSave();

@@ -3,7 +3,7 @@ import { action } from '@ember/object';
 import { task } from 'ember-concurrency';
 
 export default class AdminForm extends Component {
-  @task(function*() {
+  @task(function* () {
     if (this.args.onSubmit) {
       yield this.args.onSubmit();
     }

@@ -12,7 +12,7 @@ MediaService.reopen({
   // Change this if you want a different default breakpoint in tests.
   _defaultBreakpoint: 'lg',
 
-  _breakpointArr: computed('breakpoints', function() {
+  _breakpointArr: computed('breakpoints', function () {
     return Object.keys(this.get('breakpoints')) || A([]);
   }),
 
@@ -20,7 +20,7 @@ MediaService.reopen({
     let found = false;
 
     const props = {};
-    this.get('_breakpointArr').forEach(function(bp) {
+    this.get('_breakpointArr').forEach(function (bp) {
       const val = bp === breakpoint;
       if (val) {
         found = true;
@@ -47,7 +47,7 @@ MediaService.reopen({
   },
 });
 
-export default registerAsyncHelper('setBreakpoint', function(app, breakpoint) {
+export default registerAsyncHelper('setBreakpoint', function (app, breakpoint) {
   // this should use getOwner once that's supported
   const mediaService = app.__deprecatedInstance__.lookup('service:media');
   mediaService._forceSetBreakpoint(breakpoint);

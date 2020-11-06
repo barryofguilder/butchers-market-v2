@@ -1,10 +1,10 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
-module('Unit | Model | performance', function(hooks) {
+module('Unit | Model | performance', function (hooks) {
   setupTest(hooks);
 
-  test('it can generate the embed link', function(assert) {
+  test('it can generate the embed link', function (assert) {
     let store = this.owner.lookup('service:store');
     let model = store.createRecord('performance', {
       link: 'https://www.youtube.com/watch?v=8ODVyWKIZMw',
