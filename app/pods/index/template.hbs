@@ -1,8 +1,22 @@
 <OrderBanner />
 
+{{#if (and this.showThanksgivingMealPromo this.isMobile)}}
+  <div class="bg-black">
+    <div class="flex justify-center">
+      <a href={{order-online-url}} class="max-w-md">
+        <img
+          src="images/thanksgivingbutts.jpg"
+          alt="Order smoked Boston butt Thanksgiving meal"
+          class="w-full"
+        />
+      </a>
+    </div>
+  </div>
+{{/if}}
+
 <PromoSection @image="promo-index.jpg" as |Promo|>
   <Container>
-    <div class="text-center lg:w-3/4 sm:text-left">
+    <div class="text-center sm:text-left {{unless this.showThanksgivingMealPromo "lg:w-3/4"}}">
       {{#if this.media.isSm}}
         <Promo.title>
           Welcome to The Butcher's Market Meat &amp; Deli
@@ -15,14 +29,29 @@
         <StoreLocation class="mt-8" />
       {{/if}}
 
-      <Button @href="https://www.facebook.com/thebutchersmarket" @variant="primary" class="mt-8">
-        Like us on Facebook
-      </Button>
+      <div class="md:flex md:justify-between">
+        <div class="md:flex-none">
+          <Button @href="https://www.facebook.com/thebutchersmarket" @variant="primary" class="mt-8">
+            Like us on Facebook
+          </Button>
 
-      {{#if this.media.isSm}}
-        <StoreHours @hours={{@model.hours}} @primaryType="Store" class="mt-8" />
-        <StoreLocation class="mt-8" />
-      {{/if}}
+          {{#if this.media.isSm}}
+            <StoreHours @hours={{@model.hours}} @primaryType="Store" class="mt-8" />
+            <StoreLocation class="mt-8" />
+          {{/if}}
+        </div>
+        {{#if (and this.showThanksgivingMealPromo this.isTablet)}}
+          <div class="max-w-md">
+            <a href={{order-online-url}}>
+              <img
+                src="images/thanksgivingbutts.jpg"
+                alt="Order smoked Boston butt Thanksgiving meal"
+                class="w-100 mt-8 ml-6"
+              />
+            </a>
+          </div>
+        {{/if}}
+      </div>
     </div>
   </Container>
 </PromoSection>
