@@ -25,49 +25,12 @@
     </LinkTo>
   </li>
   <li class="lg:block lg:h-full">
-    <BasicDropdown
-      @renderInPlace={{if this.isMobile true false}}
-      @registerAPI={{this.setDropdown}} as |Dropdown|
-    >
-      <Dropdown.Trigger
-        class="block px-6 py-4 outline-none lg:flex lg:items-center lg:py-0 lg:h-full hover:text-red-600 focus:bg-gray-300 focus:text-gray-900 text-center lg:text-left"
-      >
-        Dining <FaIcon @icon="caret-down" class="ml-1" />
-      </Dropdown.Trigger>
-
-      <Dropdown.Content class={{if this.isMobile "static"}}>
-        <div class="bg-gray-200 text-center lg:text-left lg:shadow-md">
-          <ul class="list-reset">
-            <li>
-              <a
-                href="docs/bmmenu.pdf"
-                class="block px-6 py-4 hover:text-red-600"
-              >
-                View Menu
-              </a>
-            </li>
-            <li>
-              <LinkTo
-                @route="events"
-                class="block px-6 py-4 hover:text-red-600"
-                {{on "click" this.dropdowmMenuClicked}}
-              >
-                Butcher's Market Cafe
-              </LinkTo>
-            </li>
-          </ul>
-        </div>
-      </Dropdown.Content>
-    </BasicDropdown>
-  </li>
-  <li class="lg:block lg:h-full">
-    <LinkTo
-      @route="events"
+   <a
+      href="docs/bmmenu.pdf"
       class="block px-6 py-4 lg:flex lg:items-center lg:py-0 lg:h-full hover:text-red-600 text-center lg:text-left"
-      {{on "click" this.itemClicked}}
     >
-      Events
-    </LinkTo>
+      Menu
+    </a>
   </li>
   <li class="lg:block lg:h-full">
     <LinkTo
