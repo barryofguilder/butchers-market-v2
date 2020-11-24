@@ -14,8 +14,7 @@ export default class IndexController extends Controller {
   }
 
   get showThanksgivingMealPromo() {
-    // const endDate = new Date(2020, 10, 27);
-    // return isBefore(new Date(), endDate);
-    return false;
+    const endDate = new Date(2020, 10, 25);
+    return isBefore(new Date(), endDate);
   }
 }
