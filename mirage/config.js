@@ -1,5 +1,6 @@
 import Response from 'ember-cli-mirage/response';
 import { upload } from 'ember-file-upload/mirage';
+import { isAfter, isBefore } from 'date-fns';
 
 const generateValidationError = function (field, title) {
   return {
@@ -102,6 +103,31 @@ export default function () {
   this.resource('package-bundles', { except: ['create', 'delete'] });
 
   this.get('/reviews');
+
+  this.resource('specials', { except: ['index'] });
+  this.get('/specials', ({ specials }, request) => {
+    const range = request.queryParams['filter[range]'];
+    const isHidden = request.queryParams['filter[isHidden]'];
+    let whereStatement = {};
+
+    if (isHidden !== undefined) {
+      whereStatement.isHidden = isHidden;
+    }
+
+    let response = specials.where(whereStatement);
+
+    if (range != undefined) {
+      if (range === 'active') {
+        const now = new Date();
+
+        response.models = response.models.filter((special) => {
+          return isAfter(now, special.activeStartDate) && isBefore(now, special.activeEndDate);
+        });
+      }
+    }
+
+    return response;
+  });
 
   this.post('/token', (server, request) => {
     let attrs = JSON.parse(request.requestBody).data.attributes;

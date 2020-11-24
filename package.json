@@ -1,6 +1,6 @@
 {
   "name": "butchers-market",
-  "version": "1.7.5",
+  "version": "1.8.0",
   "private": true,
   "description": "Source code for The Butcher's Market website.",
   "repository": "https://github.com/stewartandrewmiller/butchers-market-v2",
@@ -85,7 +85,7 @@
     "postcss-import": "^12.0.1",
     "prettier": "2.1.2",
     "qunit-dom": "^1.5.0",
-    "tailwindcss": "~1.9.0"
+    "tailwindcss": "~1.9.6"
   },
   "dependencies": {
     "jwt-decode": "^2.2.0"

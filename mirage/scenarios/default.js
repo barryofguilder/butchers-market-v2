@@ -1,3 +1,5 @@
+import addDays from 'date-fns/addDays';
+
 export default function (server) {
   createDeliItems(server);
   createEvents(server);
@@ -6,6 +8,7 @@ export default function (server) {
   createPackageBundles(server);
   createPerformances(server);
   createReviews(server);
+  createSpecials(server);
 }
 
 function createDeliItems(server) {
@@ -376,4 +379,35 @@ function createReviews(server) {
   server.create('review', { imageUrl: 'images/review-person1.jpg' });
   server.create('review', { imageUrl: 'images/review-person2.png' });
   server.create('review', { imageUrl: 'images/review-person3.png' });
+}
+
+function createSpecials(server) {
+  server.create('special', {
+    title: 'Smoked Boneless Turkey Breast',
+    imageUrl: 'images/thanksgivingbreast.jpg',
+    activeStartDate: addDays(new Date(), -5),
+    isSoldOut: false,
+  });
+
+  server.create('special', {
+    title: 'Italian Lasagne',
+    imageUrl: 'images/thanksgivingbreast.jpg',
+    activeStartDate: addDays(new Date(), -8),
+    isSoldOut: true,
+  });
+
+  server.create('special', {
+    title: 'Meatloaf',
+    imageUrl: 'images/thanksgivingbreast.jpg',
+    activeStartDate: addDays(new Date(), -6),
+    isSoldOut: false,
+  });
+
+  server.create('special', {
+    title: 'Beef Stew',
+    imageUrl: 'images/thanksgivingbreast.jpg',
+    activeStartDate: addDays(new Date(), -14),
+    activeEndDate: addDays(new Date(), -2),
+    isSoldOut: false,
+  });
 }

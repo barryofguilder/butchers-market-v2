@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 import DeliItemValidations from 'butchers-market/validations/deli-item';
@@ -8,6 +9,9 @@ import { dropTask, enqueueTask } from 'ember-concurrency-decorators';
 import baseUrl from 'butchers-market/utils/base-url';
 
 export default class DeliItemForm extends Component {
+  @service router;
+  @service session;
+
   changeset;
 
   @tracked image;
@@ -31,6 +35,18 @@ export default class DeliItemForm extends Component {
     return this.changeset && this.changeset.isInvalid;
   }
 
+  get uploadHeaders() {
+    const token = this.session.token;
+
+    if (token) {
+      return {
+        Authorization: `Bearer ${token}`,
+      };
+    }
+
+    return null;
+  }
+
   constructor() {
     super(...arguments);
 
@@ -52,14 +68,18 @@ export default class DeliItemForm extends Component {
 
     try {
       if (this.image) {
-        let response = yield this.image.upload(`${baseUrl}/upload`);
+        let response = yield this.image.upload(`${baseUrl}/upload`, {
+          headers: this.uploadHeaders,
+        });
         this.changeset.set('imageUrl', response.body);
       }
 
       yield this.changeset.save();
       this.args.saved();
     } catch (ex) {
-      if (ex.body) {
+      if (ex.status === 401) {
+        return this.session.redirectToSignIn(this.router.currentURL);
+      } else if (ex.body) {
         this.errorMessage = ex.body.error;
       } else {
         this.errorMessage = ex;

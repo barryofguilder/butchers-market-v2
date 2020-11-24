@@ -7,10 +7,14 @@ export default class IndexRoute extends Route {
       filter: { featured: true, isHidden: false },
     });
     const hours = await this.store.findAll('hour');
+    const specials = await this.store.query('special', {
+      filter: { isHidden: false, range: 'active' },
+    });
 
     return {
       bundles,
       hours,
+      specials,
     };
   }
 

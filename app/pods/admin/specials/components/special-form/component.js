@@ -4,17 +4,17 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
-import EventValidations from 'butchers-market/validations/event';
+import SpecialValidations from 'butchers-market/validations/special';
 import { dropTask, enqueueTask } from 'ember-concurrency-decorators';
 import baseUrl from 'butchers-market/utils/base-url';
 
-export default class EventForm extends Component {
+export default class SpecialForm extends Component {
   @service router;
   @service session;
 
   changeset;
 
-  @tracked image;
+  @tracked activeDuringRange = false;
   @tracked tempImageUrl;
   @tracked errorMessage;
   @tracked fileErrorMessage;
@@ -51,25 +51,35 @@ export default class EventForm extends Component {
     super(...arguments);
 
     let changeset = new Changeset(
-      this.args.event,
-      lookupValidator(EventValidations),
-      EventValidations
+      this.args.special,
+      lookupValidator(SpecialValidations),
+      SpecialValidations
     );
 
     this.changeset = changeset;
+
+    if (this.changeset.activeStartDate) {
+      this.activeDuringRange = true;
+    }
   }
 
   @dropTask
-  *saveEvent() {
+  *saveSpecial() {
     yield this.changeset.validate();
 
-    if (!this.changeset.isValid) {
+    const hasImage = this.changeset.image || this.changeset.imageUrl;
+
+    if (!this.changeset.isValid || !hasImage) {
+      if (!hasImage) {
+        this.changeset.addError('image', 'Image URL is required');
+      }
+
       return;
     }
 
     try {
-      if (this.image) {
-        let response = yield this.image.upload(`${baseUrl}/upload`, {
+      if (this.changeset.image) {
+        let response = yield this.changeset.image.upload(`${baseUrl}/upload`, {
           headers: this.uploadHeaders,
         });
         this.changeset.set('imageUrl', response.body);
@@ -93,91 +103,59 @@ export default class EventForm extends Component {
     try {
       let url = yield file.readAsDataURL();
       this.tempImageUrl = url;
-      this.image = file;
+      this.changeset.set('image', file);
     } catch (e) {
       this.fileErrorMessage = 'Could not read the file contents';
     }
   }
 
   @action
-  dateSelected(date) {
-    const startTime = this.changeset.get('startTime');
-    this.changeset.set(
-      'startTime',
-      new Date(
-        date[0].getFullYear(),
-        date[0].getMonth(),
-        date[0].getDate(),
-        startTime.getHours(),
-        startTime.getMinutes()
-      )
-    );
-
-    const endTime = this.changeset.get('endTime');
-    this.changeset.set(
-      'endTime',
-      new Date(
-        date[0].getFullYear(),
-        date[0].getMonth(),
-        date[0].getDate(),
-        endTime.getHours(),
-        endTime.getMinutes()
-      )
-    );
-  }
-
-  @action
-  startTimeSelected(time) {
-    const startTime = this.changeset.get('startTime');
-    this.changeset.set(
-      'startTime',
-      new Date(
-        startTime.getFullYear(),
-        startTime.getMonth(),
-        startTime.getDate(),
-        time[0].getHours(),
-        time[0].getMinutes()
-      )
-    );
-
-    const endTime = this.changeset.get('endTime');
-    this.changeset.set(
-      'endTime',
-      new Date(
-        startTime.getFullYear(),
-        startTime.getMonth(),
-        startTime.getDate(),
-        endTime.getHours(),
-        endTime.getMinutes()
-      )
-    );
-  }
-
-  @action
-  endTimeSelected(time) {
-    const startTime = this.changeset.get('startTime');
-    this.changeset.set(
-      'endTime',
-      new Date(
-        startTime.getFullYear(),
-        startTime.getMonth(),
-        startTime.getDate(),
-        time[0].getHours(),
-        time[0].getMinutes()
-      )
-    );
-  }
-
-  @action
   uploadImage(file) {
+    this.changeset.set('imageUrl', null);
     this.uploadPhoto.perform(file);
   }
 
   @action
   removeImage() {
-    this.image = null;
+    this.changeset.set('image', null);
     this.tempImageUrl = null;
 
     this.changeset.set('imageUrl', null);
+  }
+
+  @action
+  toggleActiveDuringRange(event) {
+    this.activeDuringRange = event.target.checked;
+
+    if (this.activeDuringRange === false) {
+      this.changeset.set('activeStartDate', null);
+      this.changeset.set('activeEndDate', null);
+    }
+  }
+
+  @action
+  startDateSelected(date) {
+    this.changeset.set(
+      'activeStartDate',
+      new Date(date[0].getFullYear(), date[0].getMonth(), date[0].getDate(), 0, 0, 0)
+    );
+  }
+
+  @action
+  endDateSelected(date) {
+    this.changeset.set(
+      'activeEndDate',
+      new Date(date[0].getFullYear(), date[0].getMonth(), date[0].getDate(), 23, 59, 59)
+    );
+  }
+
+  @action
+  updateIsSoldOut() {
+    this.changeset.set('isSoldOut', !this.changeset.get('isSoldOut'));
+  }
+
+  @action
+  updateIsHidden() {
+    this.changeset.set('isHidden', !this.changeset.get('isHidden'));
   }
 }
