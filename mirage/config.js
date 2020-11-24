@@ -102,6 +102,7 @@ export default function () {
   this.resource('package-bundles', { except: ['create', 'delete'] });
 
   this.get('/reviews');
+  this.resource('specials');
 
   this.post('/token', (server, request) => {
     let attrs = JSON.parse(request.requestBody).data.attributes;

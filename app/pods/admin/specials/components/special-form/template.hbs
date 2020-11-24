@@ -1,0 +1,163 @@
+<Admin::Components::AdminForm class="max-w-xl" @onSubmit={{perform this.saveSpecial}} as |Form|>
+  {{#if this.errorMessage}}
+    <UiAlert data-test-id="server-error" @variant="danger">
+      {{this.errorMessage}}
+    </UiAlert>
+  {{/if}}
+
+  <p class="mb-8">
+    <strong>Note:</strong> Required fields are marked with an <Admin::Components::Required />
+  </p>
+
+  <Form.group data-test-id="title" @model={{this.changeset}} @property="title" as |Group|>
+    <Group.label>Title <Admin::Components::Required /></Group.label>
+    <Group.textbox @value={{this.changeset.title}} />
+  </Form.group>
+
+  <Form.group data-test-id="image" @model={{this.changeset}} @property="image" as |Group|>
+    <Group.label>Image <Admin::Components::Required /></Group.label>
+    <div class="mt-2">
+      <FileUpload
+        @id={{Group.uniqueId}}
+        @name="photos"
+        @accept="image/*"
+        @onfileadd={{this.uploadImage}}
+      >
+        {{! template-lint-disable link-href-attributes }}
+        <a
+          class="inline-block px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-none focus:shadow-outline"
+          tabindex="0"
+        >
+          Select Image
+        </a>
+      </FileUpload>
+
+      {{#if this.hasImage}}
+        <button
+          type="button"
+          class="inline-block ml-2 px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-none focus:shadow-outline"
+          {{on "click" this.removeImage}}
+        >
+          Remove Image
+        </button>
+      {{/if}}
+
+      {{#if this.fileErrorMessage}}
+        <span class="block mt-2 text-red-500">
+          This is an error message.
+          {{this.fileErrorMessage}}
+        </span>
+      {{/if}}
+
+      <small
+        class="block mt-3 text-gray-700 {{if this.fileErrorMessage "" "sm:inline-block sm:mt-0 sm:ml-2"}}"
+      >
+        Only JPG, JPEG, PNG, and GIF files are allowed.
+      </small>
+      <small class="block mt-3 text-gray-700">
+        Please optimize the image before uploading using
+        <a
+          href="https://tinypng.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-red-800 hover:underline"
+        >
+          this site
+        </a>.
+      </small>
+
+      {{#if this.hasImage}}
+        <div class="mt-4">
+          <img src={{this.imageUrl}} alt="Event" class="w-full block">
+        </div>
+      {{/if}}
+    </div>
+  </Form.group>
+
+  <Form.group data-test-id="image-alt-text" @model={{this.changeset}} @property="imageAltText" as |Group|>
+    <Group.label>
+      Image Alt Text <Admin::Components::Required />
+    </Group.label>
+    <Group.textbox @value={{this.changeset.imageAltText}} />
+    <small class="block mt-3 text-gray-700">
+      The text that people will see when there is no image or the user is blind. Just needs to describe the special.
+    </small>
+  </Form.group>
+
+  <Form.group data-test-id="active-during-range">
+    <label>
+      <input type="checkbox" checked={{this.activeDuringRange}} {{on "change" this.toggleActiveDuringRange}}>
+      <span class="ml-2">Active during a certain date range?</span>
+    </label>
+    <small class="block mt-3 text-gray-700">
+      When checked, this means that the special will only be active during a specified date range.
+    </small>
+  </Form.group>
+
+  {{#if this.activeDuringRange}}
+    <Form.group
+      data-test-id="start-date"
+      @model={{this.changeset}}
+      @property="activeStartDate" as |Group|
+    >
+      <Group.label>Active Start Date</Group.label>
+      <Group.datepicker
+        @allowInput={{false}}
+        @appendDataInput={{true}}
+        @date={{readonly (if this.changeset.activeStartDate this.changeset.activeStartDate null)}}
+        @dateFormat="m/d/Y"
+        @onChange={{this.startDateSelected}}
+      />
+      <Group.help>
+        The date that this special will become active on.
+      </Group.help>
+    </Form.group>
+
+    <Form.group
+      data-test-id="end-date"
+      @model={{this.changeset}}
+      @property="activeEndDate" as |Group|
+    >
+      <Group.label>Active End Date</Group.label>
+      <Group.datepicker
+        @allowInput={{false}}
+        @appendDataInput={{true}}
+        @date={{readonly (if this.changeset.activeEndDate this.changeset.activeEndDate null)}}
+        @dateFormat="m/d/Y"
+        @onChange={{this.endDateSelected}}
+      />
+      <Group.help>
+        The last date that the special will be active on.
+      </Group.help>
+    </Form.group>
+  {{/if}}
+
+  <Form.group data-test-id="sold-out">
+    <label>
+      <input type="checkbox" checked={{this.changeset.isSoldOut}} {{on "change" this.updateIsSoldOut}}>
+      <span class="ml-2">Is Sold Out?</span>
+    </label>
+  </Form.group>
+
+  <Form.group data-test-id="hidden">
+    <label>
+      <input type="checkbox" checked={{this.changeset.isHidden}} {{on "change" this.updateIsHidden}}>
+      <span class="ml-2">Is Hidden?</span>
+    </label>
+    <small class="block mt-3 text-gray-700">
+      When checked, this means that the special will be hidden even if there is an active date range set.
+    </small>
+  </Form.group>
+
+  <div class="mt-8">
+    {{#if this.changeset.errors}}
+      <div class="mb-2 text-red-600">
+        Please fix the errors above and try again.
+      </div>
+    {{/if}}
+    <Form.submit @disabled={{this.saveDisabled}}>
+      Save
+    </Form.submit>
+    <Button class="ml-2" @variant="plain" @onClick={{@cancelled}}>Cancel</Button>
+  </div>
+</Admin::Components::AdminForm>
