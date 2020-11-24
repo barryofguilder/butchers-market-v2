@@ -14,6 +14,7 @@
     <Thead.th>Active Start Date</Thead.th>
     <Thead.th>Active End Date</Thead.th>
     <Thead.th>Sold Out?</Thead.th>
+    <Thead.th>Hidden?</Thead.th>
     <Thead.th></Thead.th>
   </Table.head>
   <Table.body as |Tbody|>
@@ -34,6 +35,9 @@
         </Row.td>
         <Row.td>
           {{if special.isSoldOut "Yes" "No"}}
+        </Row.td>
+        <Row.td>
+          {{if special.isHidden "Yes" "No"}}
         </Row.td>
         <Row.td>
           <div class="flex justify-end">
