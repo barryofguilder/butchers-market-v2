@@ -60,8 +60,11 @@ module.exports = function (environment) {
       enabled: true,
     };
 
+    ENV.uploadsDir = '';
+
     if (ENV['ember-cli-mirage'].enabled === false) {
       ENV.api = 'http://localhost:3000';
+      ENV.uploadsDir = '/uploads/';
     }
   }
 
