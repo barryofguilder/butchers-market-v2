@@ -392,7 +392,6 @@ function createSpecials(server) {
   server.create('special', {
     title: 'Italian Lasagne',
     imageUrl: 'images/thanksgivingbreast.jpg',
-    activeStartDate: addDays(new Date(), -8),
     isSoldOut: true,
   });
 
