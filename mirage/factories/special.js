@@ -10,6 +10,10 @@ export default Factory.extend({
 
   link: null,
 
+  displayOrder(index) {
+    return index + 1;
+  },
+
   imageAltText() {
     return this.title;
   },

@@ -4,6 +4,7 @@ import config from 'butchers-market/config/environment';
 export default class Special extends Model {
   @attr('string') title;
   @attr('string') link;
+  @attr('number') displayOrder;
   @attr('string') imageUrl;
   @attr('string') imageAltText;
   @attr('date') activeStartDate;

@@ -11,6 +11,7 @@
 <Admin::Components::UiTable class="mt-8" as |Table|>
   <Table.head as |Thead|>
     <Thead.th>Title</Thead.th>
+    <Thead.th>Display Order</Thead.th>
     <Thead.th>Active Start Date</Thead.th>
     <Thead.th>Active End Date</Thead.th>
     <Thead.th>Sold Out?</Thead.th>
@@ -22,6 +23,9 @@
       <Tbody.tr as |Row|>
         <Row.td>
           {{special.title}}
+        </Row.td>
+        <Row.td>
+          {{special.displayOrder}}
         </Row.td>
         <Row.td>
           {{#if special.activeStartDate}}
