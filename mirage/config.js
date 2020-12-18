@@ -116,12 +116,15 @@ export default function () {
 
     let response = specials.where(whereStatement);
 
-    if (range != undefined) {
+    if (range !== undefined) {
       if (range === 'active') {
         const now = new Date();
 
         response.models = response.models.filter((special) => {
-          return isAfter(now, special.activeStartDate) && isBefore(now, special.activeEndDate);
+          return (
+            !special.activeStartDate ||
+            (isAfter(now, special.activeStartDate) && isBefore(now, special.activeEndDate))
+          );
         });
       }
     }

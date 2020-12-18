@@ -14,6 +14,14 @@
     <Group.textbox @value={{this.changeset.title}} />
   </Form.group>
 
+  <Form.group data-test-id="link" @model={{this.changeset}} @property="link" as |Group|>
+    <Group.label>Link</Group.label>
+    <Group.textbox @value={{this.changeset.link}} />
+    <small class="block mt-3 text-gray-700">
+      If left blank, clicking on the special image will take you to {{order-online-url}}.
+    </small>
+  </Form.group>
+
   <Form.group data-test-id="image" @model={{this.changeset}} @property="image" as |Group|>
     <Group.label>Image <Admin::Components::Required /></Group.label>
     <div class="mt-2">

@@ -3,12 +3,17 @@ import config from 'butchers-market/config/environment';
 
 export default class Special extends Model {
   @attr('string') title;
+  @attr('string') link;
   @attr('string') imageUrl;
   @attr('string') imageAltText;
   @attr('date') activeStartDate;
   @attr('date') activeEndDate;
   @attr('boolean') isSoldOut;
   @attr('boolean') isHidden;
+
+  get renderLink() {
+    return this.link || config.orderOnlineUrl;
+  }
 
   get imageUrlPath() {
     if (this.imageUrl) {
