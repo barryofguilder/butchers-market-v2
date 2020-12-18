@@ -1,5 +1,5 @@
 <div class="sm:-mx-3 sm:flex sm:items-center sm:flex-wrap" ...attributes>
-  {{#each @specials as |special|}}
+  {{#each (sort-by "displayOrder" @specials) as |special|}}
     <div class="sm:px-3 sm:w-1/2 lg:w-1/3">
       <SpecialsList::SpecialListItem @special={{special}} />
     </div>

@@ -8,6 +8,12 @@ export default Factory.extend({
     return faker.lorem.words(wordCount);
   },
 
+  link: null,
+
+  displayOrder(index) {
+    return index + 1;
+  },
+
   imageAltText() {
     return this.title;
   },
