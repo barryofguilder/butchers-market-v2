@@ -22,15 +22,17 @@
         <Group.readonly @value={{@special.title}} />
       </Form.group>
 
-      <Form.group data-test-id="start-date" as |Group|>
-        <Group.label>Active Start Date</Group.label>
-        <Group.readonly @value={{date-format @special.activeStartDate "LL/dd/yyyy"}} />
-      </Form.group>
+      {{#if @special.activeStartDate}}
+        <Form.group data-test-id="start-date" as |Group|>
+          <Group.label>Active Start Date</Group.label>
+          <Group.readonly @value={{date-format @special.activeStartDate "LL/dd/yyyy"}} />
+        </Form.group>
 
-      <Form.group data-test-id="end-date" as |Group|>
-        <Group.label>Active End Date</Group.label>
-        <Group.readonly @value={{date-format @special.activeEndDate "LL/dd/yyyy"}} />
-      </Form.group>
+        <Form.group data-test-id="end-date" as |Group|>
+          <Group.label>Active End Date</Group.label>
+          <Group.readonly @value={{date-format @special.activeEndDate "LL/dd/yyyy"}} />
+        </Form.group>
+      {{/if}}
     </Modal.body>
     <Modal.footer>
       <Button @variant="plain" @onClick={{@onCancel}}>
