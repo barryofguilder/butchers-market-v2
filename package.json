@@ -36,7 +36,6 @@
     "ember-animated": "~0.10.1",
     "ember-animated-tools": "^0.4.1",
     "ember-auto-import": "^1.8.0",
-    "ember-basic-dropdown": "^3.0.11",
     "ember-changeset": "~3.10.1",
     "ember-changeset-validations": "~3.9.1",
     "ember-cli": "~3.23.0",
