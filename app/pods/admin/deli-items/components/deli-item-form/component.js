@@ -8,7 +8,7 @@ import DeliItemValidations from 'butchers-market/validations/deli-item';
 import { dropTask, enqueueTask } from 'ember-concurrency-decorators';
 import baseUrl from 'butchers-market/utils/base-url';
 
-export default class DeliItemForm extends Component {
+export default class DeliItemFormComponent extends Component {
   @service router;
   @service session;
 

@@ -6,7 +6,7 @@ import lookupValidator from 'ember-changeset-validations';
 import PackageBundleValidations from 'butchers-market/validations/package-bundle';
 import { dropTask } from 'ember-concurrency-decorators';
 
-export default class PackageBundleForm extends Component {
+export default class PackageBundleFormComponent extends Component {
   changeset;
 
   @tracked prices;

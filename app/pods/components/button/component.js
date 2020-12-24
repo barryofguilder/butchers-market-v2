@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { valueOrDefault } from 'butchers-market/utils/value-or-default';
 
-export default class Button extends Component {
+export default class ButtonComponent extends Component {
   // Specifying these two component properties instead of using HTML attributes is to get around
   // the limitation where using the `component` helper can only pass component properties through.
   // See: https://github.com/emberjs/rfcs/issues/497

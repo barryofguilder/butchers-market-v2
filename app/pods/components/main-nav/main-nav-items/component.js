@@ -3,7 +3,7 @@ import { inject as service } from '@ember/service';
 import { valueOrDefault } from 'butchers-market/utils/value-or-default';
 import config from 'butchers-market/config/environment';
 
-export default class MainNavItems extends Component {
+export default class MainNavItemsComponent extends Component {
   @service media;
 
   get isMobile() {

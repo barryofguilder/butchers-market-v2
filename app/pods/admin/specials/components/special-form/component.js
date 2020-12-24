@@ -8,7 +8,7 @@ import SpecialValidations from 'butchers-market/validations/special';
 import { dropTask, enqueueTask } from 'ember-concurrency-decorators';
 import baseUrl from 'butchers-market/utils/base-url';
 
-export default class SpecialForm extends Component {
+export default class SpecialFormComponent extends Component {
   @service router;
   @service session;
 

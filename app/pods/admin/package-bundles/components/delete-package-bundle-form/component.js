@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { dropTask } from 'ember-concurrency-decorators';
 
-export default class DeletePackageBundleForm extends Component {
+export default class DeletePackageBundleFormComponent extends Component {
   @tracked errorMessage;
 
   @dropTask

@@ -1,9 +1,0 @@
-<Admin::Components::BackLink @route="admin.performances" @text="Performances" />
-
-<Admin::Components::Title @title="Edit Performance" />
-
-<Admin::Performances::Components::PerformanceForm
-  @performance={{this.model}}
-  @saved={{this.performanceSaved}}
-  @cancelled={{this.performanceCancelled}}
-/>

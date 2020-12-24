@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 
-export default class MeatProductsProvider extends Component {
+export default class MeatProductsProviderComponent extends Component {
   products = [
     {
       title: 'Pork',

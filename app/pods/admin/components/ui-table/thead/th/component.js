@@ -3,7 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { equal } from '@ember/object/computed';
 
-export default class UiTableTheadTh extends Component {
+export default class UiTableTheadThComponent extends Component {
   @tracked sortDirection;
 
   get sortColumn() {

@@ -4,7 +4,7 @@ import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { fadeIn, fadeOut } from 'ember-animated/motions/opacity';
 
-export default class MainNav extends Component {
+export default class MainNavComponent extends Component {
   @service media;
 
   @tracked showNavigation = false;

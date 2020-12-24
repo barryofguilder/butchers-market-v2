@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { guidFor } from '@ember/object/internals';
 import { valueOrDefault } from 'butchers-market/utils/value-or-default';
 
-export default class UiTextbox extends Component {
+export default class UiTextboxComponent extends Component {
   get id() {
     return valueOrDefault(this.args.id, guidFor(this));
   }
