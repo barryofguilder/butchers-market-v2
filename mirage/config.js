@@ -30,32 +30,6 @@ export default function () {
 
   this.resource('deli-items');
 
-  this.resource('events', { except: ['index'] });
-  this.get('/events', ({ events }, request) => {
-    const range = request.queryParams['filter[range]'];
-    let response = events.all();
-
-    if (range) {
-      const date = new Date();
-
-      if (range === 'upcoming') {
-        date.setHours(0, 0, 0, 0);
-
-        response.models = response.models.filter((event) => {
-          return new Date(event.startTime) > date;
-        });
-      } else if (range === 'past') {
-        response.models = response.models.filter((event) => {
-          return new Date(event.startTime) < date;
-        });
-      }
-    }
-
-    // TODO: Sort by `startTime`
-
-    return response;
-  });
-
   this.post('/feedback', (server, request) => {
     let attrs = JSON.parse(request.requestBody).data.attributes;
     let errors = [];
@@ -99,7 +73,6 @@ export default function () {
     return meatBundles.where(whereStatement);
   });
 
-  this.resource('performances');
   this.resource('package-bundles', { except: ['create', 'delete'] });
 
   this.get('/reviews');

@@ -1,9 +1,0 @@
-<Admin::Components::BackLink @route="admin.events" @text="Events" />
-
-<Admin::Components::Title @title="Edit Event" />
-
-<Admin::Events::Components::EventForm
-  @event={{this.model}}
-  @saved={{this.eventSaved}}
-  @cancelled={{this.eventCancelled}}
-/>
