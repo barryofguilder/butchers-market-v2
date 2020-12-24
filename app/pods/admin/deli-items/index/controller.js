@@ -1,6 +1,7 @@
 import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
+// eslint-disable-next-line ember/no-computed-properties-in-native-classes
 import { sort } from '@ember/object/computed';
 import { isBlank } from '@ember/utils';
 

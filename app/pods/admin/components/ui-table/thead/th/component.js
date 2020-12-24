@@ -1,7 +1,6 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
-import { equal } from '@ember/object/computed';
 
 export default class UiTableTheadThComponent extends Component {
   @tracked sortDirection;
@@ -10,11 +9,13 @@ export default class UiTableTheadThComponent extends Component {
     return this.sortDirection ? this.args.name : null;
   }
 
-  @equal('sortDirection', 'asc')
-  isAscending;
+  get isAscending() {
+    return this.sortDirection === 'asc';
+  }
 
-  @equal('sortDirection', 'desc')
-  isDescending;
+  get isDescending() {
+    return this.sortDirection === 'desc';
+  }
 
   @action
   columnClicked() {

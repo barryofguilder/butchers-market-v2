@@ -1,18 +1,21 @@
 import ModalDialog from 'ember-modal-dialog/components/modal-dialog';
 import { computed } from '@ember/object';
 
+// eslint-disable-next-line ember/require-tagless-components
 export default ModalDialog.extend({
   size: null,
 
   translucentOverlay: false,
   targetAttachment: 'none',
 
+  // eslint-disable-next-line ember/no-component-lifecycle-hooks
   didInsertElement() {
     this._super(...arguments);
 
     document.body.classList.add('overflow-y-hidden');
   },
 
+  // eslint-disable-next-line ember/no-component-lifecycle-hooks
   willDestroyElement() {
     this._super(...arguments);
 
