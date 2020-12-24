@@ -13,6 +13,7 @@ MediaService.reopen({
   _defaultBreakpoint: 'lg',
 
   _breakpointArr: computed('breakpoints', function () {
+    // eslint-disable-next-line ember/no-get
     return Object.keys(this.get('breakpoints')) || A([]);
   }),
 
@@ -20,6 +21,7 @@ MediaService.reopen({
     let found = false;
 
     const props = {};
+    // eslint-disable-next-line ember/no-get
     this.get('_breakpointArr').forEach(function (bp) {
       const val = bp === breakpoint;
       if (val) {
@@ -43,6 +45,7 @@ MediaService.reopen({
   init() {
     this._super(...arguments);
 
+    // eslint-disable-next-line ember/no-get
     this._forceSetBreakpoint(this.get('_defaultBreakpoint'));
   },
 });
