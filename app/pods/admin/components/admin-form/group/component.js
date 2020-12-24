@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { guidFor } from '@ember/object/internals';
 import { valueOrDefault } from 'butchers-market/utils/value-or-default';
 
-export default class Button extends Component {
+export default class GroupComponent extends Component {
   uniqueId = `${guidFor(this)}-field`;
 
   get useDefaultMargin() {

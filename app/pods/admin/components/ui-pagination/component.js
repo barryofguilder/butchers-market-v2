@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { valueOrDefault } from 'butchers-market/utils/value-or-default';
 
-export default class UiPagination extends Component {
+export default class UiPaginationComponent extends Component {
   pageSizes = [10, 20, 50, 100];
 
   get page() {

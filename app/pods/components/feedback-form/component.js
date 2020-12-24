@@ -6,7 +6,7 @@ import { dropTask } from 'ember-concurrency-decorators';
 import fetch from 'fetch';
 import baseUrl from 'butchers-market/utils/base-url';
 
-export default class FeedbackForm extends Component {
+export default class FeedbackFormComponent extends Component {
   showReCaptcha = config.showReCaptcha;
 
   @tracked name;

@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { task } from 'ember-concurrency-decorators';
 
-export default class AdminForm extends Component {
+export default class AdminFormComponent extends Component {
   @task
   *submitTask() {
     if (this.args.onSubmit) {

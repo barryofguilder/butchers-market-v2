@@ -3,7 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 import { restartableTask } from 'ember-concurrency-decorators';
 
-export default class ReviewsList extends Component {
+export default class ReviewsListComponent extends Component {
   @service store;
 
   @tracked reviews;

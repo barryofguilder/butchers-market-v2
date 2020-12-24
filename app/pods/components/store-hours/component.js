@@ -4,7 +4,7 @@ import { inject as service } from '@ember/service';
 import { isAfter, isBefore } from 'date-fns';
 import { valueOrDefault } from 'butchers-market/utils/value-or-default';
 
-export default class StoreHours extends Component {
+export default class StoreHoursComponent extends Component {
   @service store;
 
   @tracked primaryHours;

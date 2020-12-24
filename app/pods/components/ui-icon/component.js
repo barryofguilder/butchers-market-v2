@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { valueOrDefault } from 'butchers-market/utils/value-or-default';
 
-export default class UiIcon extends Component {
+export default class UiIconComponent extends Component {
   get iconPrefix() {
     return valueOrDefault(this.args.iconPrefix, 'fas');
   }
