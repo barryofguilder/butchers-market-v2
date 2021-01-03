@@ -38,7 +38,6 @@ export default class Router extends EmberRouter {
 Router.map(function () {
   this.route('contact');
   this.route('deli');
-  this.route('events');
   this.route('meat');
   this.route('menu');
 
@@ -48,11 +47,6 @@ Router.map(function () {
 
   this.route('admin', function () {
     this.route('deli-items', function () {
-      this.route('new');
-      this.route('edit', { path: ':id/edit' });
-      this.route('delete', { path: ':id/delete' });
-    });
-    this.route('events', function () {
       this.route('new');
       this.route('edit', { path: ':id/edit' });
       this.route('delete', { path: ':id/delete' });
@@ -68,10 +62,6 @@ Router.map(function () {
       this.route('new');
       this.route('edit', { path: ':id/edit' });
       this.route('delete', { path: ':id/delete' });
-    });
-    this.route('performances', function () {
-      this.route('new');
-      this.route('edit', { path: ':id/edit' });
     });
     this.route('specials', function () {
       this.route('new');
