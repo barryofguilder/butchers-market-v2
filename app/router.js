@@ -39,7 +39,6 @@ Router.map(function () {
   this.route('contact');
   this.route('deli');
   this.route('meat');
-  this.route('menu');
 
   this.route('down');
 
