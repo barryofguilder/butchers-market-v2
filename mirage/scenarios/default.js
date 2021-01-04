@@ -4,6 +4,7 @@ export default function (server) {
   createDeliItems(server);
   createHours(server);
   createMeatBundles(server);
+  createMenu(server);
   createPackageBundles(server);
   createReviews(server);
   createSpecials(server);
@@ -233,6 +234,13 @@ function createMeatBundles(server) {
       '2 1/2 lb. Sliced Slab Bacon',
       '10lb. Bone-in Chicken Breast',
     ],
+  });
+}
+
+function createMenu(server) {
+  server.create('menu', {
+    fileUrl: 'docs/bmmenu_20210104.pdf',
+    updatedAt: new Date(2021, 0, 4, 16, 6, 0),
   });
 }
 

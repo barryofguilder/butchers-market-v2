@@ -57,6 +57,9 @@ Router.map(function () {
     this.route('meat-bundles', function () {
       this.route('edit', { path: ':id/edit' });
     });
+    this.route('menu', function () {
+      this.route('edit', { path: ':id/edit' });
+    });
     this.route('package-bundles', function () {
       this.route('new');
       this.route('edit', { path: ':id/edit' });

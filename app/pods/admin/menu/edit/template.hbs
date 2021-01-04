@@ -1,0 +1,9 @@
+<Admin::Components::BackLink @route="admin.menu" @text="Menu PDF" />
+
+<Admin::Components::Title @title="Edit Menu PDF" />
+
+<Admin::Menu::Components::MenuForm
+  @menu={{this.model}}
+  @saved={{this.menuSaved}}
+  @cancelled={{this.menuCancelled}}
+/>

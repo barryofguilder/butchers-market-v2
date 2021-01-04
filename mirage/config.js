@@ -73,6 +73,8 @@ export default function () {
     return meatBundles.where(whereStatement);
   });
 
+  this.resource('menus', { except: ['create', 'delete'] });
+
   this.resource('package-bundles', { except: ['create', 'delete'] });
 
   this.get('/reviews');
@@ -117,6 +119,13 @@ export default function () {
 
   this.post(
     '/upload',
+    upload(function (db, request) {
+      return new Response(201, { 'Content-Type': 'text/plain' }, request.requestBody.file.url);
+    })
+  );
+
+  this.post(
+    '/upload/pdf',
     upload(function (db, request) {
       return new Response(201, { 'Content-Type': 'text/plain' }, request.requestBody.file.url);
     })

@@ -1,0 +1,61 @@
+<Admin::Components::AdminForm class="max-w-xl" @onSubmit={{perform this.saveMenu}} as |Form|>
+  {{#if this.errorMessage}}
+    <UiAlert data-test-id="server-error" @variant="danger">
+      {{this.errorMessage}}
+    </UiAlert>
+  {{/if}}
+
+  <p class="mb-8">
+    <strong>Note:</strong> Required fields are marked with an <Admin::Components::Required />
+  </p>
+
+  <Form.group data-test-id="file" @model={{this.changeset}} @property="file" as |Group|>
+    <Group.label>PDF File <Admin::Components::Required /></Group.label>
+    <div class="mt-2">
+      <FileUpload
+        @id={{Group.uniqueId}}
+        @name="file"
+        @accept="application/pdf"
+        @onfileadd={{this.uploadFile}}
+      >
+        {{! template-lint-disable link-href-attributes }}
+        <a
+          class="inline-block px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-none focus:shadow-outline"
+          tabindex="0"
+        >
+          Select PDF
+        </a>
+      </FileUpload>
+
+      {{#if this.fileErrorMessage}}
+        <span class="block mt-2 text-red-500">
+          {{this.fileErrorMessage}}
+        </span>
+      {{/if}}
+
+      <small
+        class="block mt-3 text-gray-700 {{if this.fileErrorMessage "" "sm:inline-block sm:mt-0 sm:ml-2"}}"
+      >
+        Only PDF are allowed.
+      </small>
+
+      {{#if this.hasFile}}
+        <div class="mt-4">
+          <iframe src={{this.fileUrl}} title="Menu PDF" height="600px" class="w-full"></iframe>
+        </div>
+      {{/if}}
+    </div>
+  </Form.group>
+
+  <div class="mt-8">
+    {{#if this.changeset.errors}}
+      <div class="mb-2 text-red-600">
+        Please fix the errors above and try again.
+      </div>
+    {{/if}}
+    <Form.submit @disabled={{this.saveDisabled}}>
+      Save
+    </Form.submit>
+    <Button class="ml-2" @variant="plain" @onClick={{@cancelled}}>Cancel</Button>
+  </div>
+</Admin::Components::AdminForm>

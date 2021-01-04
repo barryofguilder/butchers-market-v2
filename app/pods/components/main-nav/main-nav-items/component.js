@@ -1,10 +1,12 @@
 import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
+import { lastValue, restartableTask } from 'ember-concurrency-decorators';
 import { valueOrDefault } from 'butchers-market/utils/value-or-default';
 import config from 'butchers-market/config/environment';
 
 export default class MainNavItemsComponent extends Component {
   @service media;
+  @service store;
 
   get isMobile() {
     return !this.media.isLg && !this.media.isXl;
@@ -16,5 +18,21 @@ export default class MainNavItemsComponent extends Component {
 
   get itemClicked() {
     return valueOrDefault(this.args.itemClicked, () => {});
+  }
+
+  @lastValue('loadMenu')
+  menus;
+
+  get menuUrl() {
+    if (this.menus?.length > 0) {
+      return this.menus.firstObject?.fileUrlPath;
+    }
+
+    return null;
+  }
+
+  @restartableTask
+  *loadMenu() {
+    return yield this.store.findAll('menu');
   }
 }
