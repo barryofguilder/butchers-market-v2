@@ -238,10 +238,7 @@ function createMeatBundles(server) {
 }
 
 function createMenu(server) {
-  server.create('menu', {
-    fileUrl: 'docs/bmmenu_20210104.pdf',
-    updatedAt: new Date(2021, 0, 4, 16, 6, 0),
-  });
+  server.create('menu');
 }
 
 function createPackageBundles(server) {
