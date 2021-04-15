@@ -25,6 +25,8 @@ export default function () {
   // Allows us to access the Mirage server in the console using `window.server`.
   window.server = this;
 
+  this.passthrough('https://images1932-focus-opensocial.googleusercontent.com/**');
+
   //this.timing = 400;
   this.namespace = '/api';
 

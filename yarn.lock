@@ -9753,6 +9753,11 @@ inquirer@^7.3.3:
     strip-ansi "^6.0.0"
     through "^2.3.6"
 
+instafeed@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/instafeed/-/instafeed-1.4.0.tgz#1f7b248283d8ffbee59b82f2f45c29220b90cae1"
+  integrity sha512-+2Xubm+mPdvIpQMn+hxdryBT6lUtwUXodFPeWeHkqiY9qmNyctjMKgD95s075nGowtiKULmM99LcA4xIm0SV+Q==
+
 invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"

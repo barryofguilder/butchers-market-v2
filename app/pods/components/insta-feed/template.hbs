@@ -1,0 +1,9 @@
+<div class="overflow-x-auto flex no-wrap px-2">
+  {{#each this.photos as |photo|}}
+    <div class="flex-none mx-2">
+      <img class="w-64 h-64" src={{photo.url}} alt={{photo.alt}} loading="lazy" />
+    </div>
+  {{/each}}
+  {{! This ensures there's proper padding on the right side of the area }}
+  <div class="flex-none w-2 h-1 bg-transparent"></div>
+</div>

@@ -27,6 +27,14 @@
   </Container>
 </PromoSection>
 
+<section>
+  <HeaderTitle @title="Instagram Feed" />
+
+  <div class="mt-10">
+    <InstaFeed />
+  </div>
+</section>
+
 {{#if (gt @model.specials.length 0)}}
   <section>
     <HeaderTitle @title="Specials" />
