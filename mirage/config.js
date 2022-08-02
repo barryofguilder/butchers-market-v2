@@ -1,4 +1,5 @@
-import Response from 'ember-cli-mirage/response';
+import { createServer, Response } from 'miragejs';
+import { discoverEmberDataModels } from 'ember-cli-mirage';
 import { upload } from 'ember-file-upload/mirage';
 import { isAfter, isBefore } from 'date-fns';
 
@@ -21,7 +22,17 @@ const TOKEN =
 // Future Token
 // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTg5NzQyODQ2LCJleHAiOjI1OTIzMzQ4NDZ9.YBJOag4Kyeq4yBBdAPXYttZMxqX9J_N-L5f5OrWX95w';
 
-export default function () {
+export default function (config) {
+  let finalConfig = {
+    ...config,
+    models: { ...discoverEmberDataModels(), ...config.models },
+    routes,
+  };
+
+  return createServer(finalConfig);
+}
+
+function routes() {
   // Allows us to access the Mirage server in the console using `window.server`.
   window.server = this;
 

@@ -1,9 +1,9 @@
-import { Factory } from 'ember-cli-mirage';
+import { Factory } from 'miragejs';
 import faker from 'faker';
 
 export default Factory.extend({
   title() {
-    const wordCount = faker.random.number({ min: 2, max: 4 });
+    const wordCount = faker.datatype.number({ min: 2, max: 4 });
     return faker.lorem.words(wordCount);
   },
 
@@ -12,13 +12,13 @@ export default Factory.extend({
   },
 
   featured() {
-    return faker.random.boolean();
+    return faker.datatype.boolean();
   },
 
   isHidden: false,
 
   orderEnabled() {
-    return faker.random.boolean();
+    return faker.datatype.boolean();
   },
 
   items() {
