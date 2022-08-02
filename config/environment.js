@@ -37,8 +37,8 @@ module.exports = function (environment) {
       },
     ],
 
-    gReCaptcha: {
-      siteKey: '6LcrHAITAAAAACvTiT4qS4dvbwL7wgGRXhJtsKim',
+    'ember-g-recaptcha': {
+      sitekey: '6LcrHAITAAAAACvTiT4qS4dvbwL7wgGRXhJtsKim',
     },
 
     api: '/',
