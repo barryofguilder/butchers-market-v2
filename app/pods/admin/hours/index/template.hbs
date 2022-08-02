@@ -3,7 +3,7 @@
 <Admin::Components::Title @title="Store Hours" />
 
 <div class="mt-8">
-  <Button @href={{href-to "admin.hours.new"}} @icon="plus" @size="medium" @variant="plain">
+  <Button @route="admin.hours.new" @icon="plus" @size="medium" @variant="plain">
     New
   </Button>
 </div>
@@ -51,7 +51,8 @@
         <Row.td>
           <div class="flex justify-end">
             <Button
-              @href={{href-to "admin.hours.edit" hours.id}}
+              @route="admin.hours.edit"
+              @model={{hours.id}}
               @iconOnly={{true}}
               @icon="pencil-alt"
               @variant="secondary"
