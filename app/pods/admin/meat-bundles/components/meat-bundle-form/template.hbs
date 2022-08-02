@@ -16,12 +16,12 @@
       Title
       <Admin::Components::Required />
     </Group.label>
-    <Group.textbox @value={{this.changeset.title}} />
+    <Group.textbox @value={{this.changeset.title}} @onChange={{set this "changeset.title"}} />
   </Form.group>
 
   <Form.group data-test-id="price" @model={{this.changeset}} @property="price" as |Group|>
     <Group.label>Price <Admin::Components::Required /></Group.label>
-    <Group.textbox @value={{this.changeset.price}} />
+    <Group.textbox @value={{this.changeset.price}} @onChange={{set this "changeset.price"}} />
   </Form.group>
 
   <Form.group data-test-id="featured" @model={{this.changeset}} @property="featured">
@@ -76,7 +76,7 @@
       <div data-test-id="item-{{index}}" class="{{if (gt index 0) 'pt-1'}} pb-1">
         <div class="flex items-center">
           <span class="handle text-gray-600" draggable="true">☰</span>
-          <UiTextbox class="ml-2" @value={{item}} @keyUp={{fn this.itemChanged index}} />
+          <UiTextbox class="ml-2" @value={{item}} @onChange={{fn this.itemChanged index}} />
           <Button
             class="mr-1"
             @iconOnly={{true}}

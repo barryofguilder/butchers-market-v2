@@ -13,15 +13,15 @@
 
   <Form.group data-test-id="title" @model={{this.changeset}} @property="title" as |Group|>
     <Group.label>Title <Admin::Components::Required /></Group.label>
-    <Group.textbox @value={{this.changeset.title}} />
+    <Group.textbox @value={{this.changeset.title}} @onChange={{set this "changeset.title"}} />
   </Form.group>
 
   <Form.group data-test-id="link" @model={{this.changeset}} @property="link" as |Group|>
     <Group.label>Link</Group.label>
-    <Group.textbox @value={{this.changeset.link}} />
+    <Group.textbox @value={{this.changeset.link}} @onChange={{set this "changeset.link"}} />
     <small class="block mt-3 text-gray-700">
       If left blank, clicking on the special image will take you to
-      {{(order-online-url)}}.
+      {{order-online-url}}.
     </small>
   </Form.group>
 
@@ -32,7 +32,11 @@
     as |Group|
   >
     <Group.label>Display Order</Group.label>
-    <Group.textbox @value={{this.changeset.displayOrder}} type="number" />
+    <Group.textbox
+      type="number"
+      @value={{this.changeset.displayOrder}}
+      @onChange={{set this "changeset.displayOrder"}}
+    />
     <small class="block mt-3 text-gray-700">
       The number used to determine what order the specials will display on the main page. This is
       only temporary until I have more time to do it in a drag/drop way.
@@ -109,7 +113,10 @@
       Image Alt Text
       <Admin::Components::Required />
     </Group.label>
-    <Group.textbox @value={{this.changeset.imageAltText}} />
+    <Group.textbox
+      @value={{this.changeset.imageAltText}}
+      @onChange={{set this "changeset.imageAltText"}}
+    />
     <small class="block mt-3 text-gray-700">
       The text that people will see when there is no image or the user is blind. Just needs to
       describe the special.
