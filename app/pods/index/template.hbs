@@ -45,7 +45,7 @@
       <div
         class="mt-10 text-center sm:w-1/2 sm:flex sm:flex-col sm:items-center lg:w-full lg:flex-row lg:text-left"
       >
-        <Button @href={{href-to "meat" (query-params packages=true)}}>
+        <Button @route="meat" @query={{hash packages=true}}>
           View All Packages
         </Button>
         <p class="mt-4 lg:ml-4 lg:mt-0 sm:text-lg">

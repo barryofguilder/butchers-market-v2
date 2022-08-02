@@ -1,5 +1,15 @@
-{{#if @href}}
-  <a data-test-id={{this.data-test-id}} href={{@href}} class={{this.buttonClasses}} ...attributes>
+{{#if this.renderAsLink}}
+  <UiBaseLink
+    data-test-id={{this.data-test-id}}
+    class={{this.buttonClasses}}
+    @download={{this.download}}
+    @href={{@href}}
+    @route={{@route}}
+    @model={{@model}}
+    @models={{@models}}
+    @query={{@query}}
+    ...attributes
+  >
     {{#if @icon}}
       <UiIcon
         data-test-id="button-icon"
@@ -10,7 +20,7 @@
     {{/if}}
 
     {{yield}}
-  </a>
+  </UiBaseLink>
 {{else}}
   <button
     data-test-id={{this.data-test-id}}

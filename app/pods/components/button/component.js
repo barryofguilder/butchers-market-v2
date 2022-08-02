@@ -1,5 +1,6 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
+import { isPresent } from '@ember/utils';
 import { valueOrDefault } from 'butchers-market/utils/value-or-default';
 
 export default class ButtonComponent extends Component {
@@ -18,7 +19,22 @@ export default class ButtonComponent extends Component {
   }
 
   get size() {
+    return valueOrDefault(this.args.disabled, false);
+  }
+
+  get size() {
     return valueOrDefault(this.args.size, 'large');
+  }
+
+  get renderAsLink() {
+    if (this.disabled) {
+      // If the button is disabled, don't render as a link. This is because there's no good way to
+      // disable an anchor tag (and you really shouldn't), so this will force it to render as a
+      // button.
+      return false;
+    }
+
+    return isPresent(this.args.href) || isPresent(this.args.route);
   }
 
   get iconOnlyClasses() {

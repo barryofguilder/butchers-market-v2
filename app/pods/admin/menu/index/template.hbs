@@ -15,7 +15,8 @@
         <Row.td>
           <div class="flex justify-end">
             <Button
-              @href={{href-to "admin.menu.edit" menu.id}}
+              @route="admin.menu.edit"
+              @model={{menu.id}}
               @iconOnly={{true}}
               @icon="pencil-alt"
               @variant="secondary"

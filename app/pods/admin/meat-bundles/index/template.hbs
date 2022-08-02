@@ -3,11 +3,11 @@
 <Admin::Components::Title @title="Meat Bundles" />
 
 {{! Hiding the new button until it's needed }}
-{{!-- <div class="mt-8">
-  <Button @href={{href-to "admin.meat-bundles.new"}} @icon="plus" @size="medium" @variant="plain">
+{{! <div class="mt-8">
+  <Button @route="admin.meat-bundles.new" @icon="plus" @size="medium" @variant="plain">
     New
   </Button>
-</div> --}}
+</div> }}
 
 <Admin::Components::UiTable class="mt-8" as |Table|>
   <Table.head as |Thead|>
@@ -48,7 +48,8 @@
         <Row.td>
           <div class="flex justify-end">
             <Button
-              @href={{href-to "admin.meat-bundles.edit" bundle.id}}
+              @route="admin.meat-bundles.edit"
+              @model={{bundle.id}}
               @iconOnly={{true}}
               @icon="pencil-alt"
               @variant="secondary"
