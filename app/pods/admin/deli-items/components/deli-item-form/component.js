@@ -5,7 +5,7 @@ import { inject as service } from '@ember/service';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 import DeliItemValidations from 'butchers-market/validations/deli-item';
-import { dropTask, enqueueTask } from 'ember-concurrency-decorators';
+import { dropTask, enqueueTask } from 'ember-concurrency';
 import baseUrl from 'butchers-market/utils/base-url';
 
 export default class DeliItemFormComponent extends Component {

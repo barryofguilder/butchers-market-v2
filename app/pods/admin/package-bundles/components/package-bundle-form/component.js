@@ -4,7 +4,7 @@ import { action } from '@ember/object';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 import PackageBundleValidations from 'butchers-market/validations/package-bundle';
-import { dropTask } from 'ember-concurrency-decorators';
+import { dropTask } from 'ember-concurrency';
 
 export default class PackageBundleFormComponent extends Component {
   changeset;
