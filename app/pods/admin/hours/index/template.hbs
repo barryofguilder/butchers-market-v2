@@ -15,7 +15,7 @@
     <Thead.th>Active Start Date</Thead.th>
     <Thead.th>Active End Date</Thead.th>
     <Thead.th>Lines</Thead.th>
-    <Thead.th></Thead.th>
+    <Thead.th />
   </Table.head>
   <Table.body as |Tbody|>
     {{#each @model as |hours|}}
@@ -75,7 +75,6 @@
     {{/each}}
   </Table.body>
 </Admin::Components::UiTable>
-
 
 {{#if this.hoursToDelete}}
   <Admin::Hours::Components::DeleteHoursForm

@@ -5,11 +5,7 @@
 >
   <div class="py-16 text-white text-shadow">
     {{yield
-      (
-        hash
-          title=(component "promo-section/title")
-          subtitle=(component "promo-section/subtitle")
-      )
+      (hash title=(component "promo-section/title") subtitle=(component "promo-section/subtitle"))
     }}
   </div>
 </section>

@@ -2,7 +2,8 @@
   {{#each (sort-by "displayOrder" @products) as |product|}}
     <div class="mt-12 px-4 w-full sm:w-1/2 lg:w-1/3">
       <h5 class="text-red-700 text-xl sm:text-2xl font-black uppercase tracking-wide">
-        {{product.title}} {{product.price}}
+        {{product.title}}
+        {{product.price}}
       </h5>
       <ul class="pl-8 list-disc sm:text-lg">
         {{#each product.items as |item|}}

@@ -15,7 +15,7 @@
     <Thead.th>Flyer Download Link</Thead.th>
     <Thead.th>Prices</Thead.th>
     <Thead.th>Items</Thead.th>
-    <Thead.th></Thead.th>
+    <Thead.th />
   </Table.head>
   <Table.body as |Tbody|>
     {{#each this.sortedBundles as |bundle|}}
@@ -31,7 +31,8 @@
         </Row.td>
         <Row.td>
           {{#if bundle.items}}
-            {{bundle.items.length}} Items
+            {{bundle.items.length}}
+            Items
           {{else}}
             0 Items
           {{/if}}

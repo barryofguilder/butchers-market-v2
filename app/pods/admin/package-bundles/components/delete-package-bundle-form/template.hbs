@@ -2,10 +2,7 @@
   <Modal.header>
     Delete Package Bundle?
   </Modal.header>
-  <Admin::Components::AdminForm
-    class="max-w-xl"
-    @onSubmit={{perform this.deleteBundle}} as |Form|
-  >
+  <Admin::Components::AdminForm class="max-w-xl" @onSubmit={{perform this.deleteBundle}} as |Form|>
     <Modal.body>
       {{#if this.errorMessage}}
         <UiAlert data-test-id="server-error" @variant="danger">
@@ -38,7 +35,8 @@
 
       <Form.group data-test-id="items" as |Group|>
         <Group.label>Items</Group.label>
-        {{@bundle.items.length}} Items
+        {{@bundle.items.length}}
+        Items
       </Form.group>
     </Modal.body>
     <Modal.footer>

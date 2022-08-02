@@ -1,13 +1,12 @@
 {{! template-lint-disable attribute-indentation}}
 <div
   data-test-id="alert"
-  class="
-    mb-4 p-4 rounded
-    {{if (eq this.variant "primary") "bg-blue-200 text-blue-900"}}
-    {{if (eq this.variant "success") "bg-green-200 text-green-900"}}
-    {{if (eq this.variant "warning") "bg-yellow-200 text-yellow-900"}}
-    {{if (eq this.variant "danger") "bg-red-200 text-red-900"}}
-  "
+  class="mb-4 p-4 rounded
+    {{if (eq this.variant 'primary') 'bg-blue-200 text-blue-900'}}
+    {{if (eq this.variant 'success') 'bg-green-200 text-green-900'}}
+    {{if (eq this.variant 'warning') 'bg-yellow-200 text-yellow-900'}}
+    {{if (eq this.variant 'danger') 'bg-red-200 text-red-900'}}
+    "
   role="alert"
   ...attributes
 >

@@ -9,13 +9,10 @@
 </div>
 
 <Admin::Components::UiTable class="mt-8" as |Table|>
-  <Table.head
-    @currentSort={{this.currentSort}}
-    @onColumnClicked={{this.sortDeliItems}} as |Thead|
-  >
+  <Table.head @currentSort={{this.currentSort}} @onColumnClicked={{this.sortDeliItems}} as |Thead|>
     <Thead.th @name="title">Title</Thead.th>
     <Thead.th @name="ingredients">Ingredients</Thead.th>
-    <Thead.th></Thead.th>
+    <Thead.th />
   </Table.head>
   <Table.body as |Tbody|>
     {{#each this.sortedDeliItems as |item|}}

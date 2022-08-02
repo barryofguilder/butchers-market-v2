@@ -6,57 +6,57 @@
   {{/if}}
 
   <p class="mb-8">
-    <strong>Note:</strong> Required fields are marked with an <Admin::Components::Required />
+    <strong>Note:</strong>
+    Required fields are marked with an
+    <Admin::Components::Required />
   </p>
 
   <Form.group data-test-id="title" @model={{this.changeset}} @property="title" as |Group|>
     <Group.label>
-      Title <Admin::Components::Required />
+      Title
+      <Admin::Components::Required />
     </Group.label>
     <Group.textbox @value={{this.changeset.title}} />
   </Form.group>
 
-  <Form.group
-    data-test-id="price"
-    @model={{this.changeset}}
-    @property="price" as |Group|
-  >
+  <Form.group data-test-id="price" @model={{this.changeset}} @property="price" as |Group|>
     <Group.label>Price <Admin::Components::Required /></Group.label>
     <Group.textbox @value={{this.changeset.price}} />
   </Form.group>
 
-  <Form.group
-    data-test-id="featured"
-    @model={{this.changeset}}
-    @property="featured"
-  >
+  <Form.group data-test-id="featured" @model={{this.changeset}} @property="featured">
     <label>
-      <input type="checkbox" checked={{this.changeset.featured}} {{on "change" this.updateFeatured}}>
+      <input
+        type="checkbox"
+        checked={{this.changeset.featured}}
+        {{on "change" this.updateFeatured}}
+      />
       <span class="ml-2">Is featured on home page</span>
     </label>
   </Form.group>
 
-  <Form.group
-    data-test-id="hidden"
-    @model={{this.changeset}}
-    @property="isHidden"
-  >
+  <Form.group data-test-id="hidden" @model={{this.changeset}} @property="isHidden">
     <label>
-      <input type="checkbox" checked={{this.changeset.isHidden}} {{on "change" this.updateHidden}}>
+      <input
+        type="checkbox"
+        checked={{this.changeset.isHidden}}
+        {{on "change" this.updateHidden}}
+      />
       <span class="ml-2">Is hidden</span>
     </label>
     <small class="block mt-3 text-gray-700">
-      When checked, this means it won't show on your site. Useful when a pandemic is occuring and you run out of meat.
+      When checked, this means it won't show on your site. Useful when a pandemic is occuring and
+      you run out of meat.
     </small>
   </Form.group>
 
-  <Form.group
-    data-test-id="order"
-    @model={{this.changeset}}
-    @property="orderEnabled"
-  >
+  <Form.group data-test-id="order" @model={{this.changeset}} @property="orderEnabled">
     <label>
-      <input type="checkbox" checked={{this.changeset.orderEnabled}} {{on "change" this.updateOrderEnabled}}>
+      <input
+        type="checkbox"
+        checked={{this.changeset.orderEnabled}}
+        {{on "change" this.updateOrderEnabled}}
+      />
       <span class="ml-2">Can order online</span>
     </label>
     <small class="block mt-3 text-gray-700">
@@ -70,9 +70,10 @@
     <DragSortList
       @items={{this.items}}
       @handle=".handle"
-      @dragEndAction={{this.reorderItems}} as |item index|
+      @dragEndAction={{this.reorderItems}}
+      as |item index|
     >
-      <div data-test-id="item-{{index}}" class="{{if (gt index 0) "pt-1"}} pb-1">
+      <div data-test-id="item-{{index}}" class="{{if (gt index 0) 'pt-1'}} pb-1">
         <div class="flex items-center">
           <span class="handle text-gray-600" draggable="true">☰</span>
           <UiTextbox class="ml-2" @value={{item}} @keyUp={{fn this.itemChanged index}} />
@@ -89,12 +90,7 @@
     </DragSortList>
 
     <div class="mt-2">
-      <Button
-        @icon="plus"
-        @size="medium"
-        @variant="plain"
-        @onClick={{this.addItem}}
-      >
+      <Button @icon="plus" @size="medium" @variant="plain" @onClick={{this.addItem}}>
         New Item
       </Button>
     </div>

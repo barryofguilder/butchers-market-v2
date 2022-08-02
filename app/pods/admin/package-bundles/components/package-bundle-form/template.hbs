@@ -6,12 +6,15 @@
   {{/if}}
 
   <p class="mb-8">
-    <strong>Note:</strong> Required fields are marked with an <Admin::Components::Required />
+    <strong>Note:</strong>
+    Required fields are marked with an
+    <Admin::Components::Required />
   </p>
 
   <Form.group data-test-id="title" @model={{this.changeset}} @property="title" as |Group|>
     <Group.label>
-      Title <Admin::Components::Required />
+      Title
+      <Admin::Components::Required />
     </Group.label>
     <Group.textbox @value={{this.changeset.title}} />
   </Form.group>
@@ -19,7 +22,8 @@
   <Form.group
     data-test-id="flyer-download-link"
     @model={{this.changeset}}
-    @property="flyerDownloadLink" as |Group|
+    @property="flyerDownloadLink"
+    as |Group|
   >
     <Group.label>Flyer Download Link</Group.label>
     <Group.textbox @value={{this.changeset.flyerDownloadLink}} />
@@ -31,9 +35,10 @@
     <DragSortList
       @items={{this.prices}}
       @handle=".handle"
-      @dragEndAction={{this.reorderPrices}} as |price index|
+      @dragEndAction={{this.reorderPrices}}
+      as |price index|
     >
-      <div data-test-id="price-{{index}}" class="{{if (gt index 0) "pt-1"}} pb-1">
+      <div data-test-id="price-{{index}}" class="{{if (gt index 0) 'pt-1'}} pb-1">
         <div class="flex items-center">
           <span class="handle text-gray-600" draggable="true">☰</span>
           <UiTextbox class="ml-2" @value={{price}} @keyUp={{fn this.priceChanged index}} />
@@ -50,12 +55,7 @@
     </DragSortList>
 
     <div class="mt-2">
-      <Button
-        @icon="plus"
-        @size="medium"
-        @variant="plain"
-        @onClick={{this.addPrice}}
-      >
+      <Button @icon="plus" @size="medium" @variant="plain" @onClick={{this.addPrice}}>
         New Price
       </Button>
     </div>
@@ -67,9 +67,10 @@
     <DragSortList
       @items={{this.items}}
       @handle=".handle"
-      @dragEndAction={{this.reorderItems}} as |item index|
+      @dragEndAction={{this.reorderItems}}
+      as |item index|
     >
-      <div data-test-id="item-{{index}}" class="{{if (gt index 0) "pt-1"}} pb-1">
+      <div data-test-id="item-{{index}}" class="{{if (gt index 0) 'pt-1'}} pb-1">
         <div class="flex items-center">
           <span class="handle text-gray-600" draggable="true">☰</span>
           <UiTextbox class="ml-2" @value={{item}} @keyUp={{fn this.itemChanged index}} />
@@ -86,12 +87,7 @@
     </DragSortList>
 
     <div class="mt-2">
-      <Button
-        @icon="plus"
-        @size="medium"
-        @variant="plain"
-        @onClick={{this.addItem}}
-      >
+      <Button @icon="plus" @size="medium" @variant="plain" @onClick={{this.addItem}}>
         New Item
       </Button>
     </div>

@@ -1,9 +1,12 @@
 <thead data-test-id="table-head" ...attributes>
   <tr data-test-id="table-head-row" class="border-b">
     {{yield
-      (
-        hash
-          th=(component "admin/components/ui-table/thead/th" onColumnClicked=@onColumnClicked currentSort=@currentSort)
+      (hash
+        th=(component
+          "admin/components/ui-table/thead/th"
+          onColumnClicked=@onColumnClicked
+          currentSort=@currentSort
+        )
       )
     }}
   </tr>

@@ -6,7 +6,9 @@
   {{/if}}
 
   <p class="mb-8">
-    <strong>Note:</strong> Required fields are marked with an <Admin::Components::Required />
+    <strong>Note:</strong>
+    Required fields are marked with an
+    <Admin::Components::Required />
   </p>
 
   <Form.group data-test-id="file" @model={{this.changeset}} @property="file" as |Group|>
@@ -34,7 +36,8 @@
       {{/if}}
 
       <small
-        class="block mt-3 text-gray-700 {{if this.fileErrorMessage "" "sm:inline-block sm:mt-0 sm:ml-2"}}"
+        class="block mt-3 text-gray-700
+          {{if this.fileErrorMessage '' 'sm:inline-block sm:mt-0 sm:ml-2'}}"
       >
         Only PDF are allowed.
       </small>
