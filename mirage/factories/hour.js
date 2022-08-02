@@ -1,4 +1,4 @@
-import { Factory } from 'ember-cli-mirage';
+import { Factory } from 'miragejs';
 import faker from 'faker';
 import addWeeks from 'date-fns/addWeeks';
 
@@ -24,7 +24,7 @@ export default Factory.extend({
   },
 
   label() {
-    const wordCount = faker.random.number({ min: 1, max: 6 });
+    const wordCount = faker.datatype.number({ min: 1, max: 6 });
     return faker.lorem.words(wordCount);
   },
 
