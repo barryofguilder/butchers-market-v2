@@ -1,14 +1,17 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 export default class AdminMenuEditController extends Controller {
+  @service router;
+
   @action
   menuSaved() {
-    this.transitionToRoute('admin.menu');
+    this.router.transitionTo('admin.menu');
   }
 
   @action
   menuCancelled() {
-    this.transitionToRoute('admin.menu');
+    this.router.transitionTo('admin.menu');
   }
 }

@@ -3,15 +3,15 @@ import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 
 export default class AdminHoursEditController extends Controller {
-  @service store;
+  @service router;
 
   @action
   hoursSaved() {
-    this.transitionToRoute('admin.hours');
+    this.router.transitionTo('admin.hours');
   }
 
   @action
   hoursCancelled() {
-    this.transitionToRoute('admin.hours');
+    this.router.transitionTo('admin.hours');
   }
 }

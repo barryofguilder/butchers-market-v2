@@ -1,7 +1,10 @@
 import Route from '@ember/routing/route';
 import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 export default class AdminHoursNewRoute extends Route {
+  @service store;
+
   model() {
     const now = new Date();
     const activeStartDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);

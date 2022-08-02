@@ -3,15 +3,15 @@ import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 
 export default class AdminSpecialsNewController extends Controller {
-  @service store;
+  @service router;
 
   @action
   specialSaved() {
-    this.transitionToRoute('admin.specials');
+    this.router.transitionTo('admin.specials');
   }
 
   @action
   specialCancelled() {
-    this.transitionToRoute('admin.specials');
+    this.router.transitionTo('admin.specials');
   }
 }
