@@ -1,14 +1,17 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 export default class AdminDeliItemsNewController extends Controller {
+  @service router;
+
   @action
   deliItemSaved() {
-    this.transitionToRoute('admin.deli-items');
+    this.router.transitionTo('admin.deli-items');
   }
 
   @action
   deliItemCancelled() {
-    this.transitionToRoute('admin.deli-items');
+    this.router.transitionTo('admin.deli-items');
   }
 }

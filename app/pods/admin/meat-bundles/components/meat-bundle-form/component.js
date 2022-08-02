@@ -79,8 +79,8 @@ export default class MeatBundleFormComponent extends Component {
   }
 
   @action
-  itemChanged(index, event) {
-    this.items[index] = event.target.value;
+  itemChanged(index, value) {
+    this.items[index] = value;
   }
 
   @action
