@@ -6,7 +6,9 @@
   {{/if}}
 
   <p class="mb-8">
-    <strong>Note:</strong> Required fields are marked with an <Admin::Components::Required />
+    <strong>Note:</strong>
+    Required fields are marked with an
+    <Admin::Components::Required />
   </p>
 
   <Form.group data-test-id="title" @model={{this.changeset}} @property="title" as |Group|>
@@ -18,16 +20,22 @@
     <Group.label>Link</Group.label>
     <Group.textbox @value={{this.changeset.link}} />
     <small class="block mt-3 text-gray-700">
-      If left blank, clicking on the special image will take you to {{order-online-url}}.
+      If left blank, clicking on the special image will take you to
+      {{order-online-url}}.
     </small>
   </Form.group>
 
-  <Form.group data-test-id="display-order" @model={{this.changeset}} @property="displayOrder" as |Group|>
+  <Form.group
+    data-test-id="display-order"
+    @model={{this.changeset}}
+    @property="displayOrder"
+    as |Group|
+  >
     <Group.label>Display Order</Group.label>
     <Group.textbox @value={{this.changeset.displayOrder}} type="number" />
     <small class="block mt-3 text-gray-700">
-      The number used to determine what order the specials will display on the main page. This is only
-      temporary until I have more time to do it in a drag/drop way.
+      The number used to determine what order the specials will display on the main page. This is
+      only temporary until I have more time to do it in a drag/drop way.
     </small>
   </Form.group>
 
@@ -66,7 +74,8 @@
       {{/if}}
 
       <small
-        class="block mt-3 text-gray-700 {{if this.fileErrorMessage "" "sm:inline-block sm:mt-0 sm:ml-2"}}"
+        class="block mt-3 text-gray-700
+          {{if this.fileErrorMessage '' 'sm:inline-block sm:mt-0 sm:ml-2'}}"
       >
         Only JPG, JPEG, PNG, and GIF files are allowed.
       </small>
@@ -84,25 +93,36 @@
 
       {{#if this.hasImage}}
         <div class="mt-4">
-          <img src={{this.imageUrl}} alt="Event" class="w-full block">
+          <img src={{this.imageUrl}} alt="Event" class="w-full block" />
         </div>
       {{/if}}
     </div>
   </Form.group>
 
-  <Form.group data-test-id="image-alt-text" @model={{this.changeset}} @property="imageAltText" as |Group|>
+  <Form.group
+    data-test-id="image-alt-text"
+    @model={{this.changeset}}
+    @property="imageAltText"
+    as |Group|
+  >
     <Group.label>
-      Image Alt Text <Admin::Components::Required />
+      Image Alt Text
+      <Admin::Components::Required />
     </Group.label>
     <Group.textbox @value={{this.changeset.imageAltText}} />
     <small class="block mt-3 text-gray-700">
-      The text that people will see when there is no image or the user is blind. Just needs to describe the special.
+      The text that people will see when there is no image or the user is blind. Just needs to
+      describe the special.
     </small>
   </Form.group>
 
   <Form.group data-test-id="active-during-range">
     <label>
-      <input type="checkbox" checked={{this.activeDuringRange}} {{on "change" this.toggleActiveDuringRange}}>
+      <input
+        type="checkbox"
+        checked={{this.activeDuringRange}}
+        {{on "change" this.toggleActiveDuringRange}}
+      />
       <span class="ml-2">Active during a certain date range?</span>
     </label>
     <small class="block mt-3 text-gray-700">
@@ -114,7 +134,8 @@
     <Form.group
       data-test-id="start-date"
       @model={{this.changeset}}
-      @property="activeStartDate" as |Group|
+      @property="activeStartDate"
+      as |Group|
     >
       <Group.label>Active Start Date</Group.label>
       <Group.datepicker
@@ -132,7 +153,8 @@
     <Form.group
       data-test-id="end-date"
       @model={{this.changeset}}
-      @property="activeEndDate" as |Group|
+      @property="activeEndDate"
+      as |Group|
     >
       <Group.label>Active End Date</Group.label>
       <Group.datepicker
@@ -150,18 +172,27 @@
 
   <Form.group data-test-id="sold-out">
     <label>
-      <input type="checkbox" checked={{this.changeset.isSoldOut}} {{on "change" this.updateIsSoldOut}}>
+      <input
+        type="checkbox"
+        checked={{this.changeset.isSoldOut}}
+        {{on "change" this.updateIsSoldOut}}
+      />
       <span class="ml-2">Is Sold Out?</span>
     </label>
   </Form.group>
 
   <Form.group data-test-id="hidden">
     <label>
-      <input type="checkbox" checked={{this.changeset.isHidden}} {{on "change" this.updateIsHidden}}>
+      <input
+        type="checkbox"
+        checked={{this.changeset.isHidden}}
+        {{on "change" this.updateIsHidden}}
+      />
       <span class="ml-2">Is Hidden?</span>
     </label>
     <small class="block mt-3 text-gray-700">
-      When checked, this means that the special will be hidden even if there is an active date range set.
+      When checked, this means that the special will be hidden even if there is an active date range
+      set.
     </small>
   </Form.group>
 

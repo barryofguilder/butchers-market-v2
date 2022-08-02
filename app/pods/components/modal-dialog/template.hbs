@@ -1,8 +1,8 @@
 {{!
   TODO: Adding template lint ignore due to this mainly being copied from `ember-modal-dialog`.
 }}
-{{!-- template-lint-disable no-curly-component-invocation --}}
-{{!-- template-lint-disable no-implicit-this --}}
+{{! template-lint-disable no-curly-component-invocation }}
+{{! template-lint-disable no-implicit-this }}
 {{#ember-wormhole to=destinationElementId}}
   <div class={{this.wrapperClasses}} data-test-id={{this.data-test-id}} ...attributes>
     <div class={{this.overlayClasses}} tabindex="-1" data-emd-overlay>
@@ -13,11 +13,10 @@
         <div class="modal-dialog">
           <div class="modal-content">
             {{yield
-              (
-                hash
-                  header=(component "modal-dialog/header")
-                  body=(component "modal-dialog/body")
-                  footer=(component "modal-dialog/footer")
+              (hash
+                header=(component "modal-dialog/header")
+                body=(component "modal-dialog/body")
+                footer=(component "modal-dialog/footer")
               )
             }}
           </div>

@@ -17,7 +17,7 @@
     <Thead.th>Items</Thead.th>
     <Thead.th>Is Featured?</Thead.th>
     <Thead.th>Is Hidden?</Thead.th>
-    <Thead.th></Thead.th>
+    <Thead.th />
   </Table.head>
   <Table.body as |Tbody|>
     {{#each (sort-by "displayOrder" this.model) as |bundle|}}
@@ -27,14 +27,17 @@
         <Row.td>{{bundle.price}}</Row.td>
         <Row.td>
           {{#if bundle.items}}
-            {{bundle.items.length}} Items
+            {{bundle.items.length}}
+            Items
           {{else}}
             0 Items
           {{/if}}
         </Row.td>
         <Row.td>
           {{#if bundle.featured}}
-            <span class="inline-block px-2 bg-blue-200 text-blue-800 text-sm rounded">Featured</span>
+            <span
+              class="inline-block px-2 bg-blue-200 text-blue-800 text-sm rounded"
+            >Featured</span>
           {{/if}}
         </Row.td>
         <Row.td>

@@ -6,7 +6,9 @@
   {{/if}}
 
   <p class="mb-8">
-    <strong>Note:</strong> Required fields are marked with an <Admin::Components::Required />
+    <strong>Note:</strong>
+    Required fields are marked with an
+    <Admin::Components::Required />
   </p>
 
   <Form.group data-test-id="title" @model={{this.changeset}} @property="title" as |Group|>
@@ -14,7 +16,12 @@
     <Group.textbox @value={{this.changeset.title}} />
   </Form.group>
 
-  <Form.group data-test-id="ingredients" @model={{this.changeset}} @property="ingredients" as |Group|>
+  <Form.group
+    data-test-id="ingredients"
+    @model={{this.changeset}}
+    @property="ingredients"
+    as |Group|
+  >
     <Group.label>Ingredients</Group.label>
     <Group.textarea @value={{this.changeset.ingredients}} />
   </Form.group>
@@ -55,7 +62,8 @@
       {{/if}}
 
       <small
-        class="block mt-3 text-gray-700 {{if this.fileErrorMessage "" "sm:inline-block sm:mt-0 sm:ml-2"}}"
+        class="block mt-3 text-gray-700
+          {{if this.fileErrorMessage '' 'sm:inline-block sm:mt-0 sm:ml-2'}}"
       >
         Only JPG, JPEG, PNG, and GIF files are allowed.
       </small>
@@ -73,7 +81,7 @@
 
       {{#if this.hasImage}}
         <div class="mt-4">
-          <img src={{this.imageUrl}} alt="Deli item" class="w-full block">
+          <img src={{this.imageUrl}} alt="Deli item" class="w-full block" />
         </div>
       {{/if}}
     </div>

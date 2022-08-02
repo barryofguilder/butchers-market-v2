@@ -1,17 +1,11 @@
 <form class="m-0" {{on "submit" this.submit}} ...attributes>
   {{yield
-    (
-      hash
-        group=(component "admin/components/admin-form/group" readOnly=@readonly)
-        label=(component "admin/components/admin-form/label")
-        submit=(
-          component
-            "button"
-            data-test-id="submit-btn"
-            task=this.submitTask
-            type="submit"
-            variant="primary"
-        )
+    (hash
+      group=(component "admin/components/admin-form/group" readOnly=@readonly)
+      label=(component "admin/components/admin-form/label")
+      submit=(component
+        "button" data-test-id="submit-btn" task=this.submitTask type="submit" variant="primary"
+      )
     )
   }}
 </form>

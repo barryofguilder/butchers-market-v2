@@ -1,6 +1,10 @@
 <div ...attributes>
-  <h3 data-test-id="{{this.hourTypeTestId}}-hours-title" class="text-2xl tracking-wide uppercase font-black">
-    {{this.hourType}} Hours
+  <h3
+    data-test-id="{{this.hourTypeTestId}}-hours-title"
+    class="text-2xl tracking-wide uppercase font-black"
+  >
+    {{this.hourType}}
+    Hours
   </h3>
   <p data-test-id="{{this.hourTypeTestId}}-hours-line">{{@hours.line1}}</p>
   {{#if @hours.line2}}
