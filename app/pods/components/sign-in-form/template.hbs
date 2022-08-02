@@ -7,12 +7,21 @@
 
   <Form.group data-test-id="username" as |Group|>
     <Group.label>Username</Group.label>
-    <Group.textbox autocomplete="username" @value={{this.username}} />
+    <Group.textbox
+      autocomplete="username"
+      @value={{this.username}}
+      @onChange={{set this "username"}}
+    />
   </Form.group>
 
   <Form.group data-test-id="password" as |Group|>
     <Group.label>Password</Group.label>
-    <Group.textbox type="password" autocomplete="current-password" @value={{this.password}} />
+    <Group.textbox
+      type="password"
+      autocomplete="current-password"
+      @value={{this.password}}
+      @onChange={{set this "password"}}
+    />
   </Form.group>
 
   <div class="mt-8">

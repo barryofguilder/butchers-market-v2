@@ -22,15 +22,32 @@
   {{#unless this.feedbackSent}}
     <div>
       <label class="sr-only" for="name">Your Name</label>
-      <UiTextbox id="name" placeholder="Your Name" @value={{this.name}} />
+      <UiTextbox
+        id="name"
+        placeholder="Your Name"
+        @value={{this.name}}
+        @onChange={{set this "name"}}
+      />
     </div>
     <div class="mt-4">
       <label class="sr-only" for="email">Your E-mail</label>
-      <UiTextbox @type="email" id="email" placeholder="Your E-mail" @value={{this.email}} />
+      <UiTextbox
+        @type="email"
+        id="email"
+        placeholder="Your E-mail"
+        @value={{this.email}}
+        @onChange={{set this "email"}}
+      />
     </div>
     <div class="mt-4">
       <label class="sr-only" for="message">Your Message</label>
-      <UiTextarea id="message" placeholder="Your Message" rows="7" @value={{this.message}} />
+      <UiTextarea
+        id="message"
+        placeholder="Your Message"
+        rows="7"
+        @value={{this.message}}
+        @onChange={{set this "message"}}
+      />
     </div>
     {{#if this.showReCaptcha}}
       <div class="mt-4">

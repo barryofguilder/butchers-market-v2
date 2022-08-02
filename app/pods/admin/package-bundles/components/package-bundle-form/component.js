@@ -73,8 +73,8 @@ export default class PackageBundleFormComponent extends Component {
   }
 
   @action
-  priceChanged(index, event) {
-    this.prices[index] = event.target.value;
+  priceChanged(index, value) {
+    this.prices[index] = value;
   }
 
   @action
@@ -108,8 +108,8 @@ export default class PackageBundleFormComponent extends Component {
   }
 
   @action
-  itemChanged(index, event) {
-    this.items[index] = event.target.value;
+  itemChanged(index, value) {
+    this.items[index] = value;
   }
 
   @action

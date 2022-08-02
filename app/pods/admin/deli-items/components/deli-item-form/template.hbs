@@ -13,7 +13,7 @@
 
   <Form.group data-test-id="title" @model={{this.changeset}} @property="title" as |Group|>
     <Group.label>Title <Admin::Components::Required /></Group.label>
-    <Group.textbox @value={{this.changeset.title}} />
+    <Group.textbox @value={{this.changeset.title}} @onChange={{set this "changeset.title"}} />
   </Form.group>
 
   <Form.group
@@ -23,7 +23,10 @@
     as |Group|
   >
     <Group.label>Ingredients</Group.label>
-    <Group.textarea @value={{this.changeset.ingredients}} />
+    <Group.textarea
+      @value={{this.changeset.ingredients}}
+      @onChange={{set this "changeset.ingredients"}}
+    />
   </Form.group>
 
   <Form.group data-test-id="image" @model={{this.changeset}} @property="imageUrl" as |Group|>

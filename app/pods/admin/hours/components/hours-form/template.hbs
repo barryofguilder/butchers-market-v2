@@ -39,7 +39,7 @@
 
   <Form.group data-test-id="label" @model={{this.changeset}} @property="label" as |Group|>
     <Group.label>Label <Admin::Components::Required /></Group.label>
-    <Group.textbox @value={{this.changeset.label}} />
+    <Group.textbox @value={{this.changeset.label}} @onChange={{set this "changeset.label"}} />
   </Form.group>
 
   {{#unless this.changeset.default}}
@@ -84,17 +84,17 @@
 
   <Form.group data-test-id="line1" @model={{this.changeset}} @property="line1" as |Group|>
     <Group.label>Line 1 <Admin::Components::Required /></Group.label>
-    <Group.textbox @value={{this.changeset.line1}} />
+    <Group.textbox @value={{this.changeset.line1}} @onChange={{set this "changeset.line1"}} />
   </Form.group>
 
   <Form.group data-test-id="line2" @model={{this.changeset}} @property="line2" as |Group|>
     <Group.label>Line 2</Group.label>
-    <Group.textbox @value={{this.changeset.line2}} />
+    <Group.textbox @value={{this.changeset.line2}} @onChange={{set this "changeset.line2"}} />
   </Form.group>
 
   <Form.group data-test-id="line3" @model={{this.changeset}} @property="line3" as |Group|>
     <Group.label>Line 3</Group.label>
-    <Group.textbox @value={{this.changeset.line3}} />
+    <Group.textbox @value={{this.changeset.line3}} @onChange={{set this "changeset.line3"}} />
   </Form.group>
 
   <div class="mt-8">

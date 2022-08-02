@@ -1,9 +1,10 @@
-<Textarea
+<textarea
   data-test-id="textarea"
   id={{this.id}}
-  class={{this.inputClasses}}
+  class="styled-textbox {{if this.hasErrors 'has-errors'}}"
+  value={{@value}}
   readonly={{this.readonly}}
-  @value={{@value}}
-  @keyUp={{@keyUp}}
   ...attributes
-/>
+  {{on "input" this.handleInput}}
+>
+</textarea>
