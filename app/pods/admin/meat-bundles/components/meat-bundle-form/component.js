@@ -4,7 +4,7 @@ import { action } from '@ember/object';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 import MeatBundleValidations from 'butchers-market/validations/meat-bundle';
-import { dropTask } from 'ember-concurrency-decorators';
+import { dropTask } from 'ember-concurrency';
 
 export default class MeatBundleFormComponent extends Component {
   changeset;

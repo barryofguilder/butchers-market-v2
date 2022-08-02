@@ -5,7 +5,7 @@ import { inject as service } from '@ember/service';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 import MenuValidations from 'butchers-market/validations/menu';
-import { dropTask, enqueueTask } from 'ember-concurrency-decorators';
+import { dropTask, enqueueTask } from 'ember-concurrency';
 import baseUrl from 'butchers-market/utils/base-url';
 
 export default class MenuFormComponent extends Component {
