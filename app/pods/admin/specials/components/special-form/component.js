@@ -7,12 +7,14 @@ import lookupValidator from 'ember-changeset-validations';
 import SpecialValidations from 'butchers-market/validations/special';
 import { dropTask, enqueueTask } from 'ember-concurrency';
 import baseUrl from 'butchers-market/utils/base-url';
+import config from 'butchers-market/config/environment';
 
 export default class SpecialFormComponent extends Component {
   @service router;
   @service session;
 
   changeset;
+  orderOnlineUrl = config.orderOnlineUrl;
 
   @tracked activeDuringRange = false;
   @tracked tempImageUrl;
