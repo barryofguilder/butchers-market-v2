@@ -1,0 +1,11 @@
+<input
+  data-test-id="radio-input"
+  ...attributes
+  type="radio"
+  aria-checked={{this.isCheckedStr}}
+  checked={{this.isChecked}}
+  disabled={{@disabled}}
+  name={{@name}}
+  value={{@value}}
+  {{on "change" this.handleChange}}
+/>
