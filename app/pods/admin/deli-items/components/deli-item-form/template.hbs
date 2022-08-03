@@ -32,20 +32,16 @@
   <Form.group data-test-id="image" @model={{this.changeset}} @property="imageUrl" as |Group|>
     <Group.label>Image <Admin::Components::Required /></Group.label>
     <div class="mt-2">
-      <FileUpload
-        @id={{Group.uniqueId}}
-        @name="photos"
-        @accept="image/*"
-        @onfileadd={{this.uploadImage}}
-      >
-        {{! template-lint-disable link-href-attributes }}
-        <a
-          class="inline-block px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-none focus:ring"
-          tabindex="0"
-        >
-          Select Image
-        </a>
-      </FileUpload>
+      {{#let (file-queue name="photos" onFileAdded=this.uploadImage) as |queue|}}
+        <label for={{Group.uniqueId}}>
+          <span
+            class="inline-block px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-none focus:ring"
+          >
+            Select Image
+          </span>
+          <input type="file" id={{Group.uniqueId}} accept="image/*" hidden {{queue.selectFile}} />
+        </label>
+      {{/let}}
 
       {{#if this.hasImage}}
         <button
