@@ -1,7 +1,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  purge: [],
+  content: ['./app/**/*.{css,hbs,html,js}'],
   theme: {
     container: {
       center: true,
@@ -15,9 +15,6 @@ module.exports = {
         sans: ['"Source Sans Pro"', ...defaultTheme.fontFamily.sans],
       },
     },
-  },
-  variants: {
-    borderWidth: ['responsive', 'hover'],
   },
   plugins: [],
 };
