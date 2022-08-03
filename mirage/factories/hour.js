@@ -1,10 +1,10 @@
 import { Factory } from 'miragejs';
-import faker from 'faker';
+import { faker } from '@faker-js/faker';
 import addWeeks from 'date-fns/addWeeks';
 
 export default Factory.extend({
   type() {
-    return faker.random.arrayElement(['Cafe', 'Store']);
+    return faker.helpers.arrayElement(['Cafe', 'Store']);
   },
 
   default() {
