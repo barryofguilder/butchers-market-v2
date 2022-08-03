@@ -22,13 +22,13 @@
 
       <AnimatedContainer class="overflow-hidden">
         {{#animated-if this.showNavigation use=this.transition duration=300}}
-          <nav class="bg-white mt-8" id="main-navigation-items">
+          <nav class="mt-8" id="main-navigation-items" aria-label="mobile site navigation">
             <MainNav::MainNavItems @itemClicked={{this.toggleNavigation}} />
           </nav>
         {{/animated-if}}
       </AnimatedContainer>
     {{else}}
-      <nav class="flex justify-end h-20" id="main-navigation-items">
+      <nav class="flex justify-end h-20" id="main-navigation-items" aria-label="site navigation">
         <MainNav::MainNavItems />
       </nav>
     {{/if}}
