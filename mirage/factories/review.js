@@ -1,5 +1,5 @@
 import { Factory } from 'miragejs';
-import faker from 'faker';
+import { faker } from '@faker-js/faker';
 
 export default Factory.extend({
   reviewer() {
@@ -15,7 +15,7 @@ export default Factory.extend({
   },
 
   source() {
-    return faker.random.arrayElement(['Trip Advisor Contributor', 'Yelp Contributor']);
+    return faker.helpers.arrayElement(['Trip Advisor Contributor', 'Yelp Contributor']);
   },
 
   url() {
