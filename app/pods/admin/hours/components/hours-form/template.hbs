@@ -19,15 +19,20 @@
     {{#if @hours.isNew}}
       <div class="flex mt-2">
         <label class="flex items-center">
-          <RadioButton @radioId="type-store" @value="Store" @groupValue={{this.changeset.type}} />
+          <UiRadioInput
+            @name="type-store"
+            @value="Store"
+            @groupValue={{this.changeset.type}}
+            @onChange={{set this.changeset "type"}}
+          />
           <span class="ml-2">Store</span>
         </label>
         <label class="ml-4 flex items-center">
-          <RadioButton
-            @radioId="type-cafe"
-            @radioClass="form-check-input"
+          <UiRadioInput
+            @name="type-cafe"
             @value="Cafe"
             @groupValue={{this.changeset.type}}
+            @onChange={{set this.changeset "type"}}
           />
           <span class="ml-2">Cafe</span>
         </label>
