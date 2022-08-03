@@ -39,7 +39,7 @@ export default class ButtonComponent extends Component {
 
   get iconOnlyClasses() {
     const baseClasses =
-      'inline-block leading-tight text-center bg-transparent focus:shadow-outline focus:outline-none';
+      'inline-block leading-tight text-center bg-transparent focus:ring focus:outline-none';
     const sizeClasses = 'p-2';
     const fontClasses = 'text-sm font-semibold';
     const disabledClasses = this.buttonDisabled ? 'opacity-50 cursor-not-allowed' : '';
@@ -98,9 +98,9 @@ export default class ButtonComponent extends Component {
         break;
     }
 
-    return `inline-block whitespace-no-wrap ${variantClasses} ${sizeClasses} ${
+    return `inline-block whitespace-nowrap ${variantClasses} ${sizeClasses} ${
       this.args.disabled ? 'opacity-50 cursor-not-allowed' : ''
-    } transition-form-element focus:outline-none focus:shadow-outline`;
+    } transition-form-element focus:outline-none focus:ring`;
   }
 
   @action

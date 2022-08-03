@@ -1,9 +1,6 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  future: {
-    removeDeprecatedGapUtilities: true,
-  },
   purge: [],
   theme: {
     container: {
