@@ -1,20 +1,53 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 import PackageBundleValidations from 'butchers-market/validations/package-bundle';
-import { dropTask } from 'ember-concurrency';
+import { dropTask, enqueueTask } from 'ember-concurrency';
+import baseUrl from 'butchers-market/utils/base-url';
+import { generatePdfFileName } from 'butchers-market/utils/file-name';
 
 export default class PackageBundleFormComponent extends Component {
+  @service router;
+  @service session;
+
   changeset;
 
   @tracked prices;
   @tracked items;
+  @tracked file;
+  @tracked tempFileUrl;
   @tracked errorMessage;
+  @tracked fileErrorMessage;
+
+  get hasFile() {
+    return this.changeset.get('fileUrl') || this.tempFileUrl;
+  }
+
+  get fileUrl() {
+    if (this.tempFileUrl) {
+      return this.tempFileUrl;
+    }
+
+    return this.changeset.get('fileUrlPath');
+  }
 
   get saveDisabled() {
     return this.changeset && this.changeset.isInvalid;
+  }
+
+  get uploadHeaders() {
+    const token = this.session.token;
+
+    if (token) {
+      return {
+        Authorization: `Bearer ${token}`,
+      };
+    }
+
+    return null;
   }
 
   constructor() {
@@ -56,15 +89,51 @@ export default class PackageBundleFormComponent extends Component {
     }
 
     try {
+      if (this.file) {
+        const generatedFileName = generatePdfFileName(this.file);
+        yield this.file.upload(`${baseUrl}/upload`, {
+          headers: this.uploadHeaders,
+          data: { generatedFileName },
+        });
+        this.changeset.set('fileUrl', generatedFileName);
+      }
+
       yield this.changeset.save();
       this.args.saved();
     } catch (ex) {
-      if (ex.body) {
+      if (ex.status === 401) {
+        return this.session.redirectToSignIn(this.router.currentURL);
+      } else if (ex.body) {
         this.errorMessage = ex.body.error;
       } else {
         this.errorMessage = ex;
       }
     }
+  }
+
+  @enqueueTask({ maxConcurrency: 3 })
+  *uploadFileTask(file) {
+    try {
+      let url = yield file.readAsDataURL();
+      this.tempFileUrl = url;
+      this.file = file;
+    } catch (e) {
+      this.fileErrorMessage = 'Could not read the file contents';
+    }
+  }
+
+  @action
+  uploadFile(file) {
+    this.changeset.set('fileUrl', null);
+    this.uploadFileTask.perform(file);
+  }
+
+  @action
+  removeFile() {
+    this.file = null;
+    this.tempFileUrl = null;
+
+    this.changeset.set('fileUrl', null);
   }
 
   @action

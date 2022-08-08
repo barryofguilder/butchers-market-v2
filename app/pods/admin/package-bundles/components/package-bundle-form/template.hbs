@@ -19,17 +19,57 @@
     <Group.textbox @value={{this.changeset.title}} @onChange={{set this "changeset.title"}} />
   </Form.group>
 
-  <Form.group
-    data-test-id="flyer-download-link"
-    @model={{this.changeset}}
-    @property="flyerDownloadLink"
-    as |Group|
-  >
-    <Group.label>Flyer Download Link</Group.label>
-    <Group.textbox
-      @value={{this.changeset.flyerDownloadLink}}
-      @onChange={{set this "changeset.flyerDownloadLink"}}
-    />
+  <Form.group data-test-id="file" @model={{this.changeset}} @property="fileUrl" as |Group|>
+    <Group.label>PDF File <Admin::Components::Required /></Group.label>
+    <div class="mt-2">
+      {{#let (file-queue name="file" onFileAdded=this.uploadFile) as |queue|}}
+        <label for={{Group.uniqueId}}>
+          <span
+            class="inline-block px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-none focus:ring"
+          >
+            Select PDF
+          </span>
+          <input
+            type="file"
+            id={{Group.uniqueId}}
+            accept="application/pdf"
+            hidden
+            {{queue.selectFile}}
+          />
+        </label>
+      {{/let}}
+
+      {{#if this.hasFile}}
+        <button
+          type="button"
+          class="inline-block ml-2 px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-none focus:ring"
+          {{on "click" this.removeFile}}
+        >
+          Remove PDF
+        </button>
+      {{/if}}
+
+      <small class="block mt-3 text-gray-700 sm:inline-block sm:mt-0 sm:ml-2">
+        Only PDF are allowed.
+      </small>
+
+      {{#if this.fileErrorMessage}}
+        <span class="block mt-2 text-red-500">
+          {{this.fileErrorMessage}}
+        </span>
+      {{/if}}
+
+      {{#if this.hasFile}}
+        <div class="mt-4">
+          <iframe
+            src={{this.fileUrl}}
+            title="Package Bundle PDF"
+            height="600px"
+            class="w-full"
+          ></iframe>
+        </div>
+      {{/if}}
+    </div>
   </Form.group>
 
   <Form.group data-test-id="prices">
