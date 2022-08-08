@@ -1,6 +1,6 @@
 {
   "name": "butchers-market",
-  "version": "1.9.0",
+  "version": "2.0.0",
   "private": true,
   "description": "Source code for The Butcher's Market website.",
   "repository": "https://github.com/stewartandrewmiller/butchers-market-v2",
@@ -98,7 +98,7 @@
     "edition": "octane"
   },
   "volta": {
-    "node": "16.16.0",
+    "node": "18.7.0",
     "npm": "8.16.0"
   }
 }
