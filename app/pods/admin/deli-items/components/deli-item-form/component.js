@@ -7,6 +7,7 @@ import lookupValidator from 'ember-changeset-validations';
 import DeliItemValidations from 'butchers-market/validations/deli-item';
 import { dropTask, enqueueTask } from 'ember-concurrency';
 import baseUrl from 'butchers-market/utils/base-url';
+import { generateFileName } from 'butchers-market/utils/file-name';
 
 export default class DeliItemFormComponent extends Component {
   @service router;
@@ -68,10 +69,12 @@ export default class DeliItemFormComponent extends Component {
 
     try {
       if (this.image) {
-        let response = yield this.image.upload(`${baseUrl}/upload`, {
+        const generatedFileName = generateFileName(this.image);
+        yield this.image.upload(`${baseUrl}/upload`, {
           headers: this.uploadHeaders,
+          data: { generatedFileName },
         });
-        this.changeset.set('imageUrl', response.body);
+        this.changeset.set('imageUrl', generatedFileName);
       }
 
       yield this.changeset.save();

@@ -8,6 +8,7 @@ import SpecialValidations from 'butchers-market/validations/special';
 import { dropTask, enqueueTask } from 'ember-concurrency';
 import baseUrl from 'butchers-market/utils/base-url';
 import config from 'butchers-market/config/environment';
+import { generateFileName } from 'butchers-market/utils/file-name';
 
 export default class SpecialFormComponent extends Component {
   @service router;
@@ -81,10 +82,12 @@ export default class SpecialFormComponent extends Component {
 
     try {
       if (this.changeset.image) {
-        let response = yield this.changeset.image.upload(`${baseUrl}/upload`, {
+        const generatedFileName = generateFileName(this.changeset.image);
+        yield this.changeset.image.upload(`${baseUrl}/upload`, {
           headers: this.uploadHeaders,
+          data: { generatedFileName },
         });
-        this.changeset.set('imageUrl', response.body);
+        this.changeset.set('imageUrl', generatedFileName);
       }
 
       yield this.changeset.save();
