@@ -7,6 +7,7 @@ import lookupValidator from 'ember-changeset-validations';
 import MenuValidations from 'butchers-market/validations/menu';
 import { dropTask, enqueueTask } from 'ember-concurrency';
 import baseUrl from 'butchers-market/utils/base-url';
+import { generatePdfFileName } from 'butchers-market/utils/file-name';
 
 export default class MenuFormComponent extends Component {
   @service router;
@@ -74,10 +75,12 @@ export default class MenuFormComponent extends Component {
 
     try {
       if (this.changeset.file) {
-        let response = yield this.changeset.file.upload(`${baseUrl}/upload/pdf`, {
+        const generatedFileName = generatePdfFileName(this.changeset.file);
+        yield this.changeset.file.upload(`${baseUrl}/upload`, {
           headers: this.uploadHeaders,
+          data: { generatedFileName },
         });
-        this.changeset.set('fileUrl', response.body);
+        this.changeset.set('fileUrl', generatedFileName);
       }
 
       yield this.changeset.save();

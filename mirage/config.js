@@ -131,14 +131,7 @@ function routes() {
   this.post(
     '/upload',
     upload(function (db, request) {
-      return new Response(201, { 'Content-Type': 'text/plain' }, request.requestBody.file.url);
-    })
-  );
-
-  this.post(
-    '/upload/pdf',
-    upload(function (db, request) {
-      return new Response(201, { 'Content-Type': 'text/plain' }, request.requestBody.file.url);
+      return new Response(201, { 'Content-Type': 'text/plain' }, {});
     })
   );
 }
