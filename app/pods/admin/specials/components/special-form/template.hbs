@@ -67,16 +67,7 @@
         </button>
       {{/if}}
 
-      {{#if this.fileErrorMessage}}
-        <span class="block mt-2 text-red-500">
-          {{this.fileErrorMessage}}
-        </span>
-      {{/if}}
-
-      <small
-        class="block mt-3 text-gray-700
-          {{if this.fileErrorMessage '' 'sm:inline-block sm:mt-0 sm:ml-2'}}"
-      >
+      <small class="block mt-3 text-gray-700 sm:inline-block sm:mt-0 sm:ml-2">
         Only JPG, JPEG, PNG, and GIF files are allowed.
       </small>
       <small class="block mt-3 text-gray-700">
@@ -90,6 +81,12 @@
           this site
         </a>.
       </small>
+
+      {{#if this.fileErrorMessage}}
+        <span class="block mt-2 text-red-500">
+          {{this.fileErrorMessage}}
+        </span>
+      {{/if}}
 
       {{#if this.hasImage}}
         <div class="mt-4">

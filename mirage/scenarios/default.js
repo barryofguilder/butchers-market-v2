@@ -246,6 +246,7 @@ function createPackageBundles(server) {
     title: "Mix N' Match",
     displayOrder: 1,
     flyerDownloadLink: 'docs/bundles-mixnmatch.pdf',
+    fileUrl: 'docs/bundles-mixnmatch.pdf',
     prices: ['Pick 5 for $53', 'Pick 10 for $99', 'Pick 20 for $195'],
     items: [
       '2 (7 oz.) Beef Ribeye Steaks',
@@ -279,6 +280,7 @@ function createPackageBundles(server) {
     title: "Ice Box Mix N' Match",
     displayOrder: 2,
     flyerDownloadLink: 'docs/iceboxflyer.pdf',
+    fileUrl: 'docs/iceboxflyer.pdf',
     prices: ['Pick 5 for $19.99', 'Pick 10 for $37.99', 'Pick 20 for $75.99'],
     items: [
       'Spicy Chicken Tenders',

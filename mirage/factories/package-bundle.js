@@ -7,7 +7,12 @@ export default Factory.extend({
     return faker.lorem.words(wordCount);
   },
 
+  // deprecated!
   flyerDownloadLink() {
+    return 'docs/bundles-mixnmatch.pdf';
+  },
+
+  fileUrl() {
     return 'docs/bundles-mixnmatch.pdf';
   },
 
