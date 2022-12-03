@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function (environment) {
-  let ENV = {
+  const ENV = {
     modulePrefix: 'butchers-market',
     podModulePrefix: 'butchers-market/pods',
     environment,
