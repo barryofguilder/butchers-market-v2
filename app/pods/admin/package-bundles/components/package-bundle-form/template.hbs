@@ -104,6 +104,17 @@
     </div>
   </Form.group>
 
+  <Form.group data-test-id="sale" @model={{this.changeset}} @property="sale" as |Group|>
+    <Group.label>Special Text</Group.label>
+    <Group.textbox
+      @value={{this.changeset.specialText}}
+      @onChange={{set this "changeset.specialText"}}
+    />
+    <small class="block mt-3 text-gray-700">
+      Will show under the title in a red text.
+    </small>
+  </Form.group>
+
   <Form.group data-test-id="items">
     <Form.label>Items</Form.label>
 

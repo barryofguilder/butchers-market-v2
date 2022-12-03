@@ -256,6 +256,7 @@ function createPackageBundles(server) {
     displayOrder: 1,
     flyerDownloadLink: 'docs/bundles-mixnmatch.pdf',
     fileUrl: 'docs/bundles-mixnmatch.pdf',
+    specialText: 'Pick 10 and 20 come with $10 gift card from now until Dec 31',
     prices: ['Pick 5 for $53', 'Pick 10 for $99', 'Pick 20 for $195'],
     items: [
       '2 (7 oz.) Beef Ribeye Steaks',
@@ -290,6 +291,7 @@ function createPackageBundles(server) {
     displayOrder: 2,
     flyerDownloadLink: 'docs/iceboxflyer.pdf',
     fileUrl: 'docs/iceboxflyer.pdf',
+    specialText: null,
     prices: ['Pick 5 for $19.99', 'Pick 10 for $37.99', 'Pick 20 for $75.99'],
     items: [
       'Spicy Chicken Tenders',

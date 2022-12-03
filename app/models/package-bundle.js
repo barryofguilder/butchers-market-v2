@@ -6,6 +6,7 @@ export default class PackageBundle extends Model {
   @attr('string') title;
   @attr('string') flyerDownloadLink; // deprecated!
   @attr('string') fileUrl;
+  @attr('string') specialText;
   @attr prices; // Array of strings
   @attr items; // Array of strings
 
