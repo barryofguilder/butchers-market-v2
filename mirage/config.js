@@ -130,7 +130,7 @@ function routes() {
 
   this.post(
     '/upload',
-    uploadHandler(function (db, request) {
+    uploadHandler(function () {
       return new Response(201, { 'Content-Type': 'text/plain' }, {});
     })
   );
