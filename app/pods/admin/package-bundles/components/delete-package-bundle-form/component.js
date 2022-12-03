@@ -5,13 +5,12 @@ import { dropTask } from 'ember-concurrency';
 export default class DeletePackageBundleFormComponent extends Component {
   @tracked errorMessage;
 
-  @dropTask
-  *deleteBundle() {
+  deleteBundle = dropTask(async () => {
     try {
-      yield this.args.bundle.destroyRecord();
+      await this.args.bundle.destroyRecord();
       this.args.onSave();
     } catch (ex) {
       this.errorMessage = ex;
     }
-  }
+  });
 }

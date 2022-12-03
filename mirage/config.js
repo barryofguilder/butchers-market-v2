@@ -1,6 +1,6 @@
 import { createServer, Response } from 'miragejs';
 import { discoverEmberDataModels } from 'ember-cli-mirage';
-import { upload } from 'ember-file-upload/mirage';
+import { uploadHandler } from 'ember-file-upload';
 import { isAfter, isBefore } from 'date-fns';
 
 const generateValidationError = function (field, title) {
@@ -130,7 +130,7 @@ function routes() {
 
   this.post(
     '/upload',
-    upload(function (db, request) {
+    uploadHandler(function (db, request) {
       return new Response(201, { 'Content-Type': 'text/plain' }, {});
     })
   );

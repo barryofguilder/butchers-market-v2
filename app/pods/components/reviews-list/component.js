@@ -14,8 +14,7 @@ export default class ReviewsListComponent extends Component {
     this.loadReviews.perform();
   }
 
-  @restartableTask
-  *loadReviews() {
-    this.reviews = yield this.store.findAll('review');
-  }
+  loadReviews = restartableTask(async () => {
+    this.reviews = await this.store.findAll('review');
+  });
 }

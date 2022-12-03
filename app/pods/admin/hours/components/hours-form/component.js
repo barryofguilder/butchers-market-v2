@@ -27,16 +27,15 @@ export default class HoursFormComponent extends Component {
     this.changeset = changeset;
   }
 
-  @dropTask
-  *saveHours() {
-    yield this.changeset.validate();
+  saveHours = dropTask(async () => {
+    await this.changeset.validate();
 
     if (!this.changeset.isValid) {
       return;
     }
 
     try {
-      yield this.changeset.save();
+      await this.changeset.save();
       this.args.saved();
     } catch (ex) {
       if (ex.body) {
@@ -45,7 +44,7 @@ export default class HoursFormComponent extends Component {
         this.errorMessage = ex;
       }
     }
-  }
+  });
 
   @action
   startDateSelected(date) {

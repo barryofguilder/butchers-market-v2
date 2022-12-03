@@ -10,8 +10,7 @@ export default class SignInFormComponent extends Component {
 
   @tracked hasError = false;
 
-  @dropTask
-  *signIn() {
+  signIn = dropTask(async () => {
     let body = JSON.stringify({
       data: {
         type: 'tokens',
@@ -29,15 +28,15 @@ export default class SignInFormComponent extends Component {
       body,
     };
 
-    const response = yield fetch(`${baseUrl}/token`, payload);
+    const response = await fetch(`${baseUrl}/token`, payload);
 
     if (response.status === 201) {
       this.hasError = false;
 
-      const token = yield response.text();
+      const token = await response.text();
       this.args.onAuthenticated(token);
     } else {
       this.hasError = true;
     }
-  }
+  });
 }

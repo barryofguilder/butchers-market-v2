@@ -77,12 +77,11 @@ export default class PackageBundleFormComponent extends Component {
     this.items = items;
   }
 
-  @dropTask
-  *saveBundle() {
+  saveBundle = dropTask(async () => {
     this.changeset.set('prices', this.prices);
     this.changeset.set('items', this.items);
 
-    yield this.changeset.validate();
+    await this.changeset.validate();
 
     if (!this.changeset.isValid) {
       return;
@@ -91,14 +90,14 @@ export default class PackageBundleFormComponent extends Component {
     try {
       if (this.file) {
         const generatedFileName = generatePdfFileName(this.file);
-        yield this.file.upload(`${baseUrl}/upload`, {
+        await this.file.upload(`${baseUrl}/upload`, {
           headers: this.uploadHeaders,
           data: { generatedFileName },
         });
         this.changeset.set('fileUrl', generatedFileName);
       }
 
-      yield this.changeset.save();
+      await this.changeset.save();
       this.args.saved();
     } catch (ex) {
       if (ex.status === 401) {
@@ -109,18 +108,17 @@ export default class PackageBundleFormComponent extends Component {
         this.errorMessage = ex;
       }
     }
-  }
+  });
 
-  @enqueueTask({ maxConcurrency: 3 })
-  *uploadFileTask(file) {
+  uploadFileTask = enqueueTask({ maxConcurrency: 3 }, async file => {
     try {
-      let url = yield file.readAsDataURL();
+      let url = await file.readAsDataURL();
       this.tempFileUrl = url;
       this.file = file;
     } catch (e) {
       this.fileErrorMessage = 'Could not read the file contents';
     }
-  }
+  });
 
   @action
   uploadFile(file) {

@@ -5,13 +5,12 @@ import { dropTask } from 'ember-concurrency';
 export default class DeleteDeliItemFormComponent extends Component {
   @tracked errorMessage;
 
-  @dropTask
-  *deleteItem() {
+  deleteItem = dropTask(async () => {
     try {
-      yield this.args.item.destroyRecord();
+      await this.args.item.destroyRecord();
       this.args.onSave();
     } catch (ex) {
       this.errorMessage = ex;
     }
-  }
+  });
 }

@@ -66,9 +66,8 @@ export default class SpecialFormComponent extends Component {
     }
   }
 
-  @dropTask
-  *saveSpecial() {
-    yield this.changeset.validate();
+  saveSpecial = dropTask(async () => {
+    await this.changeset.validate();
 
     const hasImage = this.changeset.image || this.changeset.imageUrl;
 
@@ -83,14 +82,14 @@ export default class SpecialFormComponent extends Component {
     try {
       if (this.changeset.image) {
         const generatedFileName = generateFileName(this.changeset.image);
-        yield this.changeset.image.upload(`${baseUrl}/upload`, {
+        await this.changeset.image.upload(`${baseUrl}/upload`, {
           headers: this.uploadHeaders,
           data: { generatedFileName },
         });
         this.changeset.set('imageUrl', generatedFileName);
       }
 
-      yield this.changeset.save();
+      await this.changeset.save();
       this.args.saved();
     } catch (ex) {
       if (ex.status === 401) {
@@ -101,18 +100,17 @@ export default class SpecialFormComponent extends Component {
         this.errorMessage = ex;
       }
     }
-  }
+  });
 
-  @enqueueTask({ maxConcurrency: 3 })
-  *uploadPhoto(file) {
+  uploadPhoto = enqueueTask({ maxConcurrency: 3 }, async file => {
     try {
-      let url = yield file.readAsDataURL();
+      let url = await file.readAsDataURL();
       this.tempImageUrl = url;
       this.changeset.set('image', file);
     } catch (e) {
       this.fileErrorMessage = 'Could not read the file contents';
     }
-  }
+  });
 
   @action
   uploadImage(file) {
