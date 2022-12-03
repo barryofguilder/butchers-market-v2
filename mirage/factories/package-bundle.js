@@ -16,6 +16,8 @@ export default Factory.extend({
     return 'docs/bundles-mixnmatch.pdf';
   },
 
+  specialText: null,
+
   prices() {
     return ['Pick 5 for $53', 'Pick 10 for $99', 'Pick 20 for $195'];
   },

@@ -14,6 +14,7 @@
     <Thead.th>Title</Thead.th>
     <Thead.th>Flyer Download Link</Thead.th>
     <Thead.th>Prices</Thead.th>
+    <Thead.th>Special Text</Thead.th>
     <Thead.th>Items</Thead.th>
     <Thead.th />
   </Table.head>
@@ -29,6 +30,7 @@
             {{/each}}
           </ul>
         </Row.td>
+        <Row.td>{{bundle.specialText}}</Row.td>
         <Row.td>
           {{#if bundle.items}}
             {{bundle.items.length}}

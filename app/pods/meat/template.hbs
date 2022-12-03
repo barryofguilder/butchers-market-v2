@@ -80,6 +80,11 @@
             {{#each bundle.prices as |price|}}
               <li>{{price}}</li>
             {{/each}}
+            {{#if bundle.specialText}}
+              <li class="text-md md:text-lg text-red-700 italic font-semibold">
+                {{bundle.specialText}}
+              </li>
+            {{/if}}
           </ul>
         </div>
 
