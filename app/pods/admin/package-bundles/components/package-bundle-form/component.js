@@ -110,7 +110,7 @@ export default class PackageBundleFormComponent extends Component {
     }
   });
 
-  uploadFileTask = enqueueTask({ maxConcurrency: 3 }, async file => {
+  uploadFileTask = enqueueTask({ maxConcurrency: 3 }, async (file) => {
     try {
       let url = await file.readAsDataURL();
       this.tempFileUrl = url;
