@@ -96,6 +96,7 @@ function createMeatBundles(server) {
     title: '20lb Meat Pack',
     price: '$68',
     featured: true,
+    specialText: 'Comes with $10 gift card from now until Dec 31',
     items: [
       '5lb. Ground Chuck',
       '5lb. Bonesless Chicken Breasts',
@@ -109,6 +110,7 @@ function createMeatBundles(server) {
     title: '30lb Meat Pack',
     price: '$77',
     featured: false,
+    specialText: null,
     items: [
       '5 lbs. Fresh Ground Chuck',
       '3 1/2 lbs. Boneless Pork Chops',
@@ -124,6 +126,7 @@ function createMeatBundles(server) {
     title: '40lb Meat Pack',
     price: '$114',
     featured: false,
+    specialText: null,
     items: [
       '4 lbs. Beef Chuck Roast',
       '10 lbs. Fresh Ground Chuck',
@@ -139,6 +142,7 @@ function createMeatBundles(server) {
     title: '50lb Meat Pack',
     price: '$129',
     featured: true,
+    specialText: null,
     items: [
       '10lb. Fresh Ground Chuck',
       '10lb. Boneless Pork Chops',
@@ -153,6 +157,7 @@ function createMeatBundles(server) {
     title: '75lb Meat Pack',
     price: '$235',
     featured: false,
+    specialText: null,
     items: [
       '4 (7 oz.) Beef Ribeye Steaks',
       '4 (7 oz.) Beef N.Y. Strip Steaks',
@@ -177,6 +182,7 @@ function createMeatBundles(server) {
     title: '100lb Meat Pack',
     price: '$325',
     featured: false,
+    specialText: null,
     items: [
       '10 lbs. Beef Chuck Roast',
       '20 lbs. Fresh Ground Chuck',
@@ -195,6 +201,7 @@ function createMeatBundles(server) {
     title: 'Bundle Meat Pack #1',
     price: '$69',
     featured: false,
+    specialText: null,
     items: [
       '4 (7oz) Beef Ribeye Steaks',
       '2 lbs. Beef Cube Steaks',
@@ -209,6 +216,7 @@ function createMeatBundles(server) {
     title: 'Bundle Meat Pack #2',
     price: '$69',
     featured: false,
+    specialText: null,
     items: [
       '4 (7oz) Beef N.Y. Strip Steaks',
       '2 lbs. Beef Stew',
@@ -223,6 +231,7 @@ function createMeatBundles(server) {
     title: 'Mega Bundle',
     price: '$119',
     featured: true,
+    specialText: null,
     items: [
       '2 (7 oz.) Ribeye Steaks',
       '2 (7 oz.) N.Y. Strip Steaks',

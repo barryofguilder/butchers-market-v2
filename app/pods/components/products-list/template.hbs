@@ -6,6 +6,11 @@
         {{product.price}}
       </h5>
       <ul class="pl-8 list-disc sm:text-lg">
+        {{#if product.specialText}}
+          <li class="text-red-700 italic font-semibold">
+            {{product.specialText}}
+          </li>
+        {{/if}}
         {{#each product.items as |item|}}
           <li>{{item}}</li>
         {{/each}}

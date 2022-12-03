@@ -15,6 +15,7 @@ export default Factory.extend({
     return faker.datatype.boolean();
   },
 
+  specialText: null,
   isHidden: false,
 
   orderEnabled() {
