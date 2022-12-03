@@ -59,9 +59,8 @@ export default class DeliItemFormComponent extends Component {
     this.changeset = changeset;
   }
 
-  @dropTask
-  *saveItem() {
-    yield this.changeset.validate();
+  saveItem = dropTask(async () => {
+    await this.changeset.validate();
 
     if (!this.changeset.isValid) {
       return;
@@ -70,14 +69,14 @@ export default class DeliItemFormComponent extends Component {
     try {
       if (this.image) {
         const generatedFileName = generateFileName(this.image);
-        yield this.image.upload(`${baseUrl}/upload`, {
+        await this.image.upload(`${baseUrl}/upload`, {
           headers: this.uploadHeaders,
           data: { generatedFileName },
         });
         this.changeset.set('imageUrl', generatedFileName);
       }
 
-      yield this.changeset.save();
+      await this.changeset.save();
       this.args.saved();
     } catch (ex) {
       if (ex.status === 401) {
@@ -88,12 +87,11 @@ export default class DeliItemFormComponent extends Component {
         this.errorMessage = ex;
       }
     }
-  }
+  });
 
-  @enqueueTask({ maxConcurrency: 3 })
-  *uploadPhoto(file) {
+  uploadPhoto = enqueueTask({ maxConcurrency: 3 }, async file => {
     try {
-      let url = yield file.readAsDataURL();
+      let url = await file.readAsDataURL();
       this.tempImageUrl = url;
       this.image = file;
 
@@ -102,7 +100,7 @@ export default class DeliItemFormComponent extends Component {
     } catch (e) {
       this.fileErrorMessage = 'Could not read the file contents';
     }
-  }
+  });
 
   @action
   uploadImage(file) {

@@ -31,8 +31,7 @@ export default class MainNavItemsComponent extends Component {
     return null;
   }
 
-  @restartableTask
-  *loadMenu() {
-    return yield this.store.findAll('menu');
-  }
+  loadMenu = restartableTask(async () => {
+    return await this.store.findAll('menu');
+  });
 }

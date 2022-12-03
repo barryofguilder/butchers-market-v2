@@ -3,16 +3,15 @@ import { action } from '@ember/object';
 import { task } from 'ember-concurrency';
 
 export default class AdminFormComponent extends Component {
-  @task
-  *submitTask() {
+  submitTask = task(async () => {
     if (this.args.onSubmit) {
-      yield this.args.onSubmit();
+      await this.args.onSubmit();
     }
 
     if (this.args.afterSubmit) {
-      yield this.args.afterSubmit();
+      await this.args.afterSubmit();
     }
-  }
+  });
 
   @action
   submit(event) {

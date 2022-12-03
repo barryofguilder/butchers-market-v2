@@ -27,8 +27,7 @@ export default class FeedbackFormComponent extends Component {
     return this.formState === 'ServerError';
   }
 
-  @dropTask
-  *sendFeedbackTask() {
+  sendFeedbackTask = dropTask(async () => {
     let body = JSON.stringify({
       data: {
         attributes: {
@@ -48,7 +47,7 @@ export default class FeedbackFormComponent extends Component {
       body,
     };
 
-    const response = yield fetch(`${baseUrl}/feedback`, payload);
+    const response = await fetch(`${baseUrl}/feedback`, payload);
 
     if (response.status === 204) {
       this.formState = 'Sent';
@@ -58,7 +57,7 @@ export default class FeedbackFormComponent extends Component {
     } else {
       this.formState = 'ServerError';
     }
-  }
+  });
 
   @action
   onCaptchaResolved(reCaptchaResponse) {

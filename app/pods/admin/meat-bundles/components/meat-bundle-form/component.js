@@ -36,18 +36,17 @@ export default class MeatBundleFormComponent extends Component {
     this.items = items;
   }
 
-  @dropTask
-  *saveBundle() {
+  saveBundle = dropTask(async () => {
     this.changeset.set('items', this.items);
 
-    yield this.changeset.validate();
+    await this.changeset.validate();
 
     if (!this.changeset.isValid) {
       return;
     }
 
     try {
-      yield this.changeset.save();
+      await this.changeset.save();
       this.args.saved();
     } catch (ex) {
       if (ex.body) {
@@ -56,7 +55,7 @@ export default class MeatBundleFormComponent extends Component {
         this.errorMessage = ex;
       }
     }
-  }
+  });
 
   @action
   updateFeatured() {

@@ -59,9 +59,8 @@ export default class MenuFormComponent extends Component {
     this.changeset = changeset;
   }
 
-  @dropTask
-  *saveMenu() {
-    yield this.changeset.validate();
+  saveMenu = dropTask(async () => {
+    await this.changeset.validate();
 
     const hasFile = this.changeset.file || this.changeset.fileUrl;
 
@@ -76,14 +75,14 @@ export default class MenuFormComponent extends Component {
     try {
       if (this.changeset.file) {
         const generatedFileName = generatePdfFileName(this.changeset.file);
-        yield this.changeset.file.upload(`${baseUrl}/upload`, {
+        await this.changeset.file.upload(`${baseUrl}/upload`, {
           headers: this.uploadHeaders,
           data: { generatedFileName },
         });
         this.changeset.set('fileUrl', generatedFileName);
       }
 
-      yield this.changeset.save();
+      await this.changeset.save();
       this.args.saved();
     } catch (ex) {
       if (ex.status === 401) {
@@ -94,18 +93,17 @@ export default class MenuFormComponent extends Component {
         this.errorMessage = ex;
       }
     }
-  }
+  });
 
-  @enqueueTask({ maxConcurrency: 3 })
-  *uploadFileTask(file) {
+  uploadFileTask = enqueueTask({ maxConcurrency: 3 }, async file => {
     try {
-      let url = yield file.readAsDataURL();
+      let url = await file.readAsDataURL();
       this.tempFileUrl = url;
       this.changeset.set('file', file);
     } catch (e) {
       this.fileErrorMessage = 'Could not read the file contents';
     }
-  }
+  });
 
   @action
   uploadFile(file) {
