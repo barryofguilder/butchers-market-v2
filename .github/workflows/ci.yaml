@@ -1,0 +1,56 @@
+name: Continuous Integration
+
+on:
+  # - If you create a branch and make a push, CI will not run.
+  # - If you create a PR for that branch (draft or open), CI will run. GitHub Actions shows the run
+  #   type to be `pull_request`.
+  # - Marking a draft PR as ready (open) will not trigger CI again.
+  # - Any additional pushes that you make to the PR will trigger CI. (type: `pull_request`)
+  # - If you merge the PR into `master`, CI will run once more. (type: `push`)
+  push:
+    branches:
+      - master
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      git-ref:
+        description: Git Ref (Optional)
+        required: false
+
+# Will kill the workflow runs of commits that are not the current head commit of a PR. `head_ref` is
+# only set for PRs source, which is why we fall back to `ref` (so push workflows will run one job
+# for each branch for the most recent commit).
+concurrency:
+  group: ci-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: 'Tests'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: volta-cli/action@v4
+
+      - name: Cache npm dependencies
+        uses: actions/cache@v3
+        id: cache-dependencies
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Run Tests
+        run: npm run test:ember
