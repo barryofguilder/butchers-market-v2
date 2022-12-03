@@ -18,7 +18,7 @@ export default class ButtonComponent extends Component {
     return valueOrDefault(this.args.variant, 'secondary');
   }
 
-  get size() {
+  get disabled() {
     return valueOrDefault(this.args.disabled, false);
   }
 
