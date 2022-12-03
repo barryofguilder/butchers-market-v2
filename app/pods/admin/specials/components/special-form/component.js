@@ -102,7 +102,7 @@ export default class SpecialFormComponent extends Component {
     }
   });
 
-  uploadPhoto = enqueueTask({ maxConcurrency: 3 }, async file => {
+  uploadPhoto = enqueueTask({ maxConcurrency: 3 }, async (file) => {
     try {
       let url = await file.readAsDataURL();
       this.tempImageUrl = url;
