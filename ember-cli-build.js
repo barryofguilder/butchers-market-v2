@@ -25,5 +25,17 @@ module.exports = function (defaults) {
   });
 
   const { Webpack } = require('@embroider/webpack');
-  return require('@embroider/compat').compatBuild(app, Webpack);
+  return require('@embroider/compat').compatBuild(app, Webpack, {
+    staticAddonTestSupportTrees: true,
+    staticAddonTrees: true,
+    // `ember-animated` blows up when this is turned on.
+    // staticHelpers: true,
+    staticModifiers: true,
+    // `ember-modal-dialog` blows up when this is turned on.
+    // staticComponents: true,
+    // splitAtRoutes: ['route.name'], // can also be a RegExp
+    // packagerOptions: {
+    //    webpackConfig: { }
+    // }
+  });
 };
