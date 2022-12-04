@@ -27,6 +27,8 @@
     "@ember/optional-features": "^2.0.0",
     "@ember/render-modifiers": "^2.0.4",
     "@ember/test-helpers": "^2.8.1",
+    "@embroider/compat": "^2.0.2",
+    "@embroider/webpack": "^2.0.2",
     "@faker-js/faker": "^7.6.0",
     "@fortawesome/ember-fontawesome": "^0.4.1",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
