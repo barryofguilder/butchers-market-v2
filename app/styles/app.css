@@ -2,6 +2,7 @@
 
 @import 'tailwindcss/components';
 @import '_textbox';
+@import '_ember-sortable';
 
 @import 'tailwindcss/utilities';
 @import '_utilities';

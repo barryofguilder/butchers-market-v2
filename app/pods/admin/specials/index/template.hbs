@@ -8,24 +8,31 @@
   </Button>
 </div>
 
+{{#if this.showErrorMessage}}
+  <UiAlert @variant="danger" class="mt-4">
+    Something went wrong trying to save the ordering of the specials. Please refresh the page and
+    try again.
+  </UiAlert>
+{{/if}}
+
 <Admin::Components::UiTable class="mt-8" as |Table|>
   <Table.head as |Thead|>
+    <Thead.th />
     <Thead.th>Title</Thead.th>
-    <Thead.th>Display Order</Thead.th>
     <Thead.th>Active Start Date</Thead.th>
     <Thead.th>Active End Date</Thead.th>
     <Thead.th>Sold Out?</Thead.th>
     <Thead.th>Hidden?</Thead.th>
     <Thead.th />
   </Table.head>
-  <Table.body as |Tbody|>
-    {{#each (sort-by "title" @model) as |special|}}
-      <Tbody.tr as |Row|>
+  <Table.body {{sortable-group onChange=this.reorderItems}} as |Tbody|>
+    {{#each (sort-by "displayOrder" this.specials) as |special|}}
+      <Tbody.tr {{sortable-item model=special}} as |Row|>
         <Row.td>
-          {{special.title}}
+          <UiIcon @icon="arrows-alt-v" class="block w-4" {{sortable-handle}} />
         </Row.td>
         <Row.td>
-          {{special.displayOrder}}
+          {{special.title}}
         </Row.td>
         <Row.td>
           {{#if special.activeStartDate}}
