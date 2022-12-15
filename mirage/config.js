@@ -118,6 +118,8 @@ function routes() {
     return response;
   });
 
+  this.post('/specials/reorder');
+
   this.post('/token', (server, request) => {
     let attrs = JSON.parse(request.requestBody).data.attributes;
 
