@@ -94,7 +94,7 @@ function createMeatBundles(server) {
   server.create('meat-bundle', {
     displayOrder: 1,
     title: '20lb Meat Pack',
-    price: '$68',
+    price: '68',
     featured: true,
     specialText: 'Comes with $10 gift card from now until Dec 31',
     items: [
@@ -108,7 +108,7 @@ function createMeatBundles(server) {
   server.create('meat-bundle', {
     displayOrder: 2,
     title: '30lb Meat Pack',
-    price: '$77',
+    price: '77',
     featured: false,
     specialText: null,
     items: [
@@ -124,7 +124,7 @@ function createMeatBundles(server) {
   server.create('meat-bundle', {
     displayOrder: 3,
     title: '40lb Meat Pack',
-    price: '$114',
+    price: '114',
     featured: false,
     specialText: null,
     items: [
@@ -140,7 +140,7 @@ function createMeatBundles(server) {
   server.create('meat-bundle', {
     displayOrder: 4,
     title: '50lb Meat Pack',
-    price: '$129',
+    price: '129',
     featured: true,
     specialText: null,
     items: [
@@ -155,7 +155,7 @@ function createMeatBundles(server) {
   server.create('meat-bundle', {
     displayOrder: 5,
     title: '75lb Meat Pack',
-    price: '$235',
+    price: '235',
     featured: false,
     specialText: null,
     items: [
@@ -180,7 +180,7 @@ function createMeatBundles(server) {
   server.create('meat-bundle', {
     displayOrder: 6,
     title: '100lb Meat Pack',
-    price: '$325',
+    price: '325',
     featured: false,
     specialText: null,
     items: [
@@ -199,7 +199,7 @@ function createMeatBundles(server) {
   server.create('meat-bundle', {
     displayOrder: 7,
     title: 'Bundle Meat Pack #1',
-    price: '$69',
+    price: '69',
     featured: false,
     specialText: null,
     items: [
@@ -214,7 +214,7 @@ function createMeatBundles(server) {
   server.create('meat-bundle', {
     displayOrder: 8,
     title: 'Bundle Meat Pack #2',
-    price: '$69',
+    price: '69',
     featured: false,
     specialText: null,
     items: [
@@ -229,7 +229,7 @@ function createMeatBundles(server) {
   server.create('meat-bundle', {
     displayOrder: 9,
     title: 'Mega Bundle',
-    price: '$119',
+    price: '119',
     featured: true,
     specialText: null,
     items: [
