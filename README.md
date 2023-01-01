@@ -45,7 +45,8 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-Specify what it takes to deploy your app.
+- Copy the `.example.env` file, name it `.env`, and fill out the environment variables.
+- `npm run deploy`
 
 ## Further Reading / Useful Links
 
