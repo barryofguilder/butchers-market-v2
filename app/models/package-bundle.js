@@ -4,7 +4,6 @@ import config from 'butchers-market/config/environment';
 export default class PackageBundle extends Model {
   @attr('number') displayOrder;
   @attr('string') title;
-  @attr('string') flyerDownloadLink; // deprecated!
   @attr('string') fileUrl;
   @attr('string') specialText;
   @attr prices; // Array of strings
