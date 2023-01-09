@@ -12,7 +12,6 @@
 <Admin::Components::UiTable class="mt-8" as |Table|>
   <Table.head as |Thead|>
     <Thead.th>Title</Thead.th>
-    <Thead.th>Flyer Download Link</Thead.th>
     <Thead.th>Prices</Thead.th>
     <Thead.th>Special Text</Thead.th>
     <Thead.th>Items</Thead.th>
@@ -22,7 +21,6 @@
     {{#each this.sortedBundles as |bundle|}}
       <Tbody.tr as |Row|>
         <Row.td>{{bundle.title}}</Row.td>
-        <Row.td>{{bundle.flyerDownloadLink}}</Row.td>
         <Row.td>
           <ul>
             {{#each bundle.prices as |price|}}
