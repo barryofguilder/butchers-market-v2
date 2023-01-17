@@ -51,11 +51,13 @@
   <HeaderTitle @title="Bundle Packs" />
 
   <Container>
-    <div class="mt-8 text-center">
-      <Button @href="docs/bundles-mixnmatch.pdf">
-        Print Flyer
-      </Button>
-    </div>
+    {{#if this.meatBundlePDF}}
+      <div class="mt-8 text-center">
+        <Button @href={{this.meatBundlePDF}}>
+          Print Flyer
+        </Button>
+      </div>
+    {{/if}}
 
     <ProductsList @products={{@model.bundles}} />
   </Container>
