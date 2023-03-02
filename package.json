@@ -100,11 +100,11 @@
     "uuid": "^9.0.0",
     "webpack": "^5.75.0"
   },
-  "engines": {
-    "node": "14.* || 16.* || >= 18"
-  },
   "ember": {
     "edition": "octane"
+  },
+  "engines": {
+    "node": "18.12.1"
   },
   "volta": {
     "node": "18.12.1",
