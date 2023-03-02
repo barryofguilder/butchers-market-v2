@@ -79,6 +79,7 @@ module.exports = function (environment) {
   if (environment === 'production') {
     ENV.showReCaptcha = true;
     ENV.showOrderOnline = true;
+    ENV.api = process.env.API_URL;
   }
 
   return ENV;
