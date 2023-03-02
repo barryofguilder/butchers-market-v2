@@ -80,6 +80,7 @@ module.exports = function (environment) {
     ENV.showReCaptcha = true;
     ENV.showOrderOnline = true;
     ENV.api = process.env.API_URL;
+    ENV.uploadsDir = `${process.env.S3_BUCKET_UPLOADS}/uploads/`;
   }
 
   return ENV;
