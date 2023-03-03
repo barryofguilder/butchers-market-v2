@@ -6,7 +6,7 @@ module.exports = function (environment) {
     podModulePrefix: 'butchers-market/pods',
     environment,
     rootURL: '/',
-    locationType: 'hash',
+    locationType: 'history',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
