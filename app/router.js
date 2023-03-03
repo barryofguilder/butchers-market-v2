@@ -71,4 +71,6 @@ Router.map(function () {
       this.route('delete', { path: ':id/delete' });
     });
   });
+
+  this.route('not-found', { path: '/*path' });
 });
