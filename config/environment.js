@@ -37,7 +37,7 @@ module.exports = function (environment) {
       sitekey: '6LcrHAITAAAAACvTiT4qS4dvbwL7wgGRXhJtsKim',
     },
 
-    api: '/',
+    api: '',
     namespace: 'api',
     showReCaptcha: false,
     uploadsDir: '/uploads/',
