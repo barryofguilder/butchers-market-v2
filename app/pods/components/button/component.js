@@ -49,7 +49,7 @@ export default class ButtonComponent extends Component {
   }
 
   get buttonDisabled() {
-    return (this.task && this.task.isRunning) || this.args.disabled;
+    return (this.args.task && this.args.task.isRunning) || this.args.disabled;
   }
 
   get iconVariant() {
@@ -99,7 +99,7 @@ export default class ButtonComponent extends Component {
     }
 
     return `inline-block whitespace-nowrap ${variantClasses} ${sizeClasses} ${
-      this.args.disabled ? 'opacity-50 cursor-not-allowed' : ''
+      this.buttonDisabled ? 'opacity-50 cursor-not-allowed' : ''
     } transition-form-element focus:outline-none focus:ring`;
   }
 

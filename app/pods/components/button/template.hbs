@@ -26,10 +26,14 @@
     data-test-id={{this.data-test-id}}
     class={{this.buttonClasses}}
     type={{this.type}}
-    disabled={{@disabled}}
+    disabled={{this.buttonDisabled}}
     {{on "click" this.click}}
     ...attributes
   >
+    {{#if @task.isRunning}}
+      <UiIcon data-test-id="is-running" @spin={{true}} @icon="circle-notch" />
+    {{/if}}
+
     {{#if @icon}}
       <UiIcon
         data-test-id="button-icon"
