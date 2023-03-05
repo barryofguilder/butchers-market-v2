@@ -118,7 +118,9 @@ function routes() {
     return response;
   });
 
-  this.post('/specials/reorder');
+  this.post('/specials/reorder', () => {
+    return new Response(201);
+  });
 
   this.post('/token', (server, request) => {
     let attrs = JSON.parse(request.requestBody).data.attributes;
