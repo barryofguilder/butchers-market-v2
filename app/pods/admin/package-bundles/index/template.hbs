@@ -53,7 +53,7 @@
               @iconOnly={{true}}
               @icon="trash-alt"
               @variant="danger"
-              @onClick={{action (mut this.bundleToDelete) bundle}}
+              @onClick={{set this "bundleToDelete" bundle}}
             /> --}}
           </div>
         </Row.td>
@@ -69,8 +69,8 @@
 {{#if this.bundleToDelete}}
   <Admin::PackageBundles::Components::DeletePackageBundleForm
     @bundle={{this.bundleToDelete}}
-    @onSave={{fn (mut this.bundleToDelete) null}}
-    @onCancel={{fn (mut this.bundleToDelete) null}}
+    @onSave={{set this "bundleToDelete" null}}
+    @onCancel={{set this "bundleToDelete" null}}
   />
 {{/if}}
 

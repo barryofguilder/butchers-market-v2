@@ -34,7 +34,7 @@
               @iconOnly={{true}}
               @icon="trash-alt"
               @variant="danger"
-              @onClick={{fn (mut this.itemToDelete) item}}
+              @onClick={{set this "itemToDelete" item}}
             />
           </div>
         </Row.td>
@@ -50,8 +50,8 @@
 {{#if this.itemToDelete}}
   <Admin::DeliItems::Components::DeleteDeliItemForm
     @item={{this.itemToDelete}}
-    @onSave={{fn (mut this.itemToDelete) null}}
-    @onCancel={{fn (mut this.itemToDelete) null}}
+    @onSave={{set this "itemToDelete" null}}
+    @onCancel={{set this "itemToDelete" null}}
   />
 {{/if}}
 
