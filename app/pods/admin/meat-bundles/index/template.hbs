@@ -65,7 +65,7 @@
               @iconOnly={{true}}
               @icon="trash-alt"
               @variant="danger"
-              @onClick={{action (mut this.bundleToDelete) bundle}}
+              @onClick={{set this "bundleToDelete" bundle}}
             /> --}}
           </div>
         </Row.td>
