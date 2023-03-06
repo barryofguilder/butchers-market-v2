@@ -78,33 +78,55 @@
   <Form.group data-test-id="items">
     <Form.label>Items</Form.label>
 
-    <DragSortList
-      @items={{this.items}}
-      @handle=".handle"
-      @dragEndAction={{this.reorderItems}}
-      as |item index|
-    >
-      <div data-test-id="item-{{index}}" class="{{if (gt index 0) 'pt-1'}} pb-1">
-        <div class="flex items-center">
-          <span class="handle text-gray-600" draggable="true">☰</span>
-          <UiTextbox class="ml-2" @value={{item}} @onChange={{fn this.itemChanged index}} />
-          <Button
-            class="mr-1"
-            @iconOnly={{true}}
-            @icon="trash-alt"
-            @variant="danger"
-            title="Delete item"
-            @onClick={{fn this.deleteItem index}}
-          />
-        </div>
+    {{#if this.reordering}}
+      <div {{sortable-group onChange=this.reorderItems}}>
+        {{#each this.items as |item index|}}
+          <div data-test-id="item-{{index}}" class="py-3" {{sortable-item model=item}}>
+            <div class="flex gap-2 items-center">
+              <UiIcon @icon="arrows-alt-v" class="block text-center w-6" {{sortable-handle}} />
+              <p>{{item}}</p>
+            </div>
+          </div>
+        {{/each}}
       </div>
-    </DragSortList>
 
-    <div class="mt-2">
-      <Button @icon="plus" @size="medium" @variant="plain" @onClick={{this.addItem}}>
-        New Item
-      </Button>
-    </div>
+      <div class="mt-2">
+        <Button @size="medium" @variant="plain" @onClick={{set this "reordering" false}}>
+          Done
+        </Button>
+      </div>
+    {{else}}
+      {{#each this.items as |item index|}}
+        <div data-test-id="item-{{index}}" class="py-1">
+          <div class="flex items-center">
+            <UiTextbox @value={{item}} @onChange={{fn this.itemChanged index}} />
+            <Button
+              class="mr-1"
+              @iconOnly={{true}}
+              @icon="trash-alt"
+              @variant="danger"
+              title="Delete item"
+              @onClick={{fn this.deleteItem index}}
+            />
+          </div>
+        </div>
+      {{/each}}
+
+      <div class="mt-2 flex gap-2">
+        <Button @icon="plus" @size="medium" @variant="plain" @onClick={{this.addItem}}>
+          New Item
+        </Button>
+
+        <Button
+          @icon="arrows-alt-v"
+          @size="medium"
+          @variant="plain"
+          @onClick={{set this "reordering" true}}
+        >
+          Re-order Items
+        </Button>
+      </div>
+    {{/if}}
   </Form.group>
 
   <div class="mt-8">

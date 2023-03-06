@@ -12,6 +12,7 @@ export default class MeatBundleFormComponent extends Component {
   @tracked prices;
   @tracked items;
   @tracked errorMessage;
+  @tracked reordering = false;
 
   get saveDisabled() {
     return this.changeset && this.changeset.isInvalid;
@@ -29,7 +30,7 @@ export default class MeatBundleFormComponent extends Component {
 
     // Ensure there's always an item field
     if (items.length === 0) {
-      items.pushObject('');
+      items = [''];
     }
 
     this.changeset = changeset;
@@ -74,7 +75,7 @@ export default class MeatBundleFormComponent extends Component {
 
   @action
   addItem() {
-    this.items.pushObject('');
+    this.items = [...this.items, ''];
   }
 
   @action
@@ -88,22 +89,14 @@ export default class MeatBundleFormComponent extends Component {
 
     // Ensure there's always an item field
     if (items.length === 0) {
-      items.pushObject('');
+      items = [''];
     }
 
     this.items = items;
   }
 
   @action
-  reorderItems({ sourceIndex, sourceList, targetIndex, targetList }) {
-    if (sourceIndex === targetIndex) {
-      // Not moving up or down
-      return;
-    }
-
-    const item = sourceList.objectAt(sourceIndex);
-
-    sourceList.removeAt(sourceIndex);
-    targetList.insertAt(targetIndex, item);
+  reorderItems(itemModels) {
+    this.items = itemModels;
   }
 }
