@@ -1,5 +1,5 @@
 <section class="py-16">
-  {{#if (eq @errors.0.status "404")}}
+  {{#if (eq (get (get @errors 0) "status") "404")}}
     <h1 class="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
       {{@name}}
       not found
