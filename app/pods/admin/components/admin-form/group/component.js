@@ -15,7 +15,7 @@ export default class GroupComponent extends Component {
       return [];
     }
 
-    const fieldErrors = this.args.model.errors.findBy('key', this.args.property);
+    const fieldErrors = this.args.model.errors.find((error) => error.key === this.args.property);
 
     if (fieldErrors) {
       return fieldErrors.validation;
