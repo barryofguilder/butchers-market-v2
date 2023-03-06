@@ -25,7 +25,7 @@ export default class MainNavItemsComponent extends Component {
 
   get menuUrl() {
     if (this.menus?.length > 0) {
-      return this.menus.firstObject?.fileUrlPath;
+      return this.menus[0].fileUrlPath;
     }
 
     return null;

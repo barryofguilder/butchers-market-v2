@@ -53,6 +53,6 @@ export default class StoreHoursComponent extends Component {
       });
     }
 
-    return storeHours.firstObject;
+    return storeHours[0];
   }
 }
