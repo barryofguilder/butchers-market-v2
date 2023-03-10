@@ -41,11 +41,9 @@
     <link integrity="" rel="stylesheet" href="{{rootURL}}assets/vendor.css" />
     <link integrity="" rel="stylesheet" href="{{rootURL}}assets/butchers-market.css" />
 
-    {{content-for "head-footer"}}
+    {{content-for "analytics"}} {{content-for "head-footer"}}
   </head>
   <body class="font-sans text-gray-900">
-    <!-- Uncomment the next line if you want to turn on "admin only" mode. -->
-    <!-- <div id="admin-only"></div> -->
     {{content-for "body"}}
 
     <script src="{{rootURL}}assets/vendor.js"></script>
