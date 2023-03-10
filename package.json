@@ -38,7 +38,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
-    "autoprefixer": "^10.4.13",
+    "autoprefixer": "^10.4.14",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
     "concurrently": "^7.6.0",
@@ -81,7 +81,7 @@
     "ember-test-selectors": "^6.0.0",
     "ember-truth-helpers": "^3.1.0",
     "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.6.0",
+    "eslint-config-prettier": "^8.7.0",
     "eslint-plugin-ember": "^11.4.7",
     "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-prettier": "^4.2.1",
@@ -95,7 +95,7 @@
     "tailwindcss": "^3.2.7",
     "tracked-built-ins": "^3.1.1",
     "uuid": "^9.0.0",
-    "webpack": "^5.75.0"
+    "webpack": "^5.76.0"
   },
   "ember": {
     "edition": "octane"
