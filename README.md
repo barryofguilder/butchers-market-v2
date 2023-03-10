@@ -8,7 +8,6 @@ You will need the following things properly installed on your computer.
 
 - [Git](https://git-scm.com/)
 - [Node.js](https://nodejs.org/)
-- [Yarn](https://yarnpkg.com/)
 - [Ember CLI](https://cli.emberjs.com/release/)
 - [Google Chrome](https://google.com/chrome/)
 
@@ -45,8 +44,7 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-- Copy the `.example.env` file, name it `.env`, and fill out the environment variables.
-- `npm run deploy`
+- Push changes to `master` and then trigger a deploy on [Render.com](https://render.com).
 
 ## Further Reading / Useful Links
 
