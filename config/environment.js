@@ -46,8 +46,8 @@ module.exports = function (environment) {
     ENV.uploadsDir = '';
 
     if (ENV['ember-cli-mirage'].enabled === false) {
-      ENV.api = 'http://localhost:3000';
-      ENV.uploadsDir = '/uploads/';
+      ENV.api = process.env.API_URL;
+      ENV.uploadsDir = `${process.env.S3_BUCKET_UPLOADS}/uploads/`;
     }
   }
 
