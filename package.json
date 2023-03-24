@@ -81,21 +81,21 @@
     "ember-test-selectors": "^6.0.0",
     "ember-truth-helpers": "^3.1.0",
     "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.7.0",
-    "eslint-plugin-ember": "^11.4.7",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-ember": "^11.4.8",
     "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-qunit": "^7.3.4",
     "jwt-decode": "^3.1.2",
     "loader.js": "^4.7.0",
     "postcss-import": "^15.0.1",
-    "prettier": "^2.8.4",
+    "prettier": "^2.8.7",
     "qunit": "^2.19.4",
     "qunit-dom": "^2.0.0",
     "tailwindcss": "^3.2.7",
     "tracked-built-ins": "^3.1.1",
     "uuid": "^9.0.0",
-    "webpack": "^5.76.0"
+    "webpack": "^5.76.3"
   },
   "ember": {
     "edition": "octane"
