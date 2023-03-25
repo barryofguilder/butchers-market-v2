@@ -34,7 +34,7 @@
               @iconOnly={{true}}
               @icon="trash-alt"
               @variant="danger"
-              @onClick={{set this "itemToDelete" item}}
+              @onClick={{fn this.openDeleteModal item}}
             />
           </div>
         </Row.td>
@@ -47,12 +47,11 @@
   </Table.body>
 </Admin::Components::UiTable>
 
-{{#if this.itemToDelete}}
-  <Admin::DeliItems::Components::DeleteDeliItemForm
-    @item={{this.itemToDelete}}
-    @onSave={{set this "itemToDelete" null}}
-    @onCancel={{set this "itemToDelete" null}}
-  />
-{{/if}}
+<Admin::DeliItems::Components::DeleteDeliItemForm
+  @isOpen={{this.deleteModalOpen}}
+  @item={{this.itemToDelete}}
+  @onSave={{this.closeDeleteModal}}
+  @onCancel={{this.closeDeleteModal}}
+/>
 
 {{outlet}}

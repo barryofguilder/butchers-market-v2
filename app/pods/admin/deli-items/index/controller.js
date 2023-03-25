@@ -7,6 +7,8 @@ import { isBlank } from '@ember/utils';
 
 export default class AdminDeliItemsIndexController extends Controller {
   @tracked currentSort = {};
+  @tracked itemToDelete = null;
+  @tracked deleteModalOpen = false;
 
   get deliItemsSort() {
     let sortColumn = this.currentSort.sortColumn;
@@ -25,5 +27,16 @@ export default class AdminDeliItemsIndexController extends Controller {
   @action
   sortDeliItems(sort) {
     this.currentSort = sort;
+  }
+
+  @action
+  openDeleteModal(item) {
+    this.itemToDelete = item;
+    this.deleteModalOpen = true;
+  }
+
+  @action
+  closeDeleteModal() {
+    this.deleteModalOpen = false;
   }
 }

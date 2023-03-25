@@ -65,7 +65,7 @@
               @iconOnly={{true}}
               @icon="trash-alt"
               @variant="danger"
-              @onClick={{set this "specialToDelete" special}}
+              @onClick={{fn this.openDeleteModal special}}
             />
           </div>
         </Row.td>
@@ -78,12 +78,11 @@
   </Table.body>
 </Admin::Components::UiTable>
 
-{{#if this.specialToDelete}}
-  <Admin::Specials::Components::DeleteSpecialForm
-    @special={{this.specialToDelete}}
-    @onSave={{set this "specialToDelete" null}}
-    @onCancel={{set this "specialToDelete" null}}
-  />
-{{/if}}
+<Admin::Specials::Components::DeleteSpecialForm
+  @isOpen={{this.deleteModalOpen}}
+  @special={{this.specialToDelete}}
+  @onSave={{this.closeDeleteModal}}
+  @onCancel={{this.closeDeleteModal}}
+/>
 
 {{outlet}}

@@ -9,6 +9,8 @@ export default class AdminSpecialsIndexController extends Controller {
 
   @tracked showErrorMessage;
   @tracked specials = this.model;
+  @tracked specialToDelete = null;
+  @tracked deleteModalOpen = false;
 
   @action
   reorderItems(itemModels) {
@@ -35,4 +37,15 @@ export default class AdminSpecialsIndexController extends Controller {
       console.error(ex);
     }
   });
+
+  @action
+  openDeleteModal(special) {
+    this.specialToDelete = special;
+    this.deleteModalOpen = true;
+  }
+
+  @action
+  closeDeleteModal() {
+    this.deleteModalOpen = false;
+  }
 }
