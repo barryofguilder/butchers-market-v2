@@ -48,8 +48,8 @@ module.exports = function (defaults) {
     // `ember-animated` blows up when this is turned on.
     // staticHelpers: true,
     staticModifiers: true,
-    // `ember-modal-dialog` blows up when this is turned on.
-    // staticComponents: true,
+    // Blows up on the yielded components. Figure out how to fix.
+    staticComponents: true,
     // splitAtRoutes: ['route.name'], // can also be a RegExp
     // packagerOptions: {
     //    webpackConfig: { }

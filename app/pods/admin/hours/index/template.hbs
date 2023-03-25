@@ -64,7 +64,7 @@
               @icon="trash-alt"
               @variant="danger"
               @disabled={{if hours.default true false}}
-              @onClick={{set this "hoursToDelete" hours}}
+              @onClick={{fn this.openDeleteModal hours}}
             />
           </div>
         </Row.td>
@@ -77,12 +77,11 @@
   </Table.body>
 </Admin::Components::UiTable>
 
-{{#if this.hoursToDelete}}
-  <Admin::Hours::Components::DeleteHoursForm
-    @hours={{this.hoursToDelete}}
-    @onSave={{set this "hoursToDelete" null}}
-    @onCancel={{set this "hoursToDelete" null}}
-  />
-{{/if}}
+<Admin::Hours::Components::DeleteHoursForm
+  @isOpen={{this.deleteModalOpen}}
+  @hours={{this.hoursToDelete}}
+  @onSave={{this.closeDeleteModal}}
+  @onCancel={{this.closeDeleteModal}}
+/>
 
 {{outlet}}
