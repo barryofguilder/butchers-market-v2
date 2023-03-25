@@ -49,7 +49,7 @@ module.exports = function (defaults) {
     // staticHelpers: true,
     staticModifiers: true,
     // Blows up on the yielded components. Figure out how to fix.
-    staticComponents: true,
+    // staticComponents: true,
     // splitAtRoutes: ['route.name'], // can also be a RegExp
     // packagerOptions: {
     //    webpackConfig: { }
