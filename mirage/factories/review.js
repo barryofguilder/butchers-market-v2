@@ -3,7 +3,7 @@ import { faker } from '@faker-js/faker';
 
 export default Factory.extend({
   reviewer() {
-    return `${faker.name.firstName()} ${faker.name.lastName()}`;
+    return `${faker.person.firstName()} ${faker.person.lastName()}`;
   },
 
   imageUrl() {

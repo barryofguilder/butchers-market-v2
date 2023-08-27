@@ -4,7 +4,7 @@ import addWeeks from 'date-fns/addWeeks';
 
 export default Factory.extend({
   title() {
-    const wordCount = faker.datatype.number({ min: 3, max: 10 });
+    const wordCount = faker.number.int({ min: 3, max: 10 });
     return faker.lorem.words(wordCount);
   },
 
@@ -19,11 +19,11 @@ export default Factory.extend({
   },
 
   activeStartDate() {
-    return faker.date.past(2);
+    return faker.date.past({ years: 2 });
   },
 
   activeEndDate() {
-    const weekCount = faker.datatype.number({ min: 1, max: 5 });
+    const weekCount = faker.number.int({ min: 1, max: 5 });
     return addWeeks(this.activeStartDate, weekCount);
   },
 

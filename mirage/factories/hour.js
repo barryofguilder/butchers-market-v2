@@ -13,7 +13,7 @@ export default Factory.extend({
 
   activeStartDate() {
     if (this.default === false) {
-      return faker.date.past(2);
+      return faker.date.past({ years: 2 });
     }
   },
 
