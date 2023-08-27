@@ -53,7 +53,7 @@ export default class MenuFormComponent extends Component {
     let changeset = new Changeset(
       this.args.menu,
       lookupValidator(MenuValidations),
-      MenuValidations
+      MenuValidations,
     );
 
     this.changeset = changeset;

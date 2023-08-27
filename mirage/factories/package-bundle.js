@@ -3,7 +3,7 @@ import { faker } from '@faker-js/faker';
 
 export default Factory.extend({
   title() {
-    const wordCount = faker.datatype.number({ min: 2, max: 4 });
+    const wordCount = faker.number.int({ min: 2, max: 4 });
     return faker.lorem.words(wordCount);
   },
 
