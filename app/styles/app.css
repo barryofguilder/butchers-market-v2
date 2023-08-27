@@ -13,7 +13,9 @@
 }
 
 .transition-form-element {
-  transition: border 0.15s ease-in-out, background 0.15s ease-in-out;
+  transition:
+    border 0.15s ease-in-out,
+    background 0.15s ease-in-out;
 }
 
 /* Animated tools used for debugging animations */
@@ -26,6 +28,7 @@
 }
 
 /* Disable parallax for tablets and phones */
+/* stylelint-disable-next-line media-query-no-invalid */
 @media only screen and (max-device-width <= 1024px) {
   .parallax-background {
     @apply bg-scroll;

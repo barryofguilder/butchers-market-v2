@@ -21,7 +21,7 @@ export default class HoursFormComponent extends Component {
     let changeset = new Changeset(
       this.args.hours,
       lookupValidator(HoursValidations),
-      HoursValidations
+      HoursValidations,
     );
 
     this.changeset = changeset;
@@ -50,7 +50,7 @@ export default class HoursFormComponent extends Component {
   startDateSelected(date) {
     this.changeset.set(
       'activeStartDate',
-      new Date(date[0].getFullYear(), date[0].getMonth(), date[0].getDate(), 0, 0, 0)
+      new Date(date[0].getFullYear(), date[0].getMonth(), date[0].getDate(), 0, 0, 0),
     );
   }
 
@@ -58,7 +58,7 @@ export default class HoursFormComponent extends Component {
   endDateSelected(date) {
     this.changeset.set(
       'activeEndDate',
-      new Date(date[0].getFullYear(), date[0].getMonth(), date[0].getDate(), 23, 59, 59)
+      new Date(date[0].getFullYear(), date[0].getMonth(), date[0].getDate(), 23, 59, 59),
     );
   }
 }
