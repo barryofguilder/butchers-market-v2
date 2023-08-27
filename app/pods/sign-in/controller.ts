@@ -1,19 +1,22 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import LocalStorageService from '../../services/local-storage';
 import { TOKEN } from 'butchers-market/utils/local-storage';
+import RouterService from '@ember/routing/router-service';
+import Transition from '@ember/routing/transition';
 
 export default class SignInController extends Controller {
-  @service localStorage;
-  @service router;
+  @service declare localStorage: LocalStorageService;
+  @service declare router: RouterService;
 
-  previousTransitionOrUrl = null;
+  previousTransitionOrUrl: Transition | string | null = null;
 
   @action
-  authenticated(token) {
+  authenticated(token: string) {
     this.localStorage.setItem(TOKEN, token);
 
-    let previousTransitionOrUrl = this.previousTransitionOrUrl;
+    const previousTransitionOrUrl = this.previousTransitionOrUrl;
 
     if (previousTransitionOrUrl) {
       this.previousTransitionOrUrl = null;
