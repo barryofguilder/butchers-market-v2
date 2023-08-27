@@ -1,13 +1,14 @@
 import { v4 as uuidv4 } from 'uuid';
 import format from 'date-fns/format';
+import { UploadFile } from 'ember-file-upload';
 
 /**
  * Generates a file name to store in the database for general files.
  *
- * @param {*} file
+ * @param {UploadFile} file
  * @return Returns the file name to store.
  */
-export function generateFileName(file) {
+export function generateFileName(file: UploadFile) {
   const fileParts = file.name.split('.');
   const extension = fileParts.length > 1 ? `.${fileParts[fileParts.length - 1]}` : '';
   return `${uuidv4()}${extension}`;
@@ -16,10 +17,10 @@ export function generateFileName(file) {
 /**
  * Generates a file name to store in the database for PDF files.
  *
- * @param {*} file
+ * @param {UploadFile} file
  * @return Returns the file name to store.
  */
-export function generatePdfFileName(file) {
+export function generatePdfFileName(file: UploadFile) {
   const fileParts = file.name.split('.');
   const extension = fileParts.length > 1 ? `.${fileParts[fileParts.length - 1]}` : '';
 

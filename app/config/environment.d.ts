@@ -9,6 +9,14 @@ declare const config: {
   locationType: 'history' | 'hash' | 'none' | 'auto';
   rootURL: string;
   APP: Record<string, unknown>;
+
+  // Custom properties
+  api: string;
+  namespace: string;
+  orderOnlineUrl: string;
+  showOrderOnline: boolean;
+  showReCaptcha: boolean;
+  uploadsDir: string;
 };
 
 export default config;
