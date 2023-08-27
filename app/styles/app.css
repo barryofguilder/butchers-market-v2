@@ -1,13 +1,20 @@
 /* Ember supports plain CSS out of the box. More info: https://cli.emberjs.com/release/advanced-use/stylesheets/ */
 
-@import "tailwindcss/base";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@import "tailwindcss/components";
-@import "_textbox";
-@import "_ember-sortable";
+/*
+ * Utilities
+ */
 
-@import "tailwindcss/utilities";
-@import "_utilities";
+.text-shadow {
+  text-shadow: 1px 1px 1px theme("colors.gray.900");
+}
+
+.transition-form-element {
+  transition: border 0.15s ease-in-out, background 0.15s ease-in-out;
+}
 
 /* Animated tools used for debugging animations */
 .animated-tools {
@@ -19,8 +26,42 @@
 }
 
 /* Disable parallax for tablets and phones */
-@media only screen and (max-device-width: 1024px) {
+@media only screen and (max-device-width <= 1024px) {
   .parallax-background {
     @apply bg-scroll;
   }
+}
+
+/*
+ * Ember Sortable
+ */
+
+.sortable-item {
+  transition: all 0.125s;
+}
+
+.sortable-item.is-dragging {
+  transition-duration: 0s;
+
+  @apply shadow bg-gray-200;
+}
+
+/*
+ * Textbox/Textarea
+ */
+
+.styled-textbox {
+  @apply appearance-none py-2 px-4 w-full bg-gray-200 rounded border-2 border-gray-200 text-gray-700 leading-tight transition-form-element;
+}
+
+.styled-textbox:focus {
+  @apply outline-none bg-white border-gray-500;
+}
+
+.styled-textbox:read-only:not(.ember-flatpickr) {
+  @apply p-0 bg-transparent border-transparent text-gray-900 shadow-none;
+}
+
+.styled-textbox.has-errors {
+  @apply border-red-600;
 }
