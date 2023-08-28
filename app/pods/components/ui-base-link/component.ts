@@ -2,7 +2,18 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { valueOrDefault } from 'butchers-market/utils/value-or-default';
 
-export default class UiBaseLink extends Component {
+export interface UiBaseLinkSignature {
+  Args: {
+    download?: boolean;
+    href?: string;
+    model?: unknown;
+    models?: unknown[];
+    query?: Record<string, unknown>;
+    route?: string;
+  };
+}
+
+export default class UiBaseLinkComponent extends Component<UiBaseLinkSignature> {
   get download() {
     return valueOrDefault(this.args.download, false);
   }
@@ -30,7 +41,7 @@ export default class UiBaseLink extends Component {
   }
 
   @action
-  registerLinkAttributes(element) {
+  registerLinkAttributes(element: HTMLAnchorElement) {
     if (this.args.href === '') {
       element.removeAttribute('href');
     }

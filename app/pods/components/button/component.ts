@@ -2,8 +2,25 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { isPresent } from '@ember/utils';
 import { valueOrDefault } from 'butchers-market/utils/value-or-default';
+import type { Task } from 'ember-concurrency';
 
-export default class ButtonComponent extends Component {
+export interface ButtonSignature {
+  Args: {
+    'data-test-id'?: string;
+    disabled?: boolean;
+    href?: string;
+    iconOnly?: boolean;
+    onClick?: () => unknown;
+    route?: string;
+    size?: 'large' | 'medium' | 'small';
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    task?: Task<any, any[]>;
+    type?: 'button' | 'submit';
+    variant?: 'primary' | 'plain' | 'secondary';
+  };
+}
+
+export default class ButtonComponent extends Component<ButtonSignature> {
   // Specifying these two component properties instead of using HTML attributes is to get around
   // the limitation where using the `component` helper can only pass component properties through.
   // See: https://github.com/emberjs/rfcs/issues/497
@@ -54,7 +71,7 @@ export default class ButtonComponent extends Component {
 
   get iconVariant() {
     // Only use the `variant` property if it was passed in
-    return this.iconOnly && this.args.variant ? this.args.variant : 'inherit';
+    return this.args.iconOnly && this.args.variant ? this.args.variant : 'inherit';
   }
 
   get buttonClasses() {
@@ -104,7 +121,7 @@ export default class ButtonComponent extends Component {
   }
 
   @action
-  click(event) {
+  click(event: MouseEvent) {
     if (this.args.task) {
       event.preventDefault();
       this.args.task.perform();

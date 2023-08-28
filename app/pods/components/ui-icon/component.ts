@@ -1,7 +1,17 @@
 import Component from '@glimmer/component';
 import { valueOrDefault } from 'butchers-market/utils/value-or-default';
 
-export default class UiIconComponent extends Component {
+export interface UiIconSignature {
+  Args: {
+    disabled?: boolean;
+    iconPrefix?: 'fas' | 'far' | 'fab';
+    size?: '2xs' | 'xs' | 'sm' | 'lg' | 'xl' | '2xl';
+    spin?: boolean;
+    variant?: 'inherit' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
+  };
+}
+
+export default class UiIconComponent extends Component<UiIconSignature> {
   get iconPrefix() {
     return valueOrDefault(this.args.iconPrefix, 'fas');
   }

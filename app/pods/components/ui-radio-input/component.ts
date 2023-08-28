@@ -3,7 +3,18 @@ import { action } from '@ember/object';
 import { once } from '@ember/runloop';
 import { valueOrDefault } from 'butchers-market/utils/value-or-default';
 
-export default class UiRadioInput extends Component {
+export interface UiRadioInputSignature {
+  Args: {
+    checked?: boolean;
+    disabled?: boolean;
+    groupValue: string;
+    name: string;
+    onChange: (value: string) => void;
+    value: string;
+  };
+}
+
+export default class UiRadioInputComponent extends Component<UiRadioInputSignature> {
   get disabled() {
     return valueOrDefault(this.args.disabled, false);
   }

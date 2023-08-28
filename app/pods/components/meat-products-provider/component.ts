@@ -1,6 +1,11 @@
 import Component from '@glimmer/component';
+import { EmptyObject } from '@ember/component/helper';
 
-export default class MeatProductsProviderComponent extends Component {
+export interface MeatProductsProviderSignature {
+  Args: EmptyObject;
+}
+
+export default class MeatProductsProviderComponent extends Component<MeatProductsProviderSignature> {
   products = [
     {
       title: 'Pork',
