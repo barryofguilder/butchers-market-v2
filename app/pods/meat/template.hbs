@@ -64,42 +64,45 @@
 </section>
 
 {{#each (sort-by "displayOrder" @model.packageBundles) as |bundle|}}
-  <section>
-    <HeaderTitle @title={{bundle.title}} />
+  {{! Hiding "Ice Box" for now, might delete later if not needed anymore. }}
+  {{#unless (eq bundle.title "Ice Box Mix N' Match")}}
+    <section>
+      <HeaderTitle @title={{bundle.title}} />
 
-    <Container>
-      {{#if bundle.fileUrlPath}}
-        <div class="mt-8 text-center">
-          <Button @href={{bundle.fileUrlPath}}>
-            Print Flyer
-          </Button>
-        </div>
-      {{/if}}
+      <Container>
+        {{#if bundle.fileUrlPath}}
+          <div class="mt-8 text-center">
+            <Button @href={{bundle.fileUrlPath}}>
+              Print Flyer
+            </Button>
+          </div>
+        {{/if}}
 
-      <div class="mt-12 sm:flex sm:flex-wrap">
-        <div class="text-lg font-black md:text-2xl sm:w-full lg:w-1/3">
-          <ul>
-            {{#each bundle.prices as |price|}}
-              <li>{{price}}</li>
-            {{/each}}
-            {{#if bundle.specialText}}
-              <li class="text-md md:text-lg text-red-700 italic font-semibold">
-                {{bundle.specialText}}
-              </li>
-            {{/if}}
-          </ul>
-        </div>
-
-        {{#each (split-in 2 bundle.items) as |columnItems index|}}
-          <div class="{{if (eq index 0) 'mt-4' 'sm:mt-4'}} sm:text-lg sm:w-1/2 lg:mt-0 lg:w-1/3">
-            <ul class="pl-8 list-disc">
-              {{#each columnItems as |item|}}
-                <li>{{item}}</li>
+        <div class="mt-12 sm:flex sm:flex-wrap">
+          <div class="text-lg font-black md:text-2xl sm:w-full lg:w-1/3">
+            <ul>
+              {{#each bundle.prices as |price|}}
+                <li>{{price}}</li>
               {{/each}}
+              {{#if bundle.specialText}}
+                <li class="text-md md:text-lg text-red-700 italic font-semibold">
+                  {{bundle.specialText}}
+                </li>
+              {{/if}}
             </ul>
           </div>
-        {{/each}}
-      </div>
-    </Container>
-  </section>
+
+          {{#each (split-in 2 bundle.items) as |columnItems index|}}
+            <div class="{{if (eq index 0) 'mt-4' 'sm:mt-4'}} sm:text-lg sm:w-1/2 lg:mt-0 lg:w-1/3">
+              <ul class="pl-8 list-disc">
+                {{#each columnItems as |item|}}
+                  <li>{{item}}</li>
+                {{/each}}
+              </ul>
+            </div>
+          {{/each}}
+        </div>
+      </Container>
+    </section>
+  {{/unless}}
 {{/each}}

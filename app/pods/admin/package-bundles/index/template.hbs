@@ -19,45 +19,48 @@
   </Table.head>
   <Table.body as |Tbody|>
     {{#each this.sortedBundles as |bundle|}}
-      <Tbody.tr as |Row|>
-        <Row.td>{{bundle.title}}</Row.td>
-        <Row.td>
-          <ul>
-            {{#each bundle.prices as |price|}}
-              <li>{{price}}</li>
-            {{/each}}
-          </ul>
-        </Row.td>
-        <Row.td>{{bundle.specialText}}</Row.td>
-        <Row.td>
-          {{#if bundle.items}}
-            {{bundle.items.length}}
-            Items
-          {{else}}
-            0 Items
-          {{/if}}
-        </Row.td>
-        <Row.td>
-          <div class="flex justify-end">
-            <Button
-              @route="admin.package-bundles.edit"
-              @model={{bundle.id}}
-              @iconOnly={{true}}
-              @icon="pencil-alt"
-              @variant="secondary"
-            />
+      {{! Hiding "Ice Box" for now, might delete later if not needed anymore. }}
+      {{#unless (eq bundle.title "Ice Box Mix N' Match")}}
+        <Tbody.tr as |Row|>
+          <Row.td>{{bundle.title}}</Row.td>
+          <Row.td>
+            <ul>
+              {{#each bundle.prices as |price|}}
+                <li>{{price}}</li>
+              {{/each}}
+            </ul>
+          </Row.td>
+          <Row.td>{{bundle.specialText}}</Row.td>
+          <Row.td>
+            {{#if bundle.items}}
+              {{bundle.items.length}}
+              Items
+            {{else}}
+              0 Items
+            {{/if}}
+          </Row.td>
+          <Row.td>
+            <div class="flex justify-end">
+              <Button
+                @route="admin.package-bundles.edit"
+                @model={{bundle.id}}
+                @iconOnly={{true}}
+                @icon="pencil-alt"
+                @variant="secondary"
+              />
 
-            {{! Hiding the delete button until it's needed }}
-            {{!-- <Button
+              {{! Hiding the delete button until it's needed }}
+              {{!-- <Button
               class="ml-1"
               @iconOnly={{true}}
               @icon="trash-alt"
               @variant="danger"
               @onClick={{fn this.openDeleteModal bundle}}
             /> --}}
-          </div>
-        </Row.td>
-      </Tbody.tr>
+            </div>
+          </Row.td>
+        </Tbody.tr>
+      {{/unless}}
     {{else}}
       <Tbody.empty>
         No package bundles found.
