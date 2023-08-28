@@ -3,7 +3,18 @@ import { action } from '@ember/object';
 import { guidFor } from '@ember/object/internals';
 import { valueOrDefault } from 'butchers-market/utils/value-or-default';
 
-export default class UiTextareaComponent extends Component {
+export interface UiTextboxSignature {
+  Args: {
+    hasErrors?: boolean;
+    errors?: { message: string }[];
+    id?: string;
+    readonly?: boolean;
+    onChange?: (value: string) => void;
+    value?: string;
+  };
+}
+
+export default class UiTextboxComponent extends Component<UiTextboxSignature> {
   get id() {
     return valueOrDefault(this.args.id, guidFor(this));
   }
@@ -16,18 +27,13 @@ export default class UiTextareaComponent extends Component {
     return (this.args.errors ?? []).length > 0;
   }
 
-  get onChange() {
-    return valueOrDefault(this.args.onChange, () => {
-      //
-    });
-  }
-
   get readonly() {
     return valueOrDefault(this.args.readonly, false);
   }
 
   @action
-  handleInput(event) {
-    this.onChange(event.target.value);
+  handleInput(event: InputEvent) {
+    const element = event.target as HTMLInputElement;
+    this.args.onChange?.(element.value);
   }
 }

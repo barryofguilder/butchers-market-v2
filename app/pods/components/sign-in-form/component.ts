@@ -4,14 +4,20 @@ import { dropTask } from 'ember-concurrency';
 import fetch from 'fetch';
 import baseUrl from 'butchers-market/utils/base-url';
 
-export default class SignInFormComponent extends Component {
+export interface SignInFormSignature {
+  Args: {
+    onAuthenticated: (token: string) => void;
+  };
+}
+
+export default class SignInFormComponent extends Component<SignInFormSignature> {
   username = '';
   password = '';
 
   @tracked hasError = false;
 
   signIn = dropTask(async () => {
-    let body = JSON.stringify({
+    const body = JSON.stringify({
       data: {
         type: 'tokens',
         attributes: {
@@ -20,7 +26,7 @@ export default class SignInFormComponent extends Component {
         },
       },
     });
-    let payload = {
+    const payload = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/vnd.api+json',

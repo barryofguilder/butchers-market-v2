@@ -5,15 +5,20 @@ import config from 'butchers-market/config/environment';
 import { dropTask } from 'ember-concurrency';
 import fetch from 'fetch';
 import baseUrl from 'butchers-market/utils/base-url';
+import { EmptyObject } from '@ember/component/helper';
 
-export default class FeedbackFormComponent extends Component {
+export interface FeedbackFormSignature {
+  Args: EmptyObject;
+}
+
+export default class FeedbackFormComponent extends Component<FeedbackFormComponent> {
   showReCaptcha = config.showReCaptcha;
 
-  @tracked name;
-  @tracked email;
-  @tracked message;
-  @tracked recaptcha;
-  @tracked formState;
+  @tracked name?: string;
+  @tracked email?: string;
+  @tracked message?: string;
+  @tracked recaptcha?: string;
+  @tracked formState: 'Initial' | 'FormError' | 'Sent' | 'ServerError' = 'Initial';
 
   get feedbackSent() {
     return this.formState === 'Sent';
@@ -28,7 +33,7 @@ export default class FeedbackFormComponent extends Component {
   }
 
   sendFeedbackTask = dropTask(async () => {
-    let body = JSON.stringify({
+    const body = JSON.stringify({
       data: {
         attributes: {
           name: this.name,
@@ -38,7 +43,7 @@ export default class FeedbackFormComponent extends Component {
         },
       },
     });
-    let payload = {
+    const payload = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/vnd.api+json',
@@ -60,12 +65,12 @@ export default class FeedbackFormComponent extends Component {
   });
 
   @action
-  onCaptchaResolved(reCaptchaResponse) {
+  onCaptchaResolved(reCaptchaResponse: string) {
     this.recaptcha = reCaptchaResponse;
   }
 
   @action
-  sendFeedback(event) {
+  sendFeedback(event: Event) {
     event.preventDefault();
     this.sendFeedbackTask.perform();
   }

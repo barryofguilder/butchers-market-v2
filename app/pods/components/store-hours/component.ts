@@ -3,9 +3,20 @@ import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 import { isAfter, isBefore } from 'date-fns';
 import { valueOrDefault } from 'butchers-market/utils/value-or-default';
+import Store from '@ember-data/store';
+import HourModel from 'butchers-market/models/hour';
 
-export default class StoreHoursComponent extends Component {
-  @service store;
+type HourType = 'Store' | 'Cafe';
+
+export interface StoreHoursSignature {
+  Args: {
+    hours: HourModel[];
+    primaryType?: HourType;
+  };
+}
+
+export default class StoreHoursComponent extends Component<StoreHoursSignature> {
+  @service declare store: Store;
 
   @tracked primaryHours;
   @tracked secondaryHours;
@@ -14,11 +25,11 @@ export default class StoreHoursComponent extends Component {
     return valueOrDefault(this.args.primaryType, 'Store');
   }
 
-  constructor() {
-    super(...arguments);
+  constructor(owner: unknown, args: StoreHoursSignature['Args']) {
+    super(owner, args);
 
-    let storeHours = this.getHoursForType('Store');
-    let cafeHours = this.getHoursForType('Cafe');
+    const storeHours = this.getHoursForType('Store');
+    const cafeHours = this.getHoursForType('Cafe');
 
     if (this.primaryType === 'Store') {
       this.primaryHours = storeHours;
@@ -29,9 +40,9 @@ export default class StoreHoursComponent extends Component {
     }
   }
 
-  getHoursForType(hourType) {
+  getHoursForType(hourType: HourType) {
     const hours = this.args.hours;
-    let now = new Date();
+    const now = new Date();
 
     // Get the hours set to be used during the time frame.
     let storeHours = hours.filter((hour) => {
