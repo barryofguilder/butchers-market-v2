@@ -1,8 +1,9 @@
 import ApplicationAdapter from './application';
 import fetch from 'fetch';
+import SpecialModel from '../models/special';
 
 export default class SpecialAdapter extends ApplicationAdapter {
-  reorderSpecials(specials) {
+  reorderSpecials(specials: SpecialModel[]) {
     const baseUrl = this.buildURL();
     const url = `${baseUrl}/specials/reorder`;
     const specialData = specials.map((special) => {

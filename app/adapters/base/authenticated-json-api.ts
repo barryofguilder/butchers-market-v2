@@ -1,0 +1,27 @@
+import RouterService from '@ember/routing/router-service';
+import DefaultAdapter from './default-adapter';
+import { inject as service } from '@ember/service';
+import SessionService from '../../services/session';
+
+export default class AuthenticatedJSONAPIAdapter extends DefaultAdapter {
+  @service declare router: RouterService;
+  @service declare session: SessionService;
+
+  get headers() {
+    const token = this.session.token;
+
+    return {
+      Authorization: token ? `Bearer ${token}` : '',
+    };
+  }
+
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  handleResponse(status: number, headers: {}, payload: {}, requestData: {}) {
+    if (status === 401) {
+      this.session.redirectToSignIn(this.router.currentURL);
+      return {};
+    }
+
+    return super.handleResponse(status, headers, payload, requestData);
+  }
+}

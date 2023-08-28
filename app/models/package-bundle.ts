@@ -2,12 +2,12 @@ import Model, { attr } from '@ember-data/model';
 import config from 'butchers-market/config/environment';
 
 export default class PackageBundle extends Model {
-  @attr('number') displayOrder;
-  @attr('string') title;
-  @attr('string') fileUrl;
-  @attr('string') specialText;
-  @attr prices; // Array of strings
-  @attr items; // Array of strings
+  @attr() declare displayOrder: number;
+  @attr() declare title: string;
+  @attr() declare fileUrl: string;
+  @attr() declare specialText: string;
+  @attr() declare prices: string[];
+  @attr() declare items: string[];
 
   get fileUrlPath() {
     if (this.fileUrl) {

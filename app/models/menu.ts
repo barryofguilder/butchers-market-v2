@@ -2,8 +2,8 @@ import Model, { attr } from '@ember-data/model';
 import config from 'butchers-market/config/environment';
 
 export default class Menu extends Model {
-  @attr('string') fileUrl;
-  @attr('date') updatedAt;
+  @attr() declare fileUrl: string;
+  @attr() declare updatedAt: Date;
 
   get fileUrlPath() {
     if (this.fileUrl) {

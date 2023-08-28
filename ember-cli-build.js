@@ -6,6 +6,9 @@ const isProduction = environment === 'production';
 
 module.exports = function (defaults) {
   const app = new EmberApp(defaults, {
+    // Add options here
+    'ember-cli-babel': { enableTypeScriptTransform: true },
+
     'ember-composable-helpers': {
       only: ['sort-by'],
     },

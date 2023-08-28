@@ -1,7 +1,7 @@
 import { helper } from '@ember/component/helper';
 
 // Splits an array up into the specified number of chunks.
-export function dateFormat([chunksOf, array]) {
+export function splitIn<T>([chunksOf, array]: [number, T[]]) {
   if (array === undefined || array.length === 0 || chunksOf === 1) {
     return array;
   }
@@ -16,4 +16,4 @@ export function dateFormat([chunksOf, array]) {
   return chunkedArray;
 }
 
-export default helper(dateFormat);
+export default helper(splitIn);
