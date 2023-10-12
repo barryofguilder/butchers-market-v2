@@ -6,7 +6,7 @@ export default class DeliRoute extends Route {
   @service store;
 
   model() {
-    return this.store.findAll('deli-item');
+    return this.store.query('deli-item', { filter: { isHidden: false } });
   }
 
   @action

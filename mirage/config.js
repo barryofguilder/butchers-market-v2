@@ -40,6 +40,15 @@ function routes() {
   this.namespace = '/api';
 
   this.resource('deli-items');
+  this.get('/deli-items', ({ deliItems }, request) => {
+    const isHidden = request.queryParams['filter[isHidden]'];
+
+    if (isHidden !== undefined) {
+      return deliItems.where({ isHidden });
+    }
+
+    return deliItems.all();
+  });
 
   this.post('/feedback', (server, request) => {
     let attrs = JSON.parse(request.requestBody).data.attributes;

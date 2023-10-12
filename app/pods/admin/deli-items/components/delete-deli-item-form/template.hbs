@@ -23,6 +23,11 @@
         <Group.label>Ingredients</Group.label>
         <Group.textarea readonly={{true}} @value={{@item.ingredients}} />
       </Form.group>
+
+      <Form.group data-test-id="hidden" as |Group|>
+        <Group.label>Is Hidden?</Group.label>
+        <Group.readonly @value={{if @item.isHidden "Yes" "No"}} />
+      </Form.group>
     </Modal.body>
     <Modal.footer>
       <Button @variant="plain" @onClick={{@onCancel}}>

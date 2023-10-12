@@ -5,6 +5,7 @@ export default class DeliItem extends Model {
   @attr() declare title: string;
   @attr() declare imageUrl: string;
   @attr() declare ingredients: string;
+  @attr() declare isHidden: boolean;
 
   get imageUrlPath() {
     if (this.imageUrl) {

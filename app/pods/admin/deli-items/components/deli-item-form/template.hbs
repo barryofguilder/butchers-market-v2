@@ -29,6 +29,21 @@
     />
   </Form.group>
 
+  <Form.group data-test-id="hidden" @model={{this.changeset}} @property="isHidden">
+    <label>
+      <input
+        type="checkbox"
+        checked={{this.changeset.isHidden}}
+        {{on "change" this.updateHidden}}
+      />
+      <span class="ml-2">Is hidden</span>
+    </label>
+    <small class="block mt-3 text-gray-700">
+      When checked, this means it won't show on your site. Useful when you are rotating what deli
+      items you have available.
+    </small>
+  </Form.group>
+
   <Form.group data-test-id="image" @model={{this.changeset}} @property="imageUrl" as |Group|>
     <Group.label>Image <Admin::Components::Required /></Group.label>
     <div class="mt-2">
