@@ -103,6 +103,11 @@ export default class DeliItemFormComponent extends Component {
   });
 
   @action
+  updateHidden() {
+    this.changeset.set('isHidden', !this.changeset.get('isHidden'));
+  }
+
+  @action
   uploadImage(file) {
     this.uploadPhoto.perform(file);
   }

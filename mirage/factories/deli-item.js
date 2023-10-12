@@ -15,4 +15,6 @@ export default Factory.extend({
     const wordCount = faker.number.int({ min: 2, max: 10 });
     return faker.lorem.words(wordCount).replace(' ', ', ');
   },
+
+  isHidden: false,
 });

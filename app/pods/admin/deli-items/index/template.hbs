@@ -12,6 +12,7 @@
   <Table.head @currentSort={{this.currentSort}} @onColumnClicked={{this.sortDeliItems}} as |Thead|>
     <Thead.th @name="title">Title</Thead.th>
     <Thead.th @name="ingredients">Ingredients</Thead.th>
+    <Thead.th>Is Hidden?</Thead.th>
     <Thead.th />
   </Table.head>
   <Table.body as |Tbody|>
@@ -19,6 +20,13 @@
       <Tbody.tr as |Row|>
         <Row.td>{{item.title}}</Row.td>
         <Row.td>{{item.ingredients}}</Row.td>
+        <Row.td>
+          {{#if item.isHidden}}
+            <span class="inline-block px-2 bg-blue-200 text-blue-800 text-sm rounded">
+              Hidden
+            </span>
+          {{/if}}
+        </Row.td>
         <Row.td>
           <div class="flex justify-end">
             <Button
