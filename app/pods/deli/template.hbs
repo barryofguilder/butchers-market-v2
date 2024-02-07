@@ -34,26 +34,22 @@
 </section>
 
 <section>
-  <HeaderTitle @title="Party Platters" />
+  <HeaderTitle @title="Sandwich Platters" />
 
   <Container>
-    <div class="flex flex-wrap -mx-4">
-      <div class="mt-10 px-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
-        <img class="w-full shadow-md" src="/images/sandwich-platter.jpg" alt="Sandwich Platters" />
-        <h4 class="mt-2 text-xl font-bold text-center text-gray-900">Sandwich Platters</h4>
+    <div class="flex justify-center flex-wrap -mx-4">
+      <div class="mt-10 px-4 text-center lg:text-left">
+        <Button @href="docs/bmpartyplatters-20221214.pdf">
+          View Flyer
+        </Button>
       </div>
       <div class="mt-10 px-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
         <img
           class="w-full shadow-md"
-          src="/images/meat-cheese-platter.jpg"
-          alt="Meat &amp; Cheese Platters"
+          src="/images/sandwich-platter-thumb.jpg"
+          alt="Sandwich Platters Flyer"
+          loading="lazy"
         />
-        <h4 class="mt-2 text-xl font-bold text-center text-gray-900">Meat &amp; Cheese Platters</h4>
-      </div>
-      <div class="mt-10 px-4 text-center w-full lg:w-1/2 lg:text-left">
-        <Button @href="docs/bmpartyplatters-20221214.pdf">
-          View All Platters
-        </Button>
       </div>
     </div>
   </Container>
