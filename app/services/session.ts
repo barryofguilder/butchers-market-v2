@@ -1,7 +1,7 @@
 import Service, { inject as service } from '@ember/service';
 import { getOwner } from '@ember/application';
 import RouterService from '@ember/routing/router-service';
-import Transition from '@ember/routing/transition';
+import type Transition from '@ember/routing/transition';
 import { addDays } from 'date-fns';
 import SignInController from '../controllers/sign-in';
 

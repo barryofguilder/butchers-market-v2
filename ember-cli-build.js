@@ -40,6 +40,7 @@ module.exports = function (defaults) {
     staticModifiers: true,
     // Blows up on the yielded components. Figure out how to fix.
     // staticComponents: true,
+    // staticEmberSource: true,
     // splitAtRoutes: ['route.name'], // can also be a RegExp
     packagerOptions: {
       webpackConfig: {
@@ -62,5 +63,10 @@ module.exports = function (defaults) {
         },
       },
     },
+    skipBabel: [
+      {
+        package: 'qunit',
+      },
+    ],
   });
 };
