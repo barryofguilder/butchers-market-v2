@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 import { isAfter, isBefore } from 'date-fns';
-import { valueOrDefault } from 'butchers-market/utils/value-or-default';
+import { valueOrDefault } from '../utils/value-or-default';
 
 export default class StoreHoursComponent extends Component {
   @service store;

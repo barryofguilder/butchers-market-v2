@@ -1,10 +1,10 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
-import config from 'butchers-market/config/environment';
 import { dropTask } from 'ember-concurrency';
 import fetch from 'fetch';
-import baseUrl from 'butchers-market/utils/base-url';
+import config from 'butchers-market/config/environment';
+import baseUrl from '../utils/base-url';
 
 export default class FeedbackFormComponent extends Component {
   showReCaptcha = config.showReCaptcha;

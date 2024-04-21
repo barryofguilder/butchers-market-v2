@@ -4,10 +4,10 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
-import MenuValidations from 'butchers-market/validations/menu';
 import { dropTask, enqueueTask } from 'ember-concurrency';
-import baseUrl from 'butchers-market/utils/base-url';
-import { generatePdfFileName } from 'butchers-market/utils/file-name';
+import MenuValidations from '../../../validations/menu';
+import baseUrl from '../../../utils/base-url';
+import { generatePdfFileName } from '../../../utils/file-name';
 
 export default class MenuFormComponent extends Component {
   @service router;

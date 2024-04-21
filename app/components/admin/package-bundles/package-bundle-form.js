@@ -4,10 +4,10 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
-import PackageBundleValidations from 'butchers-market/validations/package-bundle';
 import { dropTask, enqueueTask } from 'ember-concurrency';
-import baseUrl from 'butchers-market/utils/base-url';
-import { generatePdfFileName } from 'butchers-market/utils/file-name';
+import PackageBundleValidations from '../../../validations/package-bundle';
+import baseUrl from '../../../utils/base-url';
+import { generatePdfFileName } from '../../../utils/file-name';
 
 export default class PackageBundleFormComponent extends Component {
   @service router;

@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { isPresent } from '@ember/utils';
-import { valueOrDefault } from 'butchers-market/utils/value-or-default';
+import { valueOrDefault } from '../utils/value-or-default';
 
 export default class ButtonComponent extends Component {
   // Specifying these two component properties instead of using HTML attributes is to get around

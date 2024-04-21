@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
 import { lastValue, restartableTask } from 'ember-concurrency';
-import { valueOrDefault } from 'butchers-market/utils/value-or-default';
+import { valueOrDefault } from '../../utils/value-or-default';
 import config from 'butchers-market/config/environment';
 
 export default class MainNavItemsComponent extends Component {

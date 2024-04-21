@@ -3,8 +3,8 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
-import HoursValidations from 'butchers-market/validations/hour';
 import { dropTask } from 'ember-concurrency';
+import HoursValidations from '../../../validations/hour';
 
 export default class HoursFormComponent extends Component {
   changeset;

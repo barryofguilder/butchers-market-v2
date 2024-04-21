@@ -1,9 +1,9 @@
 import Service, { inject as service } from '@ember/service';
 import { getOwner } from '@ember/application';
-import addDays from 'date-fns/addDays';
 import RouterService from '@ember/routing/router-service';
 import Transition from '@ember/routing/transition';
-import SignInController from 'butchers-market/pods/sign-in/controller';
+import addDays from 'date-fns/addDays';
+import SignInController from '../controllers/sign-in';
 
 type SessionPayload = {
   username: string;

@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { guidFor } from '@ember/object/internals';
-import { valueOrDefault } from 'butchers-market/utils/value-or-default';
+import { valueOrDefault } from '../utils/value-or-default';
 
 export default class UiTextareaComponent extends Component {
   get id() {

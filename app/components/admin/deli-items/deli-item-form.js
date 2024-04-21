@@ -4,10 +4,10 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
-import DeliItemValidations from 'butchers-market/validations/deli-item';
 import { dropTask, enqueueTask } from 'ember-concurrency';
-import baseUrl from 'butchers-market/utils/base-url';
-import { generateFileName } from 'butchers-market/utils/file-name';
+import DeliItemValidations from '../../../validations/deli-item';
+import baseUrl from '../../../utils/base-url';
+import { generateFileName } from '../../../utils/file-name';
 
 export default class DeliItemFormComponent extends Component {
   @service router;

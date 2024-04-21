@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import { valueOrDefault } from 'butchers-market/utils/value-or-default';
+import { valueOrDefault } from '../utils/value-or-default';
 
 export default class UiBaseLink extends Component {
   get download() {

@@ -1,10 +1,10 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import LocalStorageService from '../../services/local-storage';
-import { TOKEN } from 'butchers-market/utils/local-storage';
 import RouterService from '@ember/routing/router-service';
 import Transition from '@ember/routing/transition';
+import LocalStorageService from '../services/local-storage';
+import { TOKEN } from '../utils/local-storage';
 
 export default class SignInController extends Controller {
   @service declare localStorage: LocalStorageService;

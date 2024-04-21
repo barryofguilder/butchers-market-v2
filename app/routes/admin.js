@@ -1,7 +1,7 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import { TOKEN } from 'butchers-market/utils/local-storage';
 import jwt_decode from 'jwt-decode';
+import { TOKEN } from '../utils/local-storage';
 
 export default class AdminRoute extends Route {
   @service localStorage;

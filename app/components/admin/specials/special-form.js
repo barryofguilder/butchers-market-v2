@@ -4,11 +4,11 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
-import SpecialValidations from 'butchers-market/validations/special';
 import { dropTask, enqueueTask } from 'ember-concurrency';
-import baseUrl from 'butchers-market/utils/base-url';
+import SpecialValidations from '../../../validations/special';
+import baseUrl from '../../../utils/base-url';
 import config from 'butchers-market/config/environment';
-import { generateFileName } from 'butchers-market/utils/file-name';
+import { generateFileName } from '../../../utils/file-name';
 
 export default class SpecialFormComponent extends Component {
   @service router;
