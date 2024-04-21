@@ -1,0 +1,112 @@
+<Admin::AdminForm class="max-w-xl" @onSubmit={{perform this.saveItem}} as |Form|>
+  {{#if this.errorMessage}}
+    <UiAlert data-test-id="server-error" @variant="danger">
+      {{this.errorMessage}}
+    </UiAlert>
+  {{/if}}
+
+  <p class="mb-8">
+    <strong>Note:</strong>
+    Required fields are marked with an
+    <Admin::Required />
+  </p>
+
+  <Form.group data-test-id="title" @model={{this.changeset}} @property="title" as |Group|>
+    <Group.label>Title <Admin::Required /></Group.label>
+    <Group.textbox @value={{this.changeset.title}} @onChange={{set this "changeset.title"}} />
+  </Form.group>
+
+  <Form.group
+    data-test-id="ingredients"
+    @model={{this.changeset}}
+    @property="ingredients"
+    as |Group|
+  >
+    <Group.label>Ingredients</Group.label>
+    <Group.textarea
+      @value={{this.changeset.ingredients}}
+      @onChange={{set this "changeset.ingredients"}}
+    />
+  </Form.group>
+
+  <Form.group data-test-id="hidden" @model={{this.changeset}} @property="isHidden">
+    <label>
+      <input
+        type="checkbox"
+        checked={{this.changeset.isHidden}}
+        {{on "change" this.updateHidden}}
+      />
+      <span class="ml-2">Is hidden</span>
+    </label>
+    <small class="block mt-3 text-gray-700">
+      When checked, this means it won't show on your site. Useful when you are rotating what deli
+      items you have available.
+    </small>
+  </Form.group>
+
+  <Form.group data-test-id="image" @model={{this.changeset}} @property="imageUrl" as |Group|>
+    <Group.label>Image <Admin::Required /></Group.label>
+    <div class="mt-2">
+      {{#let (file-queue name="photos" onFileAdded=this.uploadImage) as |queue|}}
+        <label for={{Group.uniqueId}}>
+          <span
+            class="inline-block px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-none focus:ring"
+          >
+            Select Image
+          </span>
+          <input type="file" id={{Group.uniqueId}} accept="image/*" hidden {{queue.selectFile}} />
+        </label>
+      {{/let}}
+
+      {{#if this.hasImage}}
+        <button
+          type="button"
+          class="inline-block ml-2 px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-none focus:ring"
+          {{on "click" this.removeImage}}
+        >
+          Remove Image
+        </button>
+      {{/if}}
+
+      <small class="block mt-3 text-gray-700 sm:inline-block sm:mt-0 sm:ml-2">
+        Only JPG, JPEG, PNG, and GIF files are allowed.
+      </small>
+      <small class="block mt-3 text-gray-700">
+        Please optimize the image before uploading using
+        <a
+          href="https://tinypng.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-red-800 font-semibold hover:underline"
+        >
+          this site
+        </a>.
+      </small>
+
+      {{#if this.fileErrorMessage}}
+        <span class="block mt-2 text-red-500">
+          This is an error message.
+          {{this.fileErrorMessage}}
+        </span>
+      {{/if}}
+
+      {{#if this.hasImage}}
+        <div class="mt-4">
+          <img src={{this.imageUrl}} alt="Deli item" class="w-full block" />
+        </div>
+      {{/if}}
+    </div>
+  </Form.group>
+
+  <div class="mt-8">
+    {{#if this.changeset.errors}}
+      <div class="mb-2 text-red-600">
+        Please fix the errors above and try again.
+      </div>
+    {{/if}}
+    <Form.submit @disabled={{this.saveDisabled}}>
+      Save
+    </Form.submit>
+    <Button class="ml-2" @variant="plain" @onClick={{@cancelled}}>Cancel</Button>
+  </div>
+</Admin::AdminForm>

@@ -1,0 +1,35 @@
+<Admin::BackLink @route="admin.index" @text="Admin" />
+
+<Admin::Title @title="Menu PDF" />
+
+<Admin::UiTable class="mt-8" as |Table|>
+  <Table.head as |Thead|>
+    <Thead.th>Last Updated At</Thead.th>
+    <Thead.th />
+  </Table.head>
+  <Table.body as |Tbody|>
+    {{#each this.model as |menu|}}
+      <Tbody.tr as |Row|>
+        <Row.td>{{date-format menu.updatedAt "LL/dd/yyyy h:mma"}}</Row.td>
+
+        <Row.td>
+          <div class="flex justify-end">
+            <Button
+              @route="admin.menu.edit"
+              @model={{menu.id}}
+              @iconOnly={{true}}
+              @icon="pencil-alt"
+              @variant="secondary"
+            />
+          </div>
+        </Row.td>
+      </Tbody.tr>
+    {{else}}
+      <Tbody.empty>
+        No menus found.
+      </Tbody.empty>
+    {{/each}}
+  </Table.body>
+</Admin::UiTable>
+
+{{outlet}}

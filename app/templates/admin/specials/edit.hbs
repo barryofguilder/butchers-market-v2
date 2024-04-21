@@ -1,0 +1,9 @@
+<Admin::BackLink @route="admin.specials" @text="Specials" />
+
+<Admin::Title @title="Edit Special" />
+
+<Admin::Specials::SpecialForm
+  @special={{this.model}}
+  @saved={{this.specialSaved}}
+  @cancelled={{this.specialCancelled}}
+/>
