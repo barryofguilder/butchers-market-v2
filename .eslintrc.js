@@ -22,7 +22,7 @@ module.exports = {
   overrides: [
     // TypeScript files
     {
-      files: ['**/*.ts'],
+      files: ['**/*.gts', '**/*.ts'],
       parser: '@typescript-eslint/parser',
       plugins: ['ember', '@typescript-eslint'],
       extends: [

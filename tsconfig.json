@@ -14,5 +14,8 @@
       "fetch": ["node_modules/ember-fetch"],
       "*": ["types/*"]
     }
+  },
+  "glint": {
+    "environment": ["ember-loose", "ember-template-imports"]
   }
 }
