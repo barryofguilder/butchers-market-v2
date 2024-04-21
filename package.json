@@ -146,9 +146,9 @@
     "edition": "octane"
   },
   "engines": {
-    "node": ">= 18"
+    "node": "20.12.2"
   },
   "volta": {
-    "node": "18.17.1"
+    "node": "20.12.2"
   }
 }
