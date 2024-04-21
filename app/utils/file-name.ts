@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import format from 'date-fns/format';
+import { format } from 'date-fns';
 import { UploadFile } from 'ember-file-upload';
 
 /**

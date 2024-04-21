@@ -1,4 +1,4 @@
-import addDays from 'date-fns/addDays';
+import { addDays } from 'date-fns';
 
 export default function (server) {
   createDeliItems(server);

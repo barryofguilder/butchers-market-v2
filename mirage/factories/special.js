@@ -1,6 +1,6 @@
 import { Factory } from 'miragejs';
 import { faker } from '@faker-js/faker';
-import addWeeks from 'date-fns/addWeeks';
+import { addWeeks } from 'date-fns';
 
 export default Factory.extend({
   title() {

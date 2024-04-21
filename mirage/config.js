@@ -25,7 +25,7 @@ const TOKEN =
 export default function (config) {
   let finalConfig = {
     ...config,
-    models: { ...discoverEmberDataModels(), ...config.models },
+    models: { ...discoverEmberDataModels(config.store), ...config.models },
     routes,
   };
 

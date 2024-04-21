@@ -1,6 +1,6 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import jwt_decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import { TOKEN } from '../utils/local-storage';
 
 export default class AdminRoute extends Route {
@@ -10,7 +10,7 @@ export default class AdminRoute extends Route {
   beforeModel(transition) {
     try {
       const token = localStorage.getItem(TOKEN);
-      const decodedToken = jwt_decode(token);
+      const decodedToken = jwtDecode(token);
 
       this.session.updateToken(token, decodedToken);
 
