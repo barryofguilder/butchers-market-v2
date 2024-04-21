@@ -1,0 +1,9 @@
+<Admin::BackLink @route="admin.package-bundles" @text="Package Bundles" />
+
+<Admin::Title @title="New Package Bundle" />
+
+<Admin::PackageBundles::PackageBundleForm
+  @bundle={{this.model}}
+  @saved={{this.bundleSaved}}
+  @cancelled={{this.bundleCancelled}}
+/>

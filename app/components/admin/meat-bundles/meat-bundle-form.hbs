@@ -1,0 +1,143 @@
+<Admin::AdminForm class="max-w-xl" @onSubmit={{perform this.saveBundle}} as |Form|>
+  {{#if this.errorMessage}}
+    <UiAlert data-test-id="server-error" @variant="danger">
+      {{this.errorMessage}}
+    </UiAlert>
+  {{/if}}
+
+  <p class="mb-8">
+    <strong>Note:</strong>
+    Required fields are marked with an
+    <Admin::Required />
+  </p>
+
+  <Form.group data-test-id="title" @model={{this.changeset}} @property="title" as |Group|>
+    <Group.label>
+      Title
+      <Admin::Required />
+    </Group.label>
+    <Group.textbox @value={{this.changeset.title}} @onChange={{set this "changeset.title"}} />
+  </Form.group>
+
+  <Form.group data-test-id="price" @model={{this.changeset}} @property="price" as |Group|>
+    <Group.label>Price <Admin::Required /></Group.label>
+    <Group.textbox @value={{this.changeset.price}} @onChange={{set this "changeset.price"}} />
+  </Form.group>
+
+  <Form.group data-test-id="featured" @model={{this.changeset}} @property="featured">
+    <label>
+      <input
+        type="checkbox"
+        checked={{this.changeset.featured}}
+        {{on "change" this.updateFeatured}}
+      />
+      <span class="ml-2">Is featured on home page</span>
+    </label>
+  </Form.group>
+
+  <Form.group data-test-id="sale" @model={{this.changeset}} @property="sale" as |Group|>
+    <Group.label>Special Text</Group.label>
+    <Group.textbox
+      @value={{this.changeset.specialText}}
+      @onChange={{set this "changeset.specialText"}}
+    />
+    <small class="block mt-3 text-gray-700">
+      Will show under the title in a red text.
+    </small>
+  </Form.group>
+
+  <Form.group data-test-id="hidden" @model={{this.changeset}} @property="isHidden">
+    <label>
+      <input
+        type="checkbox"
+        checked={{this.changeset.isHidden}}
+        {{on "change" this.updateHidden}}
+      />
+      <span class="ml-2">Is hidden</span>
+    </label>
+    <small class="block mt-3 text-gray-700">
+      When checked, this means it won't show on your site. Useful when a pandemic is occuring and
+      you run out of meat.
+    </small>
+  </Form.group>
+
+  <Form.group data-test-id="order" @model={{this.changeset}} @property="orderEnabled">
+    <label>
+      <input
+        type="checkbox"
+        checked={{this.changeset.orderEnabled}}
+        {{on "change" this.updateOrderEnabled}}
+      />
+      <span class="ml-2">Can order online</span>
+    </label>
+    <small class="block mt-3 text-gray-700">
+      When checked, this means the "Order Now" button is displayed to take them to the online store.
+    </small>
+  </Form.group>
+
+  <Form.group data-test-id="items">
+    <Form.label>Items</Form.label>
+
+    {{#if this.reordering}}
+      <div {{sortable-group onChange=this.reorderItems}}>
+        {{#each this.items as |item index|}}
+          <div data-test-id="item-{{index}}" class="py-3" {{sortable-item model=item}}>
+            <div class="flex gap-2 items-center">
+              <UiIcon @icon="arrows-alt-v" class="block text-center w-6" {{sortable-handle}} />
+              <p>{{item}}</p>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+
+      <div class="mt-2">
+        <Button @size="medium" @variant="plain" @onClick={{set this "reordering" false}}>
+          Done
+        </Button>
+      </div>
+    {{else}}
+      {{#each this.items as |item index|}}
+        <div data-test-id="item-{{index}}" class="py-1">
+          <div class="flex items-center">
+            <UiTextbox @value={{item}} @onChange={{fn this.itemChanged index}} />
+            <Button
+              class="mr-1"
+              @iconOnly={{true}}
+              @icon="trash-alt"
+              @variant="danger"
+              title="Delete item"
+              @onClick={{fn this.deleteItem index}}
+            />
+          </div>
+        </div>
+      {{/each}}
+
+      <div class="mt-2 flex gap-2">
+        <Button @icon="plus" @size="medium" @variant="plain" @onClick={{this.addItem}}>
+          New Item
+        </Button>
+
+        <Button
+          @icon="arrows-alt-v"
+          @size="medium"
+          @variant="plain"
+          @onClick={{set this "reordering" true}}
+        >
+          Re-order Items
+        </Button>
+      </div>
+    {{/if}}
+  </Form.group>
+
+  <div class="mt-8">
+    {{#if this.changeset.errors}}
+      <div class="mb-2 text-red-600">
+        Please fix the errors above and try again.
+      </div>
+    {{/if}}
+    <Form.submit @disabled={{this.saveDisabled}}>
+      Save
+    </Form.submit>
+    <Button class="ml-2" @variant="plain" @onClick={{@cancelled}}>Cancel</Button>
+  </div>
+</Admin::AdminForm>

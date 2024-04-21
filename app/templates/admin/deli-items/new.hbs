@@ -1,0 +1,9 @@
+<Admin::BackLink @route="admin.deli-items" @text="Deli Items" />
+
+<Admin::Title @title="New Deli Item" />
+
+<Admin::DeliItems::DeliItemForm
+  @item={{this.model}}
+  @saved={{this.deliItemSaved}}
+  @cancelled={{this.deliItemCancelled}}
+/>

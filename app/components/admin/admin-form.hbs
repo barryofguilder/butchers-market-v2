@@ -1,0 +1,11 @@
+<form class="m-0" {{on "submit" this.submit}} ...attributes>
+  {{yield
+    (hash
+      group=(component "admin/admin-form/group" readOnly=@readonly)
+      label=(component "admin/admin-form/label")
+      submit=(component
+        "button" data-test-id="submit-btn" task=this.submitTask type="submit" variant="primary"
+      )
+    )
+  }}
+</form>

@@ -1,0 +1,9 @@
+<Admin::BackLink @route="admin.hours" @text="Store Hours" />
+
+<Admin::Title @title="Edit Hours" />
+
+<Admin::Hours::HoursForm
+  @hours={{this.model}}
+  @saved={{this.hoursSaved}}
+  @cancelled={{this.hoursCancelled}}
+/>
