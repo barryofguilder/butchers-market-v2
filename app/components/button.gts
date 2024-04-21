@@ -1,15 +1,48 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { isPresent } from '@ember/utils';
+import { on } from '@ember/modifier';
+import type { Task } from 'ember-concurrency';
 import { valueOrDefault } from '../utils/value-or-default';
+import UiBaseLink from './ui-base-link';
+// TODO: Fix this...
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import UiIcon from './ui-icon';
 
-export default class ButtonComponent extends Component {
+export interface ButtonSignature {
+  Element: HTMLButtonElement | HTMLAnchorElement;
+  Args: {
+    'data-test-id'?: string;
+    disabled?: boolean;
+    download?: boolean;
+    href?: string;
+    icon?: string;
+    iconPrefix?: 'fas' | 'far' | 'fab';
+    iconOnly?: boolean;
+    model?: string;
+    models?: string[];
+    onClick?: (event: Event) => unknown;
+    query?: Record<string, unknown>;
+    route?: string;
+    size?: 'small' | 'medium' | 'large';
+    task?: Task<void, []>;
+    type?: 'button' | 'submit' | 'reset';
+    variant?: 'primary' | 'secondary' | 'plain';
+  };
+  Blocks: {
+    default: [];
+  };
+}
+
+export default class ButtonComponent extends Component<ButtonSignature> {
   // Specifying these two component properties instead of using HTML attributes is to get around
   // the limitation where using the `component` helper can only pass component properties through.
   // See: https://github.com/emberjs/rfcs/issues/497
   get 'data-test-id'() {
     return valueOrDefault(this.args['data-test-id'], 'button');
   }
+
   get type() {
     return valueOrDefault(this.args.type, 'button');
   }
@@ -54,7 +87,7 @@ export default class ButtonComponent extends Component {
 
   get iconVariant() {
     // Only use the `variant` property if it was passed in
-    return this.iconOnly && this.args.variant ? this.args.variant : 'inherit';
+    return this.args.iconOnly && this.args.variant ? this.args.variant : 'inherit';
   }
 
   get buttonClasses() {
@@ -104,13 +137,64 @@ export default class ButtonComponent extends Component {
   }
 
   @action
-  click(event) {
+  click(event: Event) {
     if (this.args.task) {
       event.preventDefault();
       this.args.task.perform();
     } else if (this.args.onClick) {
       event.preventDefault();
-      this.args.onClick();
+      this.args.onClick(event);
     }
   }
+
+  <template>
+    {{#if this.renderAsLink}}
+      <UiBaseLink
+        data-test-id={{this.data-test-id}}
+        class={{this.buttonClasses}}
+        @download={{@download}}
+        @href={{@href}}
+        @route={{@route}}
+        @model={{@model}}
+        @models={{@models}}
+        @query={{@query}}
+        ...attributes
+      >
+        {{#if @icon}}
+          <UiIcon
+            data-test-id='button-icon'
+            @icon={{@icon}}
+            @iconPrefix={{@iconPrefix}}
+            @variant={{if @iconOnly this.iconVariant 'inherit'}}
+          />
+        {{/if}}
+
+        {{yield}}
+      </UiBaseLink>
+    {{else}}
+      <button
+        data-test-id={{this.data-test-id}}
+        class={{this.buttonClasses}}
+        type={{this.type}}
+        disabled={{this.buttonDisabled}}
+        {{on 'click' this.click}}
+        ...attributes
+      >
+        {{#if @task.isRunning}}
+          <UiIcon data-test-id='is-running' @spin={{true}} @icon='circle-notch' />
+        {{/if}}
+
+        {{#if @icon}}
+          <UiIcon
+            data-test-id='button-icon'
+            @icon={{@icon}}
+            @iconPrefix={{@iconPrefix}}
+            @variant={{if @iconOnly this.iconVariant 'inherit'}}
+          />
+        {{/if}}
+
+        {{yield}}
+      </button>
+    {{/if}}
+  </template>
 }
