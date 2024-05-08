@@ -8,7 +8,11 @@ export default Factory.extend({
   },
 
   imageUrl() {
-    return 'images/generic-deli-item.jpg';
+    return faker.helpers.arrayElement([
+      'images/generic-deli-item-1.jpg',
+      'images/generic-deli-item-2.jpg',
+      'images/generic-deli-item-3.jpg',
+    ]);
   },
 
   ingredients() {
