@@ -13,12 +13,10 @@ module.exports = {
   },
   plugins: ['ember'],
   extends: ['eslint:recommended', 'plugin:ember/recommended', 'plugin:prettier/recommended'],
-  globals: {
-    server: true,
-  },
   env: {
     browser: true,
   },
+  rules: {},
   overrides: [
     // TypeScript files
     {
