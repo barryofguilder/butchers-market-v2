@@ -53,9 +53,9 @@
   <Container>
     {{#if this.meatBundlePDF}}
       <div class="mt-8 text-center">
-        <Button @href={{this.meatBundlePDF}}>
+        <UiButton @href={{this.meatBundlePDF}}>
           Print Flyer
-        </Button>
+        </UiButton>
       </div>
     {{/if}}
 
@@ -72,9 +72,9 @@
       <Container>
         {{#if bundle.fileUrlPath}}
           <div class="mt-8 text-center">
-            <Button @href={{bundle.fileUrlPath}}>
+            <UiButton @href={{bundle.fileUrlPath}}>
               Print Flyer
-            </Button>
+            </UiButton>
           </div>
         {{/if}}
 
