@@ -10,7 +10,7 @@ import UiBaseLink from './ui-base-link';
 // @ts-ignore
 import UiIcon from './ui-icon';
 
-export interface ButtonSignature {
+export interface UiButtonSignature {
   Element: HTMLButtonElement | HTMLAnchorElement;
   Args: {
     'data-test-id'?: string;
@@ -35,7 +35,7 @@ export interface ButtonSignature {
   };
 }
 
-export default class ButtonComponent extends Component<ButtonSignature> {
+export default class UiButtonComponent extends Component<UiButtonSignature> {
   // Specifying these two component properties instead of using HTML attributes is to get around
   // the limitation where using the `component` helper can only pass component properties through.
   // See: https://github.com/emberjs/rfcs/issues/497
