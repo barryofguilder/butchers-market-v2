@@ -55,7 +55,7 @@
       </div>
     {{/if}}
     <div class="mt-4">
-      <UiButton @type="submit" @task={{this.sendFeedbackTask}}>Send</UiButton>
+      <UiButton @type="submit" @onClick={{perform this.sendFeedbackTask}}>Send</UiButton>
     </div>
   {{/unless}}
 </form>

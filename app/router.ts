@@ -43,5 +43,14 @@ Router.map(function () {
     });
   });
 
+  // START TEST ROUTES
+  // These routes are only used for component tests.
+  this.route('test-route', function () {
+    this.route('model-route', { path: '/:id' }, function () {
+      this.route('second-model-route', { path: '/tag/:tag' });
+    });
+  });
+  // END TEST ROUTES
+
   this.route('not-found', { path: '/*path' });
 });

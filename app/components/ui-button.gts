@@ -1,66 +1,86 @@
 import Component from '@glimmer/component';
-import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 import { isPresent } from '@ember/utils';
 import { on } from '@ember/modifier';
-import type { Task } from 'ember-concurrency';
-import { valueOrDefault } from '../utils/value-or-default';
-import UiBaseLink from './ui-base-link';
+import { restartableTask } from 'ember-concurrency';
+// TODO: This type will exist when upgrading to latest ember-concurrency.
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import perform from 'ember-concurrency/helpers/perform';
+import UiBaseLink, { type UiBaseLinkArgs } from './ui-base-link';
 // TODO: Fix this...
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import UiIcon from './ui-icon';
 
+export type ButtonVariant = 'primary' | 'secondary' | 'plain';
+export type ButtonSize = 'small' | 'medium' | 'large';
+export type IconPrefix = 'fas' | 'far' | 'fab';
+
+export interface UiButtonArgs extends UiBaseLinkArgs {
+  'data-test-id'?: string;
+  disabled?: boolean;
+  icon?: string;
+  iconPrefix?: IconPrefix;
+  iconOnly?: boolean;
+  isRunning?: boolean;
+  onClick?: (event: Event) => unknown;
+  size?: ButtonSize;
+  type?: 'button' | 'submit' | 'reset';
+  variant?: ButtonVariant;
+}
+
 export interface UiButtonSignature {
   Element: HTMLButtonElement | HTMLAnchorElement;
-  Args: {
-    'data-test-id'?: string;
-    disabled?: boolean;
-    download?: boolean;
-    href?: string;
-    icon?: string;
-    iconPrefix?: 'fas' | 'far' | 'fab';
-    iconOnly?: boolean;
-    model?: string;
-    models?: string[];
-    onClick?: (event: Event) => unknown;
-    query?: Record<string, unknown>;
-    route?: string;
-    size?: 'small' | 'medium' | 'large';
-    task?: Task<void, []>;
-    type?: 'button' | 'submit' | 'reset';
-    variant?: 'primary' | 'secondary' | 'plain';
-  };
+  Args: UiButtonArgs;
   Blocks: {
     default: [];
   };
 }
 
+// The link and button classes have to be split out since links don't support
+// the `enabled` helper.
+const baseClasses =
+  'inline-block whitespace-nowrap transition-form-element focus:outline-none focus:ring';
+const baseButtonClasses = 'disabled:opacity-50 disabled:cursor-not-allowed';
+const baseLinkClasses = '';
+const variantBaseClasses: Record<ButtonVariant, string> = {
+  primary: 'bg-red-800 text-white',
+  secondary: 'bg-gray-800 text-white',
+  plain: 'bg-transparent border border-gray-300',
+};
+const variantButtonClasses: Record<ButtonVariant, string> = {
+  primary: 'enabled:hover:bg-red-900',
+  secondary: 'enabled:hover:bg-gray-900',
+  plain: 'enabled:hover:bg-gray-300 enabled:hover:border-transparent',
+};
+const variantLinkClasses: Record<ButtonVariant, string> = {
+  primary: '',
+  secondary: '',
+  plain: '',
+};
+const sizeClasses: Record<ButtonSize, string> = {
+  large: 'px-6 py-3 uppercase tracking-wider font-bold sm:text-xl',
+  small: 'px-2 py-1 font-semibold text-xs',
+  medium: 'px-4 py-2 font-semibold text-sm',
+};
+
 export default class UiButtonComponent extends Component<UiButtonSignature> {
+  @tracked isRunning = false;
+
   // Specifying these two component properties instead of using HTML attributes is to get around
   // the limitation where using the `component` helper can only pass component properties through.
   // See: https://github.com/emberjs/rfcs/issues/497
   get 'data-test-id'() {
-    return valueOrDefault(this.args['data-test-id'], 'button');
+    return this.args['data-test-id'] ?? 'button';
   }
 
   get type() {
-    return valueOrDefault(this.args.type, 'button');
-  }
-
-  get variant() {
-    return valueOrDefault(this.args.variant, 'secondary');
-  }
-
-  get disabled() {
-    return valueOrDefault(this.args.disabled, false);
-  }
-
-  get size() {
-    return valueOrDefault(this.args.size, 'large');
+    return this.args.type ?? 'button';
   }
 
   get renderAsLink() {
-    if (this.disabled) {
+    if (this.args.disabled) {
       // If the button is disabled, don't render as a link. This is because there's no good way to
       // disable an anchor tag (and you really shouldn't), so this will force it to render as a
       // button.
@@ -68,6 +88,30 @@ export default class UiButtonComponent extends Component<UiButtonSignature> {
     }
 
     return isPresent(this.args.href) || isPresent(this.args.route);
+  }
+
+  get baseClasses() {
+    return this.renderAsLink
+      ? `${baseClasses} ${baseLinkClasses}`
+      : `${baseClasses} ${baseButtonClasses}`;
+  }
+
+  get variant() {
+    return this.args.variant ?? 'secondary';
+  }
+
+  get variantClasses() {
+    return this.renderAsLink
+      ? `${variantBaseClasses[this.variant]} ${variantLinkClasses[this.variant]}`
+      : `${variantBaseClasses[this.variant]} ${variantButtonClasses[this.variant]}`;
+  }
+
+  get size() {
+    return this.args.size ?? 'large';
+  }
+
+  get sizeClasses() {
+    return sizeClasses[this.size];
   }
 
   get iconOnlyClasses() {
@@ -81,8 +125,19 @@ export default class UiButtonComponent extends Component<UiButtonSignature> {
     return `${baseClasses} ${disabledClasses} ${sizeClasses} ${fontClasses} ${hoverClass}`;
   }
 
+  get buttonClasses() {
+    return this.args.iconOnly
+      ? this.iconOnlyClasses
+      : `${this.baseClasses} ${this.variantClasses} ${this.sizeClasses}`;
+  }
+
   get buttonDisabled() {
-    return (this.args.task && this.args.task.isRunning) || this.args.disabled;
+    return (
+      this.buttonTask.isRunning ||
+      this.args.isRunning === true ||
+      this.isRunning === true ||
+      this.args.disabled === true
+    );
   }
 
   get iconVariant() {
@@ -90,62 +145,22 @@ export default class UiButtonComponent extends Component<UiButtonSignature> {
     return this.args.iconOnly && this.args.variant ? this.args.variant : 'inherit';
   }
 
-  get buttonClasses() {
-    if (this.args.iconOnly) {
-      return this.iconOnlyClasses;
+  buttonTask = restartableTask(async (event: MouseEvent) => {
+    let result: ReturnType<NonNullable<UiButtonArgs['onClick']>>;
+
+    if (this.args.onClick) {
+      result = this.args.onClick(event);
     }
 
-    let variantClasses;
-
-    switch (this.variant) {
-      case 'primary':
-        variantClasses = `bg-red-800 text-white ${this.args.disabled ? '' : 'hover:bg-red-900'}`;
-        break;
-
-      case 'plain':
-        variantClasses = `bg-transparent border border-gray-300 ${
-          this.args.disabled ? '' : 'hover:bg-gray-300 hover:border-transparent'
-        }`;
-        break;
-
-      case 'secondary':
-      default:
-        variantClasses = `bg-gray-800 text-white ${this.args.disabled ? '' : 'hover:bg-gray-900'}`;
-        break;
+    if (result) {
+      this.isRunning = true;
+      // Wrap this in a Promise because it might just be a regular function and
+      // you shouldn't await regular functions.
+      await Promise.resolve(result);
     }
 
-    let sizeClasses;
-
-    switch (this.size) {
-      case 'large':
-        sizeClasses = 'px-6 py-3 uppercase tracking-wider font-bold sm:text-xl';
-        break;
-
-      case 'small':
-        sizeClasses = 'px-2 py-1 font-semibold text-xs';
-        break;
-
-      case 'medium':
-      default:
-        sizeClasses = 'px-4 py-2 font-semibold text-sm';
-        break;
-    }
-
-    return `inline-block whitespace-nowrap ${variantClasses} ${sizeClasses} ${
-      this.buttonDisabled ? 'opacity-50 cursor-not-allowed' : ''
-    } transition-form-element focus:outline-none focus:ring`;
-  }
-
-  @action
-  click(event: Event) {
-    if (this.args.task) {
-      event.preventDefault();
-      this.args.task.perform();
-    } else if (this.args.onClick) {
-      event.preventDefault();
-      this.args.onClick(event);
-    }
-  }
+    this.isRunning = false;
+  });
 
   <template>
     {{#if this.renderAsLink}}
@@ -177,10 +192,10 @@ export default class UiButtonComponent extends Component<UiButtonSignature> {
         class={{this.buttonClasses}}
         type={{this.type}}
         disabled={{this.buttonDisabled}}
-        {{on 'click' this.click}}
+        {{on 'click' (perform this.buttonTask)}}
         ...attributes
       >
-        {{#if @task.isRunning}}
+        {{#if this.isRunning}}
           <UiIcon data-test-id='is-running' @spin={{true}} @icon='circle-notch' />
         {{/if}}
 
@@ -197,4 +212,10 @@ export default class UiButtonComponent extends Component<UiButtonSignature> {
       </button>
     {{/if}}
   </template>
+}
+
+declare module '@glint/environment-ember-loose/registry' {
+  export default interface Registry {
+    UiButton: typeof UiButtonComponent;
+  }
 }
