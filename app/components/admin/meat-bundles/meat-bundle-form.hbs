@@ -91,16 +91,16 @@
       </div>
 
       <div class="mt-2">
-        <Button @size="medium" @variant="plain" @onClick={{set this "reordering" false}}>
+        <UiButton @size="medium" @variant="plain" @onClick={{set this "reordering" false}}>
           Done
-        </Button>
+        </UiButton>
       </div>
     {{else}}
       {{#each this.items as |item index|}}
         <div data-test-id="item-{{index}}" class="py-1">
           <div class="flex items-center">
             <UiTextbox @value={{item}} @onChange={{fn this.itemChanged index}} />
-            <Button
+            <UiButton
               class="mr-1"
               @iconOnly={{true}}
               @icon="trash-alt"
@@ -113,18 +113,18 @@
       {{/each}}
 
       <div class="mt-2 flex gap-2">
-        <Button @icon="plus" @size="medium" @variant="plain" @onClick={{this.addItem}}>
+        <UiButton @icon="plus" @size="medium" @variant="plain" @onClick={{this.addItem}}>
           New Item
-        </Button>
+        </UiButton>
 
-        <Button
+        <UiButton
           @icon="arrows-alt-v"
           @size="medium"
           @variant="plain"
           @onClick={{set this "reordering" true}}
         >
           Re-order Items
-        </Button>
+        </UiButton>
       </div>
     {{/if}}
   </Form.group>
@@ -138,6 +138,6 @@
     <Form.submit @disabled={{this.saveDisabled}}>
       Save
     </Form.submit>
-    <Button class="ml-2" @variant="plain" @onClick={{@cancelled}}>Cancel</Button>
+    <UiButton class="ml-2" @variant="plain" @onClick={{@cancelled}}>Cancel</UiButton>
   </div>
 </Admin::AdminForm>

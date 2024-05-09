@@ -3,9 +3,9 @@
 <Admin::Title @title="Store Hours" />
 
 <div class="mt-8">
-  <Button @route="admin.hours.new" @icon="plus" @size="medium" @variant="plain">
+  <UiButton @route="admin.hours.new" @icon="plus" @size="medium" @variant="plain">
     New
-  </Button>
+  </UiButton>
 </div>
 
 <Admin::UiTable class="mt-8" as |Table|>
@@ -50,7 +50,7 @@
         </Row.td>
         <Row.td>
           <div class="flex justify-end">
-            <Button
+            <UiButton
               @route="admin.hours.edit"
               @model={{hours.id}}
               @iconOnly={{true}}
@@ -58,7 +58,7 @@
               @variant="secondary"
             />
 
-            <Button
+            <UiButton
               class="ml-1"
               @iconOnly={{true}}
               @icon="trash-alt"
