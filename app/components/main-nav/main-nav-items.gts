@@ -93,7 +93,9 @@ export default class MainNavItemsComponent extends Component<MainNavItemsSignatu
           Menu
         </a>
       </li>
-      <li class='lg:block lg:h-full'>
+      {{!-- Drew doesn't want the contact form anymore. Commenting this out instead of deleting in
+            case he changes his mind. }}
+      {{!-- <li class='lg:block lg:h-full'>
         <LinkTo
           @route='contact'
           class='block px-6 py-4 lg:flex lg:items-center lg:py-0 lg:h-full hover:text-red-600 text-center lg:text-left'
@@ -101,7 +103,7 @@ export default class MainNavItemsComponent extends Component<MainNavItemsSignatu
         >
           Contact
         </LinkTo>
-      </li>
+      </li> --}}
     </ul>
   </template>
 }
