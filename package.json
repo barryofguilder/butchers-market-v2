@@ -104,7 +104,7 @@
     "ember-data": "~5.3.3",
     "ember-fetch": "^8.1.2",
     "ember-file-upload": "^9.0.0",
-    "ember-flatpickr": "^4.0.0",
+    "ember-flatpickr": "^8.0.0",
     "ember-g-recaptcha": "^2.1.1",
     "ember-headlessui": "^0.14.0",
     "ember-load-initializers": "^2.1.2",
