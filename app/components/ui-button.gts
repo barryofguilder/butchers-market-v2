@@ -55,9 +55,9 @@ const variantButtonClasses: Record<ButtonVariant, string> = {
   plain: 'enabled:hover:bg-gray-300 enabled:hover:border-transparent',
 };
 const variantLinkClasses: Record<ButtonVariant, string> = {
-  primary: '',
-  secondary: '',
-  plain: '',
+  primary: 'hover:bg-red-900',
+  secondary: 'hover:bg-gray-900',
+  plain: 'hover:bg-gray-300 hover:border-transparent',
 };
 const sizeClasses: Record<ButtonSize, string> = {
   large: 'px-6 py-3 uppercase tracking-wider font-bold sm:text-xl',
