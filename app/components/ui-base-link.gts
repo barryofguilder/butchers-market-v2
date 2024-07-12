@@ -1,35 +1,28 @@
 import Component from '@glimmer/component';
-import { eq, or } from 'ember-truth-helpers';
 import { LinkTo } from '@ember/routing';
+import type { RouteModel } from '@ember/routing/router-service';
 import { modifier } from 'ember-modifier';
-import { valueOrDefault } from '../utils/value-or-default';
+
+export interface UiBaseLinkArgs {
+  download?: boolean;
+  href?: string;
+  model?: RouteModel;
+  models?: [RouteModel];
+  query?: Record<string, unknown>;
+  route?: string;
+}
 
 export interface UiBaseLinkSignature {
   Element: HTMLAnchorElement;
-  Args: {
-    download?: boolean;
-    href?: string;
-    model?: string;
-    models?: string[];
-    query?: Record<string, unknown>;
-    route?: string;
-  };
+  Args: UiBaseLinkArgs;
   Blocks: {
     default: [];
   };
 }
 
 export default class UiBaseLink extends Component<UiBaseLinkSignature> {
-  get download() {
-    return valueOrDefault(this.args.download, false);
-  }
-
-  get href() {
-    return valueOrDefault(this.args.href, null);
-  }
-
-  get route() {
-    return valueOrDefault(this.args.route, null);
+  get hasRoute() {
+    return this.args.route !== undefined;
   }
 
   get models() {
@@ -43,29 +36,34 @@ export default class UiBaseLink extends Component<UiBaseLinkSignature> {
   }
 
   get query() {
-    return valueOrDefault(this.args.query, {});
+    return this.args.query ? this.args.query : {};
   }
 
-  registerLinkAttributes = modifier((element: HTMLAnchorElement) => {
+  initAttributes = modifier((element: Element) => {
+    // If you want to have a button trigger the file picker for a file input, it
+    // requires you to have an `a` tag with no `href` set.
     if (this.args.href === '') {
       element.removeAttribute('href');
-    }
-
-    if (this.args.download === true) {
-      element.setAttribute('download', '');
     }
   });
 
   <template>
-    {{#if (or @href (eq @href ''))}}
-      <a href={{@href}} ...attributes {{this.registerLinkAttributes}}>{{yield}}</a>
-    {{else}}
+    {{#if this.hasRoute}}
       <LinkTo
+        data-test-id='link'
         @route={{@route}}
         @models={{this.models}}
         @query={{this.query}}
         ...attributes
       >{{yield}}</LinkTo>
+    {{else}}
+      <a
+        data-test-id='link'
+        href={{@href}}
+        download={{@download}}
+        ...attributes
+        {{this.initAttributes}}
+      >{{yield}}</a>
     {{/if}}
   </template>
 }

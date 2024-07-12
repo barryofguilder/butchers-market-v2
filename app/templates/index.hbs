@@ -15,9 +15,9 @@
         <StoreLocation class="mt-8" />
       {{/if}}
 
-      <Button @href="https://www.facebook.com/thebutchersmarket" @variant="primary" class="mt-8">
+      <UiButton @href="https://www.facebook.com/thebutchersmarket" @variant="primary" class="mt-8">
         Like us on Facebook
-      </Button>
+      </UiButton>
 
       {{#if this.media.isSm}}
         <StoreHours @hours={{@model.hours}} @primaryType="Store" class="mt-8" />
@@ -45,9 +45,9 @@
       <div
         class="mt-10 text-center sm:w-1/2 sm:flex sm:flex-col sm:items-center lg:w-full lg:flex-row lg:text-left"
       >
-        <Button @route="meat" @query={{hash packages=true}}>
+        <UiButton @route="meat" @query={{hash packages=true}}>
           View All Packages
-        </Button>
+        </UiButton>
         <p class="mt-4 lg:ml-4 lg:mt-0 sm:text-lg">
           We have a meat or grocery packages for every need and budget!
         </p>
