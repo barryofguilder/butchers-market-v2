@@ -12,7 +12,9 @@ class ButtonContext {
   @tracked isRunning = true;
 }
 interface Context extends TestContext {
+  // eslint-disable-next-line no-unused-vars
   myAction?: (event: Event) => unknown;
+  // eslint-disable-next-line no-unused-vars
   myPromise?: (event: Event) => Promise<void>;
   myTask?: Task<void, []>;
   buttonContext?: ButtonContext;

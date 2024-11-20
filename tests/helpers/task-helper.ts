@@ -7,6 +7,7 @@ import { task } from 'ember-concurrency';
  */
 export class TaskHelper {
   _promise: Promise<unknown>;
+  // eslint-disable-next-line no-unused-vars
   declare finishTask: (value?: unknown) => unknown;
 
   constructor() {

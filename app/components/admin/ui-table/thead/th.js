@@ -1,6 +1,12 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
+import { modifier } from 'ember-modifier';
+
+const DEFAULT_COLUMN_OUTPUT = {
+  sortColumn: null,
+  sortDirection: null,
+};
 
 export default class UiTableTheadThComponent extends Component {
   @tracked sortDirection;
@@ -17,6 +23,13 @@ export default class UiTableTheadThComponent extends Component {
     return this.sortDirection === 'desc';
   }
 
+  initColumn = modifier(() => {
+    const { currentSort, name } = this.args;
+    const { sortColumn, sortDirection } = currentSort ?? DEFAULT_COLUMN_OUTPUT;
+
+    this.sortDirection = sortColumn === name ? sortDirection : null;
+  });
+
   @action
   columnClicked() {
     if (this.isAscending) {
@@ -32,15 +45,6 @@ export default class UiTableTheadThComponent extends Component {
         sortColumn: this.sortColumn,
         sortDirection: this.sortDirection,
       });
-    }
-  }
-
-  @action
-  setSortDirection() {
-    if (this.args.currentSort && this.args.currentSort.sortColumn === this.args.name) {
-      this.sortDirection = this.args.currentSort.sortDirection;
-    } else {
-      this.sortDirection = null;
     }
   }
 }
