@@ -118,7 +118,7 @@
     "ember-source": "~5.12.0",
     "ember-template-imports": "^4.2.0",
     "ember-template-lint": "^6.0.0",
-    "ember-test-selectors": "mainmatter/ember-test-selectors#master",
+    "ember-test-selectors": "^7.0.0",
     "ember-truth-helpers": "^4.0.3",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
