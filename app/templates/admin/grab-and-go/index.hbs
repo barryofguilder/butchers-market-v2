@@ -1,0 +1,69 @@
+<Admin::BackLink @route="admin.index" @text="Admin" />
+
+<Admin::Title @title="Grab and Go" />
+
+<div class="mt-8">
+  <UiButton @route="admin.grab-and-go.new" @icon="plus" @size="medium" @variant="plain">
+    New
+  </UiButton>
+</div>
+
+<Admin::UiTable class="mt-8" as |Table|>
+  <Table.head as |Thead|>
+    <Thead.th>Title</Thead.th>
+    <Thead.th>Description</Thead.th>
+    <Thead.th>Is Featured?</Thead.th>
+    <Thead.th>Sold Out?</Thead.th>
+    <Thead.th />
+  </Table.head>
+  <Table.body as |Tbody|>
+    {{#each this.model as |item|}}
+      <Tbody.tr as |Row|>
+        <Row.td>
+          {{item.title}}
+        </Row.td>
+        <Row.td>
+          {{item.description}}
+        </Row.td>
+        <Row.td>
+          {{if item.featured "Yes" "No"}}
+        </Row.td>
+        <Row.td>
+          {{if item.isSoldOut "Yes" "No"}}
+        </Row.td>
+        <Row.td>
+          <div class="flex justify-end">
+            <UiButton
+              @route="admin.grab-and-go.edit"
+              @model={{item.id}}
+              @iconOnly={{true}}
+              @icon="pencil-alt"
+              @variant="secondary"
+            />
+
+            <UiButton
+              class="ml-1"
+              @iconOnly={{true}}
+              @icon="trash-alt"
+              @variant="danger"
+              @onClick={{fn this.openDeleteModal item}}
+            />
+          </div>
+        </Row.td>
+      </Tbody.tr>
+    {{else}}
+      <Tbody.empty>
+        No grab and go items found.
+      </Tbody.empty>
+    {{/each}}
+  </Table.body>
+</Admin::UiTable>
+
+<Admin::GrabAndGo::DeleteItemForm
+  @isOpen={{this.deleteModalOpen}}
+  @special={{this.itemToDelete}}
+  @onSave={{this.closeDeleteModal}}
+  @onCancel={{this.closeDeleteModal}}
+/>
+
+{{outlet}}

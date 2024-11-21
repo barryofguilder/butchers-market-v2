@@ -28,7 +28,7 @@ export default Factory.extend({
   },
 
   isSoldOut() {
-    return this.random.boolean();
+    return faker.datatype.boolean();
   },
 
   isHidden() {
