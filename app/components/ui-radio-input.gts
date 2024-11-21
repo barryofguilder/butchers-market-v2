@@ -1,7 +1,6 @@
 import Component from '@glimmer/component';
 import type { EmptyObject } from '@ember/component/helper';
 import { action } from '@ember/object';
-import { once } from '@ember/runloop';
 import { on } from '@ember/modifier';
 import { valueOrDefault } from '../utils/value-or-default';
 
@@ -37,9 +36,7 @@ export default class UiRadioInput extends Component<UiRadioInputSignature> {
 
   @action
   handleChange() {
-    if (this.args.groupValue !== this.args.value) {
-      once(this.args, 'onChange', this.args.value);
-    }
+    this.args.onChange(this.args.value);
   }
 
   <template>

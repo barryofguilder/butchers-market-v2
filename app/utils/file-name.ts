@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import { format } from 'date-fns';
 import { UploadFile } from 'ember-file-upload';
 
@@ -11,7 +10,7 @@ import { UploadFile } from 'ember-file-upload';
 export function generateFileName(file: UploadFile) {
   const fileParts = file.name.split('.');
   const extension = fileParts.length > 1 ? `.${fileParts[fileParts.length - 1]}` : '';
-  return `${uuidv4()}${extension}`;
+  return `${crypto.randomUUID()}${extension}`;
 }
 
 /**
