@@ -86,6 +86,15 @@ export default class MainNavItemsComponent extends Component<MainNavItemsSignatu
         </LinkTo>
       </li>
       <li class='lg:block lg:h-full'>
+        <LinkTo
+          @route='grab-and-go'
+          class='block px-6 py-4 lg:flex lg:items-center lg:py-0 lg:h-full hover:text-red-600 text-center lg:text-left'
+          {{on 'click' this.itemClicked}}
+        >
+          Grab &amp; Go
+        </LinkTo>
+      </li>
+      <li class='lg:block lg:h-full'>
         <a
           href={{this.menuUrl}}
           class='block px-6 py-4 lg:flex lg:items-center lg:py-0 lg:h-full hover:text-red-600 text-center lg:text-left'

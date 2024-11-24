@@ -13,6 +13,7 @@ export default class GrabAndGo extends Model {
       return `${config.uploadsDir}${this.imageUrl}`;
     }
 
+    // TODO: Return a default image
     return null;
   }
 }

@@ -11,6 +11,7 @@ Router.map(function () {
   // changes his mind.
   // this.route('contact');
   this.route('deli');
+  this.route('grab-and-go');
   this.route('meat');
 
   this.route('sign-in');
