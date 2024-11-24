@@ -29,3 +29,9 @@ const PageLink: TOC<{
 </template>;
 
 export default PageLink;
+
+declare module '@glint/environment-ember-loose/registry' {
+  export default interface Registry {
+    'Admin::PageLink': typeof PageLink;
+  }
+}

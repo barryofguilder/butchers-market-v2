@@ -1,0 +1,122 @@
+<Admin::AdminForm class="max-w-xl" @onSubmit={{perform this.saveItem}} as |Form|>
+  {{#if this.errorMessage}}
+    <UiAlert data-test-id="server-error" @variant="danger">
+      {{this.errorMessage}}
+    </UiAlert>
+  {{/if}}
+
+  <p class="mb-8">
+    <strong>Note:</strong>
+    Required fields are marked with an
+    <Admin::Required />
+  </p>
+
+  <Form.group data-test-id="title" @model={{this.changeset}} @property="title" as |Group|>
+    <Group.label>Title <Admin::Required /></Group.label>
+    <Group.textbox @value={{this.changeset.title}} @onChange={{set this "changeset.title"}} />
+  </Form.group>
+
+  <Form.group data-test-id="image" @model={{this.changeset}} @property="image" as |Group|>
+    <Group.label>Image</Group.label>
+    <div class="mt-2">
+      {{#let (file-queue name="photos" onFileAdded=this.uploadImage) as |queue|}}
+        <label for={{Group.uniqueId}}>
+          <span
+            class="inline-block px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-none focus:ring"
+          >
+            Select Image
+          </span>
+          <input type="file" id={{Group.uniqueId}} accept="image/*" hidden {{queue.selectFile}} />
+        </label>
+      {{/let}}
+
+      {{#if this.hasImage}}
+        <button
+          type="button"
+          class="inline-block ml-2 px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-none focus:ring"
+          {{on "click" this.removeImage}}
+        >
+          Remove Image
+        </button>
+      {{/if}}
+
+      <small class="block mt-3 text-gray-700 sm:inline-block sm:mt-0 sm:ml-2">
+        Only JPG, JPEG, PNG, and GIF files are allowed.
+      </small>
+      <small class="block mt-3 text-gray-700">
+        Please optimize the image before uploading using
+        <a
+          href="https://tinypng.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-red-800 font-semibold hover:underline"
+        >
+          this site
+        </a>.
+      </small>
+
+      {{#if this.fileErrorMessage}}
+        <span class="block mt-2 text-red-500">
+          {{this.fileErrorMessage}}
+        </span>
+      {{/if}}
+
+      {{#if this.hasImage}}
+        <div class="mt-4">
+          <img src={{this.imageUrl}} alt="Special" class="w-full block" />
+        </div>
+      {{/if}}
+    </div>
+  </Form.group>
+
+  <Form.group
+    data-test-id="description"
+    @model={{this.changeset}}
+    @property="description"
+    as |Group|
+  >
+    <Group.label>Description</Group.label>
+    <Group.textarea
+      @value={{this.changeset.description}}
+      @onChange={{set this "changeset.description"}}
+    />
+  </Form.group>
+
+  <Form.group data-test-id="hidden">
+    <label>
+      <input
+        type="checkbox"
+        checked={{this.changeset.featured}}
+        {{on "change" this.updateIsFeatured}}
+      />
+      <span class="ml-2">Is Featured?</span>
+    </label>
+    <small class="block mt-3 text-gray-700">
+      When checked, this means that it's available for purchase and is also featured on the home
+      page.
+    </small>
+  </Form.group>
+
+  <Form.group data-test-id="sold-out">
+    <label>
+      <input
+        type="checkbox"
+        checked={{this.changeset.isSoldOut}}
+        {{on "change" this.updateIsSoldOut}}
+      />
+      <span class="ml-2">Is Sold Out?</span>
+    </label>
+  </Form.group>
+
+  <div class="mt-8">
+    {{#if this.changeset.errors}}
+      <div class="mb-2 text-red-600">
+        Please fix the errors above and try again.
+      </div>
+    {{/if}}
+    <Form.submit @disabled={{this.saveDisabled}}>
+      Save
+    </Form.submit>
+    <UiButton class="ml-2" @variant="plain" @onClick={{@cancelled}}>Cancel</UiButton>
+  </div>
+</Admin::AdminForm>

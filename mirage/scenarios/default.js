@@ -2,6 +2,7 @@ import { addDays } from 'date-fns';
 
 export default function (server) {
   createDeliItems(server);
+  createGrabAndGo(server);
   createHours(server);
   createMeatBundles(server);
   createMenu(server);
@@ -49,6 +50,36 @@ function createDeliItems(server) {
   server.create('deli-item', {
     title: 'Original Twice Baked Potato',
     ingredients: 'milk, butter, sour cream, cheddar cheese, chives',
+  });
+}
+
+function createGrabAndGo(server) {
+  server.create('grab-and-go', {
+    title: 'Original meatloaf ',
+    imageUrl: 'images/thanksgivingbreast.jpg',
+    featured: true,
+    isSoldOut: false,
+  });
+
+  server.create('grab-and-go', {
+    title: 'Smoked Queso',
+    imageUrl: 'images/thanksgivingbreast.jpg',
+    featured: false,
+    isSoldOut: true,
+  });
+
+  server.create('grab-and-go', {
+    title: 'Mexican chicken casserole',
+    imageUrl: 'images/thanksgivingbreast.jpg',
+    featured: true,
+    isSoldOut: false,
+  });
+
+  server.create('grab-and-go', {
+    title: 'Brisket Philly cheese pie',
+    imageUrl: 'images/thanksgivingbreast.jpg',
+    featured: true,
+    isSoldOut: false,
   });
 }
 
