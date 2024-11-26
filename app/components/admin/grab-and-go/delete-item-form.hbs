@@ -1,0 +1,43 @@
+<ModalDialog @isOpen={{@isOpen}} @onClose={{@onCancel}} as |Modal|>
+  <Modal.header>
+    Delete Grab and Go Item?
+  </Modal.header>
+  <Admin::AdminForm class="max-w-xl" @onSubmit={{perform this.deleteSpecial}} as |Form|>
+    <Modal.body>
+      {{#if this.errorMessage}}
+        <UiAlert data-test-id="server-error" @variant="danger">
+          {{this.errorMessage}}
+        </UiAlert>
+      {{/if}}
+
+      <p class="mb-8">
+        Do you really want to delete this grab and go item?
+      </p>
+
+      <Form.group data-test-id="title" as |Group|>
+        <Group.label>Title</Group.label>
+        <Group.readonly @value={{@special.title}} />
+      </Form.group>
+
+      {{#if @special.activeStartDate}}
+        <Form.group data-test-id="start-date" as |Group|>
+          <Group.label>Active Start Date</Group.label>
+          <Group.readonly @value={{date-format @special.activeStartDate "LL/dd/yyyy"}} />
+        </Form.group>
+
+        <Form.group data-test-id="end-date" as |Group|>
+          <Group.label>Active End Date</Group.label>
+          <Group.readonly @value={{date-format @special.activeEndDate "LL/dd/yyyy"}} />
+        </Form.group>
+      {{/if}}
+    </Modal.body>
+    <Modal.footer>
+      <UiButton @variant="plain" @onClick={{@onCancel}}>
+        No
+      </UiButton>
+      <Form.submit class="ml-2">
+        Yes
+      </Form.submit>
+    </Modal.footer>
+  </Admin::AdminForm>
+</ModalDialog>

@@ -1,0 +1,9 @@
+<Admin::BackLink @route="admin.feature-flags" @text="Feature Flags" />
+
+<Admin::Title @title="Edit Feature Flag" />
+
+<Admin::FeatureFlags::FeatureFlagForm
+  @flag={{this.model}}
+  @saved={{this.flagSaved}}
+  @cancelled={{this.flagCancelled}}
+/>

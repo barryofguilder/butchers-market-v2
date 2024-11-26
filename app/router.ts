@@ -11,12 +11,23 @@ Router.map(function () {
   // changes his mind.
   // this.route('contact');
   this.route('deli');
+  this.route('grab-and-go');
   this.route('meat');
 
   this.route('sign-in');
 
   this.route('admin', function () {
     this.route('deli-items', function () {
+      this.route('new');
+      this.route('edit', { path: ':id/edit' });
+      this.route('delete', { path: ':id/delete' });
+    });
+    this.route('feature-flags', function () {
+      this.route('new');
+      this.route('edit', { path: ':id/edit' });
+      this.route('delete', { path: ':id/delete' });
+    });
+    this.route('grab-and-go', function () {
       this.route('new');
       this.route('edit', { path: ':id/edit' });
       this.route('delete', { path: ':id/delete' });

@@ -4,6 +4,7 @@ import type Store from '@ember-data/store';
 import { lastValue, restartableTask } from 'ember-concurrency';
 import { on } from '@ember/modifier';
 import { LinkTo } from '@ember/routing';
+import type Features from '../../services/features';
 import OrderButton from './order-button';
 import config from 'butchers-market/config/environment';
 import type Menu from '../../models/menu';
@@ -20,6 +21,7 @@ export interface MainNavItemsSignature {
 }
 
 export default class MainNavItemsComponent extends Component<MainNavItemsSignature> {
+  @service declare features: Features;
   // TODO: Fix this type.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @service declare media: any;
@@ -42,6 +44,10 @@ export default class MainNavItemsComponent extends Component<MainNavItemsSignatu
     }
 
     return null;
+  }
+
+  get showGrabAndGo() {
+    return this.features.isEnabled('grab-and-go-menu');
   }
 
   constructor(owner: unknown, args: MainNavItemsSignature['Args']) {
@@ -85,6 +91,17 @@ export default class MainNavItemsComponent extends Component<MainNavItemsSignatu
           Deli
         </LinkTo>
       </li>
+      {{#if this.showGrabAndGo}}
+        <li class='lg:block lg:h-full'>
+          <LinkTo
+            @route='grab-and-go'
+            class='block px-6 py-4 lg:flex lg:items-center lg:py-0 lg:h-full hover:text-red-600 text-center lg:text-left'
+            {{on 'click' this.itemClicked}}
+          >
+            Grab &amp; Go
+          </LinkTo>
+        </li>
+      {{/if}}
       <li class='lg:block lg:h-full'>
         <a
           href={{this.menuUrl}}

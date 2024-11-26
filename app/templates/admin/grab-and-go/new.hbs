@@ -1,0 +1,9 @@
+<Admin::BackLink @route="admin.grab-and-go" @text="Grab and Go" />
+
+<Admin::Title @title="New Grab and Go" />
+
+<Admin::GrabAndGo::ItemForm
+  @item={{this.model}}
+  @saved={{this.itemSaved}}
+  @cancelled={{this.itemCancelled}}
+/>

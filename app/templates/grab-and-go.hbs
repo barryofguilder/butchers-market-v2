@@ -1,0 +1,42 @@
+<OrderBanner />
+
+<PromoSection @image="promo-grab.jpg" class="min-h-[400px]" as |Promo|>
+  <Container>
+    <div class="text-center lg:w-3/4 lg:text-left">
+      <Promo.title>
+        Grab &amp; Go
+      </Promo.title>
+      <Promo.subtitle>
+        Fresh items ready for you to grab and go.
+      </Promo.subtitle>
+    </div>
+  </Container>
+</PromoSection>
+
+<section>
+  <HeaderTitle @title="Today's Grab & Go Items" />
+
+  <Container>
+    <div class="mt-10 max-w-3xl mx-auto">
+      <p class="text-center text-lg sm:text-2xl">
+        Here are today's grab &amp; go items.
+      </p>
+    </div>
+
+    <GrabAndGoList @items={{this.todaysItems}} />
+  </Container>
+</section>
+
+<section>
+  <HeaderTitle @title="Common Rotating Grab & Go Items" />
+
+  <Container>
+    <div class="mt-10 max-w-3xl mx-auto">
+      <p class="text-center text-lg sm:text-2xl">
+        We constantly rotate our grab &amp; go items. Here are some of our most common items.
+      </p>
+    </div>
+
+    <GrabAndGoList @items={{this.commonItems}} />
+  </Container>
+</section>

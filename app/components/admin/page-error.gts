@@ -59,3 +59,9 @@ export default class PageErrorComponent extends Component<PageErrorSignature> {
     </section>
   </template>
 }
+
+declare module '@glint/environment-ember-loose/registry' {
+  export default interface Registry {
+    'Admin::PageError': typeof PageErrorComponent;
+  }
+}

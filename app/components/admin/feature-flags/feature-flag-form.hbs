@@ -1,0 +1,37 @@
+<Admin::AdminForm class="max-w-xl" @onSubmit={{perform this.saveFlag}} as |Form|>
+  {{#if this.errorMessage}}
+    <UiAlert data-test-id="server-error" @variant="danger">
+      {{this.errorMessage}}
+    </UiAlert>
+  {{/if}}
+
+  <p class="mb-8">
+    <strong>Note:</strong>
+    Required fields are marked with an
+    <Admin::Required />
+  </p>
+
+  <Form.group data-test-id="name" @model={{this.changeset}} @property="name" as |Group|>
+    <Group.label>Name <Admin::Required /></Group.label>
+    <Group.textbox @value={{this.changeset.name}} @onChange={{set this "changeset.name"}} />
+  </Form.group>
+
+  <Form.group data-test-id="active" @model={{this.changeset}} @property="active">
+    <label>
+      <input type="checkbox" checked={{this.changeset.active}} {{on "change" this.updateActive}} />
+      <span class="ml-2">Is Active</span>
+    </label>
+  </Form.group>
+
+  <div class="mt-8">
+    {{#if this.changeset.errors}}
+      <div class="mb-2 text-red-600">
+        Please fix the errors above and try again.
+      </div>
+    {{/if}}
+    <Form.submit @disabled={{this.saveDisabled}}>
+      Save
+    </Form.submit>
+    <UiButton class="ml-2" @variant="plain" @onClick={{@cancelled}}>Cancel</UiButton>
+  </div>
+</Admin::AdminForm>

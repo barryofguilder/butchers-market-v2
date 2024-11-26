@@ -1,0 +1,64 @@
+<Admin::BackLink @route="admin.index" @text="Admin" />
+
+<Admin::Title @title="Feature Flags" />
+
+<UiAlert @variant="warning">
+  Drew, this is something just for me. It allows me to turn on/off features without having to deploy
+  code.
+</UiAlert>
+
+<div class="mt-8">
+  <UiButton @route="admin.feature-flags.new" @icon="plus" @size="medium" @variant="plain">
+    New
+  </UiButton>
+</div>
+
+<Admin::UiTable class="mt-8" as |Table|>
+  <Table.head as |Thead|>
+    <Thead.th>Name</Thead.th>
+    <Thead.th>Is Active?</Thead.th>
+    <Thead.th />
+  </Table.head>
+  <Table.body as |Tbody|>
+    {{#each this.model as |flag|}}
+      <Tbody.tr as |Row|>
+        <Row.td>{{flag.name}}</Row.td>
+        <Row.td>
+          {{if flag.active "Yes" "No"}}
+        </Row.td>
+        <Row.td>
+          <div class="flex justify-end">
+            <UiButton
+              @route="admin.feature-flags.edit"
+              @model={{flag.id}}
+              @iconOnly={{true}}
+              @icon="pencil-alt"
+              @variant="secondary"
+            />
+
+            <UiButton
+              class="ml-1"
+              @iconOnly={{true}}
+              @icon="trash-alt"
+              @variant="danger"
+              @onClick={{fn this.openDeleteModal flag}}
+            />
+          </div>
+        </Row.td>
+      </Tbody.tr>
+    {{else}}
+      <Tbody.empty>
+        No feature flags found.
+      </Tbody.empty>
+    {{/each}}
+  </Table.body>
+</Admin::UiTable>
+
+<Admin::FeatureFlags::DeleteFeatureFlagForm
+  @isOpen={{this.deleteModalOpen}}
+  @flag={{this.flagToDelete}}
+  @onSave={{this.closeDeleteModal}}
+  @onCancel={{this.closeDeleteModal}}
+/>
+
+{{outlet}}
