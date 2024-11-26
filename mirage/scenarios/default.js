@@ -2,6 +2,7 @@ import { addDays } from 'date-fns';
 
 export default function (server) {
   createDeliItems(server);
+  createFeatureFlags(server);
   createGrabAndGo(server);
   createHours(server);
   createMeatBundles(server);
@@ -50,6 +51,13 @@ function createDeliItems(server) {
   server.create('deli-item', {
     title: 'Original Twice Baked Potato',
     ingredients: 'milk, butter, sour cream, cheddar cheese, chives',
+  });
+}
+
+function createFeatureFlags(server) {
+  server.create('feature-flag', {
+    name: 'grab-and-go-menu',
+    active: true,
   });
 }
 
