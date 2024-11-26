@@ -73,6 +73,8 @@ function routes() {
     return new Response(204);
   });
 
+  this.resource('feature-flags');
+
   // TODO: Need to add filters for this
   this.resource('grab-and-go');
 
