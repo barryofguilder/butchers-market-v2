@@ -1,9 +1,9 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import RouterService from '@ember/routing/router-service';
+import type RouterService from '@ember/routing/router-service';
 import type Transition from '@ember/routing/transition';
-import LocalStorageService from '../services/local-storage';
+import type LocalStorageService from '../services/local-storage';
 import { TOKEN } from '../utils/local-storage';
 
 export default class SignInController extends Controller {

@@ -1,7 +1,7 @@
-import RouterService from '@ember/routing/router-service';
+import type RouterService from '@ember/routing/router-service';
 import DefaultAdapter from './default-adapter';
 import { inject as service } from '@ember/service';
-import SessionService from '../../services/session';
+import type SessionService from '../../services/session';
 
 export default class AuthenticatedJSONAPIAdapter extends DefaultAdapter {
   @service declare router: RouterService;

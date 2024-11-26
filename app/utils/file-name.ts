@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { UploadFile } from 'ember-file-upload';
+import type { UploadFile } from 'ember-file-upload';
 
 /**
  * Generates a file name to store in the database for general files.

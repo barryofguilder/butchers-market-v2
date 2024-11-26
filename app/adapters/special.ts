@@ -1,6 +1,6 @@
 import ApplicationAdapter from './application';
 import fetch from 'fetch';
-import SpecialModel from '../models/special';
+import type SpecialModel from '../models/special';
 
 export default class SpecialAdapter extends ApplicationAdapter {
   reorderSpecials(specials: SpecialModel[]) {
