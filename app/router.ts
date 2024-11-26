@@ -22,6 +22,11 @@ Router.map(function () {
       this.route('edit', { path: ':id/edit' });
       this.route('delete', { path: ':id/delete' });
     });
+    this.route('feature-flags', function () {
+      this.route('new');
+      this.route('edit', { path: ':id/edit' });
+      this.route('delete', { path: ':id/delete' });
+    });
     this.route('grab-and-go', function () {
       this.route('new');
       this.route('edit', { path: ':id/edit' });
