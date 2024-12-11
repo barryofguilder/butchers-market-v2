@@ -1,19 +1,7 @@
 <OrderBanner />
 
-<PromoSection @image="promo-grab.jpg" class="min-h-[400px]" as |Promo|>
-  <Container>
-    <div class="text-center lg:w-3/4 lg:text-left">
-      <Promo.title>
-        Grab &amp; Go
-      </Promo.title>
-      <Promo.subtitle>
-        Fresh items ready for you to grab and go.
-      </Promo.subtitle>
-    </div>
-  </Container>
-</PromoSection>
-
-<section>
+{{! We need 1px of padding so that the header margin takes over since we have no promo image. }}
+<section class="pt-px">
   <HeaderTitle @title="Today's Grab & Go Items" />
 
   <Container>
@@ -33,7 +21,9 @@
   <Container>
     <div class="mt-10 max-w-3xl mx-auto">
       <p class="text-center text-lg sm:text-2xl">
-        We constantly rotate our grab &amp; go items. Here are some of our most common items.
+        We constantly rotate our grab &amp; go items. Here are some of our other common items that
+        are
+        <span class="font-semibold">not currently available</span>.
       </p>
     </div>
 

@@ -24,11 +24,21 @@ const GrabAndGoListComponent: TOC<GrabAndGoListSignature> = <template>
               Sold Out
             </div>
           {{/if}}
-          <img
-            class='w-full shadow-md object-cover sm:w-[264px] sm:h-[202px] md:w-[208px] md:h-[159px] lg:w-[212px] lg:h-[162px] xl:w-[276px] xl:h-[211px] 2xl:w-[340px] 2xl:h-[260px]'
-            src={{item.imageUrlPath}}
-            alt={{item.title}}
-          />
+
+          {{#let
+            'w-full shadow-md sm:w-[264px] sm:h-[202px] md:w-[208px] md:h-[159px] lg:w-[212px] lg:h-[162px] xl:w-[276px] xl:h-[211px] 2xl:w-[340px] 2xl:h-[260px]'
+            as |classes|
+          }}
+            {{#if item.imageUrlPath}}
+              <img class='object-cover {{classes}}' src={{item.imageUrlPath}} alt={{item.title}} />
+            {{else}}
+              <div
+                class='hidden sm:flex sm:items-center sm:justify-center sm:bg-gray-200 {{classes}}'
+              >
+                <span class='text-lg text-gray-700'>No Image</span>
+              </div>
+            {{/if}}
+          {{/let}}
         </div>
         <h4 class='mt-2 text-xl font-bold text-center text-gray-900'>{{item.title}}</h4>
         <p class='mt-1 text-center text-gray-600'>{{item.description}}</p>
