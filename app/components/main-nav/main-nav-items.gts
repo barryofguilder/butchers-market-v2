@@ -107,7 +107,7 @@ export default class MainNavItemsComponent extends Component<MainNavItemsSignatu
           href={{this.menuUrl}}
           class='block px-6 py-4 lg:flex lg:items-center lg:py-0 lg:h-full hover:text-red-600 text-center lg:text-left'
         >
-          Menu
+          Cafe Menu
         </a>
       </li>
       {{!-- Drew doesn't want the contact form anymore. Commenting this out instead of deleting in
