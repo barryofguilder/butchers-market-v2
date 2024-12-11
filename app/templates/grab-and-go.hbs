@@ -1,19 +1,7 @@
 <OrderBanner />
 
-<PromoSection @image="promo-grab.jpg" class="min-h-[400px]" as |Promo|>
-  <Container>
-    <div class="text-center lg:w-3/4 lg:text-left">
-      <Promo.title>
-        Grab &amp; Go
-      </Promo.title>
-      <Promo.subtitle>
-        Fresh items ready for you to grab and go.
-      </Promo.subtitle>
-    </div>
-  </Container>
-</PromoSection>
-
-<section>
+{{! We need 1px of padding so that the header margin takes over since we have no promo image. }}
+<section class="pt-px">
   <HeaderTitle @title="Today's Grab & Go Items" />
 
   <Container>
