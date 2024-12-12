@@ -1,5 +1,5 @@
 import Controller from '@ember/controller';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { isBefore } from 'date-fns';
 
 export default class IndexController extends Controller {

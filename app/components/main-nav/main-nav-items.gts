@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import type Store from '@ember-data/store';
 import { lastValue, restartableTask } from 'ember-concurrency';
 import { on } from '@ember/modifier';
