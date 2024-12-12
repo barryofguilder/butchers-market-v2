@@ -5,11 +5,16 @@ import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 import { dropTask } from 'ember-concurrency';
 import HoursValidations from '../../../validations/hour';
+import { getErrorMessageFromException } from '../../../utils/error-handling';
 
 export default class HoursFormComponent extends Component {
   changeset;
 
   @tracked errorMessage;
+
+  get hasErrors() {
+    return this.errorMessage || this.changeset.errors;
+  }
 
   get saveDisabled() {
     return this.changeset && this.changeset.isInvalid;
@@ -38,11 +43,7 @@ export default class HoursFormComponent extends Component {
       await this.changeset.save();
       this.args.saved();
     } catch (ex) {
-      if (ex.body) {
-        this.errorMessage = ex.body.error;
-      } else {
-        this.errorMessage = ex;
-      }
+      this.errorMessage = await getErrorMessageFromException(ex);
     }
   });
 

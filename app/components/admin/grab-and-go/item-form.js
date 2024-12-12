@@ -8,6 +8,7 @@ import { dropTask, enqueueTask } from 'ember-concurrency';
 import ItemValidations from '../../../validations/grab-and-go';
 import baseUrl from '../../../utils/base-url';
 import { generateFileName } from '../../../utils/file-name';
+import { getErrorMessageFromException } from '../../../utils/error-handling';
 
 export default class ItemFormComponent extends Component {
   @service router;
@@ -18,6 +19,10 @@ export default class ItemFormComponent extends Component {
   @tracked tempImageUrl;
   @tracked errorMessage;
   @tracked fileErrorMessage;
+
+  get hasErrors() {
+    return this.errorMessage || this.changeset.errors;
+  }
 
   get hasImage() {
     return this.changeset.get('imageUrl') || this.tempImageUrl;
@@ -77,10 +82,8 @@ export default class ItemFormComponent extends Component {
     } catch (ex) {
       if (ex.status === 401) {
         return this.session.redirectToSignIn(this.router.currentURL);
-      } else if (ex.body) {
-        this.errorMessage = ex.body.error;
       } else {
-        this.errorMessage = ex;
+        this.errorMessage = await getErrorMessageFromException(ex);
       }
     }
   });

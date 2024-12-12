@@ -9,6 +9,7 @@ import SpecialValidations from '../../../validations/special';
 import baseUrl from '../../../utils/base-url';
 import config from 'butchers-market/config/environment';
 import { generateFileName } from '../../../utils/file-name';
+import { getErrorMessageFromException } from '../../../utils/error-handling';
 
 export default class SpecialFormComponent extends Component {
   @service router;
@@ -21,6 +22,10 @@ export default class SpecialFormComponent extends Component {
   @tracked tempImageUrl;
   @tracked errorMessage;
   @tracked fileErrorMessage;
+
+  get hasErrors() {
+    return this.errorMessage || this.changeset.errors;
+  }
 
   get hasImage() {
     return this.changeset.get('imageUrl') || this.tempImageUrl;
@@ -94,10 +99,8 @@ export default class SpecialFormComponent extends Component {
     } catch (ex) {
       if (ex.status === 401) {
         return this.session.redirectToSignIn(this.router.currentURL);
-      } else if (ex.body) {
-        this.errorMessage = ex.body.error;
       } else {
-        this.errorMessage = ex;
+        this.errorMessage = await getErrorMessageFromException(ex);
       }
     }
   });

@@ -52,17 +52,6 @@
       <small class="block mt-3 text-gray-700 sm:inline-block sm:mt-0 sm:ml-2">
         Only JPG, JPEG, PNG, and GIF files are allowed.
       </small>
-      <small class="block mt-3 text-gray-700">
-        Please optimize the image before uploading using
-        <a
-          href="https://tinypng.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-red-800 font-semibold hover:underline"
-        >
-          this site
-        </a>.
-      </small>
 
       {{#if this.fileErrorMessage}}
         <span class="block mt-2 text-red-500">
@@ -179,9 +168,9 @@
   </Form.group>
 
   <div class="mt-8">
-    {{#if this.changeset.errors}}
+    {{#if this.hasErrors}}
       <div class="mb-2 text-red-600">
-        Please fix the errors above and try again.
+        There are errors in the form above.
       </div>
     {{/if}}
     <Form.submit @disabled={{this.saveDisabled}}>
