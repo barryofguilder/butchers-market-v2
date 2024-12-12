@@ -8,6 +8,7 @@ import { dropTask, enqueueTask } from 'ember-concurrency';
 import PackageBundleValidations from '../../../validations/package-bundle';
 import baseUrl from '../../../utils/base-url';
 import { generatePdfFileName } from '../../../utils/file-name';
+import { getErrorMessageFromException } from '../../../utils/error-handling';
 
 export default class PackageBundleFormComponent extends Component {
   @service router;
@@ -23,6 +24,10 @@ export default class PackageBundleFormComponent extends Component {
   @tracked tempFileUrl;
   @tracked errorMessage;
   @tracked fileErrorMessage;
+
+  get hasErrors() {
+    return this.errorMessage || this.changeset.errors;
+  }
 
   get hasFile() {
     return this.changeset.get('fileUrl') || this.tempFileUrl;
@@ -104,10 +109,8 @@ export default class PackageBundleFormComponent extends Component {
     } catch (ex) {
       if (ex.status === 401) {
         return this.session.redirectToSignIn(this.router.currentURL);
-      } else if (ex.body) {
-        this.errorMessage = ex.body.error;
       } else {
-        this.errorMessage = ex;
+        this.errorMessage = await getErrorMessageFromException(ex);
       }
     }
   });

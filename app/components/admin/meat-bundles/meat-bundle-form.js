@@ -5,6 +5,7 @@ import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 import { dropTask } from 'ember-concurrency';
 import MeatBundleValidations from '../../../validations/meat-bundle';
+import { getErrorMessageFromException } from '../../../utils/error-handling';
 
 export default class MeatBundleFormComponent extends Component {
   changeset;
@@ -13,6 +14,10 @@ export default class MeatBundleFormComponent extends Component {
   @tracked items;
   @tracked errorMessage;
   @tracked reordering = false;
+
+  get hasErrors() {
+    return this.errorMessage || this.changeset.errors;
+  }
 
   get saveDisabled() {
     return this.changeset && this.changeset.isInvalid;
@@ -50,11 +55,7 @@ export default class MeatBundleFormComponent extends Component {
       await this.changeset.save();
       this.args.saved();
     } catch (ex) {
-      if (ex.body) {
-        this.errorMessage = ex.body.error;
-      } else {
-        this.errorMessage = ex;
-      }
+      this.errorMessage = await getErrorMessageFromException(ex);
     }
   });
 
