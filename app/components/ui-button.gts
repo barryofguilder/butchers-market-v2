@@ -7,6 +7,7 @@ import { restartableTask } from 'ember-concurrency';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import perform from 'ember-concurrency/helpers/perform';
+import { or } from 'ember-truth-helpers';
 import UiBaseLink, { type UiBaseLinkArgs } from './ui-base-link';
 // TODO: Fix this...
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -195,7 +196,7 @@ export default class UiButtonComponent extends Component<UiButtonSignature> {
         {{on 'click' (perform this.buttonTask)}}
         ...attributes
       >
-        {{#if this.isRunning}}
+        {{#if (or this.isRunning @isRunning)}}
           <UiIcon data-test-id='is-running' @spin={{true}} @icon='circle-notch' />
         {{/if}}
 

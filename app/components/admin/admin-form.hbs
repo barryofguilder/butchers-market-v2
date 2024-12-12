@@ -4,7 +4,11 @@
       group=(component "admin/admin-form/group" readOnly=@readonly)
       label=(component "admin/admin-form/label")
       submit=(component
-        "ui-button" data-test-id="submit-btn" task=this.submitTask type="submit" variant="primary"
+        "ui-button"
+        data-test-id="submit-btn"
+        isRunning=this.submitTask.isRunning
+        type="submit"
+        variant="primary"
       )
     )
   }}
