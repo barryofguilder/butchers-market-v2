@@ -1,5 +1,6 @@
 import { Factory } from 'miragejs';
 import { faker } from '@faker-js/faker';
+import { addHours } from 'date-fns';
 
 export default Factory.extend({
   title() {
@@ -21,4 +22,12 @@ export default Factory.extend({
   },
 
   isHidden: false,
+
+  createdAt() {
+    return faker.date.recent(30);
+  },
+
+  updatedAt() {
+    return addHours(this.createdAt, 5);
+  },
 });

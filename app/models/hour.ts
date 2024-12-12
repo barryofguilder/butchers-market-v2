@@ -9,4 +9,6 @@ export default class Hour extends Model {
   @attr() declare line1: string;
   @attr() declare line2: string;
   @attr() declare line3: string;
+  @attr('date') declare createdAt: Date;
+  @attr('date') declare updatedAt: Date;
 }

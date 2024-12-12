@@ -1,5 +1,6 @@
 import { Factory } from 'miragejs';
 import { faker } from '@faker-js/faker';
+import { addHours } from 'date-fns';
 
 export default Factory.extend({
   title() {
@@ -31,5 +32,13 @@ export default Factory.extend({
       '5 lbs. Boneless Chicken Breasts',
       '10 lbs. Chicken Leg Quarters',
     ];
+  },
+
+  createdAt() {
+    return faker.date.recent(30);
+  },
+
+  updatedAt() {
+    return addHours(this.createdAt, 5);
   },
 });
