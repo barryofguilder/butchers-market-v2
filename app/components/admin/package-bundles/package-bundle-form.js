@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 import { dropTask, enqueueTask } from 'ember-concurrency';

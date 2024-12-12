@@ -1,4 +1,4 @@
-import Service, { inject as service } from '@ember/service';
+import Service, { service } from '@ember/service';
 import { getOwner } from '@ember/application';
 import type RouterService from '@ember/routing/router-service';
 import type Transition from '@ember/routing/transition';
