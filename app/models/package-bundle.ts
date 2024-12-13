@@ -8,6 +8,8 @@ export default class PackageBundle extends Model {
   @attr() declare specialText: string;
   @attr() declare prices: string[];
   @attr() declare items: string[];
+  @attr('date') declare createdAt: Date;
+  @attr('date') declare updatedAt: Date;
 
   get fileUrlPath() {
     if (this.fileUrl) {

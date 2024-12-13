@@ -8,6 +8,10 @@
     <div class="mt-10 max-w-3xl mx-auto">
       <p class="text-center text-lg sm:text-2xl">
         Here are today's grab &amp; go items.
+        {{#if this.lastUpdatedOn}}
+          Last updated on
+          <time datetime={{this.lastUpdatedOn}}>{{this.formattedDate}}</time>.
+        {{/if}}
       </p>
     </div>
 

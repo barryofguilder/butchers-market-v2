@@ -9,4 +9,6 @@ export default class MeatBundle extends Model {
   @attr() declare isHidden: boolean;
   @attr() declare orderEnabled: boolean;
   @attr() declare items: string[];
+  @attr('date') declare createdAt: Date;
+  @attr('date') declare updatedAt: Date;
 }

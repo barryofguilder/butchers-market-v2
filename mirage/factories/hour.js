@@ -1,6 +1,6 @@
 import { Factory } from 'miragejs';
 import { faker } from '@faker-js/faker';
-import { addWeeks } from 'date-fns';
+import { addHours, addWeeks } from 'date-fns';
 
 export default Factory.extend({
   type() {
@@ -34,5 +34,13 @@ export default Factory.extend({
 
   line2() {
     return 'Fri & Sat: 9:00am - 10:00pm';
+  },
+
+  createdAt() {
+    return faker.date.recent(30);
+  },
+
+  updatedAt() {
+    return addHours(this.createdAt, 5);
   },
 });

@@ -11,6 +11,8 @@ export default class Special extends Model {
   @attr('date') declare activeEndDate: Date;
   @attr() declare isSoldOut: boolean;
   @attr() declare isHidden: boolean;
+  @attr('date') declare createdAt: Date;
+  @attr('date') declare updatedAt: Date;
 
   get renderLink() {
     return this.link || config.orderOnlineUrl;

@@ -1,5 +1,6 @@
 import { Factory } from 'miragejs';
 import { faker } from '@faker-js/faker';
+import { addHours } from 'date-fns';
 
 export default Factory.extend({
   title() {
@@ -44,5 +45,13 @@ export default Factory.extend({
       '2 lbs. Raw Shrimp',
       '2 (4oz.) Lobster Tails',
     ];
+  },
+
+  createdAt() {
+    return faker.date.recent(30);
+  },
+
+  updatedAt() {
+    return addHours(this.createdAt, 5);
   },
 });
