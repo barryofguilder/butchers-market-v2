@@ -14,19 +14,19 @@
 </div>
 
 <Admin::UiTable class="mt-8" as |Table|>
-  <Table.head as |Thead|>
-    <Thead.th>Name</Thead.th>
-    <Thead.th>Is Active?</Thead.th>
+  <Table.Head as |Thead|>
+    <Thead.Th>Name</Thead.Th>
+    <Thead.Th>Is Active?</Thead.Th>
     <Thead.th />
-  </Table.head>
-  <Table.body as |Tbody|>
+  </Table.Head>
+  <Table.Body as |Tbody|>
     {{#each this.model as |flag|}}
-      <Tbody.tr as |Row|>
-        <Row.td>{{flag.name}}</Row.td>
-        <Row.td>
+      <Tbody.Tr as |Row|>
+        <Row.Td>{{flag.name}}</Row.Td>
+        <Row.Td>
           {{if flag.active "Yes" "No"}}
-        </Row.td>
-        <Row.td>
+        </Row.Td>
+        <Row.Td>
           <div class="flex justify-end">
             <UiButton
               @route="admin.feature-flags.edit"
@@ -44,14 +44,14 @@
               @onClick={{fn this.openDeleteModal flag}}
             />
           </div>
-        </Row.td>
-      </Tbody.tr>
+        </Row.Td>
+      </Tbody.Tr>
     {{else}}
-      <Tbody.empty>
+      <Tbody.Empty>
         No feature flags found.
-      </Tbody.empty>
+      </Tbody.Empty>
     {{/each}}
-  </Table.body>
+  </Table.Body>
 </Admin::UiTable>
 
 <Admin::FeatureFlags::DeleteFeatureFlagForm

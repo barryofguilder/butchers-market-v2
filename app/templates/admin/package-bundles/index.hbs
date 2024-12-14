@@ -10,36 +10,36 @@
 </div> }}
 
 <Admin::UiTable class="mt-8" as |Table|>
-  <Table.head as |Thead|>
-    <Thead.th>Title</Thead.th>
-    <Thead.th>Prices</Thead.th>
-    <Thead.th>Special Text</Thead.th>
-    <Thead.th>Items</Thead.th>
-    <Thead.th />
-  </Table.head>
-  <Table.body as |Tbody|>
+  <Table.Head as |Thead|>
+    <Thead.Th>Title</Thead.Th>
+    <Thead.Th>Prices</Thead.Th>
+    <Thead.Th>Special Text</Thead.Th>
+    <Thead.Th>Items</Thead.Th>
+    <Thead.Th />
+  </Table.Head>
+  <Table.Body as |Tbody|>
     {{#each this.sortedBundles as |bundle|}}
       {{! Hiding "Ice Box" for now, might delete later if not needed anymore. }}
       {{#unless (eq bundle.title "Ice Box Mix N' Match")}}
-        <Tbody.tr as |Row|>
-          <Row.td>{{bundle.title}}</Row.td>
-          <Row.td>
+        <Tbody.Tr as |Row|>
+          <Row.Td>{{bundle.title}}</Row.Td>
+          <Row.Td>
             <ul>
               {{#each bundle.prices as |price|}}
                 <li>{{price}}</li>
               {{/each}}
             </ul>
-          </Row.td>
-          <Row.td>{{bundle.specialText}}</Row.td>
-          <Row.td>
+          </Row.Td>
+          <Row.Td>{{bundle.specialText}}</Row.Td>
+          <Row.Td>
             {{#if bundle.items}}
               {{bundle.items.length}}
               Items
             {{else}}
               0 Items
             {{/if}}
-          </Row.td>
-          <Row.td>
+          </Row.Td>
+          <Row.Td>
             <div class="flex justify-end">
               <UiButton
                 @route="admin.package-bundles.edit"
@@ -58,15 +58,15 @@
               @onClick={{fn this.openDeleteModal bundle}}
             /> --}}
             </div>
-          </Row.td>
-        </Tbody.tr>
+          </Row.Td>
+        </Tbody.Tr>
       {{/unless}}
     {{else}}
-      <Tbody.empty>
+      <Tbody.Empty>
         No package bundles found.
-      </Tbody.empty>
+      </Tbody.Empty>
     {{/each}}
-  </Table.body>
+  </Table.Body>
 </Admin::UiTable>
 
 <Admin::PackageBundles::DeletePackageBundleForm

@@ -16,41 +16,41 @@
 {{/if}}
 
 <Admin::UiTable class="mt-8" as |Table|>
-  <Table.head as |Thead|>
-    <Thead.th />
-    <Thead.th>Title</Thead.th>
-    <Thead.th>Active Start Date</Thead.th>
-    <Thead.th>Active End Date</Thead.th>
-    <Thead.th>Sold Out?</Thead.th>
-    <Thead.th>Hidden?</Thead.th>
-    <Thead.th />
-  </Table.head>
-  <Table.body {{sortable-group onChange=this.reorderItems}} as |Tbody|>
+  <Table.Head as |Thead|>
+    <Thead.Th />
+    <Thead.Th>Title</Thead.Th>
+    <Thead.Th>Active Start Date</Thead.Th>
+    <Thead.Th>Active End Date</Thead.Th>
+    <Thead.Th>Sold Out?</Thead.Th>
+    <Thead.Th>Hidden?</Thead.Th>
+    <Thead.Th />
+  </Table.Head>
+  <Table.Body {{sortable-group onChange=this.reorderItems}} as |Tbody|>
     {{#each (sort-by "displayOrder" this.specials) as |special|}}
-      <Tbody.tr {{sortable-item model=special}} as |Row|>
-        <Row.td>
+      <Tbody.Tr {{sortable-item model=special}} as |Row|>
+        <Row.Td>
           <UiIcon @icon="arrows-alt-v" class="block w-4" {{sortable-handle}} />
-        </Row.td>
-        <Row.td>
+        </Row.Td>
+        <Row.Td>
           {{special.title}}
-        </Row.td>
-        <Row.td>
+        </Row.Td>
+        <Row.Td>
           {{#if special.activeStartDate}}
             {{date-format special.activeStartDate "LL/dd/yyyy"}}
           {{/if}}
-        </Row.td>
-        <Row.td>
+        </Row.Td>
+        <Row.Td>
           {{#if special.activeEndDate}}
             {{date-format special.activeEndDate "LL/dd/yyyy"}}
           {{/if}}
-        </Row.td>
-        <Row.td>
+        </Row.Td>
+        <Row.Td>
           {{if special.isSoldOut "Yes" "No"}}
-        </Row.td>
-        <Row.td>
+        </Row.Td>
+        <Row.Td>
           {{if special.isHidden "Yes" "No"}}
-        </Row.td>
-        <Row.td>
+        </Row.Td>
+        <Row.Td>
           <div class="flex justify-end">
             <UiButton
               @route="admin.specials.edit"
@@ -68,14 +68,14 @@
               @onClick={{fn this.openDeleteModal special}}
             />
           </div>
-        </Row.td>
-      </Tbody.tr>
+        </Row.Td>
+      </Tbody.Tr>
     {{else}}
-      <Tbody.empty>
+      <Tbody.Empty>
         No specials found.
-      </Tbody.empty>
+      </Tbody.Empty>
     {{/each}}
-  </Table.body>
+  </Table.Body>
 </Admin::UiTable>
 
 <Admin::Specials::DeleteSpecialForm

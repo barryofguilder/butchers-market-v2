@@ -3,16 +3,16 @@
 <Admin::Title @title="Menu PDF" />
 
 <Admin::UiTable class="mt-8" as |Table|>
-  <Table.head as |Thead|>
-    <Thead.th>Last Updated At</Thead.th>
-    <Thead.th />
-  </Table.head>
-  <Table.body as |Tbody|>
+  <Table.Head as |Thead|>
+    <Thead.Th>Last Updated At</Thead.Th>
+    <Thead.Th />
+  </Table.Head>
+  <Table.Body as |Tbody|>
     {{#each this.model as |menu|}}
-      <Tbody.tr as |Row|>
-        <Row.td>{{date-format menu.updatedAt "LL/dd/yyyy h:mma"}}</Row.td>
+      <Tbody.Tr as |Row|>
+        <Row.Td>{{date-format menu.updatedAt "LL/dd/yyyy h:mma"}}</Row.Td>
 
-        <Row.td>
+        <Row.Td>
           <div class="flex justify-end">
             <UiButton
               @route="admin.menu.edit"
@@ -22,14 +22,14 @@
               @variant="secondary"
             />
           </div>
-        </Row.td>
-      </Tbody.tr>
+        </Row.Td>
+      </Tbody.Tr>
     {{else}}
-      <Tbody.empty>
+      <Tbody.Empty>
         No menus found.
-      </Tbody.empty>
+      </Tbody.Empty>
     {{/each}}
-  </Table.body>
+  </Table.Body>
 </Admin::UiTable>
 
 {{outlet}}
