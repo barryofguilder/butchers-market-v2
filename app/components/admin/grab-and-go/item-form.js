@@ -113,11 +113,6 @@ export default class ItemFormComponent extends Component {
   }
 
   @action
-  updateIsFeatured() {
-    this.changeset.set('featured', !this.changeset.get('featured'));
-  }
-
-  @action
   updateIsSoldOut() {
     this.changeset.set('isSoldOut', !this.changeset.get('isSoldOut'));
   }

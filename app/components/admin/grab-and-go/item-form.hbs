@@ -71,21 +71,6 @@
     />
   </Form.group>
 
-  <Form.group data-test-id="hidden">
-    <label>
-      <input
-        type="checkbox"
-        checked={{this.changeset.featured}}
-        {{on "change" this.updateIsFeatured}}
-      />
-      <span class="ml-2">Is Featured?</span>
-    </label>
-    <small class="block mt-3 text-gray-700">
-      When checked, this means that it's available for purchase and is also featured on the home
-      page.
-    </small>
-  </Form.group>
-
   <Form.group data-test-id="sold-out">
     <label>
       <input
