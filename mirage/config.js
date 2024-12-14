@@ -74,10 +74,7 @@ function routes() {
   });
 
   this.resource('feature-flags');
-
-  // TODO: Need to add filters for this
   this.resource('grab-and-go');
-
   this.resource('hours');
 
   this.resource('meat-bundles', { only: ['show', 'update'] });

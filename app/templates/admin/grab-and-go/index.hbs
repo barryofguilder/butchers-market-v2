@@ -11,8 +11,6 @@
 <Admin::UiTable class="mt-8" as |Table|>
   <Table.head as |Thead|>
     <Thead.th>Title</Thead.th>
-    <Thead.th>Description</Thead.th>
-    <Thead.th>Is Featured?</Thead.th>
     <Thead.th>Sold Out?</Thead.th>
     <Thead.th />
   </Table.head>
@@ -21,12 +19,6 @@
       <Tbody.tr as |Row|>
         <Row.td>
           {{item.title}}
-        </Row.td>
-        <Row.td>
-          {{item.description}}
-        </Row.td>
-        <Row.td>
-          {{if item.featured "Yes" "No"}}
         </Row.td>
         <Row.td>
           {{if item.isSoldOut "Yes" "No"}}

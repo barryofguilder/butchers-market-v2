@@ -19,17 +19,15 @@
         <Group.readonly @value={{@special.title}} />
       </Form.group>
 
-      {{#if @special.activeStartDate}}
-        <Form.group data-test-id="start-date" as |Group|>
-          <Group.label>Active Start Date</Group.label>
-          <Group.readonly @value={{date-format @special.activeStartDate "LL/dd/yyyy"}} />
-        </Form.group>
+      <Form.group data-test-id="description" as |Group|>
+        <Group.label>Description</Group.label>
+        <Group.readonly @value={{@special.description}} />
+      </Form.group>
 
-        <Form.group data-test-id="end-date" as |Group|>
-          <Group.label>Active End Date</Group.label>
-          <Group.readonly @value={{date-format @special.activeEndDate "LL/dd/yyyy"}} />
-        </Form.group>
-      {{/if}}
+      <Form.group data-test-id="sold-out" as |Group|>
+        <Group.label>Is Sold Out?</Group.label>
+        <Group.readonly @value={{if @item.isSoldOut "Yes" "No"}} />
+      </Form.group>
     </Modal.body>
     <Modal.footer>
       <UiButton @variant="plain" @onClick={{@onCancel}}>
