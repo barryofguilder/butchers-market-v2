@@ -9,21 +9,21 @@
 </div>
 
 <Admin::UiTable class="mt-8" as |Table|>
-  <Table.head as |Thead|>
-    <Thead.th>Title</Thead.th>
-    <Thead.th>Sold Out?</Thead.th>
-    <Thead.th />
-  </Table.head>
-  <Table.body as |Tbody|>
+  <Table.Head as |Thead|>
+    <Thead.Th>Title</Thead.Th>
+    <Thead.Th>Sold Out?</Thead.Th>
+    <Thead.Th />
+  </Table.Head>
+  <Table.Body as |Tbody|>
     {{#each this.model as |item|}}
-      <Tbody.tr as |Row|>
-        <Row.td>
+      <Tbody.Tr as |Row|>
+        <Row.Td>
           {{item.title}}
-        </Row.td>
-        <Row.td>
+        </Row.Td>
+        <Row.Td>
           {{if item.isSoldOut "Yes" "No"}}
-        </Row.td>
-        <Row.td>
+        </Row.Td>
+        <Row.Td>
           <div class="flex justify-end">
             <UiButton
               @route="admin.grab-and-go.edit"
@@ -41,14 +41,14 @@
               @onClick={{fn this.openDeleteModal item}}
             />
           </div>
-        </Row.td>
-      </Tbody.tr>
+        </Row.Td>
+      </Tbody.Tr>
     {{else}}
-      <Tbody.empty>
+      <Tbody.Empty>
         No grab and go items found.
-      </Tbody.empty>
+      </Tbody.Empty>
     {{/each}}
-  </Table.body>
+  </Table.Body>
 </Admin::UiTable>
 
 <Admin::GrabAndGo::DeleteItemForm

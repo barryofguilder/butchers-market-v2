@@ -9,35 +9,35 @@
 </div>
 
 <Admin::UiTable class="mt-8" as |Table|>
-  <Table.head as |Thead|>
-    <Thead.th>Type</Thead.th>
-    <Thead.th>Label</Thead.th>
-    <Thead.th>Active Start Date</Thead.th>
-    <Thead.th>Active End Date</Thead.th>
-    <Thead.th>Lines</Thead.th>
-    <Thead.th />
-  </Table.head>
-  <Table.body as |Tbody|>
+  <Table.Head as |Thead|>
+    <Thead.Th>Type</Thead.Th>
+    <Thead.Th>Label</Thead.Th>
+    <Thead.Th>Active Start Date</Thead.Th>
+    <Thead.Th>Active End Date</Thead.Th>
+    <Thead.Th>Lines</Thead.Th>
+    <Thead.Th />
+  </Table.Head>
+  <Table.Body as |Tbody|>
     {{#each @model as |hours|}}
-      <Tbody.tr as |Row|>
-        <Row.td>
+      <Tbody.Tr as |Row|>
+        <Row.Td>
           <div>{{hours.type}}</div>
           {{#if hours.default}}
             <span class="inline-block px-2 bg-blue-200 text-blue-800 text-sm rounded">Default</span>
           {{/if}}
-        </Row.td>
-        <Row.td>{{hours.label}}</Row.td>
-        <Row.td>
+        </Row.Td>
+        <Row.Td>{{hours.label}}</Row.Td>
+        <Row.Td>
           {{#if hours.activeStartDate}}
             {{date-format hours.activeStartDate "LL/dd/yyyy"}}
           {{/if}}
-        </Row.td>
-        <Row.td>
+        </Row.Td>
+        <Row.Td>
           {{#if hours.activeEndDate}}
             {{date-format hours.activeEndDate "LL/dd/yyyy"}}
           {{/if}}
-        </Row.td>
-        <Row.td>
+        </Row.Td>
+        <Row.Td>
           <ul class="list-disc list-inside">
             <li>{{hours.line1}}</li>
             {{#if hours.line2}}
@@ -47,8 +47,8 @@
               <li>{{hours.line3}}</li>
             {{/if}}
           </ul>
-        </Row.td>
-        <Row.td>
+        </Row.Td>
+        <Row.Td>
           <div class="flex justify-end">
             <UiButton
               @route="admin.hours.edit"
@@ -67,14 +67,14 @@
               @onClick={{fn this.openDeleteModal hours}}
             />
           </div>
-        </Row.td>
-      </Tbody.tr>
+        </Row.Td>
+      </Tbody.Tr>
     {{else}}
-      <Tbody.empty>
+      <Tbody.Empty>
         No hours found.
-      </Tbody.empty>
+      </Tbody.Empty>
     {{/each}}
-  </Table.body>
+  </Table.Body>
 </Admin::UiTable>
 
 <Admin::Hours::DeleteHoursForm
