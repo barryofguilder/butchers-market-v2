@@ -65,31 +65,31 @@ function createGrabAndGo(server) {
   server.create('grab-and-go', {
     title: 'Original meatloaf ',
     imageUrl: 'images/thanksgivingbreast.jpg',
-    isSoldOut: false,
+    inStock: true,
   });
 
   server.create('grab-and-go', {
     title: 'Smoked Queso',
     imageUrl: 'images/thanksgivingbreast.jpg',
-    isSoldOut: true,
+    inStock: false,
   });
 
   server.create('grab-and-go', {
     title: 'Mexican chicken casserole',
     imageUrl: 'images/thanksgivingbreast.jpg',
-    isSoldOut: false,
+    inStock: true,
   });
 
   server.create('grab-and-go', {
     title: 'Brisket Philly cheese pie',
     imageUrl: 'images/thanksgivingbreast.jpg',
-    isSoldOut: true,
+    inStock: false,
   });
 
   server.create('grab-and-go', {
     title: 'Chicken Casserole',
     imageUrl: 'images/thanksgivingbreast.jpg',
-    isSoldOut: false,
+    inStock: true,
   });
 }
 

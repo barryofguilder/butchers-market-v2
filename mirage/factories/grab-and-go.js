@@ -10,8 +10,8 @@ export default Factory.extend({
   description() {
     return faker.lorem.sentence();
   },
-  isSoldOut() {
-    return faker.datatype.boolean({ probability: 0.1 });
+  inStock() {
+    return faker.datatype.boolean({ probability: 0.9 });
   },
   createdAt() {
     return faker.date.recent(30);

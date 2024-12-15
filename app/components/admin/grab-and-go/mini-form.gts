@@ -20,19 +20,19 @@ export default class MiniFormComponent extends Component<MiniFormSignature> {
 
   @action
   handleOnChange(checked: boolean) {
-    this.args.item.isSoldOut = checked;
+    this.args.item.inStock = checked;
     this.saveItem.perform();
   }
 
   <template>
     <AdminForm as |Form|>
-      <Form.group data-test-id='sold-out' @useDefaultMargin={{false}} as |Group|>
+      <Form.group data-test-id='in-stock' @useDefaultMargin={{false}} as |Group|>
         <Group.checkbox
           @hideLabel={{true}}
-          @checked={{@item.isSoldOut}}
+          @checked={{@item.inStock}}
           @onChange={{this.handleOnChange}}
         >
-          Is Sold Out?
+          In Stock?
         </Group.checkbox>
       </Form.group>
     </AdminForm>
