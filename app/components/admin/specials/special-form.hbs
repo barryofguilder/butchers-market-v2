@@ -87,18 +87,13 @@
     </small>
   </Form.group>
 
-  <Form.group data-test-id="active-during-range">
-    <label>
-      <input
-        type="checkbox"
-        checked={{this.activeDuringRange}}
-        {{on "change" this.toggleActiveDuringRange}}
-      />
-      <span class="ml-2">Active during a certain date range?</span>
-    </label>
-    <small class="block mt-3 text-gray-700">
+  <Form.group data-test-id="active-during-range" as |Group|>
+    <Group.checkbox @checked={{this.activeDuringRange}} @onChange={{this.toggleActiveDuringRange}}>
+      Active during a certain date range?
+    </Group.checkbox>
+    <Group.help>
       When checked, this means that the special will only be active during a specified date range.
-    </small>
+    </Group.help>
   </Form.group>
 
   {{#if this.activeDuringRange}}
@@ -141,30 +136,20 @@
     </Form.group>
   {{/if}}
 
-  <Form.group data-test-id="sold-out">
-    <label>
-      <input
-        type="checkbox"
-        checked={{this.changeset.isSoldOut}}
-        {{on "change" this.updateIsSoldOut}}
-      />
-      <span class="ml-2">Is Sold Out?</span>
-    </label>
+  <Form.group data-test-id="sold-out" @model={{this.changeset}} @property="isSoldOut" as |Group|>
+    <Group.checkbox @checked={{this.changeset.isSoldOut}} @onChange={{this.updateIsSoldOut}}>
+      Is Sold Out?
+    </Group.checkbox>
   </Form.group>
 
-  <Form.group data-test-id="hidden">
-    <label>
-      <input
-        type="checkbox"
-        checked={{this.changeset.isHidden}}
-        {{on "change" this.updateIsHidden}}
-      />
-      <span class="ml-2">Is Hidden?</span>
-    </label>
-    <small class="block mt-3 text-gray-700">
+  <Form.group data-test-id="hidden" @model={{this.changeset}} @property="isHidden" as |Group|>
+    <Group.checkbox @checked={{this.changeset.isHidden}} @onChange={{this.updateIsHidden}}>
+      Is Hidden?
+    </Group.checkbox>
+    <Group.help>
       When checked, this means that the special will be hidden even if there is an active date range
       set.
-    </small>
+    </Group.help>
   </Form.group>
 
   <div class="mt-8">

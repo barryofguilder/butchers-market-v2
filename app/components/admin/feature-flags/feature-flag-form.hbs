@@ -16,11 +16,10 @@
     <Group.textbox @value={{this.changeset.name}} @onChange={{set this "changeset.name"}} />
   </Form.group>
 
-  <Form.group data-test-id="active" @model={{this.changeset}} @property="active">
-    <label>
-      <input type="checkbox" checked={{this.changeset.active}} {{on "change" this.updateActive}} />
-      <span class="ml-2">Is Active</span>
-    </label>
+  <Form.group data-test-id="active" @model={{this.changeset}} @property="active" as |Group|>
+    <Group.checkbox @checked={{this.changeset.active}} @onChange={{this.updateActive}}>
+      Is Active?
+    </Group.checkbox>
   </Form.group>
 
   <div class="mt-8">

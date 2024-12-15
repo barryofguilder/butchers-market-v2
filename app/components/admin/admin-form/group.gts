@@ -2,8 +2,8 @@ import Component from '@glimmer/component';
 import type { WithBoundArgs } from '@glint/template';
 import { guidFor } from '@ember/object/internals';
 import { hash } from '@ember/helper';
-import { get } from '@ember/object';
 import { valueOrDefault } from '../../../utils/value-or-default';
+import Checkbox from './checkbox';
 import Datepicker from './datepicker';
 import Help from './help';
 import Label from './label';
@@ -31,6 +31,7 @@ export interface GroupSignature {
   Blocks: {
     default: [
       {
+        checkbox: WithBoundArgs<typeof Checkbox, never>;
         datepicker: WithBoundArgs<typeof Datepicker, 'id' | 'errors'>;
         help: WithBoundArgs<typeof Help, never>;
         label: WithBoundArgs<typeof Label, 'for' | 'errors'>;
@@ -66,6 +67,7 @@ export default class GroupComponent extends Component<GroupSignature> {
     <div class={{if this.useDefaultMargin 'mb-6'}} ...attributes>
       {{yield
         (hash
+          checkbox=(component Checkbox)
           datepicker=(component Datepicker id=this.uniqueId errors=this.errors)
           help=(component Help)
           label=(component Label for=this.uniqueId errors=this.errors)

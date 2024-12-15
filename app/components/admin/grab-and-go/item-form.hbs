@@ -71,15 +71,10 @@
     />
   </Form.group>
 
-  <Form.group data-test-id="sold-out">
-    <label>
-      <input
-        type="checkbox"
-        checked={{this.changeset.isSoldOut}}
-        {{on "change" this.updateIsSoldOut}}
-      />
-      <span class="ml-2">Is Sold Out?</span>
-    </label>
+  <Form.group data-test-id="sold-out" @model={{this.changeset}} @property="isSoldOut" as |Group|>
+    <Group.checkbox @checked={{this.changeset.isSoldOut}} @onChange={{this.updateIsSoldOut}}>
+      Is Sold Out?
+    </Group.checkbox>
   </Form.group>
 
   <div class="mt-8">
