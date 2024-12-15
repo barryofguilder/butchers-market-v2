@@ -4,11 +4,11 @@ import { format, formatISO } from 'date-fns';
 
 export default class GrabAndGoController extends Controller {
   get todaysItems() {
-    return this.model.filter((item) => !item.isSoldOut);
+    return this.model.filter((item) => item.inStock);
   }
 
   get commonItems() {
-    return this.model.filter((item) => item.isSoldOut);
+    return this.model.filter((item) => !item.inStock);
   }
 
   @cached

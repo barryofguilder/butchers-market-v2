@@ -1,46 +1,12 @@
 <Admin::Title @title="Manage" />
 
-<div class="max-w-sm shadow rounded-md overflow-hidden">
-  <ul>
-    <li>
-      <Admin::PageLink @route="admin.deli-items">
-        Deli Items
-      </Admin::PageLink>
-    </li>
-    <li class="border-t border-gray-200">
-      <Admin::PageLink @route="admin.feature-flags">
-        Feature Flags
-      </Admin::PageLink>
-    </li>
-    <li class="border-t border-gray-200">
-      <Admin::PageLink @route="admin.grab-and-go">
-        Grab and Go
-      </Admin::PageLink>
-    </li>
-    <li class="border-t border-gray-200">
-      <Admin::PageLink @route="admin.meat-bundles">
-        Meat Bundles
-      </Admin::PageLink>
-    </li>
-    <li class="border-t border-gray-200">
-      <Admin::PageLink @route="admin.menu">
-        Menu PDF
-      </Admin::PageLink>
-    </li>
-    <li class="border-t border-gray-200">
-      <Admin::PageLink @route="admin.package-bundles">
-        Package Bundles
-      </Admin::PageLink>
-    </li>
-    <li class="border-t border-gray-200">
-      <Admin::PageLink @route="admin.specials">
-        Specials
-      </Admin::PageLink>
-    </li>
-    <li class="border-t border-gray-200">
-      <Admin::PageLink @route="admin.hours">
-        Store Hours
-      </Admin::PageLink>
-    </li>
-  </ul>
-</div>
+<Admin::UiList class="max-w-sm" as |List|>
+  <List.Item @route="admin.deli-items">Deli Items</List.Item>
+  <List.Item @route="admin.feature-flags">Feature Flags</List.Item>
+  <List.Item @route="admin.grab-and-go">Grab &amp; Go</List.Item>
+  <List.Item @route="admin.meat-bundles">Meat Bundles</List.Item>
+  <List.Item @route="admin.menu">Menu PDF</List.Item>
+  <List.Item @route="admin.package-bundles">Package Bundles</List.Item>
+  <List.Item @route="admin.specials">Specials</List.Item>
+  <List.Item @route="admin.hours">Store Hours</List.Item>
+</Admin::UiList>

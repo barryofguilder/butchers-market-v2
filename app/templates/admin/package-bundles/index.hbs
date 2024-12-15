@@ -13,8 +13,8 @@
   <Table.Head as |Thead|>
     <Thead.Th>Title</Thead.Th>
     <Thead.Th>Prices</Thead.Th>
-    <Thead.Th>Special Text</Thead.Th>
-    <Thead.Th>Items</Thead.Th>
+    <Thead.Th class="hidden md:table-cell">Special Text</Thead.Th>
+    <Thead.Th class="hidden md:table-cell">Items</Thead.Th>
     <Thead.Th />
   </Table.Head>
   <Table.Body as |Tbody|>
@@ -30,8 +30,8 @@
               {{/each}}
             </ul>
           </Row.Td>
-          <Row.Td>{{bundle.specialText}}</Row.Td>
-          <Row.Td>
+          <Row.Td class="hidden md:table-cell">{{bundle.specialText}}</Row.Td>
+          <Row.Td class="hidden md:table-cell">
             {{#if bundle.items}}
               {{bundle.items.length}}
               Items

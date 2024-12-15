@@ -8,13 +8,12 @@ import FaIcon from '@fortawesome/ember-fontawesome/components/fa-icon';
 const ValidationErrors: TOC<{
   Element: HTMLUListElement;
   Args: {
-    // TODO: Is this the correct type?
     errors?: string[];
   };
   Blocks: EmptyObject;
 }> = <template>
   {{#if (gt @errors.length 0)}}
-    <ul data-test-id='validation-errors' class='text-red text-sm' ...attributes>
+    <ul data-test-id='validation-errors' class='text-red-600 text-sm' ...attributes>
       {{#each @errors as |error|}}
         <li data-test-id='validation-error' class='my-1'>
           <FaIcon @icon='exclamation-triangle' />

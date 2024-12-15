@@ -11,13 +11,13 @@ const SpecialListItem: TOC<{
 }> = <template>
   <div class='mt-10'>
     <a href={{@special.renderLink}} class='block relative'>
-      {{#if @special.isSoldOut}}
+      {{#unless @special.inStock}}
         <div
           class='absolute px-4 py-2 whitespace-nowrap bg-red-700 text-white text-3xl font-semibold uppercase -rotate-12 xl:px-8 xl:text-5xl'
         >
           Sold Out
         </div>
-      {{/if}}
+      {{/unless}}
       <img src={{@special.imageUrlPath}} alt={{@special.imageAltText}} class='w-full' />
     </a>
   </div>

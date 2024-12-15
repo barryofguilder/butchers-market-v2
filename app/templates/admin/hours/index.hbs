@@ -12,9 +12,9 @@
   <Table.Head as |Thead|>
     <Thead.Th>Type</Thead.Th>
     <Thead.Th>Label</Thead.Th>
-    <Thead.Th>Active Start Date</Thead.Th>
-    <Thead.Th>Active End Date</Thead.Th>
-    <Thead.Th>Lines</Thead.Th>
+    <Thead.Th class="hidden md:table-cell">Active Start Date</Thead.Th>
+    <Thead.Th class="hidden md:table-cell">Active End Date</Thead.Th>
+    <Thead.Th class="hidden md:table-cell">Lines</Thead.Th>
     <Thead.Th />
   </Table.Head>
   <Table.Body as |Tbody|>
@@ -27,17 +27,17 @@
           {{/if}}
         </Row.Td>
         <Row.Td>{{hours.label}}</Row.Td>
-        <Row.Td>
+        <Row.Td class="hidden md:table-cell">
           {{#if hours.activeStartDate}}
             {{date-format hours.activeStartDate "LL/dd/yyyy"}}
           {{/if}}
         </Row.Td>
-        <Row.Td>
+        <Row.Td class="hidden md:table-cell">
           {{#if hours.activeEndDate}}
             {{date-format hours.activeEndDate "LL/dd/yyyy"}}
           {{/if}}
         </Row.Td>
-        <Row.Td>
+        <Row.Td class="hidden md:table-cell">
           <ul class="list-disc list-inside">
             <li>{{hours.line1}}</li>
             {{#if hours.line2}}

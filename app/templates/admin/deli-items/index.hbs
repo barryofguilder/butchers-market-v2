@@ -19,11 +19,7 @@
       <Tbody.Tr as |Row|>
         <Row.Td>{{item.title}}</Row.Td>
         <Row.Td>
-          {{#if item.isHidden}}
-            <span class="inline-block px-2 bg-blue-200 text-blue-800 text-sm rounded">
-              Hidden
-            </span>
-          {{/if}}
+          <Admin::DeliItems::MiniForm @item={{item}} />
         </Row.Td>
         <Row.Td>
           <div class="flex justify-end">

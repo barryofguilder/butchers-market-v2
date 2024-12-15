@@ -130,8 +130,8 @@ export default class SpecialFormComponent extends Component {
   }
 
   @action
-  toggleActiveDuringRange(event) {
-    this.activeDuringRange = event.target.checked;
+  toggleActiveDuringRange(checked) {
+    this.activeDuringRange = checked;
 
     if (this.activeDuringRange === false) {
       this.changeset.set('activeStartDate', null);
@@ -156,8 +156,8 @@ export default class SpecialFormComponent extends Component {
   }
 
   @action
-  updateIsSoldOut() {
-    this.changeset.set('isSoldOut', !this.changeset.get('isSoldOut'));
+  updateInStock() {
+    this.changeset.set('inStock', !this.changeset.get('inStock'));
   }
 
   @action

@@ -24,9 +24,9 @@
         <Group.readonly @value={{@special.description}} />
       </Form.group>
 
-      <Form.group data-test-id="sold-out" as |Group|>
-        <Group.label>Is Sold Out?</Group.label>
-        <Group.readonly @value={{if @item.isSoldOut "Yes" "No"}} />
+      <Form.group data-test-id="in-stock" as |Group|>
+        <Group.label>In Stock?</Group.label>
+        <Group.readonly @value={{if @item.inStock "Yes" "No"}} />
       </Form.group>
     </Modal.body>
     <Modal.footer>

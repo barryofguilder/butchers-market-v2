@@ -5,7 +5,12 @@ export default class GrabAndGo extends Model {
   @attr() declare title: string;
   @attr() declare imageUrl: string;
   @attr() declare description: string;
-  @attr() declare isSoldOut: boolean;
+  @attr({
+    defaultValue() {
+      return true;
+    },
+  })
+  declare inStock: boolean;
   @attr('date') declare createdAt: Date;
   @attr('date') declare updatedAt: Date;
 
@@ -14,7 +19,6 @@ export default class GrabAndGo extends Model {
       return `${config.uploadsDir}${this.imageUrl}`;
     }
 
-    // TODO: Return a default image
     return null;
   }
 }

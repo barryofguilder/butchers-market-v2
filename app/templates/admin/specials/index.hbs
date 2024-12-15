@@ -19,10 +19,10 @@
   <Table.Head as |Thead|>
     <Thead.Th />
     <Thead.Th>Title</Thead.Th>
-    <Thead.Th>Active Start Date</Thead.Th>
-    <Thead.Th>Active End Date</Thead.Th>
-    <Thead.Th>Sold Out?</Thead.Th>
-    <Thead.Th>Hidden?</Thead.Th>
+    <Thead.Th class="hidden md:table-cell">Active Start Date</Thead.Th>
+    <Thead.Th class="hidden md:table-cell">Active End Date</Thead.Th>
+    <Thead.Th>In Stock?</Thead.Th>
+    <Thead.Th class="hidden md:table-cell">Hidden?</Thead.Th>
     <Thead.Th />
   </Table.Head>
   <Table.Body {{sortable-group onChange=this.reorderItems}} as |Tbody|>
@@ -34,20 +34,20 @@
         <Row.Td>
           {{special.title}}
         </Row.Td>
-        <Row.Td>
+        <Row.Td class="hidden md:table-cell">
           {{#if special.activeStartDate}}
             {{date-format special.activeStartDate "LL/dd/yyyy"}}
           {{/if}}
         </Row.Td>
-        <Row.Td>
+        <Row.Td class="hidden md:table-cell">
           {{#if special.activeEndDate}}
             {{date-format special.activeEndDate "LL/dd/yyyy"}}
           {{/if}}
         </Row.Td>
         <Row.Td>
-          {{if special.isSoldOut "Yes" "No"}}
+          <Admin::Specials::MiniForm @special={{special}} />
         </Row.Td>
-        <Row.Td>
+        <Row.Td class="hidden md:table-cell">
           {{if special.isHidden "Yes" "No"}}
         </Row.Td>
         <Row.Td>
