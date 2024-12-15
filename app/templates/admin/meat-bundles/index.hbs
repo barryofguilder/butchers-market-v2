@@ -13,11 +13,11 @@
   <Table.Head as |Thead|>
     <Thead.Th>Order</Thead.Th>
     <Thead.Th>Title</Thead.Th>
-    <Thead.Th>Price</Thead.Th>
-    <Thead.Th>Items</Thead.Th>
+    <Thead.Th class="hidden md:table-cell">Price</Thead.Th>
+    <Thead.Th class="hidden md:table-cell">Items</Thead.Th>
     <Thead.Th>Is Featured?</Thead.Th>
-    <Thead.Th>Special Text</Thead.Th>
-    <Thead.Th>Is Hidden?</Thead.Th>
+    <Thead.Th class="hidden lg:table-cell">Special Text</Thead.Th>
+    <Thead.Th class="hidden md:table-cell">Is Hidden?</Thead.Th>
     <Thead.Th />
   </Table.Head>
   <Table.Body as |Tbody|>
@@ -25,8 +25,8 @@
       <Tbody.Tr as |Row|>
         <Row.Td>{{bundle.displayOrder}}</Row.Td>
         <Row.Td>{{bundle.title}}</Row.Td>
-        <Row.Td>{{bundle.price}}</Row.Td>
-        <Row.Td>
+        <Row.Td class="hidden md:table-cell">{{bundle.price}}</Row.Td>
+        <Row.Td class="hidden md:table-cell">
           {{#if bundle.items}}
             {{bundle.items.length}}
             Items
@@ -41,8 +41,8 @@
             </span>
           {{/if}}
         </Row.Td>
-        <Row.Td>{{bundle.specialText}}</Row.Td>
-        <Row.Td>
+        <Row.Td class="hidden lg:table-cell">{{bundle.specialText}}</Row.Td>
+        <Row.Td class="hidden md:table-cell">
           {{#if bundle.isHidden}}
             <span class="inline-block px-2 bg-blue-200 text-blue-800 text-sm rounded">
               Hidden
