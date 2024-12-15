@@ -21,7 +21,7 @@
           {{item.title}}
         </Row.Td>
         <Row.Td>
-          {{if item.isSoldOut "Yes" "No"}}
+          <Admin::GrabAndGo::MiniForm @item={{item}} />
         </Row.Td>
         <Row.Td>
           <div class="flex justify-end">
