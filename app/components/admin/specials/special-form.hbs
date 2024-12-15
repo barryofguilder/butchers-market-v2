@@ -136,9 +136,9 @@
     </Form.group>
   {{/if}}
 
-  <Form.group data-test-id="sold-out" @model={{this.changeset}} @property="isSoldOut" as |Group|>
-    <Group.checkbox @checked={{this.changeset.isSoldOut}} @onChange={{this.updateIsSoldOut}}>
-      Is Sold Out?
+  <Form.group data-test-id="in-stock" @model={{this.changeset}} @property="inStock" as |Group|>
+    <Group.checkbox @checked={{this.changeset.inStock}} @onChange={{this.updateInStock}}>
+      In Stock?
     </Group.checkbox>
   </Form.group>
 

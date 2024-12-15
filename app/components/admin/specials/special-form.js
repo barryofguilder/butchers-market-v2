@@ -156,8 +156,8 @@ export default class SpecialFormComponent extends Component {
   }
 
   @action
-  updateIsSoldOut() {
-    this.changeset.set('isSoldOut', !this.changeset.get('isSoldOut'));
+  updateInStock() {
+    this.changeset.set('inStock', !this.changeset.get('inStock'));
   }
 
   @action

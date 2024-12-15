@@ -27,7 +27,7 @@ export default Factory.extend({
     return addWeeks(this.activeStartDate, weekCount);
   },
 
-  isSoldOut() {
+  inStock() {
     return faker.datatype.boolean();
   },
 
