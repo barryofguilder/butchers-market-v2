@@ -139,7 +139,7 @@ interface UiTableBodySignature {
 }
 
 const UiTableBody: TOC<UiTableBodySignature> = <template>
-  <tbody class='divide-y divide-gray-200 bg-white'>
+  <tbody class='divide-y divide-gray-200 bg-white' ...attributes>
     {{yield (hash Empty=(component UiTableEmpty) Tr=UiTableRow)}}
   </tbody>
 </template>;
