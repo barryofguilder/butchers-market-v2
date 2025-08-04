@@ -7,6 +7,7 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
+  this.route('cafe');
   // Drew doesn't want the contact form anymore. Commenting this out instead of deleting in case he
   // changes his mind.
   // this.route('contact');
