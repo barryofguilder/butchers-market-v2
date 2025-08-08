@@ -75,7 +75,7 @@ module('Integration | Component | ui-button', function (hooks) {
   });
 
   test('it can render with an icon', async function (assert) {
-    await render(hbs`<UiButton @icon="fire">Edit</UiButton>`);
+    await render(hbs`<UiButton @icon="pencil-alt">Edit</UiButton>`);
 
     assert.dom(testId('button')).hasText('Edit', 'has correct text');
     assert.dom(testId('button', 'button-icon')).exists('an icon is rendered');
