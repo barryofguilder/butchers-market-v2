@@ -1,14 +1,14 @@
 import Component from '@glimmer/component';
 import { service } from '@ember/service';
 import type Store from '@ember-data/store';
-import { lastValue, restartableTask } from 'ember-concurrency';
+import { action } from '@ember/object';
 import { on } from '@ember/modifier';
 import { LinkTo } from '@ember/routing';
-import type Features from '../../services/features';
-import OrderButton from './order-button';
+import { restartableTask } from 'ember-concurrency';
 import config from 'butchers-market/config/environment';
+import type Features from '../../services/features';
 import type Menu from '../../models/menu';
-import { action } from '@ember/object';
+import OrderButton from './order-button';
 
 export interface MainNavItemsSignature {
   Element: HTMLElement;
@@ -35,8 +35,15 @@ export default class MainNavItemsComponent extends Component<MainNavItemsSignatu
     return config.showOrderOnline === true;
   }
 
-  @lastValue('loadMenu')
-  menus: Menu[] | null = null;
+  get menus() {
+    const menus = this.loadMenu.lastSuccessful?.value;
+
+    if (menus) {
+      return menus.slice() as Menu[];
+    }
+
+    return null;
+  }
 
   get menuUrl() {
     if (this.menus?.[0]) {
