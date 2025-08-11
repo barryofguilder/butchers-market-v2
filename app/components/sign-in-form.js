@@ -1,7 +1,6 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { dropTask } from 'ember-concurrency';
-import fetch from 'fetch';
 import baseUrl from '../utils/base-url';
 
 export default class SignInFormComponent extends Component {

@@ -1,5 +1,4 @@
 import ApplicationAdapter from './application';
-import fetch from 'fetch';
 import type SpecialModel from '../models/special';
 
 export default class SpecialAdapter extends ApplicationAdapter {
