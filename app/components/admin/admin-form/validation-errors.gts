@@ -1,8 +1,6 @@
 import type { TOC } from '@ember/component/template-only';
 import type { EmptyObject } from '@ember/component/helper';
 import { gt } from 'ember-truth-helpers';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import FaIcon from '@fortawesome/ember-fontawesome/components/fa-icon';
 
 const ValidationErrors: TOC<{
