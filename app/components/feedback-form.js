@@ -2,7 +2,6 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { dropTask } from 'ember-concurrency';
-import fetch from 'fetch';
 import config from 'butchers-market/config/environment';
 import baseUrl from '../utils/base-url';
 
