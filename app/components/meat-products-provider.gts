@@ -1,6 +1,23 @@
 import Component from '@glimmer/component';
+import { hash } from '@ember/helper';
 
-export default class MeatProductsProviderComponent extends Component {
+interface MeatProduct {
+  title: string;
+  featured: boolean;
+  items: string[];
+}
+
+export interface MeatProductsProviderSignature {
+  Blocks: {
+    default: [
+      {
+        products: MeatProduct[];
+      },
+    ];
+  };
+}
+
+export default class MeatProductsProviderComponent extends Component<MeatProductsProviderSignature> {
   products = [
     {
       title: 'Pork',
@@ -24,4 +41,6 @@ export default class MeatProductsProviderComponent extends Component {
       items: ['Natural', 'No hormones used', 'Only small young tender birds', 'Product of the USA'],
     },
   ];
+
+  <template>{{yield (hash products=this.products)}}</template>
 }

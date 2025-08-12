@@ -1,7 +1,9 @@
 import Model, { attr } from '@ember-data/model';
 
+export type HourType = 'Store' | 'Cafe';
+
 export default class Hour extends Model {
-  @attr({ defaultValue: 'Store' }) declare type: string;
+  @attr({ defaultValue: 'Store' }) declare type: HourType;
   @attr() declare default: boolean;
   @attr('date') declare activeStartDate: Date;
   @attr('date') declare activeEndDate: Date;

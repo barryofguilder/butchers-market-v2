@@ -4,7 +4,7 @@ import type Hour from '../../models/hour';
 export interface StoreHoursHoursSignature {
   Element: HTMLDivElement;
   Args: {
-    hours: Hour;
+    hours: Hour | null;
   };
   Blocks: {
     default: [];
@@ -26,19 +26,21 @@ export default class StoreHoursHoursComponent extends Component<StoreHoursHoursS
 
   <template>
     <div ...attributes>
-      <h3
-        data-test-id='{{this.hourTypeTestId}}-hours-title'
-        class='text-2xl tracking-wide uppercase font-black'
-      >
-        {{this.hourType}}
-        Hours
-      </h3>
-      <p data-test-id='{{this.hourTypeTestId}}-hours-line'>{{@hours.line1}}</p>
-      {{#if @hours.line2}}
-        <p data-test-id='{{this.hourTypeTestId}}-hours-line' class='mt-1'>{{@hours.line2}}</p>
-      {{/if}}
-      {{#if @hours.line3}}
-        <p data-test-id='{{this.hourTypeTestId}}-hours-line' class='mt-1'>{{@hours.line3}}</p>
+      {{#if @hours}}
+        <h3
+          data-test-id='{{this.hourTypeTestId}}-hours-title'
+          class='text-2xl tracking-wide uppercase font-black'
+        >
+          {{this.hourType}}
+          Hours
+        </h3>
+        <p data-test-id='{{this.hourTypeTestId}}-hours-line'>{{@hours.line1}}</p>
+        {{#if @hours.line2}}
+          <p data-test-id='{{this.hourTypeTestId}}-hours-line' class='mt-1'>{{@hours.line2}}</p>
+        {{/if}}
+        {{#if @hours.line3}}
+          <p data-test-id='{{this.hourTypeTestId}}-hours-line' class='mt-1'>{{@hours.line3}}</p>
+        {{/if}}
       {{/if}}
     </div>
   </template>
