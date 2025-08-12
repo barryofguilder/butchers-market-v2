@@ -3,25 +3,23 @@ import { tracked } from '@glimmer/tracking';
 import { isPresent } from '@ember/utils';
 import { on } from '@ember/modifier';
 import { restartableTask } from 'ember-concurrency';
-// TODO: This type will exist when upgrading to latest ember-concurrency.
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import perform from 'ember-concurrency/helpers/perform';
 import { or } from 'ember-truth-helpers';
+import type {
+  IconDefinition,
+  IconLookup,
+  IconName,
+  IconPrefix,
+} from '@fortawesome/fontawesome-svg-core';
 import UiBaseLink, { type UiBaseLinkArgs } from './ui-base-link';
-// TODO: Fix this...
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import UiIcon from './ui-icon';
+import UiIcon, { type IconVariant } from './ui-icon';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'plain';
 export type ButtonSize = 'small' | 'medium' | 'large';
-export type IconPrefix = 'fas' | 'far' | 'fab';
 
 export interface UiButtonArgs extends UiBaseLinkArgs {
   'data-test-id'?: string;
   disabled?: boolean;
-  icon?: string;
+  icon?: IconName | IconLookup | IconDefinition;
   iconPrefix?: IconPrefix;
   iconOnly?: boolean;
   isRunning?: boolean;
@@ -142,8 +140,16 @@ export default class UiButtonComponent extends Component<UiButtonSignature> {
   }
 
   get iconVariant() {
+    const { iconOnly, variant } = this.args;
+
+    let iconVariant: IconVariant = 'inherit';
+
     // Only use the `variant` property if it was passed in
-    return this.args.iconOnly && this.args.variant ? this.args.variant : 'inherit';
+    if (iconOnly && variant) {
+      iconVariant = variant === 'plain' ? 'inherit' : variant;
+    }
+
+    return iconVariant;
   }
 
   buttonTask = restartableTask(async (event: MouseEvent) => {
@@ -193,7 +199,7 @@ export default class UiButtonComponent extends Component<UiButtonSignature> {
         class={{this.buttonClasses}}
         type={{this.type}}
         disabled={{this.buttonDisabled}}
-        {{on 'click' (perform this.buttonTask)}}
+        {{on 'click' this.buttonTask.perform}}
         ...attributes
       >
         {{#if (or this.isRunning @isRunning)}}

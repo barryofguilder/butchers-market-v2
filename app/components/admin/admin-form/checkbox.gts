@@ -8,6 +8,7 @@ export interface CheckboxSignature {
     checked: boolean;
     hideLabel?: boolean;
     onChange: (checked: boolean) => unknown;
+    readonly?: boolean;
   };
   Blocks: {
     default: [];
@@ -15,6 +16,10 @@ export interface CheckboxSignature {
 }
 
 export default class CheckboxComponent extends Component<CheckboxSignature> {
+  get readonly() {
+    return this.args.readonly ?? false;
+  }
+
   @action
   handleOnChange(event: Event) {
     this.args.onChange((event.target as HTMLInputElement).checked);
@@ -22,7 +27,12 @@ export default class CheckboxComponent extends Component<CheckboxSignature> {
 
   <template>
     <label class='flex gap-x-2 items-center'>
-      <input type='checkbox' checked={{@checked}} {{on 'change' this.handleOnChange}} />
+      <input
+        type='checkbox'
+        checked={{@checked}}
+        readonly={{this.readonly}}
+        {{on 'change' this.handleOnChange}}
+      />
       <span class='{{if @hideLabel "sr-only"}}'>{{yield}}</span>
     </label>
   </template>

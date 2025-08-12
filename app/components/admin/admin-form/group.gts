@@ -26,6 +26,7 @@ export interface GroupSignature {
   Args: {
     model?: ModelStub | null;
     property?: string;
+    readonly?: boolean;
     useDefaultMargin?: boolean;
   };
   Blocks: {
@@ -36,8 +37,8 @@ export interface GroupSignature {
         help: WithBoundArgs<typeof Help, never>;
         label: WithBoundArgs<typeof Label, 'for' | 'errors'>;
         readonly: WithBoundArgs<typeof UiTextbox, 'id' | 'readonly'>;
-        textarea: WithBoundArgs<typeof UiTextarea, 'id' | 'errors'>;
-        textbox: WithBoundArgs<typeof UiTextbox, 'id' | 'errors'>;
+        textarea: WithBoundArgs<typeof UiTextarea, 'id' | 'errors' | 'readonly'>;
+        textbox: WithBoundArgs<typeof UiTextbox, 'id' | 'errors' | 'readonly'>;
         validationErrors: WithBoundArgs<typeof ValidationErrors, 'errors'>;
       },
     ];
@@ -72,8 +73,8 @@ export default class GroupComponent extends Component<GroupSignature> {
           help=(component Help)
           label=(component Label for=this.uniqueId errors=this.errors)
           readonly=(component UiTextbox id=this.uniqueId readonly=true)
-          textarea=(component UiTextarea id=this.uniqueId errors=this.errors)
-          textbox=(component UiTextbox id=this.uniqueId errors=this.errors)
+          textarea=(component UiTextarea id=this.uniqueId errors=this.errors readonly=@readonly)
+          textbox=(component UiTextbox id=this.uniqueId errors=this.errors readonly=@readonly)
           validationErrors=(component ValidationErrors errors=this.errors)
         )
       }}
