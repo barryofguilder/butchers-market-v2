@@ -1,7 +1,9 @@
 import { createServer, Response } from 'miragejs';
 import { uploadHandler } from 'ember-file-upload';
 import { isAfter, isBefore } from 'date-fns';
+import factories from './factories';
 import models from './models';
+import serializers from './serializers';
 
 const generateValidationError = function (field, title) {
   return {
@@ -25,8 +27,10 @@ const TOKEN =
 export default function (config) {
   let finalConfig = {
     ...config,
+    factories,
     models,
     routes,
+    serializers,
   };
 
   return createServer(finalConfig);
