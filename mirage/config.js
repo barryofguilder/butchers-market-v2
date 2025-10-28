@@ -1,7 +1,7 @@
 import { createServer, Response } from 'miragejs';
-import { discoverEmberDataModels } from 'ember-cli-mirage';
 import { uploadHandler } from 'ember-file-upload';
 import { isAfter, isBefore } from 'date-fns';
+import models from './models';
 
 const generateValidationError = function (field, title) {
   return {
@@ -25,7 +25,7 @@ const TOKEN =
 export default function (config) {
   let finalConfig = {
     ...config,
-    models: { ...discoverEmberDataModels(config.store), ...config.models },
+    models,
     routes,
   };
 
