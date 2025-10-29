@@ -1,9 +1,24 @@
+/* eslint-disable ember/no-get */
 import { createServer, Response } from 'miragejs';
 import { uploadHandler } from 'ember-file-upload';
 import { isAfter, isBefore } from 'date-fns';
-import factories from './factories';
-import models from './models';
-import serializers from './serializers';
+import factories from '../factories';
+import models from '../models';
+import seeds from '../scenarios/default';
+import serializers from '../serializers';
+
+export function makeServer(config) {
+  const { environment, ...rest } = config || {};
+  return createServer({
+    environment,
+    factories,
+    models,
+    routes,
+    seeds: environment === 'development' ? seeds : undefined,
+    serializers,
+    ...rest,
+  });
+}
 
 const generateValidationError = function (field, title) {
   return {
@@ -23,18 +38,6 @@ const TOKEN =
 
 // Future Token
 // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTg5NzQyODQ2LCJleHAiOjI1OTIzMzQ4NDZ9.YBJOag4Kyeq4yBBdAPXYttZMxqX9J_N-L5f5OrWX95w';
-
-export default function (config) {
-  let finalConfig = {
-    ...config,
-    factories,
-    models,
-    routes,
-    serializers,
-  };
-
-  return createServer(finalConfig);
-}
 
 function routes() {
   // Allows us to access the Mirage server in the console using `window.server`.
