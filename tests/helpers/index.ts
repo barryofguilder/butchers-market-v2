@@ -5,6 +5,8 @@ import {
   setupTest as upstreamSetupTest,
 } from 'ember-qunit';
 import 'qunit-dom';
+// @ts-expect-error - Not a TypeScript file.
+import { setupMirage } from 'butchers-market/tests/helpers/setup-mirage';
 
 // This file exists to provide wrappers around ember-qunit's
 // test setup functions. This way, you can easily extend the setup that is
@@ -29,6 +31,7 @@ function setupApplicationTest(hooks: NestedHooks, options?: SetupTestOptions) {
   //
   // setupIntl(hooks, 'en-us'); // ember-intl
   // setupMirage(hooks); // ember-cli-mirage
+  setupMirage(hooks);
 }
 
 // TODO: Fix this
@@ -37,6 +40,7 @@ function setupRenderingTest(hooks: NestedHooks, options?: SetupTestOptions) {
   upstreamSetupRenderingTest(hooks, options);
 
   // Additional setup for rendering tests can be done here.
+  setupMirage(hooks);
 }
 
 // TODO: Fix this

@@ -30,6 +30,7 @@ module.exports = function (environment) {
     uploadsDir: '/uploads/',
     orderOnlineUrl: 'https://thebutchersmarketmeatanddeli.godaddysites.com/order-online',
     showOrderOnline: true,
+    useMirage: process.env.USE_MIRAGE === 'true' ? true : false,
   };
 
   if (environment === 'development') {
@@ -39,13 +40,9 @@ module.exports = function (environment) {
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
 
-    ENV['ember-cli-mirage'] = {
-      enabled: true,
-    };
-
     ENV.uploadsDir = '';
 
-    if (ENV['ember-cli-mirage'].enabled === false) {
+    if (!ENV.useMirage) {
       ENV.api = process.env.API_URL;
       ENV.uploadsDir = `${process.env.S3_BUCKET_UPLOADS}/uploads/`;
     }

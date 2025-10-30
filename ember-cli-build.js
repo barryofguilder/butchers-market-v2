@@ -1,5 +1,7 @@
 'use strict';
 
+require('dotenv').config();
+
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 const environment = process.env.EMBER_ENV || 'development';
 const isProduction = environment === 'production';
@@ -46,6 +48,7 @@ module.exports = function (defaults) {
     // staticComponents: true,
     // staticEmberSource: true,
     // splitAtRoutes: ['route.name'], // can also be a RegExp
+    staticAppPaths: ['mirage'],
     packagerOptions: {
       webpackConfig: {
         module: {

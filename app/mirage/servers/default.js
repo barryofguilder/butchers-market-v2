@@ -1,18 +1,24 @@
+/* eslint-disable ember/no-get */
 import { createServer, Response } from 'miragejs';
-import { discoverEmberDataModels } from 'ember-cli-mirage';
 import { uploadHandler } from 'ember-file-upload';
 import { isAfter, isBefore } from 'date-fns';
+import factories from '../factories';
+import models from '../models';
+import seeds from '../scenarios/default';
+import serializers from '../serializers';
 
-const generateValidationError = function (field, title) {
-  return {
-    status: 422,
-    code: 100,
-    title,
-    source: {
-      pointer: `/data/attributes/${field}`,
-    },
-  };
-};
+export function makeServer(config) {
+  const { environment, ...rest } = config || {};
+  return createServer({
+    environment,
+    factories,
+    models,
+    routes,
+    seeds: environment === 'development' ? seeds : undefined,
+    serializers,
+    ...rest,
+  });
+}
 
 const TOKEN =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTg5NzQyODQ2LCJleHAiOjI1OTIzMzQ4NDZ9.YBJOag4Kyeq4yBBdAPXYttZMxqX9J_N-L5f5OrWX95w';
@@ -21,16 +27,6 @@ const TOKEN =
 
 // Future Token
 // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTg5NzQyODQ2LCJleHAiOjI1OTIzMzQ4NDZ9.YBJOag4Kyeq4yBBdAPXYttZMxqX9J_N-L5f5OrWX95w';
-
-export default function (config) {
-  let finalConfig = {
-    ...config,
-    models: { ...discoverEmberDataModels(config.store), ...config.models },
-    routes,
-  };
-
-  return createServer(finalConfig);
-}
 
 function routes() {
   // Allows us to access the Mirage server in the console using `window.server`.
@@ -48,29 +44,6 @@ function routes() {
     }
 
     return deliItems.all();
-  });
-
-  this.post('/feedback', (server, request) => {
-    let attrs = JSON.parse(request.requestBody).data.attributes;
-    let errors = [];
-
-    if (!attrs.name) {
-      errors.push(generateValidationError('name', 'Name is required'));
-    }
-
-    if (!attrs.email) {
-      errors.push(generateValidationError('email', 'Email is required'));
-    }
-
-    if (!attrs.message) {
-      errors.push(generateValidationError('message', 'Message is required'));
-    }
-
-    if (errors.length > 0) {
-      return new Response(422, {}, { errors });
-    }
-
-    return new Response(204);
   });
 
   this.resource('feature-flags');
