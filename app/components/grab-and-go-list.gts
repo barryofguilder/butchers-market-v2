@@ -1,7 +1,7 @@
 import type { TOC } from '@ember/component/template-only';
 import type { EmptyObject } from '@ember/component/helper';
-// @ts-expect-error: We need to figure out how to create the types for this.
-import sortBy from 'ember-composable-helpers/helpers/sort-by';
+// @ts-expect-error - there are no types for this
+import sortBy from '../helpers/sort-by';
 import GrabAndGoModel from '../models/grab-and-go';
 
 export interface GrabAndGoListSignature {

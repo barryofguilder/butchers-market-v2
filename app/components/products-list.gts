@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import config from 'butchers-market/config/environment';
-// @ts-expect-error - There are no types for this.
-import sortBy from 'ember-composable-helpers/helpers/sort-by';
+// @ts-expect-error - there are no types for this
+import sortBy from '../helpers/sort-by';
 import { and } from 'ember-truth-helpers';
 import MeatBundle from '../models/meat-bundle';
 import OrderButton from './order-button';

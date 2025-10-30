@@ -97,7 +97,6 @@
     "ember-cli-inline-content": "^0.4.1",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-terser": "^4.0.2",
-    "ember-composable-helpers": "^5.0.0",
     "ember-concurrency": "^5.1.0",
     "ember-data": "~5.3.8",
     "ember-file-upload": "^9.5.0",

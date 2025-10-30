@@ -15,10 +15,6 @@ module.exports = function (defaults) {
     // Add options here
     'ember-cli-babel': { enableTypeScriptTransform: true },
 
-    'ember-composable-helpers': {
-      only: ['sort-by'],
-    },
-
     inlineContent: {},
   });
 
