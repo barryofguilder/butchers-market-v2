@@ -22,14 +22,7 @@ export interface MainNavItemsSignature {
 
 export default class MainNavItemsComponent extends Component<MainNavItemsSignature> {
   @service declare features: Features;
-  // TODO: Fix this type.
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  @service declare media: any;
   @service declare store: Store;
-
-  get isMobile() {
-    return !this.media.isLg && !this.media.isXl;
-  }
 
   get showOrderOnline() {
     return config.showOrderOnline === true;
@@ -73,13 +66,11 @@ export default class MainNavItemsComponent extends Component<MainNavItemsSignatu
 
   <template>
     <ul class='list-reset flex flex-col lg:flex-row lg:items-center'>
-      {{#unless this.isMobile}}
-        {{#if this.showOrderOnline}}
-          <li>
-            <OrderButton />
-          </li>
-        {{/if}}
-      {{/unless}}
+      {{#if this.showOrderOnline}}
+        <li class='hidden lg:block'>
+          <OrderButton />
+        </li>
+      {{/if}}
       <li class='lg:ml-8 lg:block lg:h-full'>
         <LinkTo
           @route='meat'
@@ -117,17 +108,6 @@ export default class MainNavItemsComponent extends Component<MainNavItemsSignatu
           Cafe Menu
         </a>
       </li>
-      {{!-- Drew doesn't want the contact form anymore. Commenting this out instead of deleting in
-            case he changes his mind. }}
-      {{!-- <li class='lg:block lg:h-full'>
-        <LinkTo
-          @route='contact'
-          class='block px-6 py-4 lg:flex lg:items-center lg:py-0 lg:h-full hover:text-red-600 text-center lg:text-left'
-          {{on 'click' this.itemClicked}}
-        >
-          Contact
-        </LinkTo>
-      </li> --}}
     </ul>
   </template>
 }

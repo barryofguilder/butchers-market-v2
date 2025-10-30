@@ -3,13 +3,13 @@ import type { TOC } from '@ember/component/template-only';
 const Container: TOC<{
   Element: HTMLDivElement;
   Args: {
-    fullWidth?: boolean;
+    enableFullWidthForMobile?: boolean;
   };
   Blocks: {
     default: [];
   };
 }> = <template>
-  <div class='container {{if @fullWidth "" "px-10"}}' ...attributes>
+  <div class='container {{if @enableFullWidthForMobile "sm:px-10" "px-10"}}' ...attributes>
     {{yield}}
   </div>
 </template>;

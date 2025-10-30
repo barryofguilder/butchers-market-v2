@@ -3,26 +3,21 @@
 <PromoSection @image="promo-index.jpg" as |Promo|>
   <Container>
     <div class="text-center sm:text-left {{unless this.showThanksgivingMealPromo 'lg:w-3/4'}}">
-      {{#if this.media.isSm}}
+      <div class="hidden sm:block">
         <Promo.title>
           Welcome to The Butcher's Market Meat &amp; Deli
         </Promo.title>
         <Promo.subtitle>
           Small town service. Big city selection.
         </Promo.subtitle>
-      {{else}}
-        <StoreHours @hours={{@model.hours}} @primaryType="Store" class="mt-8" />
-        <StoreLocation class="mt-8" />
-      {{/if}}
+      </div>
 
-      <UiButton @href="https://www.facebook.com/thebutchersmarket" @variant="primary" class="mt-8">
-        Like us on Facebook
-      </UiButton>
+      <FacebookButton class="hidden sm:inline-block" />
 
-      {{#if this.media.isSm}}
-        <StoreHours @hours={{@model.hours}} @primaryType="Store" class="mt-8" />
-        <StoreLocation class="mt-8" />
-      {{/if}}
+      <StoreHours @hours={{@model.hours}} @primaryType="Store" class="mt-8" />
+      <StoreLocation class="mt-8" />
+
+      <FacebookButton class="sm:hidden" />
     </div>
   </Container>
 </PromoSection>
@@ -31,7 +26,7 @@
   <section>
     <HeaderTitle @title="Specials" />
 
-    <Container @fullWidth={{this.isMobile}}>
+    <Container @enableFullWidthForMobile={{true}}>
       <SpecialsList @specials={{@model.specials}} />
     </Container>
   </section>
