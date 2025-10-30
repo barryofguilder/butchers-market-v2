@@ -20,17 +20,6 @@ export function makeServer(config) {
   });
 }
 
-const generateValidationError = function (field, title) {
-  return {
-    status: 422,
-    code: 100,
-    title,
-    source: {
-      pointer: `/data/attributes/${field}`,
-    },
-  };
-};
-
 const TOKEN =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTg5NzQyODQ2LCJleHAiOjI1OTIzMzQ4NDZ9.YBJOag4Kyeq4yBBdAPXYttZMxqX9J_N-L5f5OrWX95w';
 // Expired Token
@@ -55,29 +44,6 @@ function routes() {
     }
 
     return deliItems.all();
-  });
-
-  this.post('/feedback', (server, request) => {
-    let attrs = JSON.parse(request.requestBody).data.attributes;
-    let errors = [];
-
-    if (!attrs.name) {
-      errors.push(generateValidationError('name', 'Name is required'));
-    }
-
-    if (!attrs.email) {
-      errors.push(generateValidationError('email', 'Email is required'));
-    }
-
-    if (!attrs.message) {
-      errors.push(generateValidationError('message', 'Message is required'));
-    }
-
-    if (errors.length > 0) {
-      return new Response(422, {}, { errors });
-    }
-
-    return new Response(204);
   });
 
   this.resource('feature-flags');
