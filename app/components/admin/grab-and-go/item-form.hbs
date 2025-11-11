@@ -16,6 +16,18 @@
     <Group.textbox @value={{this.changeset.title}} @onChange={{set this "changeset.title"}} />
   </Form.group>
 
+  <Form.group data-test-id="title" @model={{this.changeset}} @property="social-title" as |Group|>
+    <Group.label>Social Title</Group.label>
+    <Group.textbox
+      @value={{this.changeset.socialTitle}}
+      @onChange={{set this "changeset.socialTitle"}}
+    />
+    <Group.help>
+      The title that will be used for the social media page for you to copy and paste to your social
+      media accounts. If left blank, the normal title will be used.
+    </Group.help>
+  </Form.group>
+
   <Form.group data-test-id="image" @model={{this.changeset}} @property="image" as |Group|>
     <Group.label>Image</Group.label>
     <div class="mt-2">

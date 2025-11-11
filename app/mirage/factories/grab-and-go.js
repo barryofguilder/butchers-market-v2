@@ -7,6 +7,9 @@ export default Factory.extend({
     const wordCount = faker.number.int({ min: 3, max: 10 });
     return faker.lorem.words(wordCount);
   },
+  socialTitle() {
+    return this.title;
+  },
   description() {
     return faker.lorem.sentence();
   },
