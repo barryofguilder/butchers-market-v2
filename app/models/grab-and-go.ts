@@ -3,7 +3,7 @@ import config from 'butchers-market/config/environment';
 
 export default class GrabAndGo extends Model {
   @attr() declare title: string;
-  @attr() declare socialTitle: string;
+  @attr() declare socialTitle: string | null;
   @attr() declare imageUrl: string;
   @attr() declare description: string;
   @attr({
