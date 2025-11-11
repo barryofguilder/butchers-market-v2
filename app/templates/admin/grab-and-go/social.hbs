@@ -1,0 +1,17 @@
+<Admin::BackLink @route="admin.grab-and-go" @text="Grab and Go" />
+
+<Admin::Title @title="Grab and Go - Social Titles" />
+
+<div class="flex flex-col gap-6">
+  <p>
+    This contains all the Grab and Go items that are currently in stock and has the social title for
+    you to copy and paste to your social media accounts.
+  </p>
+
+  {{! This needs to be all in one line so that copying works correctly }}
+  <p class="text-lg">{{#each this.model as |item|}}{{if
+        item.socialTitle
+        item.socialTitle
+        item.title
+      }}<br />{{else}}<span class="text-gray-500 italic">No in stock Grab and Go items</span>{{/each}}</p>
+</div>

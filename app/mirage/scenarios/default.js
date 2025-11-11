@@ -63,31 +63,36 @@ function createFeatureFlags(server) {
 
 function createGrabAndGo(server) {
   server.create('grab-and-go', {
-    title: 'Original meatloaf ',
+    title: 'Original meatloaf',
+    socialTitle: 'Original meatloaf 🥩',
     imageUrl: 'images/thanksgivingbreast.jpg',
     inStock: true,
   });
 
   server.create('grab-and-go', {
     title: 'Smoked Queso',
+    socialTitle: 'Smoked Queso',
     imageUrl: 'images/thanksgivingbreast.jpg',
     inStock: false,
   });
 
   server.create('grab-and-go', {
     title: 'Mexican chicken casserole',
+    socialTitle: 'Mexican chicken casserole',
     imageUrl: 'images/thanksgivingbreast.jpg',
     inStock: true,
   });
 
   server.create('grab-and-go', {
     title: 'Brisket Philly cheese pie',
+    socialTitle: 'Brisket Philly cheese pie',
     imageUrl: 'images/thanksgivingbreast.jpg',
     inStock: false,
   });
 
   server.create('grab-and-go', {
     title: 'Chicken Casserole',
+    socialTitle: 'Chicken Casserole',
     imageUrl: 'images/thanksgivingbreast.jpg',
     inStock: true,
   });

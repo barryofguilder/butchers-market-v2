@@ -2,10 +2,17 @@
 
 <Admin::Title @title="Grab and Go" />
 
-<div class="mt-8">
+<div class="mt-8 flex justify-between items-center">
   <UiButton @route="admin.grab-and-go.new" @icon="plus" @size="medium" @variant="plain">
     New
   </UiButton>
+
+  <UiBaseLink
+    @route="admin.grab-and-go.social"
+    class="text-red-700 hover:text-red-800 focus:text-red-800"
+  >
+    Social Titles
+  </UiBaseLink>
 </div>
 
 <Admin::UiTable class="mt-8" as |Table|>
