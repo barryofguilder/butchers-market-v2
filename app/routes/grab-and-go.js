@@ -6,7 +6,7 @@ export default class GrabAndGoRoute extends Route {
   @service store;
 
   model() {
-    return this.store.findAll('grab-and-go');
+    return this.store.query('grab-and-go', { filter: { inStock: true } });
   }
 
   @action
