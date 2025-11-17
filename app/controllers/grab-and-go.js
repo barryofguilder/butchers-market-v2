@@ -3,14 +3,6 @@ import { cached } from '@glimmer/tracking';
 import { format, formatISO } from 'date-fns';
 
 export default class GrabAndGoController extends Controller {
-  get todaysItems() {
-    return this.model.filter((item) => item.inStock);
-  }
-
-  get commonItems() {
-    return this.model.filter((item) => !item.inStock);
-  }
-
   @cached
   get lastUpdatedOn() {
     // We want to sort all items, not just today's items, because if an item was removed from

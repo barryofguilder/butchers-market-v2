@@ -15,22 +15,6 @@
       </p>
     </div>
 
-    <GrabAndGoList @items={{this.todaysItems}} />
-  </Container>
-</section>
-
-<section>
-  <HeaderTitle @title="Common Rotating Grab & Go Items" />
-
-  <Container>
-    <div class="mt-10 max-w-3xl mx-auto">
-      <p class="text-center text-lg sm:text-2xl">
-        We constantly rotate our grab &amp; go items. Here are some of our other common items that
-        are
-        <span class="font-semibold">not currently available</span>.
-      </p>
-    </div>
-
-    <GrabAndGoList @items={{this.commonItems}} />
+    <GrabAndGoList @items={{this.model}} />
   </Container>
 </section>
