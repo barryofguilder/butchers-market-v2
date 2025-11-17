@@ -3,7 +3,6 @@ import type { EmptyObject } from '@ember/component/helper';
 import { format } from 'date-fns';
 import type GrabAndGo from '../../../models/grab-and-go';
 import UiCopyButton from '../../ui-copy-button';
-import { tracked } from '@glimmer/tracking';
 
 interface SocialListSignature {
   Element: HTMLLIElement;
