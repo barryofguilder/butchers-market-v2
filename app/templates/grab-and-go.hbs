@@ -1,7 +1,19 @@
 <MobileOrderBanner />
 
 {{! We need 1px of padding so that the header margin takes over since we have no promo image. }}
-<section class="pt-px">
+<div class="pt-px"></div>
+
+{{#if this.model.holidayItems.length}}
+  <section>
+    <HeaderTitle @title="Holiday Grab & Go Items" />
+
+    <Container>
+      <GrabAndGoList @items={{this.model.holidayItems}} />
+    </Container>
+  </section>
+{{/if}}
+
+<section>
   <HeaderTitle @title="Today's Grab & Go Items" />
 
   <Container>
@@ -15,6 +27,6 @@
       </p>
     </div>
 
-    <GrabAndGoList @items={{this.model}} />
+    <GrabAndGoList @items={{this.model.regularItems}} />
   </Container>
 </section>

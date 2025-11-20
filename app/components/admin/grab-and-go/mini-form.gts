@@ -9,30 +9,51 @@ interface MiniFormSignature {
   Element: HTMLLIElement;
   Args: {
     item: GrabAndGo;
+    field: 'inStock' | 'isHoliday';
   };
   Blocks: EmptyObject;
 }
 
 export default class MiniFormComponent extends Component<MiniFormSignature> {
+  get isHoliday() {
+    return this.args.field === 'isHoliday';
+  }
+
+  get isChecked() {
+    const { item } = this.args;
+    return this.isHoliday ? item.isHoliday : item.inStock;
+  }
+
   saveItem = dropTask(async () => {
     await this.args.item.save();
   });
 
   @action
   handleOnChange(checked: boolean) {
-    this.args.item.inStock = checked;
+    const { item } = this.args;
+
+    if (this.isHoliday) {
+      item.isHoliday = checked;
+    } else {
+      item.inStock = checked;
+    }
+
     this.saveItem.perform();
   }
 
   <template>
     <AdminForm as |Form|>
-      <Form.group data-test-id='in-stock' @useDefaultMargin={{false}} as |Group|>
+      <Form.group
+        data-test-id={{if this.isHoliday 'is-holiday' 'in-stock'}}
+        @useDefaultMargin={{false}}
+        as |Group|
+      >
         <Group.checkbox
           @hideLabel={{true}}
-          @checked={{@item.inStock}}
+          @checked={{this.isChecked}}
           @onChange={{this.handleOnChange}}
         >
-          In Stock?
+          {{if this.isHoliday 'Is Holiday?' 'In Stock?'}}
         </Group.checkbox>
       </Form.group>
     </AdminForm>

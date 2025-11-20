@@ -67,6 +67,7 @@ function createGrabAndGo(server) {
     socialTitle: 'Original meatloaf 🥩',
     imageUrl: 'images/thanksgivingbreast.jpg',
     inStock: true,
+    isHoliday: false,
   });
 
   server.create('grab-and-go', {
@@ -74,6 +75,7 @@ function createGrabAndGo(server) {
     socialTitle: 'Smoked Queso',
     imageUrl: 'images/thanksgivingbreast.jpg',
     inStock: false,
+    isHoliday: false,
   });
 
   server.create('grab-and-go', {
@@ -81,6 +83,7 @@ function createGrabAndGo(server) {
     socialTitle: 'Mexican chicken casserole',
     imageUrl: 'images/thanksgivingbreast.jpg',
     inStock: true,
+    isHoliday: false,
   });
 
   server.create('grab-and-go', {
@@ -88,6 +91,7 @@ function createGrabAndGo(server) {
     socialTitle: 'Brisket Philly cheese pie',
     imageUrl: 'images/thanksgivingbreast.jpg',
     inStock: false,
+    isHoliday: false,
   });
 
   server.create('grab-and-go', {
@@ -95,6 +99,23 @@ function createGrabAndGo(server) {
     socialTitle: 'Chicken Casserole',
     imageUrl: 'images/thanksgivingbreast.jpg',
     inStock: true,
+    isHoliday: false,
+  });
+
+  server.create('grab-and-go', {
+    title: 'Turkey',
+    socialTitle: null,
+    imageUrl: 'images/thanksgivingbreast.jpg',
+    inStock: true,
+    isHoliday: true,
+  });
+
+  server.create('grab-and-go', {
+    title: 'Ham',
+    socialTitle: null,
+    imageUrl: 'images/thanksgivingbreast.jpg',
+    inStock: true,
+    isHoliday: true,
   });
 }
 

@@ -47,7 +47,24 @@ function routes() {
   });
 
   this.resource('feature-flags');
+
   this.resource('grab-and-go');
+  this.get('/grab-and-gos', ({ grabAndGos }, request) => {
+    const isHoliday = request.queryParams['filter[isHoliday]'];
+    const inStock = request.queryParams['filter[inStock]'];
+    let whereStatement = {};
+
+    if (isHoliday !== undefined) {
+      whereStatement.isHoliday = isHoliday === 'true';
+    }
+
+    if (inStock !== undefined) {
+      whereStatement.inStock = inStock === 'true';
+    }
+
+    return grabAndGos.where(whereStatement);
+  });
+
   this.resource('hours');
 
   this.resource('meat-bundles', { only: ['show', 'update'] });
