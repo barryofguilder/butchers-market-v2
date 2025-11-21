@@ -37,7 +37,7 @@
     "@embroider/compat": "^3.6.1",
     "@embroider/macros": "^1.19.2",
     "@embroider/webpack": "^4.0.5",
-    "@faker-js/faker": "^9.9.0",
+    "@faker-js/faker": "^10.1.0",
     "@fortawesome/ember-fontawesome": "^3.0.1",
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
@@ -75,12 +75,11 @@
     "@types/ember-data__serializer": "^4.0.6",
     "@types/ember-data__store": "^4.0.7",
     "@types/qunit": "^2.19.12",
-    "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
-    "autoprefixer": "^10.4.20",
+    "autoprefixer": "^10.4.22",
     "broccoli-asset-rev": "^3.0.0",
     "concurrently": "^8.2.2",
-    "date-fns": "^3.6.0",
+    "date-fns": "^4.1.0",
     "dotenv": "^17.2.3",
     "ember-animated": "^2.2.0",
     "ember-animated-tools": "^2.0.0",
@@ -101,7 +100,7 @@
     "ember-concurrency": "^5.1.0",
     "ember-data": "~5.3.8",
     "ember-file-upload": "^9.5.0",
-    "ember-flatpickr": "^8.0.1",
+    "ember-flatpickr": "^9.0.2",
     "ember-headlessui": "^0.14.0",
     "ember-load-initializers": "^2.1.2",
     "ember-mirage": "^0.4.3",
@@ -136,8 +135,8 @@
     "stylelint-prettier": "^4.1.0",
     "tailwindcss": "^3.4.17",
     "tracked-built-ins": "^3.3.0",
-    "typescript": "^5.6.2",
-    "webpack": "^5.95.0"
+    "typescript": "^5.9.3",
+    "webpack": "^5.103.0"
   },
   "overrides": {
     "ember-source": "~5.12.0"
