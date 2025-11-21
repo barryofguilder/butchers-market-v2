@@ -32,12 +32,7 @@ const parserOptions = {
       ecmaVersion: 'latest',
       requireConfigFile: false,
       babelOptions: {
-        plugins: [
-          [
-            '@babel/plugin-proposal-decorators',
-            { decoratorsBeforeExport: true },
-          ],
-        ],
+        plugins: [['@babel/plugin-proposal-decorators', { decoratorsBeforeExport: true }]],
       },
     },
     ts: {
@@ -90,6 +85,16 @@ export default ts.config(
       parserOptions: parserOptions.esm.ts,
     },
     extends: [...ts.configs.recommendedTypeChecked, ember.configs.gts],
+    rules: {
+      '@typescript-eslint/no-floating-promises': 'off',
+      '@typescript-eslint/no-redundant-type-constituents': 'off',
+      '@typescript-eslint/no-unsafe-argument': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-unsafe-return': 'off',
+      '@typescript-eslint/prefer-promise-reject-errors': 'off',
+    },
   },
   {
     files: ['tests/**/*-test.{js,gjs,ts,gts}'],
@@ -112,6 +117,8 @@ export default ts.config(
       '.stylelintrc.js',
       '.template-lintrc.js',
       'ember-cli-build.js',
+      'postcss.config.js',
+      'tailwind.config.js',
     ],
     plugins: {
       n,

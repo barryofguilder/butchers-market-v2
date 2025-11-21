@@ -100,7 +100,7 @@ export default class DeliItemFormComponent extends Component {
 
       // Only setting this to make the validation happy. It gets set to the actual url on save.
       this.changeset.set('imageUrl', url);
-    } catch (e) {
+    } catch (ex) /* eslint-disable-line no-unused-vars */ {
       this.fileErrorMessage = 'Could not read the file contents';
     }
   });

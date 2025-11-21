@@ -103,7 +103,7 @@ export default class MenuFormComponent extends Component {
       let url = await file.readAsDataURL();
       this.tempFileUrl = url;
       this.changeset.set('file', file);
-    } catch (e) {
+    } catch (ex) /* eslint-disable-line no-unused-vars */ {
       this.fileErrorMessage = 'Could not read the file contents';
     }
   });

@@ -28,8 +28,8 @@ export default class StoreHoursComponent extends Component<StoreHoursSignature> 
   constructor(owner: unknown, args: StoreHoursSignature['Args']) {
     super(owner, args);
 
-    let storeHours = this.getHoursForType('Store');
-    let cafeHours = this.getHoursForType('Cafe');
+    const storeHours = this.getHoursForType('Store');
+    const cafeHours = this.getHoursForType('Cafe');
 
     if (this.primaryType === 'Store') {
       this.primaryHours = storeHours;
@@ -42,7 +42,7 @@ export default class StoreHoursComponent extends Component<StoreHoursSignature> 
 
   getHoursForType(hourType: HourType) {
     const hours = this.args.hours;
-    let now = new Date();
+    const now = new Date();
 
     // Get the hours set to be used during the time frame.
     let storeHours = hours.filter((hour) => {
