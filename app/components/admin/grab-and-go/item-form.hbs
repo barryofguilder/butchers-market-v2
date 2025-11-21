@@ -87,12 +87,19 @@
     <Group.checkbox @checked={{this.changeset.inStock}} @onChange={{this.updateInStock}}>
       In Stock?
     </Group.checkbox>
+    <Group.help>
+      Only "in stock" items will appear on the main Grab &amp; Go page.
+    </Group.help>
   </Form.group>
 
   <Form.group data-test-id="is-holiday" @model={{this.changeset}} @property="isHoliday" as |Group|>
     <Group.checkbox @checked={{this.changeset.isHoliday}} @onChange={{this.updateIsHoliday}}>
       Is Holiday?
     </Group.checkbox>
+    <Group.help>
+      When checked, this item will show in a new section on the main Grab &amp; Go page titled
+      "Holiday Grab &amp; Go Items".
+    </Group.help>
   </Form.group>
 
   <div class="mt-8">
