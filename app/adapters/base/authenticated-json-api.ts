@@ -15,7 +15,6 @@ export default class AuthenticatedJSONAPIAdapter extends DefaultAdapter {
     };
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
   handleResponse(status: number, headers: {}, payload: {}, requestData: {}) {
     if (status === 401) {
       this.session.redirectToSignIn(this.router.currentURL);
