@@ -18,7 +18,7 @@ export default class SignInFormComponent extends Component<SignInFormSignature> 
   @tracked hasError = false;
 
   signIn = dropTask(async () => {
-    let body = JSON.stringify({
+    const body = JSON.stringify({
       data: {
         type: 'tokens',
         attributes: {
@@ -27,7 +27,7 @@ export default class SignInFormComponent extends Component<SignInFormSignature> 
         },
       },
     });
-    let payload = {
+    const payload = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/vnd.api+json',

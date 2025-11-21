@@ -1,5 +1,8 @@
 {
-  "extends": "@tsconfig/ember/tsconfig.json",
+  "extends": "@tsconfig/ember",
+  "glint": {
+    "environment": ["ember-loose", "ember-template-imports"]
+  },
   "compilerOptions": {
     // Uncomment the next line if you want the app to compile with TypeScript errors.
     //"noEmitOnError": false,
@@ -14,7 +17,5 @@
       "*": ["types/*"]
     }
   },
-  "glint": {
-    "environment": ["ember-loose", "ember-template-imports"]
-  }
+  "types": ["ember-source/types"]
 }
