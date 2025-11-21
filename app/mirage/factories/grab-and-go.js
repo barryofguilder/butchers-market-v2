@@ -16,6 +16,9 @@ export default Factory.extend({
   inStock() {
     return faker.datatype.boolean({ probability: 0.9 });
   },
+  isHoliday() {
+    return faker.datatype.boolean({ probability: 0.2 });
+  },
   createdAt() {
     return faker.date.recent(30);
   },

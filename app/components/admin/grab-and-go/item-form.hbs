@@ -89,6 +89,12 @@
     </Group.checkbox>
   </Form.group>
 
+  <Form.group data-test-id="is-holiday" @model={{this.changeset}} @property="isHoliday" as |Group|>
+    <Group.checkbox @checked={{this.changeset.isHoliday}} @onChange={{this.updateIsHoliday}}>
+      Is Holiday?
+    </Group.checkbox>
+  </Form.group>
+
   <div class="mt-8">
     {{#if this.hasErrors}}
       <div class="mb-2 text-red-600">

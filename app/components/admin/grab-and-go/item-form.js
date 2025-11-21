@@ -116,4 +116,9 @@ export default class ItemFormComponent extends Component {
   updateInStock() {
     this.changeset.set('inStock', !this.changeset.get('inStock'));
   }
+
+  @action
+  updateIsHoliday() {
+    this.changeset.set('isHoliday', !this.changeset.get('isHoliday'));
+  }
 }

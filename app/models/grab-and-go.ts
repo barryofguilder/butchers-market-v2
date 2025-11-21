@@ -12,6 +12,7 @@ export default class GrabAndGo extends Model {
     },
   })
   declare inStock: boolean;
+  @attr() declare isHoliday: boolean;
   @attr('date') declare createdAt: Date;
   @attr('date') declare updatedAt: Date;
 

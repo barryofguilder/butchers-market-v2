@@ -19,6 +19,7 @@
   <Table.Head as |Thead|>
     <Thead.Th>Title</Thead.Th>
     <Thead.Th>In Stock?</Thead.Th>
+    <Thead.Th>Is Holiday?</Thead.Th>
     <Thead.Th />
   </Table.Head>
   <Table.Body as |Tbody|>
@@ -28,7 +29,10 @@
           {{item.title}}
         </Row.Td>
         <Row.Td>
-          <Admin::GrabAndGo::MiniForm @item={{item}} />
+          <Admin::GrabAndGo::MiniForm @item={{item}} @fild="inStock" />
+        </Row.Td>
+        <Row.Td>
+          <Admin::GrabAndGo::MiniForm @item={{item}} @field="isHoliday" />
         </Row.Td>
         <Row.Td>
           <div class="flex justify-end">
