@@ -3,7 +3,7 @@ import type SpecialModel from '../models/special';
 
 export default class SpecialAdapter extends ApplicationAdapter {
   reorderSpecials(specials: SpecialModel[]) {
-    const baseUrl = this.buildURL();
+    const baseUrl = this['buildURL']();
     const url = `${baseUrl}/specials/reorder`;
     const specialData = specials.map((special) => {
       return { id: special.id };

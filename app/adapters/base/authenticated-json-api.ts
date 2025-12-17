@@ -17,10 +17,10 @@ export default class AuthenticatedJSONAPIAdapter extends DefaultAdapter {
 
   handleResponse(status: number, headers: object, payload: object, requestData: object) {
     if (status === 401) {
-      this.session.redirectToSignIn(this.router.currentURL);
+      this.session.redirectToSignIn(this.router.currentURL ?? '');
       return {};
     }
 
-    return super.handleResponse(status, headers, payload, requestData);
+    return super['handleResponse'](status, headers, payload, requestData);
   }
 }

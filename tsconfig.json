@@ -1,5 +1,6 @@
 {
   "extends": "@tsconfig/ember",
+  "include": ["app/**/*", "tests/**/*", "types/**/*"],
   "glint": {
     "environment": ["ember-loose", "ember-template-imports"]
   },
@@ -11,11 +12,10 @@
     // layout, which is not resolvable with the Node resolution algorithm, to
     // work with TypeScript.
     "baseUrl": ".",
+    "types": ["ember-source/types"],
     "paths": {
       "butchers-market/tests/*": ["tests/*"],
-      "butchers-market/*": ["app/*"],
-      "*": ["types/*"]
+      "butchers-market/*": ["app/*"]
     }
-  },
-  "types": ["ember-source/types"]
+  }
 }
