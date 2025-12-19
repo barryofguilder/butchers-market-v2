@@ -1,5 +1,5 @@
 import Service, { service } from '@ember/service';
-import { getOwner } from '@ember/application';
+import { getOwner } from '@ember/owner';
 import type RouterService from '@ember/routing/router-service';
 import type Transition from '@ember/routing/transition';
 import { addDays } from 'date-fns';
@@ -48,10 +48,13 @@ export default class SessionService extends Service {
 
   redirectToSignIn(transitionOrUrl: Transition | string) {
     const owner = getOwner(this);
+
+    if (!owner) {
+      return;
+    }
+
     const controller = owner.lookup('controller:sign-in') as SignInController;
-
     controller.previousTransitionOrUrl = transitionOrUrl;
-
     this.router.transitionTo('sign-in');
   }
 }

@@ -12,8 +12,6 @@ import { setupMirage } from 'butchers-market/tests/helpers/setup-mirage';
 // test setup functions. This way, you can easily extend the setup that is
 // needed per test type.
 
-// TODO: Fix this
-// eslint-disable-next-line no-undef
 function setupApplicationTest(hooks: NestedHooks, options?: SetupTestOptions) {
   upstreamSetupApplicationTest(hooks, options);
 
@@ -34,8 +32,6 @@ function setupApplicationTest(hooks: NestedHooks, options?: SetupTestOptions) {
   setupMirage(hooks);
 }
 
-// TODO: Fix this
-// eslint-disable-next-line no-undef
 function setupRenderingTest(hooks: NestedHooks, options?: SetupTestOptions) {
   upstreamSetupRenderingTest(hooks, options);
 
@@ -43,8 +39,6 @@ function setupRenderingTest(hooks: NestedHooks, options?: SetupTestOptions) {
   setupMirage(hooks);
 }
 
-// TODO: Fix this
-// eslint-disable-next-line no-undef
 function setupTest(hooks: NestedHooks, options?: SetupTestOptions) {
   upstreamSetupTest(hooks, options);
 

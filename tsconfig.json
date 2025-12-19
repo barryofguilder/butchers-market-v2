@@ -1,5 +1,9 @@
 {
-  "extends": "@tsconfig/ember/tsconfig.json",
+  "extends": "@tsconfig/ember",
+  "include": ["app/**/*", "tests/**/*", "types/**/*"],
+  "glint": {
+    "environment": ["ember-loose", "ember-template-imports"]
+  },
   "compilerOptions": {
     // Uncomment the next line if you want the app to compile with TypeScript errors.
     //"noEmitOnError": false,
@@ -10,11 +14,21 @@
     "baseUrl": ".",
     "paths": {
       "butchers-market/tests/*": ["tests/*"],
-      "butchers-market/*": ["app/*"],
-      "*": ["types/*"]
-    }
-  },
-  "glint": {
-    "environment": ["ember-loose", "ember-template-imports"]
+      "butchers-market/*": ["app/*"]
+    },
+    "types": [
+      "ember-source/types",
+      "@ember-data/adapter/unstable-preview-types",
+      "@ember-data/graph/unstable-preview-types",
+      "@ember-data/json-api/unstable-preview-types",
+      "@ember-data/legacy-compat/unstable-preview-types",
+      "@ember-data/model/unstable-preview-types",
+      "@ember-data/request/unstable-preview-types",
+      "@ember-data/request-utils/unstable-preview-types",
+      "@ember-data/serializer/unstable-preview-types",
+      "@ember-data/store/unstable-preview-types",
+      "@warp-drive/core-types/unstable-preview-types",
+      "@warp-drive/ember"
+    ]
   }
 }

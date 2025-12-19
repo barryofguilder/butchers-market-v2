@@ -19,7 +19,7 @@ export default class AdminRoute extends Route {
         transition.abort();
         this.session.redirectToSignIn(transition);
       }
-    } catch (error) {
+    } catch (ex) /* eslint-disable-line no-unused-vars */ {
       transition.abort();
       this.session.redirectToSignIn(transition);
     }

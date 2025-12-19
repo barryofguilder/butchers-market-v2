@@ -6,16 +6,30 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 const environment = process.env.EMBER_ENV || 'development';
 const isProduction = environment === 'production';
 
-module.exports = function (defaults) {
+module.exports = async function (defaults) {
   const app = new EmberApp(defaults, {
     babel: {
       plugins: [require.resolve('ember-concurrency/async-arrow-task-transform')],
     },
-
-    // Add options here
+    emberData: {
+      deprecations: {
+        // New projects can safely leave this deprecation disabled.
+        // If upgrading, to opt-into the deprecated behavior, set this to true and then follow:
+        // https://deprecations.emberjs.com/id/ember-data-deprecate-store-extends-ember-object
+        // before upgrading to Ember Data 6.0
+        DEPRECATE_STORE_EXTENDS_EMBER_OBJECT: false,
+      },
+    },
     'ember-cli-babel': { enableTypeScriptTransform: true },
 
     inlineContent: {},
+  });
+
+  const { setConfig } = await import('@warp-drive/build-config');
+  setConfig(app, __dirname, {
+    deprecations: {
+      DEPRECATE_TRACKING_PACKAGE: false,
+    },
   });
 
   if (isProduction) {
@@ -37,14 +51,17 @@ module.exports = function (defaults) {
   return require('@embroider/compat').compatBuild(app, Webpack, {
     staticAddonTestSupportTrees: true,
     staticAddonTrees: true,
+    staticEmberSource: true,
     // `ember-animated` blows up when this is turned on.
-    // staticHelpers: true,
-    staticModifiers: true,
     // Blows up on the yielded components. Figure out how to fix.
-    // staticComponents: true,
-    // staticEmberSource: true,
+    staticInvokables: false,
     // splitAtRoutes: ['route.name'], // can also be a RegExp
     staticAppPaths: ['mirage'],
+    skipBabel: [
+      {
+        package: 'qunit',
+      },
+    ],
     packagerOptions: {
       webpackConfig: {
         module: {
@@ -66,10 +83,5 @@ module.exports = function (defaults) {
         },
       },
     },
-    skipBabel: [
-      {
-        package: 'qunit',
-      },
-    ],
   });
 };

@@ -9,12 +9,7 @@ export default class Special extends Model {
   @attr() declare imageAltText: string;
   @attr('date') declare activeStartDate: Date;
   @attr('date') declare activeEndDate: Date;
-  @attr({
-    defaultValue() {
-      return true;
-    },
-  })
-  declare inStock: boolean;
+  @attr('boolean', { defaultValue: false }) declare inStock: boolean;
   @attr() declare isHidden: boolean;
   @attr('date') declare createdAt: Date;
   @attr('date') declare updatedAt: Date;

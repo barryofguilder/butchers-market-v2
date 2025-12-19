@@ -1,5 +1,6 @@
 import Component from '@glimmer/component';
 import { service } from '@ember/service';
+import type Owner from '@ember/owner';
 import type Store from '@ember-data/store';
 import { action } from '@ember/object';
 import { on } from '@ember/modifier';
@@ -50,7 +51,7 @@ export default class MainNavItemsComponent extends Component<MainNavItemsSignatu
     return this.features.isEnabled('grab-and-go-menu');
   }
 
-  constructor(owner: unknown, args: MainNavItemsSignature['Args']) {
+  constructor(owner: Owner, args: MainNavItemsSignature['Args']) {
     super(owner, args);
 
     this.loadMenu.perform();

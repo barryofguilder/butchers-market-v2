@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
+import type Owner from '@ember/owner';
 import type Store from '@ember-data/store';
 import { isAfter, isBefore } from 'date-fns';
 import type Hour from '../models/hour';
@@ -25,11 +26,11 @@ export default class StoreHoursComponent extends Component<StoreHoursSignature> 
     return this.args.primaryType ?? 'Store';
   }
 
-  constructor(owner: unknown, args: StoreHoursSignature['Args']) {
+  constructor(owner: Owner, args: StoreHoursSignature['Args']) {
     super(owner, args);
 
-    let storeHours = this.getHoursForType('Store');
-    let cafeHours = this.getHoursForType('Cafe');
+    const storeHours = this.getHoursForType('Store');
+    const cafeHours = this.getHoursForType('Cafe');
 
     if (this.primaryType === 'Store') {
       this.primaryHours = storeHours;
@@ -42,7 +43,7 @@ export default class StoreHoursComponent extends Component<StoreHoursSignature> 
 
   getHoursForType(hourType: HourType) {
     const hours = this.args.hours;
-    let now = new Date();
+    const now = new Date();
 
     // Get the hours set to be used during the time frame.
     let storeHours = hours.filter((hour) => {

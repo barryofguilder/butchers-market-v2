@@ -1,12 +1,16 @@
 import type RouterService from '@ember/routing/router-service';
 import DefaultAdapter from './default-adapter';
 import { service } from '@ember/service';
+import type { RequestData } from '@ember-data/adapter/rest';
 import type SessionService from '../../services/session';
+
+type Payload = Error | Record<string, unknown> | unknown[] | string | undefined;
 
 export default class AuthenticatedJSONAPIAdapter extends DefaultAdapter {
   @service declare router: RouterService;
   @service declare session: SessionService;
 
+  // @ts-expect-error overring with a getter.
   get headers() {
     const token = this.session.token;
 
@@ -15,10 +19,14 @@ export default class AuthenticatedJSONAPIAdapter extends DefaultAdapter {
     };
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  handleResponse(status: number, headers: {}, payload: {}, requestData: {}) {
+  handleResponse(
+    status: number,
+    headers: Record<string, string>,
+    payload: Payload,
+    requestData: RequestData,
+  ) {
     if (status === 401) {
-      this.session.redirectToSignIn(this.router.currentURL);
+      this.session.redirectToSignIn(this.router.currentURL ?? '');
       return {};
     }
 

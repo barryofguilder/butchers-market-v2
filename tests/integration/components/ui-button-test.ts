@@ -12,9 +12,7 @@ class ButtonContext {
   @tracked isRunning = true;
 }
 interface Context extends TestContext {
-  // eslint-disable-next-line no-unused-vars
   myAction?: (event: Event) => unknown;
-  // eslint-disable-next-line no-unused-vars
   myPromise?: (event: Event) => Promise<void>;
   myTask?: Task<void, []>;
   buttonContext?: ButtonContext;
@@ -129,7 +127,6 @@ module('Integration | Component | ui-button', function (hooks) {
     assert.verifySteps(['button clicked']);
   });
 
-  // eslint-disable-next-line qunit/no-commented-tests
   // test('it shows a loading spinner and is disabled when clicking with a promise based `onClick` argument', async function (this: Context, assert) {
   //   const helper = new TaskHelper();
   //   this.myTask = helper.task;
@@ -188,7 +185,6 @@ module('Integration | Component | ui-button', function (hooks) {
     assert.dom(testId('button')).hasAttribute('href', '/test-route/1');
   });
 
-  // eslint-disable-next-line qunit/no-commented-tests
   // test('it correctly renders the `href` for a route with multiple models', async function (assert) {
   //   await render(hbs`
   //     <UiButton
