@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
+import type Owner from '@ember/owner';
 import type Store from '@ember-data/store';
 import { restartableTask } from 'ember-concurrency';
 import type Review from '../models/review';
@@ -10,7 +11,7 @@ export default class ReviewsListComponent extends Component {
 
   @tracked reviews: Review[] = [];
 
-  constructor(owner: unknown, args: object) {
+  constructor(owner: Owner, args: object) {
     super(owner, args);
 
     this.loadReviews.perform();
@@ -18,7 +19,7 @@ export default class ReviewsListComponent extends Component {
 
   loadReviews = restartableTask(async () => {
     const reviews = await this.store.findAll('review');
-    this.reviews = reviews.slice();
+    this.reviews = reviews.slice() as Review[];
   });
 
   <template>

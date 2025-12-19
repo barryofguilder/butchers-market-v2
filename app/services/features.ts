@@ -10,7 +10,7 @@ export default class FeaturesService extends Service {
 
   async load() {
     const flags = await this.store.findAll('feature-flag');
-    this._features = flags.slice();
+    this._features = flags.slice() as FeatureFlag[];
   }
 
   isEnabled(featureName: string) {

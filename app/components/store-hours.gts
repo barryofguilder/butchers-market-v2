@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
+import type Owner from '@ember/owner';
 import type Store from '@ember-data/store';
 import { isAfter, isBefore } from 'date-fns';
 import type Hour from '../models/hour';
@@ -25,7 +26,7 @@ export default class StoreHoursComponent extends Component<StoreHoursSignature> 
     return this.args.primaryType ?? 'Store';
   }
 
-  constructor(owner: unknown, args: StoreHoursSignature['Args']) {
+  constructor(owner: Owner, args: StoreHoursSignature['Args']) {
     super(owner, args);
 
     const storeHours = this.getHoursForType('Store');

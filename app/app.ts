@@ -5,6 +5,7 @@ import { importSync, isDevelopingApp, macroCondition } from '@embroider/macros';
 import config from 'butchers-market/config/environment';
 import 'butchers-market/font-awesome';
 import 'butchers-market/app.css';
+import '@warp-drive/ember/install';
 
 if (macroCondition(isDevelopingApp())) {
   importSync('./deprecation-workflow');

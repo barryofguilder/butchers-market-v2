@@ -6,7 +6,7 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 const environment = process.env.EMBER_ENV || 'development';
 const isProduction = environment === 'production';
 
-module.exports = function (defaults) {
+module.exports = async function (defaults) {
   const app = new EmberApp(defaults, {
     babel: {
       plugins: [require.resolve('ember-concurrency/async-arrow-task-transform')],
@@ -23,6 +23,13 @@ module.exports = function (defaults) {
     'ember-cli-babel': { enableTypeScriptTransform: true },
 
     inlineContent: {},
+  });
+
+  const { setConfig } = await import('@warp-drive/build-config');
+  setConfig(app, __dirname, {
+    deprecations: {
+      DEPRECATE_TRACKING_PACKAGE: false,
+    },
   });
 
   if (isProduction) {

@@ -6,12 +6,7 @@ export default class GrabAndGo extends Model {
   @attr() declare socialTitle: string | null;
   @attr() declare imageUrl: string;
   @attr() declare description: string;
-  @attr({
-    defaultValue() {
-      return true;
-    },
-  })
-  declare inStock: boolean;
+  @attr('boolean', { defaultValue: false }) declare inStock: boolean;
   @attr() declare isHoliday: boolean;
   @attr('date') declare createdAt: Date;
   @attr('date') declare updatedAt: Date;
