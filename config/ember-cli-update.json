@@ -13,6 +13,7 @@
           "options": [
             "--no-welcome",
             "--embroider",
+            "--pnpm",
             "--typescript"
           ]
         }
