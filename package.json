@@ -14,10 +14,10 @@
     "build": "NODE_ENV=production TAILWIND_MODE=build ember build --environment=production",
     "deploy": "ember deploy production --activate",
     "format": "prettier . --cache --write",
-    "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\" --prefixColors auto",
+    "lint": "concurrently \"pnpm:lint:*(!fix)\" --names \"lint:\" --prefixColors auto",
     "lint:css": "stylelint \"**/*.css\"",
-    "lint:css:fix": "concurrently \"npm:lint:css -- --fix\"",
-    "lint:fix": "concurrently \"npm:lint:*:fix\" --names \"fix:\" --prefixColors auto && npm run format",
+    "lint:css:fix": "concurrently \"pnpm:lint:css -- --fix\"",
+    "lint:fix": "concurrently \"pnpm:lint:*:fix\" --names \"fix:\" --prefixColors auto && pnpm format",
     "lint:format": "prettier . --cache --check",
     "lint:hbs": "ember-template-lint .",
     "lint:hbs:fix": "ember-template-lint . --fix",
@@ -26,7 +26,7 @@
     "lint:types": "tsc --noEmit",
     "prettier": "prettier --write \"**/*.{css,gjs,gts,hbs,html,js,json,ts}\"",
     "start": "TAILWIND_MODE=watch ember serve",
-    "test": "concurrently \"npm:lint\" \"npm:test:*\" --names \"lint,test:\" --prefixColors auto",
+    "test": "concurrently \"pnpm:lint\" \"pnpm:test:*\" --names \"lint,test:\" --prefixColors auto",
     "test:ember": "ember test"
   },
   "devDependencies": {
@@ -63,6 +63,7 @@
     "@tsconfig/ember": "^3.0.11",
     "@types/ember__string": "^3.16.3",
     "@types/qunit": "^2.19.13",
+    "@warp-drive/build-config": "~5.6.0",
     "@warp-drive/core-types": "~5.6.0",
     "@warp-drive/ember": "~5.6.0",
     "@warp-drive/legacy": "~5.6.0",
@@ -111,6 +112,7 @@
     "eslint-plugin-ember": "^12.7.3",
     "eslint-plugin-n": "^17.21.3",
     "eslint-plugin-qunit": "^8.2.5",
+    "flatpickr": "^4.6.13",
     "globals": "^15.15.0",
     "jwt-decode": "^4.0.0",
     "loader.js": "^4.7.0",
@@ -133,9 +135,10 @@
     "edition": "octane"
   },
   "engines": {
-    "node": "20.12.2"
+    "node": "24.12.0"
   },
   "volta": {
-    "node": "20.12.2"
+    "node": "24.12.0",
+    "pnpm": "10.26.1"
   }
 }
