@@ -1,14 +1,15 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { guidFor } from '@ember/object/internals';
 import { restartableTask, timeout } from 'ember-concurrency';
 // @ts-expect-error: There are no types for this.
-import CopyButton from 'ember-cli-clipboard/components/copy-button';
+import clipboard from '../modifiers/clipboard';
 // @ts-expect-error: There are no types for this.
 import EmberTooltip from 'ember-tooltips/components/ember-tooltip';
 import UiIcon from './ui-icon';
 
 interface UiCopyButtonSignature {
-  Element: HTMLDivElement;
+  Element: HTMLButtonElement;
   Args: {
     text: string | null;
   };
@@ -20,6 +21,8 @@ interface UiCopyButtonSignature {
 export default class UiCopyButton extends Component<UiCopyButtonSignature> {
   @tracked showTooltip = false;
 
+  guid = guidFor(this);
+
   onCopy = restartableTask(async () => {
     this.showTooltip = true;
     await timeout(2000);
@@ -27,16 +30,17 @@ export default class UiCopyButton extends Component<UiCopyButtonSignature> {
   });
 
   <template>
-    <CopyButton
-      @text={{@text}}
-      @onSuccess={{this.onCopy.perform}}
-      title='copy to clipboard'
+    <button
+      type='button'
       class='px-2 py-1 rounded border hover:bg-gray-50 active:shadow'
+      data-clipboard-id={{this.guid}}
+      ...attributes
+      {{clipboard text=@text action='copy' delegateClickEvent=false onSuccess=this.onCopy.perform}}
     >
       <EmberTooltip @isShown={{this.showTooltip}} @event='none' @text='Copied!' />
       <UiIcon @icon='copy' />
       <span class='ml-1'>Copy</span>
-    </CopyButton>
+    </button>
   </template>
 }
 
