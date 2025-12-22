@@ -1,5 +1,5 @@
 import Model, { attr } from '@ember-data/model';
-import config from 'butchers-market/config/environment';
+import { UPLOADS_DIR } from '../utils/config';
 
 export default class DeliItem extends Model {
   @attr() declare title: string;
@@ -11,7 +11,7 @@ export default class DeliItem extends Model {
 
   get imageUrlPath() {
     if (this.imageUrl) {
-      return `${config.uploadsDir}${this.imageUrl}`;
+      return `${UPLOADS_DIR}${this.imageUrl}`;
     }
 
     return null;

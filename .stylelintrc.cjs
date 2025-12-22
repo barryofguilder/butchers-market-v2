@@ -15,5 +15,6 @@ module.exports = {
         ignoreFunctions: ['theme'],
       },
     ],
+    'declaration-property-value-no-unknown': null,
   },
 };

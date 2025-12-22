@@ -24,11 +24,4 @@ export default config as {
   locationType: string;
   rootURL: string;
   APP: Record<string, unknown>;
-
-  // Custom properties
-  api: string;
-  namespace: string;
-  orderOnlineUrl: string;
-  showOrderOnline: boolean;
-  uploadsDir: string;
 } & Record<string, unknown>;

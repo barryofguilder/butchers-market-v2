@@ -1,10 +1,9 @@
 import {
-  type SetupTestOptions,
   setupApplicationTest as upstreamSetupApplicationTest,
   setupRenderingTest as upstreamSetupRenderingTest,
   setupTest as upstreamSetupTest,
+  type SetupTestOptions,
 } from 'ember-qunit';
-import 'qunit-dom';
 // @ts-expect-error - Not a TypeScript file.
 import { setupMirage } from 'butchers-market/tests/helpers/setup-mirage';
 

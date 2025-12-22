@@ -1,5 +1,4 @@
 import type { TOC } from '@ember/component/template-only';
-// @ts-expect-error - there are no types for this
 import sortBy from '../helpers/sort-by';
 import type Special from '../models/special';
 import SpecialListItem from './specials-list/special-list-item';

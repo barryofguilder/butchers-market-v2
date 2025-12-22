@@ -1,23 +1,21 @@
-import Component from '@glimmer/component';
-import config from 'butchers-market/config/environment';
+import type { TOC } from '@ember/component/template-only';
 import Container from './main-nav/container';
 import OrderButton from './main-nav/order-button';
+import { SHOW_ORDER_ONLINE } from '../utils/config';
 
-export default class MobileOrderBannerComponent extends Component {
-  get showOrderOnline() {
-    return config.showOrderOnline === true;
-  }
+const MobileOrderBannerComponent: TOC<{
+  Element: null;
+}> = <template>
+  {{#if SHOW_ORDER_ONLINE}}
+    <div class='bg-gray-400 py-3 lg:hidden'>
+      <Container class='text-right'>
+        <OrderButton />
+      </Container>
+    </div>
+  {{/if}}
+</template>;
 
-  <template>
-    {{#if this.showOrderOnline}}
-      <div class='bg-gray-400 py-3 lg:hidden'>
-        <Container class='text-right'>
-          <OrderButton />
-        </Container>
-      </div>
-    {{/if}}
-  </template>
-}
+export default MobileOrderBannerComponent;
 
 declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry {

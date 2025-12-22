@@ -1,5 +1,4 @@
 'use strict';
-require('dotenv').config();
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
@@ -21,9 +20,6 @@ module.exports = async function (defaults) {
         DEPRECATE_STORE_EXTENDS_EMBER_OBJECT: false,
       },
     },
-    'ember-cli-babel': { enableTypeScriptTransform: true },
-
-    inlineContent: {},
   });
 
   const { setConfig } = await import('@warp-drive/build-config');
@@ -33,34 +29,5 @@ module.exports = async function (defaults) {
     },
   });
 
-  return compatBuild(app, buildOnce, {
-    // `ember-animated` blows up when this is turned on.
-    // Blows up on the yielded components. Figure out how to fix.
-    staticInvokables: false,
-
-    // splitAtRoutes: ['route.name'], // can also be a RegExp
-    staticAppPaths: ['mirage'],
-
-    packagerOptions: {
-      webpackConfig: {
-        module: {
-          rules: [
-            {
-              test: /\.css$/i,
-              use: [
-                {
-                  loader: 'postcss-loader',
-                  options: {
-                    postcssOptions: {
-                      config: 'postcss.config.js',
-                    },
-                  },
-                },
-              ],
-            },
-          ],
-        },
-      },
-    },
-  });
+  return compatBuild(app, buildOnce);
 };

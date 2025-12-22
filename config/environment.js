@@ -3,7 +3,6 @@
 module.exports = function (environment) {
   const ENV = {
     modulePrefix: 'butchers-market',
-    podModulePrefix: 'butchers-market/pods',
     environment,
     rootURL: '/',
     locationType: 'history',
@@ -19,17 +18,6 @@ module.exports = function (environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
-
-    'ember-g-recaptcha': {
-      sitekey: '6LcrHAITAAAAACvTiT4qS4dvbwL7wgGRXhJtsKim',
-    },
-
-    api: '',
-    namespace: 'api',
-    uploadsDir: '/uploads/',
-    orderOnlineUrl: 'https://thebutchersmarketmeatanddeli.godaddysites.com/order-online',
-    showOrderOnline: true,
-    useMirage: process.env.USE_MIRAGE === 'true' ? true : false,
   };
 
   if (environment === 'development') {
@@ -38,13 +26,6 @@ module.exports = function (environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-
-    ENV.uploadsDir = '';
-
-    if (!ENV.useMirage) {
-      ENV.api = process.env.API_URL;
-      ENV.uploadsDir = `${process.env.S3_BUCKET_UPLOADS}/uploads/`;
-    }
   }
 
   if (environment === 'test') {
@@ -60,9 +41,7 @@ module.exports = function (environment) {
   }
 
   if (environment === 'production') {
-    ENV.showOrderOnline = true;
-    ENV.api = process.env.API_URL;
-    ENV.uploadsDir = `${process.env.S3_BUCKET_UPLOADS}/uploads/`;
+    // here you can enable a production-specific feature
   }
 
   return ENV;

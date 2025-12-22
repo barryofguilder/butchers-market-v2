@@ -1,17 +1,15 @@
-import Component from '@glimmer/component';
-import config from 'butchers-market/config/environment';
+import type { TOC } from '@ember/component/template-only';
 import UiButton from './ui-button';
+import { ORDER_ONLINE_URL } from '../utils/config';
 
-export default class OrderButtonComponent extends Component<{ Element: HTMLDivElement }> {
-  orderOnlineUrl = config.orderOnlineUrl;
+const OrderButtonComponent: TOC<{ Element: HTMLDivElement }> = <template>
+  <div ...attributes>
+    <UiButton @variant='primary' @size='medium' @href={{ORDER_ONLINE_URL}}>
+      Order Now
+    </UiButton>
 
-  <template>
-    <div ...attributes>
-      <UiButton @variant='primary' @size='medium' @href={{this.orderOnlineUrl}}>
-        Order Now
-      </UiButton>
+    <span class='ml-2 text-xs text-gray-700 italic'>* for pickup</span>
+  </div>
+</template>;
 
-      <span class='ml-2 text-xs text-gray-700 italic'>* for pickup</span>
-    </div>
-  </template>
-}
+export default OrderButtonComponent;

@@ -6,10 +6,10 @@ import { action } from '@ember/object';
 import { on } from '@ember/modifier';
 import { LinkTo } from '@ember/routing';
 import { restartableTask } from 'ember-concurrency';
-import config from 'butchers-market/config/environment';
 import type Features from '../../services/features';
 import type Menu from '../../models/menu';
 import OrderButton from './order-button';
+import { SHOW_ORDER_ONLINE } from '../../utils/config';
 
 export interface MainNavItemsSignature {
   Element: HTMLElement;
@@ -24,10 +24,6 @@ export interface MainNavItemsSignature {
 export default class MainNavItemsComponent extends Component<MainNavItemsSignature> {
   @service declare features: Features;
   @service declare store: Store;
-
-  get showOrderOnline() {
-    return config.showOrderOnline === true;
-  }
 
   get menus() {
     const menus = this.loadMenu.lastSuccessful?.value;
@@ -67,7 +63,7 @@ export default class MainNavItemsComponent extends Component<MainNavItemsSignatu
 
   <template>
     <ul class='list-reset flex flex-col lg:flex-row lg:items-center'>
-      {{#if this.showOrderOnline}}
+      {{#if SHOW_ORDER_ONLINE}}
         <li class='hidden lg:block'>
           <OrderButton />
         </li>

@@ -1,5 +1,5 @@
 import Model, { attr } from '@ember-data/model';
-import config from 'butchers-market/config/environment';
+import { ORDER_ONLINE_URL, UPLOADS_DIR } from '../utils/config';
 
 export default class Special extends Model {
   @attr() declare title: string;
@@ -15,12 +15,12 @@ export default class Special extends Model {
   @attr('date') declare updatedAt: Date;
 
   get renderLink() {
-    return this.link || config.orderOnlineUrl;
+    return this.link || ORDER_ONLINE_URL;
   }
 
   get imageUrlPath() {
     if (this.imageUrl) {
-      return `${config.uploadsDir}${this.imageUrl}`;
+      return `${UPLOADS_DIR}${this.imageUrl}`;
     }
 
     return null;

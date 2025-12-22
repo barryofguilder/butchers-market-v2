@@ -1,9 +1,9 @@
-import config from 'butchers-market/config/environment';
+import { API_NAMESPACE, API_URL } from './config';
 
-let baseUrl = config.api;
+let baseUrl = API_URL;
 if (baseUrl.endsWith('/') === false) {
   baseUrl += '/';
 }
-baseUrl += config.namespace;
+baseUrl += API_NAMESPACE;
 
 export default baseUrl;

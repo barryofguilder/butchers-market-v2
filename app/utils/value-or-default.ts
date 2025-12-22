@@ -7,5 +7,5 @@ export function valueOrDefault<T, A>(value: T, defaultValue: A): T | A {
   if (value === undefined) {
     return defaultValue;
   }
-  return value as T;
+  return value;
 }
