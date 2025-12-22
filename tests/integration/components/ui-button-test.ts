@@ -98,7 +98,7 @@ module('Integration | Component | ui-button', function (hooks) {
 
   test('it has the disabled attribute when set to disabled', async function (this: Context, assert) {
     await render<Context>(
-      hbs`<UiButton @onClick={{this.myAction}} @disabled={{true}}>My Button</UiButton>`,
+      hbs`<UiButton @onClick={{this.myAction}} @disabled={{true}}>My Button</UiButton>`
     );
 
     assert.dom(testId('button')).isDisabled();

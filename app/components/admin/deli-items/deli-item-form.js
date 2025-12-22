@@ -59,7 +59,7 @@ export default class DeliItemFormComponent extends Component {
     let changeset = new Changeset(
       this.args.item,
       lookupValidator(DeliItemValidations),
-      DeliItemValidations,
+      DeliItemValidations
     );
     this.changeset = changeset;
   }

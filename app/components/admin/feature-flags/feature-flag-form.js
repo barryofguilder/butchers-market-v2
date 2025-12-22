@@ -26,7 +26,7 @@ export default class FeatureFlagFormComponent extends Component {
     let changeset = new Changeset(
       this.args.flag,
       lookupValidator(FeatureFlagValidations),
-      FeatureFlagValidations,
+      FeatureFlagValidations
     );
     this.changeset = changeset;
   }

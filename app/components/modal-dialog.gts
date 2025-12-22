@@ -65,7 +65,7 @@ function sideEffect(func, ...args) {
       // This detaches from tracking frames.
       await Promise.resolve();
       func(...args);
-    })(),
+    })()
   );
 }
 

@@ -23,7 +23,7 @@ export default class AuthenticatedJSONAPIAdapter extends DefaultAdapter {
     status: number,
     headers: Record<string, string>,
     payload: Payload,
-    requestData: RequestData,
+    requestData: RequestData
   ) {
     if (status === 401) {
       this.session.redirectToSignIn(this.router.currentURL ?? '');
