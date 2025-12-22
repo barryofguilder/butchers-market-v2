@@ -185,9 +185,6 @@ importers:
       ember-cli-htmlbars:
         specifier: ^6.3.0
         version: 6.3.0
-      ember-cli-inline-content:
-        specifier: ^0.4.1
-        version: 0.4.1
       ember-concurrency:
         specifier: ^5.1.0
         version: 5.1.0(@babel/core@7.28.5)(@glint/template@1.7.3)
@@ -203,6 +200,9 @@ importers:
       ember-focus-trap:
         specifier: ^1.1.1
         version: 1.1.1(ember-source@6.7.0(@glimmer/component@2.0.0)(rsvp@4.8.5))
+      ember-head:
+        specifier: ^1.0.0
+        version: 1.0.0
       ember-load-initializers:
         specifier: ^3.0.1
         version: 3.0.1(ember-source@6.7.0(@glimmer/component@2.0.0)(rsvp@4.8.5))
@@ -3241,9 +3241,6 @@ packages:
     resolution: {integrity: sha512-N9Y80oZfcfWLsqickMfRd9YByVcTGyhYRnYQ2XVPVrp6jyUyOeRWmEAPh7ERSXpp8Ws4hr/JB9QVQrn/yZa+Ag==}
     engines: {node: 12.* || 14.* || >= 16}
 
-  ember-cli-inline-content@0.4.1:
-    resolution: {integrity: sha512-OZUG+GyRlVLlVMGR/cVAJxA5bqpGsmjVb7lxCy6GYyzhOYV+Bks6OrYjtjvp9p0pvLPA4HrZGGIh+ZFdswkucg==}
-
   ember-cli-is-package-missing@1.0.0:
     resolution: {integrity: sha512-9hEoZj6Au5onlSDdcoBqYEPT8ehlYntZPxH8pBKV0GO7LNel88otSAQsCfXvbi2eKE+MaSeLG/gNaCI5UdWm9g==}
 
@@ -3353,6 +3350,9 @@ packages:
     engines: {node: 12.* || >= 14}
     peerDependencies:
       ember-source: '>= 4.0.0'
+
+  ember-head@1.0.0:
+    resolution: {integrity: sha512-ynGepbcKjwJGviNPhIAd6gfpj46BzdF4t9u+23Xayg7HmSGkztTxSQB4Th4A8yLbySMbZ/UJ+LN0cUjP+vNNeQ==}
 
   ember-in-element-polyfill@1.0.1:
     resolution: {integrity: sha512-eHs+7D7PuQr8a1DPqsJTsEyo3FZ1XuH6WEZaEBPDa9s0xLlwByCNKl8hi1EbXOgvgEZNHHi9Rh0vjxyfakrlgg==}
@@ -10528,8 +10528,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-cli-inline-content@0.4.1: {}
-
   ember-cli-is-package-missing@1.0.0: {}
 
   ember-cli-normalize-entity-name@1.0.0:
@@ -10840,6 +10838,12 @@ snapshots:
       '@embroider/addon-shim': 1.10.2
       ember-source: 6.7.0(@glimmer/component@2.0.0)(rsvp@4.8.5)
       focus-trap: 6.9.4
+    transitivePeerDependencies:
+      - supports-color
+
+  ember-head@1.0.0:
+    dependencies:
+      '@embroider/addon-shim': 1.10.2
     transitivePeerDependencies:
       - supports-color
 

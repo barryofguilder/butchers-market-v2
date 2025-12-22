@@ -2,8 +2,6 @@
 require('dotenv').config();
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
-const environment = process.env.EMBER_ENV || 'development';
-const isProduction = environment === 'production';
 
 const { compatBuild } = require('@embroider/compat');
 
@@ -34,21 +32,6 @@ module.exports = async function (defaults) {
       DEPRECATE_TRACKING_PACKAGE: false,
     },
   });
-
-  if (isProduction) {
-    app.options.inlineContent.analytics = {
-      content: `
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-F0503M6K3V"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'G-F0503M6K3V');
-        </script>
-      `,
-    };
-  }
 
   return compatBuild(app, buildOnce, {
     // `ember-animated` blows up when this is turned on.
