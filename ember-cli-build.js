@@ -1,12 +1,15 @@
 'use strict';
-
 require('dotenv').config();
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 const environment = process.env.EMBER_ENV || 'development';
 const isProduction = environment === 'production';
 
+const { compatBuild } = require('@embroider/compat');
+
 module.exports = async function (defaults) {
+  const { buildOnce } = await import('@embroider/vite');
+
   const app = new EmberApp(defaults, {
     babel: {
       plugins: [require.resolve('ember-concurrency/async-arrow-task-transform')],
@@ -47,21 +50,14 @@ module.exports = async function (defaults) {
     };
   }
 
-  const { Webpack } = require('@embroider/webpack');
-  return require('@embroider/compat').compatBuild(app, Webpack, {
-    staticAddonTestSupportTrees: true,
-    staticAddonTrees: true,
-    staticEmberSource: true,
+  return compatBuild(app, buildOnce, {
     // `ember-animated` blows up when this is turned on.
     // Blows up on the yielded components. Figure out how to fix.
     staticInvokables: false,
+
     // splitAtRoutes: ['route.name'], // can also be a RegExp
     staticAppPaths: ['mirage'],
-    skipBabel: [
-      {
-        package: 'qunit',
-      },
-    ],
+
     packagerOptions: {
       webpackConfig: {
         module: {

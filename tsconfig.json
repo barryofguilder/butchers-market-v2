@@ -28,7 +28,9 @@
       "@ember-data/serializer/unstable-preview-types",
       "@ember-data/store/unstable-preview-types",
       "@warp-drive/core-types/unstable-preview-types",
-      "@warp-drive/ember"
+      "@warp-drive/ember",
+      "@embroider/core/virtual",
+      "vite/client"
     ]
   }
 }
