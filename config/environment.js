@@ -26,7 +26,6 @@ module.exports = function (environment) {
 
     api: '',
     namespace: 'api',
-    showReCaptcha: false,
     uploadsDir: '/uploads/',
     orderOnlineUrl: 'https://thebutchersmarketmeatanddeli.godaddysites.com/order-online',
     showOrderOnline: true,
@@ -61,7 +60,6 @@ module.exports = function (environment) {
   }
 
   if (environment === 'production') {
-    ENV.showReCaptcha = true;
     ENV.showOrderOnline = true;
     ENV.api = process.env.API_URL;
     ENV.uploadsDir = `${process.env.S3_BUCKET_UPLOADS}/uploads/`;
