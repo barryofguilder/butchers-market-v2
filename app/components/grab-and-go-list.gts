@@ -1,6 +1,4 @@
 import type { TOC } from '@ember/component/template-only';
-import type { EmptyObject } from '@ember/component/helper';
-// @ts-expect-error - there are no types for this
 import sortBy from '../helpers/sort-by';
 import GrabAndGoModel from '../models/grab-and-go';
 
@@ -9,7 +7,6 @@ export interface GrabAndGoListSignature {
   Args: {
     items: GrabAndGoModel[];
   };
-  Blocks: EmptyObject;
 }
 
 const GrabAndGoListComponent: TOC<GrabAndGoListSignature> = <template>

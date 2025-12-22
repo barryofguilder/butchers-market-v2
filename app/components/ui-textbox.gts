@@ -1,5 +1,4 @@
 import Component from '@glimmer/component';
-import type { EmptyObject } from '@ember/component/helper';
 import { action } from '@ember/object';
 import { on } from '@ember/modifier';
 import { guidFor } from '@ember/object/internals';
@@ -16,7 +15,6 @@ export interface UiTextboxSignature {
     errors?: string[];
     onChange: (value: string) => void;
   };
-  Blocks: EmptyObject;
 }
 
 export default class UiTextboxComponent extends Component<UiTextboxSignature> {

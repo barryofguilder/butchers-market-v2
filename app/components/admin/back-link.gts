@@ -1,6 +1,5 @@
 import type { TOC } from '@ember/component/template-only';
 import { LinkTo } from '@ember/routing';
-// @ts-expect-error: this isn't a TS file yet.
 import UiIcon from '../ui-icon';
 
 const BackLink: TOC<{

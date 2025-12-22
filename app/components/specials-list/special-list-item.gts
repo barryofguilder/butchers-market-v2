@@ -1,5 +1,4 @@
 import type { TOC } from '@ember/component/template-only';
-import type { EmptyObject } from '@ember/component/helper';
 import type Special from '../../models/special';
 
 const SpecialListItem: TOC<{
@@ -7,7 +6,6 @@ const SpecialListItem: TOC<{
   Args: {
     special: Special;
   };
-  Blocks: EmptyObject;
 }> = <template>
   <div class='mt-10'>
     <a href={{@special.renderLink}} class='block relative'>

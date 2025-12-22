@@ -1,12 +1,10 @@
 import type { TOC } from '@ember/component/template-only';
-import type { EmptyObject } from '@ember/component/helper';
 
 const HeaderTitle: TOC<{
   Element: HTMLElement;
   Args: {
     title: string;
   };
-  Blocks: EmptyObject;
 }> = <template>
   <header class='mt-16 sm:flex sm:items-center sm:flex-row'>
     <div

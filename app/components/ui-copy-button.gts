@@ -2,7 +2,6 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { guidFor } from '@ember/object/internals';
 import { restartableTask, timeout } from 'ember-concurrency';
-// @ts-expect-error: There are no types for this.
 import clipboard from '../modifiers/clipboard';
 // @ts-expect-error: There are no types for this.
 import EmberTooltip from 'ember-tooltips/components/ember-tooltip';

@@ -1,9 +1,8 @@
 import Component from '@glimmer/component';
 import type { TOC } from '@ember/component/template-only';
-import type { EmptyObject } from '@ember/component/helper';
 import type { WithBoundArgs } from '@glint/template';
 import { hash } from '@ember/helper';
-import type { RouteModel } from '@ember/routing/router-service';
+import type { RouteModel } from '../ui-base-link';
 import UiBaseLink from '../ui-base-link';
 import UiIcon from '../ui-icon';
 
@@ -49,7 +48,6 @@ class UiListItem extends Component<UiListItemSignature> {
 
 export interface UiListSignature {
   Element: HTMLUListElement;
-  Args: EmptyObject;
   Blocks: {
     default: [
       {

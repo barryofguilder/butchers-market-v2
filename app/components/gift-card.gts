@@ -1,5 +1,4 @@
 import type { TOC } from '@ember/component/template-only';
-import type { EmptyObject } from '@ember/component/helper';
 import { concat } from '@ember/helper';
 import { htmlSafe } from '@ember/template';
 import Container from './container';
@@ -10,7 +9,6 @@ const GiftCard: TOC<{
   Args: {
     image?: string;
   };
-  Blocks: EmptyObject;
 }> = <template>
   <section
     style={{htmlSafe (concat "background-image: url('../images/" @image "');")}}

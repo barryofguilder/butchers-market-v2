@@ -4,7 +4,6 @@ import {
   setupTest as upstreamSetupTest,
   type SetupTestOptions,
 } from 'ember-qunit';
-// @ts-expect-error - Not a TypeScript file.
 import { setupMirage } from 'butchers-market/tests/helpers/setup-mirage';
 
 // This file exists to provide wrappers around ember-qunit's

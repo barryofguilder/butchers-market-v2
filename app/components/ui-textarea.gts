@@ -1,5 +1,4 @@
 import Component from '@glimmer/component';
-import type { EmptyObject } from '@ember/component/helper';
 import { action } from '@ember/object';
 import { on } from '@ember/modifier';
 import { guidFor } from '@ember/object/internals';
@@ -16,7 +15,6 @@ export interface UiTextareaSignature {
     readonly?: boolean;
     value: string;
   };
-  Blocks: EmptyObject;
 }
 
 export default class UiTextareaComponent extends Component<UiTextareaSignature> {

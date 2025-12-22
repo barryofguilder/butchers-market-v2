@@ -1,9 +1,7 @@
 import type { TOC } from '@ember/component/template-only';
-import type { EmptyObject } from '@ember/component/helper';
 
 const Help: TOC<{
   Element: HTMLSpanElement;
-  Args: EmptyObject;
   Blocks: {
     default: [];
   };

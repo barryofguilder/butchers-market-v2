@@ -1,5 +1,4 @@
 import type { TOC } from '@ember/component/template-only';
-import type { EmptyObject } from '@ember/component/helper';
 import { gt } from 'ember-truth-helpers';
 import FaIcon from '@fortawesome/ember-fontawesome/components/fa-icon';
 
@@ -8,7 +7,6 @@ const ValidationErrors: TOC<{
   Args: {
     errors?: string[];
   };
-  Blocks: EmptyObject;
 }> = <template>
   {{#if (gt @errors.length 0)}}
     <ul data-test-id='validation-errors' class='text-red-600 text-sm' ...attributes>

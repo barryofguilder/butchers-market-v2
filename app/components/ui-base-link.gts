@@ -1,7 +1,8 @@
 import Component from '@glimmer/component';
 import { LinkTo } from '@ember/routing';
-import type { RouteModel } from '@ember/routing/router-service';
 import { modifier } from 'ember-modifier';
+
+export type RouteModel = object | string | number;
 
 export interface UiBaseLinkArgs {
   download?: boolean;
