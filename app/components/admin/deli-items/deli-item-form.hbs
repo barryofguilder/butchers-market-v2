@@ -45,7 +45,7 @@
       {{#let (file-queue name="photos" onFileAdded=this.uploadImage) as |queue|}}
         <label for={{Group.uniqueId}}>
           <span
-            class="inline-block px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-none focus:ring"
+            class="inline-block px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-hidden focus:ring-3"
           >
             Select Image
           </span>
@@ -56,7 +56,7 @@
       {{#if this.hasImage}}
         <button
           type="button"
-          class="inline-block ml-2 px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-none focus:ring"
+          class="inline-block ml-2 px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-hidden focus:ring-3"
           {{on "click" this.removeImage}}
         >
           Remove Image

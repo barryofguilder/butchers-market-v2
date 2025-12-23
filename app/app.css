@@ -1,21 +1,64 @@
-@import url('flatpickr/dist/flatpickr.css');
+/* stylelint-disable-next-line import-notation */
+@import 'flatpickr/dist/flatpickr.css';
+/* stylelint-disable-next-line import-notation */
+@import 'tailwindcss' layer(base);
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@utility container {
+  margin-inline: auto;
+}
+
+@theme {
+  --animate-modal-dialog-show: fade-in 200ms ease-out, grow-in 200ms ease-out;
+  --animate-modal-overlay-show: fade-in 100ms ease-out;
+  --font-sans:
+    'Source Sans Pro', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes grow-in {
+    0% {
+      transform: scale(0.95);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
 
 /*
  * Utilities
  */
 
 .text-shadow {
-  text-shadow: 1px 1px 1px theme('colors.gray.900');
-}
-
-.transition-form-element {
-  transition:
-    border 0.15s ease-in-out,
-    background 0.15s ease-in-out;
+  text-shadow: 1px 1px 1px var(--color-gray-900);
 }
 
 /* Animated tools used for debugging animations */
@@ -46,7 +89,7 @@
 .sortable-item.is-dragging {
   transition-duration: 0s;
 
-  @apply shadow bg-gray-200;
+  @apply shadow-sm bg-gray-200;
 }
 
 /*
@@ -54,11 +97,11 @@
  */
 
 .styled-textbox {
-  @apply appearance-none py-2 px-4 w-full bg-gray-200 rounded border-2 border-gray-200 text-gray-700 leading-tight transition-form-element;
+  @apply appearance-none py-2 px-4 w-full bg-gray-200 rounded-sm border-2 border-gray-200 text-gray-700 leading-tight transition-colors;
 }
 
 .styled-textbox:focus {
-  @apply outline-none bg-white border-gray-500;
+  @apply outline-hidden bg-white border-gray-500;
 }
 
 .styled-textbox:read-only:not(.ember-flatpickr) {

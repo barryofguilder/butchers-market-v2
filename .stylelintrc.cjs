@@ -6,15 +6,8 @@ module.exports = {
     'at-rule-no-unknown': [
       true,
       {
-        ignoreAtRules: ['tailwind', 'apply', 'layer'],
+        ignoreAtRules: ['apply', 'layer', 'theme', 'utility'],
       },
     ],
-    'function-no-unknown': [
-      true,
-      {
-        ignoreFunctions: ['theme'],
-      },
-    ],
-    'declaration-property-value-no-unknown': null,
   },
 };

@@ -111,8 +111,6 @@ export default ts.config(
       '.stylelintrc.js',
       '.template-lintrc.js',
       'ember-cli-build.js',
-      'postcss.config.js',
-      'tailwind.config.js',
     ],
     plugins: {
       n,

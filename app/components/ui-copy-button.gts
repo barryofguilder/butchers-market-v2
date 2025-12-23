@@ -31,7 +31,7 @@ export default class UiCopyButton extends Component<UiCopyButtonSignature> {
   <template>
     <button
       type='button'
-      class='px-2 py-1 rounded border hover:bg-gray-50 active:shadow'
+      class='px-2 py-1 rounded-sm border hover:bg-gray-50 active:shadow-sm'
       data-clipboard-id={{this.guid}}
       ...attributes
       {{clipboard text=@text action='copy' delegateClickEvent=false onSuccess=this.onCopy.perform}}
