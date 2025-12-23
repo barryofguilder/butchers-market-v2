@@ -40,7 +40,7 @@ export interface UiButtonSignature {
 // The link and button classes have to be split out since links don't support
 // the `enabled` helper.
 const baseClasses =
-  'inline-block whitespace-nowrap transition-colors focus:outline-none focus:ring';
+  'inline-block whitespace-nowrap transition-colors focus:outline-hidden focus:ring-3';
 const baseButtonClasses = 'disabled:opacity-50 disabled:cursor-not-allowed';
 const baseLinkClasses = '';
 const variantBaseClasses: Record<ButtonVariant, string> = {
@@ -115,7 +115,7 @@ export default class UiButtonComponent extends Component<UiButtonSignature> {
 
   get iconOnlyClasses() {
     const baseClasses =
-      'inline-block leading-tight text-center bg-transparent focus:ring focus:outline-none';
+      'inline-block leading-tight text-center bg-transparent focus:ring-3 focus:outline-hidden';
     const sizeClasses = 'p-2';
     const fontClasses = 'text-sm font-semibold';
     const disabledClasses = this.buttonDisabled ? 'opacity-50 cursor-not-allowed' : '';

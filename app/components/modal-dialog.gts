@@ -33,12 +33,12 @@ const ModalDialogComponent: TOC<ModalDialogSignature> = <template>
       class='fixed max-w-full max-h-full min-h-full m-0 inset-0 z-50 w-full overflow-y-auto bg-transparent'
       {{focusTrap isActive=m.isOpen}}
     >
+      <div class='animate-modal-overlay-show fixed inset-0 bg-gray-500/75'></div>
       <div
-        class='animate-modal-overlay-show fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75'
-      ></div>
-      <div class='flex items-end justify-center px-4 pt-4 pb-12 text-center sm:block sm:p-0'>
+        class='flex fixed inset-0 items-end justify-center px-4 pt-4 pb-12 text-center sm:block sm:p-0'
+      >
         <div
-          class='animate-modal-dialog-show inline-block w-full px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-12 sm:align-middle sm:max-w-sm sm:p-6'
+          class='animate-modal-dialog-show inline-block w-full px-4 pt-5 pb-4 overflow-hidden text-left align-bottom bg-white rounded-lg shadow-xl sm:my-12 sm:align-middle sm:max-w-sm sm:p-6'
         >
           {{yield (hash header=ModalHeader body=ModalBody footer=ModalFooter)}}
         </div>

@@ -16,7 +16,7 @@ const SocialMediaButton: TOC<{
 }> = <template>
   <a
     href={{@href}}
-    class='inline-block h-8 w-8 text-center text-xl text-gray-900 border border-gray-900 rounded hover:bg-gray-900 hover:text-white'
+    class='inline-block h-8 w-8 text-center text-xl text-gray-900 border border-gray-900 rounded-sm hover:bg-gray-900 hover:text-white'
     ...attributes
   >
     {{yield}}
