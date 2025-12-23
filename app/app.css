@@ -71,8 +71,7 @@
 }
 
 /* Disable parallax for tablets and phones */
-/* stylelint-disable-next-line media-query-no-invalid */
-@media only screen and (max-device-width <= 1024px) {
+@media only screen and (device-width <= 1024px) {
   .parallax-background {
     @apply bg-scroll;
   }
