@@ -1,7 +1,7 @@
 /* stylelint-disable-next-line import-notation */
-@import 'flatpickr/dist/flatpickr.css';
+@import 'flatpickr/dist/flatpickr.css' layer(base);
 /* stylelint-disable-next-line import-notation */
-@import 'tailwindcss' layer(base);
+@import 'tailwindcss';
 
 @utility container {
   margin-inline: auto;
