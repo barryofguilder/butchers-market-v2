@@ -44,17 +44,17 @@ const baseClasses =
 const baseButtonClasses = 'disabled:opacity-50 disabled:cursor-not-allowed';
 const baseLinkClasses = '';
 const variantBaseClasses: Record<ButtonVariant, string> = {
-  primary: 'bg-red-800 text-white',
+  primary: 'bg-red-900 text-white',
   secondary: 'bg-gray-800 text-white',
   plain: 'bg-transparent border border-gray-300',
 };
 const variantButtonClasses: Record<ButtonVariant, string> = {
-  primary: 'enabled:hover:bg-red-900',
+  primary: 'enabled:hover:bg-red-950',
   secondary: 'enabled:hover:bg-gray-900',
   plain: 'enabled:hover:bg-gray-300 enabled:hover:border-transparent',
 };
 const variantLinkClasses: Record<ButtonVariant, string> = {
-  primary: 'hover:bg-red-900',
+  primary: 'hover:bg-red-950',
   secondary: 'hover:bg-gray-900',
   plain: 'hover:bg-gray-300 hover:border-transparent',
 };

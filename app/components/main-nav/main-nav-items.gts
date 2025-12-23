@@ -58,7 +58,7 @@ export default class MainNavItemsComponent extends Component<MainNavItemsSignatu
   <template>
     <ul class='list-reset flex flex-col lg:flex-row lg:items-center'>
       {{#let
-        'block px-6 py-4 lg:flex lg:items-center lg:py-0 lg:h-full hover:text-red-600 focus:text-red-600 focus:outline-hidden text-center lg:text-left'
+        'block px-6 py-4 lg:flex lg:items-center lg:py-0 lg:h-full hover:text-red-700 focus:text-red-700 focus:outline-hidden text-center lg:text-left'
         as |classes|
       }}
         {{#if SHOW_ORDER_ONLINE}}

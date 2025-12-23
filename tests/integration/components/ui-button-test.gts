@@ -45,7 +45,7 @@ module('Integration | Component | ui-button', function (hooks) {
       </template>
     );
 
-    assert.dom(testId('button')).hasClass('bg-red-800', 'has correct background color');
+    assert.dom(testId('button')).hasClass('bg-red-900', 'has correct background color');
     assert.dom(testId('button')).hasAttribute('type', 'button', 'has correct type');
     assert.dom(testId('button')).doesNotHaveAttribute('disabled', 'is not disabled');
     assert.dom(testId('button')).hasText('Primary Button', 'has correct text');

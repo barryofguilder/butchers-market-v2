@@ -8,7 +8,7 @@ const HeaderTitle: TOC<{
 }> = <template>
   <header class='mt-16 sm:flex sm:items-center sm:flex-row'>
     <div
-      class='hidden sm:block sm:flex-auto sm:border-red-700 sm:border-2'
+      class='hidden sm:block sm:flex-auto sm:border-red-800 sm:border-2'
       aria-hidden='true'
     ></div>
     <h2
@@ -17,7 +17,7 @@ const HeaderTitle: TOC<{
       {{@title}}
     </h2>
     <div
-      class='hidden sm:block sm:flex-auto sm:border-red-700 sm:border-2'
+      class='hidden sm:block sm:flex-auto sm:border-red-800 sm:border-2'
       aria-hidden='true'
     ></div>
   </header>

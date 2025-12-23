@@ -9,7 +9,7 @@ const ValidationErrors: TOC<{
   };
 }> = <template>
   {{#if (gt @errors.length 0)}}
-    <ul data-test-id='validation-errors' class='text-red-600 text-sm' ...attributes>
+    <ul data-test-id='validation-errors' class='text-red-700 text-sm' ...attributes>
       {{#each @errors as |error|}}
         <li data-test-id='validation-error' class='my-1'>
           <FaIcon @icon='exclamation-triangle' />

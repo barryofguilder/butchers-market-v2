@@ -46,7 +46,7 @@ export default class UiIconComponent extends Component<UiIconSignature> {
       case 'warning':
         return 'text-yellow-600';
       case 'danger':
-        return 'text-red-600';
+        return 'text-red-700';
       default:
         return null;
     }

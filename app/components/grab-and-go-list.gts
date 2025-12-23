@@ -16,7 +16,7 @@ const GrabAndGoListComponent: TOC<GrabAndGoListSignature> = <template>
         <div class='relative'>
           {{#unless item.inStock}}
             <div
-              class='absolute px-4 py-2 whitespace-nowrap bg-red-700 text-white text-3xl font-semibold uppercase -rotate-12 xl:px-6 xl:text-4xl'
+              class='absolute px-4 py-2 whitespace-nowrap bg-red-800 text-white text-3xl font-semibold uppercase -rotate-12 xl:px-6 xl:text-4xl'
             >
               Sold Out
             </div>

@@ -108,5 +108,5 @@
 }
 
 .styled-textbox.has-errors {
-  @apply border-red-600;
+  @apply border-red-700;
 }
