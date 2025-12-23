@@ -54,11 +54,8 @@ function createDeliItems(server) {
   });
 }
 
-function createFeatureFlags(server) {
-  server.create('feature-flag', {
-    name: 'grab-and-go-menu',
-    active: true,
-  });
+function createFeatureFlags(/* server */) {
+  // server.create('feature-flag', { name: 'foo', activate: true });
 }
 
 function createGrabAndGo(server) {
