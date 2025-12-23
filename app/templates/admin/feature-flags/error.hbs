@@ -1,5 +1,6 @@
 <Admin::PageError
-  @errors={{this.model.errors}}
+  {{! @glint-ignore }}
+  @errors={{@model.errors}}
   @name="Feature Flag"
   @route="admin.feature-flags"
   @backText="Back to Feature Flags"

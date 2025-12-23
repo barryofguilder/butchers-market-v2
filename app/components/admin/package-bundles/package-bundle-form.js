@@ -63,7 +63,7 @@ export default class PackageBundleFormComponent extends Component {
     let changeset = new Changeset(
       this.args.bundle,
       lookupValidator(PackageBundleValidations),
-      PackageBundleValidations,
+      PackageBundleValidations
     );
     let prices = changeset.get('prices');
 

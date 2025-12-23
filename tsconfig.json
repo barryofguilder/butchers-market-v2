@@ -1,20 +1,15 @@
 {
-  "extends": "@tsconfig/ember",
-  "include": ["app/**/*", "tests/**/*", "types/**/*"],
+  "extends": "@ember/app-tsconfig",
+  "include": ["app", "tests", "types"],
   "glint": {
     "environment": ["ember-loose", "ember-template-imports"]
   },
   "compilerOptions": {
-    // Uncomment the next line if you want the app to compile with TypeScript errors.
-    //"noEmitOnError": false,
-
-    // The combination of `baseUrl` with `paths` allows Ember's classic package
-    // layout, which is not resolvable with the Node resolution algorithm, to
-    // work with TypeScript.
-    "baseUrl": ".",
+    "allowJs": true,
     "paths": {
-      "butchers-market/tests/*": ["tests/*"],
-      "butchers-market/*": ["app/*"]
+      "butchers-market/tests/*": ["./tests/*"],
+      "butchers-market/*": ["./app/*"],
+      "*": ["./types/*"]
     },
     "types": [
       "ember-source/types",
@@ -28,7 +23,9 @@
       "@ember-data/serializer/unstable-preview-types",
       "@ember-data/store/unstable-preview-types",
       "@warp-drive/core-types/unstable-preview-types",
-      "@warp-drive/ember"
+      "@warp-drive/ember",
+      "@embroider/core/virtual",
+      "vite/client"
     ]
   }
 }

@@ -1,12 +1,12 @@
 'use strict';
 
-require('dotenv').config();
-
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
-const environment = process.env.EMBER_ENV || 'development';
-const isProduction = environment === 'production';
+
+const { compatBuild } = require('@embroider/compat');
 
 module.exports = async function (defaults) {
+  const { buildOnce } = await import('@embroider/vite');
+
   const app = new EmberApp(defaults, {
     babel: {
       plugins: [require.resolve('ember-concurrency/async-arrow-task-transform')],
@@ -20,9 +20,6 @@ module.exports = async function (defaults) {
         DEPRECATE_STORE_EXTENDS_EMBER_OBJECT: false,
       },
     },
-    'ember-cli-babel': { enableTypeScriptTransform: true },
-
-    inlineContent: {},
   });
 
   const { setConfig } = await import('@warp-drive/build-config');
@@ -32,56 +29,5 @@ module.exports = async function (defaults) {
     },
   });
 
-  if (isProduction) {
-    app.options.inlineContent.analytics = {
-      content: `
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-F0503M6K3V"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'G-F0503M6K3V');
-        </script>
-      `,
-    };
-  }
-
-  const { Webpack } = require('@embroider/webpack');
-  return require('@embroider/compat').compatBuild(app, Webpack, {
-    staticAddonTestSupportTrees: true,
-    staticAddonTrees: true,
-    staticEmberSource: true,
-    // `ember-animated` blows up when this is turned on.
-    // Blows up on the yielded components. Figure out how to fix.
-    staticInvokables: false,
-    // splitAtRoutes: ['route.name'], // can also be a RegExp
-    staticAppPaths: ['mirage'],
-    skipBabel: [
-      {
-        package: 'qunit',
-      },
-    ],
-    packagerOptions: {
-      webpackConfig: {
-        module: {
-          rules: [
-            {
-              test: /\.css$/i,
-              use: [
-                {
-                  loader: 'postcss-loader',
-                  options: {
-                    postcssOptions: {
-                      config: 'postcss.config.js',
-                    },
-                  },
-                },
-              ],
-            },
-          ],
-        },
-      },
-    },
-  });
+  return compatBuild(app, buildOnce);
 };

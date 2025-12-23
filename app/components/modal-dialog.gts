@@ -1,6 +1,7 @@
-import Component from '@glimmer/component';
+import type { TOC } from '@ember/component/template-only';
 import { hash } from '@ember/helper';
 import { waitForPromise } from '@ember/test-waiters';
+// @ts-expect-error: There are no types for this.
 import { focusTrap } from 'ember-focus-trap';
 import { Modal } from 'ember-primitives';
 import ModalHeader from './modal-dialog/header';
@@ -14,58 +15,66 @@ export interface ModalDialogSignature {
     onClose: () => void;
   };
   Blocks: {
-    default: [];
+    default: [
+      {
+        header: typeof ModalHeader;
+        body: typeof ModalBody;
+        footer: typeof ModalFooter;
+      },
+    ];
   };
 }
 
-export default class ModalDialogComponent extends Component<ModalDialogSignature> {
-  get variant() {
-    return valueOrDefault(this.args.variant, 'primary');
-  }
+const ModalDialogComponent: TOC<ModalDialogSignature> = <template>
+  <Modal @onClose={{@onClose}} as |m|>
+    {{sideEffect toggle @isOpen m}}
 
-  <template>
-    <Modal @onClose={{@onClose}} as |m|>
-      {{sideEffect toggle @isOpen m}}
-
-      <m.Dialog
-        class='fixed max-w-full max-h-full min-h-full m-0 inset-0 z-50 w-full overflow-y-auto bg-transparent'
-        {{focusTrap isActive=m.isOpen}}
-      >
+    <m.Dialog
+      class='fixed max-w-full max-h-full min-h-full m-0 inset-0 z-50 w-full overflow-y-auto bg-transparent'
+      {{focusTrap isActive=m.isOpen}}
+    >
+      <div
+        class='animate-modal-overlay-show fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75'
+      ></div>
+      <div class='flex items-end justify-center px-4 pt-4 pb-12 text-center sm:block sm:p-0'>
         <div
-          class='animate-modal-overlay-show fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75'
-        ></div>
-        <div class='flex items-end justify-center px-4 pt-4 pb-12 text-center sm:block sm:p-0'>
-          <div
-            class='animate-modal-dialog-show inline-block w-full px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-12 sm:align-middle sm:max-w-sm sm:p-6'
-          >
-            {{yield (hash header=ModalHeader body=ModalBody footer=ModalFooter)}}
-          </div>
+          class='animate-modal-dialog-show inline-block w-full px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-12 sm:align-middle sm:max-w-sm sm:p-6'
+        >
+          {{yield (hash header=ModalHeader body=ModalBody footer=ModalFooter)}}
         </div>
-      </m.Dialog>
-    </Modal>
-  </template>
-}
+      </div>
+    </m.Dialog>
+  </Modal>
+</template>;
 
-function toggle(wantsOpen, { open, close, isOpen }) {
+export default ModalDialogComponent;
+
+function toggle(
+  wantsOpen: boolean,
+  { open, close, isOpen }: { open: () => void; close: () => void; isOpen: boolean }
+) {
   if (wantsOpen) {
     if (isOpen) return;
     open();
     return;
   }
 
-  if (!isOpen) return;
+  if (!isOpen) {
+    return;
+  }
 
   close();
 }
 
-function sideEffect(func, ...args) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function sideEffect<T extends (...args: any[]) => void>(func: T, ...args: Parameters<T>): void {
   waitForPromise(
     (async () => {
       // auto tracking is synchronous.
       // This detaches from tracking frames.
       await Promise.resolve();
       func(...args);
-    })(),
+    })()
   );
 }
 

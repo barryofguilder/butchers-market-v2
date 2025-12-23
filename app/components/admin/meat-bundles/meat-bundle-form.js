@@ -29,7 +29,7 @@ export default class MeatBundleFormComponent extends Component {
     let changeset = new Changeset(
       this.args.bundle,
       lookupValidator(MeatBundleValidations),
-      MeatBundleValidations,
+      MeatBundleValidations
     );
     let items = changeset.get('items');
 

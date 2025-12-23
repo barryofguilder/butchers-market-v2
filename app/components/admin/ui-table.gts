@@ -1,7 +1,6 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import type { TOC } from '@ember/component/template-only';
-import type { EmptyObject } from '@ember/component/helper';
 import type { WithBoundArgs } from '@glint/template';
 import { action } from '@ember/object';
 import { hash } from '@ember/helper';
@@ -93,7 +92,6 @@ class UiTableCell extends Component<UiTableCellSignature> {
 
 interface UiTableEmptySignature {
   Element: HTMLTableRowElement;
-  Args: EmptyObject;
   Blocks: {
     default: [];
   };
@@ -109,7 +107,6 @@ const UiTableEmpty: TOC<UiTableEmptySignature> = <template>
 
 interface UiTableRowSignature {
   Element: HTMLTableRowElement;
-  Args: EmptyObject;
   Blocks: {
     default: [
       {
@@ -127,7 +124,6 @@ const UiTableRow: TOC<UiTableRowSignature> = <template>
 
 interface UiTableBodySignature {
   Element: HTMLElement;
-  Args: EmptyObject;
   Blocks: {
     default: [
       {
@@ -297,7 +293,6 @@ const UiTableHead: TOC<UiTableHeadSignature> = <template>
 
 export interface UiTableSignature {
   Element: HTMLTableElement;
-  Args: EmptyObject;
   Blocks: {
     default: [
       {

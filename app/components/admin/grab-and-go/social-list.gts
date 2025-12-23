@@ -1,5 +1,4 @@
 import Component from '@glimmer/component';
-import type { EmptyObject } from '@ember/component/helper';
 import { format } from 'date-fns';
 import type GrabAndGo from '../../../models/grab-and-go';
 import UiCopyButton from '../../ui-copy-button';
@@ -9,7 +8,6 @@ interface SocialListSignature {
   Args: {
     items: GrabAndGo[];
   };
-  Blocks: EmptyObject;
 }
 
 export default class SocialListComponent extends Component<SocialListSignature> {

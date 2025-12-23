@@ -1,4 +1,4 @@
-@import url("flatpickr/dist/flatpickr.css");
+@import url('flatpickr/dist/flatpickr.css');
 
 @tailwind base;
 @tailwind components;
@@ -9,7 +9,7 @@
  */
 
 .text-shadow {
-  text-shadow: 1px 1px 1px theme("colors.gray.900");
+  text-shadow: 1px 1px 1px theme('colors.gray.900');
 }
 
 .transition-form-element {

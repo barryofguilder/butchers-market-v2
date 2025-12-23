@@ -1,5 +1,4 @@
 import Component from '@glimmer/component';
-import type { EmptyObject } from '@ember/component/helper';
 import { action } from '@ember/object';
 import { on } from '@ember/modifier';
 import { valueOrDefault } from '../utils/value-or-default';
@@ -14,7 +13,6 @@ export interface UiRadioInputSignature {
     onChange: (value: string) => void;
     value: string;
   };
-  Blocks: EmptyObject;
 }
 
 export default class UiRadioInput extends Component<UiRadioInputSignature> {

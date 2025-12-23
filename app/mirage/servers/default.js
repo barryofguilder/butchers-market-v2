@@ -137,6 +137,6 @@ function routes() {
     '/upload',
     uploadHandler(function () {
       return new Response(201, { 'Content-Type': 'text/plain' }, {});
-    }),
+    })
   );
 }

@@ -58,7 +58,7 @@ export default class ItemFormComponent extends Component {
     let changeset = new Changeset(
       this.args.item,
       lookupValidator(ItemValidations),
-      ItemValidations,
+      ItemValidations
     );
 
     this.changeset = changeset;

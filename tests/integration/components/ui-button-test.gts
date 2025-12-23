@@ -1,11 +1,12 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'butchers-market/tests/helpers';
 import { type TestContext, click, render /*, waitFor*/ } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
 import { timeout } from 'ember-concurrency';
 import type { Task } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
+import { hash } from '@ember/helper';
 import { testId } from 'butchers-market/tests/helpers/test-id';
+import UiButton from 'butchers-market/components/ui-button';
 // import { TaskHelper } from 'butchers-market/tests/helpers/task-helper';
 
 class ButtonContext {
@@ -22,7 +23,11 @@ module('Integration | Component | ui-button', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders with the defaults', async function (assert) {
-    await render(hbs`<UiButton>Default Button</UiButton>`);
+    await render(
+      <template>
+        <UiButton>Default Button</UiButton>
+      </template>
+    );
 
     assert.dom(testId('button')).hasClass('bg-gray-800', 'has correct background color');
     assert.dom(testId('button')).hasAttribute('type', 'button', 'has correct type');
@@ -34,7 +39,11 @@ module('Integration | Component | ui-button', function (hooks) {
   });
 
   test('it renders a primary button', async function (assert) {
-    await render(hbs`<UiButton @variant="primary">Primary Button</UiButton>`);
+    await render(
+      <template>
+        <UiButton @variant='primary'>Primary Button</UiButton>
+      </template>
+    );
 
     assert.dom(testId('button')).hasClass('bg-red-800', 'has correct background color');
     assert.dom(testId('button')).hasAttribute('type', 'button', 'has correct type');
@@ -43,7 +52,11 @@ module('Integration | Component | ui-button', function (hooks) {
   });
 
   test('it renders a secondary button', async function (assert) {
-    await render(hbs`<UiButton @variant="secondary">Secondary Button</UiButton>`);
+    await render(
+      <template>
+        <UiButton @variant='secondary'>Secondary Button</UiButton>
+      </template>
+    );
 
     assert.dom(testId('button')).hasClass('bg-gray-800', 'has correct background color');
     assert.dom(testId('button')).hasAttribute('type', 'button', 'has correct type');
@@ -52,7 +65,11 @@ module('Integration | Component | ui-button', function (hooks) {
   });
 
   test('it renders a plain button', async function (assert) {
-    await render(hbs`<UiButton @variant="plain">Plain Button</UiButton>`);
+    await render(
+      <template>
+        <UiButton @variant='plain'>Plain Button</UiButton>
+      </template>
+    );
 
     assert.dom(testId('button')).hasClass('bg-transparent', 'has correct background color');
     assert.dom(testId('button')).hasAttribute('type', 'button', 'has correct type');
@@ -61,26 +78,35 @@ module('Integration | Component | ui-button', function (hooks) {
   });
 
   test('it renders with custom HTML attributes', async function (assert) {
-    await render(hbs`
-      <UiButton data-test-id="my-button" aria-disabled="true" type="submit">
-        My Button
-      </UiButton>
-    `);
-
+    await render(
+      <template>
+        <UiButton data-test-id='my-button' aria-disabled='true' type='submit'>
+          My Button
+        </UiButton>
+      </template>
+    );
     assert.dom(testId('my-button')).exists();
     assert.dom(testId('my-button')).hasAttribute('aria-disabled', 'true');
     assert.dom(testId('my-button')).hasAttribute('type', 'submit');
   });
 
   test('it can render with an icon', async function (assert) {
-    await render(hbs`<UiButton @icon="pencil-alt">Edit</UiButton>`);
+    await render(
+      <template>
+        <UiButton @icon='pencil-alt'>Edit</UiButton>
+      </template>
+    );
 
     assert.dom(testId('button')).hasText('Edit', 'has correct text');
     assert.dom(testId('button', 'button-icon')).exists('an icon is rendered');
   });
 
   test('it can render as a different type using the component argument', async function (assert) {
-    await render(hbs`<UiButton @type="submit">Submit Button</UiButton>`);
+    await render(
+      <template>
+        <UiButton @type='submit'>Submit Button</UiButton>
+      </template>
+    );
 
     assert.dom(testId('button')).hasAttribute('type', 'submit');
   });
@@ -90,7 +116,11 @@ module('Integration | Component | ui-button', function (hooks) {
       assert.step('button clicked');
     };
 
-    await render<Context>(hbs`<UiButton @onClick={{this.myAction}}>My Button</UiButton>`);
+    await render<Context>(
+      <template>
+        <UiButton @onClick={{this.myAction}}>My Button</UiButton>
+      </template>
+    );
     await click(testId('button'));
 
     assert.verifySteps(['button clicked']);
@@ -98,7 +128,9 @@ module('Integration | Component | ui-button', function (hooks) {
 
   test('it has the disabled attribute when set to disabled', async function (this: Context, assert) {
     await render<Context>(
-      hbs`<UiButton @onClick={{this.myAction}} @disabled={{true}}>My Button</UiButton>`,
+      <template>
+        <UiButton @onClick={{this.myAction}} @disabled={{true}}>My Button</UiButton>
+      </template>
     );
 
     assert.dom(testId('button')).isDisabled();
@@ -109,7 +141,11 @@ module('Integration | Component | ui-button', function (hooks) {
       //
     };
 
-    await render<Context>(hbs`<UiButton @onClick={{this.myAction}}>My Button</UiButton>`);
+    await render<Context>(
+      <template>
+        <UiButton @onClick={{this.myAction}}>My Button</UiButton>
+      </template>
+    );
     click(testId('button'));
 
     assert.dom(testId('is-running')).doesNotExist();
@@ -121,7 +157,11 @@ module('Integration | Component | ui-button', function (hooks) {
       await timeout(1);
     };
 
-    await render<Context>(hbs`<UiButton @onClick={{this.myPromise}}>My Button</UiButton>`);
+    await render<Context>(
+      <template>
+        <UiButton @onClick={{this.myPromise}}>My Button</UiButton>
+      </template>
+    );
     await click(testId('button'));
 
     assert.verifySteps(['button clicked']);
@@ -132,9 +172,9 @@ module('Integration | Component | ui-button', function (hooks) {
   //   this.myTask = helper.task;
 
   //   await render<Context>(
-  //     hbs`
+  //     <template>
   //       <UiButton @onClick={{perform this.myTask}}>My Button</UiButton>
-  //     `,
+  //     </template>
   //   );
   //   await click(testId('button'));
 
@@ -150,9 +190,11 @@ module('Integration | Component | ui-button', function (hooks) {
   // });
 
   test('it renders as a link when using the `href` argument', async function (assert) {
-    await render(hbs`
-      <UiButton @href="https://google.com">Google</UiButton>
-    `);
+    await render(
+      <template>
+        <UiButton @href='https://google.com'>Google</UiButton>
+      </template>
+    );
 
     assert.dom(testId('button')).hasText('Google');
     assert.dom(testId('button')).hasAttribute('href', 'https://google.com');
@@ -160,15 +202,21 @@ module('Integration | Component | ui-button', function (hooks) {
   });
 
   test('it has the `download` attribute', async function (assert) {
-    await render(hbs`
-      <UiButton @href="foo.txt" @download={{true}}>My File</UiButton>
-    `);
+    await render(
+      <template>
+        <UiButton @href='foo.txt' @download={{true}}>My File</UiButton>
+      </template>
+    );
 
     assert.dom(testId('button')).hasAttribute('download', 'true');
   });
 
   test('it renders as a link when using the `route` argument', async function (assert) {
-    await render(hbs`<UiButton @route='test-route'>Test Route</UiButton>`);
+    await render(
+      <template>
+        <UiButton @route='test-route'>Test Route</UiButton>
+      </template>
+    );
 
     assert.dom(testId('button')).hasText('Test Route');
     assert.dom(testId('button')).hasAttribute('href', '/test-route');
@@ -176,35 +224,37 @@ module('Integration | Component | ui-button', function (hooks) {
   });
 
   test('it correctly renders the href for a route with a model', async function (assert) {
-    await render(hbs`
-      <UiButton @route='test-route.model-route' @model={{1}}>
-        Test Model Route
-      </UiButton>
-    `);
-
+    await render(
+      <template>
+        <UiButton @route='test-route.model-route' @model={{1}}>
+          Test Model Route
+        </UiButton>
+      </template>
+    );
     assert.dom(testId('button')).hasAttribute('href', '/test-route/1');
   });
 
   // test('it correctly renders the `href` for a route with multiple models', async function (assert) {
-  //   await render(hbs`
+  //   await render(<template>
   //     <UiButton
   //       @route='test-route.model-route.second-model-route'
   //       @models={{array 1 'foo'}}
   //     >
   //       Test Route
   //     </UiButton>
-  //   `);
+  //   </template>);
 
   //   assert.dom(testId('button')).hasAttribute('href', '/test-route/1/tag/foo');
   // });
 
   test('it correctly renders the `href` for a route with query params', async function (assert) {
-    await render(hbs`
-      <UiButton @route='test-route' @query={{hash search='foo'}}>
-        Test Route
-      </UiButton>
-    `);
-
+    await render(
+      <template>
+        <UiButton @route='test-route' @query={{hash search='foo'}}>
+          Test Route
+        </UiButton>
+      </template>
+    );
     assert.dom(testId('button')).hasAttribute('href', '/test-route?search=foo');
   });
 });

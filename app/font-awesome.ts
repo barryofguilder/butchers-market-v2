@@ -34,5 +34,5 @@ library.add(
   faPencilAlt,
   faPhone,
   faPlus,
-  faTrashAlt,
+  faTrashAlt
 );

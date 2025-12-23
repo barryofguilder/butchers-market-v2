@@ -1,6 +1,5 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import type { EmptyObject } from '@ember/component/helper';
 import { dropTask } from 'ember-concurrency';
 import type Special from '../../../models/special';
 import AdminForm from '../admin-form';
@@ -10,7 +9,6 @@ interface MiniFormSignature {
   Args: {
     special: Special;
   };
-  Blocks: EmptyObject;
 }
 
 export default class MiniFormComponent extends Component<MiniFormSignature> {

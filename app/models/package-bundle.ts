@@ -1,5 +1,5 @@
 import Model, { attr } from '@ember-data/model';
-import config from 'butchers-market/config/environment';
+import { UPLOADS_DIR } from '../utils/config';
 
 export default class PackageBundle extends Model {
   @attr() declare displayOrder: number;
@@ -13,7 +13,7 @@ export default class PackageBundle extends Model {
 
   get fileUrlPath() {
     if (this.fileUrl) {
-      return `${config.uploadsDir}${this.fileUrl}`;
+      return `${UPLOADS_DIR}${this.fileUrl}`;
     }
 
     return null;

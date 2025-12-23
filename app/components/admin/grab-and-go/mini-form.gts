@@ -1,6 +1,5 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import type { EmptyObject } from '@ember/component/helper';
 import { dropTask } from 'ember-concurrency';
 import type GrabAndGo from '../../../models/grab-and-go';
 import AdminForm from '../admin-form';
@@ -11,7 +10,6 @@ interface MiniFormSignature {
     item: GrabAndGo;
     field: 'inStock' | 'isHoliday';
   };
-  Blocks: EmptyObject;
 }
 
 export default class MiniFormComponent extends Component<MiniFormSignature> {

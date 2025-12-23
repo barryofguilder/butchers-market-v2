@@ -1,9 +1,7 @@
 import type { TOC } from '@ember/component/template-only';
-import type { EmptyObject } from '@ember/component/helper';
 
 const ModalHeader: TOC<{
   Element: HTMLDivElement;
-  Args: EmptyObject;
   Blocks: {
     default: [];
   };

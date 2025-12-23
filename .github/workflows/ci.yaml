@@ -9,13 +9,9 @@ on:
   # - If you merge the PR into `master`, CI will run once more. (type: `push`)
   push:
     branches:
+      - main
       - master
-  pull_request:
-  workflow_dispatch:
-    inputs:
-      git-ref:
-        description: Git Ref (Optional)
-        required: false
+  pull_request: {}
 
 # Will kill the workflow runs of commits that are not the current head commit of a PR. `head_ref` is
 # only set for PRs source, which is why we fall back to `ref` (so push workflows will run one job
@@ -25,10 +21,12 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
-    name: 'Tests'
+  lint:
+    name: "Lint"
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    # Don't run for draft PRs
+    if: github.event.pull_request.draft == false
 
     steps:
       - name: Checkout
@@ -40,5 +38,19 @@ jobs:
       - name: Lint
         run: pnpm lint
 
+  test:
+    name: "Test"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # Don't run for draft PRs
+    if: github.event.pull_request.draft == false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node, pnpm, install dependencies
+        uses: wyvox/action-setup-pnpm@v3
+
       - name: Run Tests
-        run: pnpm test:ember
+        run: pnpm test
