@@ -31,7 +31,7 @@ export default class MainNavComponent extends Component {
         <div class='flex items-center justify-end h-20 lg:hidden'>
           <button
             type='button'
-            class='flex items-center justify-center h-12 px-3 text-gray-600 text-2xl border rounded-sm focus:outline-hidden focus:ring-3'
+            class='flex items-center justify-center h-12 px-3 text-gray-600 text-2xl border rounded-sm focus:outline-hidden focus:ring-3 focus:ring-blue-500'
             aria-controls='main-navigation-items'
             aria-expanded={{if this.showNavigation 'true' 'false'}}
             aria-label='Toggle navigation'

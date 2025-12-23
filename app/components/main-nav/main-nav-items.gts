@@ -57,46 +57,36 @@ export default class MainNavItemsComponent extends Component<MainNavItemsSignatu
 
   <template>
     <ul class='list-reset flex flex-col lg:flex-row lg:items-center'>
-      {{#if SHOW_ORDER_ONLINE}}
-        <li class='hidden lg:block'>
-          <OrderButton />
+      {{#let
+        'block px-6 py-4 lg:flex lg:items-center lg:py-0 lg:h-full hover:text-red-600 focus:text-red-600 focus:outline-hidden text-center lg:text-left'
+        as |classes|
+      }}
+        {{#if SHOW_ORDER_ONLINE}}
+          <li class='hidden lg:block'>
+            <OrderButton />
+          </li>
+        {{/if}}
+        <li class='lg:ml-8 lg:block lg:h-full'>
+          <LinkTo @route='meat' class={{classes}} {{on 'click' this.itemClicked}}>
+            Meat
+          </LinkTo>
         </li>
-      {{/if}}
-      <li class='lg:ml-8 lg:block lg:h-full'>
-        <LinkTo
-          @route='meat'
-          class='block px-6 py-4 lg:flex lg:items-center lg:py-0 lg:h-full hover:text-red-600 text-center lg:text-left'
-          {{on 'click' this.itemClicked}}
-        >
-          Meat
-        </LinkTo>
-      </li>
-      <li class='lg:block lg:h-full'>
-        <LinkTo
-          @route='deli'
-          class='block px-6 py-4 lg:flex lg:items-center lg:py-0 lg:h-full hover:text-red-600 text-center lg:text-left'
-          {{on 'click' this.itemClicked}}
-        >
-          Deli
-        </LinkTo>
-      </li>
-      <li class='lg:block lg:h-full'>
-        <LinkTo
-          @route='grab-and-go'
-          class='block px-6 py-4 lg:flex lg:items-center lg:py-0 lg:h-full hover:text-red-600 text-center lg:text-left'
-          {{on 'click' this.itemClicked}}
-        >
-          Grab &amp; Go
-        </LinkTo>
-      </li>
-      <li class='lg:block lg:h-full'>
-        <a
-          href={{this.menuUrl}}
-          class='block px-6 py-4 lg:flex lg:items-center lg:py-0 lg:h-full hover:text-red-600 text-center lg:text-left'
-        >
-          Cafe Menu
-        </a>
-      </li>
+        <li class='lg:block lg:h-full'>
+          <LinkTo @route='deli' class={{classes}} {{on 'click' this.itemClicked}}>
+            Deli
+          </LinkTo>
+        </li>
+        <li class='lg:block lg:h-full'>
+          <LinkTo @route='grab-and-go' class={{classes}} {{on 'click' this.itemClicked}}>
+            Grab &amp; Go
+          </LinkTo>
+        </li>
+        <li class='lg:block lg:h-full'>
+          <a href={{this.menuUrl}} class={{classes}}>
+            Cafe Menu
+          </a>
+        </li>
+      {{/let}}
     </ul>
   </template>
 }
