@@ -11,7 +11,8 @@ on:
     branches:
       - main
       - master
-  pull_request: {}
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
 
 # Will kill the workflow runs of commits that are not the current head commit of a PR. `head_ref` is
 # only set for PRs source, which is why we fall back to `ref` (so push workflows will run one job
