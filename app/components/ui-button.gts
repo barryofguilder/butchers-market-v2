@@ -40,7 +40,7 @@ export interface UiButtonSignature {
 // The link and button classes have to be split out since links don't support
 // the `enabled` helper.
 const baseClasses =
-  'inline-block whitespace-nowrap transition-form-element focus:outline-none focus:ring';
+  'inline-block whitespace-nowrap transition-colors focus:outline-none focus:ring';
 const baseButtonClasses = 'disabled:opacity-50 disabled:cursor-not-allowed';
 const baseLinkClasses = '';
 const variantBaseClasses: Record<ButtonVariant, string> = {
