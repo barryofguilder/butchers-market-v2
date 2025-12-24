@@ -61,11 +61,6 @@
   text-shadow: 1px 1px 1px var(--color-gray-900);
 }
 
-/* Animated tools used for debugging animations */
-.animated-tools {
-  z-index: 100;
-}
-
 .parallax-background {
   @apply bg-fixed;
 }

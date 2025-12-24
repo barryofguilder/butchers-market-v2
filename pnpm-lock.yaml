@@ -161,12 +161,6 @@ importers:
       decorator-transforms:
         specifier: ^2.3.0
         version: 2.3.0(@babel/core@7.28.5)
-      ember-animated:
-        specifier: ^2.2.0
-        version: 2.2.0(@babel/core@7.28.5)(@ember/test-helpers@5.4.1(@babel/core@7.28.5)(@glint/template@1.7.3))(@glint/template@1.7.3)
-      ember-animated-tools:
-        specifier: ^2.0.0
-        version: 2.0.0(@babel/core@7.28.5)(@ember/test-helpers@5.4.1(@babel/core@7.28.5)(@glint/template@1.7.3))(@glint/template@1.7.3)
       ember-auto-import:
         specifier: ^2.12.0
         version: 2.12.0(@glint/template@1.7.3)(webpack@5.104.1)
@@ -3200,17 +3194,6 @@ packages:
 
   electron-to-chromium@1.5.267:
     resolution: {integrity: sha512-0Drusm6MVRXSOJpGbaSVgcQsuB4hEkMpHXaVstcPmhu5LIedxs1xNK/nIxmQIU/RPC0+1/o0AVZfBTkTNJOdUw==}
-
-  ember-animated-tools@2.0.0:
-    resolution: {integrity: sha512-BEMUHw36pce+aKAaTKRn3/6p83+s/5IrIykKQWBH2vcY65jixvBbud9mjIU6zBmn2BU58no1vaqcGopLmKXkQQ==}
-
-  ember-animated@2.2.0:
-    resolution: {integrity: sha512-5B1cuGiVwkzpPEFSFtH8WyFpHwJtH+lXWZTob6jmel7xYRdrvjpRx8QV/FRnE/IJ/wQvqjk7Q7O2Xtm8LRI5OA==}
-    peerDependencies:
-      '@ember/test-helpers': ^2.6.0 || ^3.0.0 || >= 4.0.0
-    peerDependenciesMeta:
-      '@ember/test-helpers':
-        optional: true
 
   ember-auto-import@2.12.0:
     resolution: {integrity: sha512-J9wVTddnpx1ZPf6CgtMs8byp5t9ZZITUX9v+H+PgSDSgbYbDrVlKr2RGDfJLrnaTpuWwZqh1b54/9jLaERr6QA==}
@@ -10236,31 +10219,6 @@ snapshots:
   ee-first@1.1.1: {}
 
   electron-to-chromium@1.5.267: {}
-
-  ember-animated-tools@2.0.0(@babel/core@7.28.5)(@ember/test-helpers@5.4.1(@babel/core@7.28.5)(@glint/template@1.7.3))(@glint/template@1.7.3):
-    dependencies:
-      '@embroider/addon-shim': 1.10.2
-      decorator-transforms: 1.2.1(@babel/core@7.28.5)
-      ember-animated: 2.2.0(@babel/core@7.28.5)(@ember/test-helpers@5.4.1(@babel/core@7.28.5)(@glint/template@1.7.3))(@glint/template@1.7.3)
-    transitivePeerDependencies:
-      - '@babel/core'
-      - '@ember/test-helpers'
-      - '@glint/template'
-      - supports-color
-
-  ember-animated@2.2.0(@babel/core@7.28.5)(@ember/test-helpers@5.4.1(@babel/core@7.28.5)(@glint/template@1.7.3))(@glint/template@1.7.3):
-    dependencies:
-      '@embroider/addon-shim': 1.10.2
-      '@embroider/macros': 1.19.5(@glint/template@1.7.3)
-      assert-never: 1.4.0
-      decorator-transforms: 2.3.0(@babel/core@7.28.5)
-      ember-element-helper: 0.8.8
-    optionalDependencies:
-      '@ember/test-helpers': 5.4.1(@babel/core@7.28.5)(@glint/template@1.7.3)
-    transitivePeerDependencies:
-      - '@babel/core'
-      - '@glint/template'
-      - supports-color
 
   ember-auto-import@2.12.0(@glint/template@1.7.3)(webpack@5.104.1):
     dependencies:

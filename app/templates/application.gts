@@ -14,7 +14,4 @@ import MainFooter from '../components/main-footer';
   </div>
 
   <MainFooter class='mt-24' />
-
-  {{! This adds the tools for debugging animations when developping locally. }}
-  {{! <AnimatedTools /> }}
 </template>
