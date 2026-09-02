@@ -67,7 +67,7 @@ function routes() {
 
   this.resource('hours');
 
-  this.resource('meat-bundles', { only: ['show', 'update'] });
+  this.resource('meat-bundles', { only: ['show', 'create', 'update', 'delete'] });
   this.get('/meat-bundles', ({ meatBundles }, request) => {
     const featured = request.queryParams['filter[featured]'];
     const isHidden = request.queryParams['filter[isHidden]'];

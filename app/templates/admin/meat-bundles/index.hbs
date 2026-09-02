@@ -2,12 +2,11 @@
 
 <Admin::Title @title="Meat Bundles" />
 
-{{! Hiding the new button until it's needed }}
-{{! <div class="mt-8">
+<div class="mt-8">
   <UiButton @route="admin.meat-bundles.new" @icon="plus" @size="medium" @variant="plain">
     New
   </UiButton>
-</div> }}
+</div>
 
 <Admin::UiTable class="mt-8" as |Table|>
   <Table.Head as |Thead|>
@@ -59,14 +58,13 @@
               @variant="secondary"
             />
 
-            {{! Hiding the delete button until it's needed }}
-            {{!-- <UiButton
+            <UiButton
               class="ml-1"
               @iconOnly={{true}}
               @icon="trash-alt"
               @variant="danger"
-              @onClick={{set this "bundleToDelete" bundle}}
-            /> --}}
+              @onClick={{fn this.openDeleteModal bundle}}
+            />
           </div>
         </Row.Td>
       </Tbody.Tr>
@@ -77,5 +75,12 @@
     {{/each}}
   </Table.Body>
 </Admin::UiTable>
+
+<Admin::MeatBundles::DeleteMeatBundleForm
+  @isOpen={{this.deleteModalOpen}}
+  @bundle={{this.bundleToDelete}}
+  @onSave={{this.closeDeleteModal}}
+  @onCancel={{this.closeDeleteModal}}
+/>
 
 {{outlet}}
