@@ -46,6 +46,13 @@
   <body class="h-full font-sans text-gray-900">
     {{content-for "body"}}
 
+    <!--
+      The app renders into #app-root rather than <body> so that the prerender step
+      (scripts/prerender.mjs) can park a static snapshot in a sibling #prerender node
+      that Ember never touches. See app/instance-initializers/prerender.js.
+    -->
+    <div id="app-root" class="h-full"></div>
+
     <script src="/@embroider/virtual/vendor.js"></script>
     <script type="module">
       import Application from './app/app';

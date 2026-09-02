@@ -1,0 +1,37 @@
+name: Rebuild Prerendered Site
+
+# The public pages are prerendered at build time, so the static snapshots only refresh when
+# Render rebuilds. Visitors always see live data (the app boots and refetches behind the
+# snapshot), but crawlers see whatever was true at build time — so specials that expire, or
+# items that go out of stock, would otherwise linger in search results.
+#
+# Setup: create a Deploy Hook on the `butchers-market-ui` static site (Settings → Deploy Hook)
+# and store the URL as the `RENDER_DEPLOY_HOOK_URL` repository secret.
+#
+# NOTE: The deploy hook is deliberately NOT wired to a button in /admin. Anything reachable from
+# the browser bundle is public, and a leaked hook URL lets anyone trigger unlimited builds. If
+# Drew wants a "Publish changes" button, the hook belongs behind an authenticated endpoint on
+# butchers-market-api, which can call it server-side.
+
+on:
+  schedule:
+    # 06:00 America/New_York, give or take DST (Actions cron is UTC only).
+    - cron: '0 10 * * *'
+  workflow_dispatch:
+
+jobs:
+  rebuild:
+    name: 'Trigger Render deploy'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Trigger deploy
+        env:
+          DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$DEPLOY_HOOK_URL" ]; then
+            echo "::error::RENDER_DEPLOY_HOOK_URL secret is not set."
+            exit 1
+          fi
+          curl --fail --silent --show-error --request POST "$DEPLOY_HOOK_URL"

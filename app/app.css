@@ -105,3 +105,15 @@
 .styled-textbox.has-errors {
   @apply border-red-700;
 }
+
+/*
+ * Prerendering
+ *
+ * A prerendered page loads with static markup in #prerender and an empty #app-root. Hiding
+ * #app-root until the live app has rendered avoids showing both copies at once. The class is
+ * removed by app/instance-initializers/prerender.js.
+ */
+
+.has-prerender #app-root {
+  display: none;
+}

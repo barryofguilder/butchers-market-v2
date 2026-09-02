@@ -1,0 +1,71 @@
+# Blueprint for the existing `butchers-market-ui` static site.
+#
+# IMPORTANT: This adopts a service that was originally configured by hand in the dashboard.
+# Render overwrites dashboard settings with whatever this file says, and falls back to
+# defaults for anything omitted — so every setting below is pinned to match the dashboard
+# as of the first sync, even where it equals Render's default.
+
+services:
+  - type: web
+    name: butchers-market-ui
+    runtime: static
+
+    repo: https://github.com/barryofguilder/butchers-market-v2
+    branch: master
+
+    # `pnpm build` runs `vite build` and then the prerender step, which installs Chrome for
+    # Puppeteer if it is missing before rendering.
+    buildCommand: pnpm install --frozen-lockfile && pnpm build
+    staticPublishPath: dist
+
+    # Deploys are manual; the daily rebuild in .github/workflows/rebuild.yaml uses the deploy
+    # hook, which fires regardless of this setting.
+    autoDeploy: false
+
+    domains:
+      - www.thebutchersmarket.com
+
+    envVars:
+      # Keeps Puppeteer's Chrome download inside the project directory so it survives
+      # Render's build cache between deploys. The prerender step installs Chrome explicitly
+      # rather than relying on Puppeteer's postinstall, which pnpm skips whenever its
+      # side-effects cache is warm.
+      - key: PUPPETEER_CACHE_DIR
+        value: /opt/render/project/src/.cache/puppeteer
+      # Canonical host, used to build sitemap.xml. The apex domain 301s to www.
+      - key: SITE_URL
+        value: https://www.thebutchersmarket.com
+      # The VITE_* vars stay in the dashboard, since they differ per environment. Render
+      # preserves existing env var values that this file does not mention.
+
+    routes:
+      # Carried over verbatim from the dashboard. Render does not apply routes to a path
+      # that resolves to a real file, so this never actually fires — but it is preserved
+      # rather than dropped, since it is part of the current working production config.
+      - type: rewrite
+        source: /assets/*
+        destination: /assets/
+
+      # /cafe transitions to the homepage in the app; do it at the edge so crawlers see a
+      # real 301 instead of a client-side redirect.
+      - type: redirect
+        source: /cafe
+        destination: /
+
+      # Serve the prerendered snapshots. Render does not document automatic /meat ->
+      # /meat/index.html directory resolution, so each one is mapped explicitly.
+      - type: rewrite
+        source: /deli
+        destination: /deli/index.html
+      - type: rewrite
+        source: /grab-and-go
+        destination: /grab-and-go/index.html
+      - type: rewrite
+        source: /meat
+        destination: /meat/index.html
+
+      # Everything else — /admin/*, /sign-in, unknown paths — falls back to the SPA shell.
+      # This matches the existing dashboard rule.
+      - type: rewrite
+        source: /*
+        destination: /index.html

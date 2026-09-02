@@ -30,3 +30,6 @@
 
 # Uploads directory
 /public/uploads
+
+# Puppeteer (prerendering)
+/.cache/
