@@ -1,3 +1,6 @@
 # http://www.robotstxt.org
 User-agent: *
-Disallow:
+Disallow: /admin
+Disallow: /sign-in
+
+Sitemap: https://www.thebutchersmarket.com/sitemap.xml

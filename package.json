@@ -11,7 +11,7 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "vite build",
+    "build": "vite build && pnpm prerender",
     "deploy": "ember deploy production --activate",
     "format": "prettier . --cache --write",
     "lint": "concurrently \"pnpm:lint:*(!fix)\" --names \"lint:\" --prefixColors auto",
@@ -24,6 +24,7 @@
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
     "lint:types": "glint",
+    "prerender": "puppeteer browsers install chrome && node scripts/prerender.mjs",
     "start": "vite",
     "test": "vite build --mode development && ember test --path dist"
   },
@@ -119,6 +120,7 @@
     "miragejs": "^0.1.48",
     "prettier": "^3.7.3",
     "prettier-plugin-ember-template-tag": "^2.1.1",
+    "puppeteer": "^25.9.0",
     "qunit": "^2.24.3",
     "qunit-dom": "^3.5.0",
     "stylelint": "^16.26.1",
@@ -139,5 +141,10 @@
   },
   "ember": {
     "edition": "octane"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "puppeteer"
+    ]
   }
 }

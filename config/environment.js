@@ -15,6 +15,11 @@ module.exports = function (environment) {
     },
 
     APP: {
+      // The app renders into #app-root instead of <body> so that prerendered markup can
+      // live in a sibling node that Ember will not clobber. The `test` block below
+      // overrides this with #ember-testing.
+      rootElement: '#app-root',
+
       // Here you can pass flags/options to your application instance
       // when it is created
     },

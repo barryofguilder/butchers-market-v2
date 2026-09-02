@@ -125,6 +125,17 @@ export default ts.config(
     },
   },
   /**
+   * Build scripts that also evaluate code inside a headless browser.
+   */
+  {
+    files: ['scripts/**/*.mjs'],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+      },
+    },
+  },
+  /**
    * ESM node files
    */
   {
