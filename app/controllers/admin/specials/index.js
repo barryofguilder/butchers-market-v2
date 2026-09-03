@@ -8,28 +8,27 @@ export default class AdminSpecialsIndexController extends Controller {
   @service store;
 
   @tracked showErrorMessage;
-  @tracked specials = this.model;
   @tracked specialToDelete = null;
   @tracked deleteModalOpen = false;
 
   @action
   reorderItems(itemModels) {
-    this.specials = itemModels;
-    this.saveSpecialOrdering.perform();
+    this.saveSpecialOrdering.perform(itemModels);
   }
 
-  saveSpecialOrdering = dropTask(async () => {
+  saveSpecialOrdering = dropTask(async (specials) => {
     this.showErrorMessage = false;
 
     try {
-      for (let i = 0; i < this.specials.length; i++) {
-        this.specials[i].displayOrder = i + 1;
-      }
+      // The table sorts on `displayOrder`, so setting it here is what moves the row.
+      specials.forEach((special, index) => {
+        special.displayOrder = index + 1;
+      });
 
       const adapter = this.store.adapterFor('special');
-      const response = await adapter.reorderSpecials(this.specials);
+      const response = await adapter.reorderSpecials(specials);
 
-      if (response.status !== 201) {
+      if (!response.ok) {
         this.showErrorMessage = true;
       }
     } catch (ex) {

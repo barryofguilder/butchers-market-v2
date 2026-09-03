@@ -134,8 +134,19 @@ function routes() {
     return response;
   });
 
-  this.post('/specials/reorder', () => {
-    return new Response(201);
+  this.post('/specials/reorder', ({ specials }, request) => {
+    const items = JSON.parse(request.requestBody);
+
+    items.forEach((item, index) => {
+      const special = specials.find(item.id);
+
+      if (special) {
+        special.update({ displayOrder: index + 1 });
+      }
+    });
+
+    // Responds with every special so the store can be updated with the new ordering.
+    return new Response(201, {}, specials.all());
   });
 
   this.post('/token', (server, request) => {
