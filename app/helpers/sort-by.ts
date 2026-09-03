@@ -1,18 +1,20 @@
 /**
- * This file is copied directly from ember-composable-helpers.
+ * This file is adapted from ember-composable-helpers.
  *
  * See: https://github.com/DockYard/ember-composable-helpers
  */
 import { get } from '@ember/object';
 import { isEmpty } from '@ember/utils';
-import { helper } from '@ember/component/helper';
 import asArray from '../utils/as-array';
+
+type Comparator<T> = (a: T, b: T) => number;
+type SortKey<T> = string | Comparator<T>;
 
 const collator = new Intl.Collator(undefined, {
   sensitivity: 'base',
 });
 
-function normalizeToBoolean(val) {
+function normalizeToBoolean(val: unknown) {
   if (typeof val === 'boolean') {
     return val;
   }
@@ -28,14 +30,18 @@ function normalizeToBoolean(val) {
   return val;
 }
 
-function safeValueForKey(ctx, key) {
+function safeValueForKey(ctx: unknown, key: string) {
   if (ctx === null || ctx === undefined) {
     return ctx;
   }
   return get(ctx, key);
 }
 
-function sortDesc(key, a, b) {
+function isLowerCaseable(value: unknown): value is string {
+  return typeof (value as string | undefined)?.toLowerCase === 'function';
+}
+
+function sortDesc(key: string, a: unknown, b: unknown) {
   if (isEmpty(key)) {
     return 0;
   }
@@ -60,7 +66,7 @@ function sortDesc(key, a, b) {
     return 1;
   }
 
-  if (aValue.toLowerCase && bValue.toLowerCase) {
+  if (isLowerCaseable(aValue) && isLowerCaseable(bValue)) {
     return collator.compare(bValue, aValue);
   }
 
@@ -73,7 +79,7 @@ function sortDesc(key, a, b) {
   return 0;
 }
 
-function sortAsc(key, a, b) {
+function sortAsc(key: string, a: unknown, b: unknown) {
   if (isEmpty(key)) {
     return 0;
   }
@@ -98,7 +104,7 @@ function sortAsc(key, a, b) {
     return 1;
   }
 
-  if (aValue.toLowerCase && bValue.toLowerCase) {
+  if (isLowerCaseable(aValue) && isLowerCaseable(bValue)) {
     return collator.compare(aValue, bValue);
   }
 
@@ -111,21 +117,18 @@ function sortAsc(key, a, b) {
   return 0;
 }
 
-class SortBy {
-  constructor(...args) {
-    let [array] = args;
-    if (typeof array.toArray === 'function') {
-      array = array.toArray();
-    }
+class SortBy<T> {
+  array: T[];
 
+  constructor(array: T[]) {
     this.array = [...array];
   }
 
-  comparator(key) {
+  comparator(key: SortKey<T>): Comparator<T> {
     return typeof key === 'function' ? key : this.defaultSort(key);
   }
 
-  defaultSort(sortKey) {
+  defaultSort(sortKey: string): Comparator<T> {
     let func = sortAsc;
     if (sortKey.match(':desc')) {
       func = sortDesc;
@@ -139,18 +142,15 @@ class SortBy {
  * best O(n); worst O(n^2)
  * If we feel like swapping with something more performant like QuickSort or MergeSort
  * then it should be easy
- *
- * @class BubbleSort
- * @extends SortBy
  */
-class BubbleSort extends SortBy {
-  perform(keys = []) {
+class BubbleSort<T> extends SortBy<T> {
+  perform(keys: SortKey<T>[] = []) {
     let swapped = false;
 
-    let compFuncs = keys.map((key) => this.comparator(key));
-    let compFunc = (a, b) => {
-      for (let i = 0; i < compFuncs.length; i += 1) {
-        let result = compFuncs[i](a, b);
+    const compFuncs = keys.map((key) => this.comparator(key));
+    const compFunc: Comparator<T> = (a, b) => {
+      for (const comp of compFuncs) {
+        const result = comp(a, b);
         if (result === 0) {
           continue;
         }
@@ -158,11 +158,12 @@ class BubbleSort extends SortBy {
       }
       return 0;
     };
+
     for (let i = 1; i < this.array.length; i += 1) {
       for (let j = 0; j < this.array.length - i; j += 1) {
-        let shouldSwap = normalizeToBoolean(compFunc(this.array[j + 1], this.array[j]));
+        const shouldSwap = normalizeToBoolean(compFunc(this.array[j + 1]!, this.array[j]!));
         if (shouldSwap) {
-          [this.array[j], this.array[j + 1]] = [this.array[j + 1], this.array[j]];
+          [this.array[j], this.array[j + 1]] = [this.array[j + 1]!, this.array[j]!];
 
           swapped = true;
         }
@@ -170,29 +171,40 @@ class BubbleSort extends SortBy {
 
       // no need to continue sort if not swapped in any inner iteration
       if (!swapped) {
-        return this.array;
+        return;
       }
     }
   }
 }
 
-export function sortBy(params) {
+/**
+ * Sorts an array by one or more keys, e.g. `{{sortBy 'title' items}}` or
+ * `{{sortBy 'lastName' 'firstName' people}}`. Suffix a key with `:desc` to reverse it.
+ *
+ * This is a plain function helper rather than a `helper()`-wrapped one so that its generic
+ * parameter survives into templates. `helper()` erases it, which leaves callers iterating
+ * over `unknown`.
+ */
+export default function sortBy<T>(keys: SortKey<T>[], array: T[] | undefined | null): T[];
+export default function sortBy<T>(...params: [...SortKey<T>[], T[] | undefined | null]): T[];
+export default function sortBy<T>(
+  ...params: (SortKey<T> | SortKey<T>[] | T[] | undefined | null)[]
+): T[] {
   // slice params to avoid mutating the provided params
-  let sortParams = params.slice();
-  let array = asArray(sortParams.pop());
-  let sortKeys = sortParams;
+  const sortParams = params.slice();
+  const array = asArray(sortParams.pop()) as T[];
+  let sortKeys = sortParams as SortKey<T>[];
 
-  if (!array || !sortKeys || sortKeys.length === 0) {
+  if (!array || sortKeys.length === 0) {
     return [];
   }
 
-  if (sortKeys.length === 1 && Array.isArray(sortKeys[0])) {
-    sortKeys = sortKeys[0];
+  const [firstKey] = sortKeys;
+  if (sortKeys.length === 1 && Array.isArray(firstKey)) {
+    sortKeys = firstKey as SortKey<T>[];
   }
 
   const sortKlass = new BubbleSort(array);
   sortKlass.perform(sortKeys);
   return sortKlass.array;
 }
-
-export default helper(sortBy);
