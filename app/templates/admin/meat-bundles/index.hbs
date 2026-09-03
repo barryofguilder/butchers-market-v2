@@ -8,9 +8,16 @@
   </UiButton>
 </div>
 
+{{#if this.showErrorMessage}}
+  <UiAlert @variant="danger" class="mt-4">
+    Something went wrong trying to save the ordering of the meat bundles. Please refresh the page
+    and try again.
+  </UiAlert>
+{{/if}}
+
 <Admin::UiTable class="mt-8" as |Table|>
   <Table.Head as |Thead|>
-    <Thead.Th>Order</Thead.Th>
+    <Thead.Th />
     <Thead.Th>Title</Thead.Th>
     <Thead.Th class="hidden md:table-cell">Price</Thead.Th>
     <Thead.Th class="hidden md:table-cell">Items</Thead.Th>
@@ -19,10 +26,12 @@
     <Thead.Th class="hidden md:table-cell">Is Hidden?</Thead.Th>
     <Thead.Th />
   </Table.Head>
-  <Table.Body as |Tbody|>
+  <Table.Body {{sortable-group onChange=this.reorderItems}} as |Tbody|>
     {{#each (sort-by "displayOrder" this.model) as |bundle|}}
-      <Tbody.Tr as |Row|>
-        <Row.Td>{{bundle.displayOrder}}</Row.Td>
+      <Tbody.Tr {{sortable-item model=bundle}} as |Row|>
+        <Row.Td>
+          <UiIcon @icon="arrows-alt-v" class="block w-4" {{sortable-handle}} />
+        </Row.Td>
         <Row.Td>{{bundle.title}}</Row.Td>
         <Row.Td class="hidden md:table-cell">{{bundle.price}}</Row.Td>
         <Row.Td class="hidden md:table-cell">

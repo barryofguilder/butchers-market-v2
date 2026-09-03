@@ -5,16 +5,9 @@ import { service } from '@ember/service';
 export default class AdminMeatBundlesNewRoute extends Route {
   @service store;
 
-  async model() {
-    // Loaded so the new bundle can be given a `displayOrder` that puts it at the end of the list.
-    let bundles = await this.store.findAll('meat-bundle');
-    let lastDisplayOrder = [...bundles].reduce(
-      (max, bundle) => Math.max(max, bundle.displayOrder ?? 0),
-      0
-    );
-
+  model() {
+    // `displayOrder` is assigned by the API on create.
     return this.store.createRecord('meat-bundle', {
-      displayOrder: lastDisplayOrder + 1,
       featured: false,
       isHidden: false,
       orderEnabled: false,

@@ -85,6 +85,21 @@ function routes() {
     return meatBundles.where(whereStatement);
   });
 
+  this.post('/meat-bundles/reorder', ({ meatBundles }, request) => {
+    const items = JSON.parse(request.requestBody);
+
+    items.forEach((item, index) => {
+      const meatBundle = meatBundles.find(item.id);
+
+      if (meatBundle) {
+        meatBundle.update({ displayOrder: index + 1 });
+      }
+    });
+
+    // Responds with every bundle so the store can be updated with the new ordering.
+    return new Response(201, {}, meatBundles.all());
+  });
+
   this.resource('menus', { except: ['create', 'delete'] });
 
   this.resource('package-bundles', { except: ['create', 'delete'] });
