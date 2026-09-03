@@ -4,29 +4,29 @@ import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { dropTask } from 'ember-concurrency';
 
-export default class AdminSpecialsIndexController extends Controller {
+export default class AdminMeatBundlesIndexController extends Controller {
   @service store;
 
   @tracked showErrorMessage;
-  @tracked specialToDelete = null;
+  @tracked bundleToDelete = null;
   @tracked deleteModalOpen = false;
 
   @action
   reorderItems(itemModels) {
-    this.saveSpecialOrdering.perform(itemModels);
+    this.saveBundleOrdering.perform(itemModels);
   }
 
-  saveSpecialOrdering = dropTask(async (specials) => {
+  saveBundleOrdering = dropTask(async (bundles) => {
     this.showErrorMessage = false;
 
     try {
       // The table sorts on `displayOrder`, so setting it here is what moves the row.
-      specials.forEach((special, index) => {
-        special.displayOrder = index + 1;
+      bundles.forEach((bundle, index) => {
+        bundle.displayOrder = index + 1;
       });
 
-      const adapter = this.store.adapterFor('special');
-      const response = await adapter.reorderSpecials(specials);
+      const adapter = this.store.adapterFor('meat-bundle');
+      const response = await adapter.reorderMeatBundles(bundles);
 
       if (!response.ok) {
         this.showErrorMessage = true;
@@ -38,8 +38,8 @@ export default class AdminSpecialsIndexController extends Controller {
   });
 
   @action
-  openDeleteModal(special) {
-    this.specialToDelete = special;
+  openDeleteModal(bundle) {
+    this.bundleToDelete = bundle;
     this.deleteModalOpen = true;
   }
 

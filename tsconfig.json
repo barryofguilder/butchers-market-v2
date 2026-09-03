@@ -22,6 +22,7 @@
       "@ember-data/request-utils/unstable-preview-types",
       "@ember-data/serializer/unstable-preview-types",
       "@ember-data/store/unstable-preview-types",
+      "ember-data/unstable-preview-types",
       "@warp-drive/core-types/unstable-preview-types",
       "@warp-drive/ember",
       "@embroider/core/virtual",

@@ -67,7 +67,7 @@ function routes() {
 
   this.resource('hours');
 
-  this.resource('meat-bundles', { only: ['show', 'update'] });
+  this.resource('meat-bundles', { only: ['show', 'create', 'update', 'delete'] });
   this.get('/meat-bundles', ({ meatBundles }, request) => {
     const featured = request.queryParams['filter[featured]'];
     const isHidden = request.queryParams['filter[isHidden]'];
@@ -83,6 +83,21 @@ function routes() {
 
     // TODO: Sort by `displayOrder`
     return meatBundles.where(whereStatement);
+  });
+
+  this.post('/meat-bundles/reorder', ({ meatBundles }, request) => {
+    const items = JSON.parse(request.requestBody);
+
+    items.forEach((item, index) => {
+      const meatBundle = meatBundles.find(item.id);
+
+      if (meatBundle) {
+        meatBundle.update({ displayOrder: index + 1 });
+      }
+    });
+
+    // Responds with every bundle so the store can be updated with the new ordering.
+    return new Response(201, {}, meatBundles.all());
   });
 
   this.resource('menus', { except: ['create', 'delete'] });
@@ -119,8 +134,19 @@ function routes() {
     return response;
   });
 
-  this.post('/specials/reorder', () => {
-    return new Response(201);
+  this.post('/specials/reorder', ({ specials }, request) => {
+    const items = JSON.parse(request.requestBody);
+
+    items.forEach((item, index) => {
+      const special = specials.find(item.id);
+
+      if (special) {
+        special.update({ displayOrder: index + 1 });
+      }
+    });
+
+    // Responds with every special so the store can be updated with the new ordering.
+    return new Response(201, {}, specials.all());
   });
 
   this.post('/token', (server, request) => {
