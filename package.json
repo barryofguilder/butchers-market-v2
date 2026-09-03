@@ -25,7 +25,7 @@
     "lint:js:fix": "eslint . --fix",
     "lint:types": "glint",
     "start": "vite",
-    "test": "vite build --mode development && ember test --path dist"
+    "test": "VITE_USE_MIRAGE=true vite build --mode development && ember test --path dist"
   },
   "exports": {
     "./tests/*": "./tests/*",

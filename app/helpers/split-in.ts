@@ -1,12 +1,20 @@
-import { helper } from '@ember/component/helper';
-
-// Splits an array up into the specified number of chunks.
-export function splitIn<T>([chunksOf, array]: [number, T[]]) {
-  if (array === undefined || array.length === 0 || chunksOf === 1) {
-    return array;
+/**
+ * Splits an array up into the specified number of chunks, e.g. `{{splitIn 2 items}}`.
+ *
+ * This is a plain function helper rather than a `helper()`-wrapped one so that its generic
+ * parameter survives into templates. `helper()` erases it, which leaves callers iterating
+ * over `unknown`.
+ */
+export default function splitIn<T>(chunksOf: number, array: T[]): T[][] {
+  if (array === undefined || array.length === 0) {
+    return [];
   }
 
-  const chunkedArray = [];
+  if (chunksOf === 1) {
+    return [array];
+  }
+
+  const chunkedArray: T[][] = [];
   const chunks = Math.ceil(array.length / chunksOf);
 
   for (let i = 0; i < chunksOf; i++) {
@@ -15,5 +23,3 @@ export function splitIn<T>([chunksOf, array]: [number, T[]]) {
 
   return chunkedArray;
 }
-
-export default helper(splitIn);

@@ -24,7 +24,7 @@ export default Factory.extend({
   },
 
   label() {
-    const wordCount = faker.datatype.number({ min: 1, max: 6 });
+    const wordCount = faker.number.int({ min: 1, max: 6 });
     return faker.lorem.words(wordCount);
   },
 
