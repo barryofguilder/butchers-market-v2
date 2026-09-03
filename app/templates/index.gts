@@ -42,7 +42,7 @@ const IndexTemplate: RouteTemplate<IndexModel, IndexController> = <template>
           </Promo.subtitle>
         </div>
 
-        <FacebookButton class='hidden sm:inline-block' />
+        <FacebookButton class='max-sm:hidden' />
 
         <StoreHours @hours={{@model.hours}} @primaryType='Store' class='mt-8' />
         <StoreLocation class='mt-8' />
