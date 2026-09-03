@@ -16,7 +16,13 @@ export default class MeatBundleFormComponent extends Component {
   @tracked reordering = false;
 
   get hasErrors() {
-    return this.errorMessage || this.changeset.errors;
+    return this.errorMessage || this.changeset.errors.length > 0;
+  }
+
+  // The form always keeps one item field on screen, so blank fields have to be dropped before
+  // saving. Otherwise an untouched bundle sends `['']`, which the API rejects.
+  get filledItems() {
+    return this.items.map((item) => item.trim()).filter(Boolean);
   }
 
   get saveDisabled() {
@@ -43,7 +49,7 @@ export default class MeatBundleFormComponent extends Component {
   }
 
   saveBundle = dropTask(async () => {
-    this.changeset.set('items', this.items);
+    this.syncItems();
 
     await this.changeset.validate();
 
@@ -82,6 +88,7 @@ export default class MeatBundleFormComponent extends Component {
   @action
   itemChanged(index, value) {
     this.items[index] = value;
+    this.syncItems();
   }
 
   @action
@@ -94,6 +101,15 @@ export default class MeatBundleFormComponent extends Component {
     }
 
     this.items = items;
+    this.syncItems();
+  }
+
+  // The item fields write to `items` instead of the changeset, so the changeset needs the new
+  // list pushed onto it for its `items` validation to re-run. Without this, a save blocked by
+  // the items validation would leave the Save button disabled even after items were added.
+  @action
+  syncItems() {
+    this.changeset.set('items', this.filledItems);
   }
 
   @action
