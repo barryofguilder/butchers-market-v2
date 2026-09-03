@@ -60,8 +60,13 @@
     </Group.help>
   </Form.group>
 
-  <Form.group data-test-id="items">
-    <Form.label>Items</Form.label>
+  <Form.group data-test-id="items" @model={{this.changeset}} @property="items" as |Group|>
+    <Form.label>
+      Items
+      <Admin::Required />
+    </Form.label>
+
+    <Group.validationErrors class="mb-1" />
 
     {{#if this.reordering}}
       <div {{sortable-group onChange=this.reorderItems}}>
