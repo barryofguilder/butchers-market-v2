@@ -8,12 +8,12 @@ export interface UiTextboxSignature {
   Element: HTMLInputElement;
   Args: {
     id?: string;
-    value: string;
+    value?: string | null;
     readonly?: boolean;
     hasErrors?: boolean;
     // TODO: Is this correct?
     errors?: string[];
-    onChange: (value: string) => void;
+    onChange?: (value: string) => void;
   };
 }
 
@@ -30,12 +30,6 @@ export default class UiTextboxComponent extends Component<UiTextboxSignature> {
     return (this.args.errors ?? []).length > 0;
   }
 
-  get onChange() {
-    return valueOrDefault(this.args.onChange, () => {
-      //
-    });
-  }
-
   get readonly() {
     return valueOrDefault(this.args.readonly, false);
   }
@@ -43,7 +37,7 @@ export default class UiTextboxComponent extends Component<UiTextboxSignature> {
   @action
   handleInput(event: Event) {
     const value = (event.target as HTMLInputElement).value;
-    this.onChange(value);
+    this.args.onChange?.(value);
   }
 
   <template>
