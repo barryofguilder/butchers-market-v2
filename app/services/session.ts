@@ -5,7 +5,7 @@ import type Transition from '@ember/routing/transition';
 import { addDays } from 'date-fns';
 import type SignInController from '../controllers/sign-in';
 
-type SessionPayload = {
+export type SessionPayload = {
   username: string;
   iat: number;
   exp: number;
