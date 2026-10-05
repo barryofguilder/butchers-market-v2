@@ -1,6 +1,6 @@
 import Service, { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
-import type Store from '@ember-data/store';
+import type Store from './store';
 import type FeatureFlag from '../models/feature-flag';
 
 export default class FeaturesService extends Service {

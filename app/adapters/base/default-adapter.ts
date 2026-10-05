@@ -1,4 +1,4 @@
-import JSONAPIAdapter from '@ember-data/adapter/json-api';
+import { JSONAPIAdapter } from '@warp-drive/legacy/adapter/json-api';
 import { API_NAMESPACE, API_URL } from '../../utils/config';
 
 export default class DefaultAdapter extends JSONAPIAdapter {

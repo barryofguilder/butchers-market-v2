@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
 import type Owner from '@ember/owner';
-import type Store from '@ember-data/store';
+import type Store from '../services/store';
 import { isAfter, isBefore } from 'date-fns';
 import type Hour from '../models/hour';
 import { type HourType } from '../models/hour';

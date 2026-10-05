@@ -1,7 +1,7 @@
 import Route from '@ember/routing/route';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
-import type Store from '@ember-data/store';
+import type Store from '../../../services/store';
 
 export default class AdminPackageBundlesIndexRoute extends Route {
   @service declare store: Store;

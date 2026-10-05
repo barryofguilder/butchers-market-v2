@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
-import type Store from '@ember-data/store';
+import type Store from '../../../services/store';
 import { dropTask } from 'ember-concurrency';
 import type MeatBundleAdapter from '../../../adapters/meat-bundle';
 import { fn } from '@ember/helper';
