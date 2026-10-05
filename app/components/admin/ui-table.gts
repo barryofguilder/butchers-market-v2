@@ -310,9 +310,3 @@ const UiTableComponent: TOC<UiTableSignature> = <template>
 </template>;
 
 export default UiTableComponent;
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    UiTable: typeof UiTableComponent;
-  }
-}

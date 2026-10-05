@@ -19,9 +19,3 @@ const SpecialsList: TOC<{
 </template>;
 
 export default SpecialsList;
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    SpecialsList: typeof SpecialsList;
-  }
-}

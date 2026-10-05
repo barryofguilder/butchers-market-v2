@@ -46,9 +46,3 @@ export default class SocialListComponent extends Component<SocialListSignature> 
     </div>
   </template>
 }
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    'Admin::GrabAndGo::SocialList': typeof SocialListComponent;
-  }
-}

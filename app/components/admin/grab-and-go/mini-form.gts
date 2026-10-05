@@ -57,9 +57,3 @@ export default class MiniFormComponent extends Component<MiniFormSignature> {
     </AdminForm>
   </template>
 }
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    'Admin::GrabAndGo::MiniForm': typeof MiniFormComponent;
-  }
-}

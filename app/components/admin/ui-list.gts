@@ -68,9 +68,3 @@ const UiListComponent: TOC<UiListSignature> = <template>
 </template>;
 
 export default UiListComponent;
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    'Admin::UiList': typeof UiListComponent;
-  }
-}

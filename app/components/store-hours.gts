@@ -75,9 +75,3 @@ export default class StoreHoursComponent extends Component<StoreHoursSignature> 
     </div>
   </template>
 }
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    StoreHours: typeof StoreHoursComponent;
-  }
-}

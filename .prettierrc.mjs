@@ -22,12 +22,6 @@ export default {
       },
     },
     {
-      files: ['*.hbs'],
-      options: {
-        singleQuote: false,
-      },
-    },
-    {
       files: ['*.gjs', '*.gts'],
       options: {
         // TODO: Update this to `false` in another PR since this will generate

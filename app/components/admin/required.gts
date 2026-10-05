@@ -7,9 +7,3 @@ const Required: TOC<{
 </template>;
 
 export default Required;
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    'Admin::Required': typeof Required;
-  }
-}

@@ -19,9 +19,3 @@ const Title: TOC<{
 </template>;
 
 export default Title;
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    'Admin::Title': typeof Title;
-  }
-}

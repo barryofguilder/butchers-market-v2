@@ -30,9 +30,3 @@ const StoreLocation: TOC<{
 </template>;
 
 export default StoreLocation;
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    StoreLocation: typeof StoreLocation;
-  }
-}

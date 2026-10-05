@@ -16,9 +16,3 @@ const MobileOrderBannerComponent: TOC<{
 </template>;
 
 export default MobileOrderBannerComponent;
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    MobileOrderBanner: typeof MobileOrderBannerComponent;
-  }
-}

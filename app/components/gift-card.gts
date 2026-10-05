@@ -36,9 +36,3 @@ const GiftCard: TOC<{
 </template>;
 
 export default GiftCard;
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    GiftCard: typeof GiftCard;
-  }
-}

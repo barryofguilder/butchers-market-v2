@@ -29,9 +29,3 @@ const BackLink: TOC<{
 </template>;
 
 export default BackLink;
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    'Admin::BackLink': typeof BackLink;
-  }
-}

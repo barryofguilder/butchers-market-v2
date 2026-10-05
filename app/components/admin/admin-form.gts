@@ -61,9 +61,3 @@ export default class AdminFormComponent extends Component<AdminFormSignature> {
     </form>
   </template>
 }
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    'Admin::AdminForm': typeof AdminFormComponent;
-  }
-}

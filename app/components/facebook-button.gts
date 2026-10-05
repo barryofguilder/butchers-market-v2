@@ -15,9 +15,3 @@ const FacebookButton: TOC<{
 </template>;
 
 export default FacebookButton;
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    FacebookButton: typeof FacebookButton;
-  }
-}

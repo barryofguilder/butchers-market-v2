@@ -45,9 +45,3 @@ const GrabAndGoListComponent: TOC<GrabAndGoListSignature> = <template>
 </template>;
 
 export default GrabAndGoListComponent;
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    GrabAndGoList: typeof GrabAndGoListComponent;
-  }
-}

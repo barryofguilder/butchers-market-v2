@@ -33,9 +33,3 @@ export default class UiAlertComponent extends Component<UiAlertSignature> {
     </div>
   </template>
 }
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    UiAlert: typeof UiAlertComponent;
-  }
-}

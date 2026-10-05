@@ -42,9 +42,3 @@ export default class UiCopyButton extends Component<UiCopyButtonSignature> {
     </button>
   </template>
 }
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    UiCopyButton: typeof UiCopyButton;
-  }
-}

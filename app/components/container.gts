@@ -15,9 +15,3 @@ const Container: TOC<{
 </template>;
 
 export default Container;
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    Container: typeof Container;
-  }
-}

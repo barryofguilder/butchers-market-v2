@@ -18,9 +18,3 @@ const FacebookIcon: TOC<{
 </template>;
 
 export default FacebookIcon;
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    'Icons::Facebook': typeof FacebookIcon;
-  }
-}
