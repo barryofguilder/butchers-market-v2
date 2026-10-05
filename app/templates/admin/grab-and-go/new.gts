@@ -1,20 +1,29 @@
-import type { RouteTemplate } from '../../../utils/route-template';
-import type AdminGrabAndGoNewController from '../../../controllers/admin/grab-and-go/new';
+import Component from '@glimmer/component';
+import { service } from '@ember/service';
+import type RouterService from '@ember/routing/router-service';
 import type GrabAndGo from '../../../models/grab-and-go';
 import BackLink from '../../../components/admin/back-link';
 import ItemForm from '../../../components/admin/grab-and-go/item-form';
 import Title from '../../../components/admin/title';
 
-const AdminGrabAndGoNewTemplate: RouteTemplate<GrabAndGo, AdminGrabAndGoNewController> = <template>
-  <BackLink @route="admin.grab-and-go" @text="Grab and Go" />
+interface Signature {
+  Args: {
+    model: GrabAndGo;
+  };
+}
 
-  <Title @title="New Grab and Go" />
+export default class AdminGrabAndGoNewTemplate extends Component<Signature> {
+  @service declare router: RouterService;
 
-  <ItemForm
-    @item={{@model}}
-    @saved={{@controller.itemSaved}}
-    @cancelled={{@controller.itemCancelled}}
-  />
-</template>;
+  returnToIndex = () => {
+    this.router.transitionTo('admin.grab-and-go');
+  };
 
-export default AdminGrabAndGoNewTemplate;
+  <template>
+    <BackLink @route="admin.grab-and-go" @text="Grab and Go" />
+
+    <Title @title="New Grab and Go" />
+
+    <ItemForm @item={{@model}} @saved={{this.returnToIndex}} @cancelled={{this.returnToIndex}} />
+  </template>
+}

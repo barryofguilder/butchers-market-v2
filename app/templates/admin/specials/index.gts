@@ -1,9 +1,13 @@
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { service } from '@ember/service';
+import type Store from '@ember-data/store';
+import { dropTask } from 'ember-concurrency';
+import type SpecialAdapter from '../../../adapters/special';
 import { fn } from '@ember/helper';
 import sortableGroup from 'ember-sortable/modifiers/sortable-group';
 import sortableHandle from 'ember-sortable/modifiers/sortable-handle';
 import sortableItem from 'ember-sortable/modifiers/sortable-item';
-import type { RouteTemplate } from '../../../utils/route-template';
-import type AdminSpecialsIndexController from '../../../controllers/admin/specials/index';
 import type Special from '../../../models/special';
 import dateFormat from '../../../helpers/date-format';
 import sortBy from '../../../helpers/sort-by';
@@ -16,7 +20,53 @@ import UiAlert from '../../../components/ui-alert';
 import UiButton from '../../../components/ui-button';
 import UiIcon from '../../../components/ui-icon';
 
-const AdminSpecialsIndexTemplate: RouteTemplate<Special[], AdminSpecialsIndexController> =
+interface Signature {
+  Args: {
+    model: Special[];
+  };
+}
+
+export default class AdminSpecialsIndexTemplate extends Component<Signature> {
+  @service declare store: Store;
+
+  @tracked showErrorMessage = false;
+  @tracked specialToDelete: Special | null = null;
+  @tracked deleteModalOpen = false;
+
+  reorderItems = (specials: Special[]) => {
+    this.saveSpecialOrdering.perform(specials);
+  };
+
+  saveSpecialOrdering = dropTask(async (specials: Special[]) => {
+    this.showErrorMessage = false;
+
+    try {
+      // The table sorts on `displayOrder`, so setting it here is what moves the row.
+      specials.forEach((special, index) => {
+        special.displayOrder = index + 1;
+      });
+
+      const adapter = this.store.adapterFor('special') as SpecialAdapter;
+      const response = await adapter.reorderSpecials(specials);
+
+      if (!response.ok) {
+        this.showErrorMessage = true;
+      }
+    } catch (ex) {
+      this.showErrorMessage = true;
+      console.error(ex);
+    }
+  });
+
+  openDeleteModal = (special: Special) => {
+    this.specialToDelete = special;
+    this.deleteModalOpen = true;
+  };
+
+  closeDeleteModal = () => {
+    this.deleteModalOpen = false;
+  };
+
   <template>
     <BackLink @route="admin.index" @text="Admin" />
 
@@ -28,7 +78,7 @@ const AdminSpecialsIndexTemplate: RouteTemplate<Special[], AdminSpecialsIndexCon
       </UiButton>
     </div>
 
-    {{#if @controller.showErrorMessage}}
+    {{#if this.showErrorMessage}}
       <UiAlert @variant="danger" class="mt-4">
         Something went wrong trying to save the ordering of the specials. Please refresh the page
         and try again.
@@ -45,7 +95,7 @@ const AdminSpecialsIndexTemplate: RouteTemplate<Special[], AdminSpecialsIndexCon
         <Thead.Th class="hidden md:table-cell">Hidden?</Thead.Th>
         <Thead.Th />
       </Table.Head>
-      <Table.Body {{sortableGroup onChange=@controller.reorderItems}} as |Tbody|>
+      <Table.Body {{sortableGroup onChange=this.reorderItems}} as |Tbody|>
         {{#each (sortBy "displayOrder" @model) as |special|}}
           <Tbody.Tr {{sortableItem model=special}} as |Row|>
             <Row.Td>
@@ -85,7 +135,7 @@ const AdminSpecialsIndexTemplate: RouteTemplate<Special[], AdminSpecialsIndexCon
                   @iconOnly={{true}}
                   @icon="trash-alt"
                   @variant="danger"
-                  @onClick={{fn @controller.openDeleteModal special}}
+                  @onClick={{fn this.openDeleteModal special}}
                 />
               </div>
             </Row.Td>
@@ -99,13 +149,12 @@ const AdminSpecialsIndexTemplate: RouteTemplate<Special[], AdminSpecialsIndexCon
     </UiTable>
 
     <DeleteSpecialForm
-      @isOpen={{@controller.deleteModalOpen}}
-      @special={{@controller.specialToDelete}}
-      @onSave={{@controller.closeDeleteModal}}
-      @onCancel={{@controller.closeDeleteModal}}
+      @isOpen={{this.deleteModalOpen}}
+      @special={{this.specialToDelete}}
+      @onSave={{this.closeDeleteModal}}
+      @onCancel={{this.closeDeleteModal}}
     />
 
     {{outlet}}
-  </template>;
-
-export default AdminSpecialsIndexTemplate;
+  </template>
+}

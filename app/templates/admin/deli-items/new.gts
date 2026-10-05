@@ -1,20 +1,33 @@
-import type { RouteTemplate } from '../../../utils/route-template';
-import type AdminDeliItemsNewController from '../../../controllers/admin/deli-items/new';
+import Component from '@glimmer/component';
+import { service } from '@ember/service';
+import type RouterService from '@ember/routing/router-service';
 import type DeliItem from '../../../models/deli-item';
 import BackLink from '../../../components/admin/back-link';
 import DeliItemForm from '../../../components/admin/deli-items/deli-item-form';
 import Title from '../../../components/admin/title';
 
-const AdminDeliItemsNewTemplate: RouteTemplate<DeliItem, AdminDeliItemsNewController> = <template>
-  <BackLink @route="admin.deli-items" @text="Deli Items" />
+interface Signature {
+  Args: {
+    model: DeliItem;
+  };
+}
 
-  <Title @title="New Deli Item" />
+export default class AdminDeliItemsNewTemplate extends Component<Signature> {
+  @service declare router: RouterService;
 
-  <DeliItemForm
-    @item={{@model}}
-    @saved={{@controller.deliItemSaved}}
-    @cancelled={{@controller.deliItemCancelled}}
-  />
-</template>;
+  returnToIndex = () => {
+    this.router.transitionTo('admin.deli-items');
+  };
 
-export default AdminDeliItemsNewTemplate;
+  <template>
+    <BackLink @route="admin.deli-items" @text="Deli Items" />
+
+    <Title @title="New Deli Item" />
+
+    <DeliItemForm
+      @item={{@model}}
+      @saved={{this.returnToIndex}}
+      @cancelled={{this.returnToIndex}}
+    />
+  </template>
+}

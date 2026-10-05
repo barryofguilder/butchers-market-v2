@@ -1,23 +1,33 @@
-import type { RouteTemplate } from '../../../utils/route-template';
-import type AdminPackageBundlesNewController from '../../../controllers/admin/package-bundles/new';
+import Component from '@glimmer/component';
+import { service } from '@ember/service';
+import type RouterService from '@ember/routing/router-service';
 import type PackageBundle from '../../../models/package-bundle';
 import BackLink from '../../../components/admin/back-link';
 import PackageBundleForm from '../../../components/admin/package-bundles/package-bundle-form';
 import Title from '../../../components/admin/title';
 
-const AdminPackageBundlesNewTemplate: RouteTemplate<
-  PackageBundle,
-  AdminPackageBundlesNewController
-> = <template>
-  <BackLink @route="admin.package-bundles" @text="Package Bundles" />
+interface Signature {
+  Args: {
+    model: PackageBundle;
+  };
+}
 
-  <Title @title="New Package Bundle" />
+export default class AdminPackageBundlesNewTemplate extends Component<Signature> {
+  @service declare router: RouterService;
 
-  <PackageBundleForm
-    @bundle={{@model}}
-    @saved={{@controller.bundleSaved}}
-    @cancelled={{@controller.bundleCancelled}}
-  />
-</template>;
+  returnToIndex = () => {
+    this.router.transitionTo('admin.package-bundles');
+  };
 
-export default AdminPackageBundlesNewTemplate;
+  <template>
+    <BackLink @route="admin.package-bundles" @text="Package Bundles" />
+
+    <Title @title="New Package Bundle" />
+
+    <PackageBundleForm
+      @bundle={{@model}}
+      @saved={{this.returnToIndex}}
+      @cancelled={{this.returnToIndex}}
+    />
+  </template>
+}

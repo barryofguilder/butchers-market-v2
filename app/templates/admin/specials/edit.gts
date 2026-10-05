@@ -1,20 +1,33 @@
-import type { RouteTemplate } from '../../../utils/route-template';
-import type AdminSpecialsEditController from '../../../controllers/admin/specials/edit';
+import Component from '@glimmer/component';
+import { service } from '@ember/service';
+import type RouterService from '@ember/routing/router-service';
 import type Special from '../../../models/special';
 import BackLink from '../../../components/admin/back-link';
 import SpecialForm from '../../../components/admin/specials/special-form';
 import Title from '../../../components/admin/title';
 
-const AdminSpecialsEditTemplate: RouteTemplate<Special, AdminSpecialsEditController> = <template>
-  <BackLink @route="admin.specials" @text="Specials" />
+interface Signature {
+  Args: {
+    model: Special;
+  };
+}
 
-  <Title @title="Edit Special" />
+export default class AdminSpecialsEditTemplate extends Component<Signature> {
+  @service declare router: RouterService;
 
-  <SpecialForm
-    @special={{@model}}
-    @saved={{@controller.specialSaved}}
-    @cancelled={{@controller.specialCancelled}}
-  />
-</template>;
+  returnToIndex = () => {
+    this.router.transitionTo('admin.specials');
+  };
 
-export default AdminSpecialsEditTemplate;
+  <template>
+    <BackLink @route="admin.specials" @text="Specials" />
+
+    <Title @title="Edit Special" />
+
+    <SpecialForm
+      @special={{@model}}
+      @saved={{this.returnToIndex}}
+      @cancelled={{this.returnToIndex}}
+    />
+  </template>
+}

@@ -1,7 +1,6 @@
+import type { TOC } from '@ember/component/template-only';
 import { hash } from '@ember/helper';
 import { gt } from 'ember-truth-helpers';
-import type { RouteTemplate } from '../utils/route-template';
-import type IndexController from '../controllers/index';
 import type Hour from '../models/hour';
 import type MeatBundle from '../models/meat-bundle';
 import type Special from '../models/special';
@@ -25,14 +24,18 @@ interface IndexModel {
   specials: Special[];
 }
 
-const IndexTemplate: RouteTemplate<IndexModel, IndexController> = <template>
+interface Signature {
+  Args: {
+    model: IndexModel;
+  };
+}
+
+const IndexTemplate: TOC<Signature> = <template>
   <MobileOrderBanner />
 
   <PromoSection @image="promo-index.jpg" as |Promo|>
     <Container>
-      <div
-        class="text-center sm:text-left {{unless @controller.showThanksgivingMealPromo 'lg:w-3/4'}}"
-      >
+      <div class="text-center sm:text-left lg:w-3/4">
         <div class="hidden sm:block">
           <Promo.title>
             Welcome to The Butcher's Market Meat &amp; Deli

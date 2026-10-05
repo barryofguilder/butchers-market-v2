@@ -1,9 +1,13 @@
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { service } from '@ember/service';
+import type Store from '@ember-data/store';
+import { dropTask } from 'ember-concurrency';
+import type MeatBundleAdapter from '../../../adapters/meat-bundle';
 import { fn } from '@ember/helper';
 import sortableGroup from 'ember-sortable/modifiers/sortable-group';
 import sortableHandle from 'ember-sortable/modifiers/sortable-handle';
 import sortableItem from 'ember-sortable/modifiers/sortable-item';
-import type { RouteTemplate } from '../../../utils/route-template';
-import type AdminMeatBundlesIndexController from '../../../controllers/admin/meat-bundles/index';
 import type MeatBundle from '../../../models/meat-bundle';
 import sortBy from '../../../helpers/sort-by';
 import BackLink from '../../../components/admin/back-link';
@@ -14,7 +18,53 @@ import UiAlert from '../../../components/ui-alert';
 import UiButton from '../../../components/ui-button';
 import UiIcon from '../../../components/ui-icon';
 
-const AdminMeatBundlesIndexTemplate: RouteTemplate<MeatBundle[], AdminMeatBundlesIndexController> =
+interface Signature {
+  Args: {
+    model: MeatBundle[];
+  };
+}
+
+export default class AdminMeatBundlesIndexTemplate extends Component<Signature> {
+  @service declare store: Store;
+
+  @tracked showErrorMessage = false;
+  @tracked bundleToDelete: MeatBundle | null = null;
+  @tracked deleteModalOpen = false;
+
+  reorderItems = (bundles: MeatBundle[]) => {
+    this.saveBundleOrdering.perform(bundles);
+  };
+
+  saveBundleOrdering = dropTask(async (bundles: MeatBundle[]) => {
+    this.showErrorMessage = false;
+
+    try {
+      // The table sorts on `displayOrder`, so setting it here is what moves the row.
+      bundles.forEach((bundle, index) => {
+        bundle.displayOrder = index + 1;
+      });
+
+      const adapter = this.store.adapterFor('meat-bundle') as MeatBundleAdapter;
+      const response = await adapter.reorderMeatBundles(bundles);
+
+      if (!response.ok) {
+        this.showErrorMessage = true;
+      }
+    } catch (ex) {
+      this.showErrorMessage = true;
+      console.error(ex);
+    }
+  });
+
+  openDeleteModal = (bundle: MeatBundle) => {
+    this.bundleToDelete = bundle;
+    this.deleteModalOpen = true;
+  };
+
+  closeDeleteModal = () => {
+    this.deleteModalOpen = false;
+  };
+
   <template>
     <BackLink @route="admin.index" @text="Admin" />
 
@@ -26,7 +76,7 @@ const AdminMeatBundlesIndexTemplate: RouteTemplate<MeatBundle[], AdminMeatBundle
       </UiButton>
     </div>
 
-    {{#if @controller.showErrorMessage}}
+    {{#if this.showErrorMessage}}
       <UiAlert @variant="danger" class="mt-4">
         Something went wrong trying to save the ordering of the meat bundles. Please refresh the
         page and try again.
@@ -44,7 +94,7 @@ const AdminMeatBundlesIndexTemplate: RouteTemplate<MeatBundle[], AdminMeatBundle
         <Thead.Th class="hidden md:table-cell">Is Hidden?</Thead.Th>
         <Thead.Th />
       </Table.Head>
-      <Table.Body {{sortableGroup onChange=@controller.reorderItems}} as |Tbody|>
+      <Table.Body {{sortableGroup onChange=this.reorderItems}} as |Tbody|>
         {{#each (sortBy "displayOrder" @model) as |bundle|}}
           <Tbody.Tr {{sortableItem model=bundle}} as |Row|>
             <Row.Td>
@@ -90,7 +140,7 @@ const AdminMeatBundlesIndexTemplate: RouteTemplate<MeatBundle[], AdminMeatBundle
                   @iconOnly={{true}}
                   @icon="trash-alt"
                   @variant="danger"
-                  @onClick={{fn @controller.openDeleteModal bundle}}
+                  @onClick={{fn this.openDeleteModal bundle}}
                 />
               </div>
             </Row.Td>
@@ -104,13 +154,12 @@ const AdminMeatBundlesIndexTemplate: RouteTemplate<MeatBundle[], AdminMeatBundle
     </UiTable>
 
     <DeleteMeatBundleForm
-      @isOpen={{@controller.deleteModalOpen}}
-      @bundle={{@controller.bundleToDelete}}
-      @onSave={{@controller.closeDeleteModal}}
-      @onCancel={{@controller.closeDeleteModal}}
+      @isOpen={{this.deleteModalOpen}}
+      @bundle={{this.bundleToDelete}}
+      @onSave={{this.closeDeleteModal}}
+      @onCancel={{this.closeDeleteModal}}
     />
 
     {{outlet}}
-  </template>;
-
-export default AdminMeatBundlesIndexTemplate;
+  </template>
+}

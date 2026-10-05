@@ -1,4 +1,4 @@
-import type { RouteTemplate } from '../../../utils/route-template';
+import type { TOC } from '@ember/component/template-only';
 import type Menu from '../../../models/menu';
 import dateFormat from '../../../helpers/date-format';
 import BackLink from '../../../components/admin/back-link';
@@ -6,7 +6,13 @@ import Title from '../../../components/admin/title';
 import UiTable from '../../../components/admin/ui-table';
 import UiButton from '../../../components/ui-button';
 
-const AdminMenuIndexTemplate: RouteTemplate<Menu[]> = <template>
+interface Signature {
+  Args: {
+    model: Menu[];
+  };
+}
+
+const AdminMenuIndexTemplate: TOC<Signature> = <template>
   <BackLink @route="admin.index" @text="Admin" />
 
   <Title @title="Menu PDF" />
