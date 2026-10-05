@@ -1,14 +1,13 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
-import Changeset from 'ember-changeset';
-import lookupValidator from 'ember-changeset-validations';
 import { dropTask } from 'ember-concurrency';
 import MeatBundleValidations from '../../../validations/meat-bundle';
+import FormState from '../../../utils/form-state';
 import { getErrorMessageFromException } from '../../../utils/error-handling';
 
 export default class MeatBundleFormComponent extends Component {
-  changeset;
+  form;
 
   @tracked prices;
   @tracked items;
@@ -16,7 +15,7 @@ export default class MeatBundleFormComponent extends Component {
   @tracked reordering = false;
 
   get hasErrors() {
-    return this.errorMessage || this.changeset.errors.length > 0;
+    return this.errorMessage || this.form.isInvalid;
   }
 
   // The form always keeps one item field on screen, so blank fields have to be dropped before
@@ -26,39 +25,35 @@ export default class MeatBundleFormComponent extends Component {
   }
 
   get saveDisabled() {
-    return this.changeset && this.changeset.isInvalid;
+    return this.form.isInvalid;
   }
 
   constructor() {
     super(...arguments);
 
-    let changeset = new Changeset(
-      this.args.bundle,
-      lookupValidator(MeatBundleValidations),
-      MeatBundleValidations
-    );
-    let items = changeset.get('items');
+    this.form = new FormState(this.args.bundle, MeatBundleValidations);
+    // Copied so editing a field doesn't change the model's array before the form is saved.
+    let items = [...this.form.get('items')];
 
     // Ensure there's always an item field
     if (items.length === 0) {
       items = [''];
     }
 
-    this.changeset = changeset;
     this.items = items;
   }
 
   saveBundle = dropTask(async () => {
     this.syncItems();
 
-    await this.changeset.validate();
+    this.form.validate();
 
-    if (!this.changeset.isValid) {
+    if (!this.form.isValid) {
       return;
     }
 
     try {
-      await this.changeset.save();
+      await this.form.save();
       this.args.saved();
     } catch (ex) {
       this.errorMessage = await getErrorMessageFromException(ex);
@@ -67,17 +62,17 @@ export default class MeatBundleFormComponent extends Component {
 
   @action
   updateFeatured() {
-    this.changeset.set('featured', !this.changeset.get('featured'));
+    this.form.set('featured', !this.form.get('featured'));
   }
 
   @action
   updateHidden() {
-    this.changeset.set('isHidden', !this.changeset.get('isHidden'));
+    this.form.set('isHidden', !this.form.get('isHidden'));
   }
 
   @action
   updateOrderEnabled() {
-    this.changeset.set('orderEnabled', !this.changeset.get('orderEnabled'));
+    this.form.set('orderEnabled', !this.form.get('orderEnabled'));
   }
 
   @action
@@ -104,12 +99,12 @@ export default class MeatBundleFormComponent extends Component {
     this.syncItems();
   }
 
-  // The item fields write to `items` instead of the changeset, so the changeset needs the new
-  // list pushed onto it for its `items` validation to re-run. Without this, a save blocked by
+  // The item fields write to `items` instead of the form, so the form needs the new list
+  // pushed onto it for its `items` validation to re-run. Without this, a save blocked by
   // the items validation would leave the Save button disabled even after items were added.
   @action
   syncItems() {
-    this.changeset.set('items', this.filledItems);
+    this.form.set('items', this.filledItems);
   }
 
   @action

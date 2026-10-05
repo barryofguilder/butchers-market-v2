@@ -1,45 +1,33 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
-import Changeset from 'ember-changeset';
-import lookupValidator from 'ember-changeset-validations';
 import { dropTask } from 'ember-concurrency';
 import FeatureFlagValidations from '../../../validations/feature-flag';
+import FormState from '../../../utils/form-state';
 import { getErrorMessageFromException } from '../../../utils/error-handling';
 
 export default class FeatureFlagFormComponent extends Component {
-  changeset;
+  form = new FormState(this.args.flag, FeatureFlagValidations);
 
   @tracked errorMessage;
 
   get hasErrors() {
-    return this.errorMessage || this.changeset.errors;
+    return this.errorMessage || this.form.isInvalid;
   }
 
   get saveDisabled() {
-    return this.changeset && this.changeset.isInvalid;
-  }
-
-  constructor() {
-    super(...arguments);
-
-    let changeset = new Changeset(
-      this.args.flag,
-      lookupValidator(FeatureFlagValidations),
-      FeatureFlagValidations
-    );
-    this.changeset = changeset;
+    return this.form.isInvalid;
   }
 
   saveFlag = dropTask(async () => {
-    await this.changeset.validate();
+    this.form.validate();
 
-    if (!this.changeset.isValid) {
+    if (!this.form.isValid) {
       return;
     }
 
     try {
-      await this.changeset.save();
+      await this.form.save();
       this.args.saved();
     } catch (ex) {
       this.errorMessage = await getErrorMessageFromException(ex);
@@ -48,6 +36,6 @@ export default class FeatureFlagFormComponent extends Component {
 
   @action
   updateActive() {
-    this.changeset.set('active', !this.changeset.get('active'));
+    this.form.set('active', !this.form.get('active'));
   }
 }

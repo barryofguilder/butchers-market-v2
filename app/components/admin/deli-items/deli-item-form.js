@@ -2,10 +2,9 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
-import Changeset from 'ember-changeset';
-import lookupValidator from 'ember-changeset-validations';
 import { dropTask, enqueueTask } from 'ember-concurrency';
 import DeliItemValidations from '../../../validations/deli-item';
+import FormState from '../../../utils/form-state';
 import baseUrl from '../../../utils/base-url';
 import { generateFileName } from '../../../utils/file-name';
 import { getErrorMessageFromException } from '../../../utils/error-handling';
@@ -14,7 +13,7 @@ export default class DeliItemFormComponent extends Component {
   @service router;
   @service session;
 
-  changeset;
+  form = new FormState(this.args.item, DeliItemValidations);
 
   @tracked image;
   @tracked tempImageUrl;
@@ -22,11 +21,11 @@ export default class DeliItemFormComponent extends Component {
   @tracked fileErrorMessage;
 
   get hasErrors() {
-    return this.errorMessage || this.changeset.errors;
+    return this.errorMessage || this.form.isInvalid;
   }
 
   get hasImage() {
-    return this.changeset.get('imageUrl') || this.tempImageUrl;
+    return this.form.get('imageUrl') || this.tempImageUrl;
   }
 
   get imageUrl() {
@@ -34,11 +33,11 @@ export default class DeliItemFormComponent extends Component {
       return this.tempImageUrl;
     }
 
-    return this.changeset.get('imageUrlPath');
+    return this.form.get('imageUrlPath');
   }
 
   get saveDisabled() {
-    return this.changeset && this.changeset.isInvalid;
+    return this.form.isInvalid;
   }
 
   get uploadHeaders() {
@@ -53,21 +52,10 @@ export default class DeliItemFormComponent extends Component {
     return null;
   }
 
-  constructor() {
-    super(...arguments);
-
-    let changeset = new Changeset(
-      this.args.item,
-      lookupValidator(DeliItemValidations),
-      DeliItemValidations
-    );
-    this.changeset = changeset;
-  }
-
   saveItem = dropTask(async () => {
-    await this.changeset.validate();
+    this.form.validate();
 
-    if (!this.changeset.isValid) {
+    if (!this.form.isValid) {
       return;
     }
 
@@ -78,10 +66,10 @@ export default class DeliItemFormComponent extends Component {
           headers: this.uploadHeaders,
           data: { generatedFileName },
         });
-        this.changeset.set('imageUrl', generatedFileName);
+        this.form.set('imageUrl', generatedFileName);
       }
 
-      await this.changeset.save();
+      await this.form.save();
       this.args.saved();
     } catch (ex) {
       if (ex.status === 401) {
@@ -99,7 +87,7 @@ export default class DeliItemFormComponent extends Component {
       this.image = file;
 
       // Only setting this to make the validation happy. It gets set to the actual url on save.
-      this.changeset.set('imageUrl', url);
+      this.form.set('imageUrl', url);
     } catch (ex) /* eslint-disable-line no-unused-vars */ {
       this.fileErrorMessage = 'Could not read the file contents';
     }
@@ -107,7 +95,7 @@ export default class DeliItemFormComponent extends Component {
 
   @action
   updateHidden() {
-    this.changeset.set('isHidden', !this.changeset.get('isHidden'));
+    this.form.set('isHidden', !this.form.get('isHidden'));
   }
 
   @action
@@ -120,6 +108,6 @@ export default class DeliItemFormComponent extends Component {
     this.image = null;
     this.tempImageUrl = null;
 
-    this.changeset.set('imageUrl', null);
+    this.form.set('imageUrl', null);
   }
 }

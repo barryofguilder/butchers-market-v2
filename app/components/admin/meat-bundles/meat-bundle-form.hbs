@@ -11,38 +11,38 @@
     <Admin::Required />
   </p>
 
-  <Form.group data-test-id="title" @model={{this.changeset}} @property="title" as |Group|>
+  <Form.group data-test-id="title" @model={{this.form}} @property="title" as |Group|>
     <Group.label>
       Title
       <Admin::Required />
     </Group.label>
-    <Group.textbox @value={{this.changeset.title}} @onChange={{set this "changeset.title"}} />
+    <Group.textbox @value={{this.form.values.title}} @onChange={{fn this.form.set "title"}} />
   </Form.group>
 
-  <Form.group data-test-id="price" @model={{this.changeset}} @property="price" as |Group|>
+  <Form.group data-test-id="price" @model={{this.form}} @property="price" as |Group|>
     <Group.label>Price <Admin::Required /></Group.label>
-    <Group.textbox @value={{this.changeset.price}} @onChange={{set this "changeset.price"}} />
+    <Group.textbox @value={{this.form.values.price}} @onChange={{fn this.form.set "price"}} />
   </Form.group>
 
-  <Form.group data-test-id="featured" @model={{this.changeset}} @property="featured" as |Group|>
-    <Group.checkbox @checked={{this.changeset.featured}} @onChange={{this.updateFeatured}}>
+  <Form.group data-test-id="featured" @model={{this.form}} @property="featured" as |Group|>
+    <Group.checkbox @checked={{this.form.values.featured}} @onChange={{this.updateFeatured}}>
       Is featured on home page?
     </Group.checkbox>
   </Form.group>
 
-  <Form.group data-test-id="sale" @model={{this.changeset}} @property="sale" as |Group|>
+  <Form.group data-test-id="sale" @model={{this.form}} @property="sale" as |Group|>
     <Group.label>Special Text</Group.label>
     <Group.textbox
-      @value={{this.changeset.specialText}}
-      @onChange={{set this "changeset.specialText"}}
+      @value={{this.form.values.specialText}}
+      @onChange={{fn this.form.set "specialText"}}
     />
     <small class="block mt-3 text-gray-700">
       Will show under the title in a red text.
     </small>
   </Form.group>
 
-  <Form.group data-test-id="hidden" @model={{this.changeset}} @property="isHidden" as |Group|>
-    <Group.checkbox @checked={{this.changeset.isHidden}} @onChange={{this.updateHidden}}>
+  <Form.group data-test-id="hidden" @model={{this.form}} @property="isHidden" as |Group|>
+    <Group.checkbox @checked={{this.form.values.isHidden}} @onChange={{this.updateHidden}}>
       Is Hidden?
     </Group.checkbox>
     <Group.help>
@@ -51,8 +51,11 @@
     </Group.help>
   </Form.group>
 
-  <Form.group data-test-id="order" @model={{this.changeset}} @property="orderEnabled" as |Group|>
-    <Group.checkbox @checked={{this.changeset.orderEnabled}} @onChange={{this.updateOrderEnabled}}>
+  <Form.group data-test-id="order" @model={{this.form}} @property="orderEnabled" as |Group|>
+    <Group.checkbox
+      @checked={{this.form.values.orderEnabled}}
+      @onChange={{this.updateOrderEnabled}}
+    >
       Can order online?
     </Group.checkbox>
     <Group.help>
@@ -60,7 +63,7 @@
     </Group.help>
   </Form.group>
 
-  <Form.group data-test-id="items" @model={{this.changeset}} @property="items" as |Group|>
+  <Form.group data-test-id="items" @model={{this.form}} @property="items" as |Group|>
     <Form.label>
       Items
       <Admin::Required />

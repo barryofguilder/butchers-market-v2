@@ -11,21 +11,21 @@
     <Admin::Required />
   </p>
 
-  <Form.group data-test-id="title" @model={{this.changeset}} @property="title" as |Group|>
+  <Form.group data-test-id="title" @model={{this.form}} @property="title" as |Group|>
     <Group.label>Title <Admin::Required /></Group.label>
-    <Group.textbox @value={{this.changeset.title}} @onChange={{set this "changeset.title"}} />
+    <Group.textbox @value={{this.form.values.title}} @onChange={{fn this.form.set "title"}} />
   </Form.group>
 
-  <Form.group data-test-id="link" @model={{this.changeset}} @property="link" as |Group|>
+  <Form.group data-test-id="link" @model={{this.form}} @property="link" as |Group|>
     <Group.label>Link</Group.label>
-    <Group.textbox @value={{this.changeset.link}} @onChange={{set this "changeset.link"}} />
+    <Group.textbox @value={{this.form.values.link}} @onChange={{fn this.form.set "link"}} />
     <small class="block mt-3 text-gray-700">
       If left blank, clicking on the special image will take you to
       {{this.orderOnlineUrl}}.
     </small>
   </Form.group>
 
-  <Form.group data-test-id="image" @model={{this.changeset}} @property="image" as |Group|>
+  <Form.group data-test-id="image" @model={{this.form}} @property="image" as |Group|>
     <Group.label>Image <Admin::Required /></Group.label>
     <div class="mt-2">
       {{#let (file-queue name="photos" onFileAdded=this.uploadImage) as |queue|}}
@@ -69,7 +69,7 @@
 
   <Form.group
     data-test-id="image-alt-text"
-    @model={{this.changeset}}
+    @model={{this.form}}
     @property="imageAltText"
     as |Group|
   >
@@ -78,8 +78,8 @@
       <Admin::Required />
     </Group.label>
     <Group.textbox
-      @value={{this.changeset.imageAltText}}
-      @onChange={{set this "changeset.imageAltText"}}
+      @value={{this.form.values.imageAltText}}
+      @onChange={{fn this.form.set "imageAltText"}}
     />
     <small class="block mt-3 text-gray-700">
       The text that people will see when there is no image or the user is blind. Just needs to
@@ -99,7 +99,7 @@
   {{#if this.activeDuringRange}}
     <Form.group
       data-test-id="start-date"
-      @model={{this.changeset}}
+      @model={{this.form}}
       @property="activeStartDate"
       as |Group|
     >
@@ -107,7 +107,9 @@
       <Group.datepicker
         @allowInput={{false}}
         @appendDataInput={{true}}
-        @date={{readonly (if this.changeset.activeStartDate this.changeset.activeStartDate null)}}
+        @date={{readonly
+          (if this.form.values.activeStartDate this.form.values.activeStartDate null)
+        }}
         @dateFormat="m/d/Y"
         @onChange={{this.startDateSelected}}
       />
@@ -116,17 +118,12 @@
       </Group.help>
     </Form.group>
 
-    <Form.group
-      data-test-id="end-date"
-      @model={{this.changeset}}
-      @property="activeEndDate"
-      as |Group|
-    >
+    <Form.group data-test-id="end-date" @model={{this.form}} @property="activeEndDate" as |Group|>
       <Group.label>Active End Date</Group.label>
       <Group.datepicker
         @allowInput={{false}}
         @appendDataInput={{true}}
-        @date={{readonly (if this.changeset.activeEndDate this.changeset.activeEndDate null)}}
+        @date={{readonly (if this.form.values.activeEndDate this.form.values.activeEndDate null)}}
         @dateFormat="m/d/Y"
         @onChange={{this.endDateSelected}}
       />
@@ -136,14 +133,14 @@
     </Form.group>
   {{/if}}
 
-  <Form.group data-test-id="in-stock" @model={{this.changeset}} @property="inStock" as |Group|>
-    <Group.checkbox @checked={{this.changeset.inStock}} @onChange={{this.updateInStock}}>
+  <Form.group data-test-id="in-stock" @model={{this.form}} @property="inStock" as |Group|>
+    <Group.checkbox @checked={{this.form.values.inStock}} @onChange={{this.updateInStock}}>
       In Stock?
     </Group.checkbox>
   </Form.group>
 
-  <Form.group data-test-id="hidden" @model={{this.changeset}} @property="isHidden" as |Group|>
-    <Group.checkbox @checked={{this.changeset.isHidden}} @onChange={{this.updateIsHidden}}>
+  <Form.group data-test-id="hidden" @model={{this.form}} @property="isHidden" as |Group|>
+    <Group.checkbox @checked={{this.form.values.isHidden}} @onChange={{this.updateIsHidden}}>
       Is Hidden?
     </Group.checkbox>
     <Group.help>
