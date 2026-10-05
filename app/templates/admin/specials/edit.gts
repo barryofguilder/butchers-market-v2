@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { service } from '@ember/service';
 import type RouterService from '@ember/routing/router-service';
-import type Special from '../../../models/special';
+import type { Special } from '../../../schemas/special';
 import BackLink from '../../../components/admin/back-link';
 import SpecialForm from '../../../components/admin/specials/special-form';
 import Title from '../../../components/admin/title';

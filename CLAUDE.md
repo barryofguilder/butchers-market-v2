@@ -33,7 +33,10 @@ The Mirage route handlers (filters, reorder endpoints, auth token, file uploads)
 ## Architecture
 
 - **Templates are `.gts`.** Route templates in `app/templates/**` are components that receive `@model` (and `@controller`). Each declares its own `interface Signature { Args: { model: ... } }`, typed as `TOC<Signature>` when template-only or as a class component when it needs state or handlers. Page state and handlers live in the route template, not a controller. Only add a controller for query params. Glint v2 runs in strict mode (no loose mode).
-- **Data:** WarpDrive 5.8 in legacy mode: `services/store.ts` builds the store with `useLegacyStore`, so the classic `Model`s in `app/models`, adapters, serializer, and `store.findAll`/`query`/`save` still work (`ENABLE_LEGACY_REQUEST_METHODS` is kept on in `ember-cli-build.mjs`). Import from `@warp-drive/legacy/*`, and type the store with the default export of `services/store.ts`. All adapters extend `adapters/base/authenticated-json-api.ts`, which adds the bearer token from the `session` service and sends the user to sign-in on a 401. Custom endpoints such as drag-and-drop reordering (`reorderSpecials`, `reorderMeatBundles`) are methods on the model's adapter. They push the response back into the store so records don't stay dirty.
+- **Data:** WarpDrive 5.8, partway through moving off legacy mode. `services/store.ts` builds the store with `useLegacyStore`. Type the store with its default export.
+  - **Migrated resources** (so far only `special`) have a schema in `app/schemas/<resource>.ts` (`withDefaults` from `@warp-drive/legacy/model/migration-support`, plus a `WithLegacy<...>` type) registered in `services/store.ts`, and no model or adapter. Read with `store.request(query(...))` / `findRecord(...)` from `@warp-drive/utilities/json-api` and use `content.data`. Filters are flat keys: `{ 'filter[isHidden]': false }`. Save and delete with `saveRecord`/`destroyRecord` from `app/utils/records.ts`; forms pass `saveRecord` to `FormState`. Date fields are `{ kind: 'field', type: 'date' }` (`schemas/transformations.ts`) and getters are derived fields (`schemas/derivations.ts`). Custom endpoints are request builders in `app/builders/` (e.g. `reorderSpecials`), and the store applies their JSON:API response.
+  - **Requests through `store.request`** pass through `handlers/auth.ts` (bearer token from the `session` service, sign-in on a 401) and `handlers/json-api.ts` (sets the JSON:API `Content-Type` the API needs to parse bodies, and singularizes the API's plural types to match the schemas). They skip adapters and serializers.
+  - **Unmigrated resources** still use the `Model`s in `app/models`, the adapters (which extend `adapters/base/authenticated-json-api.ts`), the serializer, transforms, and `store.findAll`/`query`/`save` (`ENABLE_LEGACY_REQUEST_METHODS` is kept on in `ember-cli-build.mjs`). `reorderMeatBundles` is still an adapter method that pushes its response into the store.
 - **Auth:** `routes/admin.js` reads a JWT from localStorage in `beforeModel`. It redirects to `sign-in` if the token is missing, expired, or expires today.
 - **Feature flags:** `services/features.ts` loads `feature-flag` records in the application route's `model` hook. Check a flag with `features.isEnabled(name)`.
 - **Admin CRUD pattern** (per resource under `admin/<resource>/`): routes `index`, `new`, `edit`. `new` calls `store.createRecord` and rolls back unsaved attributes in `willTransition`. The `new`/`edit` route templates handle `saved`/`cancelled` by transitioning back to the index. Templates render a `<Resource>Form` component from `components/admin/<resource>/`.
@@ -47,13 +50,17 @@ The Mirage route handlers (filters, reorder endpoints, auth token, file uploads)
 - In new or converted `.gts` components, write event handlers as arrow-function class fields, not `@action` methods. Leave `@action` alone in existing components you only touch in passing.
 - Document component arguments (fields in a signature's `Args`) with multi-line JSDoc blocks (`/**` / ` * text` / ` */`), not single-line `/** */`. Leave existing in-body `//` comments as they are.
 - Templates use double quotes (Prettier with `prettier-plugin-ember-template-tag`).
+- Commit messages are one short imperative line with no body (e.g. `Switch to WarpDrive in legacy mode`). Explanations go in the PR description.
+- Don't add AI attribution to commits or PRs: no "Generated with Claude Code" line in PR descriptions and no `Co-Authored-By` trailer in commit messages.
 
 ## Testing
 
-There are almost no tests: one component test, plus unit tests for `sort-by`, `form-state`, and `validators`. A green lint and build don't prove a page renders. To check a UI change:
+Acceptance tests in `tests/acceptance/` are smoke tests that check the app is wired up end to end, against Mirage:
 
-1. Add a temporary acceptance test under `tests/acceptance/`. `setupApplicationTest` from `butchers-market/tests/helpers` already sets up Mirage.
-2. Create the Mirage records the page needs and assert on the real DOM.
-3. Delete the test unless it's meant to stay.
+- `public-pages-test.ts`: each public page loads and shows its data (seeded from the default Mirage scenario).
+- `admin-pages-test.ts`: every admin index, new, and edit page renders, and the admin requires signing in.
+- `admin/<resource>-test.ts`: the admin workflows for one resource (create, edit, cancel, delete, reorder, and the requests sent to the API). Only `specials` has one so far; add one per resource as it moves to WarpDrive schemas.
+
+Other tests: one component test, plus unit tests for `sort-by`, `form-state`, and `validators`. A green lint and build don't prove a page works, so add or extend an acceptance test for UI and data changes. `setupApplicationTest` from `butchers-market/tests/helpers` sets up Mirage, and `setupAuthentication` from `tests/helpers/authenticate` signs in. To check what was sent to the API, use `trackRequests` from `tests/helpers/track-requests` (Mirage doesn't keep requests itself).
 
 `app/router.ts` has `test-route` routes that exist only for component tests.

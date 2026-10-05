@@ -7,10 +7,12 @@ import type RouterService from '@ember/routing/router-service';
 import { dropTask, enqueueTask } from 'ember-concurrency';
 import type { UploadFile } from 'ember-file-upload';
 import fileQueue from 'ember-file-upload/helpers/file-queue';
-import type Special from '../../../models/special';
+import type { Special } from '../../../schemas/special';
 import type SessionService from '../../../services/session';
+import type Store from '../../../services/store';
 import SpecialValidations from '../../../validations/special';
 import FormState from '../../../utils/form-state';
+import { saveRecord } from '../../../utils/records';
 import baseUrl from '../../../utils/base-url';
 import { ORDER_ONLINE_URL } from '../../../utils/config';
 import { generateFileName } from '../../../utils/file-name';
@@ -31,6 +33,7 @@ interface SpecialFormSignature {
 export default class SpecialFormComponent extends Component<SpecialFormSignature> {
   @service declare router: RouterService;
   @service declare session: SessionService;
+  @service declare store: Store;
 
   form: FormState<Special>;
   orderOnlineUrl = ORDER_ONLINE_URL;
@@ -76,7 +79,9 @@ export default class SpecialFormComponent extends Component<SpecialFormSignature
   constructor(owner: Owner, args: SpecialFormSignature['Args']) {
     super(owner, args);
 
-    this.form = new FormState(this.args.special, SpecialValidations);
+    this.form = new FormState(this.args.special, SpecialValidations, (special) =>
+      saveRecord(this.store, special)
+    );
 
     if (this.form.get('activeStartDate')) {
       this.activeDuringRange = true;

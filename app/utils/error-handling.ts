@@ -22,6 +22,12 @@ export async function getErrorMessageFromException(exception: unknown, defaultMe
     return getFirstErrorMessage(json.errors) ?? _defaultMessage;
   }
 
+  // Errors from `store.request` keep the parsed response body in `content`.
+  if (typeof exception === 'object' && exception !== null && 'content' in exception) {
+    const content = exception.content as { errors?: JsonApiError[] } | null;
+    return getFirstErrorMessage(content?.errors) ?? _defaultMessage;
+  }
+
   if (typeof exception === 'object' && exception !== null && 'errors' in exception) {
     return (
       getFirstErrorMessage((exception as { errors: JsonApiError[] }).errors) ?? _defaultMessage

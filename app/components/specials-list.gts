@@ -1,6 +1,6 @@
 import type { TOC } from '@ember/component/template-only';
 import sortBy from '../helpers/sort-by';
-import type Special from '../models/special';
+import type { Special } from '../schemas/special';
 import SpecialListItem from './specials-list/special-list-item';
 
 const SpecialsList: TOC<{

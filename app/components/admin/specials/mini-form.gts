@@ -1,7 +1,10 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import { dropTask } from 'ember-concurrency';
-import type Special from '../../../models/special';
+import type { Special } from '../../../schemas/special';
+import type Store from '../../../services/store';
+import { saveRecord } from '../../../utils/records';
 import AdminForm from '../admin-form';
 
 interface MiniFormSignature {
@@ -12,8 +15,10 @@ interface MiniFormSignature {
 }
 
 export default class MiniFormComponent extends Component<MiniFormSignature> {
+  @service declare store: Store;
+
   saveSpecial = dropTask(async () => {
-    await this.args.special.save();
+    await saveRecord(this.store, this.args.special);
   });
 
   @action

@@ -1,19 +1,19 @@
 import Route from '@ember/routing/route';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
-import type Model from '@warp-drive/legacy/model';
+import type { Special } from '../../../schemas/special';
 import type Store from '../../../services/store';
 
 export default class AdminSpecialsNewRoute extends Route {
   @service declare store: Store;
 
   model() {
-    return this.store.createRecord('special', {});
+    return this.store.createRecord<Special>('special', {});
   }
 
   @action
   willTransition(/*transition*/) {
-    const special = this.modelFor(this.routeName) as Model;
+    const special = this.modelFor(this.routeName) as Special;
 
     if (special.hasDirtyAttributes) {
       special.rollbackAttributes();

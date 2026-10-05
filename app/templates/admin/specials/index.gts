@@ -3,12 +3,12 @@ import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
 import type Store from '../../../services/store';
 import { dropTask } from 'ember-concurrency';
-import type SpecialAdapter from '../../../adapters/special';
+import { reorderSpecials } from '../../../builders/special';
 import { fn } from '@ember/helper';
 import sortableGroup from 'ember-sortable/modifiers/sortable-group';
 import sortableHandle from 'ember-sortable/modifiers/sortable-handle';
 import sortableItem from 'ember-sortable/modifiers/sortable-item';
-import type Special from '../../../models/special';
+import type { Special } from '../../../schemas/special';
 import dateFormat from '../../../helpers/date-format';
 import sortBy from '../../../helpers/sort-by';
 import BackLink from '../../../components/admin/back-link';
@@ -46,12 +46,9 @@ export default class AdminSpecialsIndexTemplate extends Component<Signature> {
         special.displayOrder = index + 1;
       });
 
-      const adapter = this.store.adapterFor('special') as SpecialAdapter;
-      const response = await adapter.reorderSpecials(specials);
-
-      if (!response.ok) {
-        this.showErrorMessage = true;
-      }
+      // The response has every special with its new `displayOrder`. The store applies it, which
+      // also clears the changes made above so the records aren't left with unsaved changes.
+      await this.store.request(reorderSpecials(specials));
     } catch (ex) {
       this.showErrorMessage = true;
       console.error(ex);
@@ -97,9 +94,14 @@ export default class AdminSpecialsIndexTemplate extends Component<Signature> {
       </Table.Head>
       <Table.Body {{sortableGroup onChange=this.reorderItems}} as |Tbody|>
         {{#each (sortBy "displayOrder" @model) as |special|}}
-          <Tbody.Tr {{sortableItem model=special}} as |Row|>
+          <Tbody.Tr data-test-id="special" {{sortableItem model=special}} as |Row|>
             <Row.Td>
-              <UiIcon @icon="arrows-alt-v" class="block w-4" {{sortableHandle}} />
+              <UiIcon
+                data-test-id="handle"
+                @icon="arrows-alt-v"
+                class="block w-4"
+                {{sortableHandle}}
+              />
             </Row.Td>
             <Row.Td>
               {{special.title}}
@@ -123,6 +125,7 @@ export default class AdminSpecialsIndexTemplate extends Component<Signature> {
             <Row.Td>
               <div class="flex justify-end">
                 <UiButton
+                  data-test-id="edit"
                   @route="admin.specials.edit"
                   @model={{special.id}}
                   @iconOnly={{true}}
@@ -131,6 +134,7 @@ export default class AdminSpecialsIndexTemplate extends Component<Signature> {
                 />
 
                 <UiButton
+                  data-test-id="delete"
                   class="ml-1"
                   @iconOnly={{true}}
                   @icon="trash-alt"
