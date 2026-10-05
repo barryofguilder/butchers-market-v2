@@ -5,6 +5,7 @@ import { drag } from 'ember-sortable/test-support';
 import { Response } from 'miragejs';
 import { setupApplicationTest } from 'butchers-market/tests/helpers';
 import { setupAuthentication } from 'butchers-market/tests/helpers/authenticate';
+import { buttonWithText, columnText, rowWith } from 'butchers-market/tests/helpers/table';
 import { testId } from 'butchers-market/tests/helpers/test-id';
 import {
   findRequest,
@@ -20,17 +21,11 @@ interface MirageSpecial {
 }
 
 function rowTitles() {
-  return findAll(testId('special')).map((row) => row.querySelectorAll('td')[1]!.textContent.trim());
+  return columnText('special', 1);
 }
 
 function rowFor(title: string) {
-  const row = findAll(testId('special')).find((row) => row.textContent.includes(title));
-
-  if (!row) {
-    throw new Error(`No special row with the title "${title}"`);
-  }
-
-  return row as HTMLElement;
+  return rowWith('special', title);
 }
 
 // Workflow tests: each change made through the admin reaches the API.
@@ -169,7 +164,7 @@ module('Acceptance | admin | specials', function (hooks) {
   test('cancelling an edit leaves the special unchanged', async function (assert) {
     await visit('/admin/specials/1/edit');
     await fillIn(`${testId('title')} input`, 'Not saved');
-    await click(findAll('button').find((button) => button.textContent.trim() === 'Cancel')!);
+    await click(buttonWithText('Cancel'));
 
     assert.strictEqual(currentURL(), '/admin/specials');
     assert.dom(rowFor('Brisket')).exists();
@@ -222,7 +217,7 @@ module('Acceptance | admin | specials', function (hooks) {
     await click(rowFor('Meatloaf').querySelector(testId('delete'))!);
 
     assert.dom(document.body).includesText('Delete Special?');
-    await click(findAll('button').find((button) => button.textContent.trim() === 'Yes')!);
+    await click(buttonWithText('Yes'));
 
     assert.deepEqual(rowTitles(), ['Brisket']);
     // @ts-expect-error: There are no types for the Mirage server.

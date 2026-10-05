@@ -1,5 +1,5 @@
 import type { TOC } from '@ember/component/template-only';
-import type DeliItem from '../models/deli-item';
+import type { DeliItem } from '../schemas/deli-item';
 import sortBy from '../helpers/sort-by';
 import Container from '../components/container';
 import HeaderTitle from '../components/header-title';

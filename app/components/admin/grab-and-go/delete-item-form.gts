@@ -1,8 +1,11 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { service } from '@ember/service';
 import { dropTask } from 'ember-concurrency';
-import type GrabAndGo from '../../../models/grab-and-go';
+import type { GrabAndGo } from '../../../schemas/grab-and-go';
+import type Store from '../../../services/store';
 import { getErrorMessageFromException } from '../../../utils/error-handling';
+import { destroyRecord } from '../../../utils/records';
 import ModalDialog from '../../modal-dialog';
 import UiAlert from '../../ui-alert';
 import UiButton from '../../ui-button';
@@ -18,11 +21,15 @@ interface DeleteItemFormSignature {
 }
 
 export default class DeleteItemFormComponent extends Component<DeleteItemFormSignature> {
+  @service declare store: Store;
+
   @tracked errorMessage: string | null = null;
 
   deleteItem = dropTask(async () => {
     try {
-      await this.args.item?.destroyRecord();
+      if (this.args.item) {
+        await destroyRecord(this.store, this.args.item);
+      }
       this.args.onSave();
     } catch (ex) {
       this.errorMessage = await getErrorMessageFromException(ex);

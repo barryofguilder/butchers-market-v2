@@ -4,6 +4,8 @@ import { setBuildURLConfig } from '@warp-drive/utilities/json-api';
 import { AuthHandler } from '../handlers/auth';
 import { JsonApiHandler } from '../handlers/json-api';
 import { orderOnlineLink, uploadsPath } from '../schemas/derivations';
+import { DeliItemSchema } from '../schemas/deli-item';
+import { GrabAndGoSchema } from '../schemas/grab-and-go';
 import { SpecialSchema } from '../schemas/special';
 import { DateTransformation } from '../schemas/transformations';
 import { API_NAMESPACE, API_URL } from '../utils/config';
@@ -15,7 +17,7 @@ const Store = useLegacyStore({
   legacyRequests: true,
   cache: JSONAPICache,
   handlers: [AuthHandler, JsonApiHandler],
-  schemas: [SpecialSchema],
+  schemas: [DeliItemSchema, GrabAndGoSchema, SpecialSchema],
   derivations: [orderOnlineLink, uploadsPath],
   transformations: [DateTransformation],
 });

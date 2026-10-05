@@ -1,21 +1,23 @@
 import Route from '@ember/routing/route';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import { query } from '@warp-drive/utilities/json-api';
+import type { GrabAndGo } from '../schemas/grab-and-go';
 import type Store from '../services/store';
 
 export default class GrabAndGoRoute extends Route {
   @service declare store: Store;
 
   async model() {
-    const holidayItems = this.store.query('grab-and-go', {
-      filter: { inStock: true, isHoliday: true },
-    });
-    const regularItems = this.store.query('grab-and-go', {
-      filter: { inStock: true, isHoliday: false },
-    });
+    const holidayItems = this.store.request(
+      query<GrabAndGo>('grab-and-go', { 'filter[inStock]': true, 'filter[isHoliday]': true })
+    );
+    const regularItems = this.store.request(
+      query<GrabAndGo>('grab-and-go', { 'filter[inStock]': true, 'filter[isHoliday]': false })
+    );
 
     const [holiday, regular] = await Promise.all([holidayItems, regularItems]);
-    return { holidayItems: holiday, regularItems: regular };
+    return { holidayItems: holiday.content.data, regularItems: regular.content.data };
   }
 
   @action

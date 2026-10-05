@@ -1,5 +1,5 @@
 import type { TOC } from '@ember/component/template-only';
-import type GrabAndGo from '../../../models/grab-and-go';
+import type { GrabAndGo } from '../../../schemas/grab-and-go';
 import BackLink from '../../../components/admin/back-link';
 import SocialList from '../../../components/admin/grab-and-go/social-list';
 import Title from '../../../components/admin/title';

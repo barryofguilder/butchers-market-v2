@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { service } from '@ember/service';
 import type RouterService from '@ember/routing/router-service';
-import type GrabAndGo from '../../../models/grab-and-go';
+import type { GrabAndGo } from '../../../schemas/grab-and-go';
 import BackLink from '../../../components/admin/back-link';
 import ItemForm from '../../../components/admin/grab-and-go/item-form';
 import Title from '../../../components/admin/title';

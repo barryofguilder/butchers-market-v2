@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 import { format } from 'date-fns';
-import type GrabAndGo from '../../../models/grab-and-go';
+import type { GrabAndGo } from '../../../schemas/grab-and-go';
 import UiCopyButton from '../../ui-copy-button';
 
 interface SocialListSignature {

@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { fn } from '@ember/helper';
 import type AdminDeliItemsIndexController from '../../../controllers/admin/deli-items/index';
-import type DeliItem from '../../../models/deli-item';
+import type { DeliItem } from '../../../schemas/deli-item';
 import BackLink from '../../../components/admin/back-link';
 import DeleteDeliItemForm from '../../../components/admin/deli-items/delete-deli-item-form';
 import MiniForm from '../../../components/admin/deli-items/mini-form';
@@ -73,7 +73,7 @@ export default class AdminDeliItemsIndexTemplate extends Component<Signature> {
       </Table.Head>
       <Table.Body as |Tbody|>
         {{#each this.sortedDeliItems as |item|}}
-          <Tbody.Tr as |Row|>
+          <Tbody.Tr data-test-id="deli-item" as |Row|>
             <Row.Td>{{item.title}}</Row.Td>
             <Row.Td>
               <MiniForm @item={{item}} />
@@ -81,6 +81,7 @@ export default class AdminDeliItemsIndexTemplate extends Component<Signature> {
             <Row.Td>
               <div class="flex justify-end">
                 <UiButton
+                  data-test-id="edit"
                   @route="admin.deli-items.edit"
                   @model={{item.id}}
                   @iconOnly={{true}}
@@ -89,6 +90,7 @@ export default class AdminDeliItemsIndexTemplate extends Component<Signature> {
                 />
 
                 <UiButton
+                  data-test-id="delete"
                   class="ml-1"
                   @iconOnly={{true}}
                   @icon="trash-alt"
