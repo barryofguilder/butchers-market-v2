@@ -7,5 +7,11 @@ export default {
         ignoreAtRules: ['apply', 'layer', 'theme', 'utility'],
       },
     ],
+    'at-rule-prelude-no-invalid': [
+      true,
+      {
+        ignoreAtRules: ['apply'],
+      },
+    ],
   },
 };

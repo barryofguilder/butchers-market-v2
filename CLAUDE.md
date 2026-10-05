@@ -12,8 +12,8 @@ Use pnpm (Node and pnpm versions are pinned in `package.json` via Volta).
 
 - `pnpm start`: Vite dev server.
 - `pnpm build`: production build into `dist/`. Use `pnpm vite build --mode development` for a dev build.
-- `pnpm test`: builds in development mode with `VITE_USE_MIRAGE=true`, then runs `ember test --path dist`.
-- Run a subset of tests: `pnpm test --filter "<module or test name>"`. The args go to `ember test`.
+- `pnpm test`: builds in development mode with `VITE_USE_MIRAGE=true`, then runs `testem ci` against `dist`.
+- Run a subset of tests: `pnpm ember test --path dist --filter "<module or test name>"` after a `pnpm test` build (testem has no `--filter`). Rebuild first if you changed code.
 - `pnpm lint`: runs every `lint:*` script (eslint, stylelint, ember-template-lint, prettier check, and `ember-tsc --noEmit` for Glint type-checking). `pnpm lint:fix` auto-fixes and formats.
 - `pnpm lint:types`: type-check only.
 
