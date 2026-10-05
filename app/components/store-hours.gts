@@ -71,7 +71,7 @@ export default class StoreHoursComponent extends Component<StoreHoursSignature> 
   <template>
     <div ...attributes>
       <Hours @hours={{this.primaryHours}} />
-      <Hours @hours={{this.secondaryHours}} class='mt-8' />
+      <Hours @hours={{this.secondaryHours}} class="mt-8" />
     </div>
   </template>
 }

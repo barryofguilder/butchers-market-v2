@@ -48,33 +48,33 @@ export default class SignInFormComponent extends Component<SignInFormSignature> 
   });
 
   <template>
-    <AdminForm class='max-w-md' @onSubmit={{this.signIn.perform}} as |Form|>
+    <AdminForm class="max-w-md" @onSubmit={{this.signIn.perform}} as |Form|>
       {{#if this.hasError}}
-        <UiAlert data-test-id='server-error' @variant='danger'>
+        <UiAlert data-test-id="server-error" @variant="danger">
           Invalid username or password.
         </UiAlert>
       {{/if}}
 
-      <Form.group data-test-id='username' as |Group|>
+      <Form.group data-test-id="username" as |Group|>
         <Group.label>Username</Group.label>
         <Group.textbox
-          autocomplete='username'
+          autocomplete="username"
           @value={{this.username}}
-          @onChange={{set this 'username'}}
+          @onChange={{set this "username"}}
         />
       </Form.group>
 
-      <Form.group data-test-id='password' as |Group|>
+      <Form.group data-test-id="password" as |Group|>
         <Group.label>Password</Group.label>
         <Group.textbox
-          type='password'
-          autocomplete='current-password'
+          type="password"
+          autocomplete="current-password"
           @value={{this.password}}
-          @onChange={{set this 'password'}}
+          @onChange={{set this "password"}}
         />
       </Form.group>
 
-      <div class='mt-8'>
+      <div class="mt-8">
         <Form.submit>
           Sign In
         </Form.submit>

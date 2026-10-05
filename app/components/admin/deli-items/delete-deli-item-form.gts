@@ -34,38 +34,38 @@ export default class DeleteDeliItemFormComponent extends Component<DeleteDeliIte
       <Modal.header>
         Delete Deli Item?
       </Modal.header>
-      <AdminForm class='max-w-xl' @onSubmit={{this.deleteItem.perform}} as |Form|>
+      <AdminForm class="max-w-xl" @onSubmit={{this.deleteItem.perform}} as |Form|>
         <Modal.body>
           {{#if this.errorMessage}}
-            <UiAlert data-test-id='server-error' @variant='danger'>
+            <UiAlert data-test-id="server-error" @variant="danger">
               {{this.errorMessage}}
             </UiAlert>
           {{/if}}
 
-          <p class='mb-8'>
+          <p class="mb-8">
             Do you really want to delete this deli item?
           </p>
 
-          <Form.group data-test-id='title' as |Group|>
+          <Form.group data-test-id="title" as |Group|>
             <Group.label>Title</Group.label>
             <Group.readonly @value={{@item.title}} />
           </Form.group>
 
-          <Form.group data-test-id='lead-in' as |Group|>
+          <Form.group data-test-id="lead-in" as |Group|>
             <Group.label>Ingredients</Group.label>
             <Group.textarea readonly={{true}} @value={{@item.ingredients}} />
           </Form.group>
 
-          <Form.group data-test-id='hidden' as |Group|>
+          <Form.group data-test-id="hidden" as |Group|>
             <Group.label>Is Hidden?</Group.label>
-            <Group.readonly @value={{if @item.isHidden 'Yes' 'No'}} />
+            <Group.readonly @value={{if @item.isHidden "Yes" "No"}} />
           </Form.group>
         </Modal.body>
         <Modal.footer>
-          <UiButton @variant='plain' @onClick={{@onCancel}}>
+          <UiButton @variant="plain" @onClick={{@onCancel}}>
             No
           </UiButton>
-          <Form.submit class='ml-2' @disabled={{this.deleteItem.isRunning}}>
+          <Form.submit class="ml-2" @disabled={{this.deleteItem.isRunning}}>
             Yes
           </Form.submit>
         </Modal.footer>

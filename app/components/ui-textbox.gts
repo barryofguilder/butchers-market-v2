@@ -42,14 +42,14 @@ export default class UiTextboxComponent extends Component<UiTextboxSignature> {
 
   <template>
     <input
-      data-test-id='textbox'
-      type='text'
-      class='styled-textbox {{if this.hasErrors "has-errors"}}'
+      data-test-id="textbox"
+      type="text"
+      class="styled-textbox {{if this.hasErrors 'has-errors'}}"
       id={{this.id}}
       value={{@value}}
       readonly={{this.readonly}}
       ...attributes
-      {{on 'input' this.handleInput}}
+      {{on "input" this.handleInput}}
     />
   </template>
 }

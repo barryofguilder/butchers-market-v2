@@ -34,38 +34,38 @@ export default class DeleteItemFormComponent extends Component<DeleteItemFormSig
       <Modal.header>
         Delete Grab and Go Item?
       </Modal.header>
-      <AdminForm class='max-w-xl' @onSubmit={{this.deleteItem.perform}} as |Form|>
+      <AdminForm class="max-w-xl" @onSubmit={{this.deleteItem.perform}} as |Form|>
         <Modal.body>
           {{#if this.errorMessage}}
-            <UiAlert data-test-id='server-error' @variant='danger'>
+            <UiAlert data-test-id="server-error" @variant="danger">
               {{this.errorMessage}}
             </UiAlert>
           {{/if}}
 
-          <p class='mb-8'>
+          <p class="mb-8">
             Do you really want to delete this grab and go item?
           </p>
 
-          <Form.group data-test-id='title' as |Group|>
+          <Form.group data-test-id="title" as |Group|>
             <Group.label>Title</Group.label>
             <Group.readonly @value={{@item.title}} />
           </Form.group>
 
-          <Form.group data-test-id='description' as |Group|>
+          <Form.group data-test-id="description" as |Group|>
             <Group.label>Description</Group.label>
             <Group.readonly @value={{@item.description}} />
           </Form.group>
 
-          <Form.group data-test-id='in-stock' as |Group|>
+          <Form.group data-test-id="in-stock" as |Group|>
             <Group.label>In Stock?</Group.label>
-            <Group.readonly @value={{if @item.inStock 'Yes' 'No'}} />
+            <Group.readonly @value={{if @item.inStock "Yes" "No"}} />
           </Form.group>
         </Modal.body>
         <Modal.footer>
-          <UiButton @variant='plain' @onClick={{@onCancel}}>
+          <UiButton @variant="plain" @onClick={{@onCancel}}>
             No
           </UiButton>
-          <Form.submit class='ml-2'>
+          <Form.submit class="ml-2">
             Yes
           </Form.submit>
         </Modal.footer>

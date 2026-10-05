@@ -15,11 +15,11 @@ const GrabAndGoTemplate: RouteTemplate<GrabAndGoModel, GrabAndGoController> = <t
   <MobileOrderBanner />
 
   {{! We need 1px of padding so that the header margin takes over since we have no promo image. }}
-  <div class='pt-px'></div>
+  <div class="pt-px"></div>
 
   {{#if @model.holidayItems.length}}
     <section>
-      <HeaderTitle @title='Holiday Grab & Go Items' />
+      <HeaderTitle @title="Holiday Grab & Go Items" />
 
       <Container>
         <GrabAndGoList @items={{@model.holidayItems}} />
@@ -31,8 +31,8 @@ const GrabAndGoTemplate: RouteTemplate<GrabAndGoModel, GrabAndGoController> = <t
     <HeaderTitle @title="Today's Grab & Go Items" />
 
     <Container>
-      <div class='mt-10 max-w-3xl mx-auto'>
-        <p class='text-center text-lg sm:text-2xl'>
+      <div class="mt-10 max-w-3xl mx-auto">
+        <p class="text-center text-lg sm:text-2xl">
           Here are today's grab &amp; go items.
           {{#if @controller.lastUpdatedOn}}
             Last updated on

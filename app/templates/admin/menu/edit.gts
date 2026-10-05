@@ -6,9 +6,9 @@ import MenuForm from '../../../components/admin/menu/menu-form';
 import Title from '../../../components/admin/title';
 
 const AdminMenuEditTemplate: RouteTemplate<Menu, AdminMenuEditController> = <template>
-  <BackLink @route='admin.menu' @text='Menu PDF' />
+  <BackLink @route="admin.menu" @text="Menu PDF" />
 
-  <Title @title='Edit Menu PDF' />
+  <Title @title="Edit Menu PDF" />
 
   <MenuForm
     @menu={{@model}}

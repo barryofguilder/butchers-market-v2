@@ -7,9 +7,9 @@ import MainFooter from '../components/main-footer';
 
   <MainNav />
 
-  <div class='mt-20'>
+  <div class="mt-20">
     {{outlet}}
   </div>
 
-  <MainFooter class='mt-24' />
+  <MainFooter class="mt-24" />
 </template>

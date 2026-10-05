@@ -78,11 +78,11 @@ class UiTableCell extends Component<UiTableCellSignature> {
 
   <template>
     <td
-      class='px-3 first:pl-4 first:pr-3 sm:first:pl-6 last:pl-3 last:pr-4 sm:last:pr-6 py-4 text-sm text-gray-700
-        {{if @accent "font-medium"}}
-        {{if (eq this.align "right") "text-right"}}
-        {{if @noWrap "whitespace-nowrap" "whitespace-normal"}}
-        '
+      class="px-3 first:pl-4 first:pr-3 sm:first:pl-6 last:pl-3 last:pr-4 sm:last:pr-6 py-4 text-sm text-gray-700
+        {{if @accent 'font-medium'}}
+        {{if (eq this.align 'right') 'text-right'}}
+        {{if @noWrap 'whitespace-nowrap' 'whitespace-normal'}}
+        "
       ...attributes
     >
       {{yield}}
@@ -98,8 +98,8 @@ interface UiTableEmptySignature {
 }
 
 const UiTableEmpty: TOC<UiTableEmptySignature> = <template>
-  <tr data-test-id='no-records' class='border-b' ...attributes>
-    <td class='p-3 text-gray-500 text-center italic py-6' colspan='100%'>
+  <tr data-test-id="no-records" class="border-b" ...attributes>
+    <td class="p-3 text-gray-500 text-center italic py-6" colspan="100%">
       {{yield}}
     </td>
   </tr>
@@ -135,7 +135,7 @@ interface UiTableBodySignature {
 }
 
 const UiTableBody: TOC<UiTableBodySignature> = <template>
-  <tbody class='divide-y divide-gray-200 bg-white' ...attributes>
+  <tbody class="divide-y divide-gray-200 bg-white" ...attributes>
     {{yield (hash Empty=(component UiTableEmpty) Tr=UiTableRow)}}
   </tbody>
 </template>;
@@ -232,29 +232,29 @@ class UiTableHeadCell extends Component<UiTableHeadCellSignature> {
 
   <template>
     <th
-      scope='col'
-      class='px-3 first:pl-4 sm:first:pl-6 last:pl-3 first:pr-3 last:pr-4 sm:last:pr-6 py-3.5 text-sm font-semibold text-gray-900
-        {{if this.isRightAligned "text-right" "text-left"}}'
+      scope="col"
+      class="px-3 first:pl-4 sm:first:pl-6 last:pl-3 first:pr-3 last:pr-4 sm:last:pr-6 py-3.5 text-sm font-semibold text-gray-900
+        {{if this.isRightAligned 'text-right' 'text-left'}}"
       {{this.initColumn}}
       ...attributes
     >
       {{#if this.isSortable}}
         <button
-          data-test-id='table-col-btn'
-          type='button'
-          class='group inline-flex'
-          {{on 'click' this.columnClicked}}
+          data-test-id="table-col-btn"
+          type="button"
+          class="group inline-flex"
+          {{on "click" this.columnClicked}}
         >
           {{yield}}
 
           {{#if this.isSorted}}
             <span
-              class='transition ml-2 px-1 flex-none rounded bg-gray-100 text-gray-900 group-hover:bg-gray-200
-                {{if this.isAscending "-rotate-180"}}'
+              class="transition ml-2 px-1 flex-none rounded bg-gray-100 text-gray-900 group-hover:bg-gray-200
+                {{if this.isAscending '-rotate-180'}}"
             >
               <UiIcon
-                data-test-id='{{if this.isAscending "sort-asc" "sort-desc"}}'
-                @icon='chevron-down'
+                data-test-id="{{if this.isAscending 'sort-asc' 'sort-desc'}}"
+                @icon="chevron-down"
               />
             </span>
           {{/if}}
@@ -304,7 +304,7 @@ export interface UiTableSignature {
 }
 
 const UiTableComponent: TOC<UiTableSignature> = <template>
-  <table class='min-w-full divide-y divide-gray-300' ...attributes>
+  <table class="min-w-full divide-y divide-gray-300" ...attributes>
     {{yield (hash Body=(component UiTableBody) Head=(component UiTableHead))}}
   </table>
 </template>;

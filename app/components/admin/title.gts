@@ -9,7 +9,7 @@ const Title: TOC<{
     default: [];
   };
 }> = <template>
-  <h1 class='mb-8 text-xl md:text-3xl uppercase font-black'>
+  <h1 class="mb-8 text-xl md:text-3xl uppercase font-black">
     {{#if (has-block)}}
       {{yield}}
     {{else}}

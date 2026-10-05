@@ -7,9 +7,9 @@ import Title from '../../../components/admin/title';
 
 const AdminMeatBundlesEditTemplate: RouteTemplate<MeatBundle, AdminMeatBundlesEditController> =
   <template>
-    <BackLink @route='admin.meat-bundles' @text='Meat Bundles' />
+    <BackLink @route="admin.meat-bundles" @text="Meat Bundles" />
 
-    <Title @title='Edit Meat Bundle' />
+    <Title @title="Edit Meat Bundle" />
 
     <MeatBundleForm
       @bundle={{@model}}

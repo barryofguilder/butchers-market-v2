@@ -5,9 +5,9 @@ const FacebookButton: TOC<{
   Element: HTMLButtonElement | HTMLAnchorElement;
 }> = <template>
   <UiButton
-    @href='https://www.facebook.com/thebutchersmarket'
-    @variant='primary'
-    class='mt-8'
+    @href="https://www.facebook.com/thebutchersmarket"
+    @variant="primary"
+    class="mt-8"
     ...attributes
   >
     Like us on Facebook

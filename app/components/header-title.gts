@@ -6,19 +6,19 @@ const HeaderTitle: TOC<{
     title: string;
   };
 }> = <template>
-  <header class='mt-16 sm:flex sm:items-center sm:flex-row'>
+  <header class="mt-16 sm:flex sm:items-center sm:flex-row">
     <div
-      class='hidden sm:block sm:flex-auto sm:border-red-800 sm:border-2'
-      aria-hidden='true'
+      class="hidden sm:block sm:flex-auto sm:border-red-800 sm:border-2"
+      aria-hidden="true"
     ></div>
     <h2
-      class='mx-6 my-2 text-center uppercase tracking-wide font-black text-2xl sm:text-4xl sm:shrink'
+      class="mx-6 my-2 text-center uppercase tracking-wide font-black text-2xl sm:text-4xl sm:shrink"
     >
       {{@title}}
     </h2>
     <div
-      class='hidden sm:block sm:flex-auto sm:border-red-800 sm:border-2'
-      aria-hidden='true'
+      class="hidden sm:block sm:flex-auto sm:border-red-800 sm:border-2"
+      aria-hidden="true"
     ></div>
   </header>
 </template>;

@@ -6,7 +6,7 @@ const Container: TOC<{
     default: [];
   };
 }> = <template>
-  <div class='container px-4 sm:px-10' ...attributes>
+  <div class="container px-4 sm:px-10" ...attributes>
     {{yield}}
   </div>
 </template>;

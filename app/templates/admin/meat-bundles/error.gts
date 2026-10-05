@@ -5,9 +5,9 @@ import PageError from '../../../components/admin/page-error';
 const AdminMeatBundlesErrorTemplate: RouteTemplate<{ errors?: RequestError[] }> = <template>
   <PageError
     @errors={{@model.errors}}
-    @name='Meat Bundle'
-    @route='admin.meat-bundles'
-    @backText='Back to Meat Bundles'
+    @name="Meat Bundle"
+    @route="admin.meat-bundles"
+    @backText="Back to Meat Bundles"
   />
 </template>;
 

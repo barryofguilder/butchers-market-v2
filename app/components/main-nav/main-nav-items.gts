@@ -56,32 +56,32 @@ export default class MainNavItemsComponent extends Component<MainNavItemsSignatu
   }
 
   <template>
-    <ul class='list-reset flex flex-col lg:flex-row lg:items-center'>
+    <ul class="list-reset flex flex-col lg:flex-row lg:items-center">
       {{#let
-        'block px-6 py-4 lg:flex lg:items-center lg:py-0 lg:h-full hover:text-red-700 focus:text-red-700 focus:outline-hidden text-center lg:text-left'
+        "block px-6 py-4 lg:flex lg:items-center lg:py-0 lg:h-full hover:text-red-700 focus:text-red-700 focus:outline-hidden text-center lg:text-left"
         as |classes|
       }}
         {{#if SHOW_ORDER_ONLINE}}
-          <li class='hidden lg:block'>
+          <li class="hidden lg:block">
             <OrderButton />
           </li>
         {{/if}}
-        <li class='lg:ml-8 lg:block lg:h-full'>
-          <LinkTo @route='meat' class={{classes}} {{on 'click' this.itemClicked}}>
+        <li class="lg:ml-8 lg:block lg:h-full">
+          <LinkTo @route="meat" class={{classes}} {{on "click" this.itemClicked}}>
             Meat
           </LinkTo>
         </li>
-        <li class='lg:block lg:h-full'>
-          <LinkTo @route='deli' class={{classes}} {{on 'click' this.itemClicked}}>
+        <li class="lg:block lg:h-full">
+          <LinkTo @route="deli" class={{classes}} {{on "click" this.itemClicked}}>
             Deli
           </LinkTo>
         </li>
-        <li class='lg:block lg:h-full'>
-          <LinkTo @route='grab-and-go' class={{classes}} {{on 'click' this.itemClicked}}>
+        <li class="lg:block lg:h-full">
+          <LinkTo @route="grab-and-go" class={{classes}} {{on "click" this.itemClicked}}>
             Grab &amp; Go
           </LinkTo>
         </li>
-        <li class='lg:block lg:h-full'>
+        <li class="lg:block lg:h-full">
           <a href={{this.menuUrl}} class={{classes}}>
             Cafe Menu
           </a>

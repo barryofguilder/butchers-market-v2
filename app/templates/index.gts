@@ -28,12 +28,12 @@ interface IndexModel {
 const IndexTemplate: RouteTemplate<IndexModel, IndexController> = <template>
   <MobileOrderBanner />
 
-  <PromoSection @image='promo-index.jpg' as |Promo|>
+  <PromoSection @image="promo-index.jpg" as |Promo|>
     <Container>
       <div
-        class='text-center sm:text-left {{unless @controller.showThanksgivingMealPromo "lg:w-3/4"}}'
+        class="text-center sm:text-left {{unless @controller.showThanksgivingMealPromo 'lg:w-3/4'}}"
       >
-        <div class='hidden sm:block'>
+        <div class="hidden sm:block">
           <Promo.title>
             Welcome to The Butcher's Market Meat &amp; Deli
           </Promo.title>
@@ -42,19 +42,19 @@ const IndexTemplate: RouteTemplate<IndexModel, IndexController> = <template>
           </Promo.subtitle>
         </div>
 
-        <FacebookButton class='max-sm:hidden' />
+        <FacebookButton class="max-sm:hidden" />
 
-        <StoreHours @hours={{@model.hours}} @primaryType='Store' class='mt-8' />
-        <StoreLocation class='mt-8' />
+        <StoreHours @hours={{@model.hours}} @primaryType="Store" class="mt-8" />
+        <StoreLocation class="mt-8" />
 
-        <FacebookButton class='sm:hidden' />
+        <FacebookButton class="sm:hidden" />
       </div>
     </Container>
   </PromoSection>
 
   {{#if (gt @model.specials.length 0)}}
     <section>
-      <HeaderTitle @title='Specials' />
+      <HeaderTitle @title="Specials" />
 
       <Container @enableFullWidthForMobile={{true}}>
         <SpecialsList @specials={{@model.specials}} />
@@ -63,17 +63,17 @@ const IndexTemplate: RouteTemplate<IndexModel, IndexController> = <template>
   {{/if}}
 
   <section>
-    <HeaderTitle @title='Featured Bundles' />
+    <HeaderTitle @title="Featured Bundles" />
 
     <Container>
       <ProductsList @products={{@model.bundles}}>
         <div
-          class='mt-10 text-center sm:w-1/2 sm:flex sm:flex-col sm:items-center lg:w-full lg:flex-row lg:text-left'
+          class="mt-10 text-center sm:w-1/2 sm:flex sm:flex-col sm:items-center lg:w-full lg:flex-row lg:text-left"
         >
-          <UiButton @route='meat' @query={{hash packages=true}}>
+          <UiButton @route="meat" @query={{hash packages=true}}>
             View All Packages
           </UiButton>
-          <p class='mt-4 lg:ml-4 lg:mt-0 sm:text-lg'>
+          <p class="mt-4 lg:ml-4 lg:mt-0 sm:text-lg">
             We have a meat or grocery packages for every need and budget!
           </p>
         </div>
@@ -82,21 +82,21 @@ const IndexTemplate: RouteTemplate<IndexModel, IndexController> = <template>
   </section>
 
   <section>
-    <HeaderTitle @title='Who We Are' />
+    <HeaderTitle @title="Who We Are" />
 
     <Container>
-      <div class='mt-10 max-w-3xl mx-auto'>
-        <h3 class='text-red-700 text-xl sm:text-3xl uppercase tracking-wide font-black'>
+      <div class="mt-10 max-w-3xl mx-auto">
+        <h3 class="text-red-700 text-xl sm:text-3xl uppercase tracking-wide font-black">
           Each interaction is unique.
         </h3>
-        <p class='mt-4 text-lg sm:text-2xl'>
+        <p class="mt-4 text-lg sm:text-2xl">
           Every customer is an individual and deserves service catered to their exact needs.
         </p>
-        <p class='mt-4 sm:text-lg'>
+        <p class="mt-4 sm:text-lg">
           We come to work everyday to supply that type of service &amp; and to be a part of our
           customer's lives for years to come!
         </p>
-        <ul class='mt-4 pl-8 list-disc sm:text-lg'>
+        <ul class="mt-4 pl-8 list-disc sm:text-lg">
           <li>Custom cut meats</li>
           <li>Custom packaging</li>
           <li>Custom service</li>
@@ -105,36 +105,36 @@ const IndexTemplate: RouteTemplate<IndexModel, IndexController> = <template>
     </Container>
   </section>
 
-  <GiftCard class='mt-16' @image='promo-index.jpg' />
+  <GiftCard class="mt-16" @image="promo-index.jpg" />
 
   <section>
-    <HeaderTitle @title='Our Meat Products' />
+    <HeaderTitle @title="Our Meat Products" />
 
     <Container>
-      <div class='mt-10 max-w-4xl mx-auto'>
-        <div class='sm:-mx-4 sm:flex'>
+      <div class="mt-10 max-w-4xl mx-auto">
+        <div class="sm:-mx-4 sm:flex">
           <MeatProductsProvider as |provider|>
             {{#each provider.products as |product|}}
               <div
-                class='mt-8 w-full sm:mt-0 sm:w-1/3 sm:px-4
-                  {{if product.featured "sm:-pt-10" "sm:pt-10"}}'
+                class="mt-8 w-full sm:mt-0 sm:w-1/3 sm:px-4
+                  {{if product.featured 'sm:-pt-10' 'sm:pt-10'}}"
               >
-                <div class='border border-gray-300'>
+                <div class="border border-gray-300">
                   <h4
-                    class='text-xl sm:text-2xl uppercase tracking-wide font-black text-center bg-gray-300
+                    class="text-xl sm:text-2xl uppercase tracking-wide font-black text-center bg-gray-300
                       {{if
                         product.featured
-                        "px-6 py-3 sm:px-8 sm:py-4 text-2xl"
-                        "px-3 py-2 sm:px-4"
-                      }}'
+                        'px-6 py-3 sm:px-8 sm:py-4 text-2xl'
+                        'px-3 py-2 sm:px-4'
+                      }}"
                   >
                     {{product.title}}
                   </h4>
-                  <ul class='natural-products-items'>
+                  <ul class="natural-products-items">
                     {{#each product.items as |item index|}}
                       <li
-                        class='p-3 sm:p-4 text-center sm:text-lg
-                          {{if (gt index 0) "border-t border-gray-300"}}'
+                        class="p-3 sm:p-4 text-center sm:text-lg
+                          {{if (gt index 0) 'border-t border-gray-300'}}"
                       >{{item}}</li>
                     {{/each}}
                   </ul>
@@ -148,7 +148,7 @@ const IndexTemplate: RouteTemplate<IndexModel, IndexController> = <template>
   </section>
 
   <section>
-    <HeaderTitle @title='Customer Reviews' />
+    <HeaderTitle @title="Customer Reviews" />
 
     <Container>
       <ReviewsList />

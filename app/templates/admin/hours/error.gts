@@ -5,9 +5,9 @@ import PageError from '../../../components/admin/page-error';
 const AdminHoursErrorTemplate: RouteTemplate<{ errors?: RequestError[] }> = <template>
   <PageError
     @errors={{@model.errors}}
-    @name='Store Hours'
-    @route='admin.hours'
-    @backText='Back to Store Hours'
+    @name="Store Hours"
+    @route="admin.hours"
+    @backText="Back to Store Hours"
   />
 </template>;
 

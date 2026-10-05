@@ -6,7 +6,7 @@ const ModalFooter: TOC<{
     default: [];
   };
 }> = <template>
-  <div data-test-id='modal-footer' class='mt-6 flex justify-end' ...attributes>
+  <div data-test-id="modal-footer" class="mt-6 flex justify-end" ...attributes>
     {{yield}}
   </div>
 </template>;

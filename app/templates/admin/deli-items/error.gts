@@ -5,9 +5,9 @@ import PageError from '../../../components/admin/page-error';
 const AdminDeliItemsErrorTemplate: RouteTemplate<{ errors?: RequestError[] }> = <template>
   <PageError
     @errors={{@model.errors}}
-    @name='Deli Item'
-    @route='admin.deli-items'
-    @backText='Back to Deli Items'
+    @name="Deli Item"
+    @route="admin.deli-items"
+    @backText="Back to Deli Items"
   />
 </template>;
 

@@ -6,9 +6,9 @@ import DeliItemForm from '../../../components/admin/deli-items/deli-item-form';
 import Title from '../../../components/admin/title';
 
 const AdminDeliItemsNewTemplate: RouteTemplate<DeliItem, AdminDeliItemsNewController> = <template>
-  <BackLink @route='admin.deli-items' @text='Deli Items' />
+  <BackLink @route="admin.deli-items" @text="Deli Items" />
 
-  <Title @title='New Deli Item' />
+  <Title @title="New Deli Item" />
 
   <DeliItemForm
     @item={{@model}}

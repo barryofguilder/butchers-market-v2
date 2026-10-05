@@ -12,9 +12,9 @@ const AdminPackageBundlesIndexTemplate: RouteTemplate<
   PackageBundle[],
   AdminPackageBundlesIndexController
 > = <template>
-  <BackLink @route='admin.index' @text='Admin' />
+  <BackLink @route="admin.index" @text="Admin" />
 
-  <Title @title='Package Bundles' />
+  <Title @title="Package Bundles" />
 
   {{! Hiding the new button until it's needed }}
   {{! <div class="mt-8">
@@ -23,12 +23,12 @@ const AdminPackageBundlesIndexTemplate: RouteTemplate<
     </UiButton>
   </div> }}
 
-  <UiTable class='mt-8' as |Table|>
+  <UiTable class="mt-8" as |Table|>
     <Table.Head as |Thead|>
       <Thead.Th>Title</Thead.Th>
       <Thead.Th>Prices</Thead.Th>
-      <Thead.Th class='hidden md:table-cell'>Special Text</Thead.Th>
-      <Thead.Th class='hidden md:table-cell'>Items</Thead.Th>
+      <Thead.Th class="hidden md:table-cell">Special Text</Thead.Th>
+      <Thead.Th class="hidden md:table-cell">Items</Thead.Th>
       <Thead.Th />
     </Table.Head>
     <Table.Body as |Tbody|>
@@ -44,8 +44,8 @@ const AdminPackageBundlesIndexTemplate: RouteTemplate<
                 {{/each}}
               </ul>
             </Row.Td>
-            <Row.Td class='hidden md:table-cell'>{{bundle.specialText}}</Row.Td>
-            <Row.Td class='hidden md:table-cell'>
+            <Row.Td class="hidden md:table-cell">{{bundle.specialText}}</Row.Td>
+            <Row.Td class="hidden md:table-cell">
               {{#if bundle.items}}
                 {{bundle.items.length}}
                 Items
@@ -54,13 +54,13 @@ const AdminPackageBundlesIndexTemplate: RouteTemplate<
               {{/if}}
             </Row.Td>
             <Row.Td>
-              <div class='flex justify-end'>
+              <div class="flex justify-end">
                 <UiButton
-                  @route='admin.package-bundles.edit'
+                  @route="admin.package-bundles.edit"
                   @model={{bundle.id}}
                   @iconOnly={{true}}
-                  @icon='pencil-alt'
-                  @variant='secondary'
+                  @icon="pencil-alt"
+                  @variant="secondary"
                 />
 
                 {{! Hiding the delete button until it's needed }}

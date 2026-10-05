@@ -66,43 +66,43 @@ export default class HoursFormComponent extends Component<HoursFormSignature> {
   };
 
   <template>
-    <AdminForm class='max-w-xl' @onSubmit={{this.saveHours.perform}} as |Form|>
+    <AdminForm class="max-w-xl" @onSubmit={{this.saveHours.perform}} as |Form|>
       {{#if this.errorMessage}}
-        <UiAlert data-test-id='server-error' @variant='danger'>
+        <UiAlert data-test-id="server-error" @variant="danger">
           {{this.errorMessage}}
         </UiAlert>
       {{/if}}
 
-      <p class='mb-8'>
+      <p class="mb-8">
         <strong>Note:</strong>
         Required fields are marked with an
         <Required />
       </p>
 
-      <Form.group data-test-id='type' @model={{this.form}} @property='type' as |Group|>
+      <Form.group data-test-id="type" @model={{this.form}} @property="type" as |Group|>
         <Group.label>
           Type
           {{#if @hours.isNew}}<Required />{{/if}}
         </Group.label>
         {{#if @hours.isNew}}
-          <div class='flex mt-2'>
-            <label class='flex items-center'>
+          <div class="flex mt-2">
+            <label class="flex items-center">
               <UiRadioInput
-                @name='type-store'
-                @value='Store'
+                @name="type-store"
+                @value="Store"
                 @groupValue={{this.form.values.type}}
-                @onChange={{this.form.setter 'type'}}
+                @onChange={{this.form.setter "type"}}
               />
-              <span class='ml-2'>Store</span>
+              <span class="ml-2">Store</span>
             </label>
-            <label class='ml-4 flex items-center'>
+            <label class="ml-4 flex items-center">
               <UiRadioInput
-                @name='type-cafe'
-                @value='Cafe'
+                @name="type-cafe"
+                @value="Cafe"
                 @groupValue={{this.form.values.type}}
-                @onChange={{this.form.setter 'type'}}
+                @onChange={{this.form.setter "type"}}
               />
-              <span class='ml-2'>Cafe</span>
+              <span class="ml-2">Cafe</span>
             </label>
           </div>
         {{else}}
@@ -110,23 +110,23 @@ export default class HoursFormComponent extends Component<HoursFormSignature> {
         {{/if}}
       </Form.group>
 
-      <Form.group data-test-id='label' @model={{this.form}} @property='label' as |Group|>
+      <Form.group data-test-id="label" @model={{this.form}} @property="label" as |Group|>
         <Group.label>Label <Required /></Group.label>
-        <Group.textbox @value={{this.form.values.label}} @onChange={{this.form.setter 'label'}} />
+        <Group.textbox @value={{this.form.values.label}} @onChange={{this.form.setter "label"}} />
       </Form.group>
 
       {{#unless this.form.values.default}}
         <Form.group
-          data-test-id='start-date'
+          data-test-id="start-date"
           @model={{this.form}}
-          @property='activeStartDate'
+          @property="activeStartDate"
           as |Group|
         >
           <Group.label>Active Start Date <Required /></Group.label>
           <Group.datepicker
             @allowInput={{false}}
             @date={{this.form.values.activeStartDate}}
-            @dateFormat='m/d/Y'
+            @dateFormat="m/d/Y"
             @onChange={{this.startDateSelected}}
           />
           <Group.help>
@@ -135,16 +135,16 @@ export default class HoursFormComponent extends Component<HoursFormSignature> {
         </Form.group>
 
         <Form.group
-          data-test-id='end-date'
+          data-test-id="end-date"
           @model={{this.form}}
-          @property='activeEndDate'
+          @property="activeEndDate"
           as |Group|
         >
           <Group.label>Active End Date <Required /></Group.label>
           <Group.datepicker
             @allowInput={{false}}
             @date={{this.form.values.activeEndDate}}
-            @dateFormat='m/d/Y'
+            @dateFormat="m/d/Y"
             @onChange={{this.endDateSelected}}
           />
           <Group.help>
@@ -153,31 +153,31 @@ export default class HoursFormComponent extends Component<HoursFormSignature> {
         </Form.group>
       {{/unless}}
 
-      <Form.group data-test-id='line1' @model={{this.form}} @property='line1' as |Group|>
+      <Form.group data-test-id="line1" @model={{this.form}} @property="line1" as |Group|>
         <Group.label>Line 1 <Required /></Group.label>
-        <Group.textbox @value={{this.form.values.line1}} @onChange={{this.form.setter 'line1'}} />
+        <Group.textbox @value={{this.form.values.line1}} @onChange={{this.form.setter "line1"}} />
       </Form.group>
 
-      <Form.group data-test-id='line2' @model={{this.form}} @property='line2' as |Group|>
+      <Form.group data-test-id="line2" @model={{this.form}} @property="line2" as |Group|>
         <Group.label>Line 2</Group.label>
-        <Group.textbox @value={{this.form.values.line2}} @onChange={{this.form.setter 'line2'}} />
+        <Group.textbox @value={{this.form.values.line2}} @onChange={{this.form.setter "line2"}} />
       </Form.group>
 
-      <Form.group data-test-id='line3' @model={{this.form}} @property='line3' as |Group|>
+      <Form.group data-test-id="line3" @model={{this.form}} @property="line3" as |Group|>
         <Group.label>Line 3</Group.label>
-        <Group.textbox @value={{this.form.values.line3}} @onChange={{this.form.setter 'line3'}} />
+        <Group.textbox @value={{this.form.values.line3}} @onChange={{this.form.setter "line3"}} />
       </Form.group>
 
-      <div class='mt-8'>
+      <div class="mt-8">
         {{#if this.hasErrors}}
-          <div class='mb-2 text-red-600'>
+          <div class="mb-2 text-red-600">
             There are errors in the form above.
           </div>
         {{/if}}
         <Form.submit @disabled={{this.saveDisabled}}>
           Save
         </Form.submit>
-        <UiButton class='ml-2' @variant='plain' @onClick={{@cancelled}}>Cancel</UiButton>
+        <UiButton class="ml-2" @variant="plain" @onClick={{@cancelled}}>Cancel</UiButton>
       </div>
     </AdminForm>
   </template>

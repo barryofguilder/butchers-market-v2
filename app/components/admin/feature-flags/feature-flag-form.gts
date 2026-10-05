@@ -51,40 +51,40 @@ export default class FeatureFlagFormComponent extends Component<FeatureFlagFormS
   };
 
   <template>
-    <AdminForm class='max-w-xl' @onSubmit={{this.saveFlag.perform}} as |Form|>
+    <AdminForm class="max-w-xl" @onSubmit={{this.saveFlag.perform}} as |Form|>
       {{#if this.errorMessage}}
-        <UiAlert data-test-id='server-error' @variant='danger'>
+        <UiAlert data-test-id="server-error" @variant="danger">
           {{this.errorMessage}}
         </UiAlert>
       {{/if}}
 
-      <p class='mb-8'>
+      <p class="mb-8">
         <strong>Note:</strong>
         Required fields are marked with an
         <Required />
       </p>
 
-      <Form.group data-test-id='name' @model={{this.form}} @property='name' as |Group|>
+      <Form.group data-test-id="name" @model={{this.form}} @property="name" as |Group|>
         <Group.label>Name <Required /></Group.label>
-        <Group.textbox @value={{this.form.values.name}} @onChange={{this.form.setter 'name'}} />
+        <Group.textbox @value={{this.form.values.name}} @onChange={{this.form.setter "name"}} />
       </Form.group>
 
-      <Form.group data-test-id='active' @model={{this.form}} @property='active' as |Group|>
+      <Form.group data-test-id="active" @model={{this.form}} @property="active" as |Group|>
         <Group.checkbox @checked={{this.form.values.active}} @onChange={{this.updateActive}}>
           Is Active?
         </Group.checkbox>
       </Form.group>
 
-      <div class='mt-8'>
+      <div class="mt-8">
         {{#if this.hasErrors}}
-          <div class='mb-2 text-red-600'>
+          <div class="mb-2 text-red-600">
             There are errors in the form above.
           </div>
         {{/if}}
         <Form.submit @disabled={{this.saveDisabled}}>
           Save
         </Form.submit>
-        <UiButton class='ml-2' @variant='plain' @onClick={{@cancelled}}>Cancel</UiButton>
+        <UiButton class="ml-2" @variant="plain" @onClick={{@cancelled}}>Cancel</UiButton>
       </div>
     </AdminForm>
   </template>

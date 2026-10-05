@@ -66,7 +66,7 @@ export default class GroupComponent extends Component<GroupSignature> {
   }
 
   <template>
-    <div class={{if this.useDefaultMargin 'mb-6'}} ...attributes>
+    <div class={{if this.useDefaultMargin "mb-6"}} ...attributes>
       {{yield
         (hash
           checkbox=(component Checkbox)

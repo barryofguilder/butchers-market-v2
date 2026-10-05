@@ -6,7 +6,7 @@ const Title: TOC<{
     default: [];
   };
 }> = <template>
-  <h1 class='font-black text-4xl leading-snug md:text-5xl md:leading-snug tracking-wide uppercase'>
+  <h1 class="font-black text-4xl leading-snug md:text-5xl md:leading-snug tracking-wide uppercase">
     {{yield}}
   </h1>
 </template>;

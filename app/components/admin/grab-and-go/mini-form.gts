@@ -42,7 +42,7 @@ export default class MiniFormComponent extends Component<MiniFormSignature> {
   <template>
     <AdminForm as |Form|>
       <Form.group
-        data-test-id={{if this.isHoliday 'is-holiday' 'in-stock'}}
+        data-test-id={{if this.isHoliday "is-holiday" "in-stock"}}
         @useDefaultMargin={{false}}
         as |Group|
       >
@@ -51,7 +51,7 @@ export default class MiniFormComponent extends Component<MiniFormSignature> {
           @checked={{this.isChecked}}
           @onChange={{this.handleOnChange}}
         >
-          {{if this.isHoliday 'Is Holiday?' 'In Stock?'}}
+          {{if this.isHoliday "Is Holiday?" "In Stock?"}}
         </Group.checkbox>
       </Form.group>
     </AdminForm>

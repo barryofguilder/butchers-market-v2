@@ -26,14 +26,14 @@ export default class CheckboxComponent extends Component<CheckboxSignature> {
   }
 
   <template>
-    <label class='flex gap-x-2 items-center'>
+    <label class="flex gap-x-2 items-center">
       <input
-        type='checkbox'
+        type="checkbox"
         checked={{@checked}}
         readonly={{this.readonly}}
-        {{on 'change' this.handleOnChange}}
+        {{on "change" this.handleOnChange}}
       />
-      <span class='{{if @hideLabel "sr-only"}}'>{{yield}}</span>
+      <span class="{{if @hideLabel 'sr-only'}}">{{yield}}</span>
     </label>
   </template>
 }

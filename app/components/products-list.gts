@@ -15,16 +15,16 @@ interface ProductsListSignature {
 }
 
 const ProductsListComponent: TOC<ProductsListSignature> = <template>
-  <div class='flex flex-wrap -mx-4'>
-    {{#each (sortBy 'displayOrder' @products) as |product|}}
-      <div class='mt-12 px-4 w-full sm:w-1/2 lg:w-1/3'>
-        <h5 class='text-red-800 text-xl sm:text-2xl font-black uppercase tracking-wide'>
+  <div class="flex flex-wrap -mx-4">
+    {{#each (sortBy "displayOrder" @products) as |product|}}
+      <div class="mt-12 px-4 w-full sm:w-1/2 lg:w-1/3">
+        <h5 class="text-red-800 text-xl sm:text-2xl font-black uppercase tracking-wide">
           {{product.title}}
           <span>$<span>{{product.price}}</span></span>
         </h5>
-        <ul class='pl-8 list-disc sm:text-lg'>
+        <ul class="pl-8 list-disc sm:text-lg">
           {{#if product.specialText}}
-            <li class='text-red-800 italic font-semibold'>
+            <li class="text-red-800 italic font-semibold">
               {{product.specialText}}
             </li>
           {{/if}}
@@ -34,7 +34,7 @@ const ProductsListComponent: TOC<ProductsListSignature> = <template>
         </ul>
 
         {{#if (and product.orderEnabled SHOW_ORDER_ONLINE)}}
-          <OrderButton class='mt-4' />
+          <OrderButton class="mt-4" />
         {{/if}}
       </div>
     {{/each}}

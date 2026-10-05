@@ -26,7 +26,7 @@ class UiListItem extends Component<UiListItemSignature> {
   }
 
   <template>
-    <li class='relative {{unless this.isLink "py-5 px-4"}}' ...attributes>
+    <li class="relative {{unless this.isLink 'py-5 px-4'}}" ...attributes>
       {{#if this.isLink}}
         <UiBaseLink
           @href={{@href}}
@@ -34,10 +34,10 @@ class UiListItem extends Component<UiListItemSignature> {
           @model={{@model}}
           @models={{@models}}
           @query={{@query}}
-          class='py-5 px-4 flex justify-between items-center gap-x-6 hover:bg-gray-50'
+          class="py-5 px-4 flex justify-between items-center gap-x-6 hover:bg-gray-50"
         >
           <span>{{yield}}</span>
-          <UiIcon @icon='chevron-right' class='text-gray-400' />
+          <UiIcon @icon="chevron-right" class="text-gray-400" />
         </UiBaseLink>
       {{else}}
         {{yield}}
@@ -59,8 +59,8 @@ export interface UiListSignature {
 
 const UiListComponent: TOC<UiListSignature> = <template>
   <ul
-    role='list'
-    class='border border-gray-200 divide-y divide-gray-200 rounded-md overflow-hidden'
+    role="list"
+    class="border border-gray-200 divide-y divide-gray-200 rounded-md overflow-hidden"
     ...attributes
   >
     {{yield (hash Item=(component UiListItem))}}

@@ -7,8 +7,8 @@ const MobileOrderBannerComponent: TOC<{
   Element: null;
 }> = <template>
   {{#if SHOW_ORDER_ONLINE}}
-    <div class='bg-gray-400 py-3 lg:hidden'>
-      <Container class='text-right'>
+    <div class="bg-gray-400 py-3 lg:hidden">
+      <Container class="text-right">
         <OrderButton />
       </Container>
     </div>

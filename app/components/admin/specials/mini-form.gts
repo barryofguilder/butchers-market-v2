@@ -24,7 +24,7 @@ export default class MiniFormComponent extends Component<MiniFormSignature> {
 
   <template>
     <AdminForm as |Form|>
-      <Form.group data-test-id='in-stock' @useDefaultMargin={{false}} as |Group|>
+      <Form.group data-test-id="in-stock" @useDefaultMargin={{false}} as |Group|>
         <Group.checkbox
           @hideLabel={{true}}
           @checked={{@special.inStock}}

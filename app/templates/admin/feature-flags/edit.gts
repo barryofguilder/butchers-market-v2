@@ -7,9 +7,9 @@ import Title from '../../../components/admin/title';
 
 const AdminFeatureFlagsEditTemplate: RouteTemplate<FeatureFlag, AdminFeatureFlagsEditController> =
   <template>
-    <BackLink @route='admin.feature-flags' @text='Feature Flags' />
+    <BackLink @route="admin.feature-flags" @text="Feature Flags" />
 
-    <Title @title='Edit Feature Flag' />
+    <Title @title="Edit Feature Flag" />
 
     <FeatureFlagForm
       @flag={{@model}}

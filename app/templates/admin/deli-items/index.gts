@@ -11,23 +11,23 @@ import UiButton from '../../../components/ui-button';
 
 const AdminDeliItemsIndexTemplate: RouteTemplate<DeliItem[], AdminDeliItemsIndexController> =
   <template>
-    <BackLink @route='admin.index' @text='Admin' />
+    <BackLink @route="admin.index" @text="Admin" />
 
-    <Title @title='Deli Items' />
+    <Title @title="Deli Items" />
 
-    <div class='mt-8'>
-      <UiButton @route='admin.deli-items.new' @icon='plus' @size='medium' @variant='plain'>
+    <div class="mt-8">
+      <UiButton @route="admin.deli-items.new" @icon="plus" @size="medium" @variant="plain">
         New
       </UiButton>
     </div>
 
-    <UiTable class='mt-8' as |Table|>
+    <UiTable class="mt-8" as |Table|>
       <Table.Head
         @currentSort={{@controller.currentSort}}
         @onColumnClick={{@controller.sortDeliItems}}
         as |Thead|
       >
-        <Thead.Th @name='title'>Title</Thead.Th>
+        <Thead.Th @name="title">Title</Thead.Th>
         <Thead.Th>Is Hidden?</Thead.Th>
         <Thead.Th />
       </Table.Head>
@@ -39,20 +39,20 @@ const AdminDeliItemsIndexTemplate: RouteTemplate<DeliItem[], AdminDeliItemsIndex
               <MiniForm @item={{item}} />
             </Row.Td>
             <Row.Td>
-              <div class='flex justify-end'>
+              <div class="flex justify-end">
                 <UiButton
-                  @route='admin.deli-items.edit'
+                  @route="admin.deli-items.edit"
                   @model={{item.id}}
                   @iconOnly={{true}}
-                  @icon='pencil-alt'
-                  @variant='secondary'
+                  @icon="pencil-alt"
+                  @variant="secondary"
                 />
 
                 <UiButton
-                  class='ml-1'
+                  class="ml-1"
                   @iconOnly={{true}}
-                  @icon='trash-alt'
-                  @variant='danger'
+                  @icon="trash-alt"
+                  @variant="danger"
                   @onClick={{fn @controller.openDeleteModal item}}
                 />
               </div>

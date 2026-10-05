@@ -4,11 +4,11 @@ import { ORDER_ONLINE_URL } from '../utils/config';
 
 const OrderButtonComponent: TOC<{ Element: HTMLDivElement }> = <template>
   <div ...attributes>
-    <UiButton @variant='primary' @size='medium' @href={{ORDER_ONLINE_URL}}>
+    <UiButton @variant="primary" @size="medium" @href={{ORDER_ONLINE_URL}}>
       Order Now
     </UiButton>
 
-    <span class='ml-2 text-xs text-gray-700 italic'>* for pickup</span>
+    <span class="ml-2 text-xs text-gray-700 italic">* for pickup</span>
   </div>
 </template>;
 

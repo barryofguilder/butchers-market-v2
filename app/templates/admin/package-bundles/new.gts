@@ -9,9 +9,9 @@ const AdminPackageBundlesNewTemplate: RouteTemplate<
   PackageBundle,
   AdminPackageBundlesNewController
 > = <template>
-  <BackLink @route='admin.package-bundles' @text='Package Bundles' />
+  <BackLink @route="admin.package-bundles" @text="Package Bundles" />
 
-  <Title @title='New Package Bundle' />
+  <Title @title="New Package Bundle" />
 
   <PackageBundleForm
     @bundle={{@model}}
