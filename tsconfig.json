@@ -23,7 +23,8 @@
       "@warp-drive/core-types/unstable-preview-types",
       "@warp-drive/ember",
       "@embroider/core/virtual",
-      "vite/client"
+      "vite/client",
+      "@glint/ember-tsc/types"
     ]
   }
 }
