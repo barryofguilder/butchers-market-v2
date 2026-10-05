@@ -1,4 +1,4 @@
-import Model, { attr } from '@ember-data/model';
+import Model, { attr } from '@warp-drive/legacy/model';
 import { ORDER_ONLINE_URL, UPLOADS_DIR } from '../utils/config';
 
 export default class Special extends Model {

@@ -1,5 +1,5 @@
 import { service } from '@ember/service';
-import type Store from 'ember-data/store';
+import type Store from '../services/store';
 import ApplicationAdapter from './application';
 import type SpecialModel from '../models/special';
 

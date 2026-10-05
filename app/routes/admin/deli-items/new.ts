@@ -1,8 +1,8 @@
 import Route from '@ember/routing/route';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
-import type Model from '@ember-data/model';
-import type Store from '@ember-data/store';
+import type Model from '@warp-drive/legacy/model';
+import type Store from '../../../services/store';
 
 export default class AdminDeliItemsNewRoute extends Route {
   @service declare store: Store;

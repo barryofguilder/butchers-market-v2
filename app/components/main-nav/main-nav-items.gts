@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { service } from '@ember/service';
 import type Owner from '@ember/owner';
-import type Store from '@ember-data/store';
+import type Store from '../../services/store';
 import { action } from '@ember/object';
 import { on } from '@ember/modifier';
 import { LinkTo } from '@ember/routing';

@@ -1,7 +1,7 @@
 import Route from '@ember/routing/route';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
-import type Store from '@ember-data/store';
+import type Store from '../services/store';
 import type MeatController from '../controllers/meat';
 
 export default class MeatRoute extends Route {

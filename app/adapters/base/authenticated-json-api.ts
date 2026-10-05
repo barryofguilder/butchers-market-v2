@@ -1,7 +1,7 @@
 import type RouterService from '@ember/routing/router-service';
 import DefaultAdapter from './default-adapter';
 import { service } from '@ember/service';
-import type { RequestData } from '@ember-data/adapter/rest';
+import type { RequestData } from '@warp-drive/legacy/adapter/rest';
 import type SessionService from '../../services/session';
 
 type Payload = Error | Record<string, unknown> | unknown[] | string | undefined;
