@@ -77,9 +77,3 @@ function sideEffect<T extends (...args: any[]) => void>(func: T, ...args: Parame
     })()
   );
 }
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    ModalDialog: typeof ModalDialogComponent;
-  }
-}

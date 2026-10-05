@@ -37,9 +37,3 @@ export default class PromoSectionComponent extends Component<PromoSectionSignatu
     </section>
   </template>
 }
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    PromoSection: typeof PromoSectionComponent;
-  }
-}

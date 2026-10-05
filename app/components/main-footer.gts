@@ -59,9 +59,3 @@ export default class MainFooterComponent extends Component<MainFooterSignature> 
     </footer>
   </template>
 }
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    MainFooter: typeof MainFooterComponent;
-  }
-}

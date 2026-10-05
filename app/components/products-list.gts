@@ -44,9 +44,3 @@ const ProductsListComponent: TOC<ProductsListSignature> = <template>
 </template>;
 
 export default ProductsListComponent;
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    ProductsList: typeof ProductsListComponent;
-  }
-}

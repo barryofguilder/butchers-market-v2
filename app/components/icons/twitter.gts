@@ -18,9 +18,3 @@ const TwitterIcon: TOC<{
 </template>;
 
 export default TwitterIcon;
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    'Icons::Twitter': typeof TwitterIcon;
-  }
-}

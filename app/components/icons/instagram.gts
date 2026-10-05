@@ -18,9 +18,3 @@ const InstagramIcon: TOC<{
 </template>;
 
 export default InstagramIcon;
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    'Icons::Instagram': typeof InstagramIcon;
-  }
-}

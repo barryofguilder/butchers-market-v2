@@ -24,9 +24,3 @@ const HeaderTitle: TOC<{
 </template>;
 
 export default HeaderTitle;
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    HeaderTitle: typeof HeaderTitle;
-  }
-}

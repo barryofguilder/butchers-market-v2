@@ -82,9 +82,3 @@ export default class SignInFormComponent extends Component<SignInFormSignature> 
     </AdminForm>
   </template>
 }
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    SignInForm: typeof SignInFormComponent;
-  }
-}

@@ -58,9 +58,3 @@ export default class UiIconComponent extends Component<UiIconSignature> {
     </span>
   </template>
 }
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    UiIcon: typeof UiIconComponent;
-  }
-}

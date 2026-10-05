@@ -225,9 +225,3 @@ export default class UiButtonComponent extends Component<UiButtonSignature> {
     {{/if}}
   </template>
 }
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    UiButton: typeof UiButtonComponent;
-  }
-}

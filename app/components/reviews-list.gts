@@ -48,9 +48,3 @@ export default class ReviewsListComponent extends Component {
     {{/unless}}
   </template>
 }
-
-declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry {
-    ReviewsList: typeof ReviewsListComponent;
-  }
-}
