@@ -1,10 +1,13 @@
-'use strict';
+import { createRequire } from 'node:module';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import EmberApp from 'ember-cli/lib/broccoli/ember-app.js';
+import { compatBuild } from '@embroider/compat';
 
-const EmberApp = require('ember-cli/lib/broccoli/ember-app');
+const require = createRequire(import.meta.url);
 
-const { compatBuild } = require('@embroider/compat');
-
-module.exports = async function (defaults) {
+export default async function (defaults) {
+  const { setConfig } = await import('@warp-drive/build-config');
   const { buildOnce } = await import('@embroider/vite');
 
   const app = new EmberApp(defaults, {
@@ -22,12 +25,11 @@ module.exports = async function (defaults) {
     },
   });
 
-  const { setConfig } = await import('@warp-drive/build-config');
-  setConfig(app, __dirname, {
+  setConfig(app, dirname(fileURLToPath(import.meta.url)), {
     deprecations: {
       DEPRECATE_TRACKING_PACKAGE: false,
     },
   });
 
   return compatBuild(app, buildOnce);
-};
+}

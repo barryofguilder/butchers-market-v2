@@ -12,8 +12,12 @@
  *     npx eslint --inspect-config
  *
  */
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 import globals from 'globals';
 import js from '@eslint/js';
+import { defineConfig, globalIgnores } from 'eslint/config';
 
 import ts from 'typescript-eslint';
 
@@ -23,7 +27,7 @@ import eslintConfigPrettier from 'eslint-config-prettier';
 import qunit from 'eslint-plugin-qunit';
 import n from 'eslint-plugin-n';
 
-import babelParser from '@babel/eslint-parser';
+import babelParser from '@babel/eslint-parser/experimental-worker';
 
 const parserOptions = {
   esm: {
@@ -33,24 +37,18 @@ const parserOptions = {
     },
     ts: {
       projectService: true,
-      tsconfigRootDir: import.meta.dirname,
+      tsconfigRootDir: dirname(fileURLToPath(import.meta.url)),
     },
   },
 };
 
-export default ts.config(
+export default defineConfig([
+  globalIgnores(['dist/', 'coverage/', '!**/.*']),
   js.configs.recommended,
   ember.configs.base,
   ember.configs.gjs,
   ember.configs.gts,
   eslintConfigPrettier,
-  /**
-   * Ignores must be in their own object
-   * https://eslint.org/docs/latest/use/configure/ignore
-   */
-  {
-    ignores: ['dist/', 'node_modules/', 'coverage/', '!**/.*'],
-  },
   /**
    * https://eslint.org/docs/latest/use/configure/configuration-files#configuring-linter-options
    */
@@ -79,6 +77,9 @@ export default ts.config(
     languageOptions: {
       parser: ember.parser,
       parserOptions: parserOptions.esm.ts,
+      globals: {
+        ...globals.browser,
+      },
     },
     extends: [...ts.configs.recommendedTypeChecked, ember.configs.gts],
     rules: {
@@ -93,6 +94,7 @@ export default ts.config(
     },
   },
   {
+    ...qunit.configs.recommended,
     files: ['tests/**/*-test.{js,gjs,ts,gts}'],
     plugins: {
       qunit,
@@ -102,16 +104,8 @@ export default ts.config(
    * CJS node files
    */
   {
-    files: [
-      '**/*.cjs',
-      'config/**/*.js',
-      'testem.js',
-      'testem*.js',
-      '.prettierrc.js',
-      '.stylelintrc.js',
-      '.template-lintrc.js',
-      'ember-cli-build.js',
-    ],
+    ...n.configs['flat/recommended-script'],
+    files: ['**/*.cjs', 'config/**/*.js'],
     plugins: {
       n,
     },
@@ -128,6 +122,7 @@ export default ts.config(
    * ESM node files
    */
   {
+    ...n.configs['flat/recommended-module'],
     files: ['**/*.mjs'],
     plugins: {
       n,
@@ -142,4 +137,4 @@ export default ts.config(
       },
     },
   },
-);
+]);

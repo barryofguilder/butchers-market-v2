@@ -1,3 +1,4 @@
+import '@warp-drive/ember/install';
 import Application from 'butchers-market/app';
 import config from 'butchers-market/config/environment';
 import * as QUnit from 'qunit';
