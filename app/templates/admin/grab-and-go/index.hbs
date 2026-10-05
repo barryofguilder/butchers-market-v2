@@ -2,17 +2,42 @@
 
 <Admin::Title @title="Grab and Go" />
 
-<div class="mt-8 flex justify-between items-center">
+<div class="mt-8 flex flex-wrap justify-between items-center gap-4">
   <UiButton @route="admin.grab-and-go.new" @icon="plus" @size="medium" @variant="plain">
     New
   </UiButton>
 
-  <UiBaseLink
-    @route="admin.grab-and-go.social"
-    class="text-red-700 hover:text-red-800 focus:text-red-800"
-  >
-    Social Titles
-  </UiBaseLink>
+  <div class="flex flex-wrap items-center gap-x-12 gap-y-4">
+    <UiBaseLink
+      @route="admin.grab-and-go.social"
+      class="text-red-700 hover:text-red-800 focus:text-red-800"
+    >
+      Social Titles
+    </UiBaseLink>
+
+    <div
+      role="group"
+      aria-label="Filter by stock"
+      data-test-id="stock-filter"
+      class="inline-flex rounded-sm border border-gray-300"
+    >
+      {{#each this.stockFilters as |filter|}}
+        <button
+          type="button"
+          aria-pressed={{if (eq filter.value this.stockFilter) "true" "false"}}
+          class="px-4 py-2 text-sm font-semibold transition-colors not-first:border-l not-first:border-gray-300 focus:outline-hidden focus:ring-3 focus:ring-blue-500
+            {{if
+              (eq filter.value this.stockFilter)
+              'bg-gray-800 text-white'
+              'bg-transparent hover:bg-gray-300'
+            }}"
+          {{on "click" (fn this.setStockFilter filter.value)}}
+        >
+          {{filter.label}}
+        </button>
+      {{/each}}
+    </div>
+  </div>
 </div>
 
 <Admin::UiTable class="mt-8" as |Table|>
@@ -23,13 +48,13 @@
     <Thead.Th />
   </Table.Head>
   <Table.Body as |Tbody|>
-    {{#each this.model as |item|}}
+    {{#each this.filteredItems as |item|}}
       <Tbody.Tr as |Row|>
         <Row.Td>
           {{item.title}}
         </Row.Td>
         <Row.Td>
-          <Admin::GrabAndGo::MiniForm @item={{item}} @fild="inStock" />
+          <Admin::GrabAndGo::MiniForm @item={{item}} @field="inStock" />
         </Row.Td>
         <Row.Td>
           <Admin::GrabAndGo::MiniForm @item={{item}} @field="isHoliday" />
@@ -56,7 +81,7 @@
       </Tbody.Tr>
     {{else}}
       <Tbody.Empty>
-        No grab and go items found.
+        {{this.emptyMessage}}
       </Tbody.Empty>
     {{/each}}
   </Table.Body>
