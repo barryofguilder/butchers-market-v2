@@ -26,7 +26,7 @@ type Key<Model> = keyof Model & string;
  *
  * ```hbs
  * <Form.group @model={{this.form}} @property="title" as |Group|>
- *   <Group.textbox @value={{this.form.values.title}} @onChange={{fn this.form.set "title"}} />
+ *   <Group.textbox @value={{this.form.values.title}} @onChange={{this.form.setter "title"}} />
  * </Form.group>
  * ```
  */
@@ -68,12 +68,20 @@ export default class FormState<Model extends Saveable> {
   }
 
   /**
-   * Records an edit and validates that field. An arrow function so templates can pass it around,
-   * e.g. `{{fn this.form.set "title"}}`.
+   * Records an edit and validates that field.
    */
-  set = <K extends Key<Model>>(key: K, value: Model[K]) => {
+  set<K extends Key<Model>>(key: K, value: Model[K]) {
     this.changes = { ...this.changes, [key]: value };
     this.validateKey(key);
+  }
+
+  /**
+   * Returns a function that sets one field, for passing to inputs in templates, e.g.
+   * `@onChange={{this.form.setter "title"}}`. Unlike `{{fn this.form.set "title"}}`, this keeps the
+   * field's type, so the input's value is checked against it.
+   */
+  setter = <K extends Key<Model>>(key: K) => {
+    return (value: Model[K]) => this.set(key, value);
   };
 
   /**

@@ -4,7 +4,7 @@ import { UPLOADS_DIR } from '../utils/config';
 export default class GrabAndGo extends Model {
   @attr() declare title: string;
   @attr() declare socialTitle: string | null;
-  @attr() declare imageUrl: string;
+  @attr() declare imageUrl: string | null;
   @attr() declare description: string;
   @attr('boolean', { defaultValue: false }) declare inStock: boolean;
   @attr() declare isHoliday: boolean;

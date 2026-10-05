@@ -5,10 +5,10 @@ export default class Special extends Model {
   @attr() declare title: string;
   @attr() declare link: string;
   @attr() declare displayOrder: number;
-  @attr() declare imageUrl: string;
+  @attr() declare imageUrl: string | null;
   @attr() declare imageAltText: string;
-  @attr('date') declare activeStartDate: Date;
-  @attr('date') declare activeEndDate: Date;
+  @attr('date') declare activeStartDate: Date | null;
+  @attr('date') declare activeEndDate: Date | null;
   @attr('boolean', { defaultValue: false }) declare inStock: boolean;
   @attr() declare isHidden: boolean;
   @attr('date') declare createdAt: Date;

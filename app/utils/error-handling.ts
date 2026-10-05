@@ -61,3 +61,19 @@ export function getFirstErrorMessage(errors?: JsonApiError[] | null) {
 
   return error.detail ? error.detail : error.title;
 }
+
+/**
+ * Checks whether an exception is a 401 response, such as a failed upload or save after the
+ * session has expired.
+ *
+ * @param exception The exception to check.
+ * @returns Returns `true` when the exception has a `status` of 401.
+ */
+export function isUnauthorized(exception: unknown) {
+  return (
+    typeof exception === 'object' &&
+    exception !== null &&
+    'status' in exception &&
+    exception.status === 401
+  );
+}

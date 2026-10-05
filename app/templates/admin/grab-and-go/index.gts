@@ -105,7 +105,7 @@ const AdminGrabAndGoIndexTemplate: RouteTemplate<GrabAndGo[], AdminGrabAndGoInde
 
     <DeleteItemForm
       @isOpen={{@controller.deleteModalOpen}}
-      @special={{@controller.itemToDelete}}
+      @item={{@controller.itemToDelete}}
       @onSave={{@controller.closeDeleteModal}}
       @onCancel={{@controller.closeDeleteModal}}
     />

@@ -4,7 +4,7 @@ import { UPLOADS_DIR } from '../utils/config';
 export default class PackageBundle extends Model {
   @attr() declare displayOrder: number;
   @attr() declare title: string;
-  @attr() declare fileUrl: string;
+  @attr() declare fileUrl: string | null;
   @attr() declare specialText: string;
   @attr() declare prices: string[];
   @attr() declare items: string[];

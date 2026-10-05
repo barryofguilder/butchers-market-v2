@@ -14,7 +14,7 @@ import ValidationErrors from './validation-errors';
 interface ValidationError {
   key: string;
   validation: string[];
-  value: string;
+  value: unknown;
 }
 
 interface ModelStub {
@@ -39,6 +39,7 @@ export interface GroupSignature {
         readonly: WithBoundArgs<typeof UiTextbox, 'id' | 'readonly'>;
         textarea: WithBoundArgs<typeof UiTextarea, 'id' | 'errors' | 'readonly'>;
         textbox: WithBoundArgs<typeof UiTextbox, 'id' | 'errors' | 'readonly'>;
+        uniqueId: string;
         validationErrors: WithBoundArgs<typeof ValidationErrors, 'errors'>;
       },
     ];
@@ -75,6 +76,7 @@ export default class GroupComponent extends Component<GroupSignature> {
           readonly=(component UiTextbox id=this.uniqueId readonly=true)
           textarea=(component UiTextarea id=this.uniqueId errors=this.errors readonly=@readonly)
           textbox=(component UiTextbox id=this.uniqueId errors=this.errors readonly=@readonly)
+          uniqueId=this.uniqueId
           validationErrors=(component ValidationErrors errors=this.errors)
         )
       }}

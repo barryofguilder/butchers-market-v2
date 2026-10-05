@@ -3,19 +3,21 @@ import { action } from '@ember/object';
 import { on } from '@ember/modifier';
 import { valueOrDefault } from '../utils/value-or-default';
 
-export interface UiRadioInputSignature {
+export interface UiRadioInputSignature<Value extends string = string> {
   Element: HTMLInputElement;
   Args: {
     checked?: boolean;
     disabled?: boolean;
-    groupValue: string;
+    groupValue: Value;
     name: string;
-    onChange: (value: string) => void;
-    value: string;
+    onChange: (value: Value) => void;
+    value: Value;
   };
 }
 
-export default class UiRadioInput extends Component<UiRadioInputSignature> {
+export default class UiRadioInput<Value extends string = string> extends Component<
+  UiRadioInputSignature<Value>
+> {
   get disabled() {
     return valueOrDefault(this.args.disabled, false);
   }

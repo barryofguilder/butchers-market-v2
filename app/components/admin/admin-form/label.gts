@@ -3,7 +3,7 @@ import Component from '@glimmer/component';
 export interface LabelSignature {
   Element: HTMLLabelElement;
   Args: {
-    for: string;
+    for?: string;
     // TODO: Is this the correct type?
     errors?: string[];
   };

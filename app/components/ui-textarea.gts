@@ -13,7 +13,7 @@ export interface UiTextareaSignature {
     errors?: string[];
     onChange?: (value: string) => void;
     readonly?: boolean;
-    value: string;
+    value?: string | null;
   };
 }
 

@@ -3,7 +3,7 @@ import { UPLOADS_DIR } from '../utils/config';
 
 export default class DeliItem extends Model {
   @attr() declare title: string;
-  @attr() declare imageUrl: string;
+  @attr() declare imageUrl: string | null;
   @attr() declare ingredients: string;
   @attr() declare isHidden: boolean;
   @attr('date') declare createdAt: Date;
