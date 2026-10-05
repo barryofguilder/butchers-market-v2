@@ -5,9 +5,9 @@ import PageError from '../../../components/admin/page-error';
 const AdminSpecialsErrorTemplate: RouteTemplate<{ errors?: RequestError[] }> = <template>
   <PageError
     @errors={{@model.errors}}
-    @name='Special'
-    @route='admin.specials'
-    @backText='Back to Specials'
+    @name="Special"
+    @route="admin.specials"
+    @backText="Back to Specials"
   />
 </template>;
 

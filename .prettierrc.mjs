@@ -24,9 +24,7 @@ export default {
     {
       files: ['*.gjs', '*.gts'],
       options: {
-        // TODO: Update this to `false` in another PR since this will generate
-        // a large amount of file changes.
-        templateSingleQuote: true,
+        templateSingleQuote: false,
         trailingComma: 'es5',
       },
     },

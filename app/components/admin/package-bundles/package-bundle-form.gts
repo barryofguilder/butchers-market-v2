@@ -204,41 +204,41 @@ export default class PackageBundleFormComponent extends Component<PackageBundleF
   };
 
   <template>
-    <AdminForm class='max-w-xl' @onSubmit={{this.saveBundle.perform}} as |Form|>
+    <AdminForm class="max-w-xl" @onSubmit={{this.saveBundle.perform}} as |Form|>
       {{#if this.errorMessage}}
-        <UiAlert data-test-id='server-error' @variant='danger'>
+        <UiAlert data-test-id="server-error" @variant="danger">
           {{this.errorMessage}}
         </UiAlert>
       {{/if}}
 
-      <p class='mb-8'>
+      <p class="mb-8">
         <strong>Note:</strong>
         Required fields are marked with an
         <Required />
       </p>
 
-      <Form.group data-test-id='title' @model={{this.form}} @property='title' as |Group|>
+      <Form.group data-test-id="title" @model={{this.form}} @property="title" as |Group|>
         <Group.label>
           Title
           <Required />
         </Group.label>
-        <Group.textbox @value={{this.form.values.title}} @onChange={{this.form.setter 'title'}} />
+        <Group.textbox @value={{this.form.values.title}} @onChange={{this.form.setter "title"}} />
       </Form.group>
 
-      <Form.group data-test-id='file' @model={{this.form}} @property='fileUrl' as |Group|>
+      <Form.group data-test-id="file" @model={{this.form}} @property="fileUrl" as |Group|>
         <Group.label>PDF File <Required /></Group.label>
-        <div class='mt-2'>
-          {{#let (fileQueue name='file' onFileAdded=this.uploadFile) as |queue|}}
+        <div class="mt-2">
+          {{#let (fileQueue name="file" onFileAdded=this.uploadFile) as |queue|}}
             <label for={{Group.uniqueId}}>
               <span
-                class='inline-block px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-hidden focus:ring-3 focus:ring-blue-500'
+                class="inline-block px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-hidden focus:ring-3 focus:ring-blue-500"
               >
                 Select PDF
               </span>
               <input
-                type='file'
+                type="file"
                 id={{Group.uniqueId}}
-                accept='application/pdf'
+                accept="application/pdf"
                 hidden
                 {{queue.selectFile}}
               />
@@ -247,88 +247,88 @@ export default class PackageBundleFormComponent extends Component<PackageBundleF
 
           {{#if this.hasFile}}
             <button
-              type='button'
-              class='inline-block ml-2 px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-hidden focus:ring-3 focus:ring-blue-500'
-              {{on 'click' this.removeFile}}
+              type="button"
+              class="inline-block ml-2 px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-hidden focus:ring-3 focus:ring-blue-500"
+              {{on "click" this.removeFile}}
             >
               Remove PDF
             </button>
           {{/if}}
 
-          <small class='block mt-3 text-gray-700 sm:inline-block sm:mt-0 sm:ml-2'>
+          <small class="block mt-3 text-gray-700 sm:inline-block sm:mt-0 sm:ml-2">
             Only PDF are allowed.
           </small>
 
           {{#if this.fileErrorMessage}}
-            <span class='block mt-2 text-red-600'>
+            <span class="block mt-2 text-red-600">
               {{this.fileErrorMessage}}
             </span>
           {{/if}}
 
           {{#if this.hasFile}}
-            <div class='mt-4'>
+            <div class="mt-4">
               <iframe
                 src={{this.fileUrl}}
-                title='Package Bundle PDF'
-                height='600px'
-                class='w-full'
+                title="Package Bundle PDF"
+                height="600px"
+                class="w-full"
               ></iframe>
             </div>
           {{/if}}
         </div>
       </Form.group>
 
-      <Form.group data-test-id='prices'>
+      <Form.group data-test-id="prices">
         <Form.label>Prices</Form.label>
 
         {{#if this.reorderingPrices}}
           <div {{sortableGroup onChange=this.reorderPrices}}>
             {{#each this.prices as |price index|}}
-              <div data-test-id='item-{{index}}' class='py-3' {{sortableItem model=price}}>
-                <div class='flex gap-2 items-center'>
-                  <UiIcon @icon='arrows-alt-v' class='block text-center w-6' {{sortableHandle}} />
+              <div data-test-id="item-{{index}}" class="py-3" {{sortableItem model=price}}>
+                <div class="flex gap-2 items-center">
+                  <UiIcon @icon="arrows-alt-v" class="block text-center w-6" {{sortableHandle}} />
                   <p>{{price}}</p>
                 </div>
               </div>
             {{/each}}
           </div>
 
-          <div class='mt-2'>
+          <div class="mt-2">
             <UiButton
-              @size='medium'
-              @variant='plain'
-              @onClick={{set this 'reorderingPrices' false}}
+              @size="medium"
+              @variant="plain"
+              @onClick={{set this "reorderingPrices" false}}
             >
               Done
             </UiButton>
           </div>
         {{else}}
           {{#each this.prices as |price index|}}
-            <div data-test-id='item-{{index}}' class='py-1'>
-              <div class='flex items-center'>
+            <div data-test-id="item-{{index}}" class="py-1">
+              <div class="flex items-center">
                 <UiTextbox @value={{price}} @onChange={{fn this.priceChanged index}} />
                 <UiButton
-                  class='mr-1'
+                  class="mr-1"
                   @iconOnly={{true}}
-                  @icon='trash-alt'
-                  @variant='danger'
-                  title='Delete price'
+                  @icon="trash-alt"
+                  @variant="danger"
+                  title="Delete price"
                   @onClick={{fn this.deletePrice index}}
                 />
               </div>
             </div>
           {{/each}}
 
-          <div class='mt-2 flex gap-2'>
-            <UiButton @icon='plus' @size='medium' @variant='plain' @onClick={{this.addPrice}}>
+          <div class="mt-2 flex gap-2">
+            <UiButton @icon="plus" @size="medium" @variant="plain" @onClick={{this.addPrice}}>
               New Price
             </UiButton>
 
             <UiButton
-              @icon='arrows-alt-v'
-              @size='medium'
-              @variant='plain'
-              @onClick={{set this 'reorderingPrices' true}}
+              @icon="arrows-alt-v"
+              @size="medium"
+              @variant="plain"
+              @onClick={{set this "reorderingPrices" true}}
             >
               Re-order Prices
             </UiButton>
@@ -336,64 +336,64 @@ export default class PackageBundleFormComponent extends Component<PackageBundleF
         {{/if}}
       </Form.group>
 
-      <Form.group data-test-id='sale' @model={{this.form}} @property='sale' as |Group|>
+      <Form.group data-test-id="sale" @model={{this.form}} @property="sale" as |Group|>
         <Group.label>Special Text</Group.label>
         <Group.textbox
           @value={{this.form.values.specialText}}
-          @onChange={{this.form.setter 'specialText'}}
+          @onChange={{this.form.setter "specialText"}}
         />
-        <small class='block mt-3 text-gray-700'>
+        <small class="block mt-3 text-gray-700">
           Will show under the title in a red text.
         </small>
       </Form.group>
 
-      <Form.group data-test-id='items'>
+      <Form.group data-test-id="items">
         <Form.label>Items</Form.label>
 
         {{#if this.reorderingItems}}
           <div {{sortableGroup onChange=this.reorderItems}}>
             {{#each this.items as |item index|}}
-              <div data-test-id='item-{{index}}' class='py-3' {{sortableItem model=item}}>
-                <div class='flex gap-2 items-center'>
-                  <UiIcon @icon='arrows-alt-v' class='block text-center w-6' {{sortableHandle}} />
+              <div data-test-id="item-{{index}}" class="py-3" {{sortableItem model=item}}>
+                <div class="flex gap-2 items-center">
+                  <UiIcon @icon="arrows-alt-v" class="block text-center w-6" {{sortableHandle}} />
                   <p>{{item}}</p>
                 </div>
               </div>
             {{/each}}
           </div>
 
-          <div class='mt-2'>
-            <UiButton @size='medium' @variant='plain' @onClick={{set this 'reorderingItems' false}}>
+          <div class="mt-2">
+            <UiButton @size="medium" @variant="plain" @onClick={{set this "reorderingItems" false}}>
               Done
             </UiButton>
           </div>
         {{else}}
           {{#each this.items as |item index|}}
-            <div data-test-id='item-{{index}}' class='py-1'>
-              <div class='flex items-center'>
+            <div data-test-id="item-{{index}}" class="py-1">
+              <div class="flex items-center">
                 <UiTextbox @value={{item}} @onChange={{fn this.itemChanged index}} />
                 <UiButton
-                  class='mr-1'
+                  class="mr-1"
                   @iconOnly={{true}}
-                  @icon='trash-alt'
-                  @variant='danger'
-                  title='Delete item'
+                  @icon="trash-alt"
+                  @variant="danger"
+                  title="Delete item"
                   @onClick={{fn this.deleteItem index}}
                 />
               </div>
             </div>
           {{/each}}
 
-          <div class='mt-2 flex gap-2'>
-            <UiButton @icon='plus' @size='medium' @variant='plain' @onClick={{this.addItem}}>
+          <div class="mt-2 flex gap-2">
+            <UiButton @icon="plus" @size="medium" @variant="plain" @onClick={{this.addItem}}>
               New Item
             </UiButton>
 
             <UiButton
-              @icon='arrows-alt-v'
-              @size='medium'
-              @variant='plain'
-              @onClick={{set this 'reorderingItems' true}}
+              @icon="arrows-alt-v"
+              @size="medium"
+              @variant="plain"
+              @onClick={{set this "reorderingItems" true}}
             >
               Re-order Items
             </UiButton>
@@ -401,16 +401,16 @@ export default class PackageBundleFormComponent extends Component<PackageBundleF
         {{/if}}
       </Form.group>
 
-      <div class='mt-8'>
+      <div class="mt-8">
         {{#if this.hasErrors}}
-          <div class='mb-2 text-red-600'>
+          <div class="mb-2 text-red-600">
             There are errors in the form above.
           </div>
         {{/if}}
         <Form.submit @disabled={{this.saveDisabled}}>
           Save
         </Form.submit>
-        <UiButton class='ml-2' @variant='plain' @onClick={{@cancelled}}>Cancel</UiButton>
+        <UiButton class="ml-2" @variant="plain" @onClick={{@cancelled}}>Cancel</UiButton>
       </div>
     </AdminForm>
   </template>

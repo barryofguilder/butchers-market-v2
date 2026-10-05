@@ -5,9 +5,9 @@ import SocialList from '../../../components/admin/grab-and-go/social-list';
 import Title from '../../../components/admin/title';
 
 const AdminGrabAndGoSocialTemplate: RouteTemplate<GrabAndGo[]> = <template>
-  <BackLink @route='admin.grab-and-go' @text='Grab and Go' />
+  <BackLink @route="admin.grab-and-go" @text="Grab and Go" />
 
-  <Title @title='Grab and Go - Social Titles' />
+  <Title @title="Grab and Go - Social Titles" />
 
   <SocialList @items={{@model}} />
 </template>;

@@ -126,38 +126,38 @@ export default class DeliItemFormComponent extends Component<DeliItemFormSignatu
   };
 
   <template>
-    <AdminForm class='max-w-xl' @onSubmit={{this.saveItem.perform}} as |Form|>
+    <AdminForm class="max-w-xl" @onSubmit={{this.saveItem.perform}} as |Form|>
       {{#if this.errorMessage}}
-        <UiAlert data-test-id='server-error' @variant='danger'>
+        <UiAlert data-test-id="server-error" @variant="danger">
           {{this.errorMessage}}
         </UiAlert>
       {{/if}}
 
-      <p class='mb-8'>
+      <p class="mb-8">
         <strong>Note:</strong>
         Required fields are marked with an
         <Required />
       </p>
 
-      <Form.group data-test-id='title' @model={{this.form}} @property='title' as |Group|>
+      <Form.group data-test-id="title" @model={{this.form}} @property="title" as |Group|>
         <Group.label>Title <Required /></Group.label>
-        <Group.textbox @value={{this.form.values.title}} @onChange={{this.form.setter 'title'}} />
+        <Group.textbox @value={{this.form.values.title}} @onChange={{this.form.setter "title"}} />
       </Form.group>
 
       <Form.group
-        data-test-id='ingredients'
+        data-test-id="ingredients"
         @model={{this.form}}
-        @property='ingredients'
+        @property="ingredients"
         as |Group|
       >
         <Group.label>Ingredients</Group.label>
         <Group.textarea
           @value={{this.form.values.ingredients}}
-          @onChange={{this.form.setter 'ingredients'}}
+          @onChange={{this.form.setter "ingredients"}}
         />
       </Form.group>
 
-      <Form.group data-test-id='hidden' @model={{this.form}} @property='isHidden' as |Group|>
+      <Form.group data-test-id="hidden" @model={{this.form}} @property="isHidden" as |Group|>
         <Group.checkbox @checked={{this.form.values.isHidden}} @onChange={{this.updateHidden}}>
           Is Hidden?
         </Group.checkbox>
@@ -167,20 +167,20 @@ export default class DeliItemFormComponent extends Component<DeliItemFormSignatu
         </Group.help>
       </Form.group>
 
-      <Form.group data-test-id='image' @model={{this.form}} @property='imageUrl' as |Group|>
+      <Form.group data-test-id="image" @model={{this.form}} @property="imageUrl" as |Group|>
         <Group.label>Image <Required /></Group.label>
-        <div class='mt-2'>
-          {{#let (fileQueue name='photos' onFileAdded=this.uploadImage) as |queue|}}
+        <div class="mt-2">
+          {{#let (fileQueue name="photos" onFileAdded=this.uploadImage) as |queue|}}
             <label for={{Group.uniqueId}}>
               <span
-                class='inline-block px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-hidden focus:ring-3 focus:ring-blue-500'
+                class="inline-block px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-hidden focus:ring-3 focus:ring-blue-500"
               >
                 Select Image
               </span>
               <input
-                type='file'
+                type="file"
                 id={{Group.uniqueId}}
-                accept='image/*'
+                accept="image/*"
                 hidden
                 {{queue.selectFile}}
               />
@@ -189,42 +189,42 @@ export default class DeliItemFormComponent extends Component<DeliItemFormSignatu
 
           {{#if this.hasImage}}
             <button
-              type='button'
-              class='inline-block ml-2 px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-hidden focus:ring-3 focus:ring-blue-500'
-              {{on 'click' this.removeImage}}
+              type="button"
+              class="inline-block ml-2 px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-hidden focus:ring-3 focus:ring-blue-500"
+              {{on "click" this.removeImage}}
             >
               Remove Image
             </button>
           {{/if}}
 
-          <small class='block mt-3 text-gray-700 sm:inline-block sm:mt-0 sm:ml-2'>
+          <small class="block mt-3 text-gray-700 sm:inline-block sm:mt-0 sm:ml-2">
             Only JPG, JPEG, PNG, and GIF files are allowed.
           </small>
 
           {{#if this.fileErrorMessage}}
-            <span class='block mt-2 text-red-600'>
+            <span class="block mt-2 text-red-600">
               {{this.fileErrorMessage}}
             </span>
           {{/if}}
 
           {{#if this.hasImage}}
-            <div class='mt-4'>
-              <img src={{this.imageUrl}} alt='Deli item' class='w-full block' />
+            <div class="mt-4">
+              <img src={{this.imageUrl}} alt="Deli item" class="w-full block" />
             </div>
           {{/if}}
         </div>
       </Form.group>
 
-      <div class='mt-8'>
+      <div class="mt-8">
         {{#if this.hasErrors}}
-          <div class='mb-2 text-red-600'>
+          <div class="mb-2 text-red-600">
             There are errors in the form above.
           </div>
         {{/if}}
         <Form.submit @disabled={{this.saveDisabled}}>
           Save
         </Form.submit>
-        <UiButton class='ml-2' @variant='plain' @onClick={{@cancelled}}>Cancel</UiButton>
+        <UiButton class="ml-2" @variant="plain" @onClick={{@cancelled}}>Cancel</UiButton>
       </div>
     </AdminForm>
   </template>

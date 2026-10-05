@@ -18,73 +18,73 @@ import UiIcon from '../../../components/ui-icon';
 
 const AdminSpecialsIndexTemplate: RouteTemplate<Special[], AdminSpecialsIndexController> =
   <template>
-    <BackLink @route='admin.index' @text='Admin' />
+    <BackLink @route="admin.index" @text="Admin" />
 
-    <Title @title='Specials' />
+    <Title @title="Specials" />
 
-    <div class='mt-8'>
-      <UiButton @route='admin.specials.new' @icon='plus' @size='medium' @variant='plain'>
+    <div class="mt-8">
+      <UiButton @route="admin.specials.new" @icon="plus" @size="medium" @variant="plain">
         New
       </UiButton>
     </div>
 
     {{#if @controller.showErrorMessage}}
-      <UiAlert @variant='danger' class='mt-4'>
+      <UiAlert @variant="danger" class="mt-4">
         Something went wrong trying to save the ordering of the specials. Please refresh the page
         and try again.
       </UiAlert>
     {{/if}}
 
-    <UiTable class='mt-8' as |Table|>
+    <UiTable class="mt-8" as |Table|>
       <Table.Head as |Thead|>
         <Thead.Th />
         <Thead.Th>Title</Thead.Th>
-        <Thead.Th class='hidden md:table-cell'>Active Start Date</Thead.Th>
-        <Thead.Th class='hidden md:table-cell'>Active End Date</Thead.Th>
+        <Thead.Th class="hidden md:table-cell">Active Start Date</Thead.Th>
+        <Thead.Th class="hidden md:table-cell">Active End Date</Thead.Th>
         <Thead.Th>In Stock?</Thead.Th>
-        <Thead.Th class='hidden md:table-cell'>Hidden?</Thead.Th>
+        <Thead.Th class="hidden md:table-cell">Hidden?</Thead.Th>
         <Thead.Th />
       </Table.Head>
       <Table.Body {{sortableGroup onChange=@controller.reorderItems}} as |Tbody|>
-        {{#each (sortBy 'displayOrder' @model) as |special|}}
+        {{#each (sortBy "displayOrder" @model) as |special|}}
           <Tbody.Tr {{sortableItem model=special}} as |Row|>
             <Row.Td>
-              <UiIcon @icon='arrows-alt-v' class='block w-4' {{sortableHandle}} />
+              <UiIcon @icon="arrows-alt-v" class="block w-4" {{sortableHandle}} />
             </Row.Td>
             <Row.Td>
               {{special.title}}
             </Row.Td>
-            <Row.Td class='hidden md:table-cell'>
+            <Row.Td class="hidden md:table-cell">
               {{#if special.activeStartDate}}
-                {{dateFormat special.activeStartDate 'LL/dd/yyyy'}}
+                {{dateFormat special.activeStartDate "LL/dd/yyyy"}}
               {{/if}}
             </Row.Td>
-            <Row.Td class='hidden md:table-cell'>
+            <Row.Td class="hidden md:table-cell">
               {{#if special.activeEndDate}}
-                {{dateFormat special.activeEndDate 'LL/dd/yyyy'}}
+                {{dateFormat special.activeEndDate "LL/dd/yyyy"}}
               {{/if}}
             </Row.Td>
             <Row.Td>
               <MiniForm @special={{special}} />
             </Row.Td>
-            <Row.Td class='hidden md:table-cell'>
-              {{if special.isHidden 'Yes' 'No'}}
+            <Row.Td class="hidden md:table-cell">
+              {{if special.isHidden "Yes" "No"}}
             </Row.Td>
             <Row.Td>
-              <div class='flex justify-end'>
+              <div class="flex justify-end">
                 <UiButton
-                  @route='admin.specials.edit'
+                  @route="admin.specials.edit"
                   @model={{special.id}}
                   @iconOnly={{true}}
-                  @icon='pencil-alt'
-                  @variant='secondary'
+                  @icon="pencil-alt"
+                  @variant="secondary"
                 />
 
                 <UiButton
-                  class='ml-1'
+                  class="ml-1"
                   @iconOnly={{true}}
-                  @icon='trash-alt'
-                  @variant='danger'
+                  @icon="trash-alt"
+                  @variant="danger"
                   @onClick={{fn @controller.openDeleteModal special}}
                 />
               </div>

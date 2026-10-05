@@ -5,9 +5,9 @@ import PageError from '../../../components/admin/page-error';
 const AdminFeatureFlagsErrorTemplate: RouteTemplate<{ errors?: RequestError[] }> = <template>
   <PageError
     @errors={{@model.errors}}
-    @name='Feature Flag'
-    @route='admin.feature-flags'
-    @backText='Back to Feature Flags'
+    @name="Feature Flag"
+    @route="admin.feature-flags"
+    @backText="Back to Feature Flags"
   />
 </template>;
 

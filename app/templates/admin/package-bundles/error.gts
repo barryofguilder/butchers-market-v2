@@ -5,9 +5,9 @@ import PageError from '../../../components/admin/page-error';
 const AdminPackageBundlesErrorTemplate: RouteTemplate<{ errors?: RequestError[] }> = <template>
   <PageError
     @errors={{@model.errors}}
-    @name='Package Bundle'
-    @route='admin.package-bundles'
-    @backText='Back to Package Bundles'
+    @name="Package Bundle"
+    @route="admin.package-bundles"
+    @backText="Back to Package Bundles"
   />
 </template>;
 

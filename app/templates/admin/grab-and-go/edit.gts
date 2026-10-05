@@ -7,9 +7,9 @@ import Title from '../../../components/admin/title';
 
 const AdminGrabAndGoEditTemplate: RouteTemplate<GrabAndGo, AdminGrabAndGoEditController> =
   <template>
-    <BackLink @route='admin.grab-and-go' @text='Grab and Go' />
+    <BackLink @route="admin.grab-and-go" @text="Grab and Go" />
 
-    <Title @title='Edit Grab and Go' />
+    <Title @title="Edit Grab and Go" />
 
     <ItemForm
       @item={{@model}}

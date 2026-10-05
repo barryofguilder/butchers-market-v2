@@ -177,47 +177,47 @@ export default class SpecialFormComponent extends Component<SpecialFormSignature
   };
 
   <template>
-    <AdminForm class='max-w-xl' @onSubmit={{this.saveSpecial.perform}} as |Form|>
+    <AdminForm class="max-w-xl" @onSubmit={{this.saveSpecial.perform}} as |Form|>
       {{#if this.errorMessage}}
-        <UiAlert data-test-id='server-error' @variant='danger'>
+        <UiAlert data-test-id="server-error" @variant="danger">
           {{this.errorMessage}}
         </UiAlert>
       {{/if}}
 
-      <p class='mb-8'>
+      <p class="mb-8">
         <strong>Note:</strong>
         Required fields are marked with an
         <Required />
       </p>
 
-      <Form.group data-test-id='title' @model={{this.form}} @property='title' as |Group|>
+      <Form.group data-test-id="title" @model={{this.form}} @property="title" as |Group|>
         <Group.label>Title <Required /></Group.label>
-        <Group.textbox @value={{this.form.values.title}} @onChange={{this.form.setter 'title'}} />
+        <Group.textbox @value={{this.form.values.title}} @onChange={{this.form.setter "title"}} />
       </Form.group>
 
-      <Form.group data-test-id='link' @model={{this.form}} @property='link' as |Group|>
+      <Form.group data-test-id="link" @model={{this.form}} @property="link" as |Group|>
         <Group.label>Link</Group.label>
-        <Group.textbox @value={{this.form.values.link}} @onChange={{this.form.setter 'link'}} />
-        <small class='block mt-3 text-gray-700'>
+        <Group.textbox @value={{this.form.values.link}} @onChange={{this.form.setter "link"}} />
+        <small class="block mt-3 text-gray-700">
           If left blank, clicking on the special image will take you to
           {{this.orderOnlineUrl}}.
         </small>
       </Form.group>
 
-      <Form.group data-test-id='image' @model={{this.form}} @property='image' as |Group|>
+      <Form.group data-test-id="image" @model={{this.form}} @property="image" as |Group|>
         <Group.label>Image <Required /></Group.label>
-        <div class='mt-2'>
-          {{#let (fileQueue name='photos' onFileAdded=this.uploadImage) as |queue|}}
+        <div class="mt-2">
+          {{#let (fileQueue name="photos" onFileAdded=this.uploadImage) as |queue|}}
             <label for={{Group.uniqueId}}>
               <span
-                class='inline-block px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-hidden focus:ring-3 focus:ring-blue-500'
+                class="inline-block px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-hidden focus:ring-3 focus:ring-blue-500"
               >
                 Select Image
               </span>
               <input
-                type='file'
+                type="file"
                 id={{Group.uniqueId}}
-                accept='image/*'
+                accept="image/*"
                 hidden
                 {{queue.selectFile}}
               />
@@ -226,36 +226,36 @@ export default class SpecialFormComponent extends Component<SpecialFormSignature
 
           {{#if this.hasImage}}
             <button
-              type='button'
-              class='inline-block ml-2 px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-hidden focus:ring-3 focus:ring-blue-500'
-              {{on 'click' this.removeImage}}
+              type="button"
+              class="inline-block ml-2 px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-hidden focus:ring-3 focus:ring-blue-500"
+              {{on "click" this.removeImage}}
             >
               Remove Image
             </button>
           {{/if}}
 
-          <small class='block mt-3 text-gray-700 sm:inline-block sm:mt-0 sm:ml-2'>
+          <small class="block mt-3 text-gray-700 sm:inline-block sm:mt-0 sm:ml-2">
             Only JPG, JPEG, PNG, and GIF files are allowed.
           </small>
 
           {{#if this.fileErrorMessage}}
-            <span class='block mt-2 text-red-600'>
+            <span class="block mt-2 text-red-600">
               {{this.fileErrorMessage}}
             </span>
           {{/if}}
 
           {{#if this.hasImage}}
-            <div class='mt-4'>
-              <img src={{this.imageUrl}} alt='Special' class='w-full block' />
+            <div class="mt-4">
+              <img src={{this.imageUrl}} alt="Special" class="w-full block" />
             </div>
           {{/if}}
         </div>
       </Form.group>
 
       <Form.group
-        data-test-id='image-alt-text'
+        data-test-id="image-alt-text"
         @model={{this.form}}
-        @property='imageAltText'
+        @property="imageAltText"
         as |Group|
       >
         <Group.label>
@@ -264,15 +264,15 @@ export default class SpecialFormComponent extends Component<SpecialFormSignature
         </Group.label>
         <Group.textbox
           @value={{this.form.values.imageAltText}}
-          @onChange={{this.form.setter 'imageAltText'}}
+          @onChange={{this.form.setter "imageAltText"}}
         />
-        <small class='block mt-3 text-gray-700'>
+        <small class="block mt-3 text-gray-700">
           The text that people will see when there is no image or the user is blind. Just needs to
           describe the special.
         </small>
       </Form.group>
 
-      <Form.group data-test-id='active-during-range' as |Group|>
+      <Form.group data-test-id="active-during-range" as |Group|>
         <Group.checkbox
           @checked={{this.activeDuringRange}}
           @onChange={{this.toggleActiveDuringRange}}
@@ -287,16 +287,16 @@ export default class SpecialFormComponent extends Component<SpecialFormSignature
 
       {{#if this.activeDuringRange}}
         <Form.group
-          data-test-id='start-date'
+          data-test-id="start-date"
           @model={{this.form}}
-          @property='activeStartDate'
+          @property="activeStartDate"
           as |Group|
         >
           <Group.label>Active Start Date</Group.label>
           <Group.datepicker
             @allowInput={{false}}
             @date={{this.form.values.activeStartDate}}
-            @dateFormat='m/d/Y'
+            @dateFormat="m/d/Y"
             @onChange={{this.startDateSelected}}
           />
           <Group.help>
@@ -305,16 +305,16 @@ export default class SpecialFormComponent extends Component<SpecialFormSignature
         </Form.group>
 
         <Form.group
-          data-test-id='end-date'
+          data-test-id="end-date"
           @model={{this.form}}
-          @property='activeEndDate'
+          @property="activeEndDate"
           as |Group|
         >
           <Group.label>Active End Date</Group.label>
           <Group.datepicker
             @allowInput={{false}}
             @date={{if this.form.values.activeEndDate this.form.values.activeEndDate null}}
-            @dateFormat='m/d/Y'
+            @dateFormat="m/d/Y"
             @onChange={{this.endDateSelected}}
           />
           <Group.help>
@@ -323,13 +323,13 @@ export default class SpecialFormComponent extends Component<SpecialFormSignature
         </Form.group>
       {{/if}}
 
-      <Form.group data-test-id='in-stock' @model={{this.form}} @property='inStock' as |Group|>
+      <Form.group data-test-id="in-stock" @model={{this.form}} @property="inStock" as |Group|>
         <Group.checkbox @checked={{this.form.values.inStock}} @onChange={{this.updateInStock}}>
           In Stock?
         </Group.checkbox>
       </Form.group>
 
-      <Form.group data-test-id='hidden' @model={{this.form}} @property='isHidden' as |Group|>
+      <Form.group data-test-id="hidden" @model={{this.form}} @property="isHidden" as |Group|>
         <Group.checkbox @checked={{this.form.values.isHidden}} @onChange={{this.updateIsHidden}}>
           Is Hidden?
         </Group.checkbox>
@@ -339,16 +339,16 @@ export default class SpecialFormComponent extends Component<SpecialFormSignature
         </Group.help>
       </Form.group>
 
-      <div class='mt-8'>
+      <div class="mt-8">
         {{#if this.hasErrors}}
-          <div class='mb-2 text-red-600'>
+          <div class="mb-2 text-red-600">
             There are errors in the form above.
           </div>
         {{/if}}
         <Form.submit @disabled={{this.saveDisabled}}>
           Save
         </Form.submit>
-        <UiButton class='ml-2' @variant='plain' @onClick={{@cancelled}}>Cancel</UiButton>
+        <UiButton class="ml-2" @variant="plain" @onClick={{@cancelled}}>Cancel</UiButton>
       </div>
     </AdminForm>
   </template>

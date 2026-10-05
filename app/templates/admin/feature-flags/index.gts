@@ -13,22 +13,22 @@ const AdminFeatureFlagsIndexTemplate: RouteTemplate<
   FeatureFlag[],
   AdminFeatureFlagsIndexController
 > = <template>
-  <BackLink @route='admin.index' @text='Admin' />
+  <BackLink @route="admin.index" @text="Admin" />
 
-  <Title @title='Feature Flags' />
+  <Title @title="Feature Flags" />
 
-  <UiAlert @variant='warning'>
+  <UiAlert @variant="warning">
     Drew, this is something just for me. It allows me to turn on/off features without having to
     deploy code.
   </UiAlert>
 
-  <div class='mt-8'>
-    <UiButton @route='admin.feature-flags.new' @icon='plus' @size='medium' @variant='plain'>
+  <div class="mt-8">
+    <UiButton @route="admin.feature-flags.new" @icon="plus" @size="medium" @variant="plain">
       New
     </UiButton>
   </div>
 
-  <UiTable class='mt-8' as |Table|>
+  <UiTable class="mt-8" as |Table|>
     <Table.Head as |Thead|>
       <Thead.Th>Name</Thead.Th>
       <Thead.Th>Is Active?</Thead.Th>
@@ -39,23 +39,23 @@ const AdminFeatureFlagsIndexTemplate: RouteTemplate<
         <Tbody.Tr as |Row|>
           <Row.Td>{{flag.name}}</Row.Td>
           <Row.Td>
-            {{if flag.active 'Yes' 'No'}}
+            {{if flag.active "Yes" "No"}}
           </Row.Td>
           <Row.Td>
-            <div class='flex justify-end'>
+            <div class="flex justify-end">
               <UiButton
-                @route='admin.feature-flags.edit'
+                @route="admin.feature-flags.edit"
                 @model={{flag.id}}
                 @iconOnly={{true}}
-                @icon='pencil-alt'
-                @variant='secondary'
+                @icon="pencil-alt"
+                @variant="secondary"
               />
 
               <UiButton
-                class='ml-1'
+                class="ml-1"
                 @iconOnly={{true}}
-                @icon='trash-alt'
-                @variant='danger'
+                @icon="trash-alt"
+                @variant="danger"
                 @onClick={{fn @controller.openDeleteModal flag}}
               />
             </div>

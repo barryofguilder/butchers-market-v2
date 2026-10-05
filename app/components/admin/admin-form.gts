@@ -44,17 +44,17 @@ export default class AdminFormComponent extends Component<AdminFormSignature> {
   }
 
   <template>
-    <form class='m-0' {{on 'submit' this.submit}} ...attributes>
+    <form class="m-0" {{on "submit" this.submit}} ...attributes>
       {{yield
         (hash
           group=(component Group readonly=@readonly)
           label=(component Label)
           submit=(component
             UiButton
-            data-test-id='submit-btn'
+            data-test-id="submit-btn"
             isRunning=this.submitTask.isRunning
-            type='submit'
-            variant='primary'
+            type="submit"
+            variant="primary"
           )
         )
       }}

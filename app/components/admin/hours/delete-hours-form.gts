@@ -35,41 +35,41 @@ export default class DeleteHoursFormComponent extends Component<DeleteHoursFormS
       <Modal.header>
         Delete Hours?
       </Modal.header>
-      <AdminForm class='max-w-xl' @onSubmit={{this.deleteHours.perform}} as |Form|>
+      <AdminForm class="max-w-xl" @onSubmit={{this.deleteHours.perform}} as |Form|>
         <Modal.body>
           {{#if this.errorMessage}}
-            <UiAlert data-test-id='server-error' @variant='danger'>
+            <UiAlert data-test-id="server-error" @variant="danger">
               {{this.errorMessage}}
             </UiAlert>
           {{/if}}
 
-          <p class='mb-8'>
+          <p class="mb-8">
             Do you really want to delete these hours?
           </p>
 
-          <Form.group data-test-id='type' as |Group|>
+          <Form.group data-test-id="type" as |Group|>
             <Group.label>Type</Group.label>
             <Group.readonly @value={{@hours.type}} />
           </Form.group>
 
-          <Form.group data-test-id='label' as |Group|>
+          <Form.group data-test-id="label" as |Group|>
             <Group.label>Label</Group.label>
             <Group.readonly @value={{@hours.label}} />
           </Form.group>
 
-          <Form.group data-test-id='label' as |Group|>
+          <Form.group data-test-id="label" as |Group|>
             <Group.label>Active Start Date</Group.label>
-            <Group.readonly @value={{dateFormat @hours.activeStartDate 'LL/dd/yyyy'}} />
+            <Group.readonly @value={{dateFormat @hours.activeStartDate "LL/dd/yyyy"}} />
           </Form.group>
 
-          <Form.group data-test-id='label' as |Group|>
+          <Form.group data-test-id="label" as |Group|>
             <Group.label>Active End Date</Group.label>
-            <Group.readonly @value={{dateFormat @hours.activeEndDate 'LL/dd/yyyy'}} />
+            <Group.readonly @value={{dateFormat @hours.activeEndDate "LL/dd/yyyy"}} />
           </Form.group>
 
-          <Form.group data-test-id='label' as |Group|>
+          <Form.group data-test-id="label" as |Group|>
             <Group.label>Lines</Group.label>
-            <ul class='list-disc list-inside'>
+            <ul class="list-disc list-inside">
               <li>{{@hours.line1}}</li>
               {{#if @hours.line2}}
                 <li>{{@hours.line2}}</li>
@@ -81,10 +81,10 @@ export default class DeleteHoursFormComponent extends Component<DeleteHoursFormS
           </Form.group>
         </Modal.body>
         <Modal.footer>
-          <UiButton @variant='plain' @onClick={{@onCancel}}>
+          <UiButton @variant="plain" @onClick={{@onCancel}}>
             No
           </UiButton>
-          <Form.submit class='ml-2'>
+          <Form.submit class="ml-2">
             Yes
           </Form.submit>
         </Modal.footer>

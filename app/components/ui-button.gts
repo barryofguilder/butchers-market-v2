@@ -189,10 +189,10 @@ export default class UiButtonComponent extends Component<UiButtonSignature> {
       >
         {{#if @icon}}
           <UiIcon
-            data-test-id='button-icon'
+            data-test-id="button-icon"
             @icon={{@icon}}
             @iconPrefix={{@iconPrefix}}
-            @variant={{if @iconOnly this.iconVariant 'inherit'}}
+            @variant={{if @iconOnly this.iconVariant "inherit"}}
           />
         {{/if}}
 
@@ -204,19 +204,19 @@ export default class UiButtonComponent extends Component<UiButtonSignature> {
         class={{this.buttonClasses}}
         type={{this.type}}
         disabled={{this.buttonDisabled}}
-        {{on 'click' this.buttonTask.perform}}
+        {{on "click" this.buttonTask.perform}}
         ...attributes
       >
         {{#if (or this.isRunning @isRunning)}}
-          <UiIcon data-test-id='is-running' @spin={{true}} @icon='circle-notch' />
+          <UiIcon data-test-id="is-running" @spin={{true}} @icon="circle-notch" />
         {{/if}}
 
         {{#if @icon}}
           <UiIcon
-            data-test-id='button-icon'
+            data-test-id="button-icon"
             @icon={{@icon}}
             @iconPrefix={{@iconPrefix}}
-            @variant={{if @iconOnly this.iconVariant 'inherit'}}
+            @variant={{if @iconOnly this.iconVariant "inherit"}}
           />
         {{/if}}
 

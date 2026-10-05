@@ -2,16 +2,16 @@ import Title from '../../components/admin/title';
 import UiList from '../../components/admin/ui-list';
 
 <template>
-  <Title @title='Manage' />
+  <Title @title="Manage" />
 
-  <UiList class='max-w-sm' as |List|>
-    <List.Item @route='admin.deli-items'>Deli Items</List.Item>
+  <UiList class="max-w-sm" as |List|>
+    <List.Item @route="admin.deli-items">Deli Items</List.Item>
     {{! <List.Item @route='admin.feature-flags'>Feature Flags</List.Item> }}
-    <List.Item @route='admin.grab-and-go'>Grab &amp; Go</List.Item>
-    <List.Item @route='admin.meat-bundles'>Meat Bundles</List.Item>
-    <List.Item @route='admin.menu'>Menu PDF</List.Item>
-    <List.Item @route='admin.package-bundles'>Package Bundles</List.Item>
-    <List.Item @route='admin.specials'>Specials</List.Item>
-    <List.Item @route='admin.hours'>Store Hours</List.Item>
+    <List.Item @route="admin.grab-and-go">Grab &amp; Go</List.Item>
+    <List.Item @route="admin.meat-bundles">Meat Bundles</List.Item>
+    <List.Item @route="admin.menu">Menu PDF</List.Item>
+    <List.Item @route="admin.package-bundles">Package Bundles</List.Item>
+    <List.Item @route="admin.specials">Specials</List.Item>
+    <List.Item @route="admin.hours">Store Hours</List.Item>
   </UiList>
 </template>

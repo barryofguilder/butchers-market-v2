@@ -53,7 +53,7 @@ export default class UiIconComponent extends Component<UiIconSignature> {
   }
 
   <template>
-    <span data-test-id='icon' class={{this.color}} ...attributes>
+    <span data-test-id="icon" class={{this.color}} ...attributes>
       <FaIcon @icon={{@icon}} @prefix={{this.iconPrefix}} @size={{@size}} @spin={{@spin}} />
     </span>
   </template>

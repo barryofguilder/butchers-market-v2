@@ -124,50 +124,50 @@ export default class MeatBundleFormComponent extends Component<MeatBundleFormSig
   };
 
   <template>
-    <AdminForm class='max-w-xl' @onSubmit={{this.saveBundle.perform}} as |Form|>
+    <AdminForm class="max-w-xl" @onSubmit={{this.saveBundle.perform}} as |Form|>
       {{#if this.errorMessage}}
-        <UiAlert data-test-id='server-error' @variant='danger'>
+        <UiAlert data-test-id="server-error" @variant="danger">
           {{this.errorMessage}}
         </UiAlert>
       {{/if}}
 
-      <p class='mb-8'>
+      <p class="mb-8">
         <strong>Note:</strong>
         Required fields are marked with an
         <Required />
       </p>
 
-      <Form.group data-test-id='title' @model={{this.form}} @property='title' as |Group|>
+      <Form.group data-test-id="title" @model={{this.form}} @property="title" as |Group|>
         <Group.label>
           Title
           <Required />
         </Group.label>
-        <Group.textbox @value={{this.form.values.title}} @onChange={{this.form.setter 'title'}} />
+        <Group.textbox @value={{this.form.values.title}} @onChange={{this.form.setter "title"}} />
       </Form.group>
 
-      <Form.group data-test-id='price' @model={{this.form}} @property='price' as |Group|>
+      <Form.group data-test-id="price" @model={{this.form}} @property="price" as |Group|>
         <Group.label>Price <Required /></Group.label>
-        <Group.textbox @value={{this.form.values.price}} @onChange={{this.form.setter 'price'}} />
+        <Group.textbox @value={{this.form.values.price}} @onChange={{this.form.setter "price"}} />
       </Form.group>
 
-      <Form.group data-test-id='featured' @model={{this.form}} @property='featured' as |Group|>
+      <Form.group data-test-id="featured" @model={{this.form}} @property="featured" as |Group|>
         <Group.checkbox @checked={{this.form.values.featured}} @onChange={{this.updateFeatured}}>
           Is featured on home page?
         </Group.checkbox>
       </Form.group>
 
-      <Form.group data-test-id='sale' @model={{this.form}} @property='sale' as |Group|>
+      <Form.group data-test-id="sale" @model={{this.form}} @property="sale" as |Group|>
         <Group.label>Special Text</Group.label>
         <Group.textbox
           @value={{this.form.values.specialText}}
-          @onChange={{this.form.setter 'specialText'}}
+          @onChange={{this.form.setter "specialText"}}
         />
-        <small class='block mt-3 text-gray-700'>
+        <small class="block mt-3 text-gray-700">
           Will show under the title in a red text.
         </small>
       </Form.group>
 
-      <Form.group data-test-id='hidden' @model={{this.form}} @property='isHidden' as |Group|>
+      <Form.group data-test-id="hidden" @model={{this.form}} @property="isHidden" as |Group|>
         <Group.checkbox @checked={{this.form.values.isHidden}} @onChange={{this.updateHidden}}>
           Is Hidden?
         </Group.checkbox>
@@ -177,7 +177,7 @@ export default class MeatBundleFormComponent extends Component<MeatBundleFormSig
         </Group.help>
       </Form.group>
 
-      <Form.group data-test-id='order' @model={{this.form}} @property='orderEnabled' as |Group|>
+      <Form.group data-test-id="order" @model={{this.form}} @property="orderEnabled" as |Group|>
         <Group.checkbox
           @checked={{this.form.values.orderEnabled}}
           @onChange={{this.updateOrderEnabled}}
@@ -190,58 +190,58 @@ export default class MeatBundleFormComponent extends Component<MeatBundleFormSig
         </Group.help>
       </Form.group>
 
-      <Form.group data-test-id='items' @model={{this.form}} @property='items' as |Group|>
+      <Form.group data-test-id="items" @model={{this.form}} @property="items" as |Group|>
         <Form.label>
           Items
           <Required />
         </Form.label>
 
-        <Group.validationErrors class='mb-1' />
+        <Group.validationErrors class="mb-1" />
 
         {{#if this.reordering}}
           <div {{sortableGroup onChange=this.reorderItems}}>
             {{#each this.items as |item index|}}
-              <div data-test-id='item-{{index}}' class='py-3' {{sortableItem model=item}}>
-                <div class='flex gap-2 items-center'>
-                  <UiIcon @icon='arrows-alt-v' class='block text-center w-6' {{sortableHandle}} />
+              <div data-test-id="item-{{index}}" class="py-3" {{sortableItem model=item}}>
+                <div class="flex gap-2 items-center">
+                  <UiIcon @icon="arrows-alt-v" class="block text-center w-6" {{sortableHandle}} />
                   <p>{{item}}</p>
                 </div>
               </div>
             {{/each}}
           </div>
 
-          <div class='mt-2'>
-            <UiButton @size='medium' @variant='plain' @onClick={{set this 'reordering' false}}>
+          <div class="mt-2">
+            <UiButton @size="medium" @variant="plain" @onClick={{set this "reordering" false}}>
               Done
             </UiButton>
           </div>
         {{else}}
           {{#each this.items as |item index|}}
-            <div data-test-id='item-{{index}}' class='py-1'>
-              <div class='flex items-center'>
+            <div data-test-id="item-{{index}}" class="py-1">
+              <div class="flex items-center">
                 <UiTextbox @value={{item}} @onChange={{fn this.itemChanged index}} />
                 <UiButton
-                  class='mr-1'
+                  class="mr-1"
                   @iconOnly={{true}}
-                  @icon='trash-alt'
-                  @variant='danger'
-                  title='Delete item'
+                  @icon="trash-alt"
+                  @variant="danger"
+                  title="Delete item"
                   @onClick={{fn this.deleteItem index}}
                 />
               </div>
             </div>
           {{/each}}
 
-          <div class='mt-2 flex gap-2'>
-            <UiButton @icon='plus' @size='medium' @variant='plain' @onClick={{this.addItem}}>
+          <div class="mt-2 flex gap-2">
+            <UiButton @icon="plus" @size="medium" @variant="plain" @onClick={{this.addItem}}>
               New Item
             </UiButton>
 
             <UiButton
-              @icon='arrows-alt-v'
-              @size='medium'
-              @variant='plain'
-              @onClick={{set this 'reordering' true}}
+              @icon="arrows-alt-v"
+              @size="medium"
+              @variant="plain"
+              @onClick={{set this "reordering" true}}
             >
               Re-order Items
             </UiButton>
@@ -249,16 +249,16 @@ export default class MeatBundleFormComponent extends Component<MeatBundleFormSig
         {{/if}}
       </Form.group>
 
-      <div class='mt-8'>
+      <div class="mt-8">
         {{#if this.hasErrors}}
-          <div class='mb-2 text-red-600'>
+          <div class="mb-2 text-red-600">
             There are errors in the form above.
           </div>
         {{/if}}
         <Form.submit @disabled={{this.saveDisabled}}>
           Save
         </Form.submit>
-        <UiButton class='ml-2' @variant='plain' @onClick={{@cancelled}}>Cancel</UiButton>
+        <UiButton class="ml-2" @variant="plain" @onClick={{@cancelled}}>Cancel</UiButton>
       </div>
     </AdminForm>
   </template>

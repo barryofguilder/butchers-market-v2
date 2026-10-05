@@ -28,10 +28,10 @@ export default class PromoSectionComponent extends Component<PromoSectionSignatu
   <template>
     <section
       style={{this.backgroundImage}}
-      class='bg-black parallax-background bg-center bg-cover bg-no-repeat'
+      class="bg-black parallax-background bg-center bg-cover bg-no-repeat"
       ...attributes
     >
-      <div class='py-16 text-white text-shadow'>
+      <div class="py-16 text-white text-shadow">
         {{yield (hash title=(component Title) subtitle=(component Subtitle))}}
       </div>
     </section>

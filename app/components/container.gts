@@ -9,7 +9,7 @@ const Container: TOC<{
     default: [];
   };
 }> = <template>
-  <div class='container {{if @enableFullWidthForMobile "sm:px-10" "px-10"}}' ...attributes>
+  <div class="container {{if @enableFullWidthForMobile 'sm:px-10' 'px-10'}}" ...attributes>
     {{yield}}
   </div>
 </template>;

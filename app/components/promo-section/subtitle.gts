@@ -6,7 +6,7 @@ const Subtitle: TOC<{
     default: [];
   };
 }> = <template>
-  <p class='mt-4 text-2xl md:text-3xl'>
+  <p class="mt-4 text-2xl md:text-3xl">
     {{yield}}
   </p>
 </template>;

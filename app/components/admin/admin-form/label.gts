@@ -19,8 +19,8 @@ export default class LabelComponent extends Component<LabelSignature> {
 
   <template>
     <label
-      data-test-id='label'
-      class='block mb-1 font-semibold text-sm {{if this.hasErrors "has-errors text-red-700"}}'
+      data-test-id="label"
+      class="block mb-1 font-semibold text-sm {{if this.hasErrors 'has-errors text-red-700'}}"
       for={{@for}}
       ...attributes
     >

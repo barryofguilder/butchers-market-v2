@@ -6,9 +6,9 @@ import HoursForm from '../../../components/admin/hours/hours-form';
 import Title from '../../../components/admin/title';
 
 const AdminHoursNewTemplate: RouteTemplate<Hour, AdminHoursNewController> = <template>
-  <BackLink @route='admin.hours' @text='Store Hours' />
+  <BackLink @route="admin.hours" @text="Store Hours" />
 
-  <Title @title='New Hours' />
+  <Title @title="New Hours" />
 
   <HoursForm
     @hours={{@model}}

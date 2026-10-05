@@ -9,9 +9,9 @@ const SpecialsList: TOC<{
     specials: Special[];
   };
 }> = <template>
-  <div class='sm:-mx-3 sm:flex sm:items-center sm:flex-wrap' ...attributes>
-    {{#each (sortBy 'displayOrder' @specials) as |special|}}
-      <div class='sm:px-3 sm:w-1/2 lg:w-1/3'>
+  <div class="sm:-mx-3 sm:flex sm:items-center sm:flex-wrap" ...attributes>
+    {{#each (sortBy "displayOrder" @specials) as |special|}}
+      <div class="sm:px-3 sm:w-1/2 lg:w-1/3">
         <SpecialListItem @special={{special}} />
       </div>
     {{/each}}

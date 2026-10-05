@@ -51,7 +51,7 @@ export default class UiBaseLink extends Component<UiBaseLinkSignature> {
   <template>
     {{#if this.hasRoute}}
       <LinkTo
-        data-test-id='link'
+        data-test-id="link"
         @route={{@route}}
         @models={{this.models}}
         @query={{this.query}}
@@ -59,7 +59,7 @@ export default class UiBaseLink extends Component<UiBaseLinkSignature> {
       >{{yield}}</LinkTo>
     {{else}}
       <a
-        data-test-id='link'
+        data-test-id="link"
         href={{@href}}
         download={{@download}}
         ...attributes

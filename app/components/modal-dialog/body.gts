@@ -6,7 +6,7 @@ const ModalBody: TOC<{
     default: [];
   };
 }> = <template>
-  <div data-test-id='modal-body' ...attributes>
+  <div data-test-id="modal-body" ...attributes>
     {{yield}}
   </div>
 </template>;

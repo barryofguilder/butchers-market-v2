@@ -48,13 +48,13 @@ export default class UiTextareaComponent extends Component<UiTextareaSignature> 
 
   <template>
     <textarea
-      data-test-id='textarea'
+      data-test-id="textarea"
       id={{this.id}}
-      class='styled-textbox {{if this.hasErrors "has-errors"}}'
+      class="styled-textbox {{if this.hasErrors 'has-errors'}}"
       value={{@value}}
       readonly={{this.readonly}}
       ...attributes
-      {{on 'input' this.handleInput}}
+      {{on "input" this.handleInput}}
     >
     </textarea>
   </template>

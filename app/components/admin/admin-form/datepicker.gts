@@ -56,7 +56,7 @@ export default class DatepickerComponent extends Component<DatepickerSignature> 
       @dateFormat={{@dateFormat}}
       @disableMobile={{true}}
       @onChange={{@onChange}}
-      data-test-id='datepicker'
+      data-test-id="datepicker"
       id={{@id}}
       class={{this.inputClasses}}
       ...attributes

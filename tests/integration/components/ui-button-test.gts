@@ -41,7 +41,7 @@ module('Integration | Component | ui-button', function (hooks) {
   test('it renders a primary button', async function (assert) {
     await render(
       <template>
-        <UiButton @variant='primary'>Primary Button</UiButton>
+        <UiButton @variant="primary">Primary Button</UiButton>
       </template>
     );
 
@@ -54,7 +54,7 @@ module('Integration | Component | ui-button', function (hooks) {
   test('it renders a secondary button', async function (assert) {
     await render(
       <template>
-        <UiButton @variant='secondary'>Secondary Button</UiButton>
+        <UiButton @variant="secondary">Secondary Button</UiButton>
       </template>
     );
 
@@ -67,7 +67,7 @@ module('Integration | Component | ui-button', function (hooks) {
   test('it renders a plain button', async function (assert) {
     await render(
       <template>
-        <UiButton @variant='plain'>Plain Button</UiButton>
+        <UiButton @variant="plain">Plain Button</UiButton>
       </template>
     );
 
@@ -80,7 +80,7 @@ module('Integration | Component | ui-button', function (hooks) {
   test('it renders with custom HTML attributes', async function (assert) {
     await render(
       <template>
-        <UiButton data-test-id='my-button' aria-disabled='true' type='submit'>
+        <UiButton data-test-id="my-button" aria-disabled="true" type="submit">
           My Button
         </UiButton>
       </template>
@@ -93,7 +93,7 @@ module('Integration | Component | ui-button', function (hooks) {
   test('it can render with an icon', async function (assert) {
     await render(
       <template>
-        <UiButton @icon='pencil-alt'>Edit</UiButton>
+        <UiButton @icon="pencil-alt">Edit</UiButton>
       </template>
     );
 
@@ -104,7 +104,7 @@ module('Integration | Component | ui-button', function (hooks) {
   test('it can render as a different type using the component argument', async function (assert) {
     await render(
       <template>
-        <UiButton @type='submit'>Submit Button</UiButton>
+        <UiButton @type="submit">Submit Button</UiButton>
       </template>
     );
 
@@ -192,7 +192,7 @@ module('Integration | Component | ui-button', function (hooks) {
   test('it renders as a link when using the `href` argument', async function (assert) {
     await render(
       <template>
-        <UiButton @href='https://google.com'>Google</UiButton>
+        <UiButton @href="https://google.com">Google</UiButton>
       </template>
     );
 
@@ -204,7 +204,7 @@ module('Integration | Component | ui-button', function (hooks) {
   test('it has the `download` attribute', async function (assert) {
     await render(
       <template>
-        <UiButton @href='foo.txt' @download={{true}}>My File</UiButton>
+        <UiButton @href="foo.txt" @download={{true}}>My File</UiButton>
       </template>
     );
 
@@ -214,7 +214,7 @@ module('Integration | Component | ui-button', function (hooks) {
   test('it renders as a link when using the `route` argument', async function (assert) {
     await render(
       <template>
-        <UiButton @route='test-route'>Test Route</UiButton>
+        <UiButton @route="test-route">Test Route</UiButton>
       </template>
     );
 
@@ -226,7 +226,7 @@ module('Integration | Component | ui-button', function (hooks) {
   test('it correctly renders the href for a route with a model', async function (assert) {
     await render(
       <template>
-        <UiButton @route='test-route.model-route' @model={{1}}>
+        <UiButton @route="test-route.model-route" @model={{1}}>
           Test Model Route
         </UiButton>
       </template>
@@ -250,7 +250,7 @@ module('Integration | Component | ui-button', function (hooks) {
   test('it correctly renders the `href` for a route with query params', async function (assert) {
     await render(
       <template>
-        <UiButton @route='test-route' @query={{hash search='foo'}}>
+        <UiButton @route="test-route" @query={{hash search="foo"}}>
           Test Route
         </UiButton>
       </template>

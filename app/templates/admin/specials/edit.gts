@@ -6,9 +6,9 @@ import SpecialForm from '../../../components/admin/specials/special-form';
 import Title from '../../../components/admin/title';
 
 const AdminSpecialsEditTemplate: RouteTemplate<Special, AdminSpecialsEditController> = <template>
-  <BackLink @route='admin.specials' @text='Specials' />
+  <BackLink @route="admin.specials" @text="Specials" />
 
-  <Title @title='Edit Special' />
+  <Title @title="Edit Special" />
 
   <SpecialForm
     @special={{@model}}

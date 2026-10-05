@@ -41,15 +41,15 @@ export default class UiRadioInput<Value extends string = string> extends Compone
 
   <template>
     <input
-      data-test-id='radio-input'
+      data-test-id="radio-input"
       ...attributes
-      type='radio'
+      type="radio"
       aria-checked={{this.isCheckedStr}}
       checked={{this.isChecked}}
       disabled={{@disabled}}
       name={{@name}}
       value={{@value}}
-      {{on 'change' this.handleChange}}
+      {{on "change" this.handleChange}}
     />
   </template>
 }

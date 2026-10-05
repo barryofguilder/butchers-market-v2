@@ -24,7 +24,7 @@ export default class SocialListComponent extends Component<SocialListSignature> 
   }
 
   <template>
-    <div class='flex flex-col gap-6'>
+    <div class="flex flex-col gap-6">
       <p>
         This contains all the Grab and Go items that are currently in stock and has the social title
         for you to copy and paste to your social media accounts.
@@ -36,12 +36,12 @@ export default class SocialListComponent extends Component<SocialListSignature> 
 
       <div>
         {{! This needs to be all in one line so that copying works correctly }}
-        <p class='text-lg'>Grab &amp; Go Inventory for:
+        <p class="text-lg">Grab &amp; Go Inventory for:
           {{this.date}}<br /><br />{{#each @items as |item|}}{{if
               item.socialTitle
               item.socialTitle
               item.title
-            }}<br />{{else}}<span class='text-gray-500 italic'>No in stock Grab and Go items</span>{{/each}}</p>
+            }}<br />{{else}}<span class="text-gray-500 italic">No in stock Grab and Go items</span>{{/each}}</p>
       </div>
     </div>
   </template>

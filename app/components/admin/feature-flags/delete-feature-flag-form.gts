@@ -34,33 +34,33 @@ export default class DeleteFeatureFlagFormComponent extends Component<DeleteFeat
       <Modal.header>
         Delete Feature Flag?
       </Modal.header>
-      <AdminForm class='max-w-xl' @onSubmit={{this.deleteFlag.perform}} as |Form|>
+      <AdminForm class="max-w-xl" @onSubmit={{this.deleteFlag.perform}} as |Form|>
         <Modal.body>
           {{#if this.errorMessage}}
-            <UiAlert data-test-id='server-error' @variant='danger'>
+            <UiAlert data-test-id="server-error" @variant="danger">
               {{this.errorMessage}}
             </UiAlert>
           {{/if}}
 
-          <p class='mb-8'>
+          <p class="mb-8">
             Do you really want to delete this feature flag?
           </p>
 
-          <Form.group data-test-id='title' as |Group|>
+          <Form.group data-test-id="title" as |Group|>
             <Group.label>Name</Group.label>
             <Group.readonly @value={{@flag.name}} />
           </Form.group>
 
-          <Form.group data-test-id='hidden' as |Group|>
+          <Form.group data-test-id="hidden" as |Group|>
             <Group.label>Is Active?</Group.label>
-            <Group.readonly @value={{if @flag.active 'Yes' 'No'}} />
+            <Group.readonly @value={{if @flag.active "Yes" "No"}} />
           </Form.group>
         </Modal.body>
         <Modal.footer>
-          <UiButton @variant='plain' @onClick={{@onCancel}}>
+          <UiButton @variant="plain" @onClick={{@onCancel}}>
             No
           </UiButton>
-          <Form.submit class='ml-2' @disabled={{this.deleteFlag.isRunning}}>
+          <Form.submit class="ml-2" @disabled={{this.deleteFlag.isRunning}}>
             Yes
           </Form.submit>
         </Modal.footer>

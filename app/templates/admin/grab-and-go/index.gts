@@ -14,40 +14,40 @@ import UiButton from '../../../components/ui-button';
 
 const AdminGrabAndGoIndexTemplate: RouteTemplate<GrabAndGo[], AdminGrabAndGoIndexController> =
   <template>
-    <BackLink @route='admin.index' @text='Admin' />
+    <BackLink @route="admin.index" @text="Admin" />
 
-    <Title @title='Grab and Go' />
+    <Title @title="Grab and Go" />
 
-    <div class='mt-8 flex flex-wrap justify-between items-center gap-4'>
-      <UiButton @route='admin.grab-and-go.new' @icon='plus' @size='medium' @variant='plain'>
+    <div class="mt-8 flex flex-wrap justify-between items-center gap-4">
+      <UiButton @route="admin.grab-and-go.new" @icon="plus" @size="medium" @variant="plain">
         New
       </UiButton>
 
-      <div class='flex flex-wrap items-center gap-x-12 gap-y-4'>
+      <div class="flex flex-wrap items-center gap-x-12 gap-y-4">
         <UiBaseLink
-          @route='admin.grab-and-go.social'
-          class='text-red-700 hover:text-red-800 focus:text-red-800'
+          @route="admin.grab-and-go.social"
+          class="text-red-700 hover:text-red-800 focus:text-red-800"
         >
           Social Titles
         </UiBaseLink>
 
         <div
-          role='group'
-          aria-label='Filter by stock'
-          data-test-id='stock-filter'
-          class='inline-flex rounded-sm border border-gray-300'
+          role="group"
+          aria-label="Filter by stock"
+          data-test-id="stock-filter"
+          class="inline-flex rounded-sm border border-gray-300"
         >
           {{#each @controller.stockFilters as |filter|}}
             <button
-              type='button'
-              aria-pressed={{if (eq filter.value @controller.stockFilter) 'true' 'false'}}
-              class='px-4 py-2 text-sm font-semibold transition-colors not-first:border-l not-first:border-gray-300 focus:outline-hidden focus:ring-3 focus:ring-blue-500
+              type="button"
+              aria-pressed={{if (eq filter.value @controller.stockFilter) "true" "false"}}
+              class="px-4 py-2 text-sm font-semibold transition-colors not-first:border-l not-first:border-gray-300 focus:outline-hidden focus:ring-3 focus:ring-blue-500
                 {{if
                   (eq filter.value @controller.stockFilter)
-                  "bg-gray-800 text-white"
-                  "bg-transparent hover:bg-gray-300"
-                }}'
-              {{on 'click' (fn @controller.setStockFilter filter.value)}}
+                  'bg-gray-800 text-white'
+                  'bg-transparent hover:bg-gray-300'
+                }}"
+              {{on "click" (fn @controller.setStockFilter filter.value)}}
             >
               {{filter.label}}
             </button>
@@ -56,7 +56,7 @@ const AdminGrabAndGoIndexTemplate: RouteTemplate<GrabAndGo[], AdminGrabAndGoInde
       </div>
     </div>
 
-    <UiTable class='mt-8' as |Table|>
+    <UiTable class="mt-8" as |Table|>
       <Table.Head as |Thead|>
         <Thead.Th>Title</Thead.Th>
         <Thead.Th>In Stock?</Thead.Th>
@@ -70,26 +70,26 @@ const AdminGrabAndGoIndexTemplate: RouteTemplate<GrabAndGo[], AdminGrabAndGoInde
               {{item.title}}
             </Row.Td>
             <Row.Td>
-              <MiniForm @item={{item}} @field='inStock' />
+              <MiniForm @item={{item}} @field="inStock" />
             </Row.Td>
             <Row.Td>
-              <MiniForm @item={{item}} @field='isHoliday' />
+              <MiniForm @item={{item}} @field="isHoliday" />
             </Row.Td>
             <Row.Td>
-              <div class='flex justify-end'>
+              <div class="flex justify-end">
                 <UiButton
-                  @route='admin.grab-and-go.edit'
+                  @route="admin.grab-and-go.edit"
                   @model={{item.id}}
                   @iconOnly={{true}}
-                  @icon='pencil-alt'
-                  @variant='secondary'
+                  @icon="pencil-alt"
+                  @variant="secondary"
                 />
 
                 <UiButton
-                  class='ml-1'
+                  class="ml-1"
                   @iconOnly={{true}}
-                  @icon='trash-alt'
-                  @variant='danger'
+                  @icon="trash-alt"
+                  @variant="danger"
                   @onClick={{fn @controller.openDeleteModal item}}
                 />
               </div>

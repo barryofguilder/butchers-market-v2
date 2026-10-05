@@ -4,7 +4,7 @@ import Container from '../components/container';
 import SignInForm from '../components/sign-in-form';
 
 const SignInTemplate: RouteTemplate<never, SignInController> = <template>
-  <div class='mt-32'>
+  <div class="mt-32">
     <Container>
       <SignInForm @onAuthenticated={{@controller.authenticated}} />
     </Container>

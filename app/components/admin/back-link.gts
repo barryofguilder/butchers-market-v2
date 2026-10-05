@@ -13,10 +13,10 @@ const BackLink: TOC<{
   };
 }> = <template>
   <div ...attributes>
-    <LinkTo @route={{@route}} class='inline-block'>
-      <div class='flex items-center text-red-800 hover:text-red-900 focus:text-red-900'>
-        <UiIcon @icon='chevron-left' @size='sm' />
-        <div class='ml-2'>
+    <LinkTo @route={{@route}} class="inline-block">
+      <div class="flex items-center text-red-800 hover:text-red-900 focus:text-red-900">
+        <UiIcon @icon="chevron-left" @size="sm" />
+        <div class="ml-2">
           {{#if (has-block)}}
             {{yield}}
           {{else}}
