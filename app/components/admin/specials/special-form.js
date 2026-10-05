@@ -2,10 +2,9 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
-import Changeset from 'ember-changeset';
-import lookupValidator from 'ember-changeset-validations';
 import { dropTask, enqueueTask } from 'ember-concurrency';
 import SpecialValidations from '../../../validations/special';
+import FormState from '../../../utils/form-state';
 import baseUrl from '../../../utils/base-url';
 import { generateFileName } from '../../../utils/file-name';
 import { getErrorMessageFromException } from '../../../utils/error-handling';
@@ -15,20 +14,21 @@ export default class SpecialFormComponent extends Component {
   @service router;
   @service session;
 
-  changeset;
+  form;
   orderOnlineUrl = ORDER_ONLINE_URL;
 
   @tracked activeDuringRange = false;
+  @tracked image;
   @tracked tempImageUrl;
   @tracked errorMessage;
   @tracked fileErrorMessage;
 
   get hasErrors() {
-    return this.errorMessage || this.changeset.errors;
+    return this.errorMessage || this.form.isInvalid;
   }
 
   get hasImage() {
-    return this.changeset.get('imageUrl') || this.tempImageUrl;
+    return this.form.get('imageUrl') || this.tempImageUrl;
   }
 
   get imageUrl() {
@@ -36,11 +36,11 @@ export default class SpecialFormComponent extends Component {
       return this.tempImageUrl;
     }
 
-    return this.changeset.get('imageUrlPath');
+    return this.form.get('imageUrlPath');
   }
 
   get saveDisabled() {
-    return this.changeset && this.changeset.isInvalid;
+    return this.form.isInvalid;
   }
 
   get uploadHeaders() {
@@ -58,43 +58,37 @@ export default class SpecialFormComponent extends Component {
   constructor() {
     super(...arguments);
 
-    let changeset = new Changeset(
-      this.args.special,
-      lookupValidator(SpecialValidations),
-      SpecialValidations
-    );
+    this.form = new FormState(this.args.special, SpecialValidations);
 
-    this.changeset = changeset;
-
-    if (this.changeset.activeStartDate) {
+    if (this.form.get('activeStartDate')) {
       this.activeDuringRange = true;
     }
   }
 
   saveSpecial = dropTask(async () => {
-    await this.changeset.validate();
+    this.form.validate();
 
-    const hasImage = this.changeset.image || this.changeset.imageUrl;
+    const hasImage = this.image || this.form.get('imageUrl');
 
-    if (!this.changeset.isValid || !hasImage) {
+    if (!this.form.isValid || !hasImage) {
       if (!hasImage) {
-        this.changeset.addError('image', 'Image URL is required');
+        this.form.addError('image', 'Image URL is required');
       }
 
       return;
     }
 
     try {
-      if (this.changeset.image) {
-        const generatedFileName = generateFileName(this.changeset.image);
-        await this.changeset.image.upload(`${baseUrl}/upload`, {
+      if (this.image) {
+        const generatedFileName = generateFileName(this.image);
+        await this.image.upload(`${baseUrl}/upload`, {
           headers: this.uploadHeaders,
           data: { generatedFileName },
         });
-        this.changeset.set('imageUrl', generatedFileName);
+        this.form.set('imageUrl', generatedFileName);
       }
 
-      await this.changeset.save();
+      await this.form.save();
       this.args.saved();
     } catch (ex) {
       if (ex.status === 401) {
@@ -109,7 +103,8 @@ export default class SpecialFormComponent extends Component {
     try {
       let url = await file.readAsDataURL();
       this.tempImageUrl = url;
-      this.changeset.set('image', file);
+      this.image = file;
+      this.form.removeError('image');
     } catch (ex) /* eslint-disable-line no-unused-vars */ {
       this.fileErrorMessage = 'Could not read the file contents';
     }
@@ -117,16 +112,17 @@ export default class SpecialFormComponent extends Component {
 
   @action
   uploadImage(file) {
-    this.changeset.set('imageUrl', null);
+    this.form.set('imageUrl', null);
     this.uploadPhoto.perform(file);
   }
 
   @action
   removeImage() {
-    this.changeset.set('image', null);
+    this.image = null;
     this.tempImageUrl = null;
+    this.form.removeError('image');
 
-    this.changeset.set('imageUrl', null);
+    this.form.set('imageUrl', null);
   }
 
   @action
@@ -134,14 +130,14 @@ export default class SpecialFormComponent extends Component {
     this.activeDuringRange = checked;
 
     if (this.activeDuringRange === false) {
-      this.changeset.set('activeStartDate', null);
-      this.changeset.set('activeEndDate', null);
+      this.form.set('activeStartDate', null);
+      this.form.set('activeEndDate', null);
     }
   }
 
   @action
   startDateSelected(date) {
-    this.changeset.set(
+    this.form.set(
       'activeStartDate',
       new Date(date[0].getFullYear(), date[0].getMonth(), date[0].getDate(), 0, 0, 0)
     );
@@ -149,7 +145,7 @@ export default class SpecialFormComponent extends Component {
 
   @action
   endDateSelected(date) {
-    this.changeset.set(
+    this.form.set(
       'activeEndDate',
       new Date(date[0].getFullYear(), date[0].getMonth(), date[0].getDate(), 23, 59, 59)
     );
@@ -157,11 +153,11 @@ export default class SpecialFormComponent extends Component {
 
   @action
   updateInStock() {
-    this.changeset.set('inStock', !this.changeset.get('inStock'));
+    this.form.set('inStock', !this.form.get('inStock'));
   }
 
   @action
   updateIsHidden() {
-    this.changeset.set('isHidden', !this.changeset.get('isHidden'));
+    this.form.set('isHidden', !this.form.get('isHidden'));
   }
 }

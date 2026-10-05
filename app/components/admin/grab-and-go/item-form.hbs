@@ -11,16 +11,16 @@
     <Admin::Required />
   </p>
 
-  <Form.group data-test-id="title" @model={{this.changeset}} @property="title" as |Group|>
+  <Form.group data-test-id="title" @model={{this.form}} @property="title" as |Group|>
     <Group.label>Title <Admin::Required /></Group.label>
-    <Group.textbox @value={{this.changeset.title}} @onChange={{set this "changeset.title"}} />
+    <Group.textbox @value={{this.form.values.title}} @onChange={{fn this.form.set "title"}} />
   </Form.group>
 
-  <Form.group data-test-id="title" @model={{this.changeset}} @property="social-title" as |Group|>
+  <Form.group data-test-id="title" @model={{this.form}} @property="social-title" as |Group|>
     <Group.label>Social Title</Group.label>
     <Group.textbox
-      @value={{this.changeset.socialTitle}}
-      @onChange={{set this "changeset.socialTitle"}}
+      @value={{this.form.values.socialTitle}}
+      @onChange={{fn this.form.set "socialTitle"}}
     />
     <Group.help>
       The title that will be used for the social media page for you to copy and paste to your social
@@ -28,7 +28,7 @@
     </Group.help>
   </Form.group>
 
-  <Form.group data-test-id="image" @model={{this.changeset}} @property="image" as |Group|>
+  <Form.group data-test-id="image" @model={{this.form}} @property="image" as |Group|>
     <Group.label>Image</Group.label>
     <div class="mt-2">
       {{#let (file-queue name="photos" onFileAdded=this.uploadImage) as |queue|}}
@@ -70,21 +70,16 @@
     </div>
   </Form.group>
 
-  <Form.group
-    data-test-id="description"
-    @model={{this.changeset}}
-    @property="description"
-    as |Group|
-  >
+  <Form.group data-test-id="description" @model={{this.form}} @property="description" as |Group|>
     <Group.label>Description</Group.label>
     <Group.textarea
-      @value={{this.changeset.description}}
-      @onChange={{set this "changeset.description"}}
+      @value={{this.form.values.description}}
+      @onChange={{fn this.form.set "description"}}
     />
   </Form.group>
 
-  <Form.group data-test-id="in-stock" @model={{this.changeset}} @property="inStock" as |Group|>
-    <Group.checkbox @checked={{this.changeset.inStock}} @onChange={{this.updateInStock}}>
+  <Form.group data-test-id="in-stock" @model={{this.form}} @property="inStock" as |Group|>
+    <Group.checkbox @checked={{this.form.values.inStock}} @onChange={{this.updateInStock}}>
       In Stock?
     </Group.checkbox>
     <Group.help>
@@ -92,8 +87,8 @@
     </Group.help>
   </Form.group>
 
-  <Form.group data-test-id="is-holiday" @model={{this.changeset}} @property="isHoliday" as |Group|>
-    <Group.checkbox @checked={{this.changeset.isHoliday}} @onChange={{this.updateIsHoliday}}>
+  <Form.group data-test-id="is-holiday" @model={{this.form}} @property="isHoliday" as |Group|>
+    <Group.checkbox @checked={{this.form.values.isHoliday}} @onChange={{this.updateIsHoliday}}>
       Is Holiday?
     </Group.checkbox>
     <Group.help>

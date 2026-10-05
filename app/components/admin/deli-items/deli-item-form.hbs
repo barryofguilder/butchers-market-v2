@@ -11,26 +11,21 @@
     <Admin::Required />
   </p>
 
-  <Form.group data-test-id="title" @model={{this.changeset}} @property="title" as |Group|>
+  <Form.group data-test-id="title" @model={{this.form}} @property="title" as |Group|>
     <Group.label>Title <Admin::Required /></Group.label>
-    <Group.textbox @value={{this.changeset.title}} @onChange={{set this "changeset.title"}} />
+    <Group.textbox @value={{this.form.values.title}} @onChange={{fn this.form.set "title"}} />
   </Form.group>
 
-  <Form.group
-    data-test-id="ingredients"
-    @model={{this.changeset}}
-    @property="ingredients"
-    as |Group|
-  >
+  <Form.group data-test-id="ingredients" @model={{this.form}} @property="ingredients" as |Group|>
     <Group.label>Ingredients</Group.label>
     <Group.textarea
-      @value={{this.changeset.ingredients}}
-      @onChange={{set this "changeset.ingredients"}}
+      @value={{this.form.values.ingredients}}
+      @onChange={{fn this.form.set "ingredients"}}
     />
   </Form.group>
 
-  <Form.group data-test-id="hidden" @model={{this.changeset}} @property="isHidden" as |Group|>
-    <Group.checkbox @checked={{this.changeset.isHidden}} @onChange={{this.updateHidden}}>
+  <Form.group data-test-id="hidden" @model={{this.form}} @property="isHidden" as |Group|>
+    <Group.checkbox @checked={{this.form.values.isHidden}} @onChange={{this.updateHidden}}>
       Is Hidden?
     </Group.checkbox>
     <Group.help>
@@ -39,7 +34,7 @@
     </Group.help>
   </Form.group>
 
-  <Form.group data-test-id="image" @model={{this.changeset}} @property="imageUrl" as |Group|>
+  <Form.group data-test-id="image" @model={{this.form}} @property="imageUrl" as |Group|>
     <Group.label>Image <Admin::Required /></Group.label>
     <div class="mt-2">
       {{#let (file-queue name="photos" onFileAdded=this.uploadImage) as |queue|}}

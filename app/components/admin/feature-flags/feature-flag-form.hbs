@@ -11,13 +11,13 @@
     <Admin::Required />
   </p>
 
-  <Form.group data-test-id="name" @model={{this.changeset}} @property="name" as |Group|>
+  <Form.group data-test-id="name" @model={{this.form}} @property="name" as |Group|>
     <Group.label>Name <Admin::Required /></Group.label>
-    <Group.textbox @value={{this.changeset.name}} @onChange={{set this "changeset.name"}} />
+    <Group.textbox @value={{this.form.values.name}} @onChange={{fn this.form.set "name"}} />
   </Form.group>
 
-  <Form.group data-test-id="active" @model={{this.changeset}} @property="active" as |Group|>
-    <Group.checkbox @checked={{this.changeset.active}} @onChange={{this.updateActive}}>
+  <Form.group data-test-id="active" @model={{this.form}} @property="active" as |Group|>
+    <Group.checkbox @checked={{this.form.values.active}} @onChange={{this.updateActive}}>
       Is Active?
     </Group.checkbox>
   </Form.group>

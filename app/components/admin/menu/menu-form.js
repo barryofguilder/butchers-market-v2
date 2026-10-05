@@ -2,10 +2,9 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
-import Changeset from 'ember-changeset';
-import lookupValidator from 'ember-changeset-validations';
 import { dropTask, enqueueTask } from 'ember-concurrency';
 import MenuValidations from '../../../validations/menu';
+import FormState from '../../../utils/form-state';
 import baseUrl from '../../../utils/base-url';
 import { generatePdfFileName } from '../../../utils/file-name';
 import { getErrorMessageFromException } from '../../../utils/error-handling';
@@ -14,18 +13,19 @@ export default class MenuFormComponent extends Component {
   @service router;
   @service session;
 
-  changeset;
+  form = new FormState(this.args.menu, MenuValidations);
 
+  @tracked file;
   @tracked tempFileUrl;
   @tracked errorMessage;
   @tracked fileErrorMessage;
 
   get hasErrors() {
-    return this.errorMessage || this.changeset.errors;
+    return this.errorMessage || this.form.isInvalid;
   }
 
   get hasFile() {
-    return this.changeset.get('fileUrl') || this.tempFileUrl;
+    return this.form.get('fileUrl') || this.tempFileUrl;
   }
 
   get fileUrl() {
@@ -33,11 +33,11 @@ export default class MenuFormComponent extends Component {
       return this.tempFileUrl;
     }
 
-    return this.changeset.get('fileUrlPath');
+    return this.form.get('fileUrlPath');
   }
 
   get saveDisabled() {
-    return this.changeset && this.changeset.isInvalid;
+    return this.form.isInvalid;
   }
 
   get uploadHeaders() {
@@ -52,42 +52,30 @@ export default class MenuFormComponent extends Component {
     return null;
   }
 
-  constructor() {
-    super(...arguments);
-
-    let changeset = new Changeset(
-      this.args.menu,
-      lookupValidator(MenuValidations),
-      MenuValidations
-    );
-
-    this.changeset = changeset;
-  }
-
   saveMenu = dropTask(async () => {
-    await this.changeset.validate();
+    this.form.validate();
 
-    const hasFile = this.changeset.file || this.changeset.fileUrl;
+    const hasFile = this.file || this.form.get('fileUrl');
 
-    if (!this.changeset.isValid || !hasFile) {
+    if (!this.form.isValid || !hasFile) {
       if (!hasFile) {
-        this.changeset.addError('file', 'PDF URL is required');
+        this.form.addError('file', 'PDF URL is required');
       }
 
       return;
     }
 
     try {
-      if (this.changeset.file) {
-        const generatedFileName = generatePdfFileName(this.changeset.file);
-        await this.changeset.file.upload(`${baseUrl}/upload`, {
+      if (this.file) {
+        const generatedFileName = generatePdfFileName(this.file);
+        await this.file.upload(`${baseUrl}/upload`, {
           headers: this.uploadHeaders,
           data: { generatedFileName },
         });
-        this.changeset.set('fileUrl', generatedFileName);
+        this.form.set('fileUrl', generatedFileName);
       }
 
-      await this.changeset.save();
+      await this.form.save();
       this.args.saved();
     } catch (ex) {
       if (ex.status === 401) {
@@ -102,7 +90,8 @@ export default class MenuFormComponent extends Component {
     try {
       let url = await file.readAsDataURL();
       this.tempFileUrl = url;
-      this.changeset.set('file', file);
+      this.file = file;
+      this.form.removeError('file');
     } catch (ex) /* eslint-disable-line no-unused-vars */ {
       this.fileErrorMessage = 'Could not read the file contents';
     }
@@ -110,7 +99,7 @@ export default class MenuFormComponent extends Component {
 
   @action
   uploadFile(file) {
-    this.changeset.set('fileUrl', null);
+    this.form.set('fileUrl', null);
     this.uploadFileTask.perform(file);
   }
 }

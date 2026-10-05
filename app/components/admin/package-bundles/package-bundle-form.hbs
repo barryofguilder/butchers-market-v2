@@ -11,15 +11,15 @@
     <Admin::Required />
   </p>
 
-  <Form.group data-test-id="title" @model={{this.changeset}} @property="title" as |Group|>
+  <Form.group data-test-id="title" @model={{this.form}} @property="title" as |Group|>
     <Group.label>
       Title
       <Admin::Required />
     </Group.label>
-    <Group.textbox @value={{this.changeset.title}} @onChange={{set this "changeset.title"}} />
+    <Group.textbox @value={{this.form.values.title}} @onChange={{fn this.form.set "title"}} />
   </Form.group>
 
-  <Form.group data-test-id="file" @model={{this.changeset}} @property="fileUrl" as |Group|>
+  <Form.group data-test-id="file" @model={{this.form}} @property="fileUrl" as |Group|>
     <Group.label>PDF File <Admin::Required /></Group.label>
     <div class="mt-2">
       {{#let (file-queue name="file" onFileAdded=this.uploadFile) as |queue|}}
@@ -126,11 +126,11 @@
     {{/if}}
   </Form.group>
 
-  <Form.group data-test-id="sale" @model={{this.changeset}} @property="sale" as |Group|>
+  <Form.group data-test-id="sale" @model={{this.form}} @property="sale" as |Group|>
     <Group.label>Special Text</Group.label>
     <Group.textbox
-      @value={{this.changeset.specialText}}
-      @onChange={{set this "changeset.specialText"}}
+      @value={{this.form.values.specialText}}
+      @onChange={{fn this.form.set "specialText"}}
     />
     <small class="block mt-3 text-gray-700">
       Will show under the title in a red text.

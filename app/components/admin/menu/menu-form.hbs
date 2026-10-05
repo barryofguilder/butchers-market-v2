@@ -11,7 +11,7 @@
     <Admin::Required />
   </p>
 
-  <Form.group data-test-id="file" @model={{this.changeset}} @property="file" as |Group|>
+  <Form.group data-test-id="file" @model={{this.form}} @property="file" as |Group|>
     <Group.label>PDF File <Admin::Required /></Group.label>
     <div class="mt-2">
       {{#let (file-queue name="file" onFileAdded=this.uploadFile) as |queue|}}
