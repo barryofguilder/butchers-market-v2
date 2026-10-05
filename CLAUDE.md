@@ -17,7 +17,7 @@ Use pnpm (Node and pnpm versions are pinned in `package.json` via Volta).
 - `pnpm lint`: runs every `lint:*` script (eslint, stylelint, ember-template-lint, prettier check, and `ember-tsc --noEmit` for Glint type-checking). `pnpm lint:fix` auto-fixes and formats.
 - `pnpm lint:types`: type-check only.
 
-CI (`.github/workflows`) runs `pnpm lint` and `pnpm test` on PRs. To deploy, push to `master` and trigger a deploy on Render.com. The `deploy` script in `package.json` is a leftover.
+CI (`.github/workflows`) runs `pnpm lint` and `pnpm test` on PRs. To deploy, push to `master` and trigger a deploy on Render.com.
 
 Script and config names follow the ember-cli app blueprint. Don't rename them, even when a name looks outdated: `lint:hbs` stays `lint:hbs` even though it now lints `.gts` files.
 
