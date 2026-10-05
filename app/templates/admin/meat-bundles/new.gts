@@ -1,11 +1,24 @@
-import type { RouteTemplate } from '../../../utils/route-template';
-import type AdminMeatBundlesNewController from '../../../controllers/admin/meat-bundles/new';
+import Component from '@glimmer/component';
+import { service } from '@ember/service';
+import type RouterService from '@ember/routing/router-service';
 import type MeatBundle from '../../../models/meat-bundle';
 import BackLink from '../../../components/admin/back-link';
 import MeatBundleForm from '../../../components/admin/meat-bundles/meat-bundle-form';
 import Title from '../../../components/admin/title';
 
-const AdminMeatBundlesNewTemplate: RouteTemplate<MeatBundle, AdminMeatBundlesNewController> =
+interface Signature {
+  Args: {
+    model: MeatBundle;
+  };
+}
+
+export default class AdminMeatBundlesNewTemplate extends Component<Signature> {
+  @service declare router: RouterService;
+
+  returnToIndex = () => {
+    this.router.transitionTo('admin.meat-bundles');
+  };
+
   <template>
     <BackLink @route="admin.meat-bundles" @text="Meat Bundles" />
 
@@ -13,9 +26,8 @@ const AdminMeatBundlesNewTemplate: RouteTemplate<MeatBundle, AdminMeatBundlesNew
 
     <MeatBundleForm
       @bundle={{@model}}
-      @saved={{@controller.bundleSaved}}
-      @cancelled={{@controller.bundleCancelled}}
+      @saved={{this.returnToIndex}}
+      @cancelled={{this.returnToIndex}}
     />
-  </template>;
-
-export default AdminMeatBundlesNewTemplate;
+  </template>
+}

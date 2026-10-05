@@ -1,15 +1,55 @@
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { fn } from '@ember/helper';
-import type { RouteTemplate } from '../../../utils/route-template';
 import type AdminDeliItemsIndexController from '../../../controllers/admin/deli-items/index';
 import type DeliItem from '../../../models/deli-item';
 import BackLink from '../../../components/admin/back-link';
 import DeleteDeliItemForm from '../../../components/admin/deli-items/delete-deli-item-form';
 import MiniForm from '../../../components/admin/deli-items/mini-form';
 import Title from '../../../components/admin/title';
-import UiTable from '../../../components/admin/ui-table';
+import UiTable, {
+  convertToColumnOutput,
+  convertToSort,
+  type ColumnOutput,
+} from '../../../components/admin/ui-table';
 import UiButton from '../../../components/ui-button';
+import sortBy from '../../../helpers/sort-by';
 
-const AdminDeliItemsIndexTemplate: RouteTemplate<DeliItem[], AdminDeliItemsIndexController> =
+interface Signature {
+  Args: {
+    controller: AdminDeliItemsIndexController;
+    model: DeliItem[];
+  };
+}
+
+export default class AdminDeliItemsIndexTemplate extends Component<Signature> {
+  @tracked itemToDelete: DeliItem | null = null;
+  @tracked deleteModalOpen = false;
+
+  get currentSort() {
+    return convertToColumnOutput(this.args.controller.sort);
+  }
+
+  get sortedDeliItems() {
+    const { sortColumn, sortDirection } = this.currentSort;
+    const sortKey = sortColumn ? `${sortColumn}:${sortDirection}` : 'title:asc';
+
+    return sortBy([sortKey], this.args.model);
+  }
+
+  sortDeliItems = (sort: ColumnOutput) => {
+    this.args.controller.sort = convertToSort(sort);
+  };
+
+  openDeleteModal = (item: DeliItem) => {
+    this.itemToDelete = item;
+    this.deleteModalOpen = true;
+  };
+
+  closeDeleteModal = () => {
+    this.deleteModalOpen = false;
+  };
+
   <template>
     <BackLink @route="admin.index" @text="Admin" />
 
@@ -23,8 +63,8 @@ const AdminDeliItemsIndexTemplate: RouteTemplate<DeliItem[], AdminDeliItemsIndex
 
     <UiTable class="mt-8" as |Table|>
       <Table.Head
-        @currentSort={{@controller.currentSort}}
-        @onColumnClick={{@controller.sortDeliItems}}
+        @currentSort={{this.currentSort}}
+        @onColumnClick={{this.sortDeliItems}}
         as |Thead|
       >
         <Thead.Th @name="title">Title</Thead.Th>
@@ -32,7 +72,7 @@ const AdminDeliItemsIndexTemplate: RouteTemplate<DeliItem[], AdminDeliItemsIndex
         <Thead.Th />
       </Table.Head>
       <Table.Body as |Tbody|>
-        {{#each @controller.sortedDeliItems as |item|}}
+        {{#each this.sortedDeliItems as |item|}}
           <Tbody.Tr as |Row|>
             <Row.Td>{{item.title}}</Row.Td>
             <Row.Td>
@@ -53,7 +93,7 @@ const AdminDeliItemsIndexTemplate: RouteTemplate<DeliItem[], AdminDeliItemsIndex
                   @iconOnly={{true}}
                   @icon="trash-alt"
                   @variant="danger"
-                  @onClick={{fn @controller.openDeleteModal item}}
+                  @onClick={{fn this.openDeleteModal item}}
                 />
               </div>
             </Row.Td>
@@ -67,13 +107,12 @@ const AdminDeliItemsIndexTemplate: RouteTemplate<DeliItem[], AdminDeliItemsIndex
     </UiTable>
 
     <DeleteDeliItemForm
-      @isOpen={{@controller.deleteModalOpen}}
-      @item={{@controller.itemToDelete}}
-      @onSave={{@controller.closeDeleteModal}}
-      @onCancel={{@controller.closeDeleteModal}}
+      @isOpen={{this.deleteModalOpen}}
+      @item={{this.itemToDelete}}
+      @onSave={{this.closeDeleteModal}}
+      @onCancel={{this.closeDeleteModal}}
     />
 
     {{outlet}}
-  </template>;
-
-export default AdminDeliItemsIndexTemplate;
+  </template>
+}

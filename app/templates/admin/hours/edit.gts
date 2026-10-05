@@ -1,20 +1,29 @@
-import type { RouteTemplate } from '../../../utils/route-template';
-import type AdminHoursEditController from '../../../controllers/admin/hours/edit';
+import Component from '@glimmer/component';
+import { service } from '@ember/service';
+import type RouterService from '@ember/routing/router-service';
 import type Hour from '../../../models/hour';
 import BackLink from '../../../components/admin/back-link';
 import HoursForm from '../../../components/admin/hours/hours-form';
 import Title from '../../../components/admin/title';
 
-const AdminHoursEditTemplate: RouteTemplate<Hour, AdminHoursEditController> = <template>
-  <BackLink @route="admin.hours" @text="Store Hours" />
+interface Signature {
+  Args: {
+    model: Hour;
+  };
+}
 
-  <Title @title="Edit Hours" />
+export default class AdminHoursEditTemplate extends Component<Signature> {
+  @service declare router: RouterService;
 
-  <HoursForm
-    @hours={{@model}}
-    @saved={{@controller.hoursSaved}}
-    @cancelled={{@controller.hoursCancelled}}
-  />
-</template>;
+  returnToIndex = () => {
+    this.router.transitionTo('admin.hours');
+  };
 
-export default AdminHoursEditTemplate;
+  <template>
+    <BackLink @route="admin.hours" @text="Store Hours" />
+
+    <Title @title="Edit Hours" />
+
+    <HoursForm @hours={{@model}} @saved={{this.returnToIndex}} @cancelled={{this.returnToIndex}} />
+  </template>
+}

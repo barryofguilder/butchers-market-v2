@@ -1,4 +1,4 @@
-import type { RouteTemplate } from '../utils/route-template';
+import type { TOC } from '@ember/component/template-only';
 import type DeliItem from '../models/deli-item';
 import sortBy from '../helpers/sort-by';
 import Container from '../components/container';
@@ -6,7 +6,13 @@ import HeaderTitle from '../components/header-title';
 import MobileOrderBanner from '../components/mobile-order-banner';
 import PromoSection from '../components/promo-section';
 
-const DeliTemplate: RouteTemplate<DeliItem[]> = <template>
+interface Signature {
+  Args: {
+    model: DeliItem[];
+  };
+}
+
+const DeliTemplate: TOC<Signature> = <template>
   <MobileOrderBanner />
 
   <PromoSection @image="promo-deli.jpg" as |Promo|>

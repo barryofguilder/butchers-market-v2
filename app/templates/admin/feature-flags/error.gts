@@ -1,8 +1,14 @@
-import type { RouteTemplate } from '../../../utils/route-template';
+import type { TOC } from '@ember/component/template-only';
 import type { RequestError } from '../../../components/admin/page-error';
 import PageError from '../../../components/admin/page-error';
 
-const AdminFeatureFlagsErrorTemplate: RouteTemplate<{ errors?: RequestError[] }> = <template>
+interface Signature {
+  Args: {
+    model: { errors?: RequestError[] };
+  };
+}
+
+const AdminFeatureFlagsErrorTemplate: TOC<Signature> = <template>
   <PageError
     @errors={{@model.errors}}
     @name="Feature Flag"

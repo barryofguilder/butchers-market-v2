@@ -1,7 +1,8 @@
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { eq } from 'ember-truth-helpers';
-import type { RouteTemplate } from '../../../utils/route-template';
 import type AdminGrabAndGoIndexController from '../../../controllers/admin/grab-and-go/index';
 import type GrabAndGo from '../../../models/grab-and-go';
 import BackLink from '../../../components/admin/back-link';
@@ -12,7 +13,60 @@ import UiTable from '../../../components/admin/ui-table';
 import UiBaseLink from '../../../components/ui-base-link';
 import UiButton from '../../../components/ui-button';
 
-const AdminGrabAndGoIndexTemplate: RouteTemplate<GrabAndGo[], AdminGrabAndGoIndexController> =
+const STOCK_FILTERS = [
+  { value: 'in-stock', label: 'In Stock' },
+  { value: 'out-of-stock', label: 'Out of Stock' },
+  { value: 'all', label: 'All' },
+];
+
+interface Signature {
+  Args: {
+    controller: AdminGrabAndGoIndexController;
+    model: GrabAndGo[];
+  };
+}
+
+export default class AdminGrabAndGoIndexTemplate extends Component<Signature> {
+  stockFilters = STOCK_FILTERS;
+
+  @tracked itemToDelete: GrabAndGo | null = null;
+  @tracked deleteModalOpen = false;
+
+  get filteredItems() {
+    switch (this.args.controller.stock) {
+      case 'in-stock':
+        return this.args.model.filter((item) => item.inStock);
+      case 'out-of-stock':
+        return this.args.model.filter((item) => !item.inStock);
+      default:
+        return this.args.model;
+    }
+  }
+
+  get emptyMessage() {
+    switch (this.args.controller.stock) {
+      case 'in-stock':
+        return 'No in stock grab and go items found.';
+      case 'out-of-stock':
+        return 'No out of stock grab and go items found.';
+      default:
+        return 'No grab and go items found.';
+    }
+  }
+
+  setStockFilter = (value: string) => {
+    this.args.controller.stock = value;
+  };
+
+  openDeleteModal = (item: GrabAndGo) => {
+    this.itemToDelete = item;
+    this.deleteModalOpen = true;
+  };
+
+  closeDeleteModal = () => {
+    this.deleteModalOpen = false;
+  };
+
   <template>
     <BackLink @route="admin.index" @text="Admin" />
 
@@ -37,17 +91,17 @@ const AdminGrabAndGoIndexTemplate: RouteTemplate<GrabAndGo[], AdminGrabAndGoInde
           data-test-id="stock-filter"
           class="inline-flex rounded-sm border border-gray-300"
         >
-          {{#each @controller.stockFilters as |filter|}}
+          {{#each this.stockFilters as |filter|}}
             <button
               type="button"
-              aria-pressed={{if (eq filter.value @controller.stockFilter) "true" "false"}}
+              aria-pressed={{if (eq filter.value @controller.stock) "true" "false"}}
               class="px-4 py-2 text-sm font-semibold transition-colors not-first:border-l not-first:border-gray-300 focus:outline-hidden focus:ring-3 focus:ring-blue-500
                 {{if
-                  (eq filter.value @controller.stockFilter)
+                  (eq filter.value @controller.stock)
                   'bg-gray-800 text-white'
                   'bg-transparent hover:bg-gray-300'
                 }}"
-              {{on "click" (fn @controller.setStockFilter filter.value)}}
+              {{on "click" (fn this.setStockFilter filter.value)}}
             >
               {{filter.label}}
             </button>
@@ -64,7 +118,7 @@ const AdminGrabAndGoIndexTemplate: RouteTemplate<GrabAndGo[], AdminGrabAndGoInde
         <Thead.Th />
       </Table.Head>
       <Table.Body as |Tbody|>
-        {{#each @controller.filteredItems as |item|}}
+        {{#each this.filteredItems as |item|}}
           <Tbody.Tr as |Row|>
             <Row.Td>
               {{item.title}}
@@ -90,27 +144,26 @@ const AdminGrabAndGoIndexTemplate: RouteTemplate<GrabAndGo[], AdminGrabAndGoInde
                   @iconOnly={{true}}
                   @icon="trash-alt"
                   @variant="danger"
-                  @onClick={{fn @controller.openDeleteModal item}}
+                  @onClick={{fn this.openDeleteModal item}}
                 />
               </div>
             </Row.Td>
           </Tbody.Tr>
         {{else}}
           <Tbody.Empty>
-            {{@controller.emptyMessage}}
+            {{this.emptyMessage}}
           </Tbody.Empty>
         {{/each}}
       </Table.Body>
     </UiTable>
 
     <DeleteItemForm
-      @isOpen={{@controller.deleteModalOpen}}
-      @item={{@controller.itemToDelete}}
-      @onSave={{@controller.closeDeleteModal}}
-      @onCancel={{@controller.closeDeleteModal}}
+      @isOpen={{this.deleteModalOpen}}
+      @item={{this.itemToDelete}}
+      @onSave={{this.closeDeleteModal}}
+      @onCancel={{this.closeDeleteModal}}
     />
 
     {{outlet}}
-  </template>;
-
-export default AdminGrabAndGoIndexTemplate;
+  </template>
+}
