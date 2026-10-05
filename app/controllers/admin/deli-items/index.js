@@ -6,7 +6,7 @@ import { sort } from '@ember/object/computed';
 import { isBlank } from '@ember/utils';
 
 export default class AdminDeliItemsIndexController extends Controller {
-  @tracked currentSort = {};
+  @tracked currentSort = { sortColumn: null, sortDirection: null };
   @tracked itemToDelete = null;
   @tracked deleteModalOpen = false;
 
