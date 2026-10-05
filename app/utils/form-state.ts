@@ -11,6 +11,12 @@ interface Saveable {
   save(): Promise<unknown>;
 }
 
+/**
+ * Sends the model to the API. Forms for resources that have moved to WarpDrive schemas pass one
+ * built on `saveRecord`, since their records have no `save` method.
+ */
+export type Persist<Model> = (model: Model) => Promise<unknown>;
+
 type Key<Model> = keyof Model & string;
 
 /**
@@ -22,6 +28,9 @@ type Key<Model> = keyof Model & string;
  *
  * ```js
  * form = new FormState(this.args.item, ItemValidations);
+ * form = new FormState(this.args.special, SpecialValidations, (special) =>
+ *   saveRecord(this.store, special)
+ * );
  * ```
  *
  * ```hbs
@@ -30,12 +39,13 @@ type Key<Model> = keyof Model & string;
  * </Form.group>
  * ```
  */
-export default class FormState<Model extends Saveable> {
+export default class FormState<Model extends object> {
   @tracked private changes: Partial<Model> = {};
   @tracked private errorMap: Record<string, FieldError> = {};
 
   private readonly model: Model;
   private readonly validations: Validations;
+  private readonly persist: Persist<Model>;
 
   /**
    * The model's values with any unsaved edits on top. Reads go through `get`, so templates can
@@ -43,11 +53,15 @@ export default class FormState<Model extends Saveable> {
    */
   readonly values: Readonly<Model>;
 
-  constructor(model: Model, validations: Validations = {}) {
+  constructor(model: Model, validations: Validations = {}, persist?: Persist<Model>) {
     this.model = model;
     this.validations = validations;
+    this.persist = persist ?? ((model) => (model as Model & Saveable).save());
     this.values = new Proxy({} as Model, {
       get: (_target, key) => (typeof key === 'string' ? this.get(key as Key<Model>) : undefined),
+      // Glimmer falls back to `unknownProperty` for keys that read as `undefined` and aren't `in`
+      // the object, and WarpDrive records throw on unknown fields.
+      has: (_target, key) => key in this.changes || key in this.model,
     });
   }
 
@@ -117,7 +131,7 @@ export default class FormState<Model extends Saveable> {
     Object.assign(this.model, this.changes);
     this.changes = {};
 
-    await this.model.save();
+    await this.persist(this.model);
 
     this.errorMap = {};
   }

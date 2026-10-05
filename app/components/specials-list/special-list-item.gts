@@ -1,5 +1,5 @@
 import type { TOC } from '@ember/component/template-only';
-import type Special from '../../models/special';
+import type { Special } from '../../schemas/special';
 
 const SpecialListItem: TOC<{
   Element: HTMLDivElement;

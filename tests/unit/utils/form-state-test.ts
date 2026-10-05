@@ -85,6 +85,20 @@ module('Unit | Utility | form-state', function () {
     assert.true(form.isValid);
   });
 
+  test('values has the fields of the model, even when they are undefined', function (assert) {
+    const item = new Item() as Item & { extra?: string };
+    (item as { notes: unknown }).notes = undefined;
+    const form = new FormState(item, validations);
+
+    assert.true('title' in form.values);
+    assert.true('notes' in form.values, 'a field that is undefined');
+    assert.false('extra' in form.values);
+
+    form.set('extra', 'added');
+
+    assert.true('extra' in form.values, 'a field that has been set');
+  });
+
   test('save copies the edits onto the model and saves it', async function (assert) {
     const item = new Item();
     const form = new FormState(item, validations);
@@ -95,6 +109,22 @@ module('Unit | Utility | form-state', function () {
     assert.strictEqual(item.title, 'Turkey');
     assert.strictEqual(item.saveCount, 1);
     assert.strictEqual(form.get('title'), 'Turkey');
+  });
+
+  test('save uses the persist function when one is given', async function (assert) {
+    const item = new Item();
+    const persisted: Item[] = [];
+    const form = new FormState(item, validations, (model) => {
+      persisted.push(model);
+      return Promise.resolve();
+    });
+
+    form.set('title', 'Turkey');
+    await form.save();
+
+    assert.deepEqual(persisted, [item]);
+    assert.strictEqual(item.title, 'Turkey');
+    assert.strictEqual(item.saveCount, 0, 'the model save method is not called');
   });
 
   test('a failed save keeps the edits so the form can be submitted again', async function (assert) {

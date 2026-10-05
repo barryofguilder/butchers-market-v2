@@ -1,13 +1,17 @@
 import Route from '@ember/routing/route';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import { query } from '@warp-drive/utilities/json-api';
+import type { Special } from '../../../schemas/special';
 import type Store from '../../../services/store';
 
 export default class SpecialsIndexRoute extends Route {
   @service declare store: Store;
 
-  model() {
-    return this.store.findAll('special');
+  async model() {
+    const { content } = await this.store.request(query<Special>('special'));
+
+    return content.data;
   }
 
   @action

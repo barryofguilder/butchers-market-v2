@@ -1,9 +1,12 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { service } from '@ember/service';
 import { dropTask } from 'ember-concurrency';
-import type Special from '../../../models/special';
+import type { Special } from '../../../schemas/special';
+import type Store from '../../../services/store';
 import dateFormat from '../../../helpers/date-format';
 import { getErrorMessageFromException } from '../../../utils/error-handling';
+import { destroyRecord } from '../../../utils/records';
 import ModalDialog from '../../modal-dialog';
 import UiAlert from '../../ui-alert';
 import UiButton from '../../ui-button';
@@ -19,11 +22,15 @@ interface DeleteSpecialFormSignature {
 }
 
 export default class DeleteSpecialFormComponent extends Component<DeleteSpecialFormSignature> {
+  @service declare store: Store;
+
   @tracked errorMessage: string | null = null;
 
   deleteSpecial = dropTask(async () => {
     try {
-      await this.args.special?.destroyRecord();
+      if (this.args.special) {
+        await destroyRecord(this.store, this.args.special);
+      }
       this.args.onSave();
     } catch (ex) {
       this.errorMessage = await getErrorMessageFromException(ex);

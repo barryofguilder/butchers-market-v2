@@ -3,7 +3,7 @@ import { hash } from '@ember/helper';
 import { gt } from 'ember-truth-helpers';
 import type Hour from '../models/hour';
 import type MeatBundle from '../models/meat-bundle';
-import type Special from '../models/special';
+import type { Special } from '../schemas/special';
 import Container from '../components/container';
 import FacebookButton from '../components/facebook-button';
 import GiftCard from '../components/gift-card';

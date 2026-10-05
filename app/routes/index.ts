@@ -1,6 +1,8 @@
 import Route from '@ember/routing/route';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import { query } from '@warp-drive/utilities/json-api';
+import type { Special } from '../schemas/special';
 import type Store from '../services/store';
 
 export default class IndexRoute extends Route {
@@ -11,9 +13,10 @@ export default class IndexRoute extends Route {
       filter: { featured: true, isHidden: false },
     });
     const hours = await this.store.findAll('hour');
-    const specials = await this.store.query('special', {
-      filter: { isHidden: false, range: 'active' },
-    });
+    const { content } = await this.store.request(
+      query<Special>('special', { 'filter[isHidden]': false, 'filter[range]': 'active' })
+    );
+    const specials = content.data;
 
     return {
       bundles,
