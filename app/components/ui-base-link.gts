@@ -7,7 +7,7 @@ export type RouteModel = object | string | number;
 export interface UiBaseLinkArgs {
   download?: boolean;
   href?: string;
-  model?: RouteModel;
+  model?: RouteModel | null;
   models?: [RouteModel];
   query?: Record<string, unknown>;
   route?: string;

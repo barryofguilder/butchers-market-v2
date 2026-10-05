@@ -26,7 +26,10 @@ export interface UiButtonArgs extends UiBaseLinkArgs {
   onClick?: (event: Event) => unknown;
   size?: ButtonSize;
   type?: 'button' | 'submit' | 'reset';
-  variant?: ButtonVariant;
+  /**
+   * Icon-only buttons pass this through to `UiIcon`, so they also accept its variants.
+   */
+  variant?: ButtonVariant | IconVariant;
 }
 
 export interface UiButtonSignature {
@@ -95,8 +98,10 @@ export default class UiButtonComponent extends Component<UiButtonSignature> {
       : `${baseClasses} ${baseButtonClasses}`;
   }
 
-  get variant() {
-    return this.args.variant ?? 'secondary';
+  get variant(): ButtonVariant {
+    const { variant } = this.args;
+
+    return variant === 'primary' || variant === 'plain' ? variant : 'secondary';
   }
 
   get variantClasses() {
