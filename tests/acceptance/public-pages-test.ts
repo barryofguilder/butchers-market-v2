@@ -43,11 +43,25 @@ module('Acceptance | public pages', function (hooks) {
   });
 
   test('the meat page shows the meat bundles', async function (assert) {
+    // @ts-expect-error: There are no types for the Mirage server.
+    this.server.create('meat-bundle', { title: 'Hidden Meat Pack', isHidden: true });
+
     await visit('/meat');
 
     assert.strictEqual(currentURL(), '/meat');
     assert.dom(document.body).includesText('20lb Meat Pack');
     assert.dom(document.body).includesText('Bundle Packs');
+    assert.dom(document.body).doesNotIncludeText('Hidden Meat Pack', 'a hidden bundle');
+  });
+
+  test('the meat page shows the package bundles', async function (assert) {
+    await visit('/meat');
+
+    assert.dom(document.body).includesText("Mix N' Match");
+    assert.dom(document.body).includesText('Pick 10 for $99', 'a price');
+    assert.dom(document.body).includesText('2 lbs. Raw Shrimp', 'an item');
+    assert.dom('a[href$="docs/bundles-mixnmatch.pdf"]').exists('the flyer');
+    assert.dom(document.body).doesNotIncludeText("Ice Box Mix N' Match", 'a bundle hidden for now');
   });
 
   test('the grab and go page shows the holiday and everyday items', async function (assert) {

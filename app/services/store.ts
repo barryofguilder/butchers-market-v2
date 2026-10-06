@@ -8,7 +8,9 @@ import { DeliItemSchema } from '../schemas/deli-item';
 import { FeatureFlagSchema } from '../schemas/feature-flag';
 import { GrabAndGoSchema } from '../schemas/grab-and-go';
 import { HourSchema } from '../schemas/hour';
+import { MeatBundleSchema } from '../schemas/meat-bundle';
 import { MenuSchema } from '../schemas/menu';
+import { PackageBundleSchema } from '../schemas/package-bundle';
 import { ReviewSchema } from '../schemas/review';
 import { SpecialSchema } from '../schemas/special';
 import { DateTransformation } from '../schemas/transformations';
@@ -26,7 +28,9 @@ const Store = useLegacyStore({
     FeatureFlagSchema,
     GrabAndGoSchema,
     HourSchema,
+    MeatBundleSchema,
     MenuSchema,
+    PackageBundleSchema,
     ReviewSchema,
     SpecialSchema,
   ],

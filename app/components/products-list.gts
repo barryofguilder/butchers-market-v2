@@ -1,7 +1,7 @@
 import type { TOC } from '@ember/component/template-only';
 import sortBy from '../helpers/sort-by';
 import { and } from 'ember-truth-helpers';
-import MeatBundle from '../models/meat-bundle';
+import type { MeatBundle } from '../schemas/meat-bundle';
 import OrderButton from './order-button';
 import { SHOW_ORDER_ONLINE } from '../utils/config';
 

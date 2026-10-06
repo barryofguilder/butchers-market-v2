@@ -3,12 +3,12 @@ import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
 import type Store from '../../../services/store';
 import { dropTask } from 'ember-concurrency';
-import type MeatBundleAdapter from '../../../adapters/meat-bundle';
+import { reorderMeatBundles } from '../../../builders/meat-bundle';
 import { fn } from '@ember/helper';
 import sortableGroup from 'ember-sortable/modifiers/sortable-group';
 import sortableHandle from 'ember-sortable/modifiers/sortable-handle';
 import sortableItem from 'ember-sortable/modifiers/sortable-item';
-import type MeatBundle from '../../../models/meat-bundle';
+import type { MeatBundle } from '../../../schemas/meat-bundle';
 import sortBy from '../../../helpers/sort-by';
 import BackLink from '../../../components/admin/back-link';
 import DeleteMeatBundleForm from '../../../components/admin/meat-bundles/delete-meat-bundle-form';
@@ -44,12 +44,9 @@ export default class AdminMeatBundlesIndexTemplate extends Component<Signature> 
         bundle.displayOrder = index + 1;
       });
 
-      const adapter = this.store.adapterFor('meat-bundle') as MeatBundleAdapter;
-      const response = await adapter.reorderMeatBundles(bundles);
-
-      if (!response.ok) {
-        this.showErrorMessage = true;
-      }
+      // The response has every bundle with its new `displayOrder`. The store applies it, which
+      // also clears the changes made above so the records aren't left with unsaved changes.
+      await this.store.request(reorderMeatBundles(bundles));
     } catch (ex) {
       this.showErrorMessage = true;
       console.error(ex);
@@ -96,9 +93,14 @@ export default class AdminMeatBundlesIndexTemplate extends Component<Signature> 
       </Table.Head>
       <Table.Body {{sortableGroup onChange=this.reorderItems}} as |Tbody|>
         {{#each (sortBy "displayOrder" @model) as |bundle|}}
-          <Tbody.Tr {{sortableItem model=bundle}} as |Row|>
+          <Tbody.Tr data-test-id="meat-bundle" {{sortableItem model=bundle}} as |Row|>
             <Row.Td>
-              <UiIcon @icon="arrows-alt-v" class="block w-4" {{sortableHandle}} />
+              <UiIcon
+                data-test-id="handle"
+                @icon="arrows-alt-v"
+                class="block w-4"
+                {{sortableHandle}}
+              />
             </Row.Td>
             <Row.Td>{{bundle.title}}</Row.Td>
             <Row.Td class="hidden md:table-cell">{{bundle.price}}</Row.Td>
@@ -128,6 +130,7 @@ export default class AdminMeatBundlesIndexTemplate extends Component<Signature> 
             <Row.Td>
               <div class="flex justify-end">
                 <UiButton
+                  data-test-id="edit"
                   @route="admin.meat-bundles.edit"
                   @model={{bundle.id}}
                   @iconOnly={{true}}
@@ -136,6 +139,7 @@ export default class AdminMeatBundlesIndexTemplate extends Component<Signature> 
                 />
 
                 <UiButton
+                  data-test-id="delete"
                   class="ml-1"
                   @iconOnly={{true}}
                   @icon="trash-alt"

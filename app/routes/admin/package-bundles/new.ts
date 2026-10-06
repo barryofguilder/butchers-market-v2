@@ -1,19 +1,19 @@
 import Route from '@ember/routing/route';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
-import type Model from '@warp-drive/legacy/model';
+import type { PackageBundle } from '../../../schemas/package-bundle';
 import type Store from '../../../services/store';
 
 export default class AdminPackageBundlesNewRoute extends Route {
   @service declare store: Store;
 
   model() {
-    return this.store.createRecord('package-bundle', { prices: [], items: [] });
+    return this.store.createRecord<PackageBundle>('package-bundle', { prices: [], items: [] });
   }
 
   @action
   willTransition(/*transition*/) {
-    const packageBundle = this.modelFor(this.routeName) as Model;
+    const packageBundle = this.modelFor(this.routeName) as PackageBundle;
 
     if (packageBundle.hasDirtyAttributes) {
       packageBundle.rollbackAttributes();

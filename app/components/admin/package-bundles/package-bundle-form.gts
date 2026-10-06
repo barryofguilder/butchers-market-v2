@@ -12,10 +12,12 @@ import set from 'ember-set-helper/helpers/set';
 import sortableGroup from 'ember-sortable/modifiers/sortable-group';
 import sortableHandle from 'ember-sortable/modifiers/sortable-handle';
 import sortableItem from 'ember-sortable/modifiers/sortable-item';
-import type PackageBundle from '../../../models/package-bundle';
+import type { PackageBundle } from '../../../schemas/package-bundle';
 import type SessionService from '../../../services/session';
+import type Store from '../../../services/store';
 import PackageBundleValidations from '../../../validations/package-bundle';
 import FormState from '../../../utils/form-state';
+import { saveRecord } from '../../../utils/records';
 import baseUrl from '../../../utils/base-url';
 import { generatePdfFileName } from '../../../utils/file-name';
 import { getErrorMessageFromException, isUnauthorized } from '../../../utils/error-handling';
@@ -37,6 +39,7 @@ interface PackageBundleFormSignature {
 export default class PackageBundleFormComponent extends Component<PackageBundleFormSignature> {
   @service declare router: RouterService;
   @service declare session: SessionService;
+  @service declare store: Store;
 
   form: FormState<PackageBundle>;
 
@@ -84,7 +87,9 @@ export default class PackageBundleFormComponent extends Component<PackageBundleF
   constructor(owner: Owner, args: PackageBundleFormSignature['Args']) {
     super(owner, args);
 
-    this.form = new FormState(this.args.bundle, PackageBundleValidations);
+    this.form = new FormState(this.args.bundle, PackageBundleValidations, (bundle) =>
+      saveRecord(this.store, bundle)
+    );
     // Copied so editing a field doesn't change the model's array before the form is saved.
     let prices = [...(this.form.get('prices') ?? [])];
 

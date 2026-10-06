@@ -2,14 +2,17 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { fn } from '@ember/helper';
 import type Owner from '@ember/owner';
+import { service } from '@ember/service';
 import { dropTask } from 'ember-concurrency';
 import set from 'ember-set-helper/helpers/set';
 import sortableGroup from 'ember-sortable/modifiers/sortable-group';
 import sortableHandle from 'ember-sortable/modifiers/sortable-handle';
 import sortableItem from 'ember-sortable/modifiers/sortable-item';
-import type MeatBundle from '../../../models/meat-bundle';
+import type { MeatBundle } from '../../../schemas/meat-bundle';
+import type Store from '../../../services/store';
 import MeatBundleValidations from '../../../validations/meat-bundle';
 import FormState from '../../../utils/form-state';
+import { saveRecord } from '../../../utils/records';
 import { getErrorMessageFromException } from '../../../utils/error-handling';
 import UiAlert from '../../ui-alert';
 import UiButton from '../../ui-button';
@@ -27,6 +30,8 @@ interface MeatBundleFormSignature {
 }
 
 export default class MeatBundleFormComponent extends Component<MeatBundleFormSignature> {
+  @service declare store: Store;
+
   form: FormState<MeatBundle>;
 
   @tracked items: string[];
@@ -50,7 +55,9 @@ export default class MeatBundleFormComponent extends Component<MeatBundleFormSig
   constructor(owner: Owner, args: MeatBundleFormSignature['Args']) {
     super(owner, args);
 
-    this.form = new FormState(this.args.bundle, MeatBundleValidations);
+    this.form = new FormState(this.args.bundle, MeatBundleValidations, (bundle) =>
+      saveRecord(this.store, bundle)
+    );
     // Copied so editing a field doesn't change the model's array before the form is saved.
     let items = [...(this.form.get('items') ?? [])];
 

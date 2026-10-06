@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { service } from '@ember/service';
 import type RouterService from '@ember/routing/router-service';
-import type PackageBundle from '../../../models/package-bundle';
+import type { PackageBundle } from '../../../schemas/package-bundle';
 import BackLink from '../../../components/admin/back-link';
 import PackageBundleForm from '../../../components/admin/package-bundles/package-bundle-form';
 import Title from '../../../components/admin/title';

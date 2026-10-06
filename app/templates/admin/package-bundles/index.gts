@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { eq } from 'ember-truth-helpers';
-import type PackageBundle from '../../../models/package-bundle';
+import type { PackageBundle } from '../../../schemas/package-bundle';
 import BackLink from '../../../components/admin/back-link';
 import DeletePackageBundleForm from '../../../components/admin/package-bundles/delete-package-bundle-form';
 import Title from '../../../components/admin/title';
@@ -53,7 +53,7 @@ export default class AdminPackageBundlesIndexTemplate extends Component<Signatur
         {{#each (sortBy "displayOrder" @model) as |bundle|}}
           {{! Hiding "Ice Box" for now, might delete later if not needed anymore. }}
           {{#unless (eq bundle.title "Ice Box Mix N' Match")}}
-            <Tbody.Tr as |Row|>
+            <Tbody.Tr data-test-id="package-bundle" as |Row|>
               <Row.Td>{{bundle.title}}</Row.Td>
               <Row.Td>
                 <ul>
@@ -74,6 +74,7 @@ export default class AdminPackageBundlesIndexTemplate extends Component<Signatur
               <Row.Td>
                 <div class="flex justify-end">
                   <UiButton
+                    data-test-id="edit"
                     @route="admin.package-bundles.edit"
                     @model={{bundle.id}}
                     @iconOnly={{true}}
