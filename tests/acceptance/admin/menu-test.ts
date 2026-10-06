@@ -10,6 +10,7 @@ import {
   requestHeader,
   trackRequests,
 } from 'butchers-market/tests/helpers/track-requests';
+import { rejectUploads, selectPdf } from 'butchers-market/tests/helpers/uploads';
 
 // Workflow tests: each change made through the admin reaches the API. The menu can only be edited;
 // there is always exactly one.
@@ -60,6 +61,31 @@ module('Acceptance | admin | menu', function (hooks) {
     const { data } = JSON.parse(request!.requestBody);
     assert.strictEqual(data.type, 'menus');
     assert.strictEqual(data.attributes.fileUrl, fileUrl);
+  });
+
+  test('it shows an upload error by the PDF field', async function (assert) {
+    // @ts-expect-error: There are no types for the Mirage server.
+    rejectUploads(this.server, 'That PDF could not be uploaded.');
+
+    await visit('/admin/menu/1/edit');
+    await selectPdf();
+    await click('button[type="submit"]');
+
+    assert.strictEqual(currentURL(), '/admin/menu/1/edit');
+    assert
+      .dom(`${testId('file')} ${testId('file-error')}`)
+      .hasText('That PDF could not be uploaded.');
+    assert.dom(testId('server-error')).doesNotExist();
+    // @ts-expect-error: There are no types for the Mirage server.
+    assert.strictEqual(this.server.db.menus.find(1).fileUrl, 'menu-2026.pdf');
+  });
+
+  test('it requires a PDF', async function (assert) {
+    await visit('/admin/menu/1/edit');
+    await click(buttonWithText('Remove PDF'));
+
+    assert.dom(`${testId('file')} [data-test-id="label"]`).hasClass('has-errors');
+    assert.dom('button[type="submit"]').isDisabled();
   });
 
   test('cancelling an edit leaves the menu unchanged', async function (assert) {

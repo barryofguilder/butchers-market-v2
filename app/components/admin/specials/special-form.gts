@@ -9,7 +9,7 @@ import type SessionService from '../../../services/session';
 import type Store from '../../../services/store';
 import SpecialValidations from '../../../validations/special';
 import FormState from '../../../utils/form-state';
-import ImageUpload from '../../../utils/image-upload';
+import { ImageUpload } from '../../../utils/file-upload';
 import { saveRecord } from '../../../utils/records';
 import { ORDER_ONLINE_URL } from '../../../utils/config';
 import { getErrorMessageFromException, isUnauthorized } from '../../../utils/error-handling';

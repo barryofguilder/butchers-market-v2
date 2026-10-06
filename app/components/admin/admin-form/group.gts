@@ -8,6 +8,7 @@ import Datepicker from './datepicker';
 import Help from './help';
 import Image from './image';
 import Label from './label';
+import Pdf from './pdf';
 import UiTextbox from '../../ui-textbox';
 import UiTextarea from '../../ui-textarea';
 import ValidationErrors from './validation-errors';
@@ -38,6 +39,7 @@ export interface GroupSignature {
         help: WithBoundArgs<typeof Help, never>;
         image: WithBoundArgs<typeof Image, 'id'>;
         label: WithBoundArgs<typeof Label, 'for' | 'errors'>;
+        pdf: WithBoundArgs<typeof Pdf, 'id'>;
         readonly: WithBoundArgs<typeof UiTextbox, 'id' | 'readonly'>;
         textarea: WithBoundArgs<typeof UiTextarea, 'id' | 'errors' | 'readonly'>;
         textbox: WithBoundArgs<typeof UiTextbox, 'id' | 'errors' | 'readonly'>;
@@ -76,6 +78,7 @@ export default class GroupComponent extends Component<GroupSignature> {
           help=(component Help)
           image=(component Image id=this.uniqueId)
           label=(component Label for=this.uniqueId errors=this.errors)
+          pdf=(component Pdf id=this.uniqueId)
           readonly=(component UiTextbox id=this.uniqueId readonly=true)
           textarea=(component UiTextarea id=this.uniqueId errors=this.errors readonly=@readonly)
           textbox=(component UiTextbox id=this.uniqueId errors=this.errors readonly=@readonly)

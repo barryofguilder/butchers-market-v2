@@ -10,6 +10,7 @@ import {
   requestHeader,
   trackRequests,
 } from 'butchers-market/tests/helpers/track-requests';
+import { rejectUploads, selectPdf } from 'butchers-market/tests/helpers/uploads';
 
 interface MiragePackageBundle {
   id: string;
@@ -96,6 +97,23 @@ module('Acceptance | admin | package bundles', function (hooks) {
     assert.strictEqual(data.type, 'package-bundles');
     assert.deepEqual(data.attributes.prices, saved.prices);
     assert.deepEqual(data.attributes.items, saved.items);
+  });
+
+  test('it shows an upload error by the PDF field', async function (assert) {
+    // @ts-expect-error: There are no types for the Mirage server.
+    rejectUploads(this.server, 'That PDF could not be uploaded.');
+
+    await visit('/admin/package-bundles/1/edit');
+    await selectPdf();
+    await click('button[type="submit"]');
+
+    assert.strictEqual(currentURL(), '/admin/package-bundles/1/edit');
+    assert
+      .dom(`${testId('file')} ${testId('file-error')}`)
+      .hasText('That PDF could not be uploaded.');
+    assert.dom(testId('server-error')).doesNotExist();
+    // @ts-expect-error: There are no types for the Mirage server.
+    assert.strictEqual(this.server.db.packageBundles.find(1).fileUrl, 'mix-n-match.pdf');
   });
 
   test('cancelling an edit leaves the bundle unchanged', async function (assert) {

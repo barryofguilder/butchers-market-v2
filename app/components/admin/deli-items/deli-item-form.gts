@@ -8,7 +8,7 @@ import type SessionService from '../../../services/session';
 import type Store from '../../../services/store';
 import DeliItemValidations from '../../../validations/deli-item';
 import FormState from '../../../utils/form-state';
-import ImageUpload from '../../../utils/image-upload';
+import { ImageUpload } from '../../../utils/file-upload';
 import { saveRecord } from '../../../utils/records';
 import { getErrorMessageFromException, isUnauthorized } from '../../../utils/error-handling';
 import UiAlert from '../../ui-alert';
