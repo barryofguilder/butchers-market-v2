@@ -5,17 +5,18 @@ import { validateLength, validatePresence } from 'butchers-market/utils/validato
 class Item {
   title = 'Ham';
   notes: string | null = null;
-  saveCount = 0;
-  failSave = false;
+  persistCount = 0;
+  failPersist = false;
+}
 
-  save() {
-    if (this.failSave) {
-      return Promise.reject(new Error('Save failed'));
-    }
-
-    this.saveCount++;
-    return Promise.resolve();
+// Stands in for `saveRecord`, counting the calls on the item.
+function persist(item: Item) {
+  if (item.failPersist) {
+    return Promise.reject(new Error('Save failed'));
   }
+
+  item.persistCount++;
+  return Promise.resolve();
 }
 
 const validations = {
@@ -26,7 +27,7 @@ const validations = {
 module('Unit | Utility | form-state', function () {
   test('it reads from the model until a field is set', function (assert) {
     const item = new Item();
-    const form = new FormState(item, validations);
+    const form = new FormState(item, validations, persist);
 
     assert.strictEqual(form.get('title'), 'Ham');
     assert.strictEqual(form.values.title, 'Ham');
@@ -39,7 +40,7 @@ module('Unit | Utility | form-state', function () {
   });
 
   test('setting a field validates only that field', function (assert) {
-    const form = new FormState(new Item(), validations);
+    const form = new FormState(new Item(), validations, persist);
 
     form.set('title', '');
 
@@ -58,7 +59,7 @@ module('Unit | Utility | form-state', function () {
     const item = new Item();
     item.title = '';
     item.notes = 'too long';
-    const form = new FormState(item, validations);
+    const form = new FormState(item, validations, persist);
 
     assert.true(form.isValid, 'nothing is validated up front');
 
@@ -71,7 +72,7 @@ module('Unit | Utility | form-state', function () {
   });
 
   test('addError stays until the key is removed', function (assert) {
-    const form = new FormState(new Item(), validations);
+    const form = new FormState(new Item(), validations, persist);
 
     form.addError('image', 'Image URL is required');
     form.validate();
@@ -88,7 +89,7 @@ module('Unit | Utility | form-state', function () {
   test('values has the fields of the model, even when they are undefined', function (assert) {
     const item = new Item() as Item & { extra?: string };
     (item as { notes: unknown }).notes = undefined;
-    const form = new FormState(item, validations);
+    const form = new FormState(item, validations, persist);
 
     assert.true('title' in form.values);
     assert.true('notes' in form.values, 'a field that is undefined');
@@ -99,48 +100,32 @@ module('Unit | Utility | form-state', function () {
     assert.true('extra' in form.values, 'a field that has been set');
   });
 
-  test('save copies the edits onto the model and saves it', async function (assert) {
+  test('submit copies the edits onto the model and persists it', async function (assert) {
     const item = new Item();
-    const form = new FormState(item, validations);
+    const form = new FormState(item, validations, persist);
 
     form.set('title', 'Turkey');
-    await form.save();
+    await form.submit();
 
     assert.strictEqual(item.title, 'Turkey');
-    assert.strictEqual(item.saveCount, 1);
+    assert.strictEqual(item.persistCount, 1);
     assert.strictEqual(form.get('title'), 'Turkey');
   });
 
-  test('save uses the persist function when one is given', async function (assert) {
+  test('a failed submit keeps the edits so the form can be submitted again', async function (assert) {
     const item = new Item();
-    const persisted: Item[] = [];
-    const form = new FormState(item, validations, (model) => {
-      persisted.push(model);
-      return Promise.resolve();
-    });
-
-    form.set('title', 'Turkey');
-    await form.save();
-
-    assert.deepEqual(persisted, [item]);
-    assert.strictEqual(item.title, 'Turkey');
-    assert.strictEqual(item.saveCount, 0, 'the model save method is not called');
-  });
-
-  test('a failed save keeps the edits so the form can be submitted again', async function (assert) {
-    const item = new Item();
-    item.failSave = true;
-    const form = new FormState(item, validations);
+    item.failPersist = true;
+    const form = new FormState(item, validations, persist);
 
     form.set('title', 'Turkey');
 
-    await assert.rejects(form.save());
+    await assert.rejects(form.submit());
     assert.strictEqual(form.get('title'), 'Turkey');
 
-    item.failSave = false;
-    await form.save();
+    item.failPersist = false;
+    await form.submit();
 
     assert.strictEqual(item.title, 'Turkey');
-    assert.strictEqual(item.saveCount, 1);
+    assert.strictEqual(item.persistCount, 1);
   });
 });

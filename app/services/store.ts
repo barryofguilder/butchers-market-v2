@@ -19,8 +19,9 @@ import { API_NAMESPACE, API_URL } from '../utils/config';
 setBuildURLConfig({ host: API_URL, namespace: API_NAMESPACE });
 
 const Store = useLegacyStore({
+  // `store.createRecord` still asks for an adapter (to let it generate ids), which throws in
+  // linksMode, even though there are no adapters left to find.
   linksMode: false,
-  legacyRequests: true,
   cache: JSONAPICache,
   handlers: [AuthHandler, JsonApiHandler],
   schemas: [

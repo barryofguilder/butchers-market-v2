@@ -129,7 +129,7 @@ export default class PackageBundleFormComponent extends Component<PackageBundleF
         this.form.set('fileUrl', generatedFileName);
       }
 
-      await this.form.save();
+      await this.form.submit();
       this.args.saved();
     } catch (ex) {
       if (isUnauthorized(ex)) {

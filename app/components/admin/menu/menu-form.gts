@@ -94,7 +94,7 @@ export default class MenuFormComponent extends Component<MenuFormSignature> {
         this.form.set('fileUrl', generatedFileName);
       }
 
-      await this.form.save();
+      await this.form.submit();
       this.args.saved();
     } catch (ex) {
       if (isUnauthorized(ex)) {

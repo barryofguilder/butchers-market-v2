@@ -46,7 +46,7 @@ export default class FeatureFlagFormComponent extends Component<FeatureFlagFormS
     }
 
     try {
-      await this.form.save();
+      await this.form.submit();
       this.args.saved();
     } catch (ex) {
       this.errorMessage = await getErrorMessageFromException(ex);

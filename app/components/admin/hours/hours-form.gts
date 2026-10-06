@@ -47,7 +47,7 @@ export default class HoursFormComponent extends Component<HoursFormSignature> {
     }
 
     try {
-      await this.form.save();
+      await this.form.submit();
       this.args.saved();
     } catch (ex) {
       this.errorMessage = await getErrorMessageFromException(ex);

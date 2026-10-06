@@ -23,9 +23,6 @@ export default async function (defaults) {
     compatWith: '5.8',
     deprecations: {
       // ... list individual deprecations that have been resolved here
-      // Keeps store.findAll/query/findRecord and record.save() working until requests move to
-      // store.request() with builders.
-      ENABLE_LEGACY_REQUEST_METHODS: true,
     },
   });
 

@@ -111,7 +111,7 @@ export default class SpecialFormComponent extends Component<SpecialFormSignature
         this.form.set('imageUrl', generatedFileName);
       }
 
-      await this.form.save();
+      await this.form.submit();
       this.args.saved();
     } catch (ex) {
       if (isUnauthorized(ex)) {
