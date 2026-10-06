@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { service } from '@ember/service';
 import type RouterService from '@ember/routing/router-service';
-import type Hour from '../../../models/hour';
+import type { Hour } from '../../../schemas/hour';
 import BackLink from '../../../components/admin/back-link';
 import HoursForm from '../../../components/admin/hours/hours-form';
 import Title from '../../../components/admin/title';

@@ -4,8 +4,8 @@ import { service } from '@ember/service';
 import type Owner from '@ember/owner';
 import type Store from '../services/store';
 import { isAfter, isBefore } from 'date-fns';
-import type Hour from '../models/hour';
-import { type HourType } from '../models/hour';
+import type { Hour } from '../schemas/hour';
+import { type HourType } from '../schemas/hour';
 import Hours from './store-hours/hours';
 
 interface StoreHoursSignature {

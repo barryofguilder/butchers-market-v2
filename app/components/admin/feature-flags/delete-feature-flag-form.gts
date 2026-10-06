@@ -1,8 +1,11 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { service } from '@ember/service';
 import { dropTask } from 'ember-concurrency';
-import type FeatureFlag from '../../../models/feature-flag';
+import type { FeatureFlag } from '../../../schemas/feature-flag';
+import type Store from '../../../services/store';
 import { getErrorMessageFromException } from '../../../utils/error-handling';
+import { destroyRecord } from '../../../utils/records';
 import ModalDialog from '../../modal-dialog';
 import UiAlert from '../../ui-alert';
 import UiButton from '../../ui-button';
@@ -18,11 +21,15 @@ interface DeleteFeatureFlagFormSignature {
 }
 
 export default class DeleteFeatureFlagFormComponent extends Component<DeleteFeatureFlagFormSignature> {
+  @service declare store: Store;
+
   @tracked errorMessage: string | null = null;
 
   deleteFlag = dropTask(async () => {
     try {
-      await this.args.flag?.destroyRecord();
+      if (this.args.flag) {
+        await destroyRecord(this.store, this.args.flag);
+      }
       this.args.onSave();
     } catch (ex) {
       this.errorMessage = await getErrorMessageFromException(ex);

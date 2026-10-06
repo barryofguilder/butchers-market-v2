@@ -79,7 +79,10 @@ module('Acceptance | admin | grab and go', function (hooks) {
   });
 
   test('it creates an item', async function (assert) {
-    await visit('/admin/grab-and-go/new');
+    // Start from the list, so it's already loaded when the new record is saved.
+    await visit('/admin/grab-and-go');
+    await click('a[href="/admin/grab-and-go/new"]');
+    assert.strictEqual(currentURL(), '/admin/grab-and-go/new');
 
     await fillIn(`${testId('title')} input`, 'Chicken Casserole');
     await fillIn(`${testId('social-title')} input`, 'Cheesy Chicken Casserole');

@@ -1,9 +1,12 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { service } from '@ember/service';
 import { dropTask } from 'ember-concurrency';
-import type FeatureFlag from '../../../models/feature-flag';
+import type { FeatureFlag } from '../../../schemas/feature-flag';
 import FeatureFlagValidations from '../../../validations/feature-flag';
+import type Store from '../../../services/store';
 import FormState from '../../../utils/form-state';
+import { saveRecord } from '../../../utils/records';
 import { getErrorMessageFromException } from '../../../utils/error-handling';
 import UiAlert from '../../ui-alert';
 import UiButton from '../../ui-button';
@@ -19,7 +22,11 @@ interface FeatureFlagFormSignature {
 }
 
 export default class FeatureFlagFormComponent extends Component<FeatureFlagFormSignature> {
-  form = new FormState(this.args.flag, FeatureFlagValidations);
+  @service declare store: Store;
+
+  form = new FormState(this.args.flag, FeatureFlagValidations, (record) =>
+    saveRecord(this.store, record)
+  );
 
   @tracked errorMessage: string | null = null;
 

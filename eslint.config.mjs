@@ -58,6 +58,25 @@ export default defineConfig([
       'warp-drive/no-external-request-patterns': 'off',
     },
   },
+  {
+    files: ['app/**/*.{js,ts,gjs,gts}'],
+    ignores: ['app/builders/query.ts'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [
+            {
+              name: '@warp-drive/utilities/json-api',
+              importNames: ['query'],
+              message:
+                "Use `query` from `app/builders/query`, which lets a create refresh the type's cached lists.",
+            },
+          ],
+        },
+      ],
+    },
+  },
   eslintConfigPrettier,
   /**
    * https://eslint.org/docs/latest/use/configure/configuration-files#configuring-linter-options

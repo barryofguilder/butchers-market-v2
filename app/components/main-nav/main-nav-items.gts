@@ -1,12 +1,13 @@
 import Component from '@glimmer/component';
 import { service } from '@ember/service';
 import type Owner from '@ember/owner';
+import { query } from '../../builders/query';
 import type Store from '../../services/store';
 import { action } from '@ember/object';
 import { on } from '@ember/modifier';
 import { LinkTo } from '@ember/routing';
 import { restartableTask } from 'ember-concurrency';
-import type Menu from '../../models/menu';
+import type { Menu } from '../../schemas/menu';
 import OrderButton from './order-button';
 import { SHOW_ORDER_ONLINE } from '../../utils/config';
 
@@ -27,7 +28,7 @@ export default class MainNavItemsComponent extends Component<MainNavItemsSignatu
     const menus = this.loadMenu.lastSuccessful?.value;
 
     if (menus) {
-      return menus.slice() as Menu[];
+      return menus.slice();
     }
 
     return null;
@@ -48,7 +49,8 @@ export default class MainNavItemsComponent extends Component<MainNavItemsSignatu
   }
 
   loadMenu = restartableTask(async () => {
-    return await this.store.findAll('menu');
+    const { content } = await this.store.request(query<Menu>('menu'));
+    return content.data;
   });
 
   @action itemClicked(event: MouseEvent) {

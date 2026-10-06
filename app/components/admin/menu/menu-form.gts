@@ -5,10 +5,12 @@ import type RouterService from '@ember/routing/router-service';
 import { dropTask, enqueueTask } from 'ember-concurrency';
 import type { UploadFile } from 'ember-file-upload';
 import fileQueue from 'ember-file-upload/helpers/file-queue';
-import type Menu from '../../../models/menu';
+import type { Menu } from '../../../schemas/menu';
 import type SessionService from '../../../services/session';
+import type Store from '../../../services/store';
 import MenuValidations from '../../../validations/menu';
 import FormState from '../../../utils/form-state';
+import { saveRecord } from '../../../utils/records';
 import baseUrl from '../../../utils/base-url';
 import { generatePdfFileName } from '../../../utils/file-name';
 import { getErrorMessageFromException, isUnauthorized } from '../../../utils/error-handling';
@@ -28,8 +30,9 @@ interface MenuFormSignature {
 export default class MenuFormComponent extends Component<MenuFormSignature> {
   @service declare router: RouterService;
   @service declare session: SessionService;
+  @service declare store: Store;
 
-  form = new FormState(this.args.menu, MenuValidations);
+  form = new FormState(this.args.menu, MenuValidations, (record) => saveRecord(this.store, record));
 
   @tracked file: UploadFile | null = null;
   @tracked tempFileUrl: string | null = null;

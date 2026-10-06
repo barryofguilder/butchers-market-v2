@@ -1,19 +1,19 @@
 import Route from '@ember/routing/route';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
-import type Model from '@warp-drive/legacy/model';
+import type { FeatureFlag } from '../../../schemas/feature-flag';
 import type Store from '../../../services/store';
 
 export default class AdminFeatureFlagsNewRoute extends Route {
   @service declare store: Store;
 
   model() {
-    return this.store.createRecord('feature-flag', {});
+    return this.store.createRecord<FeatureFlag>('feature-flag', {});
   }
 
   @action
   willTransition(/*transition*/) {
-    const item = this.modelFor(this.routeName) as Model;
+    const item = this.modelFor(this.routeName) as FeatureFlag;
 
     if (item.hasDirtyAttributes) {
       item.rollbackAttributes();

@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import type Hour from '../../models/hour';
+import type { Hour } from '../../schemas/hour';
 
 export interface StoreHoursHoursSignature {
   Element: HTMLDivElement;

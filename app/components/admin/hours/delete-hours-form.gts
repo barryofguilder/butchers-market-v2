@@ -1,9 +1,12 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { service } from '@ember/service';
 import { dropTask } from 'ember-concurrency';
-import type Hour from '../../../models/hour';
+import type { Hour } from '../../../schemas/hour';
+import type Store from '../../../services/store';
 import dateFormat from '../../../helpers/date-format';
 import { getErrorMessageFromException } from '../../../utils/error-handling';
+import { destroyRecord } from '../../../utils/records';
 import ModalDialog from '../../modal-dialog';
 import UiAlert from '../../ui-alert';
 import UiButton from '../../ui-button';
@@ -19,11 +22,15 @@ interface DeleteHoursFormSignature {
 }
 
 export default class DeleteHoursFormComponent extends Component<DeleteHoursFormSignature> {
+  @service declare store: Store;
+
   @tracked errorMessage: string | null = null;
 
   deleteHours = dropTask(async () => {
     try {
-      await this.args.hours?.destroyRecord();
+      if (this.args.hours) {
+        await destroyRecord(this.store, this.args.hours);
+      }
       this.args.onSave();
     } catch (ex) {
       this.errorMessage = await getErrorMessageFromException(ex);

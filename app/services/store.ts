@@ -5,7 +5,11 @@ import { AuthHandler } from '../handlers/auth';
 import { JsonApiHandler } from '../handlers/json-api';
 import { orderOnlineLink, uploadsPath } from '../schemas/derivations';
 import { DeliItemSchema } from '../schemas/deli-item';
+import { FeatureFlagSchema } from '../schemas/feature-flag';
 import { GrabAndGoSchema } from '../schemas/grab-and-go';
+import { HourSchema } from '../schemas/hour';
+import { MenuSchema } from '../schemas/menu';
+import { ReviewSchema } from '../schemas/review';
 import { SpecialSchema } from '../schemas/special';
 import { DateTransformation } from '../schemas/transformations';
 import { API_NAMESPACE, API_URL } from '../utils/config';
@@ -17,7 +21,15 @@ const Store = useLegacyStore({
   legacyRequests: true,
   cache: JSONAPICache,
   handlers: [AuthHandler, JsonApiHandler],
-  schemas: [DeliItemSchema, GrabAndGoSchema, SpecialSchema],
+  schemas: [
+    DeliItemSchema,
+    FeatureFlagSchema,
+    GrabAndGoSchema,
+    HourSchema,
+    MenuSchema,
+    ReviewSchema,
+    SpecialSchema,
+  ],
   derivations: [orderOnlineLink, uploadsPath],
   transformations: [DateTransformation],
 });

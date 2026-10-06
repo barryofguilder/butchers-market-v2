@@ -1,7 +1,8 @@
 import Service, { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
+import { query } from '../builders/query';
 import type Store from './store';
-import type FeatureFlag from '../models/feature-flag';
+import type { FeatureFlag } from '../schemas/feature-flag';
 
 export default class FeaturesService extends Service {
   @service declare store: Store;
@@ -9,8 +10,8 @@ export default class FeaturesService extends Service {
   @tracked _features: FeatureFlag[] = [];
 
   async load() {
-    const flags = await this.store.findAll('feature-flag');
-    this._features = flags.slice() as FeatureFlag[];
+    const { content } = await this.store.request(query<FeatureFlag>('feature-flag'));
+    this._features = content.data.slice();
   }
 
   isEnabled(featureName: string) {

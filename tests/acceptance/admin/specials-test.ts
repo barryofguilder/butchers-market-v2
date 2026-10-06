@@ -64,7 +64,10 @@ module('Acceptance | admin | specials', function (hooks) {
   });
 
   test('it creates a special', async function (assert) {
-    await visit('/admin/specials/new');
+    // Start from the list, so it's already loaded when the new record is saved.
+    await visit('/admin/specials');
+    await click('a[href="/admin/specials/new"]');
+    assert.strictEqual(currentURL(), '/admin/specials/new');
 
     await fillIn(`${testId('title')} input`, 'Pot Roast');
     await fillIn(`${testId('image-alt-text')} input`, 'A pot roast');
