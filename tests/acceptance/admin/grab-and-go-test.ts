@@ -10,6 +10,11 @@ import {
   requestHeader,
   trackRequests,
 } from 'butchers-market/tests/helpers/track-requests';
+import {
+  rejectUploads,
+  selectHeicImage,
+  UNSUPPORTED_IMAGE_ERROR,
+} from 'butchers-market/tests/helpers/uploads';
 
 interface MirageGrabAndGo {
   id: string;
@@ -136,6 +141,21 @@ module('Acceptance | admin | grab and go', function (hooks) {
     assert.strictEqual(data.type, 'grab-and-gos');
     assert.strictEqual(data.attributes.title, 'Classic Meatloaf');
     assert.strictEqual(data.attributes.socialTitle, 'Mom’s Meatloaf');
+  });
+
+  test('it shows an upload error by the image field', async function (assert) {
+    // @ts-expect-error: There are no types for the Mirage server.
+    rejectUploads(this.server);
+
+    await visit('/admin/grab-and-go/1/edit');
+    await selectHeicImage();
+    await click('button[type="submit"]');
+
+    assert.strictEqual(currentURL(), '/admin/grab-and-go/1/edit');
+    assert.dom(`${testId('image')} ${testId('file-error')}`).hasText(UNSUPPORTED_IMAGE_ERROR);
+    assert.dom(testId('server-error')).doesNotExist();
+    // @ts-expect-error: There are no types for the Mirage server.
+    assert.strictEqual(this.server.db.grabAndGos.find(1).imageUrl, 'meatloaf.jpg');
   });
 
   test('cancelling an edit leaves the item unchanged', async function (assert) {

@@ -1,19 +1,15 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { on } from '@ember/modifier';
 import { service } from '@ember/service';
 import type RouterService from '@ember/routing/router-service';
-import { dropTask, enqueueTask } from 'ember-concurrency';
-import type { UploadFile } from 'ember-file-upload';
-import fileQueue from 'ember-file-upload/helpers/file-queue';
+import { dropTask } from 'ember-concurrency';
 import type { GrabAndGo } from '../../../schemas/grab-and-go';
 import type SessionService from '../../../services/session';
 import type Store from '../../../services/store';
 import ItemValidations from '../../../validations/grab-and-go';
 import FormState from '../../../utils/form-state';
+import { ImageUpload } from '../../../utils/file-upload';
 import { saveRecord } from '../../../utils/records';
-import baseUrl from '../../../utils/base-url';
-import { generateFileName } from '../../../utils/file-name';
 import { getErrorMessageFromException, isUnauthorized } from '../../../utils/error-handling';
 import UiAlert from '../../ui-alert';
 import UiButton from '../../ui-button';
@@ -34,42 +30,16 @@ export default class ItemFormComponent extends Component<ItemFormSignature> {
   @service declare store: Store;
 
   form = new FormState(this.args.item, ItemValidations, (item) => saveRecord(this.store, item));
+  image = new ImageUpload(this, this.form);
 
-  @tracked image: UploadFile | null = null;
-  @tracked tempImageUrl: string | null = null;
   @tracked errorMessage: string | null = null;
-  @tracked fileErrorMessage: string | null = null;
 
   get hasErrors() {
-    return this.errorMessage || this.form.isInvalid;
-  }
-
-  get hasImage() {
-    return this.form.get('imageUrl') || this.tempImageUrl;
-  }
-
-  get imageUrl() {
-    if (this.tempImageUrl) {
-      return this.tempImageUrl;
-    }
-
-    return this.form.get('imageUrlPath');
+    return this.errorMessage || this.image.errorMessage || this.form.isInvalid;
   }
 
   get saveDisabled() {
     return this.form.isInvalid;
-  }
-
-  get uploadHeaders() {
-    const token = this.session.token;
-
-    if (token) {
-      return {
-        Authorization: `Bearer ${token}`,
-      };
-    }
-
-    return undefined;
   }
 
   saveItem = dropTask(async () => {
@@ -79,14 +49,11 @@ export default class ItemFormComponent extends Component<ItemFormSignature> {
       return;
     }
 
+    this.errorMessage = null;
+
     try {
-      if (this.image) {
-        const generatedFileName = generateFileName(this.image);
-        await this.image.upload(`${baseUrl}/upload`, {
-          headers: this.uploadHeaders,
-          data: { generatedFileName },
-        });
-        this.form.set('imageUrl', generatedFileName);
+      if (!(await this.image.upload())) {
+        return;
       }
 
       await this.form.submit();
@@ -99,28 +66,6 @@ export default class ItemFormComponent extends Component<ItemFormSignature> {
       }
     }
   });
-
-  uploadPhoto = enqueueTask({ maxConcurrency: 3 }, async (file: UploadFile) => {
-    try {
-      const url = (await file.readAsDataURL()) as string;
-      this.tempImageUrl = url;
-      this.image = file;
-    } catch {
-      this.fileErrorMessage = 'Could not read the file contents';
-    }
-  });
-
-  uploadImage = (file: UploadFile) => {
-    this.form.set('imageUrl', null);
-    this.uploadPhoto.perform(file);
-  };
-
-  removeImage = () => {
-    this.image = null;
-    this.tempImageUrl = null;
-
-    this.form.set('imageUrl', null);
-  };
 
   updateInStock = () => {
     this.form.set('inStock', !this.form.get('inStock'));
@@ -166,52 +111,9 @@ export default class ItemFormComponent extends Component<ItemFormSignature> {
         </Group.help>
       </Form.group>
 
-      <Form.group data-test-id="image" @model={{this.form}} @property="image" as |Group|>
+      <Form.group data-test-id="image" @model={{this.form}} @property="imageUrl" as |Group|>
         <Group.label>Image</Group.label>
-        <div class="mt-2">
-          {{#let (fileQueue name="photos" onFileAdded=this.uploadImage) as |queue|}}
-            <label for={{Group.uniqueId}}>
-              <span
-                class="inline-block px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-hidden focus:ring-3 focus:ring-blue-500"
-              >
-                Select Image
-              </span>
-              <input
-                type="file"
-                id={{Group.uniqueId}}
-                accept="image/*"
-                hidden
-                {{queue.selectFile}}
-              />
-            </label>
-          {{/let}}
-
-          {{#if this.hasImage}}
-            <button
-              type="button"
-              class="inline-block ml-2 px-4 py-2 text-sm border cursor-pointer hover:bg-gray-200 focus:outline-hidden focus:ring-3 focus:ring-blue-500"
-              {{on "click" this.removeImage}}
-            >
-              Remove Image
-            </button>
-          {{/if}}
-
-          <small class="block mt-3 text-gray-700 sm:inline-block sm:mt-0 sm:ml-2">
-            Only JPG, JPEG, PNG, and GIF files are allowed.
-          </small>
-
-          {{#if this.fileErrorMessage}}
-            <span class="block mt-2 text-red-600">
-              {{this.fileErrorMessage}}
-            </span>
-          {{/if}}
-
-          {{#if this.hasImage}}
-            <div class="mt-4">
-              <img src={{this.imageUrl}} alt="Special" class="w-full block" />
-            </div>
-          {{/if}}
-        </div>
+        <Group.image @image={{this.image}} @alt="Grab & Go item" />
       </Form.group>
 
       <Form.group

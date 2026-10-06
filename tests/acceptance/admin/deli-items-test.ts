@@ -10,6 +10,11 @@ import {
   requestHeader,
   trackRequests,
 } from 'butchers-market/tests/helpers/track-requests';
+import {
+  rejectUploads,
+  selectHeicImage,
+  UNSUPPORTED_IMAGE_ERROR,
+} from 'butchers-market/tests/helpers/uploads';
 
 interface MirageDeliItem {
   id: string;
@@ -110,6 +115,38 @@ module('Acceptance | admin | deli items', function (hooks) {
     assert.strictEqual(data.type, 'deli-items');
     assert.strictEqual(data.attributes.title, 'Spicy Pimiento Cheese');
     assert.strictEqual(data.attributes.imageUrl, 'pimiento.jpg');
+  });
+
+  test('the image field only accepts the image types the API supports', async function (assert) {
+    await visit('/admin/deli-items/1/edit');
+
+    assert
+      .dom(`${testId('image')} input[type="file"]`)
+      .hasAttribute(
+        'accept',
+        'image/jpeg,image/png,image/webp,image/avif,.jpg,.jpeg,.png,.webp,.avif'
+      );
+    assert
+      .dom(testId('image'))
+      .includesText('Only JPG, JPEG, PNG, WebP, and AVIF files are allowed.');
+  });
+
+  test('it shows an upload error by the image field', async function (assert) {
+    // @ts-expect-error: There are no types for the Mirage server.
+    rejectUploads(this.server);
+
+    await visit('/admin/deli-items/1/edit');
+    await selectHeicImage();
+    await click('button[type="submit"]');
+
+    assert.strictEqual(currentURL(), '/admin/deli-items/1/edit');
+    assert.dom(`${testId('image')} ${testId('file-error')}`).hasText(UNSUPPORTED_IMAGE_ERROR);
+    assert.dom(testId('server-error')).doesNotExist();
+    // @ts-expect-error: There are no types for the Mirage server.
+    assert.strictEqual(this.server.db.deliItems.find(1).imageUrl, 'pimiento.jpg');
+
+    await click(buttonWithText('Remove Image'));
+    assert.dom(testId('file-error')).doesNotExist('removing the image clears the error');
   });
 
   test('cancelling an edit leaves the deli item unchanged', async function (assert) {

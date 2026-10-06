@@ -8,6 +8,11 @@ import { setupAuthentication } from 'butchers-market/tests/helpers/authenticate'
 import { buttonWithText, columnText, rowWith } from 'butchers-market/tests/helpers/table';
 import { testId } from 'butchers-market/tests/helpers/test-id';
 import {
+  rejectUploads,
+  selectHeicImage,
+  UNSUPPORTED_IMAGE_ERROR,
+} from 'butchers-market/tests/helpers/uploads';
+import {
   findRequest,
   requestHeader,
   trackRequests,
@@ -151,6 +156,30 @@ module('Acceptance | admin | specials', function (hooks) {
     assert.strictEqual(currentURL(), '/admin/specials/1/edit');
     assert.dom(testId('server-error')).hasText('Title is taken');
     assert.dom(`${testId('title')} input`).hasValue('Meatloaf', 'the edit is kept');
+  });
+
+  test('it shows an upload error by the image field', async function (assert) {
+    // @ts-expect-error: There are no types for the Mirage server.
+    rejectUploads(this.server);
+
+    await visit('/admin/specials/1/edit');
+    await fillIn(`${testId('image-alt-text')} input`, 'Sliced brisket');
+    await selectHeicImage();
+    await click('button[type="submit"]');
+
+    assert.strictEqual(currentURL(), '/admin/specials/1/edit');
+    assert.dom(`${testId('image')} ${testId('file-error')}`).hasText(UNSUPPORTED_IMAGE_ERROR);
+    assert.dom(testId('server-error')).doesNotExist();
+    // @ts-expect-error: There are no types for the Mirage server.
+    assert.strictEqual(this.server.db.specials.find(1).imageUrl, 'brisket.jpg');
+  });
+
+  test('it requires an image', async function (assert) {
+    await visit('/admin/specials/1/edit');
+    await click(buttonWithText('Remove Image'));
+
+    assert.dom(`${testId('image')} [data-test-id="label"]`).hasClass('has-errors');
+    assert.dom('button[type="submit"]').isDisabled();
   });
 
   test('it sends the user to sign in when the session has expired', async function (assert) {
