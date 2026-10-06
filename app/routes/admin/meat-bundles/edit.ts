@@ -1,13 +1,17 @@
 import Route from '@ember/routing/route';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import { findRecord } from '@warp-drive/utilities/json-api';
+import type { MeatBundle } from '../../../schemas/meat-bundle';
 import type Store from '../../../services/store';
 
 export default class AdminMeatBundlesEditRoute extends Route {
   @service declare store: Store;
 
-  model(params: { id: string }) {
-    return this.store.findRecord('meat-bundle', params.id);
+  async model(params: { id: string }) {
+    const { content } = await this.store.request(findRecord<MeatBundle>('meat-bundle', params.id));
+
+    return content.data;
   }
 
   @action

@@ -1,8 +1,8 @@
 import Component from '@glimmer/component';
 import { eq } from 'ember-truth-helpers';
 import type MeatController from '../controllers/meat';
-import type MeatBundle from '../models/meat-bundle';
-import type PackageBundle from '../models/package-bundle';
+import type { MeatBundle } from '../schemas/meat-bundle';
+import type { PackageBundle } from '../schemas/package-bundle';
 import sortBy from '../helpers/sort-by';
 import splitIn from '../helpers/split-in';
 import scrollTo from '../modifiers/scroll-to';

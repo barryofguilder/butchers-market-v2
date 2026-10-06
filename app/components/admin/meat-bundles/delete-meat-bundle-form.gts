@@ -1,8 +1,11 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { service } from '@ember/service';
 import { dropTask } from 'ember-concurrency';
-import type MeatBundle from '../../../models/meat-bundle';
+import type { MeatBundle } from '../../../schemas/meat-bundle';
+import type Store from '../../../services/store';
 import { getErrorMessageFromException } from '../../../utils/error-handling';
+import { destroyRecord } from '../../../utils/records';
 import ModalDialog from '../../modal-dialog';
 import UiAlert from '../../ui-alert';
 import UiButton from '../../ui-button';
@@ -18,11 +21,15 @@ interface DeleteMeatBundleFormSignature {
 }
 
 export default class DeleteMeatBundleFormComponent extends Component<DeleteMeatBundleFormSignature> {
+  @service declare store: Store;
+
   @tracked errorMessage: string | null = null;
 
   deleteBundle = dropTask(async () => {
     try {
-      await this.args.bundle?.destroyRecord();
+      if (this.args.bundle) {
+        await destroyRecord(this.store, this.args.bundle);
+      }
       this.args.onSave();
     } catch (ex) {
       this.errorMessage = await getErrorMessageFromException(ex);
