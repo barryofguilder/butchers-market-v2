@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { fn } from '@ember/helper';
-import type FeatureFlag from '../../../models/feature-flag';
+import type { FeatureFlag } from '../../../schemas/feature-flag';
 import BackLink from '../../../components/admin/back-link';
 import DeleteFeatureFlagForm from '../../../components/admin/feature-flags/delete-feature-flag-form';
 import Title from '../../../components/admin/title';
@@ -52,7 +52,7 @@ export default class AdminFeatureFlagsIndexTemplate extends Component<Signature>
       </Table.Head>
       <Table.Body as |Tbody|>
         {{#each @model as |flag|}}
-          <Tbody.Tr as |Row|>
+          <Tbody.Tr data-test-id="feature-flag" as |Row|>
             <Row.Td>{{flag.name}}</Row.Td>
             <Row.Td>
               {{if flag.active "Yes" "No"}}
@@ -60,6 +60,7 @@ export default class AdminFeatureFlagsIndexTemplate extends Component<Signature>
             <Row.Td>
               <div class="flex justify-end">
                 <UiButton
+                  data-test-id="edit"
                   @route="admin.feature-flags.edit"
                   @model={{flag.id}}
                   @iconOnly={{true}}
@@ -68,6 +69,7 @@ export default class AdminFeatureFlagsIndexTemplate extends Component<Signature>
                 />
 
                 <UiButton
+                  data-test-id="delete"
                   class="ml-1"
                   @iconOnly={{true}}
                   @icon="trash-alt"

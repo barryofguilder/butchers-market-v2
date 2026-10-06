@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { service } from '@ember/service';
 import type RouterService from '@ember/routing/router-service';
-import type FeatureFlag from '../../../models/feature-flag';
+import type { FeatureFlag } from '../../../schemas/feature-flag';
 import BackLink from '../../../components/admin/back-link';
 import FeatureFlagForm from '../../../components/admin/feature-flags/feature-flag-form';
 import Title from '../../../components/admin/title';

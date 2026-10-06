@@ -1,7 +1,7 @@
 import Route from '@ember/routing/route';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
-import type Model from '@warp-drive/legacy/model';
+import type { Hour } from '../../../schemas/hour';
 import type Store from '../../../services/store';
 
 export default class AdminHoursNewRoute extends Route {
@@ -12,7 +12,7 @@ export default class AdminHoursNewRoute extends Route {
     const activeStartDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
     const activeEndDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
 
-    return this.store.createRecord('hour', {
+    return this.store.createRecord<Hour>('hour', {
       activeStartDate,
       activeEndDate,
     });
@@ -20,7 +20,7 @@ export default class AdminHoursNewRoute extends Route {
 
   @action
   willTransition(/*transition*/) {
-    const hours = this.modelFor(this.routeName) as Model;
+    const hours = this.modelFor(this.routeName) as Hour;
 
     if (hours.hasDirtyAttributes) {
       hours.rollbackAttributes();

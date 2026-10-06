@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { fn } from '@ember/helper';
-import type Hour from '../../../models/hour';
+import type { Hour } from '../../../schemas/hour';
 import dateFormat from '../../../helpers/date-format';
 import BackLink from '../../../components/admin/back-link';
 import DeleteHoursForm from '../../../components/admin/hours/delete-hours-form';
@@ -50,7 +50,7 @@ export default class AdminHoursIndexTemplate extends Component<Signature> {
       </Table.Head>
       <Table.Body as |Tbody|>
         {{#each @model as |hours|}}
-          <Tbody.Tr as |Row|>
+          <Tbody.Tr data-test-id="hours" as |Row|>
             <Row.Td>
               <div>{{hours.type}}</div>
               {{#if hours.default}}
@@ -84,6 +84,7 @@ export default class AdminHoursIndexTemplate extends Component<Signature> {
             <Row.Td>
               <div class="flex justify-end">
                 <UiButton
+                  data-test-id="edit"
                   @route="admin.hours.edit"
                   @model={{hours.id}}
                   @iconOnly={{true}}
@@ -92,6 +93,7 @@ export default class AdminHoursIndexTemplate extends Component<Signature> {
                 />
 
                 <UiButton
+                  data-test-id="delete"
                   class="ml-1"
                   @iconOnly={{true}}
                   @icon="trash-alt"

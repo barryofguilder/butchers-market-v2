@@ -1,9 +1,12 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { service } from '@ember/service';
 import { dropTask } from 'ember-concurrency';
-import type Hour from '../../../models/hour';
+import type { Hour } from '../../../schemas/hour';
 import HoursValidations from '../../../validations/hour';
+import type Store from '../../../services/store';
 import FormState from '../../../utils/form-state';
+import { saveRecord } from '../../../utils/records';
 import { getErrorMessageFromException } from '../../../utils/error-handling';
 import UiAlert from '../../ui-alert';
 import UiButton from '../../ui-button';
@@ -20,7 +23,11 @@ interface HoursFormSignature {
 }
 
 export default class HoursFormComponent extends Component<HoursFormSignature> {
-  form = new FormState(this.args.hours, HoursValidations);
+  @service declare store: Store;
+
+  form = new FormState(this.args.hours, HoursValidations, (record) =>
+    saveRecord(this.store, record)
+  );
 
   @tracked errorMessage: string | null = null;
 

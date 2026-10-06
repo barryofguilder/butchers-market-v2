@@ -59,7 +59,10 @@ module('Acceptance | admin | deli items', function (hooks) {
   });
 
   test('it creates a deli item', async function (assert) {
-    await visit('/admin/deli-items/new');
+    // Start from the list, so it's already loaded when the new record is saved.
+    await visit('/admin/deli-items');
+    await click('a[href="/admin/deli-items/new"]');
+    assert.strictEqual(currentURL(), '/admin/deli-items/new');
 
     await fillIn(`${testId('title')} input`, 'Olive Salad');
     await fillIn(`${testId('ingredients')} textarea`, 'olives, garlic');

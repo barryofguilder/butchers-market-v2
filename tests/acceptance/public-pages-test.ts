@@ -21,7 +21,18 @@ module('Acceptance | public pages', function (hooks) {
     assert.dom('[alt="Beef Stew"]').doesNotExist('a special that has ended');
     assert.dom(document.body).includesText('20lb Meat Pack', 'a featured bundle');
     assert.dom(document.body).doesNotIncludeText('30lb Meat Pack', 'a bundle that is not featured');
-    assert.dom(document.body).includesText('Contributor', 'the reviews');
+    // @ts-expect-error: There are no types for the Mirage server.
+    for (const review of this.server.db.reviews as { reviewer: string }[]) {
+      assert.dom(document.body).includesText(review.reviewer, 'a review');
+    }
+  });
+
+  test('the navigation links to the menu PDF', async function (assert) {
+    await visit('/');
+
+    // @ts-expect-error: There are no types for the Mirage server.
+    const [menu] = this.server.db.menus as { fileUrl: string }[];
+    assert.dom(`a[href$="${menu!.fileUrl}"]`).exists();
   });
 
   test('the deli page shows the deli items', async function (assert) {

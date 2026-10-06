@@ -1,13 +1,19 @@
 import Route from '@ember/routing/route';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import { findRecord } from '@warp-drive/utilities/json-api';
+import type { FeatureFlag } from '../../../schemas/feature-flag';
 import type Store from '../../../services/store';
 
 export default class AdminFeatureFlagsEditRoute extends Route {
   @service declare store: Store;
 
-  model(params: { id: string }) {
-    return this.store.findRecord('feature-flag', params.id);
+  async model(params: { id: string }) {
+    const { content } = await this.store.request(
+      findRecord<FeatureFlag>('feature-flag', params.id)
+    );
+
+    return content.data;
   }
 
   @action

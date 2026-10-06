@@ -1,5 +1,5 @@
 import type { TOC } from '@ember/component/template-only';
-import type Menu from '../../../models/menu';
+import type { Menu } from '../../../schemas/menu';
 import dateFormat from '../../../helpers/date-format';
 import BackLink from '../../../components/admin/back-link';
 import Title from '../../../components/admin/title';
@@ -24,12 +24,13 @@ const AdminMenuIndexTemplate: TOC<Signature> = <template>
     </Table.Head>
     <Table.Body as |Tbody|>
       {{#each @model as |menu|}}
-        <Tbody.Tr as |Row|>
+        <Tbody.Tr data-test-id="menu" as |Row|>
           <Row.Td>{{dateFormat menu.updatedAt "LL/dd/yyyy h:mma"}}</Row.Td>
 
           <Row.Td>
             <div class="flex justify-end">
               <UiButton
+                data-test-id="edit"
                 @route="admin.menu.edit"
                 @model={{menu.id}}
                 @iconOnly={{true}}

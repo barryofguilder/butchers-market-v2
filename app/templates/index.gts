@@ -1,7 +1,7 @@
 import type { TOC } from '@ember/component/template-only';
 import { hash } from '@ember/helper';
 import { gt } from 'ember-truth-helpers';
-import type Hour from '../models/hour';
+import type { Hour } from '../schemas/hour';
 import type MeatBundle from '../models/meat-bundle';
 import type { Special } from '../schemas/special';
 import Container from '../components/container';
