@@ -1,13 +1,19 @@
 import Route from '@ember/routing/route';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import { query } from '@warp-drive/utilities/json-api';
+import type { GrabAndGo } from '../../../schemas/grab-and-go';
 import type Store from '../../../services/store';
 
 export default class GrabAndGoSocialRoute extends Route {
   @service declare store: Store;
 
-  model() {
-    return this.store.query('grab-and-go', { filter: { inStock: true } });
+  async model() {
+    const { content } = await this.store.request(
+      query<GrabAndGo>('grab-and-go', { 'filter[inStock]': true })
+    );
+
+    return content.data;
   }
 
   @action

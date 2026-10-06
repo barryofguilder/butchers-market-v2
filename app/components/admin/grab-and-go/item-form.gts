@@ -6,10 +6,12 @@ import type RouterService from '@ember/routing/router-service';
 import { dropTask, enqueueTask } from 'ember-concurrency';
 import type { UploadFile } from 'ember-file-upload';
 import fileQueue from 'ember-file-upload/helpers/file-queue';
-import type GrabAndGo from '../../../models/grab-and-go';
+import type { GrabAndGo } from '../../../schemas/grab-and-go';
 import type SessionService from '../../../services/session';
+import type Store from '../../../services/store';
 import ItemValidations from '../../../validations/grab-and-go';
 import FormState from '../../../utils/form-state';
+import { saveRecord } from '../../../utils/records';
 import baseUrl from '../../../utils/base-url';
 import { generateFileName } from '../../../utils/file-name';
 import { getErrorMessageFromException, isUnauthorized } from '../../../utils/error-handling';
@@ -29,8 +31,9 @@ interface ItemFormSignature {
 export default class ItemFormComponent extends Component<ItemFormSignature> {
   @service declare router: RouterService;
   @service declare session: SessionService;
+  @service declare store: Store;
 
-  form = new FormState(this.args.item, ItemValidations);
+  form = new FormState(this.args.item, ItemValidations, (item) => saveRecord(this.store, item));
 
   @tracked image: UploadFile | null = null;
   @tracked tempImageUrl: string | null = null;
@@ -146,7 +149,12 @@ export default class ItemFormComponent extends Component<ItemFormSignature> {
         <Group.textbox @value={{this.form.values.title}} @onChange={{this.form.setter "title"}} />
       </Form.group>
 
-      <Form.group data-test-id="title" @model={{this.form}} @property="social-title" as |Group|>
+      <Form.group
+        data-test-id="social-title"
+        @model={{this.form}}
+        @property="socialTitle"
+        as |Group|
+      >
         <Group.label>Social Title</Group.label>
         <Group.textbox
           @value={{this.form.values.socialTitle}}

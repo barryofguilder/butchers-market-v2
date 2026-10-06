@@ -1,19 +1,19 @@
 import Route from '@ember/routing/route';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
-import type Model from '@warp-drive/legacy/model';
+import type { GrabAndGo } from '../../../schemas/grab-and-go';
 import type Store from '../../../services/store';
 
 export default class AdminGrabAndGoNewRoute extends Route {
   @service declare store: Store;
 
   model() {
-    return this.store.createRecord('grab-and-go', {});
+    return this.store.createRecord<GrabAndGo>('grab-and-go', {});
   }
 
   @action
   willTransition(/*transition*/) {
-    const special = this.modelFor(this.routeName) as Model;
+    const special = this.modelFor(this.routeName) as GrabAndGo;
 
     if (special.hasDirtyAttributes) {
       special.rollbackAttributes();

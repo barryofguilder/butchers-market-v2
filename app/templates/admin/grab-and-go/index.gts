@@ -4,7 +4,7 @@ import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { eq } from 'ember-truth-helpers';
 import type AdminGrabAndGoIndexController from '../../../controllers/admin/grab-and-go/index';
-import type GrabAndGo from '../../../models/grab-and-go';
+import type { GrabAndGo } from '../../../schemas/grab-and-go';
 import BackLink from '../../../components/admin/back-link';
 import DeleteItemForm from '../../../components/admin/grab-and-go/delete-item-form';
 import MiniForm from '../../../components/admin/grab-and-go/mini-form';
@@ -119,7 +119,7 @@ export default class AdminGrabAndGoIndexTemplate extends Component<Signature> {
       </Table.Head>
       <Table.Body as |Tbody|>
         {{#each this.filteredItems as |item|}}
-          <Tbody.Tr as |Row|>
+          <Tbody.Tr data-test-id="grab-and-go" as |Row|>
             <Row.Td>
               {{item.title}}
             </Row.Td>
@@ -132,6 +132,7 @@ export default class AdminGrabAndGoIndexTemplate extends Component<Signature> {
             <Row.Td>
               <div class="flex justify-end">
                 <UiButton
+                  data-test-id="edit"
                   @route="admin.grab-and-go.edit"
                   @model={{item.id}}
                   @iconOnly={{true}}
@@ -140,6 +141,7 @@ export default class AdminGrabAndGoIndexTemplate extends Component<Signature> {
                 />
 
                 <UiButton
+                  data-test-id="delete"
                   class="ml-1"
                   @iconOnly={{true}}
                   @icon="trash-alt"

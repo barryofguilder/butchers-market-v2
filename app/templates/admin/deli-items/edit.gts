@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { service } from '@ember/service';
 import type RouterService from '@ember/routing/router-service';
-import type DeliItem from '../../../models/deli-item';
+import type { DeliItem } from '../../../schemas/deli-item';
 import BackLink from '../../../components/admin/back-link';
 import DeliItemForm from '../../../components/admin/deli-items/deli-item-form';
 import Title from '../../../components/admin/title';

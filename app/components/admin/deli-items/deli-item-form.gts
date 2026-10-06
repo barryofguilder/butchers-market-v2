@@ -6,10 +6,12 @@ import type RouterService from '@ember/routing/router-service';
 import { dropTask, enqueueTask } from 'ember-concurrency';
 import type { UploadFile } from 'ember-file-upload';
 import fileQueue from 'ember-file-upload/helpers/file-queue';
-import type DeliItem from '../../../models/deli-item';
+import type { DeliItem } from '../../../schemas/deli-item';
 import type SessionService from '../../../services/session';
+import type Store from '../../../services/store';
 import DeliItemValidations from '../../../validations/deli-item';
 import FormState from '../../../utils/form-state';
+import { saveRecord } from '../../../utils/records';
 import baseUrl from '../../../utils/base-url';
 import { generateFileName } from '../../../utils/file-name';
 import { getErrorMessageFromException, isUnauthorized } from '../../../utils/error-handling';
@@ -29,8 +31,9 @@ interface DeliItemFormSignature {
 export default class DeliItemFormComponent extends Component<DeliItemFormSignature> {
   @service declare router: RouterService;
   @service declare session: SessionService;
+  @service declare store: Store;
 
-  form = new FormState(this.args.item, DeliItemValidations);
+  form = new FormState(this.args.item, DeliItemValidations, (item) => saveRecord(this.store, item));
 
   @tracked image: UploadFile | null = null;
   @tracked tempImageUrl: string | null = null;

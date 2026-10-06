@@ -1,6 +1,6 @@
 import type { TOC } from '@ember/component/template-only';
 import sortBy from '../helpers/sort-by';
-import GrabAndGoModel from '../models/grab-and-go';
+import type { GrabAndGo as GrabAndGoModel } from '../schemas/grab-and-go';
 
 export interface GrabAndGoListSignature {
   Element: HTMLDivElement;

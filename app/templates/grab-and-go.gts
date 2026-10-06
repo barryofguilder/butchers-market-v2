@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { cached } from '@glimmer/tracking';
 import { format, formatISO } from 'date-fns';
-import type GrabAndGo from '../models/grab-and-go';
+import type { GrabAndGo } from '../schemas/grab-and-go';
 import Container from '../components/container';
 import GrabAndGoList from '../components/grab-and-go-list';
 import HeaderTitle from '../components/header-title';
