@@ -51,14 +51,6 @@ export default defineConfig([
   ember.configs.gts,
   ...WarpDrive,
   {
-    // The app still uses legacy Models, adapters, and store methods (findAll, query, save) via
-    // useLegacyStore. Re-enable these once requests go through store.request() and builders.
-    rules: {
-      'warp-drive/no-legacy-request-patterns': 'off',
-      'warp-drive/no-external-request-patterns': 'off',
-    },
-  },
-  {
     files: ['app/**/*.{js,ts,gjs,gts}'],
     ignores: ['app/builders/query.ts'],
     rules: {

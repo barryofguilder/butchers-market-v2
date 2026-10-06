@@ -79,7 +79,7 @@ export default class MeatBundleFormComponent extends Component<MeatBundleFormSig
     }
 
     try {
-      await this.form.save();
+      await this.form.submit();
       this.args.saved();
     } catch (ex) {
       this.errorMessage = await getErrorMessageFromException(ex);

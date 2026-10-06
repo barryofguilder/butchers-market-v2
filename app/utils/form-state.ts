@@ -7,27 +7,21 @@ export interface FieldError {
   value: unknown;
 }
 
-interface Saveable {
-  save(): Promise<unknown>;
-}
-
 /**
- * Sends the model to the API. Forms for resources that have moved to WarpDrive schemas pass one
- * built on `saveRecord`, since their records have no `save` method.
+ * Sends the model to the API, usually with `saveRecord` from `utils/records`.
  */
 export type Persist<Model> = (model: Model) => Promise<unknown>;
 
 type Key<Model> = keyof Model & string;
 
 /**
- * Holds unsaved edits to a model while a form is open. Edits only reach the model when `save` is
+ * Holds unsaved edits to a model while a form is open. Edits only reach the model when `submit` is
  * called, so cancelling a form leaves the model untouched.
  *
  * Each field is validated as soon as it is set, and `validate` checks every field that has
  * validations, so errors show up while typing and again on submit.
  *
  * ```js
- * form = new FormState(this.args.item, ItemValidations);
  * form = new FormState(this.args.special, SpecialValidations, (special) =>
  *   saveRecord(this.store, special)
  * );
@@ -53,10 +47,10 @@ export default class FormState<Model extends object> {
    */
   readonly values: Readonly<Model>;
 
-  constructor(model: Model, validations: Validations = {}, persist?: Persist<Model>) {
+  constructor(model: Model, validations: Validations, persist: Persist<Model>) {
     this.model = model;
     this.validations = validations;
-    this.persist = persist ?? ((model) => (model as Model & Saveable).save());
+    this.persist = persist;
     this.values = new Proxy({} as Model, {
       get: (_target, key) => (typeof key === 'string' ? this.get(key as Key<Model>) : undefined),
       // Glimmer falls back to `unknownProperty` for keys that read as `undefined` and aren't `in`
@@ -124,10 +118,10 @@ export default class FormState<Model extends object> {
   }
 
   /**
-   * Copies the edits onto the model and saves it. If the save fails the edits stay on the model,
-   * so the form keeps showing them and can be submitted again.
+   * Copies the edits onto the model and sends it with `persist`. If that fails the edits stay on
+   * the model, so the form keeps showing them and can be submitted again.
    */
-  async save() {
+  async submit() {
     Object.assign(this.model, this.changes);
     this.changes = {};
 

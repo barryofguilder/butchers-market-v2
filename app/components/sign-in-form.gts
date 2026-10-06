@@ -35,6 +35,8 @@ export default class SignInFormComponent extends Component<SignInFormSignature> 
       body,
     };
 
+    // The token endpoint isn't a JSON:API resource, so it doesn't go through the store.
+    // eslint-disable-next-line warp-drive/no-external-request-patterns
     const response = await fetch(`${baseUrl}/token`, payload);
 
     if (response.status === 201) {

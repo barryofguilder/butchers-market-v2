@@ -89,7 +89,7 @@ export default class ItemFormComponent extends Component<ItemFormSignature> {
         this.form.set('imageUrl', generatedFileName);
       }
 
-      await this.form.save();
+      await this.form.submit();
       this.args.saved();
     } catch (ex) {
       if (isUnauthorized(ex)) {
