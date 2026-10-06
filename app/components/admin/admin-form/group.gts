@@ -6,6 +6,7 @@ import { valueOrDefault } from '../../../utils/value-or-default';
 import Checkbox from './checkbox';
 import Datepicker from './datepicker';
 import Help from './help';
+import Image from './image';
 import Label from './label';
 import UiTextbox from '../../ui-textbox';
 import UiTextarea from '../../ui-textarea';
@@ -35,6 +36,7 @@ export interface GroupSignature {
         checkbox: WithBoundArgs<typeof Checkbox, never>;
         datepicker: WithBoundArgs<typeof Datepicker, 'id' | 'errors'>;
         help: WithBoundArgs<typeof Help, never>;
+        image: WithBoundArgs<typeof Image, 'id'>;
         label: WithBoundArgs<typeof Label, 'for' | 'errors'>;
         readonly: WithBoundArgs<typeof UiTextbox, 'id' | 'readonly'>;
         textarea: WithBoundArgs<typeof UiTextarea, 'id' | 'errors' | 'readonly'>;
@@ -72,6 +74,7 @@ export default class GroupComponent extends Component<GroupSignature> {
           checkbox=(component Checkbox)
           datepicker=(component Datepicker id=this.uniqueId errors=this.errors)
           help=(component Help)
+          image=(component Image id=this.uniqueId)
           label=(component Label for=this.uniqueId errors=this.errors)
           readonly=(component UiTextbox id=this.uniqueId readonly=true)
           textarea=(component UiTextarea id=this.uniqueId errors=this.errors readonly=@readonly)
